@@ -50,7 +50,7 @@ export default defineConfig(async ({ command, mode }): Promise<UserConfig> => {
         documents: ['./src/**/*.ts'],
       },
       deployment: {
-        name: 'react-app',
+        name: 'react-app-admin',
         id: appId,
         // Shared secret with the runtime (DEPLOY_TOKEN in both .env.prod): only then the runtime
         // tells open clients about the new version. Goes to the runtime only, not into the bundle.

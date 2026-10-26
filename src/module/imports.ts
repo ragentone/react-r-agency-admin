@@ -4,6 +4,4 @@
 import "./seo/module.tsx"
 import "./file-share/module.tsx"
 import "./admin/module.tsx"
-import "./dev/module.tsx"
-import "./messenger/module.tsx"
 import "./credits/module.tsx"
