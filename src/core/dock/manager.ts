@@ -31,7 +31,7 @@ const changed = () => {
  * Dropdown menu (left in the dock):
  *
  * ```ts
- * Core.dock.registerMenuItem({ id: 'files', label: 'file-share:menu.label', icon: FolderDown, to: '/files' });
+ * Core.dock.registerMenuItem({ id: 'files', label: 'downloads:menu.label', icon: FolderDown, to: '/downloads' });
  * Core.dock.registerMenuItem({ id: 'admin', label: 'Admin', roles: 'admin:user', to: '/admin' });
  * Core.dock.registerMenuItem({ id: 'compose', label: 'Neu', visibility: 'authenticated',
  *   emit: 'timeline::compose' });

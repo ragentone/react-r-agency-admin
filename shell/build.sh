@@ -11,7 +11,7 @@ if [ -d "$DIR" ]; then
   echo "git repo exists ${DIR}..."
 else
   git init
-  git remote add origin git@github.com:ragentone/react-r-agency-v2.git
+  git remote add origin git@github.com:ragentone/react-r-agency-admin.git
 fi
 
 git fetch --all

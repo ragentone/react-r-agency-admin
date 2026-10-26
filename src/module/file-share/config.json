@@ -1,8 +1,0 @@
-{
-  "$schema": "../../../vite/import/module.config.schema.json",
-  "active": true,
-  "name": "module-file-share",
-  "entries": ["module.tsx"],
-  "sortOrder": 0,
-  "modes": ["development", "production"]
-}
