@@ -928,5 +928,66 @@
     "noMatch": "Keine Rolle gefunden.",
     "clear": "Leeren",
     "close": "Schließen"
+  },
+  "home": {
+    "error": "Konnte nicht geladen werden.",
+    "more": "Alle",
+    "openUser": "@{{name}} öffnen",
+    "live": {
+      "title": "Gerade online",
+      "open_one": "{{count}} Person online – Live-Ansicht öffnen",
+      "open_other": "{{count}} Personen online – Live-Ansicht öffnen",
+      "split": "{{users}} Mitglieder · {{guests}} Gäste"
+    },
+    "kpi": {
+      "title": "Letzte 7 Tage",
+      "visitors": "Besucher",
+      "activeUsers": "Aktive Mitglieder",
+      "registrations": "Registrierungen",
+      "views": "Seitenaufrufe",
+      "change": "Veränderung gegenüber den 7 Tagen davor",
+      "today": "Heute: {{value}}"
+    },
+    "attention": {
+      "title": "Braucht Aufmerksamkeit",
+      "count_one": "{{count}} Warnung",
+      "count_other": "{{count}} Warnungen",
+      "stuck_one": "Ein Build hängt",
+      "stuck_other": "{{count}} Builds hängen",
+      "since": "Gestartet {{ago}}",
+      "running": "Build läuft gerade",
+      "runningText": "Neue Version wird gebaut",
+      "notes_one": "{{count}} Notiz für den nächsten Build",
+      "notes_other": "{{count}} Notizen für den nächsten Build",
+      "notesText": "Wird v{{version}}",
+      "storage": "Speicher zu {{percent}} % belegt",
+      "storageText": "Nur noch {{free}} frei",
+      "ips_one": "{{count}} auffällige IP-Adresse",
+      "ips_other": "{{count}} auffällige IP-Adressen",
+      "ipsText": "Viele Fehlversuche oder mehrere Konten (7 Tage)",
+      "quiet": "Alles ruhig",
+      "quietText": "Gerade gibt es nichts zu tun.",
+      "silentText": "Eine kurze Erinnerung holt sie vielleicht zurück"
+    },
+    "members": {
+      "title": "Neue Mitglieder",
+      "empty": "In den letzten 7 Tagen hat sich niemand registriert.",
+      "joined": "Registriert {{ago}} · {{platform}}"
+    },
+    "system": {
+      "title": "System",
+      "version": "Live-Version",
+      "storage": "Server-Speicher",
+      "lastBuild": "Letzter Build {{ago}} · {{duration}}",
+      "noBuild": "Noch kein Build",
+      "free": "{{free}} frei"
+    },
+    "search": {
+      "placeholder": "Benutzer suchen …",
+      "title": "Benutzer suchen",
+      "hint": "Alias, E-Mail oder ID eingeben (ab {{count}} Zeichen)",
+      "loading": "Wird gesucht …",
+      "results": "Benutzer"
+    }
   }
 }

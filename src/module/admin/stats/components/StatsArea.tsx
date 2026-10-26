@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/shad-cn/components
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { ADMIN_STATS_VIEW_KEY } from '../../const';
 import type { StatsRange, StatsTab } from '../types';
 import { StatsRangeToggle } from './common';
 import { StatsGrowthTab } from './StatsGrowthTab';
@@ -13,7 +14,7 @@ import { StatsUserDrawer } from './StatsUserDrawer';
 import { StatsVisitorsTab } from './StatsVisitorsTab';
 
 const TABS: StatsTab[] = ['live', 'visitors', 'overview', 'growth', 'security'];
-const STORE_KEY = 'admin-stats-view';
+const STORE_KEY = ADMIN_STATS_VIEW_KEY;
 
 const restore = (): { tab: StatsTab; range: StatsRange } => {
   try {

@@ -928,5 +928,66 @@
     "noMatch": "No role found.",
     "clear": "Clear",
     "close": "Close"
+  },
+  "home": {
+    "error": "Could not be loaded.",
+    "more": "All",
+    "openUser": "Open @{{name}}",
+    "live": {
+      "title": "Online now",
+      "open_one": "{{count}} person online – open live view",
+      "open_other": "{{count}} people online – open live view",
+      "split": "{{users}} members · {{guests}} guests"
+    },
+    "kpi": {
+      "title": "Last 7 days",
+      "visitors": "Visitors",
+      "activeUsers": "Active members",
+      "registrations": "Sign-ups",
+      "views": "Page views",
+      "change": "Change against the 7 days before",
+      "today": "Today: {{value}}"
+    },
+    "attention": {
+      "title": "Needs attention",
+      "count_one": "{{count}} warning",
+      "count_other": "{{count}} warnings",
+      "stuck_one": "A build is stuck",
+      "stuck_other": "{{count}} builds are stuck",
+      "since": "Started {{ago}}",
+      "running": "Build running",
+      "runningText": "A new version is being built",
+      "notes_one": "{{count}} note for the next build",
+      "notes_other": "{{count}} notes for the next build",
+      "notesText": "Becomes v{{version}}",
+      "storage": "Disk {{percent}} % full",
+      "storageText": "Only {{free}} left",
+      "ips_one": "{{count}} suspicious IP address",
+      "ips_other": "{{count}} suspicious IP addresses",
+      "ipsText": "Many failed sign-ins or several accounts (7 days)",
+      "quiet": "All quiet",
+      "quietText": "Nothing to do right now.",
+      "silentText": "A short reminder might bring them back"
+    },
+    "members": {
+      "title": "New members",
+      "empty": "Nobody signed up in the last 7 days.",
+      "joined": "Joined {{ago}} · {{platform}}"
+    },
+    "system": {
+      "title": "System",
+      "version": "Live version",
+      "storage": "Server disk",
+      "lastBuild": "Last build {{ago}} · {{duration}}",
+      "noBuild": "No build yet",
+      "free": "{{free}} free"
+    },
+    "search": {
+      "placeholder": "Search users …",
+      "title": "Search users",
+      "hint": "Enter alias, e-mail or ID (from {{count}} characters)",
+      "loading": "Searching …",
+      "results": "Users"
+    }
   }
 }

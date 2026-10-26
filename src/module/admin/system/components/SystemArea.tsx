@@ -3,12 +3,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/shad-cn/components
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { ADMIN_SYSTEM_VIEW_KEY } from '../../const';
 import type { SystemTab } from '../types';
 import { SystemDeploysTab } from './SystemDeploysTab';
 import { SystemStorageTab } from './SystemStorageTab';
 
 const TABS: SystemTab[] = ['version', 'storage'];
-const STORE_KEY = 'admin-system-view';
+const STORE_KEY = ADMIN_SYSTEM_VIEW_KEY;
 
 const restore = (): SystemTab => {
   try {

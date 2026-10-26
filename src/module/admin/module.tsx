@@ -24,12 +24,19 @@ const PageAdminStats = lazyPage(
   () => import('./pages/PageAdminStats.tsx').then(m => m.PageAdminStats),
   'PageAdminStats'
 );
+// Admin instance: the start page becomes the admin dashboard (non-admins keep the core page).
+const PageAdminHome = lazyPage(
+  () => import('./pages/PageAdminHome.tsx').then(m => m.PageAdminHome),
+  'PageAdminHome'
+);
 const PageAdminSystem = lazyPage(
   () => import('./pages/PageAdminSystem.tsx').then(m => m.PageAdminSystem),
   'PageAdminSystem'
 );
 // Public dynamic pages (created in the admin area).
 const PageSite = lazyPage(() => import('./pages/PageSite.tsx').then(m => m.PageSite), 'PageSite');
+
+Core.page.setPage('index', PageAdminHome);
 
 // `admin` target → `_admin` layout route: guests go to login, non-admins back home.
 Core.router.register({

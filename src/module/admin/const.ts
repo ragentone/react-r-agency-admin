@@ -6,6 +6,9 @@ export const ADMIN_PAGES_ROUTE = '/admin/pages';
 export const ADMIN_STATS_ROUTE = '/admin/stats';
 /** Version, deploys, server storage (runtime shared/system). */
 export const ADMIN_SYSTEM_ROUTE = '/admin/system';
+/** localStorage keys of the last tab – the admin home sets them to open a tab directly. */
+export const ADMIN_STATS_VIEW_KEY = 'admin-stats-view';
+export const ADMIN_SYSTEM_VIEW_KEY = 'admin-system-view';
 /** Who may use it – same check as the backend (`@GraphqlAuth({ role: 'admin:user' })`). */
 export const ADMIN_ROLES = 'admin:user';
 
