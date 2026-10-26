@@ -1,5 +1,4 @@
 import type {
-  UserCreateMutation,
   UserLoginMutation,
   UserPasswordChangeMutation,
   UserPasswordCreateMutation,
@@ -19,6 +18,5 @@ export type UserPasswordCreateReturn = NonNullable<
   UserPasswordCreateMutation['userPasswordCreate']
 >;
 export type UserPasswordResetReturn = NonNullable<UserPasswordResetMutation['userPasswordReset']>;
-export type UserCreateReturn = NonNullable<UserCreateMutation['userCreate']>;
 export type UserUploadAvatarReturn = NonNullable<UserUploadAvatarMutation['userUploadAvatar']>;
 export type UserLoginReturn = NonNullable<UserLoginMutation['userLogin']>;

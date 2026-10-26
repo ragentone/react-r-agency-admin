@@ -728,12 +728,6 @@ export interface IDeleteMediaReturn {
   success: Maybe<boolean>;
 }
 
-/** GraphQL: `developerRoadmapListReturn` */
-export interface IDeveloperRoadmapListReturn {
-  items: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
 /** GraphQL: `developerTestReturn` */
 export interface IDeveloperTestReturn {
   success: Maybe<boolean>;
@@ -742,102 +736,6 @@ export interface IDeveloperTestReturn {
 /** GraphQL: `developerTestSourceReturn` */
 export interface IDeveloperTestSourceReturn {
   news: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `developerTicketAcceptReturn` */
-export interface IDeveloperTicketAcceptReturn {
-  success: Maybe<boolean>;
-  ticket: Maybe<ScalarJSON>;
-  todo: Maybe<ScalarJSON>;
-}
-
-/** GraphQL: `developerTicketCreateReturn` */
-export interface IDeveloperTicketCreateReturn {
-  success: Maybe<boolean>;
-  ticket: Maybe<ScalarJSON>;
-}
-
-/** GraphQL: `developerTicketListReturn` */
-export interface IDeveloperTicketListReturn {
-  success: Maybe<boolean>;
-  tickets: Maybe<ScalarJSON>;
-}
-
-/** GraphQL: `developerTicketMineReturn` */
-export interface IDeveloperTicketMineReturn {
-  success: Maybe<boolean>;
-  tickets: Maybe<ScalarJSON>;
-}
-
-/** GraphQL: `developerTicketRejectReturn` */
-export interface IDeveloperTicketRejectReturn {
-  success: Maybe<boolean>;
-  ticket: Maybe<ScalarJSON>;
-}
-
-/** GraphQL: `developerTodoCreateReturn` */
-export interface IDeveloperTodoCreateReturn {
-  success: Maybe<boolean>;
-  todo: Maybe<ScalarJSON>;
-}
-
-/** GraphQL: `developerTodoDeleteReturn` */
-export interface IDeveloperTodoDeleteReturn {
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `developerTodoListReturn` */
-export interface IDeveloperTodoListReturn {
-  success: Maybe<boolean>;
-  todos: Maybe<ScalarJSON>;
-}
-
-/** GraphQL: `developerTodoUpdateReturn` */
-export interface IDeveloperTodoUpdateReturn {
-  success: Maybe<boolean>;
-  todo: Maybe<ScalarJSON>;
-}
-
-/** GraphQL: `fileShareCreateReturn` */
-export interface IFileShareCreateReturn {
-  file: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `fileShareDeleteReturn` */
-export interface IFileShareDeleteReturn {
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `fileShareLinkCreateReturn` */
-export interface IFileShareLinkCreateReturn {
-  file: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `fileShareLinkResolveReturn` */
-export interface IFileShareLinkResolveReturn {
-  file: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `fileShareLinkRevokeReturn` */
-export interface IFileShareLinkRevokeReturn {
-  file: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `fileShareListReturn` */
-export interface IFileShareListReturn {
-  files: Maybe<ScalarJSON>;
-  restricted: Maybe<number>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `fileShareUpdateReturn` */
-export interface IFileShareUpdateReturn {
-  file: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
 }
 
@@ -2242,17 +2140,6 @@ export interface IMutation {
   deleteAllDummyUsers: Maybe<IDeleteAllDummyUsersReturn>;
   deleteMedia: Maybe<IDeleteMediaReturn>;
   developerTest: Maybe<IDeveloperTestReturn>;
-  developerTicketAccept: Maybe<IDeveloperTicketAcceptReturn>;
-  developerTicketCreate: Maybe<IDeveloperTicketCreateReturn>;
-  developerTicketReject: Maybe<IDeveloperTicketRejectReturn>;
-  developerTodoCreate: Maybe<IDeveloperTodoCreateReturn>;
-  developerTodoDelete: Maybe<IDeveloperTodoDeleteReturn>;
-  developerTodoUpdate: Maybe<IDeveloperTodoUpdateReturn>;
-  fileShareCreate: Maybe<IFileShareCreateReturn>;
-  fileShareDelete: Maybe<IFileShareDeleteReturn>;
-  fileShareLinkCreate: Maybe<IFileShareLinkCreateReturn>;
-  fileShareLinkRevoke: Maybe<IFileShareLinkRevokeReturn>;
-  fileShareUpdate: Maybe<IFileShareUpdateReturn>;
   forumCommentCreate: Maybe<IForumCommentCreateReturn>;
   forumCommentDelete: Maybe<IForumCommentDeleteReturn>;
   forumCommentUpdate: Maybe<IForumCommentUpdateReturn>;
@@ -2608,13 +2495,7 @@ export interface IQuery {
   cronJobList: Maybe<ICronJobListReturn>;
   cronRunnerList: Maybe<ICronRunnerListReturn>;
   currencyGet: Maybe<ICurrencyGetReturn>;
-  developerRoadmapList: Maybe<IDeveloperRoadmapListReturn>;
   developerTestSource: Maybe<IDeveloperTestSourceReturn>;
-  developerTicketList: Maybe<IDeveloperTicketListReturn>;
-  developerTicketMine: Maybe<IDeveloperTicketMineReturn>;
-  developerTodoList: Maybe<IDeveloperTodoListReturn>;
-  fileShareLinkResolve: Maybe<IFileShareLinkResolveReturn>;
-  fileShareList: Maybe<IFileShareListReturn>;
   forumCommunities: Maybe<IForumCommunitiesReturn>;
   forumCommunity: Maybe<IForumCommunityReturn>;
   forumCommunityMembers: Maybe<IForumCommunityMembersReturn>;

@@ -1,28 +1,18 @@
 import { useAuthStore } from '@core/auth/auth.store.tsx';
 import { useAuthTokenStore } from '@core/auth/auth.token.store.tsx';
 import { UserConfigQuery } from '@core/auth/graphql/config.ts';
-import { GoogleAuthAfterMutation } from '@core/auth/graphql/google.auth.ts';
 import { UserLoginMutation } from '@core/auth/graphql/login.ts';
 import { UserLogoutQuery } from '@core/auth/graphql/logout.ts';
-import {
-  buildGoogleAuthUrl,
-  NATIVE_GOOGLE_AUTH_STATE,
-  nativeGoogleAuth,
-  parseGoogleAuthHash,
-} from '@core/auth/hooks/use.user.google.auth.ts';
 import { hasRoles } from '@core/auth/roles/roles.ts';
 import type { IUserMetaData } from '@core/auth/types/config.ts';
-import type { GoogleAuthAfterReturn, IGoogleAuthParams } from '@core/auth/types/google.ts';
 import type { ILoginParams } from '@core/auth/types/login.ts';
 import { CoreVariables } from '@core/core.variables.ts';
 import { useEvents } from '@core/event';
 import { useGraphQl, useMeshState } from '@core/mesh';
-import { isNativeApp } from '@core/native';
 import { SecurityLoginHosts } from '@core/security/components/LoginHosts.tsx';
 import { useSecurityStore } from '@core/security/store.ts';
 import { useRouter } from '@tanstack/react-router';
 import i18n from 'i18next';
-import { nanoid } from 'nanoid';
 import { useMesh } from 'r-agency-mesh-client-v1/release';
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'sonner';
@@ -195,168 +185,6 @@ const AuthProvider = ({ children }: IProps) => {
     [core, navigate, refreshUserMeta, store, token]
   );
 
-  const googleAuthAfter = useCallback(
-    async (params: IGoogleAuthParams): Promise<GoogleAuthAfterReturn | null | undefined> => {
-      setLoading(true);
-      setIsLoggingIn(true);
-      try {
-        const response = await mutate({
-          mutation: GoogleAuthAfterMutation,
-          variables: {
-            token: params.token,
-            id: params.id,
-            nonce: params.nonce,
-          },
-        });
-
-        const result = response.data?.googleAuthAfter;
-        if (result?.success) {
-          const authToken = result.gapi_pxd || result.gapi_exd;
-          if (authToken) {
-            token.setToken(authToken);
-          }
-          store.setAuthorized(true);
-          setAuthorized(true);
-          // Google returns no meta – load it (the admin role guard needs the roles).
-          void refreshUserMeta();
-          void navigate({ to: '/login' });
-        }
-        return result;
-      } finally {
-        setLoading(false);
-        setIsLoggingIn(false);
-      }
-    },
-    [mutate, navigate, refreshUserMeta, store, token]
-  );
-
-  const loginWithGoogle = useCallback(
-    async (popupOptions?: {
-      width?: number;
-      height?: number;
-    }): Promise<GoogleAuthAfterReturn | null | undefined> => {
-      setLoading(true);
-      setIsLoggingIn(true);
-      try {
-        const nonce = nanoid();
-        sessionStorage.setItem('google_auth_nonce', nonce);
-
-        const redirectUri = import.meta.env.VITE_GOOGLE_REDIRECT_URI || window.location.origin;
-
-        if (isNativeApp()) {
-          const tokens = await nativeGoogleAuth(
-            buildGoogleAuthUrl(nonce, redirectUri, NATIVE_GOOGLE_AUTH_STATE)
-          );
-          sessionStorage.removeItem('google_auth_nonce');
-          return await googleAuthAfter({ token: tokens.accessToken, id: tokens.idToken, nonce });
-        }
-
-        const authUrl = buildGoogleAuthUrl(nonce, redirectUri);
-
-        const width = popupOptions?.width ?? 500;
-        const height = popupOptions?.height ?? 600;
-        const left = window.screenX + (window.outerWidth - width) / 2;
-        const top = window.screenY + (window.outerHeight - height) / 2;
-
-        const popup = window.open(
-          authUrl,
-          'google-auth-popup',
-          `width=${width},height=${height},left=${left},top=${top},status=no,menubar=no,toolbar=no`
-        );
-
-        if (!popup) {
-          window.location.href = authUrl;
-          return null;
-        }
-
-        const tokens = await new Promise<{ accessToken: string; idToken: string }>(
-          (resolve, reject) => {
-            let resolved = false;
-
-            const handleMessage = (event: MessageEvent) => {
-              if (event.origin !== window.location.origin) return;
-              if (event.data?.type === 'GOOGLE_AUTH_CALLBACK' && event.data?.hash) {
-                const parsed = parseGoogleAuthHash(event.data.hash);
-                if (parsed.accessToken && parsed.idToken) {
-                  resolved = true;
-                  window.removeEventListener('message', handleMessage);
-                  window.clearInterval(interval);
-                  try {
-                    popup.close();
-                  } catch {
-                    // ignore
-                  }
-                  resolve({ accessToken: parsed.accessToken, idToken: parsed.idToken });
-                } else if (parsed.error) {
-                  resolved = true;
-                  window.removeEventListener('message', handleMessage);
-                  window.clearInterval(interval);
-                  try {
-                    popup.close();
-                  } catch {
-                    // ignore
-                  }
-                  reject(new Error(parsed.error));
-                }
-              }
-            };
-
-            window.addEventListener('message', handleMessage);
-
-            const interval = window.setInterval(() => {
-              try {
-                if (!popup || popup.closed) {
-                  window.clearInterval(interval);
-                  window.removeEventListener('message', handleMessage);
-                  if (!resolved) {
-                    reject(new Error('Google sign-in popup was closed'));
-                  }
-                  return;
-                }
-
-                if (popup.location.origin === window.location.origin) {
-                  const hash = popup.location.hash;
-                  if (
-                    hash &&
-                    (hash.includes('access_token') ||
-                      hash.includes('id_token') ||
-                      hash.includes('error'))
-                  ) {
-                    resolved = true;
-                    window.clearInterval(interval);
-                    window.removeEventListener('message', handleMessage);
-                    const { accessToken, idToken, error } = parseGoogleAuthHash(hash);
-                    popup.close();
-                    if (accessToken && idToken) {
-                      resolve({ accessToken, idToken });
-                    } else {
-                      reject(new Error(error || 'Failed to retrieve tokens from Google response'));
-                    }
-                  }
-                }
-              } catch {
-                // Ignore cross-origin error while on accounts.google.com
-              }
-            }, 300);
-          }
-        );
-
-        const storedNonce = sessionStorage.getItem('google_auth_nonce') || nonce;
-        sessionStorage.removeItem('google_auth_nonce');
-
-        return await googleAuthAfter({
-          token: tokens.accessToken,
-          id: tokens.idToken,
-          nonce: storedNonce,
-        });
-      } finally {
-        setLoading(false);
-        setIsLoggingIn(false);
-      }
-    },
-    [googleAuthAfter]
-  );
-
   // An admin changed this user's roles (runtime shared/admin → `user::update:user_roles` with
   // `{ roles }` to every open client of the user) → the new roles go straight into `userMeta`:
   // menu, role gates and route guards update without a reload or an extra request.
@@ -403,7 +231,7 @@ const AuthProvider = ({ children }: IProps) => {
   }, [authorized, destroy, navigate, onEvent]);
 
   // Admin instance: only `super:admin:user` / `admin:user`. Any other signed-in user (password,
-  // sign-in flow, Google or an existing session on reload) is signed out again right away –
+  // sign-in flow or an existing session on reload) is signed out again right away –
   // the session is ended on the server too, so no token stays behind.
   const denyingRef = useRef(false);
   useEffect(() => {
@@ -470,37 +298,6 @@ const AuthProvider = ({ children }: IProps) => {
   }, [core, navigate, query, store, token, userMeta]);
 
   useEffect(() => {
-    // Check if popup callback
-    if (window.opener && window.location.hash) {
-      const { accessToken, idToken } = parseGoogleAuthHash(window.location.hash);
-      if (accessToken && idToken) {
-        window.opener.postMessage(
-          { type: 'GOOGLE_AUTH_CALLBACK', hash: window.location.hash },
-          window.location.origin
-        );
-        window.close();
-        return;
-      }
-    }
-
-    // Check if direct redirect callback with tokens in hash
-    if (window.location.hash) {
-      const { accessToken, idToken } = parseGoogleAuthHash(window.location.hash);
-      const storedNonce = sessionStorage.getItem('google_auth_nonce');
-      if (accessToken && idToken && storedNonce) {
-        sessionStorage.removeItem('google_auth_nonce');
-        window.history.replaceState(null, '', window.location.pathname + window.location.search);
-        setTimeout(() => {
-          void googleAuthAfter({
-            token: accessToken,
-            id: idToken,
-            nonce: storedNonce,
-          });
-        }, 0);
-        return;
-      }
-    }
-
     const init = () => {
       if (!connected) return;
       void load();
@@ -519,8 +316,6 @@ const AuthProvider = ({ children }: IProps) => {
       isLoggingOut,
       login,
       completeLogin,
-      loginWithGoogle,
-      googleAuthAfter,
       logout,
       loaded,
       userMeta,
@@ -536,14 +331,12 @@ const AuthProvider = ({ children }: IProps) => {
     };
   }, [
     authorized,
-    googleAuthAfter,
     isLoggingIn,
     isLoggingOut,
     loaded,
     loading,
     login,
     completeLogin,
-    loginWithGoogle,
     logout,
     logoutConfirm,
     preLogout,

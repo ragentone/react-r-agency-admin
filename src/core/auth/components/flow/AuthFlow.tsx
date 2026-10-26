@@ -19,28 +19,14 @@ import {
   passkeyGet,
   passkeySupported,
 } from '@core/security/utils/webauthn.ts';
-import { statsEvent } from '@core/stats';
-import { cn } from '@ui/lib/utils';
 import { Button } from '@ui/shad-cn/components/button.tsx';
-import { Checkbox } from '@ui/shad-cn/components/checkbox.tsx';
 import { Input } from '@ui/shad-cn/components/input.tsx';
-import { Switch } from '@ui/shad-cn/components/switch.tsx';
-import {
-  ArrowBigUp,
-  ArrowLeft,
-  Fingerprint,
-  KeyRound,
-  Mail,
-  ShieldAlert,
-  UserPlus,
-} from 'lucide-react';
+import { ArrowBigUp, ArrowLeft, Fingerprint, KeyRound, Mail, ShieldAlert } from 'lucide-react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { LoginFormGoogleButton } from '../forms/login/LoginFormGoogleButton.tsx';
-
-type Step = 'identify' | 'password' | 'code' | 'totp' | 'register' | 'reset' | 'google';
-type Purpose = 'login' | 'register' | 'reset';
+type Step = 'identify' | 'password' | 'code' | 'totp' | 'reset';
+type Purpose = 'login' | 'reset';
 
 const RESEND_SECONDS = 30;
 /** From this many wrong passwords on, the ways without a password become big buttons. */
@@ -54,29 +40,10 @@ const clock = (seconds: number): string =>
 const capsLockOn = (event: React.KeyboardEvent): boolean =>
   typeof event.getModifierState === 'function' && event.getModifierState('CapsLock');
 
-const ageOf = (birthday: string): number | null => {
-  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(birthday);
-  if (!match) return null;
-  const now = new Date();
-  let age = now.getFullYear() - Number(match[1]);
-  const month = Number(match[2]);
-  const day = Number(match[3]);
-  if (now.getMonth() + 1 < month || (now.getMonth() + 1 === month && now.getDate() < day)) age -= 1;
-  return age >= 0 && age <= 120 ? age : null;
-};
-
-const inviteFromUrl = (): string | null => {
-  try {
-    return new URLSearchParams(window.location.search).get('invite');
-  } catch {
-    return null;
-  }
-};
-
 /**
- * Sign-in and sign-up in one flow (like X): one field "e-mail or user name" → the server says
- * which way works (passkey, password, e-mail code) → optional second factor → signed in.
- * Unknown e-mail → code → choose user name → account created and signed in.
+ * Admin sign-in (like X): one field "e-mail or user name" → the server says which way works
+ * (passkey, password, e-mail code) → optional second factor → signed in.
+ * No sign-up and no Google here: unknown accounts get an error, Google-only accounts the e-mail code.
  */
 export const AuthFlow: React.FC = () => {
   const { t, i18n } = useTranslation('security');
@@ -96,8 +63,6 @@ export const AuthFlow: React.FC = () => {
   const [fieldError, setFieldError] = useState<string | null>(null);
   const [banReason, setBanReason] = useState<string | null>(null);
   const [resendIn, setResendIn] = useState(0);
-  const [invite] = useState(inviteFromUrl);
-  const [inviter, setInviter] = useState<string | null>(null);
   /** Wrong passwords in this flow (only for the hints, the server decides). */
   const [passwordFails, setPasswordFails] = useState(0);
   /** The server asked for the e-mail code instead of the password (step-up). */
@@ -107,32 +72,11 @@ export const AuthFlow: React.FC = () => {
   const [waitUntil, setWaitUntil] = useState(0);
   const [now, setNow] = useState(() => Date.now());
 
-  // Register form.
-  const [alias, setAlias] = useState('');
-  const [aliasCheck, setAliasCheck] = useState<{
-    alias: string;
-    available: boolean;
-    suggestions: string[];
-  } | null>(null);
-  const [birthday, setBirthday] = useState('');
-  const [consent, setConsent] = useState(false);
-  const [withPassword, setWithPassword] = useState(false);
+  /** New password of the reset step. */
   const [newPassword, setNewPassword] = useState('');
 
   const usedPasskey = useRef(false);
   const canPasskey = passkeySupported();
-
-  // Sign-up funnel of the visitor statistics (admin → Statistik → Wachstum).
-  useEffect(() => {
-    statsEvent('auth_open');
-  }, []);
-
-  useEffect(() => {
-    if (!invite) return;
-    void AuthApi.inviteInfo(invite).then(result => {
-      if (result.success && result.alias) setInviter(result.alias);
-    });
-  }, [invite]);
 
   // Countdown of a rate limit; when it is over the "too many attempts" note disappears.
   const waitLeft = waitUntil > now ? Math.ceil((waitUntil - now) / 1000) : 0;
@@ -203,10 +147,10 @@ export const AuthFlow: React.FC = () => {
         reset('totp');
         return;
       }
-      if (result.step === 'register' && result.ticket) {
-        statsEvent('auth_code');
-        setTicket(result.ticket);
-        reset('register');
+      if (result.step === 'register') {
+        // No sign-up in the admin.
+        setError(t('flow.adminNoAccount'));
+        reset('identify');
         return;
       }
       if (result.step === 'reset' && result.ticket) {
@@ -305,20 +249,11 @@ export const AuthFlow: React.FC = () => {
     setPasswordFails(0);
     setStepUp(false);
     if (!result.exists) {
-      if (!value.includes('@')) {
-        setError(t('flow.noAccount'));
-        setFieldError('identifier');
-        return;
-      }
-      statsEvent('auth_identify');
-      await sendCode(value, 'register');
+      setError(t('flow.adminNoAccount'));
+      setFieldError('identifier');
       return;
     }
     const methods = result.methods;
-    if (methods?.google && !methods.password) {
-      reset('google');
-      return;
-    }
     if (methods?.password) {
       setPassword('');
       reset('password');
@@ -379,58 +314,6 @@ export const AuthFlow: React.FC = () => {
     await handle(result);
   };
 
-  // Alias availability (debounced). Only the check of the current input counts.
-  const aliasValue = alias.trim().replace(/^@/, '');
-  useEffect(() => {
-    if (step !== 'register' || !/^[A-Za-z0-9_]{3,16}$/.test(aliasValue)) return;
-    const timer = window.setTimeout(() => {
-      void AuthApi.aliasCheck(aliasValue).then(result => {
-        if (result.success) {
-          setAliasCheck({
-            alias: aliasValue,
-            available: Boolean(result.available),
-            suggestions: result.suggestions ?? [],
-          });
-        }
-      });
-    }, 450);
-    return () => window.clearTimeout(timer);
-  }, [aliasValue, step]);
-  const aliasState = aliasCheck?.alias === aliasValue ? aliasCheck : null;
-
-  const age = ageOf(birthday);
-  const needsConsent = age !== null && age < 16;
-  const aliasValid = /^[A-Za-z0-9_]{3,16}$/.test(aliasValue);
-  const registerReady =
-    aliasValid &&
-    aliasState?.available !== false &&
-    age !== null &&
-    (!needsConsent || consent) &&
-    (!withPassword || passwordValid(newPassword));
-
-  const submitRegister = async (event: React.FormEvent) => {
-    event.preventDefault();
-    if (!registerReady) return;
-    setBusy(true);
-    setError(null);
-    setFieldError(null);
-    const result = await AuthApi.register(ticket, {
-      alias: alias.trim().replace(/^@/, ''),
-      birthday,
-      password: withPassword ? newPassword : null,
-      parentConsent: needsConsent ? consent : false,
-      invite,
-    });
-    setBusy(false);
-    if (result.error === 'expired') {
-      setError(t('flow.expired'));
-      reset('identify');
-      return;
-    }
-    if (result.success) statsEvent('auth_register');
-    await handle(result);
-  };
-
   const submitReset = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!passwordValid(newPassword)) return;
@@ -448,13 +331,11 @@ export const AuthFlow: React.FC = () => {
 
   // ---- view ----
   const headline: Record<Step, string> = {
-    identify: t('flow.identifyTitle'),
+    identify: t('flow.adminTitle'),
     password: t('flow.passwordTitle'),
-    code: purpose === 'register' ? t('flow.registerCodeTitle') : t('flow.codeTitle'),
+    code: t('flow.codeTitle'),
     totp: t('flow.totpTitle'),
-    register: t('flow.registerTitle'),
     reset: t('flow.resetTitle'),
-    google: t('flow.googleTitle'),
   };
 
   const shownEmail = info?.email ?? (identifier.includes('@') ? identifier.trim() : '');
@@ -506,12 +387,6 @@ export const AuthFlow: React.FC = () => {
 
       {step === 'identify' && (
         <>
-          {inviter && (
-            <p className="mb-4 flex items-center gap-2 text-body leading-5 text-muted-foreground">
-              <UserPlus aria-hidden="true" className="size-4 shrink-0" />
-              {t('flow.invitedBy', { alias: inviter })}
-            </p>
-          )}
           <p className="mb-6 text-body leading-5 text-muted-foreground">{t('flow.identifyText')}</p>
           <form onSubmit={submitIdentifier} className="flex flex-col gap-3" noValidate>
             <Input
@@ -539,23 +414,22 @@ export const AuthFlow: React.FC = () => {
               {waitLabel ?? t('flow.next')}
             </BigButton>
           </form>
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center" aria-hidden="true">
-              <span className="w-full border-t border-border/60" />
-            </div>
-            <div className="relative flex justify-center">
-              <span className="bg-background px-3 text-body text-muted-foreground">
-                {t('flow.or')}
-              </span>
-            </div>
-          </div>
-          <div className="flex flex-col gap-3">
-            {passkeyButton(null)}
-            <LoginFormGoogleButton
-              onError={err => setError(err instanceof Error ? err.message : String(err))}
-            />
-          </div>
-          <p className="mt-6 text-caption leading-4 text-muted-foreground">{t('flow.newHint')}</p>
+          {canPasskey && (
+            <>
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                  <span className="w-full border-t border-border/60" />
+                </div>
+                <div className="relative flex justify-center">
+                  <span className="bg-background px-3 text-body text-muted-foreground">
+                    {t('flow.or')}
+                  </span>
+                </div>
+              </div>
+              {passkeyButton(null)}
+            </>
+          )}
+          <p className="mt-6 text-caption leading-4 text-muted-foreground">{t('flow.adminHint')}</p>
         </>
       )}
 
@@ -770,141 +644,6 @@ export const AuthFlow: React.FC = () => {
         </>
       )}
 
-      {step === 'register' && (
-        <form onSubmit={submitRegister} className="flex flex-col gap-4" noValidate>
-          <p className="text-body leading-5 text-muted-foreground">
-            {t('flow.registerText', { email: identifier.trim() })}
-          </p>
-          {inviter && (
-            <p className="flex items-center gap-2 text-body leading-5">
-              <UserPlus aria-hidden="true" className="size-4 shrink-0" />
-              {t('flow.inviteFriend', { alias: inviter })}
-            </p>
-          )}
-
-          <label className="flex flex-col gap-1.5">
-            <span className="text-body font-bold">{t('flow.alias')}</span>
-            <div className="relative">
-              <span className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-[17px] text-muted-foreground">
-                @
-              </span>
-              <Input
-                value={alias}
-                onChange={event => setAlias(event.target.value.replace(/\s/g, ''))}
-                maxLength={16}
-                autoComplete="username"
-                autoCapitalize="none"
-                autoCorrect="off"
-                spellCheck={false}
-                aria-invalid={
-                  fieldError === 'alias' || aliasState?.available === false || undefined
-                }
-                className="h-12 rounded-full pr-4 pl-9 text-[17px]"
-                autoFocus
-                disabled={busy}
-              />
-            </div>
-            <span className="text-caption leading-4 text-muted-foreground" aria-live="polite">
-              {!alias
-                ? t('flow.aliasHint')
-                : !aliasValid
-                  ? t('flow.aliasRules')
-                  : aliasState?.available === false
-                    ? t('flow.aliasTaken')
-                    : aliasState?.available
-                      ? t('flow.aliasFree')
-                      : ' '}
-            </span>
-            {aliasState?.available === false && aliasState.suggestions.length > 0 && (
-              <span className="flex flex-wrap gap-2">
-                {aliasState.suggestions.map(suggestion => (
-                  <Button
-                    key={suggestion}
-                    type="button"
-                    variant="outline"
-                    pill
-                    size="lg"
-                    onClick={() => setAlias(suggestion)}
-                  >
-                    @{suggestion}
-                  </Button>
-                ))}
-              </span>
-            )}
-          </label>
-
-          <label className="flex flex-col gap-1.5">
-            <span className="text-body font-bold">{t('flow.birthday')}</span>
-            <Input
-              type="date"
-              value={birthday}
-              onChange={event => setBirthday(event.target.value)}
-              max={new Date().toISOString().slice(0, 10)}
-              min="1900-01-01"
-              autoComplete="bday"
-              aria-invalid={fieldError === 'birthday' || undefined}
-              className="h-12 rounded-full px-4 text-[17px]"
-              disabled={busy}
-            />
-            <span className="text-caption leading-4 text-muted-foreground">
-              {t('flow.birthdayHint')}
-            </span>
-          </label>
-
-          {needsConsent && (
-            <label
-              htmlFor="auth-parent-consent"
-              className={cn(
-                'flex cursor-pointer items-start gap-3 rounded-2xl border p-4 select-none',
-                fieldError === 'parentConsent' ? 'border-foreground' : 'border-border/60'
-              )}
-            >
-              <Checkbox
-                id="auth-parent-consent"
-                checked={consent}
-                onCheckedChange={value => setConsent(value === true)}
-                className="mt-0.5"
-              />
-              <span className="text-body leading-5">{t('flow.consent')}</span>
-            </label>
-          )}
-
-          <div className="flex items-center justify-between gap-4 rounded-2xl border border-border/60 p-4">
-            <label htmlFor="auth-with-password" className="flex min-w-0 flex-col">
-              <span className="text-body font-bold">{t('flow.withPassword')}</span>
-              <span className="text-caption leading-4 text-muted-foreground">
-                {t('flow.withPasswordHint')}
-              </span>
-            </label>
-            <Switch
-              id="auth-with-password"
-              checked={withPassword}
-              onCheckedChange={setWithPassword}
-            />
-          </div>
-          {withPassword && (
-            <div className="flex flex-col gap-3">
-              <PasswordField
-                autoComplete="new-password"
-                value={newPassword}
-                onChange={event => setNewPassword(event.target.value)}
-                placeholder={t('password.new')}
-                aria-label={t('password.new')}
-                aria-invalid={fieldError === 'password' || undefined}
-                maxLength={64}
-                disabled={busy}
-              />
-              <PasswordRules password={newPassword} />
-            </div>
-          )}
-
-          <ErrorNote message={error} />
-          <BigButton type="submit" isLoading={busy} disabled={busy || !registerReady}>
-            {t('flow.create')}
-          </BigButton>
-        </form>
-      )}
-
       {step === 'reset' && (
         <form onSubmit={submitReset} className="flex flex-col gap-3" noValidate>
           <p className="mb-3 text-body leading-5 text-muted-foreground">{t('flow.resetText')}</p>
@@ -936,30 +675,6 @@ export const AuthFlow: React.FC = () => {
             {t('flow.resetSave')}
           </BigButton>
         </form>
-      )}
-
-      {step === 'google' && (
-        <>
-          {identifierChip}
-          <p className="mb-6 text-body leading-5 text-muted-foreground">{t('flow.googleText')}</p>
-          <div className="flex flex-col gap-3">
-            <LoginFormGoogleButton
-              onError={err => setError(err instanceof Error ? err.message : String(err))}
-            />
-            {info?.methods?.passkey && passkeyButton(identifier.trim())}
-            <Button
-              variant="ghost"
-              pill
-              className="h-11 font-bold"
-              onClick={() => void sendCode(identifier.trim(), 'login')}
-              disabled={busy}
-            >
-              <Mail />
-              {t('flow.useCode')}
-            </Button>
-            <ErrorNote message={error} />
-          </div>
-        </>
       )}
 
       {banReason && (

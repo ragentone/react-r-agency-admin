@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next';
 import { LoginFormAlert } from './LoginFormAlert';
 import { LoginFormEmailField } from './LoginFormEmailField';
 import { LoginFormFields } from './LoginFormFields';
-import { LoginFormGoogleButton } from './LoginFormGoogleButton';
 import { LoginFormHeader } from './LoginFormHeader';
 import { LoginFormPasswordField } from './LoginFormPasswordField';
 import { LoginFormSubmitButton } from './LoginFormSubmitButton';
@@ -31,7 +30,6 @@ export interface LoginFormProps {
   className?: string;
   title?: string;
   description?: string;
-  showGoogleAuth?: boolean;
 }
 
 const defaultInitialValues: ILoginFormValues = {
@@ -47,7 +45,6 @@ export interface LoginFormComponent extends React.FC<LoginFormProps> {
   EmailField: typeof LoginFormEmailField;
   PasswordField: typeof LoginFormPasswordField;
   SubmitButton: typeof LoginFormSubmitButton;
-  GoogleButton: typeof LoginFormGoogleButton;
 }
 
 export const LoginForm: LoginFormComponent = Object.assign(
@@ -59,7 +56,6 @@ export const LoginForm: LoginFormComponent = Object.assign(
     className,
     title,
     description,
-    showGoogleAuth = true,
   }: LoginFormProps) => {
     const { t } = useTranslation('auth');
     const { login } = useAuth();
@@ -122,26 +118,6 @@ export const LoginForm: LoginFormComponent = Object.assign(
       <div className={cn('w-full max-w-md mx-auto space-y-4', className)}>
         <LoginFormHeader title={displayTitle} description={displayDescription} />
         <div>{formBody}</div>
-        {showGoogleAuth && (
-          <div className="space-y-4">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-body">
-                <span className="bg-background px-3 text-muted-foreground">{t('form.or')}</span>
-              </div>
-            </div>
-            <LoginFormGoogleButton
-              onSuccess={onSuccess}
-              onError={err => {
-                const message = err instanceof Error ? err.message : String(err);
-                setSubmitError(message);
-                onError?.(err);
-              }}
-            />
-          </div>
-        )}
       </div>
     );
   },
@@ -152,7 +128,6 @@ export const LoginForm: LoginFormComponent = Object.assign(
     EmailField: LoginFormEmailField,
     PasswordField: LoginFormPasswordField,
     SubmitButton: LoginFormSubmitButton,
-    GoogleButton: LoginFormGoogleButton,
   }
 );
 

@@ -1,7 +1,6 @@
 import type { IAuthStore } from '@core/auth/auth.store.tsx';
 import type { IAuthTokenStore } from '@core/auth/auth.token.store.tsx';
 import type { IUserMetaData } from '@core/auth/types/config.ts';
-import type { GoogleAuthAfterReturn, IGoogleAuthParams } from '@core/auth/types/google.ts';
 import type { ILoginParams } from '@core/auth/types/login.ts';
 import { createContext } from 'react';
 
@@ -23,11 +22,6 @@ export interface IAuthContext {
     },
     options?: { offerPasskey?: boolean }
   ) => Promise<void>;
-  loginWithGoogle: (popupOptions?: {
-    width?: number;
-    height?: number;
-  }) => Promise<GoogleAuthAfterReturn | null | undefined>;
-  googleAuthAfter: (params: IGoogleAuthParams) => Promise<GoogleAuthAfterReturn | null | undefined>;
   logout(): void;
   preLogout(): void;
   logoutConfirm: boolean;

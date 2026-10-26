@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |    120 |
-| [Mutation](#mutation) |    228 |
-| Object-Types          |    403 |
+| [Query](#query)       |    114 |
+| [Mutation](#mutation) |    217 |
+| Object-Types          |    386 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -222,29 +222,8 @@ Query  ‹IQuery›
 │   ├── requestId: String
 │   ├── success: Boolean
 │   └── total: Int
-├── developerRoadmapList: developerRoadmapListReturn  ‹IDeveloperRoadmapListReturn›
-│   ├── items: JSON
-│   └── success: Boolean
 ├── developerTestSource: developerTestSourceReturn  ‹IDeveloperTestSourceReturn›
 │   ├── news: JSON
-│   └── success: Boolean
-├── developerTicketList: developerTicketListReturn  ‹IDeveloperTicketListReturn›
-│   ├── $status: String
-│   ├── success: Boolean
-│   └── tickets: JSON
-├── developerTicketMine: developerTicketMineReturn  ‹IDeveloperTicketMineReturn›
-│   ├── success: Boolean
-│   └── tickets: JSON
-├── developerTodoList: developerTodoListReturn  ‹IDeveloperTodoListReturn›
-│   ├── success: Boolean
-│   └── todos: JSON
-├── fileShareLinkResolve: fileShareLinkResolveReturn  ‹IFileShareLinkResolveReturn›
-│   ├── $token: String!
-│   ├── file: JSON
-│   └── success: Boolean
-├── fileShareList: fileShareListReturn  ‹IFileShareListReturn›
-│   ├── files: JSON
-│   ├── restricted: Int
 │   └── success: Boolean
 ├── forumCommunities: forumCommunitiesReturn  ‹IForumCommunitiesReturn›
 │   ├── $options: JSON
@@ -1410,56 +1389,6 @@ Mutation  ‹IMutation›
 │   └── success: Boolean
 ├── developerTest: developerTestReturn  ‹IDeveloperTestReturn›
 │   ├── $delay: Int
-│   └── success: Boolean
-├── developerTicketAccept: developerTicketAcceptReturn  ‹IDeveloperTicketAcceptReturn›
-│   ├── $id: ID!
-│   ├── $note: String
-│   ├── $public: Boolean
-│   ├── success: Boolean
-│   ├── ticket: JSON
-│   └── todo: JSON
-├── developerTicketCreate: developerTicketCreateReturn  ‹IDeveloperTicketCreateReturn›
-│   ├── $values: JSON!
-│   ├── success: Boolean
-│   └── ticket: JSON
-├── developerTicketReject: developerTicketRejectReturn  ‹IDeveloperTicketRejectReturn›
-│   ├── $id: ID!
-│   ├── $note: String!
-│   ├── success: Boolean
-│   └── ticket: JSON
-├── developerTodoCreate: developerTodoCreateReturn  ‹IDeveloperTodoCreateReturn›
-│   ├── $values: JSON!
-│   ├── success: Boolean
-│   └── todo: JSON
-├── developerTodoDelete: developerTodoDeleteReturn  ‹IDeveloperTodoDeleteReturn›
-│   ├── $id: ID!
-│   └── success: Boolean
-├── developerTodoUpdate: developerTodoUpdateReturn  ‹IDeveloperTodoUpdateReturn›
-│   ├── $id: ID!
-│   ├── $values: JSON!
-│   ├── success: Boolean
-│   └── todo: JSON
-├── fileShareCreate: fileShareCreateReturn  ‹IFileShareCreateReturn›
-│   ├── $file: [Upload]!
-│   ├── $values: JSON!
-│   ├── file: JSON
-│   └── success: Boolean
-├── fileShareDelete: fileShareDeleteReturn  ‹IFileShareDeleteReturn›
-│   ├── $id: ID!
-│   └── success: Boolean
-├── fileShareLinkCreate: fileShareLinkCreateReturn  ‹IFileShareLinkCreateReturn›
-│   ├── $id: ID!
-│   ├── file: JSON
-│   └── success: Boolean
-├── fileShareLinkRevoke: fileShareLinkRevokeReturn  ‹IFileShareLinkRevokeReturn›
-│   ├── $id: ID!
-│   ├── file: JSON
-│   └── success: Boolean
-├── fileShareUpdate: fileShareUpdateReturn  ‹IFileShareUpdateReturn›
-│   ├── $file: [Upload]
-│   ├── $id: ID!
-│   ├── $values: JSON!
-│   ├── file: JSON
 │   └── success: Boolean
 ├── forumCommentCreate: forumCommentCreateReturn  ‹IForumCommentCreateReturn›
 │   ├── $values: JSON!
@@ -2977,26 +2906,9 @@ Inputs
 | `dbResourceWriteResult`                  | Object | `IDbResourceWriteResult`                  | `objects.ts` |                                                                                  |
 | `deleteAllDummyUsersReturn`              | Object | `IDeleteAllDummyUsersReturn`              | `objects.ts` |                                                                                  |
 | `deleteMediaReturn`                      | Object | `IDeleteMediaReturn`                      | `objects.ts` |                                                                                  |
-| `developerRoadmapListReturn`             | Object | `IDeveloperRoadmapListReturn`             | `objects.ts` |                                                                                  |
 | `developerTestReturn`                    | Object | `IDeveloperTestReturn`                    | `objects.ts` |                                                                                  |
 | `developerTestSourceReturn`              | Object | `IDeveloperTestSourceReturn`              | `objects.ts` |                                                                                  |
-| `developerTicketAcceptReturn`            | Object | `IDeveloperTicketAcceptReturn`            | `objects.ts` |                                                                                  |
-| `developerTicketCreateReturn`            | Object | `IDeveloperTicketCreateReturn`            | `objects.ts` |                                                                                  |
-| `developerTicketListReturn`              | Object | `IDeveloperTicketListReturn`              | `objects.ts` |                                                                                  |
-| `developerTicketMineReturn`              | Object | `IDeveloperTicketMineReturn`              | `objects.ts` |                                                                                  |
-| `developerTicketRejectReturn`            | Object | `IDeveloperTicketRejectReturn`            | `objects.ts` |                                                                                  |
-| `developerTodoCreateReturn`              | Object | `IDeveloperTodoCreateReturn`              | `objects.ts` |                                                                                  |
-| `developerTodoDeleteReturn`              | Object | `IDeveloperTodoDeleteReturn`              | `objects.ts` |                                                                                  |
-| `developerTodoListReturn`                | Object | `IDeveloperTodoListReturn`                | `objects.ts` |                                                                                  |
-| `developerTodoUpdateReturn`              | Object | `IDeveloperTodoUpdateReturn`              | `objects.ts` |                                                                                  |
 | `Email`                                  | Scalar | `ScalarEmail`                             | `scalars.ts` |                                                                                  |
-| `fileShareCreateReturn`                  | Object | `IFileShareCreateReturn`                  | `objects.ts` |                                                                                  |
-| `fileShareDeleteReturn`                  | Object | `IFileShareDeleteReturn`                  | `objects.ts` |                                                                                  |
-| `fileShareLinkCreateReturn`              | Object | `IFileShareLinkCreateReturn`              | `objects.ts` |                                                                                  |
-| `fileShareLinkResolveReturn`             | Object | `IFileShareLinkResolveReturn`             | `objects.ts` |                                                                                  |
-| `fileShareLinkRevokeReturn`              | Object | `IFileShareLinkRevokeReturn`              | `objects.ts` |                                                                                  |
-| `fileShareListReturn`                    | Object | `IFileShareListReturn`                    | `objects.ts` |                                                                                  |
-| `fileShareUpdateReturn`                  | Object | `IFileShareUpdateReturn`                  | `objects.ts` |                                                                                  |
 | `findOptions`                            | Input  | `IFindOptions`                            | `inputs.ts`  |                                                                                  |
 | `Float`                                  | Scalar | –                                         | built-in     | The `Float` scalar type represents signed double-precision fractional values as… |
 | `forumCommentCreateReturn`               | Object | `IForumCommentCreateReturn`               | `objects.ts` |                                                                                  |

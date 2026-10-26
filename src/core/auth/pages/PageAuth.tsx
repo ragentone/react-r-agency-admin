@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next';
 import { PageScrollTopBlock } from '../../layout/components/PageScrollTopBlock.tsx';
 
 /**
- * Mobile first auth screen (X-style): logo + one flow for sign-in and sign-up
+ * Mobile first admin sign-in (X-style): logo + sign-in flow (no sign-up, no Google)
  * (`AuthFlow`: identifier first → passkey / password / e-mail code → 2FA).
  */
 const PageAuth = () => {

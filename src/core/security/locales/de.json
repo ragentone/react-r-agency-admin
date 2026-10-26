@@ -104,7 +104,10 @@
     "retryIn": "Nochmal in {{time}}",
     "tooMany": "Zu viele Versuche. Bitte warte kurz.",
     "codeRequired": "Zu viele falsche Passwörter auf diesem Gerät. Zur Sicherheit meldest du dich jetzt mit dem Code aus deiner E-Mail an.",
-    "troubleText": "Klappt es nicht? Melde dich ohne Passwort an."
+    "troubleText": "Klappt es nicht? Melde dich ohne Passwort an.",
+    "adminTitle": "Im Admin anmelden",
+    "adminNoAccount": "Für diesen Benutzer gibt es kein Konto. Eine Registrierung ist im Admin nicht möglich.",
+    "adminHint": "Nur für Administratoren. Neue Konten werden in der App angelegt."
   },
   "section": {
     "title": "Sicherheit",

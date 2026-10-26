@@ -278,68 +278,6 @@ export interface IMutationDeveloperTestArgs {
   delay?: InputMaybe<number>;
 }
 
-/** Arguments of `Mutation.developerTicketAccept` */
-export interface IMutationDeveloperTicketAcceptArgs {
-  id: ScalarID;
-  note?: InputMaybe<string>;
-  public?: InputMaybe<boolean>;
-}
-
-/** Arguments of `Mutation.developerTicketCreate` */
-export interface IMutationDeveloperTicketCreateArgs {
-  values: ScalarJSON;
-}
-
-/** Arguments of `Mutation.developerTicketReject` */
-export interface IMutationDeveloperTicketRejectArgs {
-  id: ScalarID;
-  note: string;
-}
-
-/** Arguments of `Mutation.developerTodoCreate` */
-export interface IMutationDeveloperTodoCreateArgs {
-  values: ScalarJSON;
-}
-
-/** Arguments of `Mutation.developerTodoDelete` */
-export interface IMutationDeveloperTodoDeleteArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Mutation.developerTodoUpdate` */
-export interface IMutationDeveloperTodoUpdateArgs {
-  id: ScalarID;
-  values: ScalarJSON;
-}
-
-/** Arguments of `Mutation.fileShareCreate` */
-export interface IMutationFileShareCreateArgs {
-  file: Array<InputMaybe<ScalarUpload>>;
-  values: ScalarJSON;
-}
-
-/** Arguments of `Mutation.fileShareDelete` */
-export interface IMutationFileShareDeleteArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Mutation.fileShareLinkCreate` */
-export interface IMutationFileShareLinkCreateArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Mutation.fileShareLinkRevoke` */
-export interface IMutationFileShareLinkRevokeArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Mutation.fileShareUpdate` */
-export interface IMutationFileShareUpdateArgs {
-  file?: InputMaybe<Array<InputMaybe<ScalarUpload>>>;
-  id: ScalarID;
-  values: ScalarJSON;
-}
-
 /** Arguments of `Mutation.forumCommentCreate` */
 export interface IMutationForumCommentCreateArgs {
   values: ScalarJSON;
@@ -1390,16 +1328,6 @@ export interface IQueryClientWriteDataArgs {
 /** Arguments of `Query.currencyGet` */
 export interface IQueryCurrencyGetArgs {
   params: ICurrencyParams;
-}
-
-/** Arguments of `Query.developerTicketList` */
-export interface IQueryDeveloperTicketListArgs {
-  status?: InputMaybe<string>;
-}
-
-/** Arguments of `Query.fileShareLinkResolve` */
-export interface IQueryFileShareLinkResolveArgs {
-  token: string;
 }
 
 /** Arguments of `Query.forumCommunities` */

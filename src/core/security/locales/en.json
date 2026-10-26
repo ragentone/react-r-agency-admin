@@ -104,7 +104,10 @@
     "retryIn": "Try again in {{time}}",
     "tooMany": "Too many attempts. Please wait a moment.",
     "codeRequired": "Too many wrong passwords on this device. To be safe, sign in with the code from your e-mail now.",
-    "troubleText": "Not working? Sign in without a password."
+    "troubleText": "Not working? Sign in without a password.",
+    "adminTitle": "Sign in to admin",
+    "adminNoAccount": "There is no account for this user. Sign-up is not available in the admin.",
+    "adminHint": "Administrators only. New accounts are created in the app."
   },
   "section": {
     "title": "Security",
