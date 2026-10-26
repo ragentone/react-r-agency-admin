@@ -1,4 +1,3 @@
-
 import tailwindcss from '@tailwindcss/vite';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 // ---
@@ -192,7 +191,7 @@ export default defineConfig(async ({ command, mode }): Promise<UserConfig> => {
     },
     plugins: plugins,
     server: {
-      port: 3000,
+      port: parseInt(process.env.VITE_DEV_SERVER_PORT || '3100'),
       //host: '0.0.0.0',
       host: true,
       open: true,
