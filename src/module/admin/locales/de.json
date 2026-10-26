@@ -3,6 +3,7 @@
   "subtitle": "Benutzer suchen und Rollen verwalten",
   "retry": "Erneut versuchen",
   "menu": {
+    "group": "Administrator",
     "label": "Benutzerverwaltung",
     "description": "Benutzer suchen und Rollen verwalten",
     "pagesLabel": "Seiten verwalten",

@@ -2,7 +2,6 @@ import { Core } from '@core/core.api.ts';
 import { lazyPage } from '@core/page/lazy.page.ts';
 import { ChartNoAxesCombined, FileText, Server, UsersRound } from 'lucide-react';
 
-import { SitePageMenuLoader } from './components/SitePageMenuLoader';
 import {
   ADMIN_PAGES_ROUTE,
   ADMIN_ROLES,
@@ -69,6 +68,11 @@ Core.router.register({
   meta: { title: 'Page' },
 });
 
+Core.menu.registerSection('admin', {
+  sortOrder: 0,
+  label: 'admin:menu.group',
+});
+
 // Admin area – role management + page builder in the "Administration" group.
 Core.menu.register({
   id: 'admin',
@@ -77,7 +81,7 @@ Core.menu.register({
   icon: UsersRound,
   to: ADMIN_ROUTE,
   exact: true,
-  parent: 'administration',
+  section: 'admin',
   roles: ADMIN_ROLES,
   sortOrder: 10,
 });
@@ -88,7 +92,7 @@ Core.menu.register({
   description: 'admin:menu.pagesDescription',
   icon: FileText,
   to: ADMIN_PAGES_ROUTE,
-  parent: 'administration',
+  section: 'admin',
   roles: ADMIN_ROLES,
   sortOrder: 20,
 });
@@ -99,9 +103,9 @@ Core.menu.register({
   description: 'admin:menu.statsDescription',
   icon: ChartNoAxesCombined,
   to: ADMIN_STATS_ROUTE,
-  parent: 'administration',
+  section: 'admin',
   roles: ADMIN_ROLES,
-  sortOrder: 5,
+  sortOrder: 30,
 });
 
 Core.menu.register({
@@ -110,10 +114,7 @@ Core.menu.register({
   description: 'admin:menu.systemDescription',
   icon: Server,
   to: ADMIN_SYSTEM_ROUTE,
-  parent: 'administration',
+  section: 'admin',
   roles: ADMIN_ROLES,
-  sortOrder: 30,
+  sortOrder: 40,
 });
-
-// Published pages → own group "Pages" in the main menu (reloaded after admin changes).
-Core.extension.add({ component: SitePageMenuLoader, sortOrder: 100 });

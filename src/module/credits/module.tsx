@@ -68,7 +68,7 @@ Core.menu.register({
   description: 'credits:menu.adminDescription',
   icon: Gem,
   to: CREDITS_ADMIN_ROUTE,
-  parent: 'administration',
+  section: 'admin',
   roles: CREDITS_ADMIN_ROLES,
   sortOrder: 30,
 });

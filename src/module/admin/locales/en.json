@@ -3,6 +3,7 @@
   "subtitle": "Search users and manage roles",
   "retry": "Try again",
   "menu": {
+    "group": "Administrator",
     "label": "User management",
     "description": "Search users and manage roles",
     "pagesLabel": "Manage pages",

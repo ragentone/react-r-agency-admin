@@ -23,7 +23,7 @@ Core.menu.register({
   description: 'seo:menu.description',
   icon: SearchCheck,
   to: ADMIN_SEO_ROUTE,
-  parent: 'administration',
+  section: 'admin',
   roles: SEO_ADMIN_ROLES,
   sortOrder: 25,
 });
