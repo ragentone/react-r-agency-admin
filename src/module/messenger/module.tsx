@@ -5,17 +5,11 @@ import { Button } from '@ui/shad-cn/components/button.tsx';
 import { MessageCircle } from 'lucide-react';
 
 import { MessengerProvider } from './components/MessengerProvider.tsx';
-import { MESSENGER_LAYER_DELAY_MS, MESSENGER_USER_ROLE } from './const.ts';
+import { MESSENGER_LAYER_DELAY_MS } from './const.ts';
 import { markMessengerActive } from './feature.ts';
 import { openMessenger, useMessengerStore } from './store.ts';
 
 markMessengerActive();
-
-Core.roles.register({
-  label: 'Messenger user',
-  description: 'User who can use messenger',
-  role: MESSENGER_USER_ROLE[0],
-});
 
 ProviderManager.add({
   alias: 'messenger',
@@ -34,7 +28,6 @@ Core.menu.register({
   sortOrder: 5,
   onSelect: () => window.setTimeout(() => openMessenger(), MESSENGER_LAYER_DELAY_MS),
   useBadge: () => useMessengerStore(state => state.unreadTotal) || null,
-  roles: MESSENGER_USER_ROLE,
 });
 
 Core.cms.register('profile-call-buttons', {

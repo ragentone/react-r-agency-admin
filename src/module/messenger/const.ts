@@ -19,4 +19,4 @@ export const MESSENGER_LIKE = '👍';
 /** Facebook Messenger look. */
 export const MESSENGER_PRIMARY_COLOR = '#212527';
 export const MESSENGER_ONLINE = '#31a24c';
-export const MESSENGER_USER_ROLE = ['messenger:user'];
+export const MESSENGER_USER_ROLE = ['admin:user', 'super:admin:user'];
