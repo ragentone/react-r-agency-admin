@@ -1,5 +1,7 @@
 export type NotifyType = 'info' | 'success' | 'warning' | 'error';
 export type NotifyFilter = 'all' | 'unread';
+/** Inbox area: `app` = frontend, `admin` = admin area (runtime `UserNotifyScope`). */
+export type NotifyScope = 'app' | 'admin';
 
 export interface INotifyFrom {
   id: string;
@@ -37,6 +39,8 @@ export interface INotifyItem {
   identifier?: string | null;
   /** Live only, not stored (not in the inbox). */
   flash: boolean;
+  /** Inbox area (`app` | `admin`). */
+  scope: NotifyScope;
 }
 
 export interface INotifyState {
@@ -62,10 +66,15 @@ export interface INotifyRaw {
   component?: string | null;
   identifier?: string | null;
   flash?: boolean | null;
+  scope?: string | null;
 }
 
 /** Payload of `user::update:notify_state` (all devices of the user). */
 export interface INotifyStateEvent {
+  /** Counters per scope – this app reads `NOTIFY_SCOPE` (older runtimes: only `state`). */
+  states?: Partial<Record<NotifyScope, Partial<INotifyState>>> | null;
+  /** Scope of `seenAll` / `cleared` (missing = all). */
+  scope?: string | null;
   state?: Partial<INotifyState> | null;
   seenIds?: string[] | null;
   seenAll?: boolean | null;

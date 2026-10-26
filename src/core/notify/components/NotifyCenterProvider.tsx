@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 import { useAuth } from '../../auth/components/use.auth.ts';
 import { NotifyActions } from '../actions';
 import { useNotifyActivityStore } from '../activity';
-import { NOTIFY_EVENTS, NOTIFY_STATE_INTERVAL_MS, NOTIFY_TOAST_MS } from '../const';
+import { NOTIFY_EVENTS, NOTIFY_SCOPE, NOTIFY_STATE_INTERVAL_MS, NOTIFY_TOAST_MS } from '../const';
 import { playNotifySoundIfEnabled } from '../sound';
 import { useNotifyBadge, useNotifyStore } from '../store';
 import { cancelSystemNotify, NOTIFY_SYSTEM_TYPE, setAppBadge, showSystemNotify } from '../system';
@@ -109,7 +109,8 @@ export const NotifyCenterProvider = ({ children }: { children: ReactNode }) => {
       if (!payload) return;
       store().applyStateEvent(payload);
       // Read / deleted (also on another device) → the system notification goes away too.
-      if (payload.seenAll || payload.cleared) cancelSystemNotify();
+      const mine = !payload.scope || payload.scope === NOTIFY_SCOPE;
+      if ((payload.seenAll || payload.cleared) && mine) cancelSystemNotify();
       else cancelSystemNotify([...(payload.seenIds ?? []), ...(payload.removedIds ?? [])]);
     });
 

@@ -12,14 +12,14 @@ const STATE_FIELDS = `
 `;
 
 export const UserNotifyStateQuery = parse(`
-  query UserNotifyState {
-    userNotifyState { ${STATE_FIELDS} }
+  query UserNotifyState($scope: String) {
+    userNotifyState(scope: $scope) { ${STATE_FIELDS} }
   }
 `);
 
 export const UserNotifyListingQuery = parse(`
-  query UserNotifyListing($page: Int!, $limit: Int, $filter: String) {
-    userNotifyListing(page: $page, limit: $limit, filter: $filter) {
+  query UserNotifyListing($page: Int!, $limit: Int, $filter: String, $scope: String) {
+    userNotifyListing(page: $page, limit: $limit, filter: $filter, scope: $scope) {
       success
       total
       hasNextPage
@@ -38,6 +38,7 @@ export const UserNotifyListingQuery = parse(`
         component
         identifier
         flash
+        scope
         actions { label emit payload variant close delete }
       }
     }
@@ -54,8 +55,8 @@ export const UserNotifySeenMutation = parse(`
 `);
 
 export const UserNotifySeenAllMutation = parse(`
-  mutation UserNotifySeenAll {
-    userNotifySeenAll {
+  mutation UserNotifySeenAll($scope: String) {
+    userNotifySeenAll(scope: $scope) {
       success
       state { ${STATE_FIELDS} }
     }
@@ -72,8 +73,8 @@ export const UserNotifyDeleteMutation = parse(`
 `);
 
 export const UserNotifyClearMutation = parse(`
-  mutation UserNotifyClear {
-    userNotifyClear {
+  mutation UserNotifyClear($scope: String) {
+    userNotifyClear(scope: $scope) {
       success
       state { ${STATE_FIELDS} }
     }

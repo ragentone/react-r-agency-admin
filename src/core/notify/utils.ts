@@ -41,6 +41,7 @@ export const normalizeNotify = (raw: INotifyRaw): INotifyItem | null => {
     component: raw.component ?? null,
     identifier: raw.identifier ?? null,
     flash: Boolean(raw.flash),
+    scope: raw.scope === 'admin' ? 'admin' : 'app',
   };
 };
 

@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 import { useNotifyActivityUnseen } from './activity';
 import { NotifyApi } from './api';
-import { NOTIFY_PAGE_SIZE, NOTIFY_UNDO_MS } from './const';
+import { NOTIFY_PAGE_SIZE, NOTIFY_SCOPE, NOTIFY_UNDO_MS } from './const';
 import type {
   INotifyItem,
   INotifyList,
@@ -348,7 +348,9 @@ export const useNotifyStore = create<INotifyStore>((set, get) => {
 
     receive(raw) {
       const item = normalizeNotify(raw);
-      if (!item || item.flash) return item;
+      // Notification of the other area (frontend ↔ admin) → not shown here.
+      if (!item || item.scope !== NOTIFY_SCOPE) return null;
+      if (item.flash) return item;
       const lists = { ...get().lists };
       for (const filter of FILTERS) {
         const list = lists[filter];
@@ -362,18 +364,21 @@ export const useNotifyStore = create<INotifyStore>((set, get) => {
     },
 
     applyStateEvent(event) {
-      if (event.seenAll) {
+      // `seenAll` / `cleared` of the other area don't touch this list.
+      const mine = !event.scope || event.scope === NOTIFY_SCOPE;
+      if (event.seenAll && mine) {
         mapItems(entry => (entry.seen ? entry : { ...entry, seen: true }));
       } else if (event.seenIds?.length) {
         const ids = new Set(event.seenIds);
         mapItems(entry => (ids.has(entry.id) ? { ...entry, seen: true } : entry));
       }
-      if (event.cleared) {
+      if (event.cleared && mine) {
         dropItems(entry => entry.removable);
       } else if (event.removedIds?.length) {
         get().applyRemoved(event.removedIds);
       }
-      if (event.state) get().setState(event.state);
+      const state = event.states ? event.states[NOTIFY_SCOPE] : event.state;
+      if (state) get().setState(state);
     },
 
     applyRemoved(ids) {

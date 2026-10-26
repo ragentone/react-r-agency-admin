@@ -1,5 +1,6 @@
 import { getMeshClient } from 'r-agency-mesh-client-v1/release';
 
+import { NOTIFY_SCOPE } from './const';
 import {
   UserNotifyClearMutation,
   UserNotifyDeleteMutation,
@@ -41,7 +42,12 @@ const expectSuccess = (result: IMutationResult | undefined, name: string) => {
 /** Notification API (outside React – usable from the store). Errors are thrown. */
 export const NotifyApi = {
   async state(): Promise<INotifyState> {
-    const { data } = await query<{ userNotifyState?: Partial<INotifyState> }>(UserNotifyStateQuery);
+    const { data } = await query<{ userNotifyState?: Partial<INotifyState> }>(
+      UserNotifyStateQuery,
+      {
+        scope: NOTIFY_SCOPE,
+      }
+    );
     return normalizeState(data?.userNotifyState);
   },
 
@@ -63,7 +69,7 @@ export const NotifyApi = {
         state?: Partial<INotifyState> | null;
         records?: (INotifyRaw | null)[] | null;
       };
-    }>(UserNotifyListingQuery, { page, limit, filter });
+    }>(UserNotifyListingQuery, { page, limit, filter, scope: NOTIFY_SCOPE });
     const result = data?.userNotifyListing;
     if (!result) throw new Error('userNotifyListing failed');
     return {
@@ -85,7 +91,8 @@ export const NotifyApi = {
 
   async seenAll() {
     const { data } = await mutate<{ userNotifySeenAll?: IMutationResult }>(
-      UserNotifySeenAllMutation
+      UserNotifySeenAllMutation,
+      { scope: NOTIFY_SCOPE }
     );
     return expectSuccess(data?.userNotifySeenAll, 'userNotifySeenAll');
   },
@@ -99,7 +106,9 @@ export const NotifyApi = {
   },
 
   async clear() {
-    const { data } = await mutate<{ userNotifyClear?: IMutationResult }>(UserNotifyClearMutation);
+    const { data } = await mutate<{ userNotifyClear?: IMutationResult }>(UserNotifyClearMutation, {
+      scope: NOTIFY_SCOPE,
+    });
     return expectSuccess(data?.userNotifyClear, 'userNotifyClear');
   },
 };

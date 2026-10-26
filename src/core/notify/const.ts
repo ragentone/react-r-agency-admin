@@ -1,3 +1,11 @@
+import type { NotifyScope } from './types';
+
+/**
+ * Inbox area of this app. The inbox is shared with the frontend: only notifications of this scope are
+ * listed, counted and shown live here.
+ */
+export const NOTIFY_SCOPE: NotifyScope = 'admin';
+
 /** Wait for a closing drawer / menu (back-button history) before opening the next layer. */
 export const NOTIFY_LAYER_DELAY_MS = 320;
 /** Page size of the inbox (backend max. 50). */
