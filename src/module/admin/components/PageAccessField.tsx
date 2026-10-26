@@ -1,13 +1,14 @@
 import { useUserRoleRegistry } from '@core/auth/roles/role.manager.ts';
 import { cn } from '@ui/lib/utils';
-import { Globe, Lock, X } from 'lucide-react';
-import React, { useMemo } from 'react';
+import { Button } from '@ui/shad-cn/components/button.tsx';
+import { Globe, Lock, Plus, X } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useBackendRoles } from '../hooks/use.backend.roles';
 import type { SitePageVisibility } from '../types';
 import { RoleChip } from './RoleChip';
-import { RoleSelect } from './RoleSelect';
+import { RolePickerSheet } from './RolePickerSheet';
 
 const OPTIONS: { value: SitePageVisibility; icon: typeof Globe }[] = [
   { value: 'all', icon: Globe },
@@ -34,6 +35,7 @@ export const PageAccessField: React.FC<IPageAccessFieldProps> = ({
   const { t } = useTranslation('admin');
   const { roles: registered } = useUserRoleRegistry();
   useBackendRoles();
+  const [picking, setPicking] = useState(false);
   const options = useMemo(
     () => registered.filter(definition => !roles.includes(definition.role)),
     [registered, roles]
@@ -109,15 +111,36 @@ export const PageAccessField: React.FC<IPageAccessFieldProps> = ({
             </p>
           )}
           {options.length > 0 && (
-            <RoleSelect
-              value=""
-              onValueChange={role => role && onChange(visibility, [...roles, role])}
-              options={options}
-              placeholder={t('pages.access.addRole')}
-              ariaLabel={t('pages.access.addRole')}
-              disabled={disabled}
-              className="h-11 w-full rounded-xl"
-            />
+            <>
+              <Button
+                type="button"
+                variant="outline"
+                pill
+                size="lg"
+                fullWidth
+                onClick={() => setPicking(true)}
+                disabled={disabled}
+                aria-haspopup="dialog"
+              >
+                <Plus />
+                {t('pages.access.addRole')}
+              </Button>
+              <RolePickerSheet
+                open={picking}
+                onOpenChange={setPicking}
+                title={t('pages.access.addRole')}
+                description={t('pages.access.rolesHint')}
+                options={options}
+                mode="multiple"
+                confirmLabel={count =>
+                  count ? t('rolePicker.addConfirm', { count }) : t('rolePicker.addNone')
+                }
+                onConfirm={picked => {
+                  onChange(visibility, [...roles, ...picked.filter(role => !roles.includes(role))]);
+                  return true;
+                }}
+              />
+            </>
           )}
           <p className="mt-1.5 text-caption text-muted-foreground">{t('pages.access.rolesHint')}</p>
         </div>

@@ -60,20 +60,21 @@
     "title_other": "{{count}} роли",
     "empty": "Нет ролей",
     "add": "Добавить роль",
-    "addAction": "Добавить",
     "protected": "Защищена – нельзя удалить",
     "protectedSelf": "Защищена – ваша базовая роль",
     "superUserLocked": "Супер-админ – роли может менять только он сам.",
     "changeLabel": "Изменить роль {{role}}",
     "removeLabel": "Удалить роль {{role}}",
-    "save": "Сохранить",
     "cancel": "Отмена",
-    "selectPlaceholder": "Выберите роль",
     "allAssigned": "Все зарегистрированные роли уже назначены.",
     "unregistered": "Не зарегистрирована – ни одно приложение не знает эту роль",
     "system": "Назначается системой",
     "loading": "Загрузка ролей …",
-    "loadError": "Не удалось загрузить роли с сервера – показаны только известные."
+    "loadError": "Не удалось загрузить роли с сервера – показаны только известные.",
+    "addOpen_one": "Выбрать роли (доступно: {{count}})",
+    "addOpen_few": "Выбрать роли (доступно: {{count}})",
+    "addOpen_many": "Выбрать роли (доступно: {{count}})",
+    "addOpen_other": "Выбрать роли (доступно: {{count}})"
   },
   "remove": {
     "title": "Удалить роль?",
@@ -82,9 +83,12 @@
     "confirm": "Удалить"
   },
   "toast": {
-    "added": "Роль {{role}} добавлена",
     "changed": "Роль изменена на {{role}}",
-    "removed": "Роль {{role}} удалена"
+    "removed": "Роль {{role}} удалена",
+    "addedMany_one": "Роль {{role}} добавлена",
+    "addedMany_few": "Добавлено ролей: {{count}} – {{role}}",
+    "addedMany_many": "Добавлено ролей: {{count}} – {{role}}",
+    "addedMany_other": "Добавлено ролей: {{count}} – {{role}}"
   },
   "error": {
     "load": "Не удалось загрузить.",
@@ -958,5 +962,21 @@
         "reset": "Сбросить"
       }
     }
+  },
+  "rolePicker": {
+    "addTitle": "Добавить роли",
+    "addDescription": "Для {{user}} – можно выбрать несколько ролей сразу.",
+    "addConfirm_one": "Добавить {{count}} роль",
+    "addConfirm_few": "Добавить {{count}} роли",
+    "addConfirm_many": "Добавить {{count}} ролей",
+    "addConfirm_other": "Добавить {{count}} роли",
+    "addNone": "Выберите роли",
+    "changeTitle": "Изменить роль",
+    "changeDescription": "{{role}} будет заменена выбранной ролью.",
+    "changeConfirm": "Изменить роль",
+    "search": "Поиск роли",
+    "noMatch": "Роль не найдена.",
+    "clear": "Очистить",
+    "close": "Закрыть"
   }
 }

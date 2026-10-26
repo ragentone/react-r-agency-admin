@@ -56,20 +56,19 @@
     "title_other": "{{count}} roles",
     "empty": "No roles",
     "add": "Add role",
-    "addAction": "Add",
     "protected": "Protected – can't be removed",
     "protectedSelf": "Protected – your base role",
     "superUserLocked": "Super admin – roles can only be changed by themselves.",
     "changeLabel": "Change role {{role}}",
     "removeLabel": "Remove role {{role}}",
-    "save": "Save",
     "cancel": "Cancel",
-    "selectPlaceholder": "Select a role",
     "allAssigned": "Every registered role is already assigned.",
     "unregistered": "Not registered – no app knows this role",
     "system": "Assigned by the system",
     "loading": "Loading roles …",
-    "loadError": "The roles could not be loaded from the server – only the known ones are shown."
+    "loadError": "The roles could not be loaded from the server – only the known ones are shown.",
+    "addOpen_one": "{{count}} role available – pick",
+    "addOpen_other": "Pick roles ({{count}} available)"
   },
   "remove": {
     "title": "Remove role?",
@@ -78,9 +77,10 @@
     "confirm": "Remove"
   },
   "toast": {
-    "added": "Role {{role}} added",
     "changed": "Role changed to {{role}}",
-    "removed": "Role {{role}} removed"
+    "removed": "Role {{role}} removed",
+    "addedMany_one": "Role {{role}} added",
+    "addedMany_other": "{{count}} roles added: {{role}}"
   },
   "error": {
     "load": "Loading failed.",
@@ -914,5 +914,19 @@
         "reset": "Reset"
       }
     }
+  },
+  "rolePicker": {
+    "addTitle": "Add roles",
+    "addDescription": "For {{user}} – several roles at once.",
+    "addConfirm_one": "Add {{count}} role",
+    "addConfirm_other": "Add {{count}} roles",
+    "addNone": "Pick roles",
+    "changeTitle": "Change role",
+    "changeDescription": "{{role}} will be replaced by the selected role.",
+    "changeConfirm": "Change role",
+    "search": "Search role",
+    "noMatch": "No role found.",
+    "clear": "Clear",
+    "close": "Close"
   }
 }

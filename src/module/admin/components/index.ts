@@ -9,7 +9,7 @@ export * from './AdminSelfView';
 export * from './AdminUserDrawer';
 export * from './AdminUsersView';
 export * from './RoleChip';
-export * from './RoleSelect';
+export * from './RolePickerSheet';
 export * from './SitePageHtml';
 export * from './SitePageMenuLoader';
 export * from './SitePageView';

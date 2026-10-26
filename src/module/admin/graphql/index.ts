@@ -53,6 +53,16 @@ export const AdminRoleListQuery = parse(`
   }
 `);
 
+/** `admin:user` only – several roles at once (all or nothing). */
+export const AdminRoleAddMutation = parse(`
+  mutation AdminRoleAdd($userId: ID!, $roles: JSON!) {
+    adminRoleAdd(userId: $userId, roles: $roles) {
+      success
+      user
+    }
+  }
+`);
+
 /** `admin:user` only – every page (drafts too) without content. */
 export const AdminPageListQuery = parse(`
   query AdminPageList {

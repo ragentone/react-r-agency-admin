@@ -56,20 +56,19 @@
     "title_other": "{{count}} Rollen",
     "empty": "Keine Rollen",
     "add": "Rolle hinzufügen",
-    "addAction": "Hinzufügen",
     "protected": "Geschützt – kann nicht entfernt werden",
     "protectedSelf": "Geschützt – eigene Basisrolle",
     "superUserLocked": "Super-Admin – Rollen können nur von ihm selbst geändert werden.",
     "changeLabel": "Rolle {{role}} ändern",
     "removeLabel": "Rolle {{role}} entfernen",
-    "save": "Speichern",
     "cancel": "Abbrechen",
-    "selectPlaceholder": "Rolle auswählen",
     "allAssigned": "Alle registrierten Rollen sind bereits vergeben.",
     "unregistered": "Nicht registriert – keine App kennt diese Rolle",
     "system": "Wird vom System vergeben",
     "loading": "Rollen werden geladen …",
-    "loadError": "Die Rollen konnten nicht vom Server geladen werden – es werden nur die bekannten angezeigt."
+    "loadError": "Die Rollen konnten nicht vom Server geladen werden – es werden nur die bekannten angezeigt.",
+    "addOpen_one": "{{count}} Rolle verfügbar – auswählen",
+    "addOpen_other": "Rollen auswählen ({{count}} verfügbar)"
   },
   "remove": {
     "title": "Rolle entfernen?",
@@ -78,9 +77,10 @@
     "confirm": "Entfernen"
   },
   "toast": {
-    "added": "Rolle {{role}} hinzugefügt",
     "changed": "Rolle in {{role}} geändert",
-    "removed": "Rolle {{role}} entfernt"
+    "removed": "Rolle {{role}} entfernt",
+    "addedMany_one": "Rolle {{role}} hinzugefügt",
+    "addedMany_other": "{{count}} Rollen hinzugefügt: {{role}}"
   },
   "error": {
     "load": "Laden fehlgeschlagen.",
@@ -914,5 +914,19 @@
         "reset": "Zurücksetzen"
       }
     }
+  },
+  "rolePicker": {
+    "addTitle": "Rollen hinzufügen",
+    "addDescription": "Für {{user}} – mehrere Rollen auf einmal möglich.",
+    "addConfirm_one": "{{count}} Rolle hinzufügen",
+    "addConfirm_other": "{{count}} Rollen hinzufügen",
+    "addNone": "Rollen auswählen",
+    "changeTitle": "Rolle ändern",
+    "changeDescription": "{{role}} wird durch die gewählte Rolle ersetzt.",
+    "changeConfirm": "Rolle ändern",
+    "search": "Rolle suchen",
+    "noMatch": "Keine Rolle gefunden.",
+    "clear": "Leeren",
+    "close": "Schließen"
   }
 }

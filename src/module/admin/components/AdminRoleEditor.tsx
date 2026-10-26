@@ -8,7 +8,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@ui/shad-cn/components/alert-dialog.tsx';
-import { Check, Loader2, Lock, Pencil, Plus, Trash2, X } from 'lucide-react';
+import { Button } from '@ui/shad-cn/components/button.tsx';
+import { Loader2, Lock, Pencil, Plus, Trash2 } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -16,7 +17,7 @@ import { toast } from 'sonner';
 import { useBackendRoles } from '../hooks/use.backend.roles';
 import type { AdminRoleUpdate, IAdminRoleResult, IAdminUser } from '../types';
 import { RoleChip } from './RoleChip';
-import { RoleSelect } from './RoleSelect';
+import { RolePickerSheet } from './RolePickerSheet';
 
 export interface IAdminRoleEditorProps {
   user: IAdminUser;
@@ -27,7 +28,8 @@ export interface IAdminRoleEditorProps {
 }
 
 /**
- * Roles of one user: add, change, remove – picked from the registered roles (`Core.roles`).
+ * Roles of one user: add (several at once), change, remove – picked in a sheet from the right
+ * (`RolePickerSheet`) from the registered roles (`Core.roles`, loaded from the runtime).
  * Protected roles (`user.protectedRoles`) show a lock and no actions – the backend enforces it too.
  * Roles the user has but no app registered stay visible ("not registered") and can be removed.
  */
@@ -41,16 +43,16 @@ export const AdminRoleEditor: React.FC<IAdminRoleEditorProps> = ({
   const { assignable, get } = useUserRoleRegistry();
   // Every role of the runtime (also of apps that only live in the app frontend).
   const { loading: rolesLoading, error: rolesError } = useBackendRoles();
-  const [selected, setSelected] = useState('');
+  const [adding, setAdding] = useState(false);
+  /** Role whose "change" sheet is open. */
   const [editing, setEditing] = useState<string | null>(null);
-  const [editValue, setEditValue] = useState('');
   const [confirmRemove, setConfirmRemove] = useState<string | null>(null);
 
   // Another user opened → reset (adjusted during render).
   const [userId, setUserId] = useState(user.id);
   if (userId !== user.id) {
     setUserId(user.id);
-    setSelected('');
+    setAdding(false);
     setEditing(null);
     setConfirmRemove(null);
   }
@@ -71,47 +73,38 @@ export const AdminRoleEditor: React.FC<IAdminRoleEditorProps> = ({
     const current = get(role) ?? { role, label: role, group: 'other' };
     return [current, ...available];
   };
+  const changeOptionsOf = editing ? changeOptions(editing) : [];
 
   const label = (role: string) => {
     const definition = get(role);
     return definition ? t(definition.label, { defaultValue: definition.label }) : null;
   };
-  const description = (role: string) => {
-    const text = get(role)?.description;
-    return text ? t(text, { defaultValue: text }) : null;
-  };
 
   const run = async (change: AdminRoleUpdate, success: string) => {
     const result = await onUpdate(user, change);
-    const role = change.action === 'change' ? change.to : change.role;
+    const roles =
+      change.action === 'add'
+        ? change.roles
+        : [change.action === 'change' ? change.to : change.role];
     if (result.ok && result.user) {
       onChanged(result.user);
-      toast.success(t(success, { role: label(role) ?? role }));
+      toast.success(
+        t(success, {
+          role: roles.map(role => label(role) ?? role).join(', '),
+          count: roles.length,
+        })
+      );
     } else {
       toast.error(t(result.error ?? 'error.save'));
     }
     return result.ok;
   };
 
-  const add = async () => {
-    if (saving || !selected || user.roles.includes(selected)) return;
-    if (await run({ action: 'add', role: selected }, 'toast.added')) setSelected('');
-  };
+  const add = (roles: string[]) => run({ action: 'add', roles }, 'toast.addedMany');
 
-  const startEdit = (role: string) => {
-    setEditing(role);
-    setEditValue(role);
-  };
-
-  const saveEdit = async () => {
-    if (!editing || saving || !editValue) return;
-    if (editValue === editing) {
-      setEditing(null);
-      return;
-    }
-    if (await run({ action: 'change', role: editing, to: editValue }, 'toast.changed')) {
-      setEditing(null);
-    }
+  const change = async ([to]: string[]) => {
+    if (!editing || !to || to === editing) return true;
+    return run({ action: 'change', role: editing, to }, 'toast.changed');
   };
 
   const remove = async () => {
@@ -120,8 +113,6 @@ export const AdminRoleEditor: React.FC<IAdminRoleEditorProps> = ({
       setConfirmRemove(null);
     }
   };
-
-  const selectedDescription = selected ? description(selected) : null;
 
   return (
     <div className="space-y-6">
@@ -149,45 +140,6 @@ export const AdminRoleEditor: React.FC<IAdminRoleEditorProps> = ({
             {user.roles.map(role => {
               const locked = isProtected(role);
               const canEdit = !readOnly && !locked && isManaged(role);
-
-              if (editing === role) {
-                return (
-                  <li key={role} className="space-y-2 p-2">
-                    <RoleSelect
-                      value={editValue}
-                      onValueChange={setEditValue}
-                      options={changeOptions(role)}
-                      placeholder={t('role.selectPlaceholder')}
-                      ariaLabel={t('role.changeLabel', { role })}
-                      disabled={saving}
-                    />
-                    <div className="flex gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setEditing(null)}
-                        disabled={saving}
-                        className="inline-flex h-11 flex-1 items-center justify-center gap-1.5 rounded-full border border-border/70 text-sm font-bold transition-colors hover:bg-foreground/[0.04] disabled:opacity-50"
-                      >
-                        <X className="size-4" aria-hidden="true" />
-                        {t('role.cancel')}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => void saveEdit()}
-                        disabled={saving || editValue === role}
-                        className="inline-flex h-11 flex-1 items-center justify-center gap-1.5 rounded-full bg-foreground text-sm font-bold text-background transition-opacity hover:opacity-85 disabled:opacity-40"
-                      >
-                        {saving ? (
-                          <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-                        ) : (
-                          <Check className="size-4" aria-hidden="true" />
-                        )}
-                        {t('role.save')}
-                      </button>
-                    </div>
-                  </li>
-                );
-              }
 
               const name = label(role);
               return (
@@ -219,7 +171,7 @@ export const AdminRoleEditor: React.FC<IAdminRoleEditorProps> = ({
                     <>
                       <button
                         type="button"
-                        onClick={() => startEdit(role)}
+                        onClick={() => setEditing(role)}
                         disabled={saving}
                         aria-label={t('role.changeLabel', { role })}
                         className="grid size-11 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/10 hover:text-foreground disabled:opacity-40"
@@ -267,40 +219,52 @@ export const AdminRoleEditor: React.FC<IAdminRoleEditorProps> = ({
               {t('role.allAssigned')}
             </p>
           ) : (
-            <>
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-start">
-                <RoleSelect
-                  value={selected}
-                  onValueChange={setSelected}
-                  options={available}
-                  placeholder={t('role.selectPlaceholder')}
-                  ariaLabel={t('role.add')}
-                  disabled={saving}
-                  className="sm:flex-1"
-                />
-                <button
-                  type="button"
-                  onClick={() => void add()}
-                  disabled={saving || !selected}
-                  className="inline-flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-full bg-foreground px-5 text-sm font-bold text-background transition-opacity hover:opacity-85 disabled:opacity-40"
-                >
-                  {saving ? (
-                    <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-                  ) : (
-                    <Plus className="size-4" aria-hidden="true" />
-                  )}
-                  {t('role.addAction')}
-                </button>
-              </div>
-              {selectedDescription && (
-                <p className="mt-1.5 px-1 text-caption text-muted-foreground">
-                  {selectedDescription}
-                </p>
-              )}
-            </>
+            <Button
+              variant="outline"
+              pill
+              size="lg"
+              fullWidth
+              onClick={() => setAdding(true)}
+              disabled={saving}
+              aria-haspopup="dialog"
+            >
+              <Plus />
+              {t('role.addOpen', { count: available.length })}
+            </Button>
           )}
         </section>
       )}
+
+      <RolePickerSheet
+        open={adding}
+        onOpenChange={setAdding}
+        title={t('rolePicker.addTitle')}
+        description={t('rolePicker.addDescription', { user: user.alias })}
+        options={available}
+        mode="multiple"
+        confirmLabel={count =>
+          count ? t('rolePicker.addConfirm', { count }) : t('rolePicker.addNone')
+        }
+        onConfirm={add}
+        saving={saving}
+      />
+
+      <RolePickerSheet
+        open={editing !== null}
+        onOpenChange={next => !next && setEditing(null)}
+        title={t('rolePicker.changeTitle')}
+        description={
+          editing
+            ? t('rolePicker.changeDescription', { role: label(editing) ?? editing })
+            : undefined
+        }
+        options={changeOptionsOf}
+        mode="single"
+        initial={editing ? [editing] : []}
+        confirmLabel={() => t('rolePicker.changeConfirm')}
+        onConfirm={change}
+        saving={saving}
+      />
 
       <AlertDialog
         open={confirmRemove !== null}

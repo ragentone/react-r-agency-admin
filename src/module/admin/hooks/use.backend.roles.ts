@@ -80,7 +80,7 @@ const apply = (definitions: IBackendRole[], groups: IBackendRoleGroup[]) => {
 
 /**
  * Roles of the runtime (`adminRoleList` → registered in the runtime via CAN bus
- * `roles` → `collect_roles`) in `Core.roles`, so `RoleSelect` / `AdminRoleEditor` show every
+ * `roles` → `collect_roles`) in `Core.roles`, so `RolePickerSheet` / `AdminRoleEditor` show every
  * app role – also of apps that only live in the app frontend. Loaded once per page load.
  * Errors: the roles the admin registered itself stay available, the next mount tries again.
  */

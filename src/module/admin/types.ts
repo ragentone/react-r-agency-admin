@@ -30,7 +30,8 @@ export interface IAdminRoleResult {
 }
 
 export type AdminRoleUpdate =
-  | { action: 'add'; role: string }
+  /** Several roles at once (`adminRoleAdd`, all or nothing). */
+  | { action: 'add'; roles: string[] }
   | { action: 'remove'; role: string }
   | { action: 'change'; role: string; to: string };
 
