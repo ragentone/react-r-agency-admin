@@ -1,6 +1,7 @@
-import type { TFunction } from 'i18next';
+import type { i18n as I18n, TFunction } from 'i18next';
 
-import type { INotifyItem, INotifyRaw, INotifyState, NotifyType } from './types';
+import { NotifyActions } from './actions';
+import type { INotifyAction, INotifyItem, INotifyRaw, INotifyState, NotifyType } from './types';
 
 const TYPES: NotifyType[] = ['info', 'success', 'warning', 'error'];
 
@@ -70,6 +71,57 @@ export const notifyText = (
     ...values,
     defaultValue: text.includes('.') ? (text.split('.').pop() ?? text) : text,
   });
+};
+
+/** Namespaced key as `notifyText` looks it up. */
+const nsKey = (text: string) => (text.includes('.') ? `notify:${text}` : `backend:${text}`);
+
+/** Plain text or a key this admin app can translate (apps like my-events are frontend-only). */
+const known = (i18n: Pick<I18n, 'exists'>, text: string | null | undefined) =>
+  !text || !isKey(text) || i18n.exists(nsKey(text));
+
+export interface INotifyView {
+  title: string;
+  message: string;
+  /** Buttons this admin app has a handler for. */
+  actions: INotifyAction[];
+  /** Text comes from an app the admin app doesn't know → neutral fallback text. */
+  foreign: boolean;
+  /** Some buttons were hidden (no handler here) → answer in the app. */
+  answerInApp: boolean;
+}
+
+/**
+ * What the admin app can show of a notification. The inbox is shared with the frontend: app
+ * notifications (e.g. a calendar invitation) carry keys and button emits only the frontend
+ * knows. They get a neutral text and no buttons here – otherwise "accept" would only delete
+ * the notification. They stay untouched in the inbox and work in the app as usual.
+ */
+export const notifyView = (
+  t: TFunction,
+  i18n: Pick<I18n, 'exists'>,
+  item: Pick<INotifyItem, 'title' | 'message' | 'actions' | 'args' | 'from'>
+): INotifyView => {
+  const actions = item.actions.filter(action => NotifyActions.has(action.emit));
+  const answerInApp = actions.length < item.actions.length;
+  if (known(i18n, item.title) && known(i18n, item.message)) {
+    return {
+      title: notifyText(t, item.title, item),
+      message: notifyText(t, item.message, item),
+      actions,
+      foreign: false,
+      answerInApp,
+    };
+  }
+  return {
+    title: t('notify:foreign.title'),
+    message: item.from?.alias
+      ? t('notify:foreign.textFrom', { name: item.from.alias })
+      : t('notify:foreign.text'),
+    actions,
+    foreign: true,
+    answerInApp,
+  };
 };
 
 /** "now", "3m", "5h", "2d" (like X) – a short date after a week. */

@@ -8,13 +8,14 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { useAuth } from '../../auth/components/use.auth.ts';
+import { NotifyActions } from '../actions';
 import { useNotifyActivityStore } from '../activity';
 import { NOTIFY_EVENTS, NOTIFY_STATE_INTERVAL_MS, NOTIFY_TOAST_MS } from '../const';
 import { playNotifySoundIfEnabled } from '../sound';
 import { useNotifyBadge, useNotifyStore } from '../store';
 import { cancelSystemNotify, NOTIFY_SYSTEM_TYPE, setAppBadge, showSystemNotify } from '../system';
 import type { INotifyRaw, INotifyStateEvent } from '../types';
-import { notifyText } from '../utils';
+import { notifyView } from '../utils';
 import { NotifyDrawer } from './NotifyDrawer';
 import { NotifyToast } from './NotifyToast';
 
@@ -64,8 +65,7 @@ export const NotifyCenterProvider = ({ children }: { children: ReactNode }) => {
       playNotifySoundIfEnabled(item.type);
       // App in the background (Flutter app / other tab) → system notification, if switched on.
       if (!item.flash) {
-        const title = notifyText(i18n.t, item.title, item);
-        const message = notifyText(i18n.t, item.message, item);
+        const { title, message } = notifyView(i18n.t, i18n, item);
         void showSystemNotify(item.id, title || message, title ? message : undefined);
       }
       // Drawer open → the new entry appears at the top of the list, no popup needed.
@@ -89,7 +89,9 @@ export const NotifyCenterProvider = ({ children }: { children: ReactNode }) => {
         ),
         {
           id,
-          duration: item.actions.length > 0 ? NOTIFY_TOAST_MS * 2 : NOTIFY_TOAST_MS,
+          duration: item.actions.some(action => NotifyActions.has(action.emit))
+            ? NOTIFY_TOAST_MS * 2
+            : NOTIFY_TOAST_MS,
           unstyled: true,
         }
       );

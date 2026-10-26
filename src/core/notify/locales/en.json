@@ -97,5 +97,11 @@
     "soundLabel": "Notification sound",
     "on": "On",
     "off": "Off"
+  },
+  "foreign": {
+    "title": "Notification from the app",
+    "text": "This notification can only be shown in the app.",
+    "textFrom": "@{{name}} sent you something in the app.",
+    "answerInApp": "Open the app to respond."
   }
 }

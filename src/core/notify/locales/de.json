@@ -97,5 +97,11 @@
     "soundLabel": "Benachrichtigungston",
     "on": "Ein",
     "off": "Aus"
+  },
+  "foreign": {
+    "title": "Mitteilung aus der App",
+    "text": "Diese Mitteilung kann nur in der App angezeigt werden.",
+    "textFrom": "@{{name}} hat dir in der App etwas geschickt.",
+    "answerInApp": "Öffne die App, um darauf zu antworten."
   }
 }

@@ -4,7 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { INotifyItem } from '../types';
-import { notifyText } from '../utils';
+import { notifyView } from '../utils';
 import { NotifyTypeIcon } from './NotifyTypeIcon';
 
 export interface INotifyToastProps {
@@ -16,9 +16,8 @@ export interface INotifyToastProps {
 
 /** Live popup of an incoming notification (sonner `toast.custom`, unstyled). */
 export const NotifyToast: React.FC<INotifyToastProps> = ({ item, onOpen, onClose }) => {
-  const { t } = useTranslation('notify');
-  const title = notifyText(t, item.title, item);
-  const message = notifyText(t, item.message, item);
+  const { t, i18n } = useTranslation('notify');
+  const { title, message, actions } = notifyView(t, i18n, item);
   const heading = title || message;
   const body = title ? message : '';
 
@@ -50,7 +49,7 @@ export const NotifyToast: React.FC<INotifyToastProps> = ({ item, onOpen, onClose
             {body}
           </span>
         )}
-        {onOpen && item.actions.length > 0 && (
+        {onOpen && actions.length > 0 && (
           <span className="mt-1 block text-caption font-semibold text-foreground underline-offset-2">
             {t('toast.openActions')}
           </span>
