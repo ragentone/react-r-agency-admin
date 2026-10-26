@@ -263,5 +263,9 @@
       "back": "Go back",
       "home": "Go to home"
     }
+  },
+  "adminOnly": {
+    "title": "No access",
+    "description": "Only administrators can sign in to the admin area."
   }
 }

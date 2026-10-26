@@ -263,5 +263,9 @@
       "back": "Zurück",
       "home": "Zur Startseite"
     }
+  },
+  "adminOnly": {
+    "title": "Kein Zugriff",
+    "description": "Im Admin können sich nur Administratoren anmelden."
   }
 }

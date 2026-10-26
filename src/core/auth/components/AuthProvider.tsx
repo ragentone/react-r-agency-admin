@@ -10,6 +10,7 @@ import {
   nativeGoogleAuth,
   parseGoogleAuthHash,
 } from '@core/auth/hooks/use.user.google.auth.ts';
+import { hasRoles } from '@core/auth/roles/roles.ts';
 import type { IUserMetaData } from '@core/auth/types/config.ts';
 import type { GoogleAuthAfterReturn, IGoogleAuthParams } from '@core/auth/types/google.ts';
 import type { ILoginParams } from '@core/auth/types/login.ts';
@@ -23,7 +24,7 @@ import { useRouter } from '@tanstack/react-router';
 import i18n from 'i18next';
 import { nanoid } from 'nanoid';
 import { useMesh } from 'r-agency-mesh-client-v1/release';
-import { type ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'sonner';
 
 import { AuthContext, type IAuthContext } from './auth.context.ts';
@@ -33,6 +34,11 @@ import { AuthLogoutOverlay } from './AuthLogoutOverlay.tsx';
 interface IProps {
   children: ReactNode;
 }
+
+/** Only these roles may sign in to the admin instance. */
+export const ADMIN_LOGIN_ROLES = ['super:admin:user', 'admin:user'] as const;
+
+const canUseAdmin = (meta: IUserMetaData | null | undefined) => hasRoles(meta, ADMIN_LOGIN_ROLES);
 
 const AuthProvider = ({ children }: IProps) => {
   const { navigate } = useRouter();
@@ -211,6 +217,8 @@ const AuthProvider = ({ children }: IProps) => {
           }
           store.setAuthorized(true);
           setAuthorized(true);
+          // Google returns no meta – load it (the admin role guard needs the roles).
+          void refreshUserMeta();
           void navigate({ to: '/login' });
         }
         return result;
@@ -219,7 +227,7 @@ const AuthProvider = ({ children }: IProps) => {
         setIsLoggingIn(false);
       }
     },
-    [mutate, navigate, store, token]
+    [mutate, navigate, refreshUserMeta, store, token]
   );
 
   const loginWithGoogle = useCallback(
@@ -393,6 +401,28 @@ const AuthProvider = ({ children }: IProps) => {
       off();
     };
   }, [authorized, destroy, navigate, onEvent]);
+
+  // Admin instance: only `super:admin:user` / `admin:user`. Any other signed-in user (password,
+  // sign-in flow, Google or an existing session on reload) is signed out again right away –
+  // the session is ended on the server too, so no token stays behind.
+  const denyingRef = useRef(false);
+  useEffect(() => {
+    if (!authorized || !userMeta || canUseAdmin(userMeta) || denyingRef.current) return;
+    denyingRef.current = true;
+    void (async () => {
+      try {
+        await query({ query: UserLogoutQuery, fetchPolicy: 'no-cache' });
+      } catch (error) {
+        console.warn('[auth] admin guard logout failed', error);
+      }
+      destroy();
+      toast.error(i18n.t('auth:adminOnly.title'), {
+        description: i18n.t('auth:adminOnly.description'),
+      });
+      await navigate({ to: CoreVariables.routePathAuth, replace: true });
+      denyingRef.current = false;
+    })();
+  }, [authorized, destroy, navigate, query, userMeta]);
 
   const preLogout = useCallback(() => {
     setLogoutConfirm(true);
