@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /auth
+Disallow: /login
+Disallow: /logout
+Disallow: /user/
+Disallow: /files/s/
+Disallow: /transfer/
+Disallow: /meet/
+
+Sitemap: https://echo-v2.r-agency.org:8032/sitemap.xml

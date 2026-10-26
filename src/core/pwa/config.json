@@ -1,0 +1,6 @@
+{
+  "active": true,
+  "name": "core-pwa",
+  "entries": ["core.tsx"],
+  "sortOrder": 0
+}

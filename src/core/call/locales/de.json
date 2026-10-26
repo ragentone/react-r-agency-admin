@@ -1,0 +1,74 @@
+{
+  "unknown": "Unbekannt",
+  "remoteMuted": "Stummgeschaltet",
+  "status": {
+    "calling": "Wird angerufen …",
+    "ringing": "Klingelt …",
+    "incomingVideo": "Videoanruf",
+    "incomingVoice": "Sprachanruf",
+    "connecting": "Verbinde …"
+  },
+  "actions": {
+    "videoCall": "Videoanruf",
+    "voiceCall": "Sprachanruf",
+    "videoCallWith": "Videoanruf mit @{{name}}",
+    "voiceCallWith": "Sprachanruf mit @{{name}}",
+    "accept": "Annehmen",
+    "decline": "Ablehnen",
+    "cancel": "Abbrechen",
+    "hangup": "Auflegen",
+    "mute": "Stumm",
+    "unmute": "Ton an",
+    "cameraOff": "Kamera aus",
+    "cameraOn": "Kamera an",
+    "flip": "Drehen",
+    "close": "Schließen"
+  },
+  "ended": {
+    "self": "Anruf beendet",
+    "hangup": "Anruf beendet",
+    "declined": "{{name}} hat abgelehnt",
+    "canceled": "Verpasster Anruf",
+    "missed": "Verpasster Anruf",
+    "noAnswer": "{{name}} hat nicht abgenommen",
+    "disconnected": "Verbindung unterbrochen",
+    "connection_failed": "Verbindung fehlgeschlagen",
+    "offline": "{{name}} ist gerade nicht online",
+    "busy": "{{name}} telefoniert gerade",
+    "not_friends": "Nur Freunde können sich anrufen",
+    "media_denied": "Kein Zugriff auf Mikrofon oder Kamera",
+    "unavailable": "Anrufe sind gerade nicht verfügbar",
+    "rate_limited": "Zu viele Anrufe – bitte warte kurz",
+    "handled": "Anruf wurde bereits beantwortet",
+    "not_found": "Der Anruf ist nicht mehr aktiv",
+    "unauthorized": "Bitte melde dich an",
+    "invalid_target": "Diese Person kann nicht angerufen werden",
+    "no_peer": "Anruf-Verbindung konnte nicht vorbereitet werden – bitte erneut versuchen"
+  },
+  "notification": {
+    "video": "Videoanruf von @{{name}}",
+    "voice": "Anruf von @{{name}}",
+    "body": "Tippe, um zu antworten"
+  },
+  "errors": {
+    "alreadyInCall": "Du bist bereits in einem Anruf",
+    "flip": "Kamera konnte nicht gewechselt werden",
+    "mic": "Mikrofon konnte nicht gewechselt werden",
+    "camera": "Kamera konnte nicht gewechselt werden"
+  },
+  "aria": {
+    "dialog": "Anruf mit {{name}}"
+  },
+  "devices": {
+    "open": "Kamera & Mikrofon",
+    "title": "Kamera & Mikrofon",
+    "camera": "Kamera",
+    "microphone": "Mikrofon",
+    "none": "Kein Gerät gefunden",
+    "level": "Pegel",
+    "muted": "Stumm",
+    "micLost": "Mikrofon getrennt – Standardmikrofon wird verwendet",
+    "cameraLost": "Kamera getrennt – Standardkamera wird verwendet",
+    "description": "Wähle, welche Geräte im Anruf verwendet werden"
+  }
+}

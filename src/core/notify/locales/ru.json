@@ -1,0 +1,103 @@
+{
+  "title": "Уведомления",
+  "subtitle_one": "{{count}} непрочитанное",
+  "subtitle_few": "{{count}} непрочитанных",
+  "subtitle_many": "{{count}} непрочитанных",
+  "subtitle_other": "{{count}} непрочитанных",
+  "subtitleNone": "Всё прочитано",
+  "unread": "Не прочитано",
+  "end": "Это всё",
+  "menu": {
+    "label": "Уведомления",
+    "description": "Запросы и новости для тебя"
+  },
+  "tabs": {
+    "all": "Все",
+    "unread": "Непрочитанные"
+  },
+  "time": {
+    "now": "сейчас"
+  },
+  "actions": {
+    "markRead": "Отметить как прочитанное",
+    "markAllRead": "Отметить всё как прочитанное",
+    "markAllReadShort": "Прочитать всё",
+    "delete": "Удалить",
+    "clearAll": "Удалить все",
+    "close": "Закрыть",
+    "more": "Другие действия",
+    "undo": "Отменить",
+    "retry": "Повторить",
+    "back": "Отмена",
+    "profile": "Профиль @{{name}}",
+    "dismiss": "Скрыть"
+  },
+  "confirm": {
+    "clear": {
+      "title": "Удалить все уведомления?",
+      "text": "Уведомления будут удалены навсегда. Открытые запросы останутся.",
+      "action": "Удалить все"
+    }
+  },
+  "toast": {
+    "deleted": "Уведомление удалено",
+    "cleared": "Все уведомления удалены",
+    "openActions": "Нажми, чтобы ответить",
+    "stale": "Этот запрос больше не актуален"
+  },
+  "errors": {
+    "action": "Не получилось. Попробуй ещё раз.",
+    "loadTitle": "Не удалось загрузить уведомления",
+    "loadText": "Проверь подключение и попробуй ещё раз."
+  },
+  "empty": {
+    "all": {
+      "title": "Пока пусто",
+      "text": "Запросы в друзья и новости появятся здесь – сразу, как только они произойдут."
+    },
+    "unread": {
+      "title": "Всё прочитано",
+      "text": "У тебя нет новых уведомлений."
+    }
+  },
+  "default": {
+    "button": {
+      "accept": "Принять",
+      "reject": "Отклонить",
+      "block": "Заблокировать",
+      "confirm": "Подтвердить",
+      "sessions": "Устройства",
+      "passkey": "Создать ключ доступа"
+    }
+  },
+  "user_relation_request_notify_title": "Новый запрос в друзья",
+  "user_relation_request_notify_message": "@{{name}} хочет добавить тебя в друзья.",
+  "user_relation_accepted_notify_title": "Запрос принят",
+  "user_relation_accepted_notify_message": "Ты и @{{name}} теперь друзья.",
+  "user_relation_rejected_notify_title": "Запрос отклонён",
+  "user_relation_rejected_notify_message": "@{{name}} отклонил(а) твой запрос в друзья.",
+  "user_relation_canceled_notify_title": "Дружба завершена",
+  "user_relation_canceled_notify_message": "@{{name}} завершил(а) дружбу.",
+  "user_notify_not_removable": "Это уведомление нельзя удалить",
+  "user_notify_invalid_target": "Не указан получатель уведомления",
+  "user_notify_invalid_message": "У уведомления нет текста",
+  "notify_invalid_identifier_request": "Недопустимый запрос",
+  "system": {
+    "title": "Не пропускай уведомления",
+    "textApp": "Получай уведомления на этом устройстве, даже когда приложение работает в фоне.",
+    "textBrowser": "Получай уведомления в браузере, когда эта вкладка в фоне.",
+    "enable": "Включить",
+    "dismiss": "Не сейчас",
+    "enabled": "Уведомления включены",
+    "deniedApp": "Уведомления заблокированы. Разреши их для r-agency в системных настройках.",
+    "deniedBrowser": "Уведомления заблокированы в браузере. Разреши их в настройках сайта."
+  },
+  "activity": {
+    "label": "Текущие задачи"
+  },
+  "settings": {
+    "soundLabel": "Звук уведомлений",
+    "on": "Вкл",
+    "off": "Выкл"
+  }
+}

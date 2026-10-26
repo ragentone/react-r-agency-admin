@@ -1,0 +1,62 @@
+{
+  "offline": "You are offline",
+  "update": {
+    "title": "New version available",
+    "text": "Reload to use the latest version.",
+    "action": "Update",
+    "later": "Later",
+    "updating": "Loading the new version …",
+    "settingsTitle": "New version",
+    "settingsText": "Tap “Update” to load it.",
+    "titleVersion": "New version {{version}}",
+    "requiredText": "Required update – the page reloads by itself shortly.",
+    "settingsVersion": "Version {{from}} → {{to}}",
+    "settingsVersionNew": "Version {{to}} is here"
+  },
+  "offlineReady": {
+    "title": "Ready offline",
+    "text": "The app now works without internet too.",
+    "done": "Got it"
+  },
+  "install": {
+    "menu": "Install app",
+    "title": "Install the app",
+    "subtitle": "On your home screen – just like a native app.",
+    "action": "Install",
+    "later": "Not now",
+    "benefits": {
+      "fast": {
+        "title": "Lightning fast",
+        "text": "Open it right from your home screen."
+      },
+      "offline": {
+        "title": "Works offline",
+        "text": "Content you already loaded stays available."
+      },
+      "fullscreen": {
+        "title": "Full screen",
+        "text": "No browser bars, more room for content."
+      }
+    },
+    "ios": {
+      "step1": "Tap “Share” at the bottom",
+      "step2": "Choose “Add to Home Screen”",
+      "step3": "Confirm with “Add”",
+      "done": "Got it"
+    }
+  },
+  "deploy": {
+    "before": {
+      "title": "Installing an update …",
+      "text": "A new version is on its way. You can keep going as usual."
+    }
+  },
+  "version": {
+    "label": "Version {{version}}"
+  },
+  "whatsNew": {
+    "title": "What’s new in {{version}}",
+    "text": "Here’s what changed with the update.",
+    "done": "Got it"
+  }
+}

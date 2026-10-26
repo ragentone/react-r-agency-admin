@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Module / app config (auto import)",
+  "type": "object",
+  "required": ["name", "entries"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "active": { "type": "boolean", "description": "false → never built." },
+    "name": { "type": "string", "description": "Unique module name (used in build.config.json)." },
+    "entries": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Files imported on start, relative to this config.json."
+    },
+    "sortOrder": { "type": "number", "description": "Import order, lower first." },
+    "modes": {
+      "type": "array",
+      "items": { "type": "string", "examples": ["development", "production"] },
+      "description": "Vite modes this module is built in. Omitted → all modes. [\"development\"] = never deployed to prod."
+    }
+  }
+}

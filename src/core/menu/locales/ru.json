@@ -1,0 +1,56 @@
+{
+  "label": "Главное меню",
+  "description": "Все разделы приложения",
+  "sections": {
+    "main": "Обзор",
+    "apps": "Приложения",
+    "account": "Пользователь"
+  },
+  "items": {
+    "user": "Мой раздел",
+    "userDescription": "Профиль, друзья и аккаунт",
+    "administration": "Администрирование",
+    "administrationDescription": "Разработка, роли и страницы",
+    "home": "Главная",
+    "profile": "Профиль",
+    "profileDescription": "Твои публикации и данные",
+    "account": "Аккаунт",
+    "accountDescription": "Аккаунт, пароль и приватность",
+    "login": "Войти",
+    "loginDescription": "Вход или регистрация",
+    "logout": "Выйти",
+    "logoutDescription": "Выйти на этом устройстве"
+  },
+  "open": "Открыть меню",
+  "close": "Закрыть меню",
+  "settings": {
+    "attention": "Новое в настройках",
+    "quick": "Быстрые настройки",
+    "description": "Язык и оформление",
+    "close": "Закрыть настройки",
+    "title": "Настройки",
+    "language": "Язык",
+    "theme": "Оформление",
+    "themes": {
+      "light": "Светлая",
+      "dark": "Тёмная",
+      "system": "Системная"
+    }
+  },
+  "dock": "Быстрые действия",
+  "group": {
+    "back": "Назад в главное меню",
+    "expand": "Развернуть {{label}}",
+    "collapse": "Свернуть {{label}}"
+  },
+  "dockMenu": {
+    "label": "Быстрое меню"
+  },
+  "apps": {
+    "description": "Все приложения",
+    "empty": "Нет доступных приложений"
+  },
+  "sheet": {
+    "close": "Закрыть: {{label}}"
+  }
+}

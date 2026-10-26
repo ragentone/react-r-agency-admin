@@ -1,0 +1,21 @@
+{
+  "badge": "Error",
+  "title": "Something went wrong",
+  "description": "This part couldn't be displayed. Please try again – your data is safe.",
+  "actions": {
+    "retry": "Try again",
+    "reload": "Reload page",
+    "home": "Go home",
+    "back": "Go back"
+  },
+  "details": {
+    "toggle": "Technical details",
+    "copy": "Copy",
+    "copied": "Copied",
+    "stack": "Stack trace",
+    "component": "Component stack",
+    "none": "No stack trace available."
+  },
+  "unknown": "An unexpected error occurred.",
+  "hint": "If it keeps happening, copy the details and send them to support."
+}

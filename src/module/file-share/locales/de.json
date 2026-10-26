@@ -1,0 +1,132 @@
+{
+  "title": "Downloads",
+  "upload": "Hochladen",
+  "retry": "Erneut versuchen",
+  "login": "Anmelden",
+  "count_one": "{{count}} Datei",
+  "count_other": "{{count}} Dateien",
+  "restricted_one": "{{count}} weitere Datei ist nur für angemeldete Nutzer sichtbar.",
+  "restricted_other": "{{count}} weitere Dateien sind nur für angemeldete Nutzer sichtbar.",
+  "uploaded": "Datei hochgeladen",
+  "saved": "Änderungen gespeichert",
+  "deleted": "Datei gelöscht",
+  "menu": {
+    "label": "Downloads",
+    "description": "Dateien zum Herunterladen"
+  },
+  "search": {
+    "placeholder": "Dateien durchsuchen",
+    "empty": "Keine Datei passt zu deiner Suche."
+  },
+  "filter": {
+    "label": "Sichtbarkeit",
+    "all": "Alle",
+    "public": "Öffentlich",
+    "authenticated": "Nur angemeldet",
+    "private": "Privat"
+  },
+  "empty": {
+    "title": "Noch keine Dateien",
+    "description": "Hier erscheinen Dateien, sobald sie bereitgestellt werden.",
+    "admin": "Lade die erste Datei hoch und lege fest, wer sie sehen darf."
+  },
+  "item": {
+    "more": "Mehr anzeigen",
+    "less": "Weniger anzeigen",
+    "download": "„{{title}}“ herunterladen",
+    "edit": "„{{title}}“ bearbeiten"
+  },
+  "visibility": {
+    "public": {
+      "label": "Öffentlich",
+      "hint": "Jeder kann die Datei sehen und herunterladen – auch ohne Anmeldung.",
+      "short": "Öffentlich"
+    },
+    "authenticated": {
+      "label": "Nur angemeldete Nutzer",
+      "hint": "Nur sichtbar und herunterladbar, wenn man angemeldet ist.",
+      "short": "Nur angemeldet"
+    },
+    "private": {
+      "label": "Privat",
+      "hint": "Nur für Admins sichtbar – für alle anderen unsichtbar. Share-Links funktionieren weiterhin.",
+      "short": "Privat"
+    }
+  },
+  "form": {
+    "createTitle": "Datei hochladen",
+    "editTitle": "Datei bearbeiten",
+    "description": "Datei, Titel, Beschreibung und Sichtbarkeit festlegen.",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "upload": "Hochladen",
+    "uploading": "Lädt hoch …",
+    "file": "Datei",
+    "filePick": "Datei auswählen",
+    "fileHint": "Antippen oder hierher ziehen · max. {{max}}",
+    "fileChange": "Ändern",
+    "fileReplace": "Ersetzen",
+    "fileNew": "neu",
+    "fileRequired": "Bitte wähle eine Datei aus.",
+    "title": "Titel",
+    "titleRequired": "Bitte gib einen Titel ein.",
+    "titlePlaceholder": "z. B. Preisliste 2026",
+    "descriptionLabel": "Beschreibung (optional)",
+    "descriptionPlaceholder": "Worum geht es in der Datei?",
+    "visibility": "Wer darf die Datei sehen und herunterladen?",
+    "tooLong": "Maximal {{max}} Zeichen."
+  },
+  "delete": {
+    "action": "Datei löschen",
+    "title": "Datei löschen?",
+    "description": "„{{title}}“ wird endgültig gelöscht und kann nicht mehr heruntergeladen werden.",
+    "confirm": "Löschen"
+  },
+  "error": {
+    "load": "Die Dateien konnten nicht geladen werden.",
+    "save": "Das hat nicht geklappt. Bitte versuche es erneut.",
+    "tooLarge": "Die Datei ist zu groß (max. {{max}}).",
+    "empty": "Die Datei ist leer.",
+    "type": "Dieser Dateityp ist nicht erlaubt.",
+    "notAuthorized": "Dafür fehlt dir die Berechtigung.",
+    "notFound": "Die Datei gibt es nicht mehr."
+  },
+  "share": {
+    "title": "Share-Link",
+    "hint": "Jeder mit dem Link kann die Datei herunterladen – auch ohne Anmeldung und unabhängig von der Sichtbarkeit.",
+    "activeHint": "Aktiv: Jeder mit diesem Link kann die Datei herunterladen.",
+    "create": "Share-Link erstellen",
+    "copy": "Link kopieren",
+    "share": "Link teilen",
+    "copyFailed": "Der Link konnte nicht kopiert werden.",
+    "renew": "Neuer Link",
+    "revoke": "Deaktivieren",
+    "revoked": "Share-Link deaktiviert",
+    "chip": "Link aktiv",
+    "confirm": {
+      "renew": "Ein neuer Link wird erzeugt. Der bisherige Link funktioniert danach nicht mehr.",
+      "revoke": "Der Link wird deaktiviert und funktioniert danach nicht mehr."
+    }
+  },
+  "link": {
+    "kicker": "Mit dir geteilt",
+    "download": "Herunterladen · {{size}}",
+    "all": "Alle Downloads",
+    "invalidTitle": "Link ungültig",
+    "invalidDescription": "Dieser Link ist abgelaufen oder wurde deaktiviert. Frag die Person, die ihn dir geschickt hat, nach einem neuen."
+  },
+  "block": {
+    "latest": {
+      "label": "Downloads",
+      "description": "Neueste Dateien zum Herunterladen",
+      "defaultTitle": "Downloads",
+      "titleField": "Überschrift",
+      "limitField": "Anzahl",
+      "descriptionField": "Beschreibung anzeigen",
+      "empty": "Noch keine Dateien.",
+      "download": "{{title}} herunterladen",
+      "locked": "Nur für angemeldete Nutzer",
+      "more": "Alle Downloads"
+    }
+  }
+}

@@ -1,0 +1,118 @@
+<!doctype html>
+<!--suppress CssOverwrittenProperties -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/png" href="/logo.png"/>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+    <!-- Browser / status bar colour = page background (`--background`), updated by ThemeProvider. -->
+    <script>
+        // Native App (Flutter): Der Google-Login lief im System-Anmeldefenster (state=r-agency-app).
+        // Tokens per Custom-Scheme an die App zurückgeben (siehe nativeGoogleAuth in use.user.google.auth.ts).
+        (function() {
+            var hash = window.location.hash;
+            if (hash.indexOf('state=r-agency-app') === -1 || !/(access_token|error)=/.test(hash)) return;
+            var target = 'r-agency://google-auth' + hash;
+            window.location.replace(target);
+            // Fallback, falls der Browser den automatischen Sprung blockiert.
+            setTimeout(function() {
+                var a = document.createElement('a');
+                a.href = target;
+                a.textContent = 'Zurück zur r-agency App';
+                a.style.cssText = 'position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;' +
+                    'justify-content:center;background:#0a0a0a;color:#fff;font:600 18px system-ui;text-decoration:none';
+                document.body.appendChild(a);
+            }, 1500);
+        })();
+    </script>
+    <script>
+        // Flutter-App auf Android: Klasse für Performance-Overrides (src/index.css → .native-android).
+        (function() {
+            var ua = navigator.userAgent;
+            if (ua.indexOf('r-agency-app') !== -1 && /Android/i.test(ua)) {
+                document.documentElement.classList.add('native-android');
+            }
+        })();
+    </script>
+    <meta name="theme-color" content="#0a0a0a"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-title" content="r-agency"/>
+    <script>
+        (function() {
+            try {
+                let storageKey = 'app-ui-theme';
+                let theme = localStorage.getItem(storageKey) || 'dark';
+                let isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                let meta = document.querySelector('meta[name="theme-color"]');
+                if (meta) meta.setAttribute('content', isDark ? '#0a0a0a' : '#ffffff');
+                if (isDark) {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
+                } else {
+                    document.documentElement.classList.add('light');
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+    <style type="text/css">
+        html {
+            margin: 0;
+            width: 100%;
+            width: 100dvw;
+            height: 100%;
+            height: 100vh;
+            height: 100dvh;
+            max-width: 100dvw;
+            max-height: 100dvh;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        html.dark, html.dark body {
+            background-color: oklch(0.145 0 0);
+            color: oklch(0.985 0 0);
+            color-scheme: dark;
+        }
+
+        html.light, html.light body {
+            background-color: oklch(1 0 0);
+            color: oklch(0.145 0 0);
+            color-scheme: light;
+        }
+
+        body {
+            margin: 0;
+            width: 100%;
+            width: 100dvw;
+            height: 100%;
+            height: 100vh;
+            height: 100dvh;
+            max-width: 100dvw;
+            max-height: 100dvh;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #root {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            width: 100dvw;
+            height: 100%;
+            height: 100vh;
+            height: 100dvh;
+            max-width: 100dvw;
+            max-height: 100dvh;
+            overflow: hidden;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+    <title>...</title>
+</head>
+<body>
+<div id="root"></div>
+<script type="module" src="/src/main.tsx"></script>
+</body>
+</html>

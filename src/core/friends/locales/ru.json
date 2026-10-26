@@ -1,0 +1,134 @@
+{
+  "title": "Друзья",
+  "subtitle_one": "{{count}} друг",
+  "subtitle_few": "{{count}} друга",
+  "subtitle_many": "{{count}} друзей",
+  "subtitle_other": "{{count}} друзей",
+  "online": "В сети",
+  "menu": {
+    "label": "Друзья",
+    "description": "Друзья, заявки и блокировки"
+  },
+  "tabs": {
+    "accepted": "Друзья",
+    "incoming": "Заявки",
+    "outgoing": "Отправленные",
+    "blocked": "Заблокированные",
+    "manage": "Управление"
+  },
+  "state": {
+    "outgoing": "Заявка отправлена",
+    "friends": "Друзья",
+    "outgoingMenu": "Заявка отправлена – действия",
+    "friendsMenu": "Вы друзья – действия"
+  },
+  "actions": {
+    "message": "Сообщение",
+    "messageWith": "Написать @{{name}}",
+    "add": "Добавить",
+    "accept": "Принять",
+    "reject": "Отклонить",
+    "cancel": "Отозвать заявку",
+    "cancelShort": "Отозвать",
+    "remove": "Удалить из друзей",
+    "block": "Заблокировать @{{name}}",
+    "unblock": "Разблокировать",
+    "more": "Другие действия",
+    "profile": "Открыть профиль",
+    "retry": "Повторить",
+    "back": "Отмена",
+    "close": "Закрыть",
+    "acceptShort": "Принять",
+    "discover": "Найти людей",
+    "undo": "Отменить",
+    "showAll": "Показать все",
+    "showLess": "Свернуть",
+    "loadMore": "Загрузить ещё",
+    "clearFilter": "Очистить фильтр",
+    "discoverShort": "Поиск",
+    "videoCall": "Видеозвонок",
+    "voiceCall": "Аудиозвонок",
+    "videoCallWith": "Видеозвонок с @{{name}}"
+  },
+  "since": {
+    "accepted": "с {{date}}",
+    "incoming": "заявка {{date}}",
+    "outgoing": "отправлено {{date}}",
+    "blocked": "заблокирован(а)"
+  },
+  "confirm": {
+    "remove": {
+      "title": "Удалить @{{name}} из друзей?",
+      "text": "Вы больше не будете друзьями. Новую заявку можно отправить в любое время.",
+      "action": "Удалить"
+    },
+    "block": {
+      "title": "Заблокировать @{{name}}?",
+      "text": "@{{name}} больше не сможет отправлять тебе заявки. Дружба закончится. Блокировку можно снять в любое время.",
+      "action": "Заблокировать"
+    },
+    "cancel": {
+      "title": "Отозвать заявку?",
+      "text": "@{{name}} больше не увидит твою заявку.",
+      "action": "Отозвать"
+    }
+  },
+  "toast": {
+    "accepted": "Теперь вы с @{{name}} друзья",
+    "rejected": "Заявка от @{{name}} отклонена",
+    "canceled": "Заявка для @{{name}} отозвана",
+    "removed": "@{{name}} удалён(а) из друзей",
+    "blocked": "@{{name}} заблокирован(а)",
+    "unblocked": "@{{name}} разблокирован(а)",
+    "requested": "Заявка отправлена @{{name}}"
+  },
+  "empty": {
+    "accepted": {
+      "title": "Пока нет друзей",
+      "text": "Заходи в профили и отправляй заявки – принятые появятся здесь.",
+      "action": "Найти людей"
+    },
+    "incoming": {
+      "title": "Нет новых заявок",
+      "text": "Когда кто-то отправит тебе заявку, она появится здесь."
+    },
+    "outgoing": {
+      "title": "Нет отправленных заявок",
+      "text": "Здесь появятся твои заявки, на которые ещё не ответили."
+    },
+    "blocked": {
+      "title": "Никто не заблокирован",
+      "text": "Заблокированные пользователи не могут отправлять тебе заявки."
+    }
+  },
+  "errors": {
+    "failed": "Не получилось. Попробуй ещё раз.",
+    "loadTitle": "Не удалось загрузить список",
+    "loadText": "Проверь подключение и попробуй снова."
+  },
+  "sections": {
+    "requests": "Заявки",
+    "friends": "Твои друзья",
+    "manage": "Управление",
+    "outgoing": "Отправленные заявки",
+    "outgoingHint_one": "{{count}} ожидает",
+    "outgoingHint_few": "{{count}} ожидают",
+    "outgoingHint_many": "{{count}} ожидают",
+    "outgoingHint_other": "{{count}} ожидают",
+    "blocked": "Заблокированные",
+    "blockedHint_one": "{{count}} заблокирован",
+    "blockedHint_few": "{{count}} заблокировано",
+    "blockedHint_many": "{{count}} заблокировано",
+    "blockedHint_other": "{{count}} заблокировано"
+  },
+  "onlineCount_one": "{{count}} в сети",
+  "onlineCount_few": "{{count}} в сети",
+  "onlineCount_many": "{{count}} в сети",
+  "onlineCount_other": "{{count}} в сети",
+  "filterPlaceholder": "Фильтр друзей",
+  "filterEmpty": "Нет друзей по запросу «{{term}}»",
+  "subtitleWithRequests_one": "{{count}} друг · заявок: {{requests}}",
+  "subtitleWithRequests_few": "{{count}} друга · заявок: {{requests}}",
+  "subtitleWithRequests_many": "{{count}} друзей · заявок: {{requests}}",
+  "subtitleWithRequests_other": "{{count}} друзей · заявок: {{requests}}"
+}

@@ -1,0 +1,101 @@
+{
+  "title": "Mitteilungen",
+  "subtitle_one": "{{count}} ungelesen",
+  "subtitle_other": "{{count}} ungelesen",
+  "subtitleNone": "Alles gelesen",
+  "unread": "Ungelesen",
+  "end": "Das war alles",
+  "menu": {
+    "label": "Mitteilungen",
+    "description": "Anfragen und Neuigkeiten für dich"
+  },
+  "tabs": {
+    "all": "Alle",
+    "unread": "Ungelesen"
+  },
+  "time": {
+    "now": "jetzt"
+  },
+  "actions": {
+    "markRead": "Als gelesen markieren",
+    "markAllRead": "Alle als gelesen markieren",
+    "markAllReadShort": "Alle gelesen",
+    "delete": "Löschen",
+    "clearAll": "Alle löschen",
+    "close": "Schließen",
+    "more": "Weitere Optionen",
+    "undo": "Rückgängig",
+    "retry": "Erneut versuchen",
+    "back": "Abbrechen",
+    "profile": "Profil von @{{name}}",
+    "dismiss": "Ausblenden"
+  },
+  "confirm": {
+    "clear": {
+      "title": "Alle Mitteilungen löschen?",
+      "text": "Deine Mitteilungen werden endgültig entfernt. Offene Anfragen bleiben bestehen.",
+      "action": "Alle löschen"
+    }
+  },
+  "toast": {
+    "deleted": "Mitteilung gelöscht",
+    "cleared": "Alle Mitteilungen gelöscht",
+    "openActions": "Tippen zum Antworten",
+    "stale": "Diese Anfrage ist nicht mehr offen"
+  },
+  "errors": {
+    "action": "Das hat nicht geklappt. Bitte versuche es erneut.",
+    "loadTitle": "Mitteilungen konnten nicht geladen werden",
+    "loadText": "Prüfe deine Verbindung und versuche es erneut."
+  },
+  "empty": {
+    "all": {
+      "title": "Noch nichts los",
+      "text": "Freundschaftsanfragen und Neuigkeiten erscheinen hier – live, sobald sie passieren."
+    },
+    "unread": {
+      "title": "Alles gelesen",
+      "text": "Du bist auf dem neuesten Stand."
+    }
+  },
+  "default": {
+    "button": {
+      "accept": "Annehmen",
+      "reject": "Ablehnen",
+      "block": "Blockieren",
+      "confirm": "Bestätigen",
+      "sessions": "Geräte ansehen",
+      "passkey": "Passkey einrichten"
+    }
+  },
+  "user_relation_request_notify_title": "Neue Freundschaftsanfrage",
+  "user_relation_request_notify_message": "@{{name}} möchte mit dir befreundet sein.",
+  "user_relation_accepted_notify_title": "Anfrage angenommen",
+  "user_relation_accepted_notify_message": "Du und @{{name}} seid jetzt Freunde.",
+  "user_relation_rejected_notify_title": "Anfrage abgelehnt",
+  "user_relation_rejected_notify_message": "@{{name}} hat deine Freundschaftsanfrage abgelehnt.",
+  "user_relation_canceled_notify_title": "Freundschaft beendet",
+  "user_relation_canceled_notify_message": "@{{name}} hat die Freundschaft beendet.",
+  "user_notify_not_removable": "Diese Mitteilung kann nicht gelöscht werden",
+  "user_notify_invalid_target": "Empfänger der Mitteilung fehlt",
+  "user_notify_invalid_message": "Die Mitteilung hat keinen Text",
+  "notify_invalid_identifier_request": "Ungültige Anfrage",
+  "system": {
+    "title": "Keine Mitteilung verpassen",
+    "textApp": "Erhalte Benachrichtigungen auf diesem Gerät, auch wenn die App im Hintergrund läuft.",
+    "textBrowser": "Erhalte Benachrichtigungen im Browser, wenn dieser Tab im Hintergrund ist.",
+    "enable": "Aktivieren",
+    "dismiss": "Nicht jetzt",
+    "enabled": "Benachrichtigungen sind aktiviert",
+    "deniedApp": "Benachrichtigungen sind blockiert. Du kannst sie in den Systemeinstellungen für r-agency erlauben.",
+    "deniedBrowser": "Benachrichtigungen sind im Browser blockiert. Erlaube sie in den Website-Einstellungen."
+  },
+  "activity": {
+    "label": "Laufende Aktivitäten"
+  },
+  "settings": {
+    "soundLabel": "Benachrichtigungston",
+    "on": "Ein",
+    "off": "Aus"
+  }
+}

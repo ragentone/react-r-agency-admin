@@ -1,0 +1,74 @@
+{
+  "unknown": "Unknown",
+  "remoteMuted": "Muted",
+  "status": {
+    "calling": "Calling …",
+    "ringing": "Ringing …",
+    "incomingVideo": "Video call",
+    "incomingVoice": "Voice call",
+    "connecting": "Connecting …"
+  },
+  "actions": {
+    "videoCall": "Video call",
+    "voiceCall": "Voice call",
+    "videoCallWith": "Video call with @{{name}}",
+    "voiceCallWith": "Voice call with @{{name}}",
+    "accept": "Accept",
+    "decline": "Decline",
+    "cancel": "Cancel",
+    "hangup": "Hang up",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "cameraOff": "Camera off",
+    "cameraOn": "Camera on",
+    "flip": "Flip",
+    "close": "Close"
+  },
+  "ended": {
+    "self": "Call ended",
+    "hangup": "Call ended",
+    "declined": "{{name}} declined",
+    "canceled": "Missed call",
+    "missed": "Missed call",
+    "noAnswer": "{{name}} didn't answer",
+    "disconnected": "Connection lost",
+    "connection_failed": "Connection failed",
+    "offline": "{{name}} is not online right now",
+    "busy": "{{name}} is on another call",
+    "not_friends": "Only friends can call each other",
+    "media_denied": "No access to microphone or camera",
+    "unavailable": "Calls are not available right now",
+    "rate_limited": "Too many calls – please wait a moment",
+    "handled": "The call was already answered",
+    "not_found": "The call is no longer active",
+    "unauthorized": "Please sign in",
+    "invalid_target": "This person can't be called",
+    "no_peer": "Couldn't prepare the call connection – please try again"
+  },
+  "notification": {
+    "video": "Video call from @{{name}}",
+    "voice": "Call from @{{name}}",
+    "body": "Tap to answer"
+  },
+  "errors": {
+    "alreadyInCall": "You are already in a call",
+    "flip": "Couldn't switch the camera",
+    "mic": "Couldn't switch the microphone",
+    "camera": "Couldn't switch the camera"
+  },
+  "aria": {
+    "dialog": "Call with {{name}}"
+  },
+  "devices": {
+    "open": "Camera & microphone",
+    "title": "Camera & microphone",
+    "camera": "Camera",
+    "microphone": "Microphone",
+    "none": "No device found",
+    "level": "Level",
+    "muted": "Muted",
+    "micLost": "Microphone disconnected – using the default microphone",
+    "cameraLost": "Camera disconnected – using the default camera",
+    "description": "Choose which devices the call uses"
+  }
+}

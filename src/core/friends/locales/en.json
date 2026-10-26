@@ -1,0 +1,124 @@
+{
+  "title": "Friends",
+  "subtitle_one": "{{count}} friend",
+  "subtitle_other": "{{count}} friends",
+  "online": "Online",
+  "menu": {
+    "label": "Friends",
+    "description": "Friends, requests and blocks"
+  },
+  "tabs": {
+    "accepted": "Friends",
+    "incoming": "Requests",
+    "outgoing": "Sent",
+    "blocked": "Blocked",
+    "manage": "Manage"
+  },
+  "state": {
+    "outgoing": "Requested",
+    "friends": "Friends",
+    "outgoingMenu": "Request sent – options",
+    "friendsMenu": "You are friends – options"
+  },
+  "actions": {
+    "message": "Message",
+    "messageWith": "Message @{{name}}",
+    "add": "Add friend",
+    "accept": "Accept",
+    "reject": "Decline",
+    "cancel": "Withdraw request",
+    "cancelShort": "Withdraw",
+    "remove": "Remove friend",
+    "block": "Block @{{name}}",
+    "unblock": "Unblock",
+    "more": "More actions",
+    "profile": "View profile",
+    "retry": "Try again",
+    "back": "Cancel",
+    "close": "Close",
+    "acceptShort": "Accept",
+    "discover": "Find people",
+    "undo": "Undo",
+    "showAll": "Show all",
+    "showLess": "Show less",
+    "loadMore": "Load more",
+    "clearFilter": "Clear filter",
+    "discoverShort": "Search",
+    "videoCall": "Video call",
+    "voiceCall": "Voice call",
+    "videoCallWith": "Video call with @{{name}}"
+  },
+  "since": {
+    "accepted": "since {{date}}",
+    "incoming": "requested {{date}}",
+    "outgoing": "sent {{date}}",
+    "blocked": "blocked"
+  },
+  "confirm": {
+    "remove": {
+      "title": "Remove @{{name}} as a friend?",
+      "text": "You will no longer be friends. You can send a new request at any time.",
+      "action": "Remove"
+    },
+    "block": {
+      "title": "Block @{{name}}?",
+      "text": "@{{name}} can no longer send you requests. An existing friendship ends. You can unblock at any time.",
+      "action": "Block"
+    },
+    "cancel": {
+      "title": "Withdraw request?",
+      "text": "@{{name}} will no longer see your request.",
+      "action": "Withdraw"
+    }
+  },
+  "toast": {
+    "accepted": "You and @{{name}} are now friends",
+    "rejected": "Declined request from @{{name}}",
+    "canceled": "Withdrew request to @{{name}}",
+    "removed": "Removed @{{name}} from friends",
+    "blocked": "Blocked @{{name}}",
+    "unblocked": "Unblocked @{{name}}",
+    "requested": "Request sent to @{{name}}"
+  },
+  "empty": {
+    "accepted": {
+      "title": "No friends yet",
+      "text": "Visit profiles and send friend requests – accepted requests show up here.",
+      "action": "Discover people"
+    },
+    "incoming": {
+      "title": "No open requests",
+      "text": "When someone sends you a friend request, you will see it here."
+    },
+    "outgoing": {
+      "title": "No sent requests",
+      "text": "Requests you sent that are still open show up here."
+    },
+    "blocked": {
+      "title": "Nobody blocked",
+      "text": "Blocked users can't send you requests."
+    }
+  },
+  "errors": {
+    "failed": "That didn't work. Please try again.",
+    "loadTitle": "Couldn't load the list",
+    "loadText": "Check your connection and try again."
+  },
+  "sections": {
+    "requests": "Requests",
+    "friends": "Your friends",
+    "manage": "Manage",
+    "outgoing": "Sent requests",
+    "outgoingHint_one": "{{count}} pending",
+    "outgoingHint_other": "{{count}} pending",
+    "blocked": "Blocked users",
+    "blockedHint_one": "{{count}} blocked",
+    "blockedHint_other": "{{count}} blocked"
+  },
+  "onlineCount_one": "{{count}} online",
+  "onlineCount_other": "{{count}} online",
+  "filterPlaceholder": "Filter friends",
+  "filterEmpty": "No friends matching “{{term}}”",
+  "subtitleWithRequests_one": "{{count}} friend · {{requests}} pending",
+  "subtitleWithRequests_other": "{{count}} friends · {{requests}} pending"
+}

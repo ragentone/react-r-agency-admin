@@ -1,0 +1,28 @@
+{
+  "emoji": {
+    "search": "Emoji suchen …",
+    "searchResults": "Suchergebnisse",
+    "noResults": "Kein Emoji gefunden",
+    "pick": "Emoji auswählen",
+    "skinTone": "Hautfarbe",
+    "skins": {
+      "0": "Standard",
+      "1": "Hell",
+      "2": "Mittelhell",
+      "3": "Mittel",
+      "4": "Mitteldunkel",
+      "5": "Dunkel"
+    },
+    "categories": {
+      "recent": "Zuletzt verwendet",
+      "people": "Smileys & Personen",
+      "nature": "Tiere & Natur",
+      "foods": "Essen & Trinken",
+      "activity": "Aktivitäten",
+      "places": "Reisen & Orte",
+      "objects": "Objekte",
+      "symbols": "Symbole",
+      "flags": "Flaggen"
+    }
+  }
+}

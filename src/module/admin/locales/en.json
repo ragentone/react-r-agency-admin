@@ -1,0 +1,913 @@
+{
+  "title": "User management",
+  "subtitle": "Search users and manage roles",
+  "retry": "Try again",
+  "menu": {
+    "label": "User management",
+    "description": "Search users and manage roles",
+    "pagesLabel": "Manage pages",
+    "pagesDescription": "Create and edit your own pages",
+    "pagesSection": "Pages",
+    "statsLabel": "Visitors",
+    "statsDescription": "Who visits the site, live and as statistics",
+    "systemLabel": "System",
+    "systemDescription": "Version, deploys and server storage"
+  },
+  "tabs": {
+    "users": "Users",
+    "self": "My roles"
+  },
+  "noAccess": {
+    "title": "No access",
+    "description": "This area is for administrators only."
+  },
+  "users": {
+    "searchPlaceholder": "Name, e-mail or ID",
+    "found_one": "{{count}} result",
+    "found_other": "{{count}} results",
+    "noResults": "No user matches “{{term}}”.",
+    "more": "Load more ({{count}})",
+    "open": "Edit roles of {{user}}",
+    "idleTitle": "Search users",
+    "idle": "Type at least {{count}} characters – name, e-mail or ID."
+  },
+  "self": {
+    "hint": "You can add, change and remove your own roles. admin:user and default:user are protected so you can't lock yourself out."
+  },
+  "drawer": {
+    "title": "User",
+    "description": "Add, change or remove this user's roles",
+    "close": "Close",
+    "tabsLabel": "Sections",
+    "tabs": {
+      "roles": "Roles",
+      "activity": "Activity"
+    }
+  },
+  "badge": {
+    "self": "You",
+    "superUser": "Super admin",
+    "blocked": "Blocked",
+    "inactive": "Inactive"
+  },
+  "role": {
+    "title_one": "{{count}} role",
+    "title_other": "{{count}} roles",
+    "empty": "No roles",
+    "add": "Add role",
+    "addAction": "Add",
+    "protected": "Protected – can't be removed",
+    "protectedSelf": "Protected – your base role",
+    "superUserLocked": "Super admin – roles can only be changed by themselves.",
+    "changeLabel": "Change role {{role}}",
+    "removeLabel": "Remove role {{role}}",
+    "save": "Save",
+    "cancel": "Cancel",
+    "selectPlaceholder": "Select a role",
+    "allAssigned": "Every registered role is already assigned.",
+    "unregistered": "Not registered – no app knows this role",
+    "system": "Assigned by the system"
+  },
+  "remove": {
+    "title": "Remove role?",
+    "description": "{{user}} loses the role {{role}} right away.",
+    "descriptionSelf": "You lose the role {{role}} right away – including every area that depends on it.",
+    "confirm": "Remove"
+  },
+  "toast": {
+    "added": "Role {{role}} added",
+    "changed": "Role changed to {{role}}",
+    "removed": "Role {{role}} removed"
+  },
+  "error": {
+    "load": "Loading failed.",
+    "save": "Saving failed.",
+    "protected": "default:user is protected and can't be removed or changed.",
+    "protectedSelf": "This role is protected on your own account.",
+    "exists": "This role is already assigned.",
+    "missing": "The user doesn't have this role (anymore).",
+    "invalid": "Invalid role.",
+    "superUser": "A super admin's roles can't be changed.",
+    "userMissing": "User not found.",
+    "notAuthorized": "Not authorized.",
+    "delete": "Delete failed.",
+    "slugExists": "This address is already taken.",
+    "slugInvalid": "Only lower case letters, digits and single dashes.",
+    "titleRequired": "Please enter a title.",
+    "titleTooLong": "The title is too long.",
+    "summaryTooLong": "The summary is too long.",
+    "contentTooLong": "The content is too long.",
+    "pageMissing": "This page no longer exists.",
+    "menuOrderInvalid": "The position must be a whole number between -9999 and 9999.",
+    "blocksTooMany": "Too many blocks on the page.",
+    "blockItemsTooMany": "Too many entries in a block.",
+    "blocksInvalid": "A block is invalid.",
+    "imageType": "Only JPG, PNG, WebP, GIF or AVIF.",
+    "imageTooLarge": "The image is larger than 8 MB.",
+    "imageUpload": "Image upload failed.",
+    "accessInvalid": "Invalid visibility or role."
+  },
+  "pages": {
+    "searchPlaceholder": "Title or address",
+    "new": "New",
+    "create": "New page",
+    "open": "Edit page “{{title}}”",
+    "emptyTitle": "No pages yet",
+    "empty": "Create pages like “About”, “Imprint” or “FAQ” – they are available at /p/….",
+    "noResults": "No page matches your search.",
+    "updated": "Changed {{date}}",
+    "filterLabel": "Filter pages",
+    "filter": {
+      "all": "All",
+      "published": "Published",
+      "draft": "Drafts"
+    },
+    "status": {
+      "published": "Published",
+      "draft": "Draft"
+    },
+    "view": "View page",
+    "preview": "Preview",
+    "form": {
+      "description": "Title, address, content and visibility of the page",
+      "createTitle": "New page",
+      "editTitle": "Edit page",
+      "create": "Create",
+      "save": "Save",
+      "cancel": "Cancel",
+      "title": "Title",
+      "titlePlaceholder": "e.g. About us",
+      "titleRequired": "Please enter a title.",
+      "tooLong": "At most {{max}} characters.",
+      "slug": "Address",
+      "slugPlaceholder": "about-us",
+      "slugRequired": "Please enter an address.",
+      "slugHint": "Lower case letters, digits and dashes.",
+      "slugChanged": "Heads up: the old address stops working.",
+      "summary": "Summary",
+      "summaryPlaceholder": "One or two sentences about the page (optional)",
+      "content": "Content",
+      "contentPlaceholder": "Start writing …",
+      "published": "Published",
+      "publishedHint": "Visible to everyone. Drafts are only visible to administrators.",
+      "showInMenu": "Show in main menu",
+      "showInMenuHint": "Appears in the “Pages” group of the main menu.",
+      "showInMenuDraftHint": "Appears in the menu once the page is published.",
+      "menuOrder": "Position in the menu (lower = higher up)",
+      "seoIndex": "Show in search engines",
+      "seoIndexHint": "Listed in the sitemap, Google may find the page.",
+      "seoIndexDraftHint": "Goes into the sitemap once the page is published.",
+      "seoIndexOffHint": "Not in the sitemap, search engines get noindex.",
+      "seoIndexPrivate": "Pages for signed-in users never appear in search engines."
+    },
+    "delete": {
+      "action": "Delete page",
+      "title": "Delete page?",
+      "description": "“{{title}}” will be deleted permanently. Its address stops working.",
+      "confirm": "Delete"
+    },
+    "toast": {
+      "created": "Page “{{title}}” created",
+      "saved": "Page “{{title}}” saved",
+      "deleted": "Page “{{title}}” deleted"
+    },
+    "access": {
+      "title": "Who may see the page?",
+      "all": "Everybody",
+      "allHint": "Guests without login too",
+      "authenticated": "Signed-in only",
+      "authenticatedHint": "Guests are asked to sign in",
+      "roles": "Only with role (optional)",
+      "rolesEmpty": "No role selected – every signed-in user may see the page.",
+      "rolesHint": "One of the selected roles is enough. Admins always see the page.",
+      "addRole": "Add role",
+      "removeRole": "Remove role {{role}}",
+      "badge": "Signed-in",
+      "badgeRoles_one": "{{count}} role",
+      "badgeRoles_other": "{{count}} roles"
+    },
+    "discard": {
+      "title": "Discard changes?",
+      "description": "Your unsaved changes to this page will be lost. Newly uploaded images will be deleted.",
+      "save": "Save",
+      "create": "Create page",
+      "confirm": "Discard",
+      "keep": "Keep editing"
+    },
+    "noindexBadge": "Hidden from search"
+  },
+  "sitePage": {
+    "missingTitle": "Page not found",
+    "missing": "This page does not exist (anymore).",
+    "home": "Go home",
+    "updated": "Last updated {{date}}",
+    "edit": "Edit",
+    "draftHint": "Draft – only visible to administrators",
+    "adminHint": "Visible to everyone",
+    "loginTitle": "Please sign in",
+    "login": "This page is for signed-in users only.",
+    "loginAction": "Sign in",
+    "forbiddenTitle": "No access",
+    "forbidden": "You don't have the permission for this page."
+  },
+  "pagesArea": {
+    "title": "Pages",
+    "subtitle": "Create, edit and publish your own pages"
+  },
+  "blocks": {
+    "title": "Content (blocks)",
+    "emptyTitle": "No content yet",
+    "empty": "Build the page from blocks: banner, text, images, cards, FAQ …",
+    "add": "Add block",
+    "addAfter": "Insert block below",
+    "pickTitle": "Which block?",
+    "noContent": "Still empty – tap to edit",
+    "removed": "{{type}} removed",
+    "undo": "Undo",
+    "full": "At most {{max}} blocks per page.",
+    "action": {
+      "up": "Move up",
+      "down": "Move down",
+      "duplicate": "Duplicate",
+      "remove": "Remove",
+      "removeItem": "Remove entry"
+    },
+    "type": {
+      "hero": {
+        "label": "Banner",
+        "description": "Big intro with image and button"
+      },
+      "text": {
+        "label": "Text",
+        "description": "Formatted text with headings"
+      },
+      "image": {
+        "label": "Image",
+        "description": "Single image with caption"
+      },
+      "cards": {
+        "label": "Cards",
+        "description": "Grid with image, text and link"
+      },
+      "cta": {
+        "label": "Call to action",
+        "description": "Highlighted box with buttons"
+      },
+      "notice": {
+        "label": "Notice",
+        "description": "Info, success, warning"
+      },
+      "faq": {
+        "label": "FAQ",
+        "description": "Expandable questions and answers"
+      },
+      "quote": {
+        "label": "Quote",
+        "description": "Testimonial or statement"
+      },
+      "video": {
+        "label": "Video",
+        "description": "YouTube or Vimeo, privacy friendly"
+      },
+      "divider": {
+        "label": "Divider",
+        "description": "Line or spacing"
+      },
+      "split": {
+        "label": "Image + text",
+        "description": "Image next to text, stacked on phones"
+      },
+      "gallery": {
+        "label": "Gallery",
+        "description": "Several images as grid or slider"
+      },
+      "stats": {
+        "label": "Key figures",
+        "description": "Big numbers with labels"
+      },
+      "steps": {
+        "label": "Steps",
+        "description": "Process in numbered steps"
+      },
+      "map": {
+        "label": "Map",
+        "description": "Location with marker, loads on tap"
+      },
+      "tabs": {
+        "label": "Tabs",
+        "description": "Switchable content"
+      },
+      "countdown": {
+        "label": "Countdown",
+        "description": "Counts down to a date"
+      },
+      "table": {
+        "label": "Table",
+        "description": "Data in rows and columns, also from Excel"
+      }
+    },
+    "field": {
+      "title": "Title",
+      "heading": "Heading (optional)",
+      "text": "Text",
+      "style": "Style",
+      "image": "Image",
+      "imageOptional": "Image (optional)",
+      "buttonLabel": "Button text",
+      "buttonUrl": "Button link",
+      "linkLabel": "Link text",
+      "linkUrl": "Link",
+      "align": "Alignment",
+      "height": "Height",
+      "spacing": "Spacing",
+      "tone": "Type",
+      "alt": "Alt text",
+      "altHint": "Describes the image for screen readers and search engines.",
+      "caption": "Caption (optional)",
+      "urlPlaceholder": "/p/contact or https://…",
+      "urlHint": "Internal address (/p/…) or https://, mailto:, tel:",
+      "urlInvalid": "Allowed: /…, https://…, mailto:… or tel:…",
+      "imageUpload": "Upload image",
+      "imageUploading": "Uploading …",
+      "imageReplace": "Replace",
+      "imageRemove": "Remove image",
+      "imageFormats": "JPG, PNG, WebP, GIF · max. 8 MB",
+      "imageUrl": "Image URL",
+      "format": "Format",
+      "imageEdit": "Edit",
+      "editLoadError": "The image can’t be loaded – upload it again to edit it.",
+      "imageRestore": "Restore original",
+      "altMissing": "Missing: without alt text the image is invisible to screen readers."
+    },
+    "align": {
+      "left": "Left",
+      "center": "Center"
+    },
+    "size": {
+      "sm": "Small",
+      "md": "Medium",
+      "lg": "Large",
+      "custom": "Custom"
+    },
+    "hero": {
+      "variant": {
+        "brand": "Colored",
+        "muted": "Light"
+      },
+      "imageHint": "Sits behind the text. Editing never changes the original – it is kept and can be re-cropped or restored at any time.",
+      "focus": "Image focus point",
+      "focusHint": "Tap the most important spot – it stays in the centre of the banner on every screen size.",
+      "focusReset": "Center",
+      "textPosition": "Text position",
+      "rounded": "Rounded",
+      "roundedHint": "Rounded corners and spacing to the page edges instead of edge to edge.",
+      "tone": {
+        "dark": "Black",
+        "light": "Light"
+      },
+      "overlay": "Darken",
+      "overlayHint": "Lays black over the image so the text stays readable on bright photos."
+    },
+    "image": {
+      "wide": "Full width",
+      "wideHint": "Edge to edge on phones."
+    },
+    "notice": {
+      "tone": {
+        "info": "Info",
+        "success": "Success",
+        "warning": "Warning",
+        "danger": "Important"
+      }
+    },
+    "cards": {
+      "columns": "Columns (from tablet)",
+      "columnsValue_one": "{{count}} column",
+      "columnsValue_other": "{{count}} columns",
+      "items": "Cards",
+      "item": "Card",
+      "add": "Add card",
+      "linkHint": "The whole card becomes tappable, this text shows as a link at the bottom."
+    },
+    "cta": {
+      "primaryLabel": "Main button: text",
+      "primaryUrl": "Main button: link",
+      "secondaryLabel": "Second button: text (optional)",
+      "secondaryUrl": "Second button: link"
+    },
+    "faq": {
+      "items": "Questions",
+      "item": "Question",
+      "add": "Add question",
+      "question": "Question",
+      "answer": "Answer"
+    },
+    "quote": {
+      "text": "Quote",
+      "author": "Name",
+      "role": "Role / company (optional)"
+    },
+    "video": {
+      "url": "Video link",
+      "hint": "Paste a YouTube or Vimeo link.",
+      "invalid": "Not a valid YouTube or Vimeo link.",
+      "consent": "Tap to load the video from {{provider}}. Data will be sent to {{provider}}."
+    },
+    "divider": {
+      "variant": {
+        "line": "Line",
+        "space": "Spacing only"
+      }
+    },
+    "pickApps": "From apps",
+    "appMissing": "The app of this block isn't loaded – it won't be shown on the page.",
+    "appNoSettings": "This block has no settings.",
+    "position": {
+      "h": {
+        "left": "Left",
+        "center": "Center",
+        "right": "Right"
+      },
+      "v": {
+        "top": "Top",
+        "center": "Middle",
+        "bottom": "Bottom"
+      }
+    },
+    "split": {
+      "imageSide": "Image side (from tablet)"
+    },
+    "gallery": {
+      "layout": "Layout",
+      "layoutValue": {
+        "grid": "Grid",
+        "slider": "Slider"
+      },
+      "items": "Images",
+      "item": "Image",
+      "add": "Add image",
+      "open": "Open image {{index}}"
+    },
+    "stats": {
+      "items": "Key figures",
+      "item": "Figure",
+      "add": "Add figure",
+      "value": "Number",
+      "label": "Label"
+    },
+    "steps": {
+      "items": "Steps",
+      "item": "Step",
+      "add": "Add step"
+    },
+    "map": {
+      "search": "Search address",
+      "searchPlaceholder": "Street, city or company",
+      "label": "Marker name",
+      "address": "Address (display)",
+      "lat": "Latitude",
+      "lng": "Longitude",
+      "zoom": "Zoom",
+      "zoomValue": {
+        "11": "City",
+        "13": "District",
+        "15": "Street",
+        "17": "Building"
+      },
+      "load": "Load map",
+      "consent": "Loading fetches map data from OpenStreetMap/CARTO.",
+      "open": "Open in map"
+    },
+    "tabs": {
+      "items": "Tabs",
+      "item": "Tab",
+      "add": "Add tab",
+      "label": "Tab name"
+    },
+    "countdown": {
+      "target": "Date & time",
+      "targetHint": "In your time zone – visitors see it in theirs.",
+      "doneText": "Text afterwards (optional)",
+      "doneHint": "Empty = “It's time!”",
+      "done": "It's time!",
+      "days_one": "day",
+      "days_other": "days",
+      "hours_one": "hour",
+      "hours_other": "hrs",
+      "minutes_one": "minute",
+      "minutes_other": "min",
+      "seconds_one": "second",
+      "seconds_other": "sec"
+    },
+    "table": {
+      "content": "Content",
+      "column": "Column {{index}}",
+      "columnLabel": "Heading",
+      "columnLabelOf": "Heading column {{index}}",
+      "cellOf": "Row {{row}}, {{column}}",
+      "alignValue": "Alignment: {{value}} – tap to change",
+      "addRow": "Row",
+      "addColumn": "Column",
+      "removeRow": "Remove row",
+      "removeColumn": "Remove column",
+      "size": "{{columns}} × {{rows}}",
+      "pasteHint": "Tip: copy cells from Excel or Google Sheets and paste them into a cell. Enter jumps one row down.",
+      "import": "Paste table (Excel, CSV)",
+      "importPlaceholder": "Copy a range in Excel / Google Sheets and paste it here – or CSV with ; or ,",
+      "importHeader": "First row contains headings",
+      "importLimit": "At most {{columns}} columns and {{rows}} rows are taken over.",
+      "importApply_one": "Use {{count}} row (replaces the table)",
+      "importApply_other": "Use {{count}} rows (replaces the table)",
+      "variant": {
+        "striped": "Striped",
+        "lines": "Lines",
+        "grid": "Grid"
+      },
+      "mobile": "On phones",
+      "mobileValue": {
+        "scroll": "Swipe sideways",
+        "stack": "As cards"
+      },
+      "firstColumn": "Highlight first column",
+      "firstColumnHint": "Bold as row heading – the card title on phones.",
+      "caption": "Footnote (optional)",
+      "captionHint": "Source, date or explanation below the table."
+    },
+    "ratio": {
+      "auto": "Original"
+    },
+    "imageGone_one": "An image stayed unsaved for too long and was removed from the server – please upload it again.",
+    "imageGone_other": "{{count}} images stayed unsaved for too long and were removed from the server – please upload them again."
+  },
+  "stats": {
+    "title": "Visitors",
+    "subtitle": "Who visits the site – live, history and statistics",
+    "tabsLabel": "Statistics sections",
+    "tabs": {
+      "live": "Live",
+      "visitors": "Visitors",
+      "overview": "Statistics",
+      "growth": "Growth",
+      "security": "Security"
+    },
+    "range": {
+      "label": "Period",
+      "1": "Today",
+      "7": "7 days",
+      "30": "30 days",
+      "365": "12 months"
+    },
+    "users": "Users",
+    "guests": "Guests",
+    "guest": "Guest",
+    "minor": "Under 16",
+    "previous": "Previous period",
+    "visitorsShort": "Visitors",
+    "hourLabel": "{{hour}}:00",
+    "pwaBadge": "App",
+    "unknown": "Unknown",
+    "noData": "No data yet",
+    "error": {
+      "title": "Couldn't load",
+      "text": "Please try again in a moment."
+    },
+    "series": {
+      "users": "Users",
+      "guests": "Guests",
+      "previous": "Previous period",
+      "visitors": "Visitors",
+      "viewsUsers": "Users",
+      "viewsGuests": "Guests",
+      "registrations": "New users",
+      "total": "Total users",
+      "dau": "Daily active",
+      "wau": "Weekly active",
+      "mau": "Monthly active"
+    },
+    "kpi": {
+      "visitors": "Visitors",
+      "activeUsers": "Active users",
+      "registrations": "New users",
+      "views": "Page views",
+      "avgDuration": "Avg. duration",
+      "bounceRate": "Bounce rate",
+      "change": "Change vs. previous period",
+      "approx": "Guests counted per day",
+      "totalUsers_one": "{{count}} user in total",
+      "totalUsers_other": "{{count}} users in total",
+      "before": "Before {{value}}"
+    },
+    "live": {
+      "now": "Online now",
+      "online_one": "person is here right now",
+      "online_other": "people are here right now",
+      "curve": "Last 60 minutes",
+      "curveText": "Online per minute, refreshed every 10 seconds",
+      "curveLabel": "Line: how many people were online in the last hour",
+      "apps": "Where they are",
+      "list": "Who's here?",
+      "listText": "Tap a user for details. Guests have no name.",
+      "empty": "Nobody is online right now",
+      "since": "since {{time}}"
+    },
+    "visitors": {
+      "search": "Search name or e-mail",
+      "filter": "Filter visitors",
+      "filters": {
+        "all": "All",
+        "new": "New only",
+        "guests": "Guests only",
+        "pwa": "App only"
+      },
+      "hideAdmins": "Hide admins",
+      "max30": "The list shows the last 30 days at most.",
+      "count_one": "{{count}} visitor",
+      "count_other": "{{count}} visitors",
+      "groups": {
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "week": "This week",
+        "older": "Earlier"
+      },
+      "new": "New",
+      "admin": "Admin",
+      "empty": "No visitors in this period",
+      "line": "{{views}} pages · {{duration}} · first visit {{first}}"
+    },
+    "overview": {
+      "empty": "No visitors yet",
+      "emptyText": "As soon as someone opens the site, the numbers show up here.",
+      "today": "Visitors today",
+      "todayText": "Per hour",
+      "todayLabel": "Bars: visitors per hour today",
+      "visitors": "Visitors",
+      "perDay": "Per day, dashed the previous period",
+      "perWeek": "Per week, dashed the previous period",
+      "visitorsLabel": "Bars: visitors per day, users filled, guests outlined, line: previous period",
+      "views": "Page views",
+      "viewsText": "Users filled, guests hatched",
+      "viewsLabel": "Stacked bars: page views of users and guests",
+      "registrations": "New users",
+      "registrationsText": "Bars per day, line: all {{total}} users",
+      "registrationsLabel": "Bars: sign-ups, line: total users",
+      "active": "Active users",
+      "activeText": "Stickiness: {{value}} of the monthly active come daily",
+      "activeLabel": "Three lines: daily, weekly and monthly active users",
+      "heatmap": "When is it busiest?",
+      "heatmapText": "The darker, the more visitors",
+      "heatmapLabel": "Grid: visitors by weekday and hour",
+      "heatmapCell_one": "{{day}} {{from}}–{{to}}: {{count}} visitor",
+      "heatmapCell_other": "{{day}} {{from}}–{{to}}: {{count}} visitors",
+      "hours": "By hour",
+      "hoursText": "Outlined: the current hour",
+      "hoursLabel": "Bars: visitors by hour",
+      "pages": "Top pages",
+      "pagesText": "By views",
+      "apps": "Apps",
+      "appsText": "By visitors",
+      "appTrend": "App usage over time",
+      "appTrendText": "Visitors of the five most used apps",
+      "appTrendLabel": "Lines: visitors per app",
+      "entries": "Entry pages",
+      "entriesText": "Where visitors come in",
+      "exits": "Exit pages",
+      "exitsText": "Where visitors leave",
+      "sources": "Sources",
+      "sourcesText": "Where visits come from",
+      "devices": "Devices",
+      "devicesLabel": "Ring: share of phone, tablet and computer",
+      "pwa": "With installed app",
+      "pwaText": "Share of visits from the installed app",
+      "pwaTrend": "Share per day",
+      "platforms": "Operating system",
+      "browsers": "Browser",
+      "locales": "Language"
+    },
+    "growth": {
+      "cohorts": "Do new users stay?",
+      "cohortsText": "Share active in week 1, 2, 4 and 8 after sign-up",
+      "week": "Week",
+      "size": "New",
+      "weekN_one": "W{{count}}",
+      "weekN_other": "W{{count}}",
+      "curve": "Retention by days",
+      "curveText": "Who came back after X days (last 180 days)",
+      "curveLabel": "Line: share of users who came back after X days",
+      "dayN_one": "Day {{count}}",
+      "dayN_other": "Day {{count}}",
+      "kept": "Came back",
+      "registerFunnel": "Sign-up",
+      "registerFunnelText": "From the sign-in page to the first use",
+      "activationFunnel": "First steps",
+      "activationFunnelText": "What new users of the period did",
+      "drop": "{{percent}} % dropped off",
+      "steps": {
+        "open": "Sign-in page opened",
+        "identify": "E-mail entered",
+        "code": "Code confirmed",
+        "account": "Account created",
+        "active": "Used the app",
+        "avatar": "Profile picture",
+        "friend": "First friend",
+        "post": "First post"
+      },
+      "silent": "Silent users",
+      "silentText": "Not seen for a long time",
+      "silentBucket": {
+        "30": "30–59 days",
+        "60": "60–89 days",
+        "90": "90 days and more"
+      },
+      "silentFor_one": "Away for {{count}} day",
+      "silentFor_other": "Away for {{count}} days",
+      "remind": "Remind",
+      "remindDone": "Reminded",
+      "remindLabel": "Send @{{name}} a reminder",
+      "reminded": "Reminder sent",
+      "remindedRecently": "This person was already reminded in the last 7 days",
+      "invites": "Invitations",
+      "invitesText_one": "{{count}} person signed up via an invite link",
+      "invitesText_other": "{{count}} people signed up via invite links",
+      "invitesLabel": "Bars: sign-ups via invite links",
+      "invited": "Invited",
+      "topInviters": "Who invites the most"
+    },
+    "security": {
+      "failures": "Failed attempts",
+      "failuresShort": "Failures",
+      "stepUps": "Step-ups",
+      "bots": "Bots",
+      "keep30": "Only the last 30 days are stored",
+      "failuresChart": "Failed sign-ins",
+      "failuresText": "Per day, known devices filled",
+      "failuresLabel": "Stacked bars: failed attempts from known and unknown devices",
+      "known": "Known device",
+      "unknown": "Unknown device",
+      "trend": "Step-ups and bots",
+      "trendText": "Step-up: sign-in only with a code (estimated)",
+      "trendLabel": "Lines: step-ups and bot requests per day",
+      "methods": "Sign-in methods",
+      "methodsText": "New sign-ins in the period",
+      "method": {
+        "password": "Password",
+        "passkey": "Passkey",
+        "code": "E-mail code",
+        "google": "Google",
+        "register": "Sign-up",
+        "reset": "Password reset",
+        "legacy": "Old sign-in"
+      },
+      "ips": "Conspicuous IP addresses",
+      "ipsText": "Many failed attempts or several accounts",
+      "ipsEmpty": "No conspicuous IP addresses",
+      "ip": "IP",
+      "accounts": "Accounts",
+      "last": "Last"
+    },
+    "activity": {
+      "minor": "No activity stored",
+      "minorText": "Visits of users under 16 are only counted as numbers.",
+      "days": "Active days",
+      "views": "Pages",
+      "time": "Time",
+      "last": "Last active {{time}}",
+      "calendar": "Visit days",
+      "calendarText": "Last 26 weeks, the darker, the more pages",
+      "calendarLabel_one": "Calendar: active on {{count}} day",
+      "calendarLabel_other": "Calendar: active on {{count}} days",
+      "cell_one": "{{day}}: {{count}} page, {{time}}",
+      "cell_other": "{{day}}: {{count}} pages, {{time}}",
+      "apps": "Apps used",
+      "daysCount_one": "{{count}} day",
+      "daysCount_other": "{{count}} days",
+      "pages": "Recently visited pages",
+      "pagesText": "Deleted after 30 days"
+    },
+    "source": {
+      "direct": "Direct",
+      "internal": "Internal",
+      "search": "Search engine",
+      "social": "Social networks",
+      "website": "Other website",
+      "invite": "Invite link",
+      "wish": "Wish list",
+      "share": "Shared link"
+    },
+    "device": {
+      "mobile": "Phone",
+      "tablet": "Tablet",
+      "desktop": "Computer"
+    },
+    "locale": {
+      "de": "German",
+      "en": "English",
+      "ru": "Russian",
+      "unknown": "Unknown"
+    },
+    "app": {
+      "home": "Home",
+      "timeline": "Timeline",
+      "kids": "Kids",
+      "my-events": "Calendar",
+      "forum": "Forum",
+      "shop": "Shop",
+      "chat": "Chat",
+      "messenger": "Messenger",
+      "profile": "Profile",
+      "account": "Account",
+      "auth": "Sign-in",
+      "admin": "Admin",
+      "pages": "Pages",
+      "files": "Files",
+      "meet": "Meet",
+      "news": "News",
+      "resume": "Résumé"
+    },
+    "loading": "Loading …"
+  },
+  "system": {
+    "title": "System",
+    "subtitle": "Version, deploys and server storage",
+    "tabsLabel": "System sections",
+    "tabs": {
+      "version": "Version",
+      "storage": "Storage"
+    },
+    "storage": {
+      "title": "Server storage",
+      "used": "{{percent}} % used",
+      "free": "{{free}} free of {{total}}",
+      "warn": "From {{percent}} % on admins get a daily message.",
+      "warnActive": "Disk almost full – see below what takes up space.",
+      "parts": "What takes up space",
+      "partsText": "Share of the whole disk.",
+      "uploads": "Uploads",
+      "kidsUploads": "of which kids",
+      "backups": "Database backups",
+      "logs": "Logs",
+      "binlogs": "Database binlogs",
+      "binlogsOff": "off or not readable",
+      "other": "System and rest",
+      "measured": "Measured {{ago}}",
+      "refresh": "Measure again",
+      "refreshing": "Measuring …",
+      "hints": {
+        "title": "Hints",
+        "binlogs": "Binlogs over 1 GB: set binlog_expire_logs_seconds ({{expire}}).",
+        "backups": "Backups over 5 GB: reduce KEEP in shell/db-backup.sh.",
+        "logs": "Logs over 500 MB: rotated daily from 20 MB, check older copies.",
+        "ok": "All good."
+      }
+    },
+    "deploys": {
+      "last": "Live version",
+      "median": "Avg. duration",
+      "running": "Running",
+      "stuck": "Stuck",
+      "listTitle": "Frontend builds",
+      "listText": "Production builds with a valid DEPLOY_TOKEN, newest first.",
+      "version": "v{{version}}",
+      "status": {
+        "running": "Running",
+        "done": "Live",
+        "stuck": "Stuck"
+      },
+      "clients_one": "{{count}} device notified",
+      "clients_other": "{{count}} devices notified",
+      "noBroadcast": "no notification",
+      "emptyTitle": "No deploys yet",
+      "emptyText": "They appear after the next production build with DEPLOY_TOKEN.",
+      "stuckHint": "Not finished after 15 minutes – probably failed. The live site is unchanged.",
+      "started": "Started {{ago}}",
+      "liveSince": "since {{ago}}",
+      "build": "Build {{build}}",
+      "planned": "planned",
+      "requiredBadge": "Required",
+      "bump": {
+        "patch": "Patch",
+        "minor": "Minor",
+        "major": "Major"
+      },
+      "next": {
+        "title": "Next version",
+        "text": "Applies to the next production build, then back to patch.",
+        "first": "The next build gets the first version number 1.0.0.",
+        "bumpLabel": "Type of update",
+        "bumpHint": {
+          "patch": "Small fixes – “New version” hint.",
+          "minor": "New features – with “What’s new”.",
+          "major": "Big change – with “What’s new”."
+        },
+        "notes": "What’s new",
+        "notesHint": "Optional · one line per item · at most {{max}}",
+        "notesPlaceholder": "Share calendars\nFaster kids tasks",
+        "required": "Force update",
+        "requiredHint": "Old versions can’t dismiss the hint and reload as soon as nothing is open.",
+        "save": "Save for next deploy",
+        "saved": "Saved – applies to the next deploy",
+        "saveError": "Could not be saved",
+        "reset": "Reset"
+      }
+    }
+  }
+}

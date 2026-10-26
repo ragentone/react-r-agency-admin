@@ -1,0 +1,25 @@
+{
+  "dateTimeSelector": {
+    "placeholder": {
+      "date": "Выберите дату",
+      "time": "Выберите время",
+      "datetime": "Выберите дату и время"
+    },
+    "done": "Готово",
+    "cancel": "Отмена",
+    "clear": "Очистить",
+    "age_one": "{{count}} год",
+    "age_few": "{{count}} года",
+    "age_many": "{{count}} лет",
+    "age_other": "{{count}} лет"
+  },
+  "dateSelector": {
+    "year": "Год",
+    "month": "Месяц",
+    "day": "День"
+  },
+  "drawer": {
+    "close": "Закрыть",
+    "back": "Назад"
+  }
+}

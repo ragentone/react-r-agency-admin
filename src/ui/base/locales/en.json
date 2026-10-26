@@ -1,0 +1,23 @@
+{
+  "dateTimeSelector": {
+    "placeholder": {
+      "date": "Select date",
+      "time": "Select time",
+      "datetime": "Select date & time"
+    },
+    "done": "Done",
+    "cancel": "Cancel",
+    "clear": "Clear",
+    "age_one": "{{count}} year old",
+    "age_other": "{{count}} years old"
+  },
+  "dateSelector": {
+    "year": "Year",
+    "month": "Month",
+    "day": "Day"
+  },
+  "drawer": {
+    "close": "Close",
+    "back": "Back"
+  }
+}

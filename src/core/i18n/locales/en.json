@@ -1,0 +1,75 @@
+{
+  "locale": {
+    "de": "German",
+    "en": "English",
+    "ru": "Russian"
+  },
+  "label": {
+    "language": "Language",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "year": "Year",
+    "month": "Month",
+    "day": "Day",
+    "selectDay": "Select day",
+    "selectMonth": "Select month",
+    "selectYear": "Select year"
+  },
+  "months": {
+    "number": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    },
+    "long": {
+      "jan": "January",
+      "feb": "February",
+      "mar": "March",
+      "apr": "April",
+      "may": "May",
+      "jun": "June",
+      "jul": "July",
+      "aug": "August",
+      "sep": "September",
+      "oct": "October",
+      "nov": "November",
+      "dec": "December"
+    },
+    "short": {
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr",
+      "may": "May",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Aug",
+      "sep": "Sep",
+      "oct": "Oct",
+      "nov": "Nov",
+      "dec": "Dec"
+    }
+  },
+  "days": {
+    "short": {
+      "su": "Su",
+      "mo": "Mo",
+      "tu": "Tu",
+      "we": "We",
+      "th": "Th",
+      "fr": "Fr",
+      "sa": "Sa"
+    }
+  }
+}

@@ -1,0 +1,371 @@
+/* Inter (variable, optical sizing) – self-hosted, Latin + Cyrillic subsets. */
+@import '@fontsource-variable/inter/opsz.css';
+@import 'tailwindcss';
+
+@plugin "tailwindcss-animate";
+
+@plugin 'tailwind-scrollbar-hide';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Typography
+ * One family (Inter) with system fallbacks, and a small mobile-first type scale.
+ * Use the named sizes instead of arbitrary values:
+ *   text-micro 11/16 · text-caption 13/18 · text-body 15/20 · text-title 17/24 · text-display 28/32
+ * Inputs stay at text-base (16px) on phones so iOS doesn't zoom.
+ */
+@theme {
+  --font-sans:
+    'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1rem;
+  --text-micro--letter-spacing: 0.01em;
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.125rem;
+  --text-caption--letter-spacing: 0;
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.25rem;
+  --text-body--letter-spacing: -0.006em;
+  --text-title: 1.0625rem;
+  --text-title--line-height: 1.5rem;
+  --text-title--letter-spacing: -0.012em;
+  --text-display: 1.75rem;
+  --text-display--line-height: 2rem;
+  --text-display--letter-spacing: -0.022em;
+
+  /* Loading shimmer (skeletons): a soft highlight sweeping left → right. */
+  --animate-shimmer: shimmer 1.8s ease-in-out infinite;
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-highlight: var(--highlight);
+  --color-warning-foreground:
+    var(--warning-foreground);
+  --color-warning:
+    var(--warning);
+  --color-success-foreground:
+    var(--success-foreground);
+  --color-success:
+    var(--success);
+  --color-info-foreground:
+    var(--info-foreground);
+  --color-info:
+    var(--info);
+  --color-destructive-foreground:
+    var(--destructive-foreground);
+  --animate-marquee-x:
+    marqueeX var(--marquee-duration) linear infinite var(--marquee-delay);
+  --animate-marquee-y:
+    marqueeY var(--marquee-duration) linear infinite var(--marquee-delay);
+  @keyframes marqueeX {
+  from {
+    transform:
+    translateX(0);
+    }
+  to {
+    transform:
+    translateX(var(--marquee-translate));
+    }
+  }
+  @keyframes marqueeY {
+  from {
+    transform:
+    translateY(0);
+    }
+  to {
+    transform:
+    translateY(var(--marquee-translate));
+    }
+  }
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  --highlight: oklch(0.852 0.199 91.936);
+  --destructive-foreground:
+    var(--color-red-700);
+  --info:
+    var(--color-blue-500);
+  --info-foreground:
+    var(--color-blue-700);
+  --success:
+    var(--color-emerald-500);
+  --success-foreground:
+    var(--color-emerald-700);
+  --warning:
+    var(--color-amber-500);
+  --warning-foreground:
+    var(--color-amber-700);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: var(--background);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+  --highlight: oklch(0.852 0.199 91.936);
+  --destructive-foreground:
+    var(--color-red-400);
+  --info:
+    var(--color-blue-500);
+  --info-foreground:
+    var(--color-blue-400);
+  --success:
+    var(--color-emerald-500);
+  --success-foreground:
+    var(--color-emerald-400);
+  --warning:
+    var(--color-amber-500);
+  --warning-foreground:
+    var(--color-amber-400);
+}
+
+@layer base {
+  * {
+    @apply border-border/50 outline-ring/50;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    /* Inter: disambiguated l/I/1 (cv11), contextual alternates. */
+    font-feature-settings: 'calt', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Headlines: tighter tracking, balanced line breaks. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+    font-kerning: normal;
+  }
+  h1,
+  h2 {
+    letter-spacing: -0.015em;
+  }
+
+  /* Running text: no orphans, long (German) words hyphenate instead of overflowing. */
+  p,
+  li,
+  dd,
+  blockquote,
+  figcaption {
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+  }
+  p,
+  blockquote {
+    hyphens: auto;
+    hyphenate-limit-chars: 10 4 4;
+  }
+
+  /* Numbers that change or line up (times, counters, tables) don't jump. */
+  time,
+  kbd,
+  output,
+  td,
+  [role='progressbar'],
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--font-mono);
+    font-feature-settings: normal;
+  }
+
+  ::selection {
+    background-color: var(--foreground);
+    color: var(--background);
+  }
+
+  /*.border-light {*/
+  /*  @apply border-black/5 dark:border-white/5;*/
+  /*}*/
+  .leaflet-container {
+    @apply !bg-card !font-[inherit];
+  }
+  .leaflet-container a {
+    @apply !text-inherit;
+  }
+  .leaflet-div-icon {
+    @apply !bg-transparent !border-none;
+  }
+  .leaflet-popup-content-wrapper,
+  .leaflet-popup-content,
+  .leaflet-popup-content p {
+    @apply ![all:unset];
+  }
+  .leaflet-popup {
+    @apply !animate-none;
+  }
+  .leaflet-popup-close-button {
+    @apply ring-offset-background focus:ring-ring bg-secondary rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:outline-hidden;
+  }
+  .leaflet-tooltip,
+  .leaflet-draw-tooltip {
+    @apply !bg-foreground !text-background !animate-none !rounded-md !border-none !p-0 !px-3 !py-1.5 !shadow-none;
+  }
+  .leaflet-draw-tooltip:before {
+    @apply bg-foreground !top-1/2 !right-0.5 size-2.5 translate-x-1/2 -translate-y-1/2 rotate-45 rounded-[2px] !border-none;
+  }
+  .leaflet-error-draw-tooltip {
+    @apply !bg-destructive !text-white;
+  }
+  .leaflet-error-draw-tooltip:before {
+    @apply bg-destructive;
+  }
+  .leaflet-draw-tooltip-subtext {
+    @apply !text-background;
+  }
+  .leaflet-popup-tip-container,
+  .leaflet-tooltip-top:before,
+  .leaflet-tooltip-bottom:before,
+  .leaflet-tooltip-left:before,
+  .leaflet-tooltip-right:before {
+    @apply hidden;
+  }
+  .leaflet-control-attribution {
+    @apply !bg-muted rounded-md !px-[4px] !py-[2px] text-[10px] !leading-none !text-inherit;
+  }
+  .leaflet-draw-guide-dash {
+    @apply rounded-full;
+  }
+  .leaflet-edit-marker-selected {
+    @apply !border-transparent !bg-transparent;
+  }
+  .marker-cluster div {
+    @apply font-[inherit];
+  }
+}
+
+/*
+ * Flutter-App auf Android (Klasse wird in index.html gesetzt):
+ * backdrop-filter (backdrop-blur-*) muss in der Android-WebView pro Frame den Hintergrund neu
+ * rendern und weichzeichnen – bei Overlays, Drawern und Animationen ruckelt es deutlich.
+ * Hier ohne Blur; die halbtransparenten Hintergründe bleiben.
+ */
+html.native-android *,
+html.native-android *::before,
+html.native-android *::after {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}

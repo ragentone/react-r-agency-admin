@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Build and output directories
+dist/
+dist-ssr/
+dev-dist/
+build/
+
+# Package manager lockfiles
+package-lock.json
+
+# Generated files
+generated/
+coverage/
+.cache/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment and local config files
+.env
+.env.*
+*.local
+
+# Editor and OS files
+.idea/
+.vscode/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

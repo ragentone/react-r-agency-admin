@@ -1,0 +1,10 @@
+{
+  "loaded": {
+    "title": "r-agency готово",
+    "body": "Приложение загружено ({{platform}})."
+  },
+  "button": {
+    "reload": "Обновить",
+    "reloadDescription": "Перезапустить приложение"
+  }
+}

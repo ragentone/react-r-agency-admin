@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../vite/import/module.config.schema.json",
+  "active": true,
+  "name": "module-seo",
+  "entries": ["module.tsx"],
+  "sortOrder": 0
+}

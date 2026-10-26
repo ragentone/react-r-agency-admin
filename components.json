@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "src/index.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "components": "@ui/shad-cn/components",
+    "utils": "@ui/lib/utils",
+    "ui": "@ui/shad-cn/components",
+    "lib": "@ui/lib",
+    "hooks": "@ui/shad-cn/hooks"
+  },
+  "registries": {
+    "@wandry-ui": "https://ui.wandry.com.ua/r/{name}.json",
+    "@uitripled": "https://ui.tripled.work/r/{name}.json",
+    "@plate": "https://platejs.org/r/{name}.json",
+    "@ss-components": "https://shadcnstudio.com/r/components/{name}.json",
+    "@ss-blocks": "https://shadcnstudio.com/r/blocks/{name}.json",
+    "@ss-themes": "https://shadcnstudio.com/r/themes/{name}.json",
+    "@coss": "https://coss.com/ui/r/{name}.json",
+    "@wigggle-ui": "https://wigggle-ui.vercel.app/r/{name}.json",
+    "@intentui": "https://intentui.com/r/{name}",
+    "@diceui": "https://diceui.com/r/{name}.json",
+    "@joyco": "https://registry.joyco.studio/r/{name}.json",
+    "@shadcn-map": "http://shadcn-map.vercel.app/r/{name}.json",
+    "@shark": "https://shark.vini.one/r/{name}.json"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "offline": "Du bist offline",
+  "update": {
+    "title": "Neue Version verfügbar",
+    "text": "Lade neu, um die neueste Version zu nutzen.",
+    "action": "Aktualisieren",
+    "later": "Später",
+    "updating": "Neue Version wird geladen …",
+    "settingsTitle": "Neue Version",
+    "settingsText": "Tippe auf „Aktualisieren“, um sie zu laden.",
+    "titleVersion": "Neue Version {{version}}",
+    "requiredText": "Pflicht-Update – die Seite lädt gleich von selbst neu.",
+    "settingsVersion": "Version {{from}} → {{to}}",
+    "settingsVersionNew": "Version {{to}} ist da"
+  },
+  "offlineReady": {
+    "title": "Offline bereit",
+    "text": "Die App funktioniert jetzt auch ohne Internet.",
+    "done": "Verstanden"
+  },
+  "install": {
+    "menu": "App installieren",
+    "title": "App installieren",
+    "subtitle": "Auf deinem Startbildschirm – wie eine echte App.",
+    "action": "Installieren",
+    "later": "Jetzt nicht",
+    "benefits": {
+      "fast": {
+        "title": "Blitzschnell",
+        "text": "Direkt vom Startbildschirm öffnen."
+      },
+      "offline": {
+        "title": "Auch offline",
+        "text": "Bereits geladene Inhalte bleiben verfügbar."
+      },
+      "fullscreen": {
+        "title": "Vollbild",
+        "text": "Ohne Browserleisten, mehr Platz für Inhalte."
+      }
+    },
+    "ios": {
+      "step1": "Tippe unten auf „Teilen“",
+      "step2": "Wähle „Zum Home-Bildschirm“",
+      "step3": "Bestätige mit „Hinzufügen“",
+      "done": "Verstanden"
+    }
+  },
+  "deploy": {
+    "before": {
+      "title": "Update wird eingespielt …",
+      "text": "Gleich gibt es eine neue Version. Du kannst normal weitermachen."
+    }
+  },
+  "version": {
+    "label": "Version {{version}}"
+  },
+  "whatsNew": {
+    "title": "Was ist neu in {{version}}",
+    "text": "Das hat sich mit dem Update geändert.",
+    "done": "Verstanden"
+  }
+}

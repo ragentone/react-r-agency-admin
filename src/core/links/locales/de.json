@@ -1,0 +1,39 @@
+{
+  "groups": {
+    "legal": "Rechtliches",
+    "links": "Weitere Links"
+  },
+  "menu": {
+    "title": "Rechtliches & Links",
+    "description": "Impressum, AGB, Datenschutz und mehr",
+    "close": "Links schließen",
+    "empty": "Keine Links vorhanden."
+  },
+  "items": {
+    "imprint": "Impressum",
+    "imprintDescription": "Anbieter und Kontakt",
+    "terms": "AGB",
+    "termsDescription": "Allgemeine Geschäftsbedingungen",
+    "privacy": "Datenschutz",
+    "privacyDescription": "Wie wir mit deinen Daten umgehen"
+  },
+  "external": {
+    "description": "Dieser Link führt zu einer externen Seite.",
+    "open": "Seite öffnen",
+    "hint": "Öffnet in neuem Tab"
+  },
+  "error": {
+    "load": "Der Inhalt konnte nicht geladen werden."
+  },
+  "retry": "Erneut versuchen",
+  "notFound": {
+    "title": "Nicht gefunden",
+    "description": "Diesen Inhalt gibt es nicht (mehr) oder er ist für dich nicht sichtbar."
+  },
+  "updatedAt": "Stand: {{date}}",
+  "share": "Link teilen",
+  "copied": "Link kopiert",
+  "close": "Schließen",
+  "back": "Zurück",
+  "toHome": "Zur Startseite"
+}

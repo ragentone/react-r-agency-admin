@@ -1,0 +1,247 @@
+/* Content styles for the Tiptap HTML editor (scoped, no typography plugin needed). */
+
+.html-editor-content {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  /* 16px on phones (no iOS zoom while typing), body size (15px) from sm – like the rendered posts. */
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--foreground);
+  outline: none;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 40rem) {
+  .html-editor-content {
+    font-size: var(--text-body, 0.9375rem);
+    line-height: 1.4;
+  }
+}
+
+.html-editor-content > * + * {
+  margin-top: 0.75em;
+}
+
+.html-editor-content h1,
+.html-editor-content h2,
+.html-editor-content h3,
+.html-editor-content h4,
+.html-editor-content h5,
+.html-editor-content h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.html-editor-content > :is(h1, h2, h3, h4, h5, h6):not(:first-child) {
+  margin-top: 1.25em;
+}
+
+.html-editor-content h1 {
+  font-size: 1.25rem;
+}
+.html-editor-content h2 {
+  font-size: 1.125rem;
+}
+.html-editor-content h3 {
+  font-size: 1.0625rem;
+}
+.html-editor-content h4 {
+  font-size: 1rem;
+}
+.html-editor-content h5 {
+  font-size: 0.875rem;
+}
+.html-editor-content h6 {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}
+
+.html-editor-content ul,
+.html-editor-content ol {
+  padding-left: 1.5em;
+}
+
+.html-editor-content ul {
+  list-style: disc;
+}
+.html-editor-content ol {
+  list-style: decimal;
+}
+.html-editor-content ul ul {
+  list-style: circle;
+}
+.html-editor-content li > p {
+  margin: 0;
+}
+.html-editor-content li + li {
+  margin-top: 0.25em;
+}
+.html-editor-content li::marker {
+  color: var(--muted-foreground);
+}
+
+.html-editor-content blockquote {
+  border-left: 3px solid var(--border);
+  padding-left: 1em;
+  color: var(--muted-foreground);
+}
+
+.html-editor-content a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: text;
+}
+
+.html-editor-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+  background: var(--muted);
+  border-radius: calc(var(--radius) - 4px);
+  padding: 0.1em 0.35em;
+}
+
+.html-editor-content pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  background: var(--muted);
+  border-radius: calc(var(--radius) - 2px);
+  padding: 0.75em 1em;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.html-editor-content pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.html-editor-content mark {
+  background: var(--highlight, #fef08a);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 0.1em;
+}
+
+.html-editor-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.25em 0;
+}
+
+.html-editor-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: calc(var(--radius) - 2px);
+}
+
+.html-editor-content img.ProseMirror-selectednode,
+.html-editor-content hr.ProseMirror-selectednode {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.html-editor-content p.is-editor-empty:first-child::before {
+  /* Variable from <HtmlEditor> follows the language; attribute as fallback (hook only). */
+  content: var(--html-editor-placeholder, attr(data-placeholder));
+  float: left;
+  height: 0;
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+
+.html-editor-content pre,
+.html-editor-content img {
+  max-width: 100%;
+}
+
+/* Inserted date/time (<time datetime>) – one unit, re-editable via the toolbar. */
+.html-editor-content time {
+  border-radius: calc(var(--radius) - 4px);
+  background: color-mix(in oklab, var(--primary) 8%, transparent);
+  padding: 0.05em 0.3em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.html-editor-content time.ProseMirror-selectednode {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+}
+
+/* Characters beyond maxLength (maxLengthMode="highlight", or external content). */
+.html-editor-content .html-editor-overflow {
+  background: color-mix(in oklab, var(--destructive) 14%, transparent);
+  box-shadow: 0 0 0 1.5px var(--destructive);
+  border-radius: 3px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.html-editor-content img.html-editor-overflow,
+.html-editor-content hr.html-editor-overflow {
+  outline: 2px solid var(--destructive);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+/* Touch: no grey tap flash, no double-tap zoom delay on controls. */
+[data-html-editor-ui] :is(button, [role='slider'], [role='option']) {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.html-editor-content {
+  -webkit-tap-highlight-color: transparent;
+  /* Vertical swipes on the focused text scroll the page/dialog instead of being eaten. */
+  touch-action: manipulation;
+}
+
+/* Touch devices: 16px text prevents iOS from zooming in on focus. */
+@media (pointer: coarse) {
+  .html-editor-content {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Larger tap target for links and inserted dates. */
+  .html-editor-content a,
+  .html-editor-content time {
+    padding-block: 0.1em;
+  }
+}
+
+/* Narrow editors (mobile, drawers, sidebars). */
+@container html-editor (max-width: 28rem) {
+  .html-editor-content {
+    padding: 0.625rem 0.75rem;
+  }
+
+  .html-editor-content h1 {
+    font-size: 1.3rem;
+  }
+  .html-editor-content h2 {
+    font-size: 1.15rem;
+  }
+  .html-editor-content h3 {
+    font-size: 1.05rem;
+  }
+
+  .html-editor-content ul,
+  .html-editor-content ol {
+    padding-left: 1.25em;
+  }
+
+  .html-editor-content pre {
+    padding: 0.625em 0.75em;
+  }
+}
+
+.html-editor-content[contenteditable='false'] {
+  cursor: default;
+}

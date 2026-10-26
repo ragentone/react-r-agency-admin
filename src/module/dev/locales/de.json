@@ -1,0 +1,196 @@
+{
+  "title": "Dev",
+  "new": "Neu",
+  "retry": "Erneut versuchen",
+  "menu": {
+    "label": "Developer",
+    "description": "Dev-Todos für Admins und Entwickler"
+  },
+  "filter": {
+    "label": "Filter",
+    "active": "Offen",
+    "in_progress": "In Arbeit",
+    "done": "Erledigt",
+    "all": "Alle"
+  },
+  "empty": {
+    "active": "Nichts offen – stark!",
+    "in_progress": "Gerade ist nichts in Arbeit.",
+    "done": "Noch nichts erledigt.",
+    "all": "Noch keine Todos."
+  },
+  "status": {
+    "open": "Offen",
+    "in_progress": "In Arbeit",
+    "done": "Erledigt"
+  },
+  "priority": {
+    "low": "Niedrig",
+    "normal": "Normal",
+    "high": "Hoch"
+  },
+  "item": {
+    "done": "„{{title}}“ als erledigt markieren",
+    "reopen": "„{{title}}“ wieder öffnen",
+    "doneAt": "erledigt {{date}}",
+    "fromTicket": "Ticket",
+    "internal": "Intern"
+  },
+  "form": {
+    "createTitle": "Neues Todo",
+    "editTitle": "Todo bearbeiten",
+    "description": "Titel, Beschreibung, Priorität und Status des Todos.",
+    "create": "Anlegen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "title": "Titel",
+    "titlePlaceholder": "Was ist zu tun?",
+    "titleRequired": "Bitte gib einen Titel ein.",
+    "descriptionLabel": "Beschreibung",
+    "descriptionPlaceholder": "Details, Links, Schritte …",
+    "priority": "Priorität",
+    "status": "Status",
+    "tooLong": "Höchstens {{max}} Zeichen.",
+    "public": "In der Roadmap zeigen",
+    "publicHint": "Öffentlich unter „Entwicklung“ sichtbar – Beschreibung nur als Text."
+  },
+  "delete": {
+    "action": "Todo löschen",
+    "title": "Todo löschen?",
+    "description": "„{{title}}“ wird endgültig gelöscht.",
+    "confirm": "Löschen"
+  },
+  "noAccess": {
+    "title": "Kein Zugriff",
+    "description": "Der Dev-Bereich ist nur für Admins und Entwickler."
+  },
+  "error": {
+    "load": "Die Todos konnten nicht geladen werden.",
+    "save": "Speichern fehlgeschlagen.",
+    "delete": "Löschen fehlgeschlagen."
+  },
+  "tabs": {
+    "todos": "Todos",
+    "tickets": "Tickets"
+  },
+  "roadmap": {
+    "menu": {
+      "label": "Entwicklung",
+      "description": "Woran gerade gearbeitet wird"
+    },
+    "title": "Entwicklung",
+    "subtitle": "Woran wir gerade arbeiten – und was als Nächstes kommt.",
+    "tabs": {
+      "roadmap": "Roadmap",
+      "tickets": "Meine Tickets"
+    },
+    "sections": {
+      "in_progress": "In Arbeit",
+      "open": "Geplant",
+      "done": "Kürzlich fertig"
+    },
+    "empty": {
+      "in_progress": "Gerade ist nichts in Arbeit.",
+      "open": "Nichts geplant.",
+      "done": "In letzter Zeit wurde nichts fertig."
+    },
+    "important": "Wichtig",
+    "fromCommunity": "Aus der Community",
+    "error": "Die Roadmap konnte nicht geladen werden."
+  },
+  "ticket": {
+    "new": "Ticket erstellen",
+    "newShort": "Ticket",
+    "guestTitle": "Hast du eine Idee oder einen Fehler gefunden?",
+    "guestDescription": "Melde dich an, um Tickets zu erstellen und ihren Status zu verfolgen.",
+    "login": "Anmelden",
+    "emptyTitle": "Noch keine Tickets",
+    "emptyDescription": "Schick uns einen Fehler, ein Feature oder eine Idee – wir schauen uns jedes Ticket an.",
+    "error": "Tickets konnten nicht geladen werden.",
+    "limit": "Du hast schon {{max}} offene Tickets. Warte, bis eines bearbeitet wurde.",
+    "answer": "Antwort vom Team",
+    "type": {
+      "bug": "Fehler",
+      "feature": "Feature",
+      "idea": "Idee"
+    },
+    "status": {
+      "pending": "Offen",
+      "accepted": "Angenommen",
+      "rejected": "Abgelehnt"
+    },
+    "form": {
+      "title": "Neues Ticket",
+      "description": "Fehler, Feature-Wunsch oder Idee an das Entwicklerteam.",
+      "hint": "Beschreib so genau wie möglich, worum es geht. Das Team nimmt das Ticket an oder gibt dir eine Begründung.",
+      "type": "Art",
+      "submit": "Senden",
+      "titleRequired": "Bitte gib einen Titel ein.",
+      "error": "Ticket konnte nicht gesendet werden.",
+      "titlePlaceholder": {
+        "bug": "Was funktioniert nicht?",
+        "feature": "Was soll die App können?",
+        "idea": "Deine Idee in einem Satz"
+      },
+      "descriptionPlaceholder": {
+        "bug": "Was hast du gemacht, was ist passiert, was hast du erwartet?",
+        "feature": "Wofür brauchst du es? Wie stellst du es dir vor?",
+        "idea": "Erzähl mehr …"
+      }
+    }
+  },
+  "review": {
+    "acceptTitle": "Ticket annehmen",
+    "rejectTitle": "Ticket ablehnen",
+    "accept": "Annehmen",
+    "reject": "Ablehnen",
+    "note": "Nachricht an den Nutzer (optional)",
+    "notePlaceholder": "z. B. „Danke! Kommt in der nächsten Version.“",
+    "reason": "Begründung",
+    "reasonPlaceholder": "Warum wird das Ticket abgelehnt?",
+    "visibleToUser": "Der Nutzer sieht diesen Text bei seinem Ticket.",
+    "publicHint": "Das neue Todo erscheint in der öffentlichen Roadmap.",
+    "accepted": "Ticket angenommen – Todo wurde angelegt.",
+    "rejected": "Ticket abgelehnt.",
+    "unknownUser": "Unbekannt",
+    "filter": {
+      "pending": "Offen",
+      "accepted": "Angenommen",
+      "rejected": "Abgelehnt",
+      "all": "Alle"
+    },
+    "empty": {
+      "pending": "Keine offenen Tickets.",
+      "accepted": "Noch keine angenommenen Tickets.",
+      "rejected": "Keine abgelehnten Tickets.",
+      "all": "Noch keine Tickets."
+    }
+  },
+  "developer_ticket_created": "Ticket gesendet – danke!",
+  "developer_ticket_limit_reached": "Du hast zu viele offene Tickets.",
+  "developer_ticket_title_required": "Bitte gib einen Titel ein.",
+  "developer_ticket_title_too_long": "Der Titel ist zu lang.",
+  "developer_ticket_description_too_long": "Die Beschreibung ist zu lang.",
+  "developer_ticket_already_reviewed": "Das Ticket wurde schon bearbeitet.",
+  "developer_ticket_reason_required": "Bitte gib eine Begründung an.",
+  "developer_ticket_not_found": "Ticket nicht gefunden.",
+  "developer_ticket_note_too_long": "Die Nachricht ist zu lang.",
+  "block": {
+    "roadmap": {
+      "label": "Roadmap",
+      "description": "Was gerade entwickelt wird",
+      "defaultTitle": "Roadmap",
+      "titleField": "Überschrift",
+      "filterField": "Anzeigen",
+      "filter": {
+        "active": "Geplant & in Arbeit",
+        "done": "Erledigt",
+        "all": "Alle"
+      },
+      "limitField": "Anzahl",
+      "empty": "Gerade nichts auf der Roadmap.",
+      "error": "Roadmap konnte nicht geladen werden.",
+      "more": "Ganze Roadmap"
+    }
+  }
+}

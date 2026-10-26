@@ -1,0 +1,21 @@
+{
+  "badge": "Fehler",
+  "title": "Etwas ist schiefgelaufen",
+  "description": "Dieser Bereich konnte nicht angezeigt werden. Versuch es noch einmal – deine Daten sind sicher.",
+  "actions": {
+    "retry": "Erneut versuchen",
+    "reload": "Seite neu laden",
+    "home": "Zur Startseite",
+    "back": "Zurück"
+  },
+  "details": {
+    "toggle": "Technische Details",
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "stack": "Stack Trace",
+    "component": "Komponenten-Stack",
+    "none": "Kein Stack Trace verfügbar."
+  },
+  "unknown": "Ein unerwarteter Fehler ist aufgetreten.",
+  "hint": "Tritt der Fehler wieder auf, kopiere die Details und schick sie dem Support."
+}

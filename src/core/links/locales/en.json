@@ -1,0 +1,39 @@
+{
+  "groups": {
+    "legal": "Legal",
+    "links": "More links"
+  },
+  "menu": {
+    "title": "Legal & links",
+    "description": "Imprint, terms, privacy and more",
+    "close": "Close links",
+    "empty": "No links available."
+  },
+  "items": {
+    "imprint": "Imprint",
+    "imprintDescription": "Provider and contact",
+    "terms": "Terms",
+    "termsDescription": "Terms and conditions",
+    "privacy": "Privacy",
+    "privacyDescription": "How we handle your data"
+  },
+  "external": {
+    "description": "This link leads to an external page.",
+    "open": "Open page",
+    "hint": "Opens in a new tab"
+  },
+  "error": {
+    "load": "The content couldn't be loaded."
+  },
+  "retry": "Try again",
+  "notFound": {
+    "title": "Not found",
+    "description": "This content doesn't exist (anymore) or isn't visible to you."
+  },
+  "updatedAt": "Last updated: {{date}}",
+  "share": "Share link",
+  "copied": "Link copied",
+  "close": "Close",
+  "back": "Back",
+  "toHome": "Go to home"
+}

@@ -1,0 +1,6 @@
+{
+  "active": true,
+  "name": "core-seo",
+  "entries": ["core.tsx"],
+  "sortOrder": 0
+}

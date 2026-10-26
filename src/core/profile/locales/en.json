@@ -1,0 +1,64 @@
+{
+  "title": "Profile",
+  "back": "Back",
+  "close": "Close",
+  "actions": {
+    "editProfile": "Edit profile",
+    "retry": "Try again",
+    "toHome": "Go to home"
+  },
+  "meta": {
+    "joined": "Joined {{date}}",
+    "birthday": "Born {{date}}",
+    "lastSeen": "Last active {{date}}",
+    "online": "Online",
+    "email": "Email"
+  },
+  "badge": {
+    "own": "You",
+    "public": "Public",
+    "private": "Private"
+  },
+  "relation": {
+    "accepted": "Connected",
+    "pendingOut": "Request sent",
+    "pendingIn": "Wants to connect",
+    "blocked": "Blocked"
+  },
+  "states": {
+    "loading": "Loading profile …",
+    "notFound": "This profile doesn’t exist",
+    "notFoundHint": "The link may be wrong or the account was deleted.",
+    "private": "This profile is private",
+    "privateHint": "Only connected people can see this profile.",
+    "error": "Couldn’t load the profile"
+  },
+  "sections": {
+    "about": "About",
+    "info": "Information"
+  },
+  "info": {
+    "alias": "Username",
+    "fullName": "Name",
+    "gender": "Gender",
+    "birthday": "Birthday",
+    "age_one": "{{count}} year",
+    "age_other": "{{count}} years",
+    "email": "Email",
+    "userType": "Account type",
+    "visibility": "Visibility",
+    "memberSince": "Member since",
+    "lastActive": "Last active",
+    "never": "Never"
+  },
+  "gender": {
+    "male": "Male",
+    "female": "Female",
+    "diverse": "Diverse"
+  },
+  "userType": {
+    "user": "User",
+    "standard": "Standard",
+    "admin": "Administrator"
+  }
+}

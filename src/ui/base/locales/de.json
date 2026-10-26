@@ -1,0 +1,23 @@
+{
+  "dateTimeSelector": {
+    "placeholder": {
+      "date": "Datum auswählen",
+      "time": "Uhrzeit auswählen",
+      "datetime": "Datum & Uhrzeit auswählen"
+    },
+    "done": "Fertig",
+    "cancel": "Abbrechen",
+    "clear": "Entfernen",
+    "age_one": "{{count}} Jahr",
+    "age_other": "{{count}} Jahre"
+  },
+  "dateSelector": {
+    "year": "Jahr",
+    "month": "Monat",
+    "day": "Tag"
+  },
+  "drawer": {
+    "close": "Schließen",
+    "back": "Zurück"
+  }
+}

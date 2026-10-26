@@ -1,0 +1,69 @@
+{
+  "html": {
+    "placeholder": "Text eingeben …",
+    "toolbar": {
+      "label": "Formatierung",
+      "undo": "Rückgängig",
+      "redo": "Wiederholen",
+      "textStyle": "Textformat",
+      "paragraph": "Absatz",
+      "heading": "Überschrift {{level}}",
+      "bold": "Fett",
+      "italic": "Kursiv",
+      "underline": "Unterstrichen",
+      "strike": "Durchgestrichen",
+      "code": "Inline-Code",
+      "highlight": "Hervorheben",
+      "bulletList": "Aufzählung",
+      "orderedList": "Nummerierte Liste",
+      "blockquote": "Zitat",
+      "codeBlock": "Codeblock",
+      "alignLeft": "Linksbündig",
+      "alignCenter": "Zentriert",
+      "alignRight": "Rechtsbündig",
+      "alignJustify": "Blocksatz",
+      "link": "Link",
+      "image": "Bild einfügen",
+      "emoji": "Emoji einfügen",
+      "horizontalRule": "Trennlinie",
+      "clearFormatting": "Formatierung entfernen",
+      "source": "HTML-Quelltext",
+      "color": "Farbe",
+      "textColor": "Textfarbe",
+      "backgroundColor": "Hintergrundfarbe",
+      "dateTime": "Datum/Uhrzeit einfügen"
+    },
+    "link": {
+      "url": "Link-Adresse",
+      "urlPlaceholder": "https://beispiel.de",
+      "apply": "Übernehmen",
+      "remove": "Link entfernen"
+    },
+    "image": {
+      "url": "Bild-URL",
+      "urlPlaceholder": "https://beispiel.de/bild.jpg",
+      "alt": "Alternativtext",
+      "altPlaceholder": "Kurze Bildbeschreibung",
+      "insert": "Einfügen"
+    },
+    "characters": {
+      "count": "{{count}} Zeichen",
+      "limit": "{{count}} / {{max}}"
+    },
+    "color": {
+      "text": "Text",
+      "background": "Hintergrund",
+      "reset": "Standard"
+    },
+    "dateTime": {
+      "insert": "Einfügen",
+      "update": "Aktualisieren",
+      "edit": "Datum/Uhrzeit bearbeiten",
+      "modes": {
+        "date": "Datum",
+        "time": "Uhrzeit",
+        "datetime": "Datum & Uhrzeit"
+      }
+    }
+  }
+}

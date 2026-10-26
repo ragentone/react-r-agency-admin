@@ -1,0 +1,124 @@
+{
+  "title": "Freunde",
+  "subtitle_one": "{{count}} Freund",
+  "subtitle_other": "{{count}} Freunde",
+  "online": "Online",
+  "menu": {
+    "label": "Freunde",
+    "description": "Freunde, Anfragen und Blockierungen"
+  },
+  "tabs": {
+    "accepted": "Freunde",
+    "incoming": "Anfragen",
+    "outgoing": "Gesendet",
+    "blocked": "Blockiert",
+    "manage": "Verwalten"
+  },
+  "state": {
+    "outgoing": "Angefragt",
+    "friends": "Freunde",
+    "outgoingMenu": "Anfrage gesendet – Optionen",
+    "friendsMenu": "Ihr seid Freunde – Optionen"
+  },
+  "actions": {
+    "message": "Nachricht",
+    "messageWith": "Nachricht an @{{name}}",
+    "add": "Hinzufügen",
+    "accept": "Annehmen",
+    "reject": "Ablehnen",
+    "cancel": "Anfrage zurückziehen",
+    "cancelShort": "Zurückziehen",
+    "remove": "Freundschaft beenden",
+    "block": "@{{name}} blockieren",
+    "unblock": "Freigeben",
+    "more": "Weitere Aktionen",
+    "profile": "Profil ansehen",
+    "retry": "Erneut versuchen",
+    "back": "Abbrechen",
+    "close": "Schließen",
+    "acceptShort": "Annehmen",
+    "discover": "Menschen suchen",
+    "undo": "Rückgängig",
+    "showAll": "Alle anzeigen",
+    "showLess": "Weniger",
+    "loadMore": "Mehr laden",
+    "clearFilter": "Filter löschen",
+    "discoverShort": "Suchen",
+    "videoCall": "Videoanruf",
+    "voiceCall": "Sprachanruf",
+    "videoCallWith": "Videoanruf mit @{{name}}"
+  },
+  "since": {
+    "accepted": "seit {{date}}",
+    "incoming": "angefragt {{date}}",
+    "outgoing": "gesendet {{date}}",
+    "blocked": "blockiert"
+  },
+  "confirm": {
+    "remove": {
+      "title": "Freundschaft mit @{{name}} beenden?",
+      "text": "Ihr seid danach keine Freunde mehr. Du kannst jederzeit eine neue Anfrage senden.",
+      "action": "Beenden"
+    },
+    "block": {
+      "title": "@{{name}} blockieren?",
+      "text": "@{{name}} kann dir keine Anfragen mehr senden. Eine bestehende Freundschaft endet. Du kannst die Blockierung jederzeit aufheben.",
+      "action": "Blockieren"
+    },
+    "cancel": {
+      "title": "Anfrage zurückziehen?",
+      "text": "@{{name}} sieht deine Anfrage dann nicht mehr.",
+      "action": "Zurückziehen"
+    }
+  },
+  "toast": {
+    "accepted": "Du und @{{name}} seid jetzt Freunde",
+    "rejected": "Anfrage von @{{name}} abgelehnt",
+    "canceled": "Anfrage an @{{name}} zurückgezogen",
+    "removed": "Freundschaft mit @{{name}} beendet",
+    "blocked": "@{{name}} blockiert",
+    "unblocked": "@{{name}} freigegeben",
+    "requested": "Anfrage an @{{name}} gesendet"
+  },
+  "empty": {
+    "accepted": {
+      "title": "Noch keine Freunde",
+      "text": "Besuche Profile und sende Freundschaftsanfragen – angenommene Anfragen erscheinen hier.",
+      "action": "Menschen entdecken"
+    },
+    "incoming": {
+      "title": "Keine offenen Anfragen",
+      "text": "Wenn dir jemand eine Freundschaftsanfrage sendet, siehst du sie hier."
+    },
+    "outgoing": {
+      "title": "Keine gesendeten Anfragen",
+      "text": "Anfragen, die du verschickt hast und die noch offen sind, erscheinen hier."
+    },
+    "blocked": {
+      "title": "Niemand blockiert",
+      "text": "Blockierte Nutzer können dir keine Anfragen senden."
+    }
+  },
+  "errors": {
+    "failed": "Das hat nicht geklappt. Bitte versuche es erneut.",
+    "loadTitle": "Liste konnte nicht geladen werden",
+    "loadText": "Prüfe deine Verbindung und versuche es erneut."
+  },
+  "sections": {
+    "requests": "Anfragen",
+    "friends": "Deine Freunde",
+    "manage": "Verwalten",
+    "outgoing": "Gesendete Anfragen",
+    "outgoingHint_one": "{{count}} offen",
+    "outgoingHint_other": "{{count}} offen",
+    "blocked": "Blockierte Nutzer",
+    "blockedHint_one": "{{count}} blockiert",
+    "blockedHint_other": "{{count}} blockiert"
+  },
+  "onlineCount_one": "{{count}} online",
+  "onlineCount_other": "{{count}} online",
+  "filterPlaceholder": "Freunde filtern",
+  "filterEmpty": "Keine Freunde mit „{{term}}“",
+  "subtitleWithRequests_one": "{{count}} Freund · {{requests}} offen",
+  "subtitleWithRequests_other": "{{count}} Freunde · {{requests}} offen"
+}

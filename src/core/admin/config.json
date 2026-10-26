@@ -1,0 +1,6 @@
+{
+  "active": true,
+  "name": "core-admin",
+  "entries": ["core.tsx"],
+  "sortOrder": 0
+}

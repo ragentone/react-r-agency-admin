@@ -1,0 +1,19 @@
+{
+  "title": "Cookie Settings",
+  "description": "We use cookies and similar technologies to provide you with an optimal website experience and continuously improve our services.",
+  "essential": {
+    "title": "Essential Cookies",
+    "description": "These cookies are required for the basic operation of the website and cannot be deactivated."
+  },
+  "analytics": {
+    "title": "Analytics & Personalization",
+    "description": "Help us understand how visitors interact with the website in order to optimize user experience."
+  },
+  "actions": {
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject non-essential",
+    "manage": "Settings"
+  },
+  "privacyPolicy": "Privacy Policy",
+  "imprint": "Legal Notice"
+}

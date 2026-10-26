@@ -1,0 +1,14 @@
+{
+  "datetime": {
+    "previous": "Назад",
+    "next": "Вперёд",
+    "chooseMonth": "Выбрать месяц",
+    "chooseYear": "Выбрать год",
+    "chooseDay": "Выбрать день",
+    "hours": "Часы",
+    "minutes": "Минуты",
+    "period": "Время суток",
+    "today": "Сегодня",
+    "now": "Сейчас"
+  }
+}

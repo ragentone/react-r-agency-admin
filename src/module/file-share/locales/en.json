@@ -1,0 +1,132 @@
+{
+  "title": "Downloads",
+  "upload": "Upload",
+  "retry": "Try again",
+  "login": "Sign in",
+  "count_one": "{{count}} file",
+  "count_other": "{{count}} files",
+  "restricted_one": "{{count}} more file is only visible to signed-in users.",
+  "restricted_other": "{{count}} more files are only visible to signed-in users.",
+  "uploaded": "File uploaded",
+  "saved": "Changes saved",
+  "deleted": "File deleted",
+  "menu": {
+    "label": "Downloads",
+    "description": "Files to download"
+  },
+  "search": {
+    "placeholder": "Search files",
+    "empty": "No file matches your search."
+  },
+  "filter": {
+    "label": "Visibility",
+    "all": "All",
+    "public": "Public",
+    "authenticated": "Signed in only",
+    "private": "Private"
+  },
+  "empty": {
+    "title": "No files yet",
+    "description": "Files will show up here as soon as they are shared.",
+    "admin": "Upload the first file and decide who may see it."
+  },
+  "item": {
+    "more": "Show more",
+    "less": "Show less",
+    "download": "Download “{{title}}”",
+    "edit": "Edit “{{title}}”"
+  },
+  "visibility": {
+    "public": {
+      "label": "Public",
+      "hint": "Everyone can see and download the file – no sign-in needed.",
+      "short": "Public"
+    },
+    "authenticated": {
+      "label": "Signed-in users only",
+      "hint": "Only visible and downloadable when signed in.",
+      "short": "Signed in only"
+    },
+    "private": {
+      "label": "Private",
+      "hint": "Only admins can see it – hidden from everyone else. Share links still work.",
+      "short": "Private"
+    }
+  },
+  "form": {
+    "createTitle": "Upload file",
+    "editTitle": "Edit file",
+    "description": "Set file, title, description and visibility.",
+    "cancel": "Cancel",
+    "save": "Save",
+    "upload": "Upload",
+    "uploading": "Uploading …",
+    "file": "File",
+    "filePick": "Choose a file",
+    "fileHint": "Tap or drop it here · max. {{max}}",
+    "fileChange": "Change",
+    "fileReplace": "Replace",
+    "fileNew": "new",
+    "fileRequired": "Please choose a file.",
+    "title": "Title",
+    "titleRequired": "Please enter a title.",
+    "titlePlaceholder": "e.g. Price list 2026",
+    "descriptionLabel": "Description (optional)",
+    "descriptionPlaceholder": "What is this file about?",
+    "visibility": "Who may see and download the file?",
+    "tooLong": "At most {{max}} characters."
+  },
+  "delete": {
+    "action": "Delete file",
+    "title": "Delete file?",
+    "description": "“{{title}}” will be deleted for good and can't be downloaded anymore.",
+    "confirm": "Delete"
+  },
+  "error": {
+    "load": "The files couldn't be loaded.",
+    "save": "That didn't work. Please try again.",
+    "tooLarge": "The file is too large (max. {{max}}).",
+    "empty": "The file is empty.",
+    "type": "This file type isn't allowed.",
+    "notAuthorized": "You don't have permission for this.",
+    "notFound": "This file doesn't exist anymore."
+  },
+  "share": {
+    "title": "Share link",
+    "hint": "Anyone with the link can download the file – no sign-in needed, regardless of visibility.",
+    "activeHint": "Active: anyone with this link can download the file.",
+    "create": "Create share link",
+    "copy": "Copy link",
+    "share": "Share link",
+    "copyFailed": "The link couldn't be copied.",
+    "renew": "New link",
+    "revoke": "Deactivate",
+    "revoked": "Share link deactivated",
+    "chip": "Link active",
+    "confirm": {
+      "renew": "A new link will be created. The current link will stop working.",
+      "revoke": "The link will be deactivated and stop working."
+    }
+  },
+  "link": {
+    "kicker": "Shared with you",
+    "download": "Download · {{size}}",
+    "all": "All downloads",
+    "invalidTitle": "Invalid link",
+    "invalidDescription": "This link has expired or was deactivated. Ask the person who sent it for a new one."
+  },
+  "block": {
+    "latest": {
+      "label": "Downloads",
+      "description": "Newest files to download",
+      "defaultTitle": "Downloads",
+      "titleField": "Heading",
+      "limitField": "Number",
+      "descriptionField": "Show description",
+      "empty": "No files yet.",
+      "download": "Download {{title}}",
+      "locked": "Signed-in users only",
+      "more": "All downloads"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "title": "AI Assistant",
+  "subtitle": "Real-time streaming chatbot",
+  "placeholder": "Ask something or type a message...",
+  "clear": "Clear",
+  "clearTitle": "Clear chat",
+  "scrollToBottom": "Scroll to bottom",
+  "send": "Send",
+  "sending": "Sending...",
+  "enterToSend": "send",
+  "shiftEnterForNewLine": "new line",
+  "user": "You",
+  "assistant": "Assistant",
+  "generating": "generating...",
+  "noResponse": "No response",
+  "requestFailed": "Request to OpenRouter failed",
+  "errorLoading": "Error loading response",
+  "submit": "Submit",
+  "yourAnswer": "Your answer...",
+  "answersSubmitted": "Answers submitted",
+  "systemPrompt": "You are a helpful and concise AI assistant.",
+  "empty": {
+    "title": "How can I help you today?",
+    "description": "Ask questions, get code explanations, or start any conversation via OpenRouter.",
+    "suggestions": {
+      "reactHooks": "Explain React hooks quickly and concisely",
+      "codingPoem": "Write a short poem about coding",
+      "tailwindBenefits": "What are the benefits of Tailwind CSS?",
+      "restApi": "Help me design a REST API"
+    }
+  }
+}

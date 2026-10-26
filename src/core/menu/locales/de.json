@@ -1,0 +1,56 @@
+{
+  "label": "Hauptmenü",
+  "description": "Alle Bereiche der App",
+  "sections": {
+    "main": "Entdecken",
+    "apps": "Apps",
+    "account": "User"
+  },
+  "items": {
+    "user": "Mein Bereich",
+    "userDescription": "Profil, Freunde und Account",
+    "administration": "Administration",
+    "administrationDescription": "Developer, Rollen und Seiten",
+    "home": "Start",
+    "profile": "Profil",
+    "profileDescription": "Deine Beiträge und Infos",
+    "account": "Account",
+    "accountDescription": "Konto, Passwort und Privatsphäre",
+    "login": "Anmelden",
+    "loginDescription": "Einloggen oder registrieren",
+    "logout": "Abmelden",
+    "logoutDescription": "Von diesem Gerät abmelden"
+  },
+  "open": "Menü öffnen",
+  "close": "Menü schließen",
+  "settings": {
+    "attention": "Neuer Hinweis in den Einstellungen",
+    "quick": "Schnelleinstellungen",
+    "description": "Sprache und Darstellung",
+    "close": "Einstellungen schließen",
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "theme": "Darstellung",
+    "themes": {
+      "light": "Hell",
+      "dark": "Dunkel",
+      "system": "System"
+    }
+  },
+  "dock": "Schnellzugriff",
+  "group": {
+    "back": "Zurück zum Hauptmenü",
+    "expand": "{{label}} aufklappen",
+    "collapse": "{{label}} zuklappen"
+  },
+  "dockMenu": {
+    "label": "Schnellmenü"
+  },
+  "apps": {
+    "description": "Alle Anwendungen",
+    "empty": "Keine Apps verfügbar"
+  },
+  "sheet": {
+    "close": "{{label}} schließen"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "settings": {
+    "label": "Push-Benachrichtigungen",
+    "on": "An",
+    "off": "Aus",
+    "denied": "Im Browser blockiert",
+    "deniedHint": "Benachrichtigungen sind für diese Seite blockiert – erlaube sie in den Browser-Einstellungen."
+  },
+  "hint": {
+    "title": "Benachrichtigungen aktivieren",
+    "text": "Erfahre sofort von neuen Nachrichten – auch wenn die App geschlossen ist.",
+    "enable": "Aktivieren",
+    "dismiss": "Ausblenden"
+  },
+  "result": {
+    "on": "Push-Benachrichtigungen sind aktiv",
+    "denied": "Benachrichtigungen wurden blockiert",
+    "failed": "Push-Benachrichtigungen konnten nicht aktiviert werden"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "title": "KI-Assistent",
+  "subtitle": "Echtzeit-Streaming Chatbot",
+  "placeholder": "Frage etwas oder schreibe eine Nachricht...",
+  "clear": "Leeren",
+  "clearTitle": "Chat leeren",
+  "scrollToBottom": "Nach unten",
+  "send": "Senden",
+  "sending": "Sendet...",
+  "enterToSend": "senden",
+  "shiftEnterForNewLine": "Zeilenumbruch",
+  "user": "Du",
+  "assistant": "Assistent",
+  "generating": "generiert...",
+  "noResponse": "Keine Antwort",
+  "requestFailed": "Anfrage an OpenRouter fehlgeschlagen",
+  "errorLoading": "Fehler beim Laden der Antwort",
+  "submit": "Absenden",
+  "yourAnswer": "Deine Antwort...",
+  "answersSubmitted": "Antworten übermittelt",
+  "systemPrompt": "Du bist ein hilfsbereiter und präziser KI-Assistent.",
+  "empty": {
+    "title": "Wie kann ich dir heute helfen?",
+    "description": "Stelle Fragen, lasse dir Code erklären oder starte ein beliebiges Gespräch über OpenRouter.",
+    "suggestions": {
+      "reactHooks": "Erkläre mir React Hooks kurz & knackig",
+      "codingPoem": "Schreibe ein kurzes Gedicht über Coding",
+      "tailwindBenefits": "Was sind die Vorteile von Tailwind CSS?",
+      "restApi": "Hilf mir beim Entwerfen einer REST API"
+    }
+  }
+}

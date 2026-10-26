@@ -1,0 +1,11 @@
+{
+  "color": {
+    "palette": "Color palette",
+    "recent": "Recently used",
+    "custom": "Custom color",
+    "eyeDropper": "Pick color from screen",
+    "saturation": "Saturation and brightness",
+    "hue": "Hue",
+    "hex": "Hex color"
+  }
+}

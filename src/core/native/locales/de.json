@@ -1,0 +1,10 @@
+{
+  "loaded": {
+    "title": "r-agency ist bereit",
+    "body": "Die App wurde geladen ({{platform}})."
+  },
+  "button": {
+    "reload": "Neu laden",
+    "reloadDescription": "App neu starten"
+  }
+}

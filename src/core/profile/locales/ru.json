@@ -1,0 +1,66 @@
+{
+  "title": "Профиль",
+  "back": "Назад",
+  "close": "Закрыть",
+  "actions": {
+    "editProfile": "Редактировать профиль",
+    "retry": "Повторить",
+    "toHome": "На главную"
+  },
+  "meta": {
+    "joined": "С нами с {{date}}",
+    "birthday": "Дата рождения: {{date}}",
+    "lastSeen": "Был(а) в сети {{date}}",
+    "online": "В сети",
+    "email": "Эл. почта"
+  },
+  "badge": {
+    "own": "Вы",
+    "public": "Открытый",
+    "private": "Закрытый"
+  },
+  "relation": {
+    "accepted": "В контактах",
+    "pendingOut": "Запрос отправлен",
+    "pendingIn": "Хочет добавить вас",
+    "blocked": "Заблокирован"
+  },
+  "states": {
+    "loading": "Загрузка профиля …",
+    "notFound": "Такого профиля нет",
+    "notFoundHint": "Возможно, ссылка неверна или аккаунт удалён.",
+    "private": "Это закрытый профиль",
+    "privateHint": "Профиль видят только контакты пользователя.",
+    "error": "Не удалось загрузить профиль"
+  },
+  "sections": {
+    "about": "О себе",
+    "info": "Информация"
+  },
+  "info": {
+    "alias": "Имя пользователя",
+    "fullName": "Имя",
+    "gender": "Пол",
+    "birthday": "День рождения",
+    "age_one": "{{count}} год",
+    "age_few": "{{count}} года",
+    "age_many": "{{count}} лет",
+    "age_other": "{{count}} года",
+    "email": "Эл. почта",
+    "userType": "Тип аккаунта",
+    "visibility": "Видимость",
+    "memberSince": "Участник с",
+    "lastActive": "Последняя активность",
+    "never": "Никогда"
+  },
+  "gender": {
+    "male": "Мужской",
+    "female": "Женский",
+    "diverse": "Другой"
+  },
+  "userType": {
+    "user": "Пользователь",
+    "standard": "Стандарт",
+    "admin": "Администратор"
+  }
+}

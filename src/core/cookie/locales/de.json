@@ -1,0 +1,19 @@
+{
+  "title": "Cookie-Einstellungen",
+  "description": "Wir verwenden Cookies und ähnliche Technologien, um Ihnen ein optimales Webseiten-Erlebnis zu bieten und unsere Dienste stetig zu verbessern.",
+  "essential": {
+    "title": "Notwendige Cookies",
+    "description": "Diese Cookies sind für den grundlegenden Betrieb der Website erforderlich und können nicht deaktiviert werden."
+  },
+  "analytics": {
+    "title": "Analyse & Personalisierung",
+    "description": "Helfen uns zu verstehen, wie Besucher mit der Website interagieren, um die Benutzerfreundlichkeit zu optimieren."
+  },
+  "actions": {
+    "acceptAll": "Alle akzeptieren",
+    "rejectAll": "Nur essenzielle akzeptieren",
+    "manage": "Einstellungen"
+  },
+  "privacyPolicy": "Datenschutzerklärung",
+  "imprint": "Impressum"
+}

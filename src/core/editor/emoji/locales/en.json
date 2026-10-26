@@ -1,0 +1,28 @@
+{
+  "emoji": {
+    "search": "Search emoji …",
+    "searchResults": "Search results",
+    "noResults": "No emoji found",
+    "pick": "Pick an emoji",
+    "skinTone": "Skin tone",
+    "skins": {
+      "0": "Default",
+      "1": "Light",
+      "2": "Medium-light",
+      "3": "Medium",
+      "4": "Medium-dark",
+      "5": "Dark"
+    },
+    "categories": {
+      "recent": "Recently used",
+      "people": "Smileys & People",
+      "nature": "Animals & Nature",
+      "foods": "Food & Drink",
+      "activity": "Activities",
+      "places": "Travel & Places",
+      "objects": "Objects",
+      "symbols": "Symbols",
+      "flags": "Flags"
+    }
+  }
+}

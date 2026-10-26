@@ -1,0 +1,395 @@
+import { CoreVariables } from '@core/core.variables.ts';
+import { type ClientPlatform, useClientPlatform } from '@core/native';
+import { getProfilePath } from '@core/profile/const.ts';
+import { Link } from '@tanstack/react-router';
+import { cn } from '@ui/lib';
+import { Avatar, AvatarFallback, AvatarImage } from '@ui/shad-cn/components/avatar.tsx';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowRight, Globe, Hand, Laptop, type LucideIcon, Smartphone } from 'lucide-react';
+import { type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { useAuth } from '../use.auth.ts';
+import {
+  formatRelativeTime,
+  getGreetingSlot,
+  getUserDisplayName,
+  GREETING_SLOT_ICONS,
+  pickGreetingVariant,
+  toGreetingDate,
+  useGreetingNow,
+} from './greeting.utils.ts';
+import { GreetingDate } from './GreetingDate.tsx';
+
+export interface IUserGreetingProps {
+  /** `card` = hero card, `inline` = without frame, `compact` = one line (lists / headers). */
+  variant?: 'card' | 'inline' | 'compact';
+  className?: string;
+  showAvatar?: boolean;
+  /** Date chip + sky arc with sun / moon. */
+  showDate?: boolean;
+  /** "Last active …" from `userMeta.lastLogin`. */
+  showLastLogin?: boolean;
+  /** Chip with the current platform (Android / iOS / macOS app, fallback: web). */
+  showPlatform?: boolean;
+  /** Overrides the name (default: alias → e-mail prefix). */
+  name?: string;
+  /** Extra content below the greeting (buttons, stats …). */
+  children?: ReactNode;
+}
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+const PLATFORM_ICONS: Record<ClientPlatform, LucideIcon> = {
+  android: Smartphone,
+  ios: Smartphone,
+  macos: Laptop,
+  web: Globe,
+};
+
+/** Small chip: on which platform the app is running right now. */
+const PlatformChip = ({
+  platform,
+  name,
+  label,
+}: {
+  platform: ClientPlatform;
+  name: string;
+  label: string;
+}) => {
+  const Icon = PLATFORM_ICONS[platform];
+  return (
+    <span
+      title={label}
+      aria-label={label}
+      className={
+        'inline-flex items-center gap-1.5 rounded-full py-0.5 text-caption text-muted-foreground'
+      }
+    >
+      <Icon aria-hidden className={'size-3.5'} strokeWidth={2} />
+      <span aria-hidden>{name}</span>
+    </span>
+  );
+};
+
+/** Grain texture (inline SVG) – gives the flat card some depth. */
+const NOISE =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
+
+const WavingHand = ({ animate }: { animate: boolean }) => (
+  <motion.span
+    aria-hidden
+    className={'inline-flex shrink-0 origin-[30%_85%] self-center'}
+    initial={false}
+    animate={animate ? { rotate: [0, 18, -8, 18, -4, 12, 0] } : undefined}
+    transition={{ duration: 1.6, delay: 0.9, ease: 'easeInOut' }}
+  >
+    <Hand className={'size-7 -scale-x-100 text-foreground/70 sm:size-8'} strokeWidth={2} />
+  </motion.span>
+);
+
+/** Avatar with a slowly rotating monochrome ring ("story ring") and the daytime badge. */
+const GreetingAvatar = ({
+  userId,
+  name,
+  src,
+  compact,
+  badge,
+  label,
+}: {
+  userId: string;
+  name: string;
+  src?: string | null;
+  compact?: boolean;
+  badge: ReactNode;
+  label: string;
+}) => {
+  const reduceMotion = useReducedMotion();
+  return (
+    <Link
+      to={getProfilePath(userId) as '/'}
+      aria-label={label}
+      className={
+        'group relative grid shrink-0 place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+      }
+    >
+      {!compact && (
+        <motion.span
+          aria-hidden
+          className={
+            'absolute -inset-[3px] rounded-full bg-[conic-gradient(from_0deg,var(--color-foreground),transparent_35%,transparent_60%,var(--color-foreground))] opacity-80'
+          }
+          animate={reduceMotion ? undefined : { rotate: 360 }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+        />
+      )}
+      <Avatar
+        className={cn(
+          'relative ring-[3px] ring-background transition-transform duration-300 group-hover:scale-[1.04]',
+          compact ? 'size-9 ring-0' : 'size-16 sm:size-[72px]'
+        )}
+      >
+        {src && <AvatarImage src={src} alt={name} className={'object-cover'} />}
+        <AvatarFallback
+          className={cn(
+            'bg-foreground font-extrabold uppercase text-background',
+            compact ? 'text-body' : 'text-display'
+          )}
+        >
+          {name.slice(0, 1)}
+        </AvatarFallback>
+      </Avatar>
+      <span
+        className={cn(
+          'absolute grid place-items-center rounded-full bg-foreground text-background ring-[3px] ring-background',
+          compact ? '-bottom-0.5 -right-0.5 size-4 ring-2' : '-bottom-1 -right-1 size-7'
+        )}
+      >
+        {badge}
+      </span>
+    </Link>
+  );
+};
+
+/**
+ * Personal greeting of the logged-in user – daytime aware ("Guten Morgen, Anna"),
+ * avatar with ring, last activity and below that the date chip + sky arc with the sun / moon.
+ * Guests get a welcome + login call to action.
+ */
+const UserGreeting = ({
+  variant = 'inline',
+  className,
+  showAvatar = true,
+  showDate = true,
+  showLastLogin = true,
+  showPlatform = true,
+  name: nameOverride,
+  children,
+}: IUserGreetingProps) => {
+  const { t, i18n } = useTranslation('auth');
+  const { userMeta, authorized, loaded } = useAuth();
+  const reduceMotion = useReducedMotion();
+  const now = useGreetingNow();
+  const platform = useClientPlatform();
+  const platformName = t(`greeting.platform.${platform}`);
+
+  const locale = i18n.resolvedLanguage ?? i18n.language ?? 'en';
+  const slot = getGreetingSlot(now.getHours());
+  const SlotIcon = GREETING_SLOT_ICONS[slot];
+  const isUser = Boolean(authorized && userMeta?.id);
+  const name = nameOverride ?? getUserDisplayName(userMeta?.alias, userMeta?.email);
+
+  const lastLogin = toGreetingDate(userMeta?.lastLogin);
+  const lastLoginText =
+    showLastLogin && isUser && lastLogin
+      ? t('greeting.lastLogin', { time: formatRelativeTime(lastLogin, now, locale) })
+      : null;
+
+  const greeting = isUser
+    ? t(`greeting.slots.${slot}.${pickGreetingVariant(now, slot)}`)
+    : t('greeting.guest.title');
+  const subline = isUser ? t(`greeting.subline.${slot}`) : t('greeting.guest.text');
+
+  // ---------------------------------------------------------------- loading
+  if (!loaded) {
+    return (
+      <div
+        aria-hidden
+        className={cn(
+          'flex items-center gap-4',
+          variant === 'card' && 'rounded-[28px] border border-border/50 p-5 sm:p-6',
+          className
+        )}
+      >
+        {showAvatar && (
+          <span
+            className={cn(
+              'shrink-0 animate-pulse rounded-full bg-foreground/[0.08]',
+              variant === 'compact' ? 'size-9' : 'size-16'
+            )}
+          />
+        )}
+        <span className={'flex flex-1 flex-col gap-2.5'}>
+          <span className={'h-3 w-28 animate-pulse rounded-full bg-foreground/[0.08]'} />
+          {variant !== 'compact' && (
+            <span className={'h-7 w-52 animate-pulse rounded-full bg-foreground/[0.08]'} />
+          )}
+        </span>
+      </div>
+    );
+  }
+
+  const avatar =
+    showAvatar && isUser && userMeta?.id ? (
+      <GreetingAvatar
+        userId={userMeta.id}
+        name={name}
+        src={userMeta.avatarUrl}
+        compact={variant === 'compact'}
+        label={t('greeting.profile')}
+        badge={
+          <SlotIcon className={variant === 'compact' ? 'size-2.5' : 'size-3.5'} strokeWidth={2.5} />
+        }
+      />
+    ) : null;
+
+  // ---------------------------------------------------------------- compact
+  if (variant === 'compact') {
+    return (
+      <div className={cn('flex min-w-0 items-center gap-3', className)}>
+        {avatar}
+        <p className={'min-w-0 truncate text-body'}>
+          <span className={'text-muted-foreground'}>{greeting}</span>
+          {isUser && (
+            <>
+              {', '}
+              <span className={'font-semibold text-foreground'}>{name}</span>
+            </>
+          )}
+        </p>
+      </div>
+    );
+  }
+
+  const enter = (delay: number) =>
+    reduceMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 12, filter: 'blur(6px)' },
+          animate: { opacity: 1, y: 0, filter: 'blur(0px)' },
+          transition: { delay, duration: 0.55, ease: EASE },
+        };
+
+  const greetingWords = greeting.split(' ');
+  const isCard = variant === 'card';
+
+  return (
+    <section
+      aria-label={t('greeting.label')}
+      className={cn(
+        'relative isolate overflow-hidden',
+        isCard &&
+          'rounded-[28px] border border-border/50 bg-background p-5 shadow-[0_1px_0_0_var(--color-border),0_24px_48px_-32px_rgb(0_0_0/0.25)] sm:p-7',
+        className
+      )}
+    >
+      {isCard && (
+        <>
+          {/* Subtle top light + grain for depth (monochrome). */}
+          <div
+            aria-hidden
+            className={
+              'pointer-events-none absolute inset-x-0 top-0 -z-10 h-40 bg-linear-to-b from-foreground/[0.045] to-transparent'
+            }
+          />
+          <div
+            aria-hidden
+            className={
+              'pointer-events-none absolute inset-0 -z-10 opacity-[0.035] mix-blend-multiply dark:mix-blend-screen'
+            }
+            style={{ backgroundImage: NOISE }}
+          />
+        </>
+      )}
+
+      {/* Greeting */}
+      <div className={'flex items-center gap-4 sm:gap-5'}>
+        {avatar && <motion.div {...enter(0)}>{avatar}</motion.div>}
+        <div className={'min-w-0 flex-1'}>
+          <p className={'text-title text-muted-foreground'}>
+            {greetingWords.map((word, i) => (
+              <motion.span
+                key={`${word}-${i}`}
+                className={'inline-block'}
+                {...enter(0.14 + i * 0.06)}
+              >
+                {word}
+                {i < greetingWords.length - 1 ? ' ' : isUser ? ',' : ''}
+              </motion.span>
+            ))}
+          </p>
+          <motion.h2
+            {...enter(0.24 + greetingWords.length * 0.06)}
+            className={
+              'flex min-w-0 items-center gap-2 text-[clamp(1.75rem,7vw,2.5rem)] leading-[1.1] font-extrabold tracking-[-0.03em]'
+            }
+          >
+            <span
+              className={
+                'truncate bg-linear-to-br from-foreground via-foreground to-foreground/45 bg-clip-text pb-1 text-transparent'
+              }
+            >
+              {isUser ? name : (CoreVariables.headerTitle ?? t('greeting.guest.fallbackTitle'))}
+            </span>
+            {isUser && <WavingHand animate={!reduceMotion} />}
+          </motion.h2>
+        </div>
+      </div>
+
+      {/* Subline + last activity */}
+      <motion.div
+        {...enter(0.4)}
+        className={cn('mt-4 flex flex-col gap-2', isCard && 'border-t border-border/50 pt-4')}
+      >
+        <p className={'text-body text-pretty text-muted-foreground'}>{subline}</p>
+        {(lastLoginText || showPlatform) && (
+          <div className={'flex flex-wrap items-center gap-x-3 gap-y-2'}>
+            {showPlatform && (
+              <PlatformChip
+                platform={platform}
+                name={platformName}
+                label={t('greeting.platform.label', { platform: platformName })}
+              />
+            )}
+            {lastLoginText && (
+              <p className={'inline-flex items-center gap-2 text-caption text-muted-foreground'}>
+                <span className={'relative flex size-2'}>
+                  <span
+                    className={
+                      'absolute inset-0 rounded-full bg-foreground/40 motion-safe:animate-ping'
+                    }
+                  />
+                  <span className={'relative size-2 rounded-full bg-foreground'} />
+                </span>
+                {lastLoginText}
+              </p>
+            )}
+          </div>
+        )}
+      </motion.div>
+
+      {/* Below the user infos: date chip · sky arc */}
+      {showDate && (
+        <GreetingDate now={now} locale={locale} slot={slot} delay={0.46} className={'mt-5'} />
+      )}
+
+      {!isUser && (
+        <motion.div {...enter(0.48)} className={'mt-5'}>
+          <Link
+            to={CoreVariables.routePathAuth as '/'}
+            className={
+              'group inline-flex h-11 items-center gap-2 rounded-full bg-foreground pr-4 pl-5 text-body font-bold text-background outline-none transition-[opacity,transform] hover:opacity-90 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'
+            }
+          >
+            {t('greeting.guest.cta')}
+            <span
+              className={
+                'grid size-6 place-items-center rounded-full bg-background/15 transition-transform group-hover:translate-x-0.5'
+              }
+            >
+              <ArrowRight className={'size-3.5'} />
+            </span>
+          </Link>
+        </motion.div>
+      )}
+
+      {children && (
+        <motion.div {...enter(0.5)} className={'mt-5'}>
+          {children}
+        </motion.div>
+      )}
+    </section>
+  );
+};
+
+export { UserGreeting };

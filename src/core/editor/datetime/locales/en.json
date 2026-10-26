@@ -1,0 +1,14 @@
+{
+  "datetime": {
+    "previous": "Previous",
+    "next": "Next",
+    "chooseMonth": "Choose month",
+    "chooseYear": "Choose year",
+    "chooseDay": "Choose day",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "period": "AM/PM",
+    "today": "Today",
+    "now": "Now"
+  }
+}

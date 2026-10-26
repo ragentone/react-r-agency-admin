@@ -1,0 +1,14 @@
+{
+  "datetime": {
+    "previous": "Zurück",
+    "next": "Weiter",
+    "chooseMonth": "Monat auswählen",
+    "chooseYear": "Jahr auswählen",
+    "chooseDay": "Tag auswählen",
+    "hours": "Stunden",
+    "minutes": "Minuten",
+    "period": "Tageszeit",
+    "today": "Heute",
+    "now": "Jetzt"
+  }
+}

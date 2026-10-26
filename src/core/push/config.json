@@ -1,0 +1,6 @@
+{
+  "active": true,
+  "name": "core-push",
+  "entries": ["core.tsx"],
+  "sortOrder": 8
+}

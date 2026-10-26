@@ -1,0 +1,4 @@
+{
+  "$schema": "./vite/import/build.config.schema.json",
+  "disabled": []
+}

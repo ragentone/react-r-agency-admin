@@ -1,0 +1,101 @@
+{
+  "title": "Notifications",
+  "subtitle_one": "{{count}} unread",
+  "subtitle_other": "{{count}} unread",
+  "subtitleNone": "All caught up",
+  "unread": "Unread",
+  "end": "That's all",
+  "menu": {
+    "label": "Notifications",
+    "description": "Requests and news for you"
+  },
+  "tabs": {
+    "all": "All",
+    "unread": "Unread"
+  },
+  "time": {
+    "now": "now"
+  },
+  "actions": {
+    "markRead": "Mark as read",
+    "markAllRead": "Mark all as read",
+    "markAllReadShort": "Read all",
+    "delete": "Delete",
+    "clearAll": "Delete all",
+    "close": "Close",
+    "more": "More options",
+    "undo": "Undo",
+    "retry": "Try again",
+    "back": "Cancel",
+    "profile": "@{{name}}'s profile",
+    "dismiss": "Dismiss"
+  },
+  "confirm": {
+    "clear": {
+      "title": "Delete all notifications?",
+      "text": "Your notifications will be removed for good. Open requests stay.",
+      "action": "Delete all"
+    }
+  },
+  "toast": {
+    "deleted": "Notification deleted",
+    "cleared": "All notifications deleted",
+    "openActions": "Tap to respond",
+    "stale": "This request is no longer open"
+  },
+  "errors": {
+    "action": "That didn't work. Please try again.",
+    "loadTitle": "Couldn't load notifications",
+    "loadText": "Check your connection and try again."
+  },
+  "empty": {
+    "all": {
+      "title": "Nothing to see here – yet",
+      "text": "Friend requests and news show up here – live, as they happen."
+    },
+    "unread": {
+      "title": "All caught up",
+      "text": "You're up to date."
+    }
+  },
+  "default": {
+    "button": {
+      "accept": "Accept",
+      "reject": "Decline",
+      "block": "Block",
+      "confirm": "Confirm",
+      "sessions": "View devices",
+      "passkey": "Set up passkey"
+    }
+  },
+  "user_relation_request_notify_title": "New friend request",
+  "user_relation_request_notify_message": "@{{name}} wants to be your friend.",
+  "user_relation_accepted_notify_title": "Request accepted",
+  "user_relation_accepted_notify_message": "You and @{{name}} are now friends.",
+  "user_relation_rejected_notify_title": "Request declined",
+  "user_relation_rejected_notify_message": "@{{name}} declined your friend request.",
+  "user_relation_canceled_notify_title": "Friendship ended",
+  "user_relation_canceled_notify_message": "@{{name}} ended the friendship.",
+  "user_notify_not_removable": "This notification can't be deleted",
+  "user_notify_invalid_target": "Notification recipient missing",
+  "user_notify_invalid_message": "The notification has no text",
+  "notify_invalid_identifier_request": "Invalid request",
+  "system": {
+    "title": "Never miss a notification",
+    "textApp": "Get notifications on this device, even while the app runs in the background.",
+    "textBrowser": "Get browser notifications while this tab is in the background.",
+    "enable": "Turn on",
+    "dismiss": "Not now",
+    "enabled": "Notifications are turned on",
+    "deniedApp": "Notifications are blocked. You can allow them for r-agency in your system settings.",
+    "deniedBrowser": "Notifications are blocked in your browser. Allow them in the site settings."
+  },
+  "activity": {
+    "label": "Running activities"
+  },
+  "settings": {
+    "soundLabel": "Notification sound",
+    "on": "On",
+    "off": "Off"
+  }
+}

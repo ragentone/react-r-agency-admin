@@ -1,0 +1,64 @@
+{
+  "title": "Profil",
+  "back": "Zurück",
+  "close": "Schließen",
+  "actions": {
+    "editProfile": "Profil bearbeiten",
+    "retry": "Erneut versuchen",
+    "toHome": "Zur Startseite"
+  },
+  "meta": {
+    "joined": "Dabei seit {{date}}",
+    "birthday": "Geboren am {{date}}",
+    "lastSeen": "Zuletzt aktiv {{date}}",
+    "online": "Online",
+    "email": "E-Mail"
+  },
+  "badge": {
+    "own": "Du",
+    "public": "Öffentlich",
+    "private": "Privat"
+  },
+  "relation": {
+    "accepted": "Verbunden",
+    "pendingOut": "Anfrage gesendet",
+    "pendingIn": "Möchte sich verbinden",
+    "blocked": "Blockiert"
+  },
+  "states": {
+    "loading": "Profil wird geladen …",
+    "notFound": "Dieses Profil gibt es nicht",
+    "notFoundHint": "Der Link ist vielleicht falsch oder das Konto wurde gelöscht.",
+    "private": "Dieses Profil ist privat",
+    "privateHint": "Nur verbundene Personen können dieses Profil sehen.",
+    "error": "Profil konnte nicht geladen werden"
+  },
+  "sections": {
+    "about": "Über mich",
+    "info": "Informationen"
+  },
+  "info": {
+    "alias": "Benutzername",
+    "fullName": "Name",
+    "gender": "Geschlecht",
+    "birthday": "Geburtstag",
+    "age_one": "{{count}} Jahr",
+    "age_other": "{{count}} Jahre",
+    "email": "E-Mail",
+    "userType": "Kontotyp",
+    "visibility": "Sichtbarkeit",
+    "memberSince": "Mitglied seit",
+    "lastActive": "Zuletzt aktiv",
+    "never": "Noch nie"
+  },
+  "gender": {
+    "male": "Männlich",
+    "female": "Weiblich",
+    "diverse": "Divers"
+  },
+  "userType": {
+    "user": "Nutzer",
+    "standard": "Standard",
+    "admin": "Administrator"
+  }
+}

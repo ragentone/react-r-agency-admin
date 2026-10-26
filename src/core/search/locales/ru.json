@@ -1,0 +1,30 @@
+{
+  "title": "Поиск",
+  "placeholder": "Поиск",
+  "clear": "Очистить",
+  "cancel": "Отмена",
+  "bundles": "Области поиска",
+  "results": "Результаты поиска",
+  "recent": "Недавние запросы",
+  "clearRecent": "Очистить всё",
+  "removeRecent": "Удалить «{{term}}»",
+  "hint_one": "Введи не менее {{count}} символа.",
+  "hint_few": "Введи не менее {{count}} символов.",
+  "hint_many": "Введи не менее {{count}} символов.",
+  "hint_other": "Введи не менее {{count}} символов.",
+  "error": "Поиск сейчас недоступен. Попробуй чуть позже.",
+  "emptyTitle": "Ничего не найдено по запросу «{{term}}»",
+  "emptyText": "Попробуй другой запрос или включи больше областей поиска.",
+  "stats_one": "{{count}} результат · {{ms}} мс",
+  "stats_few": "{{count}} результата · {{ms}} мс",
+  "stats_many": "{{count}} результатов · {{ms}} мс",
+  "stats_other": "{{count}} результатов · {{ms}} мс",
+  "keys": { "navigate": "навигация", "open": "открыть" },
+  "menu": { "label": "Поиск", "description": "Люди и публикации" },
+  "bundleLabels": {
+    "user-search": "Люди",
+    "timeline-search": "Публикации",
+    "timeline-page-search": "Страницы"
+  },
+  "groups": { "user": "Люди", "timeline": "Публикации" }
+}

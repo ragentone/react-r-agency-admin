@@ -1,0 +1,353 @@
+{
+  "title": "Credits",
+  "subtitle": "Earn, spend and give",
+  "loading": "Loading …",
+  "amount_one": "{{value}} credit",
+  "amount_other": "{{value}} credits",
+  "menu": {
+    "label": "Credits",
+    "description": "Balance, history and rewards",
+    "adminLabel": "Credits",
+    "adminDescription": "Balances, corrections and settings",
+    "topLabel": "Top credits",
+    "topDescription": "The three richest users"
+  },
+  "apps": {
+    "core": "General"
+  },
+  "rules": {
+    "daily": {
+      "label": "Daily bonus",
+      "description": "Once a day – the longer your streak, the more you get"
+    },
+    "confirmed": {
+      "label": "E-mail confirmed",
+      "description": "Once, as soon as your e-mail address is confirmed"
+    },
+    "avatar": {
+      "label": "Profile picture added",
+      "description": "Once, for your first profile picture"
+    }
+  },
+  "tips": {
+    "transfer": "Send credits"
+  },
+  "reasons": {
+    "admin": "Correction by an admin",
+    "reversal": "Reversed by an admin",
+    "voucher": "Voucher redeemed",
+    "deleted": "Account deleted",
+    "genesis": "Start capital of the bank",
+    "topup": "Bank topped up"
+  },
+  "kinds": {
+    "earn": "Reward",
+    "revoke": "Reward taken back",
+    "purchase": "Purchase",
+    "refund": "Refund",
+    "transfer_in": "Credits received",
+    "transfer_out": "Credits sent",
+    "admin": "Correction",
+    "voucher": "Voucher",
+    "bank": "Bank"
+  },
+  "errors": {
+    "not_authorized": "Please sign in.",
+    "invalid": "That didn't work – please check your input.",
+    "not_found": "Not found.",
+    "disabled": "This isn't available right now.",
+    "insufficient_funds": "Your balance isn't enough for this.",
+    "held_funds": "Received credits can be sent on after {{hours}} h – spending works right away.",
+    "frozen": "Your balance is locked right now. Please contact support.",
+    "rate_limited": "Too many actions – please wait a moment.",
+    "forbidden": "You're not allowed to do that.",
+    "blocked": "This isn't possible between you two.",
+    "self_transfer": "You can't send credits to yourself.",
+    "friends_only": "You can only send credits to friends.",
+    "account_too_new": "Your account is too new to send credits.",
+    "not_confirmed": "Please confirm your e-mail address first.",
+    "limit_send": "You've reached your daily sending limit.",
+    "limit_receive": "This person has reached their daily limit.",
+    "limit_recipient": "You've reached your daily limit for this person.",
+    "already_active": "This is already running.",
+    "duplicate": "Already booked.",
+    "capped": "Daily limit reached.",
+    "failed": "That didn't work – your credits were refunded.",
+    "timeout": "No answer – please try again.",
+    "unknown": "Something went wrong. Please try again.",
+    "bank_empty": "The bank doesn't have enough credits for this.",
+    "code_invalid": "This code doesn't exist.",
+    "code_expired": "This code has expired.",
+    "code_used": "You've already redeemed this code.",
+    "code_exhausted": "This code has been redeemed too often.",
+    "code_taken": "This code already exists.",
+    "too_many_attempts": "Too many wrong codes – try again in an hour."
+  },
+  "duration": {
+    "permanent": "Permanent",
+    "hours_one": "{{count}} h",
+    "hours_other": "{{count}} h",
+    "days_one": "{{count}} day",
+    "days_other": "{{count}} days"
+  },
+  "actions": {
+    "cancel": "Cancel",
+    "retry": "Try again",
+    "loadMore": "Load more",
+    "back": "Back"
+  },
+  "purchase": {
+    "title": "Buy with credits",
+    "success": "{{label}} is active",
+    "confirm_one": "Buy for {{count}} credit",
+    "confirm_other": "Buy for {{count}} credits",
+    "price": "Price",
+    "duration": "Duration",
+    "balance": "Your balance",
+    "after": "Afterwards",
+    "notEnough_one": "You need {{count}} more credit.",
+    "notEnough_other": "You need {{count}} more credits.",
+    "howToEarn": "How to earn credits"
+  },
+  "tip": {
+    "title": "Credits for @{{name}}",
+    "button": "Send credits to @{{name}}",
+    "short": "Credits",
+    "confirm_one": "Send {{count}} credit",
+    "confirm_other": "Send {{count}} credits",
+    "amount": "Amount",
+    "custom": "Custom amount ({{min}}–{{max}})",
+    "note": "Message (optional)",
+    "notePlaceholder": "Thanks for your post!",
+    "transferable": "Sendable",
+    "fee": "Fee ({{percent}} %)",
+    "receives": "@{{name}} gets",
+    "success_one": "Sent {{count}} credit to @{{name}}",
+    "success_other": "Sent {{count}} credits to @{{name}}"
+  },
+  "daily": {
+    "toast_one": "Daily bonus: +{{count}} credit",
+    "toast_other": "Daily bonus: +{{count}} credits",
+    "streak_one": "{{count}} day in a row",
+    "streak_other": "{{count}} days in a row"
+  },
+  "live": {
+    "received_one": "+{{count}} credit received",
+    "received_other": "+{{count}} credits received"
+  },
+  "tabs": {
+    "history": "History",
+    "earn": "Earn",
+    "spend": "Spend"
+  },
+  "wallet": {
+    "label": "Balance",
+    "streak_one": "{{count}} day in a row",
+    "streak_other": "{{count}} days in a row",
+    "transferable": "{{value}} sendable",
+    "today": "Earned today",
+    "earned": "Earned",
+    "spent": "Spent",
+    "sent": "Given"
+  },
+  "history": {
+    "filter": "Filter history",
+    "filters": {
+      "all": "All",
+      "in": "Incoming",
+      "out": "Outgoing"
+    },
+    "emptyTitle": "No bookings yet",
+    "emptyText": "Collect credits with your daily bonus.",
+    "from": "from @{{name}}",
+    "to": "to @{{name}}",
+    "deletedUser": "deleted"
+  },
+  "earn": {
+    "dailyTitle": "Every day",
+    "dailyText": "{{base}} credit per day in a row – up to {{max}} from day {{days}}. A break restarts the streak.",
+    "appCap_one": "At most {{count}} credit per day in this area",
+    "appCap_other": "At most {{count}} credits per day in this area",
+    "once": "Once",
+    "ruleCap_one": "Max. {{count}} per day",
+    "ruleCap_other": "Max. {{count}} per day",
+    "globalCap_one": "In total you can earn {{count}} credit per day (daily bonus included).",
+    "globalCap_other": "In total you can earn {{count}} credits per day (daily bonus included)."
+  },
+  "spend": {
+    "tipsTitle": "Give",
+    "tipsText": "Up to {{daily}} credits per day. Received credits can be sent on after {{hours}} h.",
+    "transferText": "Directly to others – with the credits button on their profile",
+    "transferFriends": "Directly to friends – with the credits button on their profile",
+    "fee": "A fee of {{percent}} % is kept when sending."
+  },
+  "admin": {
+    "title": "Credits",
+    "subtitle": "Balances, corrections and settings",
+    "tabs": {
+      "overview": "Overview",
+      "settings": "Settings",
+      "vouchers": "Vouchers"
+    },
+    "kpi": {
+      "circulation": "In circulation",
+      "wallets": "Wallets",
+      "todayEarned": "Earned today",
+      "todaySpent": "Spent today",
+      "todayTransferred": "Given today",
+      "frozen": "Locked"
+    },
+    "apps": "By area",
+    "app": "Area",
+    "earned": "Earned",
+    "spent": "Spent",
+    "amount": "Amount",
+    "note": "Reason (shown in the history)",
+    "saved": "Settings saved",
+    "save": "Save",
+    "reset": "Reset to default",
+    "settings": {
+      "global": "General",
+      "dailyCap": "Daily limit (all areas)",
+      "dailyCapText": "Credits one person can earn per day",
+      "earnConfirmed": "Earning only with a confirmed e-mail",
+      "daily": "Daily bonus",
+      "enabled": "Active",
+      "dailyBase": "Credits per streak day",
+      "maxStreak": "Streak counts up to day",
+      "transfer": "Sending & tips",
+      "friendsOnly": "Friends only",
+      "requireConfirmed": "Only with a confirmed e-mail",
+      "minAccountAgeDays": "Minimum account age (days)",
+      "maxPerTransfer": "Maximum per transfer",
+      "dailySend": "Sending per day",
+      "dailyReceive": "Receiving per day",
+      "dailyPerRecipient": "Per recipient and day",
+      "holdHours": "Hold of received credits (h)",
+      "feePercent": "Fee (%)",
+      "rules": "Rewards",
+      "products": "Products",
+      "tips": "Tips",
+      "apps": "Daily limit per area",
+      "appCap": "Empty = no own limit",
+      "default": "Default {{amount}}, limit {{cap}}",
+      "defaultPrice": "Default {{price}}",
+      "amount": "Amount",
+      "cap": "Daily limit",
+      "price": "Price",
+      "min": "Minimum",
+      "max": "Maximum",
+      "bank": "Bank",
+      "defaultFunding": "Default source",
+      "defaultFundingText": "For rewards, grants and vouchers without their own setting",
+      "maxVoucherAmount": "Highest value per voucher"
+    },
+    "funding": {
+      "label": "Source",
+      "bank": "From the bank",
+      "mint": "From nothing",
+      "default": "Default",
+      "bankHint": "Taken from the bank account (or booked back).",
+      "mintHint": "Credits are newly created (or destroyed) – the bank stays untouched."
+    },
+    "bank": {
+      "title": "Bank account",
+      "reserved": "Voucher reserve",
+      "users": "With users",
+      "supply": "Total supply",
+      "consistent": "All accounts match the total supply.",
+      "inconsistent": "The accounts differ from the total supply – please check.",
+      "topUp": "Top up the bank",
+      "topUpText": "The credits are newly created and raise the total supply.",
+      "topUpButton": "Top up",
+      "toppedUp": "Bank topped up by {{value}} credits",
+      "history": "Movements of the bank",
+      "wallet": {
+        "bank": "Bank",
+        "reserve": "Voucher reserve"
+      }
+    },
+    "vouchers": {
+      "new": "New voucher",
+      "search": "Search code or note",
+      "filter": "Filter vouchers",
+      "filters": {
+        "open": "Open",
+        "closed": "Ended",
+        "all": "All"
+      },
+      "empty": "No vouchers.",
+      "state": {
+        "active": "Active",
+        "scheduled": "Scheduled",
+        "expired": "Expired",
+        "exhausted": "Used up",
+        "closed": "Deactivated"
+      },
+      "redeemedOf": "{{redeemed}}/{{max}} redeemed",
+      "until": "until {{date}}",
+      "removeUser": "Remove person",
+      "userSearch": "Only for one person (alias, e-mail) – optional",
+      "created_one": "{{count}} voucher created",
+      "created_other": "{{count}} vouchers created",
+      "csv": "Download as CSV",
+      "copy": "Copy code",
+      "copied": "Copied",
+      "copyLink": "Copy link",
+      "mode": "Type",
+      "single": "Single",
+      "batch": "Several",
+      "code": "Code (optional)",
+      "codePlaceholder": "Empty = generated",
+      "count": "Number of codes (max. 500)",
+      "amount": "Value in credits",
+      "maxRedemptions": "Redemptions per code",
+      "validFrom": "Valid from",
+      "validUntil": "Valid until",
+      "user": "Only for",
+      "note": "Note (admins only)",
+      "reserveBank": "{{value}} credits are reserved from the bank.",
+      "reserveMint": "{{value}} credits are newly created and reserved.",
+      "create": "Create voucher",
+      "createBatch_one": "Create {{count}} voucher",
+      "createBatch_other": "Create {{count}} vouchers",
+      "reserved": "{{value}} reserved",
+      "everyone": "Everyone",
+      "createdBy": "Created by",
+      "edit": "Edit",
+      "amountLocked": "The value is fixed once someone has redeemed it.",
+      "deactivate": "Deactivate",
+      "deactivateConfirm": "Really deactivate? The rest goes back to the bank.",
+      "deactivated": "Voucher deactivated"
+    },
+    "sumsOnly": "Admins only see sums – no wallets or bookings of single users.",
+    "chart": {
+      "title": "Trend",
+      "range": "Period",
+      "days_one": "{{count}} day",
+      "days_other": "{{count}} days",
+      "bank": "Bank balance",
+      "earned": "Earned",
+      "spent": "Spent",
+      "transferred": "Given",
+      "day": "Day",
+      "showTable": "Show as table",
+      "hideTable": "Hide table"
+    }
+  },
+  "voucher": {
+    "title": "Redeem voucher",
+    "placeholder": "Enter code",
+    "redeem": "Redeem",
+    "success_one": "+{{count}} credit added",
+    "success_other": "+{{count}} credits added"
+  },
+  "top": {
+    "title": "Top credits",
+    "subtitle": "The three users with the most credits",
+    "empty": "Nobody on the podium yet.",
+    "hint": "Only public profiles are shown. Updated every minute.",
+    "rankLabel": "Place {{rank}}: @{{name}}",
+    "link": "See the three richest users"
+  }
+}

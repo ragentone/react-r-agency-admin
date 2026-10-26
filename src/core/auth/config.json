@@ -1,0 +1,6 @@
+{
+  "active": true,
+  "name": "core-auth",
+  "entries": ["core.tsx"],
+  "sortOrder": 0
+}

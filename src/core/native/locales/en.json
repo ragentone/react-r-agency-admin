@@ -1,0 +1,10 @@
+{
+  "loaded": {
+    "title": "r-agency is ready",
+    "body": "The app has loaded ({{platform}})."
+  },
+  "button": {
+    "reload": "Reload",
+    "reloadDescription": "Restart the app"
+  }
+}

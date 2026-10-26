@@ -1,0 +1,11 @@
+{
+  "color": {
+    "palette": "Farbpalette",
+    "recent": "Zuletzt verwendet",
+    "custom": "Eigene Farbe",
+    "eyeDropper": "Farbe vom Bildschirm aufnehmen",
+    "saturation": "Sättigung und Helligkeit",
+    "hue": "Farbton",
+    "hex": "Hex-Farbwert"
+  }
+}

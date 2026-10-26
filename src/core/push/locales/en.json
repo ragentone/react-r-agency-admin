@@ -1,0 +1,20 @@
+{
+  "settings": {
+    "label": "Push notifications",
+    "on": "On",
+    "off": "Off",
+    "denied": "Blocked in the browser",
+    "deniedHint": "Notifications are blocked for this site – allow them in your browser settings."
+  },
+  "hint": {
+    "title": "Turn on notifications",
+    "text": "Hear about new messages right away – even when the app is closed.",
+    "enable": "Turn on",
+    "dismiss": "Dismiss"
+  },
+  "result": {
+    "on": "Push notifications are on",
+    "denied": "Notifications were blocked",
+    "failed": "Push notifications could not be turned on"
+  }
+}

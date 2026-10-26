@@ -1,0 +1,26 @@
+{
+  "title": "Search",
+  "placeholder": "Search",
+  "clear": "Clear input",
+  "cancel": "Cancel",
+  "bundles": "Search areas",
+  "results": "Search results",
+  "recent": "Recent",
+  "clearRecent": "Clear all",
+  "removeRecent": "Remove “{{term}}”",
+  "hint_one": "Type at least {{count}} character.",
+  "hint_other": "Type at least {{count}} characters.",
+  "error": "Search is not available right now. Please try again in a moment.",
+  "emptyTitle": "No results for “{{term}}”",
+  "emptyText": "Try a different term or enable more search areas.",
+  "stats_one": "{{count}} result · {{ms}} ms",
+  "stats_other": "{{count}} results · {{ms}} ms",
+  "keys": { "navigate": "navigate", "open": "open" },
+  "menu": { "label": "Search", "description": "Find people and posts" },
+  "bundleLabels": {
+    "user-search": "People",
+    "timeline-search": "Posts",
+    "timeline-page-search": "Pages"
+  },
+  "groups": { "user": "People", "timeline": "Posts" }
+}

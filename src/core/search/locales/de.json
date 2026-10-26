@@ -1,0 +1,26 @@
+{
+  "title": "Suche",
+  "placeholder": "Suchen",
+  "clear": "Eingabe löschen",
+  "cancel": "Abbrechen",
+  "bundles": "Suchbereiche",
+  "results": "Suchergebnisse",
+  "recent": "Zuletzt gesucht",
+  "clearRecent": "Alle löschen",
+  "removeRecent": "„{{term}}“ entfernen",
+  "hint_one": "Gib mindestens {{count}} Zeichen ein.",
+  "hint_other": "Gib mindestens {{count}} Zeichen ein.",
+  "error": "Die Suche ist gerade nicht erreichbar. Bitte versuche es gleich noch einmal.",
+  "emptyTitle": "Keine Treffer für „{{term}}“",
+  "emptyText": "Versuche einen anderen Begriff oder aktiviere weitere Suchbereiche.",
+  "stats_one": "{{count}} Treffer · {{ms}} ms",
+  "stats_other": "{{count}} Treffer · {{ms}} ms",
+  "keys": { "navigate": "navigieren", "open": "öffnen" },
+  "menu": { "label": "Suche", "description": "Menschen und Beiträge finden" },
+  "bundleLabels": {
+    "user-search": "Menschen",
+    "timeline-search": "Beiträge",
+    "timeline-page-search": "Seiten"
+  },
+  "groups": { "user": "Menschen", "timeline": "Beiträge" }
+}

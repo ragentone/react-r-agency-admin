@@ -1,0 +1,913 @@
+{
+  "title": "Benutzerverwaltung",
+  "subtitle": "Benutzer suchen und Rollen verwalten",
+  "retry": "Erneut versuchen",
+  "menu": {
+    "label": "Benutzerverwaltung",
+    "description": "Benutzer suchen und Rollen verwalten",
+    "pagesLabel": "Seiten verwalten",
+    "pagesDescription": "Eigene Seiten erstellen und bearbeiten",
+    "pagesSection": "Seiten",
+    "statsLabel": "Besucher",
+    "statsDescription": "Wer die Seite besucht, live und als Statistik",
+    "systemLabel": "System",
+    "systemDescription": "Version, Deploys und Server-Speicher"
+  },
+  "tabs": {
+    "users": "Benutzer",
+    "self": "Meine Rollen"
+  },
+  "noAccess": {
+    "title": "Kein Zugriff",
+    "description": "Dieser Bereich ist nur für Administratoren."
+  },
+  "users": {
+    "searchPlaceholder": "Name, E-Mail oder ID",
+    "found_one": "{{count}} Treffer",
+    "found_other": "{{count}} Treffer",
+    "noResults": "Kein Benutzer passt zu „{{term}}“.",
+    "more": "Weitere laden ({{count}})",
+    "open": "Rollen von {{user}} bearbeiten",
+    "idleTitle": "Benutzer suchen",
+    "idle": "Gib mindestens {{count}} Zeichen ein – Name, E-Mail oder ID."
+  },
+  "self": {
+    "hint": "Du kannst dir selbst Rollen geben, ändern und entfernen. admin:user und default:user sind geschützt, damit du dich nicht aussperrst."
+  },
+  "drawer": {
+    "title": "Benutzer",
+    "description": "Rollen dieses Benutzers hinzufügen, ändern oder entfernen",
+    "close": "Schließen",
+    "tabsLabel": "Bereiche",
+    "tabs": {
+      "roles": "Rollen",
+      "activity": "Aktivität"
+    }
+  },
+  "badge": {
+    "self": "Du",
+    "superUser": "Super-Admin",
+    "blocked": "Gesperrt",
+    "inactive": "Inaktiv"
+  },
+  "role": {
+    "title_one": "{{count}} Rolle",
+    "title_other": "{{count}} Rollen",
+    "empty": "Keine Rollen",
+    "add": "Rolle hinzufügen",
+    "addAction": "Hinzufügen",
+    "protected": "Geschützt – kann nicht entfernt werden",
+    "protectedSelf": "Geschützt – eigene Basisrolle",
+    "superUserLocked": "Super-Admin – Rollen können nur von ihm selbst geändert werden.",
+    "changeLabel": "Rolle {{role}} ändern",
+    "removeLabel": "Rolle {{role}} entfernen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "selectPlaceholder": "Rolle auswählen",
+    "allAssigned": "Alle registrierten Rollen sind bereits vergeben.",
+    "unregistered": "Nicht registriert – keine App kennt diese Rolle",
+    "system": "Wird vom System vergeben"
+  },
+  "remove": {
+    "title": "Rolle entfernen?",
+    "description": "{{user}} verliert die Rolle {{role}} sofort.",
+    "descriptionSelf": "Du verlierst die Rolle {{role}} sofort – inklusive aller Bereiche, die daran hängen.",
+    "confirm": "Entfernen"
+  },
+  "toast": {
+    "added": "Rolle {{role}} hinzugefügt",
+    "changed": "Rolle in {{role}} geändert",
+    "removed": "Rolle {{role}} entfernt"
+  },
+  "error": {
+    "load": "Laden fehlgeschlagen.",
+    "save": "Speichern fehlgeschlagen.",
+    "protected": "default:user ist geschützt und kann nicht entfernt oder geändert werden.",
+    "protectedSelf": "Diese Rolle ist für dein eigenes Konto geschützt.",
+    "exists": "Diese Rolle ist bereits vergeben.",
+    "missing": "Diese Rolle gibt es bei dem Benutzer nicht (mehr).",
+    "invalid": "Ungültige Rolle.",
+    "superUser": "Rollen eines Super-Admins können nicht geändert werden.",
+    "userMissing": "Benutzer nicht gefunden.",
+    "notAuthorized": "Keine Berechtigung.",
+    "delete": "Löschen fehlgeschlagen.",
+    "slugExists": "Diese Adresse ist schon vergeben.",
+    "slugInvalid": "Nur Kleinbuchstaben, Zahlen und einzelne Bindestriche.",
+    "titleRequired": "Bitte gib einen Titel ein.",
+    "titleTooLong": "Der Titel ist zu lang.",
+    "summaryTooLong": "Die Kurzbeschreibung ist zu lang.",
+    "contentTooLong": "Der Inhalt ist zu lang.",
+    "pageMissing": "Diese Seite gibt es nicht mehr.",
+    "menuOrderInvalid": "Die Position muss eine ganze Zahl zwischen -9999 und 9999 sein.",
+    "blocksTooMany": "Zu viele Blöcke auf der Seite.",
+    "blockItemsTooMany": "Zu viele Einträge in einem Block.",
+    "blocksInvalid": "Ein Block ist ungültig.",
+    "imageType": "Nur JPG, PNG, WebP, GIF oder AVIF.",
+    "imageTooLarge": "Das Bild ist größer als 8 MB.",
+    "imageUpload": "Bild-Upload fehlgeschlagen.",
+    "accessInvalid": "Ungültige Sichtbarkeit oder Rolle."
+  },
+  "pages": {
+    "searchPlaceholder": "Titel oder Adresse",
+    "new": "Neu",
+    "create": "Neue Seite",
+    "open": "Seite „{{title}}“ bearbeiten",
+    "emptyTitle": "Noch keine Seiten",
+    "empty": "Erstelle Seiten wie „Über uns“, „Impressum“ oder „FAQ“ – sie sind unter /p/… erreichbar.",
+    "noResults": "Keine Seite passt zu deiner Suche.",
+    "updated": "Geändert {{date}}",
+    "filterLabel": "Seiten filtern",
+    "filter": {
+      "all": "Alle",
+      "published": "Veröffentlicht",
+      "draft": "Entwürfe"
+    },
+    "status": {
+      "published": "Veröffentlicht",
+      "draft": "Entwurf"
+    },
+    "view": "Seite ansehen",
+    "preview": "Vorschau",
+    "form": {
+      "description": "Titel, Adresse, Inhalt und Sichtbarkeit der Seite",
+      "createTitle": "Neue Seite",
+      "editTitle": "Seite bearbeiten",
+      "create": "Erstellen",
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "title": "Titel",
+      "titlePlaceholder": "z. B. Über uns",
+      "titleRequired": "Bitte gib einen Titel ein.",
+      "tooLong": "Maximal {{max}} Zeichen.",
+      "slug": "Adresse",
+      "slugPlaceholder": "ueber-uns",
+      "slugRequired": "Bitte gib eine Adresse ein.",
+      "slugHint": "Kleinbuchstaben, Zahlen und Bindestriche.",
+      "slugChanged": "Achtung: Die alte Adresse funktioniert danach nicht mehr.",
+      "summary": "Kurzbeschreibung",
+      "summaryPlaceholder": "Ein, zwei Sätze, worum es auf der Seite geht (optional)",
+      "content": "Inhalt",
+      "contentPlaceholder": "Schreib los …",
+      "published": "Veröffentlicht",
+      "publishedHint": "Für alle sichtbar. Entwürfe sehen nur Administratoren.",
+      "showInMenu": "Im Hauptmenü anzeigen",
+      "showInMenuHint": "Erscheint in der Gruppe „Seiten“ im Hauptmenü.",
+      "showInMenuDraftHint": "Erscheint im Menü, sobald die Seite veröffentlicht ist.",
+      "menuOrder": "Position im Menü (kleiner = weiter oben)",
+      "seoIndex": "In Suchmaschinen zeigen",
+      "seoIndexHint": "Steht in der Sitemap, Google darf die Seite finden.",
+      "seoIndexDraftHint": "Kommt in die Sitemap, sobald die Seite veröffentlicht ist.",
+      "seoIndexOffHint": "Nicht in der Sitemap, Suchmaschinen bekommen noindex.",
+      "seoIndexPrivate": "Seiten nur für Angemeldete stehen nie in Suchmaschinen."
+    },
+    "delete": {
+      "action": "Seite löschen",
+      "title": "Seite löschen?",
+      "description": "„{{title}}“ wird endgültig gelöscht. Die Adresse ist danach nicht mehr erreichbar.",
+      "confirm": "Löschen"
+    },
+    "toast": {
+      "created": "Seite „{{title}}“ erstellt",
+      "saved": "Seite „{{title}}“ gespeichert",
+      "deleted": "Seite „{{title}}“ gelöscht"
+    },
+    "access": {
+      "title": "Wer darf die Seite sehen?",
+      "all": "Alle",
+      "allHint": "Auch Gäste ohne Anmeldung",
+      "authenticated": "Nur angemeldete",
+      "authenticatedHint": "Gäste werden zur Anmeldung geschickt",
+      "roles": "Nur mit Rolle (optional)",
+      "rolesEmpty": "Keine Rolle gewählt – jeder angemeldete Nutzer darf die Seite sehen.",
+      "rolesHint": "Eine der gewählten Rollen reicht. Admins sehen die Seite immer.",
+      "addRole": "Rolle hinzufügen",
+      "removeRole": "Rolle {{role}} entfernen",
+      "badge": "Angemeldet",
+      "badgeRoles_one": "{{count}} Rolle",
+      "badgeRoles_other": "{{count}} Rollen"
+    },
+    "discard": {
+      "title": "Änderungen verwerfen?",
+      "description": "Deine ungespeicherten Änderungen an dieser Seite gehen verloren. Neu hochgeladene Bilder werden gelöscht.",
+      "save": "Speichern",
+      "create": "Seite erstellen",
+      "confirm": "Verwerfen",
+      "keep": "Weiter bearbeiten"
+    },
+    "noindexBadge": "Nicht in Suche"
+  },
+  "sitePage": {
+    "missingTitle": "Seite nicht gefunden",
+    "missing": "Diese Seite gibt es nicht (mehr).",
+    "home": "Zur Startseite",
+    "updated": "Zuletzt aktualisiert {{date}}",
+    "edit": "Bearbeiten",
+    "draftHint": "Entwurf – nur für Administratoren sichtbar",
+    "adminHint": "Für alle sichtbar",
+    "loginTitle": "Bitte anmelden",
+    "login": "Diese Seite ist nur für angemeldete Nutzer.",
+    "loginAction": "Anmelden",
+    "forbiddenTitle": "Kein Zugriff",
+    "forbidden": "Für diese Seite fehlt dir die nötige Berechtigung."
+  },
+  "pagesArea": {
+    "title": "Seiten",
+    "subtitle": "Eigene Seiten erstellen, bearbeiten und veröffentlichen"
+  },
+  "blocks": {
+    "title": "Inhalt (Blöcke)",
+    "emptyTitle": "Noch keine Inhalte",
+    "empty": "Baue die Seite aus Blöcken: Banner, Text, Bilder, Karten, FAQ …",
+    "add": "Block hinzufügen",
+    "addAfter": "Block darunter einfügen",
+    "pickTitle": "Welcher Block?",
+    "noContent": "Noch leer – antippen zum Bearbeiten",
+    "removed": "{{type}} entfernt",
+    "undo": "Rückgängig",
+    "full": "Maximal {{max}} Blöcke pro Seite.",
+    "action": {
+      "up": "Nach oben",
+      "down": "Nach unten",
+      "duplicate": "Duplizieren",
+      "remove": "Entfernen",
+      "removeItem": "Eintrag entfernen"
+    },
+    "type": {
+      "hero": {
+        "label": "Banner",
+        "description": "Großer Einstieg mit Bild und Button"
+      },
+      "text": {
+        "label": "Text",
+        "description": "Formatierter Text mit Überschriften"
+      },
+      "image": {
+        "label": "Bild",
+        "description": "Einzelnes Bild mit Bildunterschrift"
+      },
+      "cards": {
+        "label": "Karten",
+        "description": "Raster mit Bild, Text und Link"
+      },
+      "cta": {
+        "label": "Aufruf",
+        "description": "Hervorgehobene Box mit Buttons"
+      },
+      "notice": {
+        "label": "Hinweis",
+        "description": "Info, Erfolg, Warnung"
+      },
+      "faq": {
+        "label": "FAQ",
+        "description": "Fragen und Antworten zum Aufklappen"
+      },
+      "quote": {
+        "label": "Zitat",
+        "description": "Stimme oder Kundenmeinung"
+      },
+      "video": {
+        "label": "Video",
+        "description": "YouTube oder Vimeo, datenschutzfreundlich"
+      },
+      "divider": {
+        "label": "Trenner",
+        "description": "Linie oder Abstand"
+      },
+      "split": {
+        "label": "Bild + Text",
+        "description": "Bild neben Text, auf dem Handy untereinander"
+      },
+      "gallery": {
+        "label": "Galerie",
+        "description": "Mehrere Bilder als Raster oder Slider"
+      },
+      "stats": {
+        "label": "Kennzahlen",
+        "description": "Große Zahlen mit Beschriftung"
+      },
+      "steps": {
+        "label": "Schritte",
+        "description": "Ablauf in nummerierten Schritten"
+      },
+      "map": {
+        "label": "Karte",
+        "description": "Standort mit Marker, lädt erst auf Klick"
+      },
+      "tabs": {
+        "label": "Tabs",
+        "description": "Inhalte zum Umschalten"
+      },
+      "countdown": {
+        "label": "Countdown",
+        "description": "Zählt bis zu einem Datum herunter"
+      },
+      "table": {
+        "label": "Tabelle",
+        "description": "Daten in Zeilen und Spalten, auch aus Excel"
+      }
+    },
+    "field": {
+      "title": "Titel",
+      "heading": "Überschrift (optional)",
+      "text": "Text",
+      "style": "Stil",
+      "image": "Bild",
+      "imageOptional": "Bild (optional)",
+      "buttonLabel": "Button-Text",
+      "buttonUrl": "Button-Link",
+      "linkLabel": "Link-Text",
+      "linkUrl": "Link",
+      "align": "Ausrichtung",
+      "height": "Höhe",
+      "spacing": "Abstand",
+      "tone": "Art",
+      "alt": "Alternativtext",
+      "altHint": "Beschreibt das Bild für Screenreader und Suchmaschinen.",
+      "caption": "Bildunterschrift (optional)",
+      "urlPlaceholder": "/p/kontakt oder https://…",
+      "urlHint": "Interne Adresse (/p/…) oder https://, mailto:, tel:",
+      "urlInvalid": "Erlaubt: /…, https://…, mailto:… oder tel:…",
+      "imageUpload": "Bild hochladen",
+      "imageUploading": "Wird hochgeladen …",
+      "imageReplace": "Ersetzen",
+      "imageRemove": "Bild entfernen",
+      "imageFormats": "JPG, PNG, WebP, GIF · max. 8 MB",
+      "imageUrl": "Bild-URL",
+      "format": "Format",
+      "imageEdit": "Bearbeiten",
+      "editLoadError": "Das Bild kann nicht geladen werden – lade es neu hoch, um es zu bearbeiten.",
+      "imageRestore": "Original wiederherstellen",
+      "altMissing": "Fehlt noch: Ohne Alternativtext ist das Bild für Screenreader unsichtbar."
+    },
+    "align": {
+      "left": "Links",
+      "center": "Mittig"
+    },
+    "size": {
+      "sm": "Klein",
+      "md": "Mittel",
+      "lg": "Groß",
+      "custom": "Eigene"
+    },
+    "hero": {
+      "variant": {
+        "brand": "Farbig",
+        "muted": "Hell"
+      },
+      "imageHint": "Liegt als Hintergrund unter dem Text. Bearbeiten ändert nie das Original – es bleibt gespeichert und lässt sich jederzeit neu zuschneiden oder wiederherstellen.",
+      "focus": "Bildausschnitt (Fokuspunkt)",
+      "focusHint": "Tippe auf die wichtigste Stelle – sie bleibt bei jeder Bildschirmgröße in der Mitte des Banners.",
+      "focusReset": "Mitte",
+      "textPosition": "Textposition",
+      "rounded": "Abgerundet",
+      "roundedHint": "Runde Ecken und Abstand zum Seitenrand statt randlos.",
+      "tone": {
+        "dark": "Schwarz",
+        "light": "Hell"
+      },
+      "overlay": "Abdunkeln",
+      "overlayHint": "Legt Schwarz über das Bild, damit der Text auf hellen Fotos lesbar bleibt."
+    },
+    "image": {
+      "wide": "Volle Breite",
+      "wideHint": "Auf dem Handy randlos bis zum Bildschirmrand."
+    },
+    "notice": {
+      "tone": {
+        "info": "Info",
+        "success": "Erfolg",
+        "warning": "Warnung",
+        "danger": "Wichtig"
+      }
+    },
+    "cards": {
+      "columns": "Spalten (ab Tablet)",
+      "columnsValue_one": "{{count}} Spalte",
+      "columnsValue_other": "{{count}} Spalten",
+      "items": "Karten",
+      "item": "Karte",
+      "add": "Karte hinzufügen",
+      "linkHint": "Die ganze Karte wird antippbar, der Text erscheint als Link unten."
+    },
+    "cta": {
+      "primaryLabel": "Haupt-Button: Text",
+      "primaryUrl": "Haupt-Button: Link",
+      "secondaryLabel": "Zweiter Button: Text (optional)",
+      "secondaryUrl": "Zweiter Button: Link"
+    },
+    "faq": {
+      "items": "Fragen",
+      "item": "Frage",
+      "add": "Frage hinzufügen",
+      "question": "Frage",
+      "answer": "Antwort"
+    },
+    "quote": {
+      "text": "Zitat",
+      "author": "Name",
+      "role": "Rolle / Firma (optional)"
+    },
+    "video": {
+      "url": "Video-Link",
+      "hint": "Link von YouTube oder Vimeo einfügen.",
+      "invalid": "Kein gültiger YouTube- oder Vimeo-Link.",
+      "consent": "Antippen lädt das Video von {{provider}}. Dabei werden Daten an {{provider}} übertragen."
+    },
+    "divider": {
+      "variant": {
+        "line": "Linie",
+        "space": "Nur Abstand"
+      }
+    },
+    "pickApps": "Aus Apps",
+    "appMissing": "Die App dieses Blocks ist nicht geladen – er wird auf der Seite nicht angezeigt.",
+    "appNoSettings": "Dieser Block hat keine Einstellungen.",
+    "position": {
+      "h": {
+        "left": "Links",
+        "center": "Mitte",
+        "right": "Rechts"
+      },
+      "v": {
+        "top": "Oben",
+        "center": "Mitte",
+        "bottom": "Unten"
+      }
+    },
+    "split": {
+      "imageSide": "Bild-Seite (ab Tablet)"
+    },
+    "gallery": {
+      "layout": "Darstellung",
+      "layoutValue": {
+        "grid": "Raster",
+        "slider": "Slider"
+      },
+      "items": "Bilder",
+      "item": "Bild",
+      "add": "Bild hinzufügen",
+      "open": "Bild {{index}} öffnen"
+    },
+    "stats": {
+      "items": "Kennzahlen",
+      "item": "Kennzahl",
+      "add": "Kennzahl hinzufügen",
+      "value": "Zahl",
+      "label": "Beschriftung"
+    },
+    "steps": {
+      "items": "Schritte",
+      "item": "Schritt",
+      "add": "Schritt hinzufügen"
+    },
+    "map": {
+      "search": "Adresse suchen",
+      "searchPlaceholder": "Straße, Ort oder Firma",
+      "label": "Name am Marker",
+      "address": "Adresse (Anzeige)",
+      "lat": "Breitengrad",
+      "lng": "Längengrad",
+      "zoom": "Zoom",
+      "zoomValue": {
+        "11": "Stadt",
+        "13": "Viertel",
+        "15": "Straße",
+        "17": "Gebäude"
+      },
+      "load": "Karte laden",
+      "consent": "Beim Laden werden Kartendaten von OpenStreetMap/CARTO abgerufen.",
+      "open": "In Karte öffnen"
+    },
+    "tabs": {
+      "items": "Tabs",
+      "item": "Tab",
+      "add": "Tab hinzufügen",
+      "label": "Tab-Name"
+    },
+    "countdown": {
+      "target": "Datum & Uhrzeit",
+      "targetHint": "In deiner Zeitzone – Besucher sehen die Zeit in ihrer.",
+      "doneText": "Text danach (optional)",
+      "doneHint": "Leer = „Es ist so weit!“",
+      "done": "Es ist so weit!",
+      "days_one": "Tag",
+      "days_other": "Tage",
+      "hours_one": "Stunde",
+      "hours_other": "Std.",
+      "minutes_one": "Minute",
+      "minutes_other": "Min.",
+      "seconds_one": "Sekunde",
+      "seconds_other": "Sek."
+    },
+    "table": {
+      "content": "Inhalt",
+      "column": "Spalte {{index}}",
+      "columnLabel": "Überschrift",
+      "columnLabelOf": "Überschrift Spalte {{index}}",
+      "cellOf": "Zeile {{row}}, {{column}}",
+      "alignValue": "Ausrichtung: {{value}} – tippen zum Wechseln",
+      "addRow": "Zeile",
+      "addColumn": "Spalte",
+      "removeRow": "Zeile entfernen",
+      "removeColumn": "Spalte entfernen",
+      "size": "{{columns}} × {{rows}}",
+      "pasteHint": "Tipp: Zellen aus Excel oder Google Sheets kopieren und in eine Zelle einfügen. Enter springt eine Zeile tiefer.",
+      "import": "Tabelle einfügen (Excel, CSV)",
+      "importPlaceholder": "Bereich in Excel / Google Sheets kopieren und hier einfügen – oder CSV mit ; bzw. ,",
+      "importHeader": "Erste Zeile sind Überschriften",
+      "importLimit": "Es werden maximal {{columns}} Spalten und {{rows}} Zeilen übernommen.",
+      "importApply_one": "{{count}} Zeile übernehmen (ersetzt die Tabelle)",
+      "importApply_other": "{{count}} Zeilen übernehmen (ersetzt die Tabelle)",
+      "variant": {
+        "striped": "Gestreift",
+        "lines": "Linien",
+        "grid": "Raster"
+      },
+      "mobile": "Auf dem Handy",
+      "mobileValue": {
+        "scroll": "Seitlich wischen",
+        "stack": "Als Karten"
+      },
+      "firstColumn": "Erste Spalte hervorheben",
+      "firstColumnHint": "Fett als Zeilenüberschrift – auf dem Handy als Kartentitel.",
+      "caption": "Fußnote (optional)",
+      "captionHint": "Quelle, Stand oder Erläuterung unter der Tabelle."
+    },
+    "ratio": {
+      "auto": "Original"
+    },
+    "imageGone_one": "Ein Bild war zu lange ungespeichert und wurde vom Server entfernt – bitte lade es neu hoch.",
+    "imageGone_other": "{{count}} Bilder waren zu lange ungespeichert und wurden vom Server entfernt – bitte lade sie neu hoch."
+  },
+  "stats": {
+    "title": "Besucher",
+    "subtitle": "Wer die Seite besucht – live, Verlauf und Statistik",
+    "tabsLabel": "Bereiche der Statistik",
+    "tabs": {
+      "live": "Live",
+      "visitors": "Besucher",
+      "overview": "Statistik",
+      "growth": "Wachstum",
+      "security": "Sicherheit"
+    },
+    "range": {
+      "label": "Zeitraum",
+      "1": "Heute",
+      "7": "7 Tage",
+      "30": "30 Tage",
+      "365": "12 Monate"
+    },
+    "users": "Nutzer",
+    "guests": "Gäste",
+    "guest": "Gast",
+    "minor": "Unter 16",
+    "previous": "Vorzeitraum",
+    "visitorsShort": "Besucher",
+    "hourLabel": "{{hour}}:00 Uhr",
+    "pwaBadge": "App",
+    "unknown": "Unbekannt",
+    "noData": "Noch keine Daten",
+    "error": {
+      "title": "Konnte nicht laden",
+      "text": "Bitte versuche es gleich noch einmal."
+    },
+    "series": {
+      "users": "Nutzer",
+      "guests": "Gäste",
+      "previous": "Vorzeitraum",
+      "visitors": "Besucher",
+      "viewsUsers": "Nutzer",
+      "viewsGuests": "Gäste",
+      "registrations": "Neue Nutzer",
+      "total": "Nutzer gesamt",
+      "dau": "Täglich aktiv",
+      "wau": "Wöchentlich aktiv",
+      "mau": "Monatlich aktiv"
+    },
+    "kpi": {
+      "visitors": "Besucher",
+      "activeUsers": "Aktive Nutzer",
+      "registrations": "Neue Nutzer",
+      "views": "Seitenaufrufe",
+      "avgDuration": "Ø Dauer",
+      "bounceRate": "Absprungrate",
+      "change": "Veränderung zum Vorzeitraum",
+      "approx": "Gäste pro Tag gezählt",
+      "totalUsers_one": "{{count}} Nutzer gesamt",
+      "totalUsers_other": "{{count}} Nutzer gesamt",
+      "before": "Vorher {{value}}"
+    },
+    "live": {
+      "now": "Gerade online",
+      "online_one": "Person ist gerade da",
+      "online_other": "Personen sind gerade da",
+      "curve": "Letzte 60 Minuten",
+      "curveText": "Online pro Minute, aktualisiert alle 10 Sekunden",
+      "curveLabel": "Linie: wie viele Personen in der letzten Stunde online waren",
+      "apps": "Wo sie gerade sind",
+      "list": "Wer ist da?",
+      "listText": "Tippe auf einen Nutzer für Details. Gäste ohne Namen.",
+      "empty": "Gerade ist niemand online",
+      "since": "seit {{time}}"
+    },
+    "visitors": {
+      "search": "Name oder E-Mail suchen",
+      "filter": "Besucher filtern",
+      "filters": {
+        "all": "Alle",
+        "new": "Nur neue",
+        "guests": "Nur Gäste",
+        "pwa": "Nur App"
+      },
+      "hideAdmins": "Admins ausblenden",
+      "max30": "Die Liste zeigt höchstens die letzten 30 Tage.",
+      "count_one": "{{count}} Besucher",
+      "count_other": "{{count}} Besucher",
+      "groups": {
+        "today": "Heute",
+        "yesterday": "Gestern",
+        "week": "Diese Woche",
+        "older": "Früher"
+      },
+      "new": "Neu",
+      "admin": "Admin",
+      "empty": "Keine Besucher in diesem Zeitraum",
+      "line": "{{views}} Seiten · {{duration}} · erster Besuch {{first}} Uhr"
+    },
+    "overview": {
+      "empty": "Noch keine Besucher",
+      "emptyText": "Sobald jemand die Seite öffnet, erscheinen hier die Zahlen.",
+      "today": "Besucher heute",
+      "todayText": "Pro Stunde",
+      "todayLabel": "Balken: Besucher pro Stunde heute",
+      "visitors": "Besucher",
+      "perDay": "Pro Tag, gestrichelt der Vorzeitraum",
+      "perWeek": "Pro Woche, gestrichelt der Vorzeitraum",
+      "visitorsLabel": "Balken: Besucher pro Tag, Nutzer gefüllt, Gäste umrandet, Linie: Vorzeitraum",
+      "views": "Seitenaufrufe",
+      "viewsText": "Nutzer gefüllt, Gäste schraffiert",
+      "viewsLabel": "Gestapelte Balken: Seitenaufrufe von Nutzern und Gästen",
+      "registrations": "Neue Nutzer",
+      "registrationsText": "Balken pro Tag, Linie: alle {{total}} Nutzer",
+      "registrationsLabel": "Balken: Registrierungen, Linie: Nutzer gesamt",
+      "active": "Aktive Nutzer",
+      "activeText": "Bindung: {{value}} der Monatsaktiven kommen täglich",
+      "activeLabel": "Drei Linien: täglich, wöchentlich und monatlich aktive Nutzer",
+      "heatmap": "Wann ist am meisten los?",
+      "heatmapText": "Je dunkler, desto mehr Besucher",
+      "heatmapLabel": "Raster: Besucher nach Wochentag und Uhrzeit",
+      "heatmapCell_one": "{{day}} {{from}}–{{to}} Uhr: {{count}} Besucher",
+      "heatmapCell_other": "{{day}} {{from}}–{{to}} Uhr: {{count}} Besucher",
+      "hours": "Nach Uhrzeit",
+      "hoursText": "Umrandet: die aktuelle Stunde",
+      "hoursLabel": "Balken: Besucher nach Uhrzeit",
+      "pages": "Top-Seiten",
+      "pagesText": "Nach Aufrufen",
+      "apps": "Apps",
+      "appsText": "Nach Besuchern",
+      "appTrend": "App-Nutzung im Verlauf",
+      "appTrendText": "Besucher der fünf meistgenutzten Apps",
+      "appTrendLabel": "Linien: Besucher pro App",
+      "entries": "Einstiegsseiten",
+      "entriesText": "Hier kommen Besucher rein",
+      "exits": "Ausstiegsseiten",
+      "exitsText": "Hier gehen Besucher",
+      "sources": "Herkunft",
+      "sourcesText": "Woher die Besuche kommen",
+      "devices": "Geräte",
+      "devicesLabel": "Ring: Anteil Handy, Tablet und Computer",
+      "pwa": "Mit installierter App",
+      "pwaText": "Anteil der Besuche aus der installierten App",
+      "pwaTrend": "Anteil pro Tag",
+      "platforms": "Betriebssystem",
+      "browsers": "Browser",
+      "locales": "Sprache"
+    },
+    "growth": {
+      "cohorts": "Bleiben neue Nutzer?",
+      "cohortsText": "Anteil aktiv in Woche 1, 2, 4 und 8 nach der Registrierung",
+      "week": "Woche",
+      "size": "Neu",
+      "weekN_one": "W{{count}}",
+      "weekN_other": "W{{count}}",
+      "curve": "Bindung nach Tagen",
+      "curveText": "Wer nach X Tagen noch einmal da war (letzte 180 Tage)",
+      "curveLabel": "Linie: Anteil der Nutzer, die nach X Tagen wiederkamen",
+      "dayN_one": "Tag {{count}}",
+      "dayN_other": "Tag {{count}}",
+      "kept": "Wiedergekommen",
+      "registerFunnel": "Registrierung",
+      "registerFunnelText": "Von der Anmeldeseite bis zur ersten Nutzung",
+      "activationFunnel": "Erste Schritte",
+      "activationFunnelText": "Was neue Nutzer im Zeitraum gemacht haben",
+      "drop": "{{percent}} % abgesprungen",
+      "steps": {
+        "open": "Anmeldeseite geöffnet",
+        "identify": "E-Mail eingegeben",
+        "code": "Code bestätigt",
+        "account": "Konto erstellt",
+        "active": "App genutzt",
+        "avatar": "Profilbild",
+        "friend": "Erster Freund",
+        "post": "Erster Beitrag"
+      },
+      "silent": "Stille Nutzer",
+      "silentText": "Lange nicht mehr da",
+      "silentBucket": {
+        "30": "30–59 Tage",
+        "60": "60–89 Tage",
+        "90": "90 Tage und mehr"
+      },
+      "silentFor_one": "Seit {{count}} Tag nicht da",
+      "silentFor_other": "Seit {{count}} Tagen nicht da",
+      "remind": "Erinnern",
+      "remindDone": "Erinnert",
+      "remindLabel": "@{{name}} eine Erinnerung schicken",
+      "reminded": "Erinnerung gesendet",
+      "remindedRecently": "Diese Person wurde in den letzten 7 Tagen schon erinnert",
+      "invites": "Einladungen",
+      "invitesText_one": "{{count}} Person über einen Einladungslink registriert",
+      "invitesText_other": "{{count}} Personen über Einladungslinks registriert",
+      "invitesLabel": "Balken: Registrierungen über Einladungslinks",
+      "invited": "Eingeladen",
+      "topInviters": "Wer am meisten einlädt"
+    },
+    "security": {
+      "failures": "Fehlversuche",
+      "failuresShort": "Fehler",
+      "stepUps": "Step-ups",
+      "bots": "Bots",
+      "keep30": "Nur die letzten 30 Tage gespeichert",
+      "failuresChart": "Fehlgeschlagene Anmeldungen",
+      "failuresText": "Pro Tag, bekannte Geräte gefüllt",
+      "failuresLabel": "Gestapelte Balken: Fehlversuche von bekannten und unbekannten Geräten",
+      "known": "Bekanntes Gerät",
+      "unknown": "Unbekanntes Gerät",
+      "trend": "Step-ups und Bots",
+      "trendText": "Step-up: Anmeldung nur noch per Code (geschätzt)",
+      "trendLabel": "Linien: Step-ups und Bot-Aufrufe pro Tag",
+      "methods": "Anmeldemethoden",
+      "methodsText": "Neue Anmeldungen im Zeitraum",
+      "method": {
+        "password": "Passwort",
+        "passkey": "Passkey",
+        "code": "Code per E-Mail",
+        "google": "Google",
+        "register": "Registrierung",
+        "reset": "Passwort zurückgesetzt",
+        "legacy": "Alte Anmeldung"
+      },
+      "ips": "Auffällige IP-Adressen",
+      "ipsText": "Viele Fehlversuche oder mehrere Konten",
+      "ipsEmpty": "Keine auffälligen IP-Adressen",
+      "ip": "IP",
+      "accounts": "Konten",
+      "last": "Zuletzt"
+    },
+    "activity": {
+      "minor": "Keine Aktivität gespeichert",
+      "minorText": "Bei Nutzern unter 16 werden Besuche nur als Zahl gezählt.",
+      "days": "Aktive Tage",
+      "views": "Seiten",
+      "time": "Zeit",
+      "last": "Zuletzt aktiv {{time}}",
+      "calendar": "Besuchstage",
+      "calendarText": "Letzte 26 Wochen, je dunkler, desto mehr Seiten",
+      "calendarLabel_one": "Kalender: an {{count}} Tag aktiv",
+      "calendarLabel_other": "Kalender: an {{count}} Tagen aktiv",
+      "cell_one": "{{day}}: {{count}} Seite, {{time}}",
+      "cell_other": "{{day}}: {{count}} Seiten, {{time}}",
+      "apps": "Genutzte Apps",
+      "daysCount_one": "{{count}} Tag",
+      "daysCount_other": "{{count}} Tage",
+      "pages": "Zuletzt besuchte Seiten",
+      "pagesText": "Werden nach 30 Tagen gelöscht"
+    },
+    "source": {
+      "direct": "Direkt",
+      "internal": "Intern",
+      "search": "Suchmaschine",
+      "social": "Soziale Netzwerke",
+      "website": "Andere Webseite",
+      "invite": "Einladungslink",
+      "wish": "Wunschliste",
+      "share": "Geteilter Link"
+    },
+    "device": {
+      "mobile": "Handy",
+      "tablet": "Tablet",
+      "desktop": "Computer"
+    },
+    "locale": {
+      "de": "Deutsch",
+      "en": "Englisch",
+      "ru": "Russisch",
+      "unknown": "Unbekannt"
+    },
+    "app": {
+      "home": "Startseite",
+      "timeline": "Timeline",
+      "kids": "Kids",
+      "my-events": "Kalender",
+      "forum": "Forum",
+      "shop": "Shop",
+      "chat": "Chat",
+      "messenger": "Messenger",
+      "profile": "Profil",
+      "account": "Konto",
+      "auth": "Anmeldung",
+      "admin": "Admin",
+      "pages": "Seiten",
+      "files": "Dateien",
+      "meet": "Meet",
+      "news": "News",
+      "resume": "Lebenslauf"
+    },
+    "loading": "Wird geladen …"
+  },
+  "system": {
+    "title": "System",
+    "subtitle": "Version, Deploys und Server-Speicher",
+    "tabsLabel": "Bereiche des Systems",
+    "tabs": {
+      "version": "Version",
+      "storage": "Speicher"
+    },
+    "storage": {
+      "title": "Server-Speicher",
+      "used": "{{percent}} % belegt",
+      "free": "{{free}} frei von {{total}}",
+      "warn": "Ab {{percent}} % bekommen Admins täglich eine Nachricht.",
+      "warnActive": "Speicher fast voll – unten steht, was Platz braucht.",
+      "parts": "Was Platz braucht",
+      "partsText": "Anteile an der ganzen Platte.",
+      "uploads": "Uploads",
+      "kidsUploads": "davon Kids",
+      "backups": "Datenbank-Backups",
+      "logs": "Logs",
+      "binlogs": "Datenbank-Binlogs",
+      "binlogsOff": "aus oder nicht lesbar",
+      "other": "System und Rest",
+      "measured": "Gemessen {{ago}}",
+      "refresh": "Neu messen",
+      "refreshing": "Wird gemessen …",
+      "hints": {
+        "title": "Hinweise",
+        "binlogs": "Binlogs über 1 GB: binlog_expire_logs_seconds setzen ({{expire}}).",
+        "backups": "Backups über 5 GB: KEEP in shell/db-backup.sh verkleinern.",
+        "logs": "Logs über 500 MB: werden täglich ab 20 MB rotiert, ältere Kopien prüfen.",
+        "ok": "Alles im grünen Bereich."
+      }
+    },
+    "deploys": {
+      "last": "Live-Version",
+      "median": "Ø Dauer",
+      "running": "Läuft gerade",
+      "stuck": "Hängt",
+      "listTitle": "Frontend-Builds",
+      "listText": "Produktions-Builds mit gültigem DEPLOY_TOKEN, neueste oben.",
+      "version": "v{{version}}",
+      "status": {
+        "running": "Läuft",
+        "done": "Live",
+        "stuck": "Hängt"
+      },
+      "clients_one": "{{count}} Gerät benachrichtigt",
+      "clients_other": "{{count}} Geräte benachrichtigt",
+      "noBroadcast": "keine Benachrichtigung",
+      "emptyTitle": "Noch keine Deploys",
+      "emptyText": "Sie erscheinen nach dem nächsten Produktions-Build mit DEPLOY_TOKEN.",
+      "stuckHint": "Kein Abschluss nach 15 Minuten – vermutlich fehlgeschlagen. Die Live-Seite ist unverändert.",
+      "started": "Gestartet {{ago}}",
+      "liveSince": "seit {{ago}}",
+      "build": "Build {{build}}",
+      "planned": "geplant",
+      "requiredBadge": "Pflicht",
+      "bump": {
+        "patch": "Patch",
+        "minor": "Minor",
+        "major": "Major"
+      },
+      "next": {
+        "title": "Nächste Version",
+        "text": "Gilt für den nächsten Produktions-Build, danach wieder Patch.",
+        "first": "Der nächste Build bekommt die erste Versionsnummer 1.0.0.",
+        "bumpLabel": "Art des Updates",
+        "bumpHint": {
+          "patch": "Kleine Fixes – Hinweis „Neue Version“.",
+          "minor": "Neue Funktionen – mit „Was ist neu“.",
+          "major": "Große Änderung – mit „Was ist neu“."
+        },
+        "notes": "Was ist neu",
+        "notesHint": "Optional · eine Zeile pro Punkt · höchstens {{max}}",
+        "notesPlaceholder": "Kalender teilen\nSchnellere Kids-Aufgaben",
+        "required": "Update erzwingen",
+        "requiredHint": "Alte Versionen können den Hinweis nicht wegklicken und laden neu, sobald nichts offen ist.",
+        "save": "Für nächsten Deploy speichern",
+        "saved": "Gespeichert – gilt für den nächsten Deploy",
+        "saveError": "Konnte nicht gespeichert werden",
+        "reset": "Zurücksetzen"
+      }
+    }
+  }
+}

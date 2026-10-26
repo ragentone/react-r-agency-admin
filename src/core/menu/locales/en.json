@@ -1,0 +1,56 @@
+{
+  "label": "Main menu",
+  "description": "All areas of the app",
+  "sections": {
+    "main": "Discover",
+    "apps": "Apps",
+    "account": "User"
+  },
+  "items": {
+    "user": "My space",
+    "userDescription": "Profile, friends and account",
+    "administration": "Administration",
+    "administrationDescription": "Developer, roles and pages",
+    "home": "Home",
+    "profile": "Profile",
+    "profileDescription": "Your posts and info",
+    "account": "Account",
+    "accountDescription": "Account, password and privacy",
+    "login": "Sign in",
+    "loginDescription": "Log in or sign up",
+    "logout": "Sign out",
+    "logoutDescription": "Sign out on this device"
+  },
+  "open": "Open menu",
+  "close": "Close menu",
+  "settings": {
+    "attention": "New in settings",
+    "quick": "Quick settings",
+    "description": "Language and appearance",
+    "close": "Close settings",
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Appearance",
+    "themes": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    }
+  },
+  "dock": "Quick actions",
+  "group": {
+    "back": "Back to the main menu",
+    "expand": "Expand {{label}}",
+    "collapse": "Collapse {{label}}"
+  },
+  "dockMenu": {
+    "label": "Quick menu"
+  },
+  "apps": {
+    "description": "All applications",
+    "empty": "No apps available"
+  },
+  "sheet": {
+    "close": "Close {{label}}"
+  }
+}

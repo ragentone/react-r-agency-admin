@@ -1,0 +1,6 @@
+{
+  "active": true,
+  "name": "core-media",
+  "entries": ["core.tsx"],
+  "sortOrder": 0
+}

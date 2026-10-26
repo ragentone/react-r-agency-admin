@@ -1,0 +1,69 @@
+{
+  "html": {
+    "placeholder": "Start typing …",
+    "toolbar": {
+      "label": "Formatting",
+      "undo": "Undo",
+      "redo": "Redo",
+      "textStyle": "Text style",
+      "paragraph": "Paragraph",
+      "heading": "Heading {{level}}",
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strike": "Strikethrough",
+      "code": "Inline code",
+      "highlight": "Highlight",
+      "bulletList": "Bullet list",
+      "orderedList": "Numbered list",
+      "blockquote": "Quote",
+      "codeBlock": "Code block",
+      "alignLeft": "Align left",
+      "alignCenter": "Align center",
+      "alignRight": "Align right",
+      "alignJustify": "Justify",
+      "link": "Link",
+      "image": "Insert image",
+      "emoji": "Insert emoji",
+      "horizontalRule": "Divider",
+      "clearFormatting": "Clear formatting",
+      "source": "HTML source",
+      "color": "Color",
+      "textColor": "Text color",
+      "backgroundColor": "Background color",
+      "dateTime": "Insert date/time"
+    },
+    "link": {
+      "url": "Link address",
+      "urlPlaceholder": "https://example.com",
+      "apply": "Apply",
+      "remove": "Remove link"
+    },
+    "image": {
+      "url": "Image URL",
+      "urlPlaceholder": "https://example.com/image.jpg",
+      "alt": "Alt text",
+      "altPlaceholder": "Short image description",
+      "insert": "Insert"
+    },
+    "characters": {
+      "count": "{{count}} characters",
+      "limit": "{{count}} / {{max}}"
+    },
+    "color": {
+      "text": "Text",
+      "background": "Background",
+      "reset": "Default"
+    },
+    "dateTime": {
+      "insert": "Insert",
+      "update": "Update",
+      "edit": "Edit date/time",
+      "modes": {
+        "date": "Date",
+        "time": "Time",
+        "datetime": "Date & time"
+      }
+    }
+  }
+}

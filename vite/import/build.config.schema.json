@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Build config (auto import)",
+  "type": "object",
+  "properties": {
+    "$schema": { "type": "string" },
+    "disabled": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Module names left out in every mode."
+    },
+    "modes": {
+      "type": "object",
+      "description": "Per vite mode, e.g. { \"production\": { \"disabled\": [\"app-love\"] } }.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "disabled": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

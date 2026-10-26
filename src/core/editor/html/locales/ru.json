@@ -1,0 +1,69 @@
+{
+  "html": {
+    "placeholder": "Введите текст …",
+    "toolbar": {
+      "label": "Форматирование",
+      "undo": "Отменить",
+      "redo": "Повторить",
+      "textStyle": "Стиль текста",
+      "paragraph": "Абзац",
+      "heading": "Заголовок {{level}}",
+      "bold": "Жирный",
+      "italic": "Курсив",
+      "underline": "Подчёркнутый",
+      "strike": "Зачёркнутый",
+      "code": "Код в строке",
+      "highlight": "Выделение",
+      "bulletList": "Маркированный список",
+      "orderedList": "Нумерованный список",
+      "blockquote": "Цитата",
+      "codeBlock": "Блок кода",
+      "alignLeft": "По левому краю",
+      "alignCenter": "По центру",
+      "alignRight": "По правому краю",
+      "alignJustify": "По ширине",
+      "link": "Ссылка",
+      "image": "Вставить изображение",
+      "emoji": "Вставить эмодзи",
+      "horizontalRule": "Разделитель",
+      "clearFormatting": "Очистить форматирование",
+      "source": "HTML-код",
+      "color": "Цвет",
+      "textColor": "Цвет текста",
+      "backgroundColor": "Цвет фона",
+      "dateTime": "Вставить дату/время"
+    },
+    "link": {
+      "url": "Адрес ссылки",
+      "urlPlaceholder": "https://example.com",
+      "apply": "Применить",
+      "remove": "Удалить ссылку"
+    },
+    "image": {
+      "url": "URL изображения",
+      "urlPlaceholder": "https://example.com/image.jpg",
+      "alt": "Альтернативный текст",
+      "altPlaceholder": "Краткое описание изображения",
+      "insert": "Вставить"
+    },
+    "characters": {
+      "count": "{{count}} символов",
+      "limit": "{{count}} / {{max}}"
+    },
+    "color": {
+      "text": "Текст",
+      "background": "Фон",
+      "reset": "По умолчанию"
+    },
+    "dateTime": {
+      "insert": "Вставить",
+      "update": "Обновить",
+      "edit": "Изменить дату/время",
+      "modes": {
+        "date": "Дата",
+        "time": "Время",
+        "datetime": "Дата и время"
+      }
+    }
+  }
+}

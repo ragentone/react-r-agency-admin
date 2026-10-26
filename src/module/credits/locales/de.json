@@ -1,0 +1,353 @@
+{
+  "title": "Credits",
+  "subtitle": "Verdienen, ausgeben und verschenken",
+  "loading": "Wird geladen …",
+  "amount_one": "{{value}} Credit",
+  "amount_other": "{{value}} Credits",
+  "menu": {
+    "label": "Credits",
+    "description": "Guthaben, Verlauf und Belohnungen",
+    "adminLabel": "Credits",
+    "adminDescription": "Guthaben, Korrekturen und Einstellungen",
+    "topLabel": "Top Credits",
+    "topDescription": "Die drei reichsten Nutzer"
+  },
+  "apps": {
+    "core": "Allgemein"
+  },
+  "rules": {
+    "daily": {
+      "label": "Tagesbonus",
+      "description": "Jeden Tag einmal – je länger die Serie, desto mehr"
+    },
+    "confirmed": {
+      "label": "E-Mail bestätigt",
+      "description": "Einmalig, sobald deine E-Mail-Adresse bestätigt ist"
+    },
+    "avatar": {
+      "label": "Profilbild hochgeladen",
+      "description": "Einmalig für dein erstes Profilbild"
+    }
+  },
+  "tips": {
+    "transfer": "Credits senden"
+  },
+  "reasons": {
+    "admin": "Korrektur durch Admin",
+    "reversal": "Rückbuchung durch Admin",
+    "voucher": "Gutschein eingelöst",
+    "deleted": "Konto gelöscht",
+    "genesis": "Startkapital der Bank",
+    "topup": "Bank aufgestockt"
+  },
+  "kinds": {
+    "earn": "Belohnung",
+    "revoke": "Belohnung zurückgenommen",
+    "purchase": "Kauf",
+    "refund": "Erstattung",
+    "transfer_in": "Credits erhalten",
+    "transfer_out": "Credits gesendet",
+    "admin": "Korrektur",
+    "voucher": "Gutschein",
+    "bank": "Bank"
+  },
+  "errors": {
+    "not_authorized": "Bitte melde dich an.",
+    "invalid": "Das hat nicht gepasst – bitte prüfe deine Eingabe.",
+    "not_found": "Nicht gefunden.",
+    "disabled": "Das ist gerade nicht verfügbar.",
+    "insufficient_funds": "Dafür reicht dein Guthaben nicht.",
+    "held_funds": "Erhaltene Credits kannst du erst nach {{hours}} Std. weitersenden – ausgeben geht sofort.",
+    "frozen": "Dein Guthaben ist gerade gesperrt. Bitte wende dich an den Support.",
+    "rate_limited": "Zu viele Aktionen – bitte warte kurz.",
+    "forbidden": "Das darfst du nicht.",
+    "blocked": "Zwischen euch ist das nicht möglich.",
+    "self_transfer": "Du kannst dir selbst keine Credits senden.",
+    "friends_only": "Credits kannst du nur an Freunde senden.",
+    "account_too_new": "Dein Konto ist noch zu neu, um Credits zu senden.",
+    "not_confirmed": "Bestätige zuerst deine E-Mail-Adresse.",
+    "limit_send": "Dein Tageslimit zum Senden ist erreicht.",
+    "limit_receive": "Diese Person hat ihr Tageslimit für heute erreicht.",
+    "limit_recipient": "Dein Tageslimit für diese Person ist erreicht.",
+    "already_active": "Das läuft bereits.",
+    "duplicate": "Wurde schon gebucht.",
+    "capped": "Tageslimit erreicht.",
+    "failed": "Das hat nicht geklappt – deine Credits wurden erstattet.",
+    "timeout": "Keine Antwort – bitte versuch es noch einmal.",
+    "unknown": "Etwas ist schiefgelaufen. Bitte versuch es noch einmal.",
+    "bank_empty": "Die Bank hat dafür nicht genug Credits.",
+    "code_invalid": "Diesen Code gibt es nicht.",
+    "code_expired": "Dieser Code ist abgelaufen.",
+    "code_used": "Du hast diesen Code schon eingelöst.",
+    "code_exhausted": "Dieser Code wurde schon zu oft eingelöst.",
+    "code_taken": "Diesen Code gibt es schon.",
+    "too_many_attempts": "Zu viele falsche Codes – versuch es in einer Stunde wieder."
+  },
+  "duration": {
+    "permanent": "Dauerhaft",
+    "hours_one": "{{count}} Std.",
+    "hours_other": "{{count}} Std.",
+    "days_one": "{{count}} Tag",
+    "days_other": "{{count}} Tage"
+  },
+  "actions": {
+    "cancel": "Abbrechen",
+    "retry": "Erneut versuchen",
+    "loadMore": "Mehr laden",
+    "back": "Zurück"
+  },
+  "purchase": {
+    "title": "Mit Credits kaufen",
+    "success": "{{label}} ist aktiv",
+    "confirm_one": "Für {{count}} Credit kaufen",
+    "confirm_other": "Für {{count}} Credits kaufen",
+    "price": "Preis",
+    "duration": "Dauer",
+    "balance": "Dein Guthaben",
+    "after": "Danach",
+    "notEnough_one": "Dir fehlt noch {{count}} Credit.",
+    "notEnough_other": "Dir fehlen noch {{count}} Credits.",
+    "howToEarn": "So verdienst du Credits"
+  },
+  "tip": {
+    "title": "Credits an @{{name}}",
+    "button": "Credits an @{{name}} senden",
+    "short": "Credits",
+    "confirm_one": "{{count}} Credit senden",
+    "confirm_other": "{{count}} Credits senden",
+    "amount": "Betrag",
+    "custom": "Eigener Betrag ({{min}}–{{max}})",
+    "note": "Nachricht (optional)",
+    "notePlaceholder": "Danke für deinen Beitrag!",
+    "transferable": "Versendbar",
+    "fee": "Gebühr ({{percent}} %)",
+    "receives": "@{{name}} erhält",
+    "success_one": "{{count}} Credit an @{{name}} gesendet",
+    "success_other": "{{count}} Credits an @{{name}} gesendet"
+  },
+  "daily": {
+    "toast_one": "Tagesbonus: +{{count}} Credit",
+    "toast_other": "Tagesbonus: +{{count}} Credits",
+    "streak_one": "{{count}} Tag in Folge",
+    "streak_other": "{{count}} Tage in Folge"
+  },
+  "live": {
+    "received_one": "+{{count}} Credit erhalten",
+    "received_other": "+{{count}} Credits erhalten"
+  },
+  "tabs": {
+    "history": "Verlauf",
+    "earn": "Verdienen",
+    "spend": "Ausgeben"
+  },
+  "wallet": {
+    "label": "Guthaben",
+    "streak_one": "{{count}} Tag in Folge",
+    "streak_other": "{{count}} Tage in Folge",
+    "transferable": "{{value}} versendbar",
+    "today": "Heute verdient",
+    "earned": "Verdient",
+    "spent": "Ausgegeben",
+    "sent": "Verschenkt"
+  },
+  "history": {
+    "filter": "Verlauf filtern",
+    "filters": {
+      "all": "Alle",
+      "in": "Eingänge",
+      "out": "Ausgänge"
+    },
+    "emptyTitle": "Noch keine Buchungen",
+    "emptyText": "Sammle Credits mit deinem Tagesbonus.",
+    "from": "von @{{name}}",
+    "to": "an @{{name}}",
+    "deletedUser": "gelöscht"
+  },
+  "earn": {
+    "dailyTitle": "Jeden Tag",
+    "dailyText": "{{base}} Credit pro Tag in Folge – bis zu {{max}} ab Tag {{days}}. Eine Pause startet die Serie neu.",
+    "appCap_one": "Höchstens {{count}} Credit pro Tag in diesem Bereich",
+    "appCap_other": "Höchstens {{count}} Credits pro Tag in diesem Bereich",
+    "once": "Einmalig",
+    "ruleCap_one": "Max. {{count}} pro Tag",
+    "ruleCap_other": "Max. {{count}} pro Tag",
+    "globalCap_one": "Insgesamt kannst du {{count}} Credit pro Tag verdienen (Tagesbonus eingeschlossen).",
+    "globalCap_other": "Insgesamt kannst du {{count}} Credits pro Tag verdienen (Tagesbonus eingeschlossen)."
+  },
+  "spend": {
+    "tipsTitle": "Verschenken",
+    "tipsText": "Bis zu {{daily}} Credits pro Tag. Erhaltene Credits kannst du nach {{hours}} Std. weitersenden.",
+    "transferText": "Direkt an andere – über den Credits-Button im Profil",
+    "transferFriends": "Direkt an Freunde – über den Credits-Button im Profil",
+    "fee": "Beim Senden werden {{percent}} % als Gebühr einbehalten."
+  },
+  "admin": {
+    "title": "Credits",
+    "subtitle": "Guthaben, Korrekturen und Einstellungen",
+    "tabs": {
+      "overview": "Übersicht",
+      "settings": "Einstellungen",
+      "vouchers": "Gutscheine"
+    },
+    "kpi": {
+      "circulation": "Im Umlauf",
+      "wallets": "Wallets",
+      "todayEarned": "Heute verdient",
+      "todaySpent": "Heute ausgegeben",
+      "todayTransferred": "Heute verschenkt",
+      "frozen": "Gesperrt"
+    },
+    "apps": "Nach Bereich",
+    "app": "Bereich",
+    "earned": "Verdient",
+    "spent": "Ausgegeben",
+    "amount": "Betrag",
+    "note": "Grund (sichtbar im Verlauf)",
+    "saved": "Einstellungen gespeichert",
+    "save": "Speichern",
+    "reset": "Auf Standard zurücksetzen",
+    "settings": {
+      "global": "Allgemein",
+      "dailyCap": "Tageslimit (alle Bereiche)",
+      "dailyCapText": "Credits, die eine Person pro Tag verdienen kann",
+      "earnConfirmed": "Verdienen nur mit bestätigter E-Mail",
+      "daily": "Tagesbonus",
+      "enabled": "Aktiv",
+      "dailyBase": "Credits pro Serientag",
+      "maxStreak": "Serie zählt bis Tag",
+      "transfer": "Senden & Trinkgeld",
+      "friendsOnly": "Nur an Freunde",
+      "requireConfirmed": "Nur mit bestätigter E-Mail",
+      "minAccountAgeDays": "Mindestalter des Kontos (Tage)",
+      "maxPerTransfer": "Höchstens pro Überweisung",
+      "dailySend": "Senden pro Tag",
+      "dailyReceive": "Empfangen pro Tag",
+      "dailyPerRecipient": "Pro Empfänger und Tag",
+      "holdHours": "Sperre erhaltener Credits (Std.)",
+      "feePercent": "Gebühr (%)",
+      "rules": "Belohnungen",
+      "products": "Produkte",
+      "tips": "Trinkgeld",
+      "apps": "Tageslimit pro Bereich",
+      "appCap": "Leer = kein eigenes Limit",
+      "default": "Standard {{amount}}, Limit {{cap}}",
+      "defaultPrice": "Standard {{price}}",
+      "amount": "Betrag",
+      "cap": "Tageslimit",
+      "price": "Preis",
+      "min": "Minimum",
+      "max": "Maximum",
+      "bank": "Bank",
+      "defaultFunding": "Standard-Herkunft",
+      "defaultFundingText": "Für Belohnungen, Gutschriften und Gutscheine ohne eigene Einstellung",
+      "maxVoucherAmount": "Höchstwert pro Gutschein"
+    },
+    "funding": {
+      "label": "Herkunft",
+      "bank": "Aus der Bank",
+      "mint": "Aus dem Nichts",
+      "default": "Standard",
+      "bankHint": "Wird vom Bankkonto abgezogen (oder zurückgebucht).",
+      "mintHint": "Credits werden neu erzeugt (oder vernichtet) – die Bank bleibt unberührt."
+    },
+    "bank": {
+      "title": "Bankkonto",
+      "reserved": "Gutschein-Reserve",
+      "users": "Bei Nutzern",
+      "supply": "Gesamtmenge",
+      "consistent": "Alle Konten stimmen mit der Gesamtmenge überein.",
+      "inconsistent": "Die Konten weichen von der Gesamtmenge ab – bitte prüfen.",
+      "topUp": "Bank aufstocken",
+      "topUpText": "Die Credits werden neu erzeugt und erhöhen die Gesamtmenge.",
+      "topUpButton": "Aufstocken",
+      "toppedUp": "Bank um {{value}} Credits aufgestockt",
+      "history": "Bewegungen der Bank",
+      "wallet": {
+        "bank": "Bank",
+        "reserve": "Gutschein-Reserve"
+      }
+    },
+    "vouchers": {
+      "new": "Neuer Gutschein",
+      "search": "Code oder Notiz suchen",
+      "filter": "Gutscheine filtern",
+      "filters": {
+        "open": "Offen",
+        "closed": "Beendet",
+        "all": "Alle"
+      },
+      "empty": "Keine Gutscheine.",
+      "state": {
+        "active": "Aktiv",
+        "scheduled": "Geplant",
+        "expired": "Abgelaufen",
+        "exhausted": "Aufgebraucht",
+        "closed": "Deaktiviert"
+      },
+      "redeemedOf": "{{redeemed}}/{{max}} eingelöst",
+      "until": "bis {{date}}",
+      "removeUser": "Person entfernen",
+      "userSearch": "Nur für eine Person (Alias, E-Mail) – optional",
+      "created_one": "{{count}} Gutschein erstellt",
+      "created_other": "{{count}} Gutscheine erstellt",
+      "csv": "Als CSV herunterladen",
+      "copy": "Code kopieren",
+      "copied": "Kopiert",
+      "copyLink": "Link kopieren",
+      "mode": "Art",
+      "single": "Einzeln",
+      "batch": "Mehrere",
+      "code": "Code (optional)",
+      "codePlaceholder": "Leer = wird erzeugt",
+      "count": "Anzahl Codes (max. 500)",
+      "amount": "Wert in Credits",
+      "maxRedemptions": "Einlösungen pro Code",
+      "validFrom": "Gültig ab",
+      "validUntil": "Gültig bis",
+      "user": "Nur für",
+      "note": "Notiz (nur für Admins)",
+      "reserveBank": "{{value}} Credits werden aus der Bank reserviert.",
+      "reserveMint": "{{value}} Credits werden neu erzeugt und reserviert.",
+      "create": "Gutschein erstellen",
+      "createBatch_one": "{{count}} Gutschein erstellen",
+      "createBatch_other": "{{count}} Gutscheine erstellen",
+      "reserved": "{{value}} reserviert",
+      "everyone": "Alle",
+      "createdBy": "Erstellt von",
+      "edit": "Bearbeiten",
+      "amountLocked": "Der Wert ist fest, sobald jemand eingelöst hat.",
+      "deactivate": "Deaktivieren",
+      "deactivateConfirm": "Wirklich deaktivieren? Der Rest geht zurück an die Bank.",
+      "deactivated": "Gutschein deaktiviert"
+    },
+    "sumsOnly": "Admins sehen nur Summen – keine Konten oder Buchungen einzelner Nutzer.",
+    "chart": {
+      "title": "Verlauf",
+      "range": "Zeitraum",
+      "days_one": "{{count}} Tag",
+      "days_other": "{{count}} Tage",
+      "bank": "Bank-Kontostand",
+      "earned": "Verdient",
+      "spent": "Ausgegeben",
+      "transferred": "Verschenkt",
+      "day": "Tag",
+      "showTable": "Als Tabelle anzeigen",
+      "hideTable": "Tabelle ausblenden"
+    }
+  },
+  "voucher": {
+    "title": "Gutschein einlösen",
+    "placeholder": "Code eingeben",
+    "redeem": "Einlösen",
+    "success_one": "+{{count}} Credit gutgeschrieben",
+    "success_other": "+{{count}} Credits gutgeschrieben"
+  },
+  "top": {
+    "title": "Top Credits",
+    "subtitle": "Die drei Nutzer mit den meisten Credits",
+    "empty": "Noch niemand auf dem Treppchen.",
+    "hint": "Es erscheinen nur öffentliche Profile. Aktualisiert jede Minute.",
+    "rankLabel": "Platz {{rank}}: @{{name}}",
+    "link": "Die drei reichsten Nutzer ansehen"
+  }
+}
