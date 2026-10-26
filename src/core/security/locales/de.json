@@ -108,7 +108,13 @@
     "troubleText": "Klappt es nicht? Melde dich ohne Passwort an.",
     "adminTitle": "Im Admin anmelden",
     "adminNoAccount": "Für diesen Benutzer gibt es kein Konto. Eine Registrierung ist im Admin nicht möglich.",
-    "adminHint": "Nur für Administratoren. Neue Konten werden in der App angelegt."
+    "adminHint": "Nur für Administratoren. Neue Konten werden in der App angelegt.",
+    "adminLockedTitle": "Kein Zugriff auf den Admin",
+    "adminLockedText": "Dieses Konto ist kein Administrator. Die Anmeldung ist gesperrt – lade die Seite neu, um es mit einem anderen Konto zu versuchen.",
+    "adminReload": "Seite neu laden",
+    "adminPasskeyOnly": "Für dieses Konto ist kein Passwort gesetzt. Melde dich mit deinem Passkey an.",
+    "adminNoPassword": "Für dieses Konto ist kein Passwort gesetzt. Lege in der App unter Konto → Sicherheit ein Passwort an.",
+    "adminCodeRequired": "Zu viele falsche Passwörter. Melde dich mit deinem Passkey an oder versuche es später erneut."
   },
   "section": {
     "title": "Sicherheit",

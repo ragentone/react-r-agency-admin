@@ -1,0 +1,7 @@
+{
+  "active": true,
+  "name": "module-messenger",
+  "entries": ["module.tsx"],
+  "sortOrder": 7,
+  "modes": ["development", "production"]
+}

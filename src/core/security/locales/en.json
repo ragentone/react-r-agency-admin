@@ -108,7 +108,13 @@
     "troubleText": "Not working? Sign in without a password.",
     "adminTitle": "Sign in to admin",
     "adminNoAccount": "There is no account for this user. Sign-up is not available in the admin.",
-    "adminHint": "Administrators only. New accounts are created in the app."
+    "adminHint": "Administrators only. New accounts are created in the app.",
+    "adminLockedTitle": "No access to the admin",
+    "adminLockedText": "This account is not an administrator. Sign-in is locked – reload the page to try another account.",
+    "adminReload": "Reload page",
+    "adminPasskeyOnly": "This account has no password. Sign in with your passkey.",
+    "adminNoPassword": "This account has no password. Set one in the app under Account → Security.",
+    "adminCodeRequired": "Too many wrong passwords. Sign in with your passkey or try again later."
   },
   "section": {
     "title": "Security",

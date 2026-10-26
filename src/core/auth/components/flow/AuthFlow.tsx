@@ -1,36 +1,30 @@
 import { useAuth } from '@core/auth/components/use.auth.ts';
 import { AuthApi } from '@core/security/api';
-import { PasswordRules } from '@core/security/components/PasswordDrawer.tsx';
-import {
-  BigButton,
-  CodeField,
-  ErrorNote,
-  InfoBox,
-  PasswordField,
-} from '@core/security/components/ui.tsx';
+import { BigButton, CodeField, ErrorNote, PasswordField } from '@core/security/components/ui.tsx';
 import { useErrorText } from '@core/security/hooks/use.error.text.ts';
 import { passkeyPromptDismissed } from '@core/security/store.ts';
 import type { IAuthIdentifyResult, IAuthLoginResult } from '@core/security/types.ts';
 import { formatDate } from '@core/security/utils/format.ts';
-import { passwordValid } from '@core/security/utils/password.ts';
 import {
   passkeyAbortAutofill,
   passkeyAutofillSupported,
   passkeyGet,
   passkeySupported,
 } from '@core/security/utils/webauthn.ts';
+import { Alert, AlertDescription, AlertTitle } from '@ui/shad-cn/components/alert.tsx';
 import { Button } from '@ui/shad-cn/components/button.tsx';
 import { Input } from '@ui/shad-cn/components/input.tsx';
-import { ArrowBigUp, ArrowLeft, Fingerprint, KeyRound, Mail, ShieldAlert } from 'lucide-react';
+import { ArrowBigUp, ArrowLeft, Fingerprint, RotateCw, ShieldX } from 'lucide-react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-type Step = 'identify' | 'password' | 'code' | 'totp' | 'reset';
-type Purpose = 'login' | 'reset';
+type Step = 'identify' | 'password' | 'totp';
 
-const RESEND_SECONDS = 30;
-/** From this many wrong passwords on, the ways without a password become big buttons. */
-const TROUBLE_AFTER = 2;
+/**
+ * Sign-in form locked for the rest of this page load: a non-admin account tried to sign in.
+ * Module state on purpose – it survives remounts and navigation, only a reload frees it.
+ */
+let lockedUntilReload = false;
 
 /** `95` → `1:35` */
 const clock = (seconds: number): string =>
@@ -41,19 +35,22 @@ const capsLockOn = (event: React.KeyboardEvent): boolean =>
   typeof event.getModifierState === 'function' && event.getModifierState('CapsLock');
 
 /**
- * Admin sign-in (like X): one field "e-mail or user name" → the server says which way works
- * (passkey, password, e-mail code) → optional second factor → signed in.
- * No sign-up and no Google here: unknown accounts get an error, Google-only accounts the e-mail code.
+ * Admin sign-in (like X): "e-mail or user name" → password or passkey → optional 2FA.
+ * No sign-up, no Google, no e-mail codes (runtime shared/auth, scope `admin`).
+ *
+ * Non-admin account: the runtime answers `admin_required` (at `identify`, or – if someone gets
+ * past it – when the session would be issued). The form is then locked until the page is
+ * reloaded. The AuthProvider guard signs out anyone who still ends up signed in.
  */
 export const AuthFlow: React.FC = () => {
   const { t, i18n } = useTranslation('security');
   const errorText = useErrorText();
   const { completeLogin } = useAuth();
 
+  const [locked, setLocked] = useState(lockedUntilReload);
   const [step, setStep] = useState<Step>('identify');
   const [identifier, setIdentifier] = useState('');
   const [info, setInfo] = useState<IAuthIdentifyResult | null>(null);
-  const [purpose, setPurpose] = useState<Purpose>('login');
   const [ticket, setTicket] = useState('');
   const [password, setPassword] = useState('');
   const [code, setCode] = useState('');
@@ -62,21 +59,21 @@ export const AuthFlow: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [fieldError, setFieldError] = useState<string | null>(null);
   const [banReason, setBanReason] = useState<string | null>(null);
-  const [resendIn, setResendIn] = useState(0);
-  /** Wrong passwords in this flow (only for the hints, the server decides). */
-  const [passwordFails, setPasswordFails] = useState(0);
-  /** The server asked for the e-mail code instead of the password (step-up). */
-  const [stepUp, setStepUp] = useState(false);
   const [capsLock, setCapsLock] = useState(false);
   /** Rate limit: no new attempt before this time (ms), shown as countdown. */
   const [waitUntil, setWaitUntil] = useState(0);
   const [now, setNow] = useState(() => Date.now());
 
-  /** New password of the reset step. */
-  const [newPassword, setNewPassword] = useState('');
-
   const usedPasskey = useRef(false);
   const canPasskey = passkeySupported();
+
+  const lock = useCallback(() => {
+    lockedUntilReload = true;
+    passkeyAbortAutofill();
+    setPassword('');
+    setCode('');
+    setLocked(true);
+  }, []);
 
   // Countdown of a rate limit; when it is over the "too many attempts" note disappears.
   const waitLeft = waitUntil > now ? Math.ceil((waitUntil - now) / 1000) : 0;
@@ -109,12 +106,6 @@ export const AuthFlow: React.FC = () => {
     [t]
   );
 
-  useEffect(() => {
-    if (resendIn <= 0) return;
-    const timer = window.setTimeout(() => setResendIn(value => value - 1), 1000);
-    return () => window.clearTimeout(timer);
-  }, [resendIn]);
-
   const reset = (next: Step) => {
     setError(null);
     setBanReason(null);
@@ -127,6 +118,10 @@ export const AuthFlow: React.FC = () => {
   const handle = useCallback(
     async (result: IAuthLoginResult, method: 'passkey' | 'other' = 'other') => {
       if (!result.success) {
+        if (result.error === 'admin_required') {
+          lock();
+          return;
+        }
         if (result.error === 'banned') {
           setError(
             result.bannedUntil
@@ -134,6 +129,12 @@ export const AuthFlow: React.FC = () => {
               : t('flow.banned')
           );
           setBanReason(result.banReason ?? null);
+          return;
+        }
+        // Step-up after wrong passwords needs the e-mail code – not available in the admin.
+        if (result.error === 'code_required') {
+          setFieldError('password');
+          setError(t('flow.adminCodeRequired'));
           return;
         }
         setFieldError(result.field ?? null);
@@ -147,18 +148,6 @@ export const AuthFlow: React.FC = () => {
         reset('totp');
         return;
       }
-      if (result.step === 'register') {
-        // No sign-up in the admin.
-        setError(t('flow.adminNoAccount'));
-        reset('identify');
-        return;
-      }
-      if (result.step === 'reset' && result.ticket) {
-        setTicket(result.ticket);
-        setNewPassword('');
-        reset('reset');
-        return;
-      }
       if (result.step === 'done' && result.authToken) {
         passkeyAbortAutofill();
         await completeLogin(result, {
@@ -169,14 +158,18 @@ export const AuthFlow: React.FC = () => {
             !info?.methods?.passkey &&
             !passkeyPromptDismissed(),
         });
+        return;
       }
+      // Any other step (sign-up, reset) does not exist in the admin.
+      setError(t('errors.unknown'));
     },
-    [applyWait, canPasskey, completeLogin, errorText, i18n.language, info, t]
+    [applyWait, canPasskey, completeLogin, errorText, i18n.language, info, lock, t]
   );
 
   // ---- passkey (button or autofill) ----
   const signInWithPasskey = useCallback(
     async (forIdentifier: string | null, conditional = false) => {
+      if (lockedUntilReload) return;
       if (!conditional) setBusy(true);
       setError(null);
       const options = await AuthApi.passkeyOptions(forIdentifier);
@@ -203,7 +196,7 @@ export const AuthFlow: React.FC = () => {
 
   // Autofill: passkeys appear in the keyboard suggestions of the identifier field.
   useEffect(() => {
-    if (step !== 'identify') return;
+    if (step !== 'identify' || locked) return;
     let active = true;
     void passkeyAutofillSupported().then(supported => {
       if (supported && active) void signInWithPasskey(null, true);
@@ -212,28 +205,13 @@ export const AuthFlow: React.FC = () => {
       active = false;
       passkeyAbortAutofill();
     };
-  }, [step, signInWithPasskey]);
+  }, [locked, step, signInWithPasskey]);
 
   // ---- steps ----
-  const sendCode = async (value: string, nextPurpose: Purpose) => {
-    setBusy(true);
-    setError(null);
-    const result = await AuthApi.codeSend(value, nextPurpose);
-    setBusy(false);
-    if (!result.success) {
-      if (!applyWait(result)) setError(errorText(result));
-      return false;
-    }
-    setPurpose(nextPurpose);
-    setResendIn(RESEND_SECONDS);
-    reset('code');
-    return true;
-  };
-
   const submitIdentifier = async (event: React.FormEvent) => {
     event.preventDefault();
     const value = identifier.trim();
-    if (!value) return;
+    if (!value || lockedUntilReload) return;
     passkeyAbortAutofill();
     setBusy(true);
     setError(null);
@@ -241,66 +219,43 @@ export const AuthFlow: React.FC = () => {
     const result = await AuthApi.identify(value);
     setBusy(false);
     if (!result.success) {
+      if (result.error === 'admin_required') {
+        lock();
+        return;
+      }
       if (!applyWait(result)) setError(errorText(result));
       setFieldError('identifier');
       return;
     }
     setInfo(result);
-    setPasswordFails(0);
-    setStepUp(false);
     if (!result.exists) {
       setError(t('flow.adminNoAccount'));
       setFieldError('identifier');
       return;
     }
-    const methods = result.methods;
-    if (methods?.password) {
+    if (result.methods?.password) {
       setPassword('');
       reset('password');
       return;
     }
-    await sendCode(value, 'login');
+    // No password: only a passkey works here (no e-mail codes in the admin).
+    setFieldError('identifier');
+    setError(result.methods?.passkey ? t('flow.adminPasskeyOnly') : t('flow.adminNoPassword'));
   };
 
   const submitPassword = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (!password) return;
+    if (!password || lockedUntilReload) return;
     setBusy(true);
     setError(null);
     const result = await AuthApi.password(identifier.trim(), password);
     setBusy(false);
     if (!result.success) setPassword('');
-    if (result.error === 'code_required') {
-      // Step-up: continue with the e-mail code (shows the reason on the code step).
-      setStepUp(true);
-      if (!(await sendCode(identifier.trim(), 'login'))) setFieldError('password');
-      return;
-    }
-    if (result.error === 'invalid_password') setPasswordFails(count => count + 1);
-    await handle(result);
-  };
-
-  const trackCapsLock = (event: React.KeyboardEvent) => setCapsLock(capsLockOn(event));
-  const capsLockNote = capsLock ? (
-    <p className="flex items-center gap-2 px-4 text-caption leading-4 font-bold" aria-live="polite">
-      <ArrowBigUp aria-hidden="true" className="size-4 shrink-0" />
-      {t('flow.capsLock')}
-    </p>
-  ) : null;
-  const waitLabel = waitLeft > 0 ? t('flow.retryIn', { time: clock(waitLeft) }) : null;
-  const trouble = passwordFails >= TROUBLE_AFTER;
-
-  const submitCode = async (value: string) => {
-    setBusy(true);
-    setError(null);
-    const result = await AuthApi.codeVerify(identifier.trim(), purpose, value);
-    setBusy(false);
-    if (!result.success) setCode('');
     await handle(result);
   };
 
   const submitTotp = async (value: string) => {
-    if (!value.trim()) return;
+    if (!value.trim() || lockedUntilReload) return;
     setBusy(true);
     setError(null);
     const result = await AuthApi.totp(ticket, value.trim());
@@ -314,31 +269,57 @@ export const AuthFlow: React.FC = () => {
     await handle(result);
   };
 
-  const submitReset = async (event: React.FormEvent) => {
-    event.preventDefault();
-    if (!passwordValid(newPassword)) return;
-    setBusy(true);
-    setError(null);
-    const result = await AuthApi.reset(ticket, newPassword);
-    setBusy(false);
-    if (result.error === 'expired') {
-      setError(t('flow.expired'));
-      reset('identify');
-      return;
-    }
-    await handle(result);
-  };
+  const trackCapsLock = (event: React.KeyboardEvent) => setCapsLock(capsLockOn(event));
+  const capsLockNote = capsLock ? (
+    <p className="flex items-center gap-2 px-4 text-caption leading-4 font-bold" aria-live="polite">
+      <ArrowBigUp aria-hidden="true" className="size-4 shrink-0" />
+      {t('flow.capsLock')}
+    </p>
+  ) : null;
+  const waitLabel = waitLeft > 0 ? t('flow.retryIn', { time: clock(waitLeft) }) : null;
 
   // ---- view ----
+  if (locked) {
+    return (
+      <div className="flex flex-col">
+        <h1 className="mb-6 text-[31px] leading-9 font-extrabold tracking-tight text-foreground sm:text-4xl">
+          {t('flow.adminTitle')}
+        </h1>
+        <Alert className="mb-6 rounded-2xl border-foreground/20 px-4 py-4">
+          <ShieldX aria-hidden="true" className="size-5" />
+          <AlertTitle className="text-body font-bold">{t('flow.adminLockedTitle')}</AlertTitle>
+          <AlertDescription className="text-body leading-5 text-muted-foreground">
+            {t('flow.adminLockedText')}
+          </AlertDescription>
+        </Alert>
+        <fieldset disabled aria-disabled="true" className="flex flex-col gap-3 opacity-50">
+          <Input
+            value={identifier}
+            readOnly
+            aria-label={t('flow.identifier')}
+            placeholder={t('flow.identifier')}
+            className="h-12 rounded-full px-4 text-[17px]"
+          />
+          <BigButton type="button">{t('flow.next')}</BigButton>
+        </fieldset>
+        <BigButton
+          type="button"
+          variant="outline"
+          className="mt-6"
+          onClick={() => window.location.reload()}
+        >
+          <RotateCw />
+          {t('flow.adminReload')}
+        </BigButton>
+      </div>
+    );
+  }
+
   const headline: Record<Step, string> = {
     identify: t('flow.adminTitle'),
     password: t('flow.passwordTitle'),
-    code: t('flow.codeTitle'),
     totp: t('flow.totpTitle'),
-    reset: t('flow.resetTitle'),
   };
-
-  const shownEmail = info?.email ?? (identifier.includes('@') ? identifier.trim() : '');
 
   const identifierChip = (
     <button
@@ -465,113 +446,9 @@ export const AuthFlow: React.FC = () => {
               {waitLabel ?? t('flow.signIn')}
             </BigButton>
           </form>
-          {trouble ? (
-            // After a few wrong passwords: the ways without a password, big and first.
-            <div className="mt-6 flex flex-col gap-3">
-              <p className="text-body leading-5 font-bold">{t('flow.troubleText')}</p>
-              {info?.methods?.passkey && passkeyButton(identifier.trim(), true)}
-              <BigButton
-                type="button"
-                variant={info?.methods?.passkey && canPasskey ? 'outline' : 'default'}
-                onClick={() => void sendCode(identifier.trim(), 'login')}
-                disabled={busy}
-              >
-                <Mail />
-                {t('flow.useCode')}
-              </BigButton>
-              <BigButton
-                type="button"
-                variant="outline"
-                onClick={() => void sendCode(identifier.trim(), 'reset')}
-                disabled={busy}
-              >
-                <KeyRound />
-                {t('flow.forgot')}
-              </BigButton>
-            </div>
-          ) : (
-            <div className="mt-3 flex flex-col gap-3">
-              {info?.methods?.passkey && passkeyButton(identifier.trim())}
-              <Button
-                variant="ghost"
-                pill
-                className="h-11 font-bold"
-                onClick={() => void sendCode(identifier.trim(), 'login')}
-                disabled={busy}
-              >
-                <Mail />
-                {t('flow.useCode')}
-              </Button>
-              <Button
-                variant="ghost"
-                pill
-                className="h-11 font-bold"
-                onClick={() => void sendCode(identifier.trim(), 'reset')}
-                disabled={busy}
-              >
-                <KeyRound />
-                {t('flow.forgot')}
-              </Button>
-            </div>
+          {info?.methods?.passkey && (
+            <div className="mt-4 flex flex-col gap-3">{passkeyButton(identifier.trim())}</div>
           )}
-        </>
-      )}
-
-      {step === 'code' && (
-        <>
-          {stepUp && purpose === 'login' && (
-            <InfoBox icon={ShieldAlert} className="mb-4">
-              {t('flow.codeRequired')}
-            </InfoBox>
-          )}
-          <p className="mb-6 text-body leading-5 text-muted-foreground">
-            {t('flow.codeText', { email: shownEmail })}
-          </p>
-          <div className="flex flex-col items-center gap-4">
-            <CodeField
-              value={code}
-              onChange={setCode}
-              onComplete={submitCode}
-              disabled={busy || waitLeft > 0}
-              invalid={Boolean(error)}
-              label={t('common.code')}
-            />
-            <ErrorNote message={error} className="text-center" />
-            {waitLabel && (
-              <p
-                className="text-center text-body leading-5 text-muted-foreground"
-                aria-live="polite"
-              >
-                {waitLabel}
-              </p>
-            )}
-            <Button
-              variant="ghost"
-              pill
-              className="h-11 font-bold"
-              onClick={() => void sendCode(identifier.trim(), purpose)}
-              disabled={busy || resendIn > 0}
-            >
-              {resendIn > 0 ? t('flow.resendIn', { count: resendIn }) : t('common.resend')}
-            </Button>
-          </div>
-          {purpose === 'login' && (
-            <div className="mt-4 flex flex-col gap-3">
-              {info?.methods?.passkey && passkeyButton(identifier.trim(), true)}
-              {info?.methods?.password && !stepUp && (
-                <Button
-                  variant="outline"
-                  pill
-                  className="h-12 font-bold"
-                  onClick={() => reset('password')}
-                  disabled={busy}
-                >
-                  {t('flow.usePassword')}
-                </Button>
-              )}
-            </div>
-          )}
-          <p className="mt-6 text-caption leading-4 text-muted-foreground">{t('flow.codeHint')}</p>
         </>
       )}
 
@@ -642,39 +519,6 @@ export const AuthFlow: React.FC = () => {
             {recovery ? t('flow.useTotp') : t('flow.useRecovery')}
           </Button>
         </>
-      )}
-
-      {step === 'reset' && (
-        <form onSubmit={submitReset} className="flex flex-col gap-3" noValidate>
-          <p className="mb-3 text-body leading-5 text-muted-foreground">{t('flow.resetText')}</p>
-          <input
-            type="text"
-            name="username"
-            autoComplete="username"
-            value={identifier}
-            readOnly
-            hidden
-          />
-          <PasswordField
-            autoComplete="new-password"
-            value={newPassword}
-            onChange={event => setNewPassword(event.target.value)}
-            onKeyDown={trackCapsLock}
-            onKeyUp={trackCapsLock}
-            onBlur={() => setCapsLock(false)}
-            placeholder={t('password.new')}
-            aria-label={t('password.new')}
-            maxLength={64}
-            autoFocus
-            disabled={busy}
-          />
-          {capsLockNote}
-          <PasswordRules password={newPassword} />
-          <ErrorNote message={error} />
-          <BigButton type="submit" isLoading={busy} disabled={busy || !passwordValid(newPassword)}>
-            {t('flow.resetSave')}
-          </BigButton>
-        </form>
       )}
 
       {banReason && (
