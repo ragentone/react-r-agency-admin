@@ -128,6 +128,7 @@ export default defineConfig(async ({ command, mode }): Promise<UserConfig> => {
       'import.meta.env.VITE_APP': JSON.stringify({
         id: appId,
         name: 'r-agency-mesh-platform',
+        scope: 'admin',
       }),
     },
     // Build only: strip `debugger` and the noisy console calls. `console.warn` / `console.error`

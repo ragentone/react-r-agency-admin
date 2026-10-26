@@ -20,6 +20,7 @@ export type AuthError =
   | 'limit_reached'
   | 'consent_required'
   | 'code_required'
+  | 'admin_required'
   | 'unknown';
 
 export interface IAuthResult {

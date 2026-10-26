@@ -2,6 +2,7 @@
 // noinspection JSAnnotator
 
 export type ViteMode = 'development' | 'production';
+export type ViteScope = 'admin' | 'default';
 
 interface ImportMetaEnv {
   readonly VITE_MESH_SERVER_ENDPOINT: string;
@@ -9,6 +10,8 @@ interface ImportMetaEnv {
   readonly VITE_MODE: ViteMode;
   readonly VITE_APP: {
     id: string;
+    name: string;
+    scope: ViteScope;
   };
 }
 

@@ -98,6 +98,9 @@ const MeshProvider = ({ children, fallback, afterLoadDelay = 0 }: IProps) => {
             'x-auth-token': useAuthTokenStore.getState().token,
             // UI language – the runtime uses it for emails and other texts it sends itself.
             'x-mesh-locale': i18n.resolvedLanguage || i18n.language || '',
+            // Client scope (`vite.config.ts` → `VITE_APP.scope`): `admin` = admin instance, the
+            // runtime then only lets admins sign in and turns sign-up off (shared/auth).
+            'x-mesh-app-scope': import.meta.env.VITE_APP?.scope ?? 'default',
           });
         }) as () => void
       );

@@ -38,7 +38,8 @@
     "limit_reached": "Das Limit ist erreicht.",
     "consent_required": "Unter 16 brauchst du das Einverständnis deiner Eltern.",
     "unknown": "Etwas ist schiefgelaufen. Bitte versuch es noch einmal.",
-    "code_required": "Zu viele falsche Passwörter. Zur Sicherheit geht es jetzt mit einem Code per E-Mail weiter."
+    "code_required": "Zu viele falsche Passwörter. Zur Sicherheit geht es jetzt mit einem Code per E-Mail weiter.",
+    "admin_required": "Dieses Konto hat keinen Zugriff auf den Admin."
   },
   "methods": {
     "password": "Passwort",

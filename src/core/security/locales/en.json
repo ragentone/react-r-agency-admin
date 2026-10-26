@@ -38,7 +38,8 @@
     "limit_reached": "The limit is reached.",
     "consent_required": "Under 16 you need your parents' consent.",
     "unknown": "Something went wrong. Please try again.",
-    "code_required": "Too many wrong passwords. To be safe, continue with a code sent by e-mail."
+    "code_required": "Too many wrong passwords. To be safe, continue with a code sent by e-mail.",
+    "admin_required": "This account has no access to the admin."
   },
   "methods": {
     "password": "Password",
