@@ -67,7 +67,9 @@
     "selectPlaceholder": "Rolle auswählen",
     "allAssigned": "Alle registrierten Rollen sind bereits vergeben.",
     "unregistered": "Nicht registriert – keine App kennt diese Rolle",
-    "system": "Wird vom System vergeben"
+    "system": "Wird vom System vergeben",
+    "loading": "Rollen werden geladen …",
+    "loadError": "Die Rollen konnten nicht vom Server geladen werden – es werden nur die bekannten angezeigt."
   },
   "remove": {
     "title": "Rolle entfernen?",
@@ -106,7 +108,9 @@
     "imageType": "Nur JPG, PNG, WebP, GIF oder AVIF.",
     "imageTooLarge": "Das Bild ist größer als 8 MB.",
     "imageUpload": "Bild-Upload fehlgeschlagen.",
-    "accessInvalid": "Ungültige Sichtbarkeit oder Rolle."
+    "accessInvalid": "Ungültige Sichtbarkeit oder Rolle.",
+    "roleUnknown": "Diese Rolle ist im System nicht registriert.",
+    "roleNotAssignable": "Diese Rolle wird vom System vergeben und kann nicht manuell zugewiesen werden."
   },
   "pages": {
     "searchPlaceholder": "Titel oder Adresse",

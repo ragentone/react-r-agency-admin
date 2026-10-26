@@ -4,6 +4,7 @@ import { Globe, Lock, X } from 'lucide-react';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useBackendRoles } from '../hooks/use.backend.roles';
 import type { SitePageVisibility } from '../types';
 import { RoleChip } from './RoleChip';
 import { RoleSelect } from './RoleSelect';
@@ -32,6 +33,7 @@ export const PageAccessField: React.FC<IPageAccessFieldProps> = ({
 }) => {
   const { t } = useTranslation('admin');
   const { roles: registered } = useUserRoleRegistry();
+  useBackendRoles();
   const options = useMemo(
     () => registered.filter(definition => !roles.includes(definition.role)),
     [registered, roles]

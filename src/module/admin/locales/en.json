@@ -67,7 +67,9 @@
     "selectPlaceholder": "Select a role",
     "allAssigned": "Every registered role is already assigned.",
     "unregistered": "Not registered – no app knows this role",
-    "system": "Assigned by the system"
+    "system": "Assigned by the system",
+    "loading": "Loading roles …",
+    "loadError": "The roles could not be loaded from the server – only the known ones are shown."
   },
   "remove": {
     "title": "Remove role?",
@@ -106,7 +108,9 @@
     "imageType": "Only JPG, PNG, WebP, GIF or AVIF.",
     "imageTooLarge": "The image is larger than 8 MB.",
     "imageUpload": "Image upload failed.",
-    "accessInvalid": "Invalid visibility or role."
+    "accessInvalid": "Invalid visibility or role.",
+    "roleUnknown": "This role is not registered in the system.",
+    "roleNotAssignable": "This role is set by the system and cannot be granted manually."
   },
   "pages": {
     "searchPlaceholder": "Title or address",

@@ -4,4 +4,5 @@ export * from './use.admin.pages';
 export * from './use.admin.roles';
 export * from './use.admin.user';
 export * from './use.admin.users';
+export * from './use.backend.roles';
 export * from './use.site.page';

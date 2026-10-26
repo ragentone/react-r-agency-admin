@@ -15,6 +15,8 @@ const ERROR_KEYS: [needle: string, key: string][] = [
   ['admin_role_protected', 'error.protected'],
   ['admin_role_exists', 'error.exists'],
   ['admin_role_missing', 'error.missing'],
+  ['admin_role_unknown', 'error.roleUnknown'],
+  ['admin_role_not_assignable', 'error.roleNotAssignable'],
   ['admin_role_invalid', 'error.invalid'],
   ['user_update_role_not_allowed', 'error.superUser'],
   ['user_not_exists', 'error.userMissing'],

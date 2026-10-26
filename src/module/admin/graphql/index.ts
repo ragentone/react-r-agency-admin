@@ -38,6 +38,21 @@ export const AdminRoleUpdateMutation = graphql(`
  * break the request.
  */
 
+/**
+ * `admin:user` only – roles registered in the runtime (`definitions` with texts per language,
+ * `groups`) + every role still in use (`roles`). Parsed directly: new fields codegen may not know.
+ */
+export const AdminRoleListQuery = parse(`
+  query AdminRoleList {
+    adminRoleList {
+      success
+      roles
+      definitions
+      groups
+    }
+  }
+`);
+
 /** `admin:user` only – every page (drafts too) without content. */
 export const AdminPageListQuery = parse(`
   query AdminPageList {

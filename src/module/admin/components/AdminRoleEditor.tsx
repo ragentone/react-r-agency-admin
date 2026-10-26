@@ -13,6 +13,7 @@ import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
+import { useBackendRoles } from '../hooks/use.backend.roles';
 import type { AdminRoleUpdate, IAdminRoleResult, IAdminUser } from '../types';
 import { RoleChip } from './RoleChip';
 import { RoleSelect } from './RoleSelect';
@@ -38,6 +39,8 @@ export const AdminRoleEditor: React.FC<IAdminRoleEditorProps> = ({
 }) => {
   const { t } = useTranslation('admin');
   const { assignable, get } = useUserRoleRegistry();
+  // Every role of the runtime (also of apps that only live in the app frontend).
+  const { loading: rolesLoading, error: rolesError } = useBackendRoles();
   const [selected, setSelected] = useState('');
   const [editing, setEditing] = useState<string | null>(null);
   const [editValue, setEditValue] = useState('');
@@ -249,7 +252,17 @@ export const AdminRoleEditor: React.FC<IAdminRoleEditorProps> = ({
           >
             {t('role.add')}
           </h3>
-          {available.length === 0 ? (
+          {rolesError && (
+            <p role="alert" className="mb-2 px-1 text-caption text-muted-foreground">
+              {t('role.loadError')}
+            </p>
+          )}
+          {rolesLoading && available.length === 0 ? (
+            <div className="flex h-11 items-center justify-center rounded-full border border-border text-caption text-muted-foreground">
+              <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />
+              {t('role.loading')}
+            </div>
+          ) : available.length === 0 ? (
             <p className="rounded-2xl border border-dashed border-border p-4 text-center text-caption text-muted-foreground">
               {t('role.allAssigned')}
             </p>
