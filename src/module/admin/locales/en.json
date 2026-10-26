@@ -67,7 +67,7 @@
     "system": "Assigned by the system",
     "loading": "Loading roles …",
     "loadError": "The roles could not be loaded from the server – only the known ones are shown.",
-    "addOpen_one": "{{count}} role available – pick",
+    "addOpen_one": "Pick roles ({{count}} available)",
     "addOpen_other": "Pick roles ({{count}} available)"
   },
   "remove": {

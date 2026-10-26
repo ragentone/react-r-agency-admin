@@ -67,7 +67,7 @@
     "system": "Wird vom System vergeben",
     "loading": "Rollen werden geladen …",
     "loadError": "Die Rollen konnten nicht vom Server geladen werden – es werden nur die bekannten angezeigt.",
-    "addOpen_one": "{{count}} Rolle verfügbar – auswählen",
+    "addOpen_one": "Rollen auswählen ({{count}} verfügbar)",
     "addOpen_other": "Rollen auswählen ({{count}} verfügbar)"
   },
   "remove": {
