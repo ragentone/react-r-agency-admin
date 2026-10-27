@@ -95,8 +95,16 @@ export const PokerAdminPairs: React.FC<{ onShowHands: (alias: string) => void }>
                 <span className="truncate text-body font-bold">@{from.alias}</span>
                 <ArrowRight className="size-4 shrink-0" aria-label={t('admin.pairs.to')} />
                 <span className="truncate text-body font-bold">@{to.alias}</span>
+                {pair.sameAddress && (
+                  <Badge variant="outline" className="ml-auto shrink-0 rounded-full">
+                    {t('admin.pairs.sameAddress')}
+                  </Badge>
+                )}
                 {pair.flagged && (
-                  <Badge variant="destructive" className="ml-auto shrink-0 rounded-full">
+                  <Badge
+                    variant="destructive"
+                    className={cn('shrink-0 rounded-full', !pair.sameAddress && 'ml-auto')}
+                  >
                     {t('admin.pairs.flagged')}
                   </Badge>
                 )}

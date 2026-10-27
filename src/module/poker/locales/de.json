@@ -83,7 +83,9 @@
       "cancelTitle": "{{label}} absagen?",
       "cancelText": "Bei Sit & Go bekommen alle Einsatz und Gebühr zurück, auch wer schon ausgeschieden ist. Beim Freeroll bleiben bereits gezahlte Preise bestehen.",
       "closed": "Tisch geschlossen.",
-      "cancelled": "Turnier abgesagt."
+      "cancelled": "Turnier abgesagt.",
+      "recoveryTitle": "Auszahlungen vom letzten Start offen",
+      "recoveryText": "Diese Plätze bzw. Turniere aus dem letzten Lauf konnten noch nicht ausgezahlt werden. Poker läuft trotzdem; es wird alle 5 Sekunden erneut versucht."
     },
     "settings": {
       "hint": "Änderungen gelten für neue Tische und Turniere. Laufende behalten ihre Werte. Leere Sit-&-Go-Warteschlangen werden sofort ersetzt.",
@@ -126,7 +128,20 @@
         "minPool": "Min. Pool",
         "maxPool": "Max. Pool",
         "enabled": "Aktiv",
-        "timeZone": "Zeitzone"
+        "timeZone": "Zeitzone",
+        "sameAddress": "Gleiche IP-Adresse am Tisch"
+      },
+      "matching": "Matchmaking",
+      "sameAddress": "Gleiche IP-Adresse am Tisch",
+      "sameAddressText": {
+        "allow": "Keine Prüfung – Spieler derselben IP werden normal zusammengesetzt.",
+        "avoid": "Zuerst ein anderer Tisch; nur wenn sonst niemand wartet, sitzen sie zusammen. Die Prüfung markiert solche Paare früher.",
+        "block": "Nie am selben Tisch. Achtung: Familien, WGs und Büros teilen oft eine IP und warten dann allein."
+      },
+      "sameAddressOptions": {
+        "allow": "Erlauben",
+        "avoid": "Vermeiden",
+        "block": "Sperren"
       }
     },
     "hands": {
@@ -174,7 +189,8 @@
       "to": "an",
       "flagged": "Auffällig",
       "line": "Netto {{net}} Credits · {{hands}} Hände zusammen · {{oneSided}} % einseitig",
-      "handsOf": "Hände von @{{alias}}"
+      "handsOf": "Hände von @{{alias}}",
+      "sameAddress": "Gleiche IP"
     }
   }
 }

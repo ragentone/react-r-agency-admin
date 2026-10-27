@@ -13,6 +13,7 @@ import { Button } from '@ui/shad-cn/components/button.tsx';
 import { Input } from '@ui/shad-cn/components/input.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { Switch } from '@ui/shad-cn/components/switch.tsx';
+import { ToggleGroup, ToggleGroupItem } from '@ui/shad-cn/components/toggle-group.tsx';
 import { Plus, RotateCcw, Trash2 } from 'lucide-react';
 import React, { type ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -24,6 +25,7 @@ import type {
   IPokerSettings,
   IPokerSngSetting,
   IPokerStakeSetting,
+  PokerSameAddress,
 } from '../types.ts';
 import { PokerSection } from './PokerAdminView.tsx';
 import { usePokerAdminSettings } from './use.poker.admin.ts';
@@ -362,6 +364,36 @@ const PokerSettingsForm: React.FC<{
             </label>
           </Card>
         ))}
+      </div>
+
+      <PokerSection title={t('admin.settings.matching')} />
+      <div className="border-y border-border/50 px-4 py-4">
+        <p className="text-body font-bold">{t('admin.settings.sameAddress')}</p>
+        <p className="mt-0.5 text-caption text-muted-foreground">
+          {t(`admin.settings.sameAddressText.${draft.matching?.sameAddress ?? 'avoid'}`)}
+        </p>
+        <ToggleGroup
+          type="single"
+          value={draft.matching?.sameAddress ?? 'avoid'}
+          onValueChange={value =>
+            value &&
+            update(next => {
+              next.matching = { sameAddress: value as PokerSameAddress };
+            })
+          }
+          aria-label={t('admin.settings.sameAddress')}
+          className="mt-3 justify-start"
+        >
+          {(['allow', 'avoid', 'block'] as const).map(item => (
+            <ToggleGroupItem
+              key={item}
+              value={item}
+              className="rounded-full px-3 data-[state=on]:bg-foreground data-[state=on]:text-background"
+            >
+              {t(`admin.settings.sameAddressOptions.${item}`)}
+            </ToggleGroupItem>
+          ))}
+        </ToggleGroup>
       </div>
 
       <PokerSection title={t('admin.settings.freeroll')} />

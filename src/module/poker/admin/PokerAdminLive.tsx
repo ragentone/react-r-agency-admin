@@ -82,6 +82,19 @@ export const PokerAdminLive: React.FC = () => {
 
   return (
     <>
+      {!!overview.recovery?.problems.length && (
+        <div role="alert" className="mx-4 mt-4 rounded-2xl border border-destructive/40 px-4 py-3">
+          <p className="text-body font-bold text-destructive">{t('admin.live.recoveryTitle')}</p>
+          <p className="mt-0.5 text-caption text-muted-foreground">
+            {t('admin.live.recoveryText')}
+          </p>
+          <ul className="mt-2 space-y-0.5 font-mono text-micro break-all">
+            {overview.recovery.problems.slice(0, 10).map(problem => (
+              <li key={problem}>{problem}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <dl className="grid grid-cols-3 gap-2 px-4 pt-4">
         <PokerStat label={t('admin.live.escrow')} value={formatNumber(overview.escrow, locale)} />
         <PokerStat

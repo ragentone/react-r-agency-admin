@@ -83,7 +83,9 @@
       "cancelTitle": "Cancel {{label}}?",
       "cancelText": "Sit & Go: everyone gets entry and fee back, also players already out. Freeroll: prizes already paid stay paid.",
       "closed": "Table closed.",
-      "cancelled": "Tournament cancelled."
+      "cancelled": "Tournament cancelled.",
+      "recoveryTitle": "Payouts of the last run pending",
+      "recoveryText": "These seats / tournaments of the last run could not be paid out yet. Poker works anyway; it is retried every 5 seconds."
     },
     "settings": {
       "hint": "Changes apply to new tables and tournaments. Running ones keep their values. Empty Sit & Go queues are replaced right away.",
@@ -126,7 +128,20 @@
         "minPool": "Min pool",
         "maxPool": "Max pool",
         "enabled": "Active",
-        "timeZone": "Time zone"
+        "timeZone": "Time zone",
+        "sameAddress": "Same IP address at a table"
+      },
+      "matching": "Matchmaking",
+      "sameAddress": "Same IP address at a table",
+      "sameAddressText": {
+        "allow": "No check – players of one IP are seated as usual.",
+        "avoid": "Another table first; only when nobody else is waiting do they sit together. The check flags such pairs earlier.",
+        "block": "Never at the same table. Note: families, flat shares and offices often share one IP and then wait alone."
+      },
+      "sameAddressOptions": {
+        "allow": "Allow",
+        "avoid": "Avoid",
+        "block": "Block"
       }
     },
     "hands": {
@@ -174,7 +189,8 @@
       "to": "to",
       "flagged": "Suspicious",
       "line": "Net {{net}} credits · {{hands}} hands together · {{oneSided}} % one-sided",
-      "handsOf": "Hands of @{{alias}}"
+      "handsOf": "Hands of @{{alias}}",
+      "sameAddress": "Same IP"
     }
   }
 }

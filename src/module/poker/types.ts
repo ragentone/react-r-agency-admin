@@ -45,10 +45,14 @@ export interface IPokerFreerollSetting {
   maxPool: number;
 }
 
+export type PokerSameAddress = 'allow' | 'avoid' | 'block';
+
 export interface IPokerSettings {
   stakes: IPokerStakeSetting[];
   sngs: IPokerSngSetting[];
   freeroll: IPokerFreerollSetting;
+  /** Missing on runtimes before the setting existed. */
+  matching?: { sameAddress: PokerSameAddress };
 }
 
 export interface IPokerAdminPlayer {
@@ -88,6 +92,7 @@ export interface IPokerAdminTournament {
 
 export interface IPokerAdminOverview {
   escrow: number;
+  recovery?: { ready: boolean; problems: string[] };
   tables: IPokerAdminTable[];
   tournaments: IPokerAdminTournament[];
   today: {
@@ -133,5 +138,6 @@ export interface IPokerAdminPair {
   bToA: number;
   net: number;
   oneSided: number;
+  sameAddress?: boolean;
   flagged: boolean;
 }
