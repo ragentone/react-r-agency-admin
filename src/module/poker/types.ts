@@ -53,6 +53,7 @@ export interface IPokerSettings {
   freeroll: IPokerFreerollSetting;
   /** Missing on runtimes before the setting existed. */
   matching?: { sameAddress: PokerSameAddress };
+  bots?: { enabled: boolean; dailyWinLimit: number; maxBb: number };
 }
 
 export interface IPokerAdminPlayer {
@@ -66,6 +67,8 @@ export interface IPokerAdminPlayer {
 
 export interface IPokerAdminTable {
   tableId: string;
+  /** Table against bots (level). */
+  bots?: 'easy' | 'medium' | 'hard' | null;
   stakeId: string;
   sb: number;
   bb: number;

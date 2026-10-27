@@ -55,7 +55,9 @@
       "poker_tournament_fee": "Tournament fees",
       "poker_tournament_refund": "Refunds",
       "poker_tournament_prize": "Sit & Go prizes",
-      "poker_freeroll_prize": "Freeroll prizes"
+      "poker_freeroll_prize": "Freeroll prizes",
+      "poker_bot_buyin": "Bot buy-ins (bank)",
+      "poker_bot_cashout": "Bot cash-outs (bank)"
     },
     "live": {
       "escrow": "On tables",
@@ -85,7 +87,8 @@
       "closed": "Table closed.",
       "cancelled": "Tournament cancelled.",
       "recoveryTitle": "Payouts of the last run pending",
-      "recoveryText": "These seats / tournaments of the last run could not be paid out yet. Poker works anyway; it is retried every 5 seconds."
+      "recoveryText": "These seats / tournaments of the last run could not be paid out yet. Poker works anyway; it is retried every 5 seconds.",
+      "bots": "Bots · {{level}}"
     },
     "settings": {
       "hint": "Changes apply to new tables and tournaments. Running ones keep their values. Empty Sit & Go queues are replaced right away.",
@@ -129,7 +132,9 @@
         "maxPool": "Max pool",
         "enabled": "Active",
         "timeZone": "Time zone",
-        "sameAddress": "Same IP address at a table"
+        "sameAddress": "Same IP address at a table",
+        "dailyWinLimit": "Daily win limit",
+        "maxBb": "Highest big blind"
       },
       "matching": "Matchmaking",
       "sameAddress": "Same IP address at a table",
@@ -142,7 +147,10 @@
         "allow": "Allow",
         "avoid": "Avoid",
         "block": "Block"
-      }
+      },
+      "bots": "Bots",
+      "botsTitle": "Tables against bots",
+      "botsText": "For real credits – the bots play with credits of the bank. The daily limit caps what a user can win net against bots per day (0 = no limit)."
     },
     "hands": {
       "search": "@alias or user id",
@@ -191,6 +199,11 @@
       "line": "Net {{net}} credits · {{hands}} hands together · {{oneSided}} % one-sided",
       "handsOf": "Hands of @{{alias}}",
       "sameAddress": "Same IP"
+    },
+    "levels": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard"
     }
   }
 }

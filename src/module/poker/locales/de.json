@@ -55,7 +55,9 @@
       "poker_tournament_fee": "Turnier-Gebühren",
       "poker_tournament_refund": "Erstattungen",
       "poker_tournament_prize": "Sit & Go-Preise",
-      "poker_freeroll_prize": "Freeroll-Preise"
+      "poker_freeroll_prize": "Freeroll-Preise",
+      "poker_bot_buyin": "Bot-Buy-ins (Bank)",
+      "poker_bot_cashout": "Bot-Auszahlungen (Bank)"
     },
     "live": {
       "escrow": "Auf Tischen",
@@ -85,7 +87,8 @@
       "closed": "Tisch geschlossen.",
       "cancelled": "Turnier abgesagt.",
       "recoveryTitle": "Auszahlungen vom letzten Start offen",
-      "recoveryText": "Diese Plätze bzw. Turniere aus dem letzten Lauf konnten noch nicht ausgezahlt werden. Poker läuft trotzdem; es wird alle 5 Sekunden erneut versucht."
+      "recoveryText": "Diese Plätze bzw. Turniere aus dem letzten Lauf konnten noch nicht ausgezahlt werden. Poker läuft trotzdem; es wird alle 5 Sekunden erneut versucht.",
+      "bots": "Bots · {{level}}"
     },
     "settings": {
       "hint": "Änderungen gelten für neue Tische und Turniere. Laufende behalten ihre Werte. Leere Sit-&-Go-Warteschlangen werden sofort ersetzt.",
@@ -129,7 +132,9 @@
         "maxPool": "Max. Pool",
         "enabled": "Aktiv",
         "timeZone": "Zeitzone",
-        "sameAddress": "Gleiche IP-Adresse am Tisch"
+        "sameAddress": "Gleiche IP-Adresse am Tisch",
+        "dailyWinLimit": "Tageslimit Gewinn",
+        "maxBb": "Höchster Big Blind"
       },
       "matching": "Matchmaking",
       "sameAddress": "Gleiche IP-Adresse am Tisch",
@@ -142,7 +147,10 @@
         "allow": "Erlauben",
         "avoid": "Vermeiden",
         "block": "Sperren"
-      }
+      },
+      "bots": "Bots",
+      "botsTitle": "Tische gegen Bots",
+      "botsText": "Um echte Credits – die Bots spielen mit Credits der Bank. Das Tageslimit begrenzt, was ein Nutzer pro Tag netto gegen Bots gewinnen kann (0 = kein Limit)."
     },
     "hands": {
       "search": "@alias oder User-ID",
@@ -191,6 +199,11 @@
       "line": "Netto {{net}} Credits · {{hands}} Hände zusammen · {{oneSided}} % einseitig",
       "handsOf": "Hände von @{{alias}}",
       "sameAddress": "Gleiche IP"
+    },
+    "levels": {
+      "easy": "Leicht",
+      "medium": "Mittel",
+      "hard": "Schwer"
     }
   }
 }

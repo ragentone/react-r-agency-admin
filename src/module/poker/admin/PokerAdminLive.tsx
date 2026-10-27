@@ -143,7 +143,11 @@ export const PokerAdminLive: React.FC = () => {
                   {formatNumber(table.sb, locale)}/{formatNumber(table.bb, locale)}
                 </span>
                 <Badge variant="secondary" className="rounded-full">
-                  {table.seats === 2 ? 'Heads-Up' : `${table.seats}-Max`}
+                  {table.bots
+                    ? t('admin.live.bots', { level: t(`admin.levels.${table.bots}`) })
+                    : table.seats === 2
+                      ? 'Heads-Up'
+                      : `${table.seats}-Max`}
                 </Badge>
                 {table.running && (
                   <Badge className="rounded-full">

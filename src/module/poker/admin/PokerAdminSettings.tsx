@@ -32,6 +32,8 @@ import { usePokerAdminSettings } from './use.poker.admin.ts';
 
 type Result = IPokerAdminResult & { settings?: IPokerSettings; defaults?: IPokerSettings };
 
+const BOT_DEFAULTS = { enabled: true, dailyWinLimit: 500, maxBb: 10 };
+
 /** Number field with its label – `invalid` when the runtime rejected exactly this field. */
 const NumberField: React.FC<{
   label: string;
@@ -364,6 +366,40 @@ const PokerSettingsForm: React.FC<{
             </label>
           </Card>
         ))}
+      </div>
+
+      <PokerSection title={t('admin.settings.bots')} />
+      <div className="border-t border-border/50">
+        <Card
+          enabled={draft.bots?.enabled ?? true}
+          enabledLabel={t('admin.settings.enabled')}
+          removeLabel={t('admin.settings.remove')}
+          onEnabled={value =>
+            update(next => {
+              next.bots = { ...(next.bots ?? BOT_DEFAULTS), enabled: value };
+            })
+          }
+          title={
+            <div className="min-w-0">
+              <p className="truncate text-body font-bold">{t('admin.settings.botsTitle')}</p>
+              <p className="text-caption text-muted-foreground">{t('admin.settings.botsText')}</p>
+            </div>
+          }
+        >
+          {(['dailyWinLimit', 'maxBb'] as const).map(key => (
+            <NumberField
+              key={key}
+              label={t(`admin.settings.fields.${key}`)}
+              value={(draft.bots ?? BOT_DEFAULTS)[key]}
+              invalid={bad(`bots.${key}`)}
+              onChange={value =>
+                update(next => {
+                  next.bots = { ...(next.bots ?? BOT_DEFAULTS), [key]: value };
+                })
+              }
+            />
+          ))}
+        </Card>
       </div>
 
       <PokerSection title={t('admin.settings.matching')} />
