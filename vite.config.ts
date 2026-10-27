@@ -77,9 +77,9 @@ export default defineConfig(async ({ command, mode }): Promise<UserConfig> => {
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'logo.png'],
         manifest: {
           id: '/',
-          name: 'r-agency',
-          short_name: 'r-agency',
-          description: 'r-agency platform application',
+          name: 'r-agency-admin',
+          short_name: 'r-agency-admin',
+          description: 'r-agency admin platform application',
           theme_color: '#0a0a0a',
           background_color: '#0a0a0a',
           display: 'standalone',
