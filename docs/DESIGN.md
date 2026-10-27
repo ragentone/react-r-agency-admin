@@ -10,13 +10,14 @@
 
 **Wie X/Twitter: schwarz-weiß, flach, dicht, schnell, Daumen-freundlich – Mobile First, nur shadcn-Komponenten.**
 
-Bevor du Code schreibst, prüfe jede Entscheidung gegen diese 5 Regeln:
+Bevor du Code schreibst, prüfe jede Entscheidung gegen diese 6 Regeln:
 
 1. **Mobile First** – zuerst für 375 px Breite bauen, dann mit `sm: md: lg:` erweitern. Nie umgekehrt.
 2. **Schwarz/Weiß** – Farbe nur über Theme-Tokens. Einzige echte Farbe: Rot (`destructive`) für Löschen/Fehler, plus Status-Tokens (`success`, `warning`, `info`) sparsam.
 3. **Nur shadcn** – vorhandene Komponenten aus `@ui/shad-cn/components` verwenden. Nichts Eigenes bauen, wenn es eine Komponente gibt.
 4. **Usability vor Optik** – große Touch-Ziele, klare Hierarchie, eine Hauptaktion pro Screen, jeder Zustand (Laden/Leer/Fehler) ist gestaltet.
 5. **Konsistenz** – lieber ein bestehendes Muster kopieren als ein neues erfinden.
+6. **Kleine Komponenten** – eine Komponente, eine Aufgabe; Logik in Hooks, große Teile aufteilen (siehe 2.4).
 
 ---
 
@@ -59,6 +60,29 @@ Zusätzlich fertige Muster in `src/ui/patterns/`:
 - **Keine** weiteren UI-Libraries einführen (kein MUI, Chakra, Ant, Bootstrap …). Radix/Base-UI/Ark nur indirekt über shadcn-Komponenten.
 - Komponenten **nicht kopieren und abwandeln** – Varianten über `variant`/`size`-Props bzw. `className` lösen.
 - Frontend und Admin haben dieselbe Komponentenbasis. Änderungen an einer shadcn-Komponente in **beiden** Projekten nachziehen.
+
+### 2.4 Komponenten klein halten
+
+- **Eine Komponente = eine Aufgabe.** Richtwert: max. ~150 Zeilen pro Datei, der JSX-Return max. ~50 Zeilen. Wird es länger → aufteilen.
+- **Logik raus aus dem JSX:** Daten laden, Formular-Logik, Berechnungen und Effekte in einen eigenen Hook (`use-<name>.ts`) neben der Komponente.
+- **Seiten setzen nur zusammen:** Eine Page-Komponente enthält Layout + Unterkomponenten, keine Details (keine Listenzeilen, keine Formularfelder inline).
+- **Wiederkehrende Teile** (Header, Listenzeile, Leerzustand, Aktionsleiste) als eigene Unterkomponente im selben Feature-Ordner.
+- **Schlanke Props:** max. ~5–7 Props. Mehr → Komposition über `children`/Slots statt immer neuer Konfigurations-Props.
+- **Keine Modus-Monster:** viele `if (mode === …)`-Zweige in einer Komponente → getrennte Komponenten.
+- **Kein Prop-Drilling** über mehr als 2 Ebenen → Context oder Hook.
+- Teile, die in mehreren Features gebraucht werden, nach `src/ui/patterns/` verschieben – nicht kopieren.
+
+Beispiel-Struktur pro Feature:
+
+```
+module/<feature>/components/
+  FeedPage.tsx      // setzt nur zusammen
+  FeedHeader.tsx
+  FeedList.tsx
+  FeedItem.tsx
+  FeedEmpty.tsx
+  use-feed.ts       // Daten + Logik
+```
 
 ---
 
@@ -296,6 +320,7 @@ export function ExamplePage() {
 - Mehr als eine schwarze Hauptaktion pro Screen
 - Seiten ohne Lade-, Leer- und Fehlerzustand
 - `outline-none` ohne sichtbaren Fokus-Ersatz
+- Riesen-Komponenten (> ~150 Zeilen, mehrere Aufgaben, Logik und JSX vermischt)
 
 ---
 
@@ -304,6 +329,7 @@ export function ExamplePage() {
 - [ ] Auf **375 px** geprüft, kein horizontales Scrollen, dann `md` und `lg`
 - [ ] **Hell und Dunkel** geprüft
 - [ ] Nur Komponenten aus `@ui/shad-cn/components` / `@ui/patterns`
+- [ ] Komponenten klein: eine Aufgabe, ≤ ~150 Zeilen, Logik in Hooks ausgelagert
 - [ ] Nur Theme-Tokens und definierte Textgrößen
 - [ ] Touch-Ziele ≥ 44 px, Hauptaktion in Daumenzone
 - [ ] Lade-, Leer-, Fehler- und Erfolgszustand vorhanden
