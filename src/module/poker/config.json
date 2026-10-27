@@ -1,0 +1,7 @@
+{
+  "active": true,
+  "name": "module-poker",
+  "entries": ["module.tsx"],
+  "sortOrder": 9,
+  "modes": ["development", "production"]
+}

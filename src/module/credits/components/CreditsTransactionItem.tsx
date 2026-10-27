@@ -3,6 +3,8 @@ import {
   ArrowDownLeft,
   ArrowUpRight,
   Coins,
+  Dices,
+  HandCoins,
   Landmark,
   type LucideIcon,
   RotateCcw,
@@ -29,6 +31,8 @@ const KIND_ICONS: Record<ICreditTransaction['kind'], LucideIcon> = {
   admin: ShieldCheck,
   voucher: Ticket,
   bank: Landmark,
+  stake: Dices,
+  payout: HandCoins,
 };
 
 export interface ICreditsTransactionItemProps {

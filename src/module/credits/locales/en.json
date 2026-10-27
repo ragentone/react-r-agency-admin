@@ -49,7 +49,9 @@
     "transfer_out": "Credits sent",
     "admin": "Correction",
     "voucher": "Voucher",
-    "bank": "Bank"
+    "bank": "Bank",
+    "stake": "Game buy-in",
+    "payout": "Game cash-out"
   },
   "errors": {
     "not_authorized": "Please sign in.",
@@ -253,6 +255,7 @@
     "bank": {
       "title": "Bank account",
       "reserved": "Voucher reserve",
+      "escrow": "On game tables",
       "users": "With users",
       "supply": "Total supply",
       "consistent": "All accounts match the total supply.",
@@ -264,7 +267,8 @@
       "history": "Movements of the bank",
       "wallet": {
         "bank": "Bank",
-        "reserve": "Voucher reserve"
+        "reserve": "Voucher reserve",
+        "escrow": "Game tables"
       }
     },
     "vouchers": {

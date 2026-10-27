@@ -8,8 +8,8 @@
 | Bereich               | Anzahl |
 | --------------------- | -----: |
 | [Query](#query)       |    114 |
-| [Mutation](#mutation) |    217 |
-| Object-Types          |    386 |
+| [Mutation](#mutation) |    218 |
+| Object-Types          |    387 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -50,6 +50,8 @@ Query  ‹IQuery›
 │   ├── pages: JSON
 │   └── success: Boolean
 ├── adminRoleList: adminRoleListReturn  ‹IAdminRoleListReturn›
+│   ├── definitions: JSON
+│   ├── groups: JSON
 │   ├── roles: JSON
 │   └── success: Boolean
 ├── adminSeoOverview: adminSeoOverviewReturn  ‹IAdminSeoOverviewReturn›
@@ -888,6 +890,7 @@ Query  ‹IQuery›
 │   ├── $filter: String
 │   ├── $limit: Int
 │   ├── $page: Int!
+│   ├── $scope: String
 │   ├── hasNextPage: Boolean
 │   ├── records: [userNotifyListingRecords]  ‹IUserNotifyListingRecords›
 │   │   ├── actions: [userNotifyListingRecordsActions]  ‹IUserNotifyListingRecordsActions›
@@ -910,6 +913,7 @@ Query  ‹IQuery›
 │   │   ├── notifyId: String
 │   │   ├── payload: JSON
 │   │   ├── removable: Boolean
+│   │   ├── scope: String
 │   │   ├── seen: Boolean
 │   │   ├── title: String
 │   │   ├── translate: Boolean
@@ -921,6 +925,7 @@ Query  ‹IQuery›
 │   ├── success: Boolean
 │   └── total: Int
 ├── userNotifyState: userNotifyState  ‹IUserNotifyState›
+│   ├── $scope: String
 │   ├── hasNew: Boolean
 │   ├── total: Int
 │   └── unread: Int
@@ -940,6 +945,7 @@ Query  ‹IQuery›
 │   │   ├── email: String
 │   │   ├── fullName: String
 │   │   ├── gender: String
+│   │   ├── isAdmin: Boolean
 │   │   ├── lastLogin: String
 │   │   ├── online: Boolean
 │   │   ├── teaserUrl: String
@@ -1042,6 +1048,11 @@ Mutation  ‹IMutation›
 │   ├── $values: JSON!
 │   ├── page: JSON
 │   └── success: Boolean
+├── adminRoleAdd: adminRoleAddReturn  ‹IAdminRoleAddReturn›
+│   ├── $roles: JSON!
+│   ├── $userId: ID!
+│   ├── success: Boolean
+│   └── user: JSON
 ├── adminRoleUpdate: adminRoleUpdateReturn  ‹IAdminRoleUpdateReturn›
 │   ├── $action: String!
 │   ├── $role: String!
@@ -2589,6 +2600,7 @@ Mutation  ‹IMutation›
 │   ├── $type: String!
 │   └── success: Boolean
 ├── userNotifyClear: userNotifyClearReturn  ‹IUserNotifyClearReturn›
+│   ├── $scope: String
 │   ├── state: userNotifyClearReturnState  ‹IUserNotifyClearReturnState›
 │   │   ├── hasNew: Boolean
 │   │   ├── total: Int
@@ -2609,6 +2621,7 @@ Mutation  ‹IMutation›
 │   │   └── unread: Int
 │   └── success: Boolean
 ├── userNotifySeenAll: userNotifySeenAllReturn  ‹IUserNotifySeenAllReturn›
+│   ├── $scope: String
 │   ├── state: userNotifySeenAllReturnState  ‹IUserNotifySeenAllReturnState›
 │   │   ├── hasNew: Boolean
 │   │   ├── total: Int
@@ -2823,6 +2836,7 @@ Inputs
 | `adminPageImageUploadReturn`             | Object | `IAdminPageImageUploadReturn`             | `objects.ts` |                                                                                  |
 | `adminPageListReturn`                    | Object | `IAdminPageListReturn`                    | `objects.ts` |                                                                                  |
 | `adminPageUpdateReturn`                  | Object | `IAdminPageUpdateReturn`                  | `objects.ts` |                                                                                  |
+| `adminRoleAddReturn`                     | Object | `IAdminRoleAddReturn`                     | `objects.ts` |                                                                                  |
 | `adminRoleListReturn`                    | Object | `IAdminRoleListReturn`                    | `objects.ts` |                                                                                  |
 | `adminRoleUpdateReturn`                  | Object | `IAdminRoleUpdateReturn`                  | `objects.ts` |                                                                                  |
 | `adminSeoOverviewReturn`                 | Object | `IAdminSeoOverviewReturn`                 | `objects.ts` |                                                                                  |

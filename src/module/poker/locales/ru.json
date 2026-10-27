@@ -1,0 +1,188 @@
+{
+  "credits": {
+    "app": "Покер",
+    "refill": {
+      "label": "Покерное пополнение",
+      "description": "Раз в день, когда кошелёк почти пуст"
+    }
+  },
+  "menu": {
+    "adminLabel": "Покер",
+    "adminDescription": "Столы, турниры, настройки и проверки"
+  },
+  "admin": {
+    "title": "Покер",
+    "subtitle": "Столы онлайн, настройки, история раздач и проверки",
+    "retry": "Повторить",
+    "back": "Назад",
+    "more": "Загрузить ещё",
+    "tabs": {
+      "live": "Онлайн",
+      "settings": "Настройки",
+      "hands": "Раздачи",
+      "pairs": "Проверка"
+    },
+    "errors": {
+      "forbidden": "Нет прав.",
+      "not_found": "Больше не существует.",
+      "timeout": "Сервер не ответил.",
+      "invalid": "Неверный ввод.",
+      "unknown": "Неизвестная ошибка."
+    },
+    "names": {
+      "freeroll": "Ежедневный фриролл",
+      "sng-hu": "Sit & Go · Heads-Up",
+      "sng-6": "Sit & Go · 6",
+      "sng-6-high": "Sit & Go · 6 High",
+      "micro": "Micro",
+      "low": "Low",
+      "mid": "Mid",
+      "six-micro": "6-Max Micro",
+      "six-low": "6-Max Low",
+      "six-mid": "6-Max Mid"
+    },
+    "status": {
+      "registering": "Регистрация",
+      "running": "Идёт",
+      "finished": "Завершён",
+      "cancelled": "Отменён"
+    },
+    "reasons": {
+      "poker_table_buyin": "Бай-ины",
+      "poker_table_cashout": "Выводы со стола",
+      "poker_refill": "Пополнения",
+      "poker_tournament_entry": "Турнирные взносы",
+      "poker_tournament_fee": "Турнирные комиссии",
+      "poker_tournament_refund": "Возвраты",
+      "poker_tournament_prize": "Призы Sit & Go",
+      "poker_freeroll_prize": "Призы фриролла"
+    },
+    "live": {
+      "escrow": "На столах",
+      "hands": "Раздач сегодня",
+      "rake": "Рейк сегодня",
+      "today": "Операции сегодня",
+      "todayHint": "Сумма по кошелькам игроков – минус = внесено.",
+      "tables_one": "{{count}} кэш-стол",
+      "tables_few": "{{count}} кэш-стола",
+      "tables_many": "{{count}} кэш-столов",
+      "tables_other": "{{count}} кэш-стола",
+      "noTables": "Сейчас никто не сидит за кэш-столом.",
+      "hand": "Раздача №{{no}}",
+      "chips": "{{value}} фишек",
+      "offline": "Не в сети",
+      "sittingOut": "пропускает",
+      "close": "Закрыть",
+      "tournaments": "Турниры",
+      "noTournaments": "Нет открытых турниров.",
+      "running": "осталось {{left}}/{{total}} · уровень {{level}} · столов: {{tables}}",
+      "registering_one": "{{count}} регистрация",
+      "registering_few": "{{count}} регистрации",
+      "registering_many": "{{count}} регистраций",
+      "registering_other": "{{count}} регистрации",
+      "pool": "Фонд {{value}}",
+      "cancel": "Отменить",
+      "closeTitle": "Закрыть стол {{label}}?",
+      "closeText": "Все встают и получают фишки обратно. Текущая раздача отменяется – каждый получает свои ставки назад.",
+      "cancelTitle": "Отменить {{label}}?",
+      "cancelText": "Sit & Go: все получают взнос и комиссию обратно, включая выбывших. Фриролл: уже выплаченные призы остаются.",
+      "closed": "Стол закрыт.",
+      "cancelled": "Турнир отменён."
+    },
+    "settings": {
+      "hint": "Изменения действуют для новых столов и турниров. Текущие сохраняют свои значения. Пустые очереди Sit & Go заменяются сразу.",
+      "stakes": "Кэш-ставки",
+      "sngs": "Sit & Go",
+      "freeroll": "Фриролл",
+      "add": "Добавить",
+      "remove": "Удалить",
+      "enabled": "Активно",
+      "save": "Сохранить",
+      "saved": "Сохранено.",
+      "discard": "Отменить изменения",
+      "reset": "По умолчанию",
+      "resetDone": "Значения по умолчанию восстановлены.",
+      "resetTitle": "Сбросить на значения по умолчанию?",
+      "resetText": "Все настройки покера вернутся к значениям из кода.",
+      "invalidField": "Неверное значение: {{field}}",
+      "fields": {
+        "id": "Ключ",
+        "sb": "Малый блайнд",
+        "bb": "Большой блайнд",
+        "minBuyIn": "Мин. бай-ин",
+        "maxBuyIn": "Макс. бай-ин",
+        "seats": "Мест",
+        "rakePercent": "Рейк",
+        "rakeCap": "Лимит рейка",
+        "players": "Игроков",
+        "buyIn": "Взнос",
+        "fee": "Комиссия",
+        "chips": "Стартовый стек",
+        "levelMinutes": "Минут на уровень",
+        "payouts": "Выплаты в % (сумма 100)",
+        "start": "Старт",
+        "hour": "Час",
+        "minute": "Минута",
+        "registerMinutes": "Регистрация заранее",
+        "minPlayers": "Мин. игроков",
+        "maxPlayers": "Макс. игроков",
+        "prizePerPlayer": "Приз за игрока",
+        "minPool": "Мин. фонд",
+        "maxPool": "Макс. фонд",
+        "enabled": "Активно",
+        "timeZone": "Часовой пояс"
+      }
+    },
+    "hands": {
+      "search": "@alias или ID пользователя",
+      "kind": "Тип",
+      "kinds": {
+        "all": "Все",
+        "cash": "Кэш",
+        "tournament": "Турнир"
+      },
+      "noUser": "Пользователь «{{user}}» не найден.",
+      "empty": "Раздачи не найдены.",
+      "pot": "Банк {{value}}",
+      "title": "Раздача",
+      "rake": "Рейк {{value}}",
+      "board": "Борд",
+      "folded": "сбросил",
+      "streets": {
+        "preflop": "Префлоп",
+        "flop": "Флоп",
+        "turn": "Тёрн",
+        "river": "Ривер",
+        "showdown": "Вскрытие"
+      },
+      "actions": {
+        "sb": "Малый блайнд",
+        "bb": "Большой блайнд",
+        "fold": "Фолд",
+        "check": "Чек",
+        "call": "Колл",
+        "bet": "Бет",
+        "raise": "Рейз",
+        "allin": "Олл-ин",
+        "return": "возврат"
+      }
+    },
+    "pairs": {
+      "hint": "Кредиты, перешедшие между двумя игроками в кэш-раздачах. Отмечено: больше, чем позволяет лимит переводов, и почти только в одну сторону – возможный слив фишек.",
+      "range": "Период",
+      "days_one": "{{count}} день",
+      "days_few": "{{count}} дня",
+      "days_many": "{{count}} дней",
+      "days_other": "{{count}} дня",
+      "scanned_one": "проверена {{count}} раздача",
+      "scanned_few": "проверено {{count}} раздачи",
+      "scanned_many": "проверено {{count}} раздач",
+      "scanned_other": "проверено {{count}} раздачи",
+      "empty": "Ничего подозрительного.",
+      "to": "→",
+      "flagged": "Подозрительно",
+      "line": "Нетто {{net}} кредитов · {{hands}} раздач вместе · {{oneSided}} % в одну сторону",
+      "handsOf": "Раздачи @{{alias}}"
+    }
+  }
+}

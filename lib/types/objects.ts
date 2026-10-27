@@ -82,8 +82,16 @@ export interface IAdminPageUpdateReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminRoleAddReturn` */
+export interface IAdminRoleAddReturn {
+  success: Maybe<boolean>;
+  user: Maybe<ScalarJSON>;
+}
+
 /** GraphQL: `adminRoleListReturn` */
 export interface IAdminRoleListReturn {
+  definitions: Maybe<ScalarJSON>;
+  groups: Maybe<ScalarJSON>;
   roles: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
 }
@@ -2096,6 +2104,7 @@ export interface IMutation {
   adminPageImageKeep: Maybe<IAdminPageImageKeepReturn>;
   adminPageImageUpload: Maybe<IAdminPageImageUploadReturn>;
   adminPageUpdate: Maybe<IAdminPageUpdateReturn>;
+  adminRoleAdd: Maybe<IAdminRoleAddReturn>;
   adminRoleUpdate: Maybe<IAdminRoleUpdateReturn>;
   adminSeoRouteDelete: Maybe<IAdminSeoRouteDeleteReturn>;
   adminSeoRouteSave: Maybe<IAdminSeoRouteSaveReturn>;
@@ -3410,6 +3419,7 @@ export interface IUserNotifyListingRecords {
   notifyId: Maybe<string>;
   payload: Maybe<ScalarJSON>;
   removable: Maybe<boolean>;
+  scope: Maybe<string>;
   seen: Maybe<boolean>;
   title: Maybe<string>;
   translate: Maybe<boolean>;
@@ -3503,6 +3513,7 @@ export interface IUserProfileData {
   email: Maybe<string>;
   fullName: Maybe<string>;
   gender: Maybe<string>;
+  isAdmin: Maybe<boolean>;
   lastLogin: Maybe<string>;
   online: Maybe<boolean>;
   teaserUrl: Maybe<string>;

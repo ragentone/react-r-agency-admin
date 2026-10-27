@@ -9,7 +9,11 @@ export type CreditKind =
   | 'transfer_out'
   | 'admin'
   | 'voucher'
-  | 'bank';
+  | 'bank'
+  /** Credits put into a game (poker buy-in). */
+  | 'stake'
+  /** Credits back from a game (poker cash-out). */
+  | 'payout';
 
 /** Where credits come from: the application bank or created from nothing. */
 export type CreditFunding = 'bank' | 'mint';
@@ -276,7 +280,7 @@ export interface ICreditChartDay {
 /** Movement of the bank / voucher reserve (no users). */
 export interface ICreditBankRow {
   id: string;
-  wallet: 'bank' | 'reserve';
+  wallet: 'bank' | 'reserve' | 'escrow';
   amount: number;
   balanceAfter: number;
   reason: string;
@@ -300,6 +304,8 @@ export interface ICreditTopResult extends ICreditResult {
 export interface ICreditBankStatus {
   balance: number;
   reserved: number;
+  /** Credits on game tables (escrow). */
+  escrow?: number;
   supply: number;
   users: number;
   consistent: boolean;

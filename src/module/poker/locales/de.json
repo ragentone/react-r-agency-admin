@@ -1,0 +1,180 @@
+{
+  "credits": {
+    "app": "Poker",
+    "refill": {
+      "label": "Poker-Nachschub",
+      "description": "Einmal am Tag, wenn das Konto fast leer ist"
+    }
+  },
+  "menu": {
+    "adminLabel": "Poker",
+    "adminDescription": "Tische, Turniere, Einstellungen und Prüfungen"
+  },
+  "admin": {
+    "title": "Poker",
+    "subtitle": "Live-Tische, Einstellungen, Hand-Historie und Prüfungen",
+    "retry": "Erneut versuchen",
+    "back": "Zurück",
+    "more": "Mehr laden",
+    "tabs": {
+      "live": "Live",
+      "settings": "Einstellungen",
+      "hands": "Hände",
+      "pairs": "Prüfung"
+    },
+    "errors": {
+      "forbidden": "Keine Berechtigung.",
+      "not_found": "Nicht mehr vorhanden.",
+      "timeout": "Keine Antwort vom Server.",
+      "invalid": "Ungültige Eingabe.",
+      "unknown": "Unbekannter Fehler."
+    },
+    "names": {
+      "freeroll": "Tägliches Freeroll",
+      "sng-hu": "Sit & Go · Heads-Up",
+      "sng-6": "Sit & Go · 6",
+      "sng-6-high": "Sit & Go · 6 High",
+      "micro": "Micro",
+      "low": "Low",
+      "mid": "Mid",
+      "six-micro": "6-Max Micro",
+      "six-low": "6-Max Low",
+      "six-mid": "6-Max Mid"
+    },
+    "status": {
+      "registering": "Anmeldung",
+      "running": "Läuft",
+      "finished": "Beendet",
+      "cancelled": "Abgesagt"
+    },
+    "reasons": {
+      "poker_table_buyin": "Buy-ins",
+      "poker_table_cashout": "Cash-outs",
+      "poker_refill": "Nachschub",
+      "poker_tournament_entry": "Turnier-Einsätze",
+      "poker_tournament_fee": "Turnier-Gebühren",
+      "poker_tournament_refund": "Erstattungen",
+      "poker_tournament_prize": "Sit & Go-Preise",
+      "poker_freeroll_prize": "Freeroll-Preise"
+    },
+    "live": {
+      "escrow": "Auf Tischen",
+      "hands": "Hände heute",
+      "rake": "Rake heute",
+      "today": "Buchungen heute",
+      "todayHint": "Summe der Nutzerkonten – negativ = eingezahlt.",
+      "tables_one": "{{count}} Cash-Tisch",
+      "tables_other": "{{count}} Cash-Tische",
+      "noTables": "Gerade sitzt niemand an einem Cash-Tisch.",
+      "hand": "Hand #{{no}}",
+      "chips": "{{value}} Chips",
+      "offline": "Offline",
+      "sittingOut": "setzt aus",
+      "close": "Schließen",
+      "tournaments": "Turniere",
+      "noTournaments": "Keine offenen Turniere.",
+      "running": "{{left}}/{{total}} übrig · Level {{level}} · {{tables}} Tisch(e)",
+      "registering_one": "{{count}} Anmeldung",
+      "registering_other": "{{count}} Anmeldungen",
+      "pool": "Pool {{value}}",
+      "cancel": "Absagen",
+      "closeTitle": "Tisch {{label}} schließen?",
+      "closeText": "Alle stehen auf und bekommen ihre Chips zurück. Eine laufende Hand wird rückgängig gemacht – jeder erhält seinen Einsatz zurück.",
+      "cancelTitle": "{{label}} absagen?",
+      "cancelText": "Bei Sit & Go bekommen alle Einsatz und Gebühr zurück, auch wer schon ausgeschieden ist. Beim Freeroll bleiben bereits gezahlte Preise bestehen.",
+      "closed": "Tisch geschlossen.",
+      "cancelled": "Turnier abgesagt."
+    },
+    "settings": {
+      "hint": "Änderungen gelten für neue Tische und Turniere. Laufende behalten ihre Werte. Leere Sit-&-Go-Warteschlangen werden sofort ersetzt.",
+      "stakes": "Cash-Stakes",
+      "sngs": "Sit & Go",
+      "freeroll": "Freeroll",
+      "add": "Hinzufügen",
+      "remove": "Entfernen",
+      "enabled": "Aktiv",
+      "save": "Speichern",
+      "saved": "Gespeichert.",
+      "discard": "Verwerfen",
+      "reset": "Standard",
+      "resetDone": "Auf Standardwerte zurückgesetzt.",
+      "resetTitle": "Auf Standardwerte zurücksetzen?",
+      "resetText": "Alle Poker-Einstellungen gehen auf die Werte aus dem Code zurück.",
+      "invalidField": "Ungültiger Wert: {{field}}",
+      "fields": {
+        "id": "Kennung",
+        "sb": "Small Blind",
+        "bb": "Big Blind",
+        "minBuyIn": "Min. Buy-in",
+        "maxBuyIn": "Max. Buy-in",
+        "seats": "Plätze",
+        "rakePercent": "Rake",
+        "rakeCap": "Rake-Deckel",
+        "players": "Spieler",
+        "buyIn": "Einsatz",
+        "fee": "Gebühr",
+        "chips": "Startchips",
+        "levelMinutes": "Level-Minuten",
+        "payouts": "Auszahlung in % (Summe 100)",
+        "start": "Start",
+        "hour": "Stunde",
+        "minute": "Minute",
+        "registerMinutes": "Anmeldung vorher",
+        "minPlayers": "Min. Spieler",
+        "maxPlayers": "Max. Spieler",
+        "prizePerPlayer": "Preis pro Spieler",
+        "minPool": "Min. Pool",
+        "maxPool": "Max. Pool",
+        "enabled": "Aktiv",
+        "timeZone": "Zeitzone"
+      }
+    },
+    "hands": {
+      "search": "@alias oder User-ID",
+      "kind": "Art",
+      "kinds": {
+        "all": "Alle",
+        "cash": "Cash",
+        "tournament": "Turnier"
+      },
+      "noUser": "Kein Nutzer „{{user}}“ gefunden.",
+      "empty": "Keine Hände gefunden.",
+      "pot": "Pot {{value}}",
+      "title": "Hand",
+      "rake": "Rake {{value}}",
+      "board": "Board",
+      "folded": "gefoldet",
+      "streets": {
+        "preflop": "Preflop",
+        "flop": "Flop",
+        "turn": "Turn",
+        "river": "River",
+        "showdown": "Showdown"
+      },
+      "actions": {
+        "sb": "Small Blind",
+        "bb": "Big Blind",
+        "fold": "Fold",
+        "check": "Check",
+        "call": "Call",
+        "bet": "Bet",
+        "raise": "Raise",
+        "allin": "All-in",
+        "return": "zurück"
+      }
+    },
+    "pairs": {
+      "hint": "Credits, die in Cash-Händen zwischen zwei Spielern geflossen sind. Markiert: mehr als das Überweisungslimit erlaubt und fast nur in eine Richtung – möglicher Chip-Dump.",
+      "range": "Zeitraum",
+      "days_one": "{{count}} Tag",
+      "days_other": "{{count}} Tage",
+      "scanned_one": "{{count}} Hand ausgewertet",
+      "scanned_other": "{{count}} Hände ausgewertet",
+      "empty": "Keine Auffälligkeiten.",
+      "to": "an",
+      "flagged": "Auffällig",
+      "line": "Netto {{net}} Credits · {{hands}} Hände zusammen · {{oneSided}} % einseitig",
+      "handsOf": "Hände von @{{alias}}"
+    }
+  }
+}

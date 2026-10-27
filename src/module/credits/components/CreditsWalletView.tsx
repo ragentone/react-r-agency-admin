@@ -47,7 +47,10 @@ export const CreditsWalletView: React.FC = () => {
     void navigate({ to: CREDITS_ROUTE, search: { tab: next } as never, replace: true });
 
   return (
-    <div data-slot="credits" className="mx-auto flex min-h-dvh w-full flex-col bg-background overflow-x-hidden">
+    <div
+      data-slot="credits"
+      className="mx-auto flex min-h-dvh w-full flex-col bg-background overflow-x-hidden"
+    >
       <CreditsPageHeader title={t('title')} subtitle={t('subtitle')}>
         <CreditsTabs
           tabs={TABS}

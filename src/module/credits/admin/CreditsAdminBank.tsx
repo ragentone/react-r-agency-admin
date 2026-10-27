@@ -41,6 +41,7 @@ export const CreditsAdminBank: React.FC<{ bank: ICreditBankStatus; onChanged: ()
 
   const stats = [
     ['reserved', bank.reserved],
+    ['escrow', bank.escrow ?? 0],
     ['users', bank.users],
     ['supply', bank.supply],
   ] as const;
@@ -58,7 +59,7 @@ export const CreditsAdminBank: React.FC<{ bank: ICreditBankStatus; onChanged: ()
         {format(bank.balance)}
       </p>
       <CreditsStats
-        className="mt-3"
+        className="mt-3 grid-cols-2 sm:grid-cols-4"
         items={stats.map(([key, value]) => ({
           key,
           label: t(`admin.bank.${key}`),

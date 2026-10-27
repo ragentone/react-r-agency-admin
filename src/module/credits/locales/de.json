@@ -49,7 +49,9 @@
     "transfer_out": "Credits gesendet",
     "admin": "Korrektur",
     "voucher": "Gutschein",
-    "bank": "Bank"
+    "bank": "Bank",
+    "stake": "Spieleinsatz",
+    "payout": "Auszahlung aus Spiel"
   },
   "errors": {
     "not_authorized": "Bitte melde dich an.",
@@ -253,6 +255,7 @@
     "bank": {
       "title": "Bankkonto",
       "reserved": "Gutschein-Reserve",
+      "escrow": "Auf Spieltischen",
       "users": "Bei Nutzern",
       "supply": "Gesamtmenge",
       "consistent": "Alle Konten stimmen mit der Gesamtmenge überein.",
@@ -264,7 +267,8 @@
       "history": "Bewegungen der Bank",
       "wallet": {
         "bank": "Bank",
-        "reserve": "Gutschein-Reserve"
+        "reserve": "Gutschein-Reserve",
+        "escrow": "Spieltische"
       }
     },
     "vouchers": {

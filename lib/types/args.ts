@@ -100,6 +100,12 @@ export interface IMutationAdminPageUpdateArgs {
   values: ScalarJSON;
 }
 
+/** Arguments of `Mutation.adminRoleAdd` */
+export interface IMutationAdminRoleAddArgs {
+  roles: ScalarJSON;
+  userId: ScalarID;
+}
+
 /** Arguments of `Mutation.adminRoleUpdate` */
 export interface IMutationAdminRoleUpdateArgs {
   action: string;
@@ -1151,6 +1157,11 @@ export interface IMutationUserNotifyArgs {
   type: string;
 }
 
+/** Arguments of `Mutation.userNotifyClear` */
+export interface IMutationUserNotifyClearArgs {
+  scope?: InputMaybe<string>;
+}
+
 /** Arguments of `Mutation.userNotifyDelete` */
 export interface IMutationUserNotifyDeleteArgs {
   notifyId: string;
@@ -1159,6 +1170,11 @@ export interface IMutationUserNotifyDeleteArgs {
 /** Arguments of `Mutation.userNotifySeen` */
 export interface IMutationUserNotifySeenArgs {
   notifyId: string;
+}
+
+/** Arguments of `Mutation.userNotifySeenAll` */
+export interface IMutationUserNotifySeenAllArgs {
+  scope?: InputMaybe<string>;
 }
 
 /** Arguments of `Mutation.userPasswordChange` */
@@ -1651,6 +1667,12 @@ export interface IQueryUserNotifyListingArgs {
   filter?: InputMaybe<string>;
   limit?: InputMaybe<number>;
   page: number;
+  scope?: InputMaybe<string>;
+}
+
+/** Arguments of `Query.userNotifyState` */
+export interface IQueryUserNotifyStateArgs {
+  scope?: InputMaybe<string>;
 }
 
 /** Arguments of `Query.userProfileLoad` */

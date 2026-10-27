@@ -1,0 +1,180 @@
+{
+  "credits": {
+    "app": "Poker",
+    "refill": {
+      "label": "Poker refill",
+      "description": "Once a day when the wallet is almost empty"
+    }
+  },
+  "menu": {
+    "adminLabel": "Poker",
+    "adminDescription": "Tables, tournaments, settings and checks"
+  },
+  "admin": {
+    "title": "Poker",
+    "subtitle": "Live tables, settings, hand history and checks",
+    "retry": "Try again",
+    "back": "Back",
+    "more": "Load more",
+    "tabs": {
+      "live": "Live",
+      "settings": "Settings",
+      "hands": "Hands",
+      "pairs": "Checks"
+    },
+    "errors": {
+      "forbidden": "No permission.",
+      "not_found": "No longer there.",
+      "timeout": "No response from the server.",
+      "invalid": "Invalid input.",
+      "unknown": "Unknown error."
+    },
+    "names": {
+      "freeroll": "Daily freeroll",
+      "sng-hu": "Sit & Go · Heads-Up",
+      "sng-6": "Sit & Go · 6",
+      "sng-6-high": "Sit & Go · 6 High",
+      "micro": "Micro",
+      "low": "Low",
+      "mid": "Mid",
+      "six-micro": "6-Max Micro",
+      "six-low": "6-Max Low",
+      "six-mid": "6-Max Mid"
+    },
+    "status": {
+      "registering": "Registration",
+      "running": "Running",
+      "finished": "Finished",
+      "cancelled": "Cancelled"
+    },
+    "reasons": {
+      "poker_table_buyin": "Buy-ins",
+      "poker_table_cashout": "Cash-outs",
+      "poker_refill": "Refills",
+      "poker_tournament_entry": "Tournament entries",
+      "poker_tournament_fee": "Tournament fees",
+      "poker_tournament_refund": "Refunds",
+      "poker_tournament_prize": "Sit & Go prizes",
+      "poker_freeroll_prize": "Freeroll prizes"
+    },
+    "live": {
+      "escrow": "On tables",
+      "hands": "Hands today",
+      "rake": "Rake today",
+      "today": "Bookings today",
+      "todayHint": "Sum of user wallets – negative = paid in.",
+      "tables_one": "{{count}} cash table",
+      "tables_other": "{{count}} cash tables",
+      "noTables": "Nobody is at a cash table right now.",
+      "hand": "Hand #{{no}}",
+      "chips": "{{value}} chips",
+      "offline": "Offline",
+      "sittingOut": "sitting out",
+      "close": "Close",
+      "tournaments": "Tournaments",
+      "noTournaments": "No open tournaments.",
+      "running": "{{left}}/{{total}} left · level {{level}} · {{tables}} table(s)",
+      "registering_one": "{{count}} registration",
+      "registering_other": "{{count}} registrations",
+      "pool": "Pool {{value}}",
+      "cancel": "Cancel",
+      "closeTitle": "Close table {{label}}?",
+      "closeText": "Everyone stands up and gets their chips back. A running hand is undone – everyone gets their bets back.",
+      "cancelTitle": "Cancel {{label}}?",
+      "cancelText": "Sit & Go: everyone gets entry and fee back, also players already out. Freeroll: prizes already paid stay paid.",
+      "closed": "Table closed.",
+      "cancelled": "Tournament cancelled."
+    },
+    "settings": {
+      "hint": "Changes apply to new tables and tournaments. Running ones keep their values. Empty Sit & Go queues are replaced right away.",
+      "stakes": "Cash stakes",
+      "sngs": "Sit & Go",
+      "freeroll": "Freeroll",
+      "add": "Add",
+      "remove": "Remove",
+      "enabled": "Active",
+      "save": "Save",
+      "saved": "Saved.",
+      "discard": "Discard",
+      "reset": "Defaults",
+      "resetDone": "Back to the defaults.",
+      "resetTitle": "Reset to defaults?",
+      "resetText": "All poker settings go back to the values from the code.",
+      "invalidField": "Invalid value: {{field}}",
+      "fields": {
+        "id": "Key",
+        "sb": "Small blind",
+        "bb": "Big blind",
+        "minBuyIn": "Min buy-in",
+        "maxBuyIn": "Max buy-in",
+        "seats": "Seats",
+        "rakePercent": "Rake",
+        "rakeCap": "Rake cap",
+        "players": "Players",
+        "buyIn": "Entry",
+        "fee": "Fee",
+        "chips": "Starting chips",
+        "levelMinutes": "Level minutes",
+        "payouts": "Payouts in % (sum 100)",
+        "start": "Start",
+        "hour": "Hour",
+        "minute": "Minute",
+        "registerMinutes": "Registration before",
+        "minPlayers": "Min players",
+        "maxPlayers": "Max players",
+        "prizePerPlayer": "Prize per player",
+        "minPool": "Min pool",
+        "maxPool": "Max pool",
+        "enabled": "Active",
+        "timeZone": "Time zone"
+      }
+    },
+    "hands": {
+      "search": "@alias or user id",
+      "kind": "Kind",
+      "kinds": {
+        "all": "All",
+        "cash": "Cash",
+        "tournament": "Tournament"
+      },
+      "noUser": "No user “{{user}}” found.",
+      "empty": "No hands found.",
+      "pot": "Pot {{value}}",
+      "title": "Hand",
+      "rake": "Rake {{value}}",
+      "board": "Board",
+      "folded": "folded",
+      "streets": {
+        "preflop": "Preflop",
+        "flop": "Flop",
+        "turn": "Turn",
+        "river": "River",
+        "showdown": "Showdown"
+      },
+      "actions": {
+        "sb": "Small blind",
+        "bb": "Big blind",
+        "fold": "Fold",
+        "check": "Check",
+        "call": "Call",
+        "bet": "Bet",
+        "raise": "Raise",
+        "allin": "All-in",
+        "return": "returned"
+      }
+    },
+    "pairs": {
+      "hint": "Credits that moved between two players in cash hands. Flagged: more than the transfer limit allows and almost only one way – possible chip dumping.",
+      "range": "Range",
+      "days_one": "{{count}} day",
+      "days_other": "{{count}} days",
+      "scanned_one": "{{count}} hand checked",
+      "scanned_other": "{{count}} hands checked",
+      "empty": "Nothing suspicious.",
+      "to": "to",
+      "flagged": "Suspicious",
+      "line": "Net {{net}} credits · {{hands}} hands together · {{oneSided}} % one-sided",
+      "handsOf": "Hands of @{{alias}}"
+    }
+  }
+}

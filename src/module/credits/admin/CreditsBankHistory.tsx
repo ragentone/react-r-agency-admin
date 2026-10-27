@@ -1,4 +1,4 @@
-import { Landmark, Ticket } from 'lucide-react';
+import { Dices, Landmark, Ticket } from 'lucide-react';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -28,7 +28,8 @@ export const CreditsBankHistory: React.FC = () => {
       )}
       <ul className="divide-y divide-border/40">
         {rows.map(row => {
-          const Icon = row.wallet === 'reserve' ? Ticket : Landmark;
+          const Icon =
+            row.wallet === 'reserve' ? Ticket : row.wallet === 'escrow' ? Dices : Landmark;
           return (
             <li key={row.id} className="flex items-center gap-3 px-4 py-3">
               <span className="grid size-10 shrink-0 place-items-center rounded-full bg-foreground/[0.06]">

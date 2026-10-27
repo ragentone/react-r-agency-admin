@@ -1,7 +1,7 @@
 import { Core } from '@core/core.api.ts';
 import { lazyPage } from '@core/page/lazy.page.ts';
 import { ProviderManager } from '@core/provider';
-import { Coins, Gem } from 'lucide-react';
+import { Coins, Gem, Spade } from 'lucide-react';
 import React from 'react';
 
 import { CreditsMenuBalance } from './components/CreditsMenuBalance.tsx';
@@ -25,6 +25,13 @@ const PageCreditsAdmin = lazyPage(
 );
 
 CreditsRegistry.registerApp({ app: 'core', label: 'credits:apps.core', icon: Coins, sortOrder: 0 });
+// Poker (runtime apps/poker): buy-ins, cash-outs, rake, refill.
+CreditsRegistry.registerApp({
+  app: 'poker',
+  label: 'poker:credits.app',
+  icon: Spade,
+  sortOrder: 40,
+});
 
 ProviderManager.add({
   alias: 'credits',
