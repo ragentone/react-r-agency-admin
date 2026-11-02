@@ -19,10 +19,8 @@ interface IPluginListProps {
   loading: boolean;
   error: boolean;
   plugins: IPluginListItem[];
-  pendingId: string | null;
   onRetry: () => void;
-  onToggle: (plugin: IPluginListItem, active: boolean) => void;
-  onRemove: (plugin: IPluginListItem) => void;
+  onSelect: (plugin: IPluginListItem) => void;
 }
 
 /** Loading, error, empty and list state of the installed plugins. */
@@ -30,10 +28,8 @@ export const PluginList: React.FC<IPluginListProps> = ({
   loading,
   error,
   plugins,
-  pendingId,
   onRetry,
-  onToggle,
-  onRemove,
+  onSelect,
 }) => {
   const { t } = useTranslation('admin');
 
@@ -80,13 +76,7 @@ export const PluginList: React.FC<IPluginListProps> = ({
   return (
     <ul className="flex flex-col">
       {plugins.map(plugin => (
-        <PluginRow
-          key={plugin.pluginId}
-          plugin={plugin}
-          pending={pendingId === plugin.pluginId}
-          onToggle={active => onToggle(plugin, active)}
-          onRemove={() => onRemove(plugin)}
-        />
+        <PluginRow key={plugin.pluginId} plugin={plugin} onSelect={() => onSelect(plugin)} />
       ))}
     </ul>
   );

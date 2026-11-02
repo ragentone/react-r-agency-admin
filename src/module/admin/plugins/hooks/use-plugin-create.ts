@@ -9,7 +9,7 @@ export const usePluginCreate = (onCreated: () => void) => {
   const [result, setResult] = useState<IPluginCreateResult | null>(null);
 
   const create = useCallback(
-    async (input: { pluginId: string; name: string; slots: string[] }) => {
+    async (input: { name: string; slots: string[] }) => {
       setBusy(true);
       setResult(null);
       const response = await PluginApi.createDraft(input);

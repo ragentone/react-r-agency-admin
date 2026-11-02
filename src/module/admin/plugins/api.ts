@@ -1,8 +1,10 @@
 import { parse } from 'graphql';
 import { getMeshClient } from 'r-agency-mesh-client-v1/release';
 
+import type { PluginBump } from './version';
 import type {
   IPluginCreateResult,
+  IPluginDeployResult,
   IPluginListResult,
   IPluginRemoveResult,
   IPluginStatusResult,
@@ -34,8 +36,14 @@ const RemoveMutation = parse(`
 `);
 
 const CreateDraftMutation = parse(`
-  mutation AdminPluginCreateDraft($pluginId: String!, $name: String!, $slots: [String]) {
-    adminPluginCreateDraft(pluginId: $pluginId, name: $name, slots: $slots) { success error errors plugin }
+  mutation AdminPluginCreateDraft($name: String!, $slots: [String]) {
+    adminPluginCreateDraft(name: $name, slots: $slots) { success error errors plugin }
+  }
+`);
+
+const DeployDevMutation = parse(`
+  mutation AdminPluginDeployDev($pluginId: String!, $bump: String!) {
+    adminPluginDeployDev(pluginId: $pluginId, bump: $bump) { success error errors plugin }
   }
 `);
 
@@ -57,17 +65,27 @@ export const PluginApi = {
     }
   },
 
-  createDraft: async (input: {
-    pluginId: string;
-    name: string;
-    slots: string[];
-  }): Promise<IPluginCreateResult> => {
+  createDraft: async (input: { name: string; slots: string[] }): Promise<IPluginCreateResult> => {
     try {
       const response = (await client().mutate({
         mutation: CreateDraftMutation as never,
         variables: input,
       })) as { data?: { adminPluginCreateDraft?: IPluginCreateResult } };
       return response.data?.adminPluginCreateDraft ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+
+  /** Development only: build, install the new version and activate it on this server. */
+  deployDev: async (pluginId: string, bump: PluginBump): Promise<IPluginDeployResult> => {
+    try {
+      const response = (await client().mutate({
+        mutation: DeployDevMutation as never,
+        variables: { pluginId, bump },
+      })) as { data?: { adminPluginDeployDev?: IPluginDeployResult } };
+      return response.data?.adminPluginDeployDev ?? { success: false, error: 'unknown' };
     } catch (error) {
       console.warn('[admin-plugins]', (error as Error)?.message);
       return { success: false, error: 'unknown' };

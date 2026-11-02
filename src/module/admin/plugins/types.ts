@@ -49,6 +49,13 @@ export interface IPluginStatusResult {
 }
 
 /** Result of `adminPluginRemove`. */
+export interface IPluginDeployResult {
+  success: boolean;
+  error?: string | null;
+  errors?: string[] | null;
+  plugin?: { pluginId: string; version: string; status: PluginStatus } | null;
+}
+
 export interface IPluginRemoveResult {
   success: boolean;
   error?: string | null;

@@ -1061,19 +1061,55 @@
       "button": "Entwicklungs-Plugin anlegen",
       "title": "Entwicklungs-Plugin anlegen",
       "description": "Legt eine Vorlage mit Manifest und Platzhalter-Code an. Der Code wird lokal in plugin-dev weitergebaut.",
-      "idLabel": "Plugin-Id",
-      "idHint": "Kleinbuchstaben, Ziffern und „-“, 2–48 Zeichen, mit Buchstabe beginnen.",
+      "idHint": "Die Plugin-Id wird automatisch aus dem Namen erstellt.",
       "nameLabel": "Name",
       "slotsLabel": "Wo das Plugin erscheint",
       "submit": "Vorlage anlegen",
       "busy": "Wird angelegt …",
-      "success": "Vorlage {{id}} angelegt (Status: in Entwicklung)",
+      "success": "Vorlage {{id}} angelegt (Status: in Entwicklung). Abhängigkeiten werden im Hintergrund installiert.",
       "errors": {
         "invalid_manifest": "Die Angaben sind ungültig.",
         "exists": "Diese Plugin-Id gibt es schon.",
         "not_authorized": "Keine Berechtigung.",
         "unknown": "Anlegen fehlgeschlagen. Bitte erneut versuchen."
       }
+    },
+    "deploy": {
+      "button": "{{name}} neu deployen",
+      "hint": "Version erhöhen, bauen und aktivieren.",
+      "success": "{{name}} {{version}} deployt und aktiviert.",
+      "errors": {
+        "not_found": "Plugin nicht gefunden.",
+        "not_development": "Nur Entwicklungs-Plugins können neu deployt werden.",
+        "not_available": "Nur in der Entwicklung verfügbar.",
+        "project_missing": "Kein Entwicklungsprojekt gefunden.",
+        "dependencies_missing": "Abhängigkeiten fehlen. npm install läuft noch oder ist fehlgeschlagen.",
+        "build_failed": "Build fehlgeschlagen.",
+        "manifest_invalid": "plugin.json ist ungültig.",
+        "version_not_newer": "Die Version in plugin.json ist nicht neuer als die aktive. Bitte erhöhen.",
+        "app_version_too_old": "Die App ist zu alt für dieses Plugin.",
+        "package_invalid": "Das Paket ist ungültig.",
+        "zip_missing": "Der Build hat keine ZIP-Datei erzeugt.",
+        "invalid_plugin_id": "Ungültige Plugin-Id.",
+        "unknown": "Deploy fehlgeschlagen. Bitte erneut versuchen."
+      },
+      "dialogTitle": "{{name}} deployen",
+      "dialogDescription": "Aktuelle Version {{version}}. Welche Erhöhung soll die neue Version bekommen?",
+      "cancel": "Abbrechen",
+      "bump": {
+        "patch": "Patch · Fehlerbehebung",
+        "minor": "Minor · neue Funktionen",
+        "major": "Major · grundlegende Änderung"
+      }
+    },
+    "details": {
+      "open": "{{name}} Details öffnen",
+      "version": "Version",
+      "minAppVersion": "Mindest-App-Version",
+      "state": "Status",
+      "active": "Aktiv",
+      "deploy": "Neu deployen",
+      "remove": "Löschen"
     }
   }
 }
