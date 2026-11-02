@@ -1,0 +1,47 @@
+export type PluginStatus = 'installed' | 'active' | 'inactive';
+
+/** One row of `adminPluginList` (runtime `shared/plugin`). */
+export interface IPluginListItem {
+  pluginId: string;
+  name: string;
+  version: string;
+  minAppVersion: string;
+  status: PluginStatus;
+}
+
+export interface IPluginListResult {
+  success: boolean;
+  error?: string | null;
+  plugins?: IPluginListItem[] | null;
+}
+
+/** Result of `adminPluginUpload`. `error` is a code, `errors` the details found by the backend. */
+export interface IPluginUploadResult {
+  success: boolean;
+  error?: string | null;
+  errors?: string[] | null;
+  plugin?: { id: string; name: string; version: string } | null;
+}
+
+/** Upload error codes the backend can return (translation keys `plugins.errors.<code>`). */
+export const PLUGIN_UPLOAD_ERROR_CODES = [
+  'no_file',
+  'not_zip',
+  'too_large',
+  'zip_unreadable',
+  'package_invalid',
+  'manifest_missing',
+  'manifest_invalid',
+  'version_not_newer',
+  'not_authorized',
+] as const;
+
+/** Upload limit – same as the backend (`PLUGIN_UPLOAD_MAX_BYTES`). */
+export const PLUGIN_UPLOAD_MAX_MB = 20;
+
+/** Result of `adminPluginSetStatus`. */
+export interface IPluginStatusResult {
+  success: boolean;
+  error?: string | null;
+  plugin?: { pluginId: string; version: string; status: PluginStatus } | null;
+}

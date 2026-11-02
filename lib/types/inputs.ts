@@ -100,6 +100,8 @@ export interface ITimelineListingOptions {
   page: number;
   pageId?: InputMaybe<string>;
   postId?: InputMaybe<string>;
+  search?: InputMaybe<string>;
+  shareToken?: InputMaybe<string>;
   type?: InputMaybe<Array<InputMaybe<string>>>;
   userId?: InputMaybe<ScalarID>;
 }
@@ -107,6 +109,7 @@ export interface ITimelineListingOptions {
 /** GraphQL: `timelineLoadEntryOptions` */
 export interface ITimelineLoadEntryOptions {
   entryId?: InputMaybe<string>;
+  shareToken?: InputMaybe<string>;
 }
 
 /** GraphQL: `timelineLocationInput` */

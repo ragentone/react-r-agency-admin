@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |    114 |
-| [Mutation](#mutation) |    218 |
-| Object-Types          |    387 |
+| [Query](#query)       |    115 |
+| [Mutation](#mutation) |    220 |
+| Object-Types          |    390 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -624,6 +624,7 @@ Query  ‹IQuery›
 ├── timelineCommentsListing: timelineCommentsListing  ‹ITimelineCommentsListing›
 │   ├── $entryId: String!
 │   ├── $page: Int!
+│   ├── $shareToken: String
 │   ├── comments: [timelineCommentsListingComments]  ‹ITimelineCommentsListingComments›
 │   │   ├── canDelete: Boolean
 │   │   ├── comment: String
@@ -693,12 +694,15 @@ Query  ‹IQuery›
 │   │   ├── page: Int!
 │   │   ├── pageId: String
 │   │   ├── postId: String
+│   │   ├── search: String
+│   │   ├── shareToken: String
 │   │   ├── type: [String]
 │   │   └── userId: ID
 │   ├── entries: [timelineListingEntries]  ‹ITimelineListingEntries›
 │   │   ├── component: String
 │   │   ├── createdAt: DateTime!
 │   │   ├── entryType: String!
+│   │   ├── excerpt: String
 │   │   ├── generated: Boolean
 │   │   ├── id: String!
 │   │   ├── lastEntry: Boolean!
@@ -718,7 +722,8 @@ Query  ‹IQuery›
 │   └── tokenId: String
 ├── timelineLoadEntry: timelineLoadEntry  ‹ITimelineLoadEntry›
 │   ├── $options: timelineLoadEntryOptions!  ‹ITimelineLoadEntryOptions›
-│   │   └── entryId: String
+│   │   ├── entryId: String
+│   │   └── shareToken: String
 │   └── entry: timelineLoadEntryEntry  ‹ITimelineLoadEntryEntry›
 │       ├── data: timelineLoadEntryEntryData  ‹ITimelineLoadEntryEntryData›
 │       │   ├── anonymize: Boolean
@@ -765,9 +770,17 @@ Query  ‹IQuery›
 │   └── success: Boolean
 ├── timelinePageLoad: timelinePageLoadReturn  ‹ITimelinePageLoadReturn›
 │   ├── $id: ID!
+│   ├── $shareToken: String
 │   ├── exists: Boolean
 │   ├── page: JSON
 │   └── success: Boolean
+├── timelinePageMembers: timelinePageMembersReturn  ‹ITimelinePageMembersReturn›
+│   ├── $id: ID!
+│   ├── $shareToken: String
+│   ├── members: JSON
+│   ├── pending: JSON
+│   ├── success: Boolean
+│   └── total: Int
 ├── tokenValidate: tokenValidateReturn  ‹ITokenValidateReturn›
 │   ├── $token: String!
 │   ├── expired: Boolean
@@ -2444,6 +2457,7 @@ Mutation  ‹IMutation›
 ├── timelineCreateEntry: timelineCreateEntryReturn  ‹ITimelineCreateEntryReturn›
 │   ├── $allowComments: Boolean!
 │   ├── $anonymize: Boolean!
+│   ├── $asPage: Boolean
 │   ├── $background: String
 │   ├── $chart: JSON
 │   ├── $choice: JSON
@@ -2494,13 +2508,28 @@ Mutation  ‹IMutation›
 │   ├── $id: ID!
 │   ├── deletedEntries: Int
 │   └── success: Boolean
+├── timelinePageMember: timelinePageMemberReturn  ‹ITimelinePageMemberReturn›
+│   ├── $action: String!
+│   ├── $id: ID!
+│   ├── $shareToken: String
+│   ├── $userId: ID
+│   └── success: Boolean
 ├── timelinePageSave: timelinePageSaveReturn  ‹ITimelinePageSaveReturn›
+│   ├── $avatarFile: [Upload]
 │   ├── $bannerFile: [Upload]
 │   ├── $id: ID!
 │   ├── $values: JSON!
 │   ├── entity: JSON
 │   ├── exists: Boolean
 │   └── success: Boolean
+├── timelinePageShare: timelinePageShareReturn  ‹ITimelinePageShareReturn›
+│   ├── $action: String!
+│   ├── $expiresAt: String
+│   ├── $id: ID!
+│   ├── $mode: String
+│   ├── expiresAt: String
+│   ├── success: Boolean
+│   └── token: String
 ├── timelinePollVote: timelinePollVoteReturn  ‹ITimelinePollVoteReturn›
 │   ├── $entryId: ID!
 │   ├── $optionId: String!
@@ -2785,10 +2814,13 @@ Inputs
 │   ├── page: Int!
 │   ├── pageId: String
 │   ├── postId: String
+│   ├── search: String
+│   ├── shareToken: String
 │   ├── type: [String]
 │   └── userId: ID
 ├── timelineLoadEntryOptions  ‹ITimelineLoadEntryOptions›
-│   └── entryId: String
+│   ├── entryId: String
+│   └── shareToken: String
 ├── timelineLocationInput  ‹ITimelineLocationInput›
 │   ├── lat: String
 │   ├── lon: String
@@ -3164,7 +3196,10 @@ Inputs
 | `timelinePageDeleteReturn`               | Object | `ITimelinePageDeleteReturn`               | `objects.ts` |                                                                                  |
 | `timelinePageListReturn`                 | Object | `ITimelinePageListReturn`                 | `objects.ts` |                                                                                  |
 | `timelinePageLoadReturn`                 | Object | `ITimelinePageLoadReturn`                 | `objects.ts` |                                                                                  |
+| `timelinePageMemberReturn`               | Object | `ITimelinePageMemberReturn`               | `objects.ts` |                                                                                  |
+| `timelinePageMembersReturn`              | Object | `ITimelinePageMembersReturn`              | `objects.ts` |                                                                                  |
 | `timelinePageSaveReturn`                 | Object | `ITimelinePageSaveReturn`                 | `objects.ts` |                                                                                  |
+| `timelinePageShareReturn`                | Object | `ITimelinePageShareReturn`                | `objects.ts` |                                                                                  |
 | `timelinePollVoteReturn`                 | Object | `ITimelinePollVoteReturn`                 | `objects.ts` |                                                                                  |
 | `timelineReactReturn`                    | Object | `ITimelineReactReturn`                    | `objects.ts` |                                                                                  |
 | `timelineSearchInput`                    | Input  | `ITimelineSearchInput`                    | `inputs.ts`  |                                                                                  |

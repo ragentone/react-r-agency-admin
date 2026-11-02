@@ -2278,7 +2278,9 @@ export interface IMutation {
   timelineFixEntries: Maybe<ITimelineFixEntriesReturn>;
   timelinePageCreate: Maybe<ITimelinePageCreateReturn>;
   timelinePageDelete: Maybe<ITimelinePageDeleteReturn>;
+  timelinePageMember: Maybe<ITimelinePageMemberReturn>;
   timelinePageSave: Maybe<ITimelinePageSaveReturn>;
+  timelinePageShare: Maybe<ITimelinePageShareReturn>;
   timelinePollVote: Maybe<ITimelinePollVoteReturn>;
   timelineReact: Maybe<ITimelineReactReturn>;
   timelineUpdateEntry: Maybe<ITimelineUpdateEntryReturn>;
@@ -2568,6 +2570,7 @@ export interface IQuery {
   timelineLoadPost: Maybe<ITimelineLoadPostReturn>;
   timelinePageList: Maybe<ITimelinePageListReturn>;
   timelinePageLoad: Maybe<ITimelinePageLoadReturn>;
+  timelinePageMembers: Maybe<ITimelinePageMembersReturn>;
   tokenValidate: Maybe<ITokenValidateReturn>;
   userAliasExists: Maybe<IUserAliasExists>;
   userCheckAuth: Maybe<IUserCheckAuth>;
@@ -2921,6 +2924,7 @@ export interface ITimelineListingEntries {
   component: Maybe<string>;
   createdAt: ScalarDateTime;
   entryType: string;
+  excerpt: Maybe<string>;
   generated: Maybe<boolean>;
   id: string;
   lastEntry: boolean;
@@ -2999,6 +3003,10 @@ export interface ITimelineLoadEntryEntryDataCreator {
   alias: Maybe<string>;
   avatarUrl: Maybe<string>;
   exists: Maybe<boolean>;
+  isPage: Maybe<boolean>;
+  pageId: Maybe<string>;
+  postedByAlias: Maybe<string>;
+  postedByAvatarUrl: Maybe<string>;
 }
 
 /** GraphQL: `timelineLoadEntryEntryDataFiles` */
@@ -3088,11 +3096,31 @@ export interface ITimelinePageLoadReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `timelinePageMemberReturn` */
+export interface ITimelinePageMemberReturn {
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `timelinePageMembersReturn` */
+export interface ITimelinePageMembersReturn {
+  members: Maybe<ScalarJSON>;
+  pending: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+  total: Maybe<number>;
+}
+
 /** GraphQL: `timelinePageSaveReturn` */
 export interface ITimelinePageSaveReturn {
   entity: Maybe<ScalarJSON>;
   exists: Maybe<boolean>;
   success: Maybe<boolean>;
+}
+
+/** GraphQL: `timelinePageShareReturn` */
+export interface ITimelinePageShareReturn {
+  expiresAt: Maybe<string>;
+  success: Maybe<boolean>;
+  token: Maybe<string>;
 }
 
 /** GraphQL: `timelinePollVoteReturn` */

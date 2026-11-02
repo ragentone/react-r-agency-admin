@@ -12,7 +12,9 @@
     "statsLabel": "Besucher",
     "statsDescription": "Wer die Seite besucht, live und als Statistik",
     "systemLabel": "System",
-    "systemDescription": "Version, Deploys und Server-Speicher"
+    "systemDescription": "Version, Deploys und Server-Speicher",
+    "pluginsLabel": "Plugins",
+    "pluginsDescription": "Plugin-ZIP hochladen und installierte Plugins ansehen"
   },
   "tabs": {
     "users": "Benutzer",
@@ -988,6 +990,52 @@
       "hint": "Alias, E-Mail oder ID eingeben (ab {{count}} Zeichen)",
       "loading": "Wird gesucht …",
       "results": "Benutzer"
+    }
+  },
+  "plugins": {
+    "title": "Plugins",
+    "subtitle": "Plugin-ZIP hochladen und installierte Plugins ansehen",
+    "upload": {
+      "button": "Plugin hochladen",
+      "title": "Plugin hochladen",
+      "description": "ZIP-Datei mit plugin.json im Wurzelordner.",
+      "file": "Plugin-Datei (.zip)",
+      "fileHint": "Maximal {{size}} MB",
+      "submit": "Hochladen",
+      "uploading": "Wird hochgeladen …",
+      "success": "Plugin {{name}} {{version}} installiert"
+    },
+    "empty": {
+      "title": "Noch keine Plugins",
+      "description": "Lade ein Plugin-ZIP hoch, dann erscheint es hier."
+    },
+    "error": {
+      "title": "Plugins konnten nicht geladen werden",
+      "retry": "Erneut versuchen"
+    },
+    "status": {
+      "installed": "Installiert",
+      "active": "Aktiv",
+      "inactive": "Inaktiv"
+    },
+    "errors": {
+      "no_file": "Keine Datei gewählt.",
+      "not_zip": "Bitte eine ZIP-Datei wählen.",
+      "too_large": "Die Datei ist zu groß.",
+      "zip_unreadable": "Die Datei ist kein lesbares ZIP.",
+      "package_invalid": "Das ZIP enthält unzulässige Dateien oder Pfade.",
+      "manifest_missing": "plugin.json fehlt im Wurzelordner.",
+      "manifest_invalid": "plugin.json ist ungültig.",
+      "version_not_newer": "Diese Version ist nicht neuer als die installierte.",
+      "not_authorized": "Keine Berechtigung.",
+      "unknown": "Unbekannter Fehler. Bitte erneut versuchen."
+    },
+    "toggle": {
+      "label": "{{name}} aktiv schalten",
+      "activated": "{{name}} ist aktiv",
+      "deactivated": "{{name}} ist inaktiv",
+      "error": "Status konnte nicht geändert werden",
+      "appVersionTooOld": "Dieses Plugin braucht eine neuere App-Version."
     }
   }
 }

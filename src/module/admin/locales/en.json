@@ -12,7 +12,9 @@
     "statsLabel": "Visitors",
     "statsDescription": "Who visits the site, live and as statistics",
     "systemLabel": "System",
-    "systemDescription": "Version, deploys and server storage"
+    "systemDescription": "Version, deploys and server storage",
+    "pluginsLabel": "Plugins",
+    "pluginsDescription": "Upload a plugin ZIP and see installed plugins"
   },
   "tabs": {
     "users": "Users",
@@ -988,6 +990,52 @@
       "hint": "Enter alias, e-mail or ID (from {{count}} characters)",
       "loading": "Searching …",
       "results": "Users"
+    }
+  },
+  "plugins": {
+    "title": "Plugins",
+    "subtitle": "Upload a plugin ZIP and see installed plugins",
+    "upload": {
+      "button": "Upload plugin",
+      "title": "Upload plugin",
+      "description": "ZIP file with plugin.json in the root folder.",
+      "file": "Plugin file (.zip)",
+      "fileHint": "Max. {{size}} MB",
+      "submit": "Upload",
+      "uploading": "Uploading …",
+      "success": "Plugin {{name}} {{version}} installed"
+    },
+    "empty": {
+      "title": "No plugins yet",
+      "description": "Upload a plugin ZIP and it will appear here."
+    },
+    "error": {
+      "title": "Plugins could not be loaded",
+      "retry": "Try again"
+    },
+    "status": {
+      "installed": "Installed",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "errors": {
+      "no_file": "No file selected.",
+      "not_zip": "Please choose a ZIP file.",
+      "too_large": "The file is too large.",
+      "zip_unreadable": "The file is not a readable ZIP.",
+      "package_invalid": "The ZIP contains disallowed files or paths.",
+      "manifest_missing": "plugin.json is missing in the root folder.",
+      "manifest_invalid": "plugin.json is invalid.",
+      "version_not_newer": "This version is not newer than the installed one.",
+      "not_authorized": "Not authorized.",
+      "unknown": "Unknown error. Please try again."
+    },
+    "toggle": {
+      "label": "Turn {{name}} on or off",
+      "activated": "{{name}} is active",
+      "deactivated": "{{name}} is inactive",
+      "error": "Status could not be changed",
+      "appVersionTooOld": "This plugin needs a newer app version."
     }
   }
 }

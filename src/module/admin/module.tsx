@@ -1,9 +1,10 @@
 import { Core } from '@core/core.api.ts';
 import { lazyPage } from '@core/page/lazy.page.ts';
-import { ChartNoAxesCombined, FileText, Server, UsersRound } from 'lucide-react';
+import { ChartNoAxesCombined, FileText, Puzzle, Server, UsersRound } from 'lucide-react';
 
 import {
   ADMIN_PAGES_ROUTE,
+  ADMIN_PLUGINS_ROUTE,
   ADMIN_ROLES,
   ADMIN_ROUTE,
   ADMIN_STATS_ROUTE,
@@ -32,6 +33,10 @@ const PageAdminHome = lazyPage(
 const PageAdminSystem = lazyPage(
   () => import('./pages/PageAdminSystem.tsx').then(m => m.PageAdminSystem),
   'PageAdminSystem'
+);
+const PageAdminPlugins = lazyPage(
+  () => import('./pages/PageAdminPlugins.tsx').then(m => m.PageAdminPlugins),
+  'PageAdminPlugins'
 );
 // Public dynamic pages (created in the admin area).
 const PageSite = lazyPage(() => import('./pages/PageSite.tsx').then(m => m.PageSite), 'PageSite');
@@ -68,6 +73,13 @@ Core.router.register({
 });
 
 // Public: published pages for everybody, drafts only for `admin:user` (preview + edit).
+Core.router.register({
+  path: ADMIN_PLUGINS_ROUTE,
+  target: 'admin',
+  page: PageAdminPlugins,
+  meta: { title: 'Admin' },
+});
+
 Core.router.register({
   path: SITE_PAGE_ROUTE,
   target: 'index',
@@ -124,4 +136,15 @@ Core.menu.register({
   section: 'admin',
   roles: ADMIN_ROLES,
   sortOrder: 40,
+});
+
+Core.menu.register({
+  id: 'admin-plugins',
+  label: 'admin:menu.pluginsLabel',
+  description: 'admin:menu.pluginsDescription',
+  icon: Puzzle,
+  to: ADMIN_PLUGINS_ROUTE,
+  section: 'admin',
+  roles: ADMIN_ROLES,
+  sortOrder: 45,
 });

@@ -12,7 +12,9 @@
     "statsLabel": "Посетители",
     "statsDescription": "Кто посещает сайт – онлайн и статистика",
     "systemLabel": "Система",
-    "systemDescription": "Версия, деплои и место на сервере"
+    "systemDescription": "Версия, деплои и место на сервере",
+    "pluginsLabel": "Плагины",
+    "pluginsDescription": "Загрузить ZIP плагина и посмотреть установленные плагины"
   },
   "tabs": {
     "users": "Пользователи",
@@ -1048,6 +1050,52 @@
       "hint": "Введите псевдоним, e-mail или ID (от {{count}} символов)",
       "loading": "Поиск …",
       "results": "Пользователи"
+    }
+  },
+  "plugins": {
+    "title": "Плагины",
+    "subtitle": "Загрузить ZIP плагина и посмотреть установленные плагины",
+    "upload": {
+      "button": "Загрузить плагин",
+      "title": "Загрузить плагин",
+      "description": "ZIP-файл с plugin.json в корневой папке.",
+      "file": "Файл плагина (.zip)",
+      "fileHint": "Не более {{size}} МБ",
+      "submit": "Загрузить",
+      "uploading": "Загрузка …",
+      "success": "Плагин {{name}} {{version}} установлен"
+    },
+    "empty": {
+      "title": "Плагинов пока нет",
+      "description": "Загрузите ZIP плагина, и он появится здесь."
+    },
+    "error": {
+      "title": "Не удалось загрузить плагины",
+      "retry": "Повторить"
+    },
+    "status": {
+      "installed": "Установлен",
+      "active": "Активен",
+      "inactive": "Неактивен"
+    },
+    "errors": {
+      "no_file": "Файл не выбран.",
+      "not_zip": "Выберите ZIP-файл.",
+      "too_large": "Файл слишком большой.",
+      "zip_unreadable": "Файл не является читаемым ZIP.",
+      "package_invalid": "ZIP содержит недопустимые файлы или пути.",
+      "manifest_missing": "В корневой папке нет plugin.json.",
+      "manifest_invalid": "plugin.json некорректен.",
+      "version_not_newer": "Эта версия не новее установленной.",
+      "not_authorized": "Нет доступа.",
+      "unknown": "Неизвестная ошибка. Повторите попытку."
+    },
+    "toggle": {
+      "label": "Включить или выключить {{name}}",
+      "activated": "{{name}} активен",
+      "deactivated": "{{name}} неактивен",
+      "error": "Не удалось изменить статус",
+      "appVersionTooOld": "Для этого плагина нужна более новая версия приложения."
     }
   }
 }

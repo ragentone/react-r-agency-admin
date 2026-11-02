@@ -6,6 +6,8 @@ export const ADMIN_PAGES_ROUTE = '/admin/pages';
 export const ADMIN_STATS_ROUTE = '/admin/stats';
 /** Version, deploys, server storage (runtime shared/system). */
 export const ADMIN_SYSTEM_ROUTE = '/admin/system';
+/** Installed plugins and plugin ZIP upload (runtime shared/plugin). */
+export const ADMIN_PLUGINS_ROUTE = '/admin/plugins';
 /** localStorage keys of the last tab – the admin home sets them to open a tab directly. */
 export const ADMIN_STATS_VIEW_KEY = 'admin-stats-view';
 export const ADMIN_SYSTEM_VIEW_KEY = 'admin-system-view';

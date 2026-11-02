@@ -1022,6 +1022,7 @@ export interface IMutationTimelineCommentWriteArgs {
 export interface IMutationTimelineCreateEntryArgs {
   allowComments: boolean;
   anonymize: boolean;
+  asPage?: InputMaybe<boolean>;
   background?: InputMaybe<string>;
   chart?: InputMaybe<ScalarJSON>;
   choice?: InputMaybe<ScalarJSON>;
@@ -1068,11 +1069,28 @@ export interface IMutationTimelinePageDeleteArgs {
   id: ScalarID;
 }
 
+/** Arguments of `Mutation.timelinePageMember` */
+export interface IMutationTimelinePageMemberArgs {
+  action: string;
+  id: ScalarID;
+  shareToken?: InputMaybe<string>;
+  userId?: InputMaybe<ScalarID>;
+}
+
 /** Arguments of `Mutation.timelinePageSave` */
 export interface IMutationTimelinePageSaveArgs {
+  avatarFile?: InputMaybe<Array<InputMaybe<ScalarUpload>>>;
   bannerFile?: InputMaybe<Array<InputMaybe<ScalarUpload>>>;
   id: ScalarID;
   values: ScalarJSON;
+}
+
+/** Arguments of `Mutation.timelinePageShare` */
+export interface IMutationTimelinePageShareArgs {
+  action: string;
+  expiresAt?: InputMaybe<string>;
+  id: ScalarID;
+  mode?: InputMaybe<string>;
 }
 
 /** Arguments of `Mutation.timelinePollVote` */
@@ -1563,6 +1581,7 @@ export interface IQueryTimelineBestEntriesArgs {
 export interface IQueryTimelineCommentsListingArgs {
   entryId: string;
   page: number;
+  shareToken?: InputMaybe<string>;
 }
 
 /** Arguments of `Query.timelineEntryEdit` */
@@ -1593,6 +1612,13 @@ export interface IQueryTimelineLoadPostArgs {
 /** Arguments of `Query.timelinePageLoad` */
 export interface IQueryTimelinePageLoadArgs {
   id: ScalarID;
+  shareToken?: InputMaybe<string>;
+}
+
+/** Arguments of `Query.timelinePageMembers` */
+export interface IQueryTimelinePageMembersArgs {
+  id: ScalarID;
+  shareToken?: InputMaybe<string>;
 }
 
 /** Arguments of `Query.tokenValidate` */
