@@ -1,5 +1,5 @@
 import { Button } from '@ui/shad-cn/components/button.tsx';
-import { Upload } from 'lucide-react';
+import { Plus, Upload } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -63,12 +63,11 @@ export const PluginArea: React.FC = () => {
           </h1>
           <p className="text-caption text-muted-foreground">{t('plugins.subtitle')}</p>
         </div>
-        <Button variant="outline" size="lg" onClick={() => setCreateOpen(true)}>
-          {t('plugins.create.button')}
+        <Button size="sm" onClick={() => setCreateOpen(true)}>
+          <Plus />
         </Button>
-        <Button size="lg" onClick={() => setUploadOpen(true)}>
-          <Upload className="size-4" />
-          {t('plugins.upload.button')}
+        <Button size="sm" onClick={() => setUploadOpen(true)}>
+          <Upload />
         </Button>
       </header>
 
