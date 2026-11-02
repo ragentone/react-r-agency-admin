@@ -15,6 +15,8 @@ import type { IPluginFileItem } from '../types';
 
 interface IPluginFileTreeProps {
   pluginId: string;
+  /** Change it to reload the list, e.g. after a file was created. */
+  reloadKey?: number;
   /** Called with the path of a file the admin wants to edit. */
   onOpenFile: (path: string) => void;
 }
@@ -97,9 +99,9 @@ interface ITreeFolderProps {
   onOpenFile: (path: string) => void;
 }
 
-/** Folder row with its content; the first level starts open. */
+/** Folder row with its content; folders start closed. */
 const TreeFolder: React.FC<ITreeFolderProps> = ({ node, depth, onOpenFile }) => {
-  const [open, setOpen] = useState(depth === 0);
+  const [open, setOpen] = useState(false);
   return (
     <Collapsible open={open} onOpenChange={setOpen}>
       <CollapsibleTrigger
@@ -131,7 +133,11 @@ const TreeFolder: React.FC<ITreeFolderProps> = ({ node, depth, onOpenFile }) => 
 };
 
 /** Source files of a development project as a collapsible tree. A click on a file opens it in the editor. */
-export const PluginFileTree: React.FC<IPluginFileTreeProps> = ({ pluginId, onOpenFile }) => {
+export const PluginFileTree: React.FC<IPluginFileTreeProps> = ({
+  pluginId,
+  reloadKey = 0,
+  onOpenFile,
+}) => {
   const { t } = useTranslation('admin');
   const [files, setFiles] = useState<IPluginFileItem[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -149,7 +155,7 @@ export const PluginFileTree: React.FC<IPluginFileTreeProps> = ({ pluginId, onOpe
     return () => {
       active = false;
     };
-  }, [pluginId]);
+  }, [pluginId, reloadKey]);
 
   if (error) {
     return (

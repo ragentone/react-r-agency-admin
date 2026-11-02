@@ -1160,7 +1160,12 @@
         "patch": "Patch · исправления",
         "minor": "Minor · новые функции",
         "major": "Major · несовместимые изменения"
-      }
+      },
+      "confirm": "Развернуть и активировать {{version}}?",
+      "confirmButton": "Развернуть",
+      "versionLabel": "Версия",
+      "start": "Развернуть",
+      "busy": "Разворачивается …"
     },
     "details": {
       "open": "Открыть детали {{name}}",
@@ -1198,9 +1203,16 @@
         "invalid_manifest": "plugin.json некорректен.",
         "not_found": "Файл не найден.",
         "project_missing": "Проект для разработки не найден.",
-        "unknown": "Не получилось. Повторите попытку."
+        "unknown": "Не получилось. Повторите попытку.",
+        "exists": "Такой файл уже есть."
       },
-      "backToFiles": "Назад к файлам"
+      "backToFiles": "Назад к файлам",
+      "newFile": "Новый файл",
+      "newFileTitle": "Создать новый файл",
+      "newFileHint": "Путь относительно проекта, например src/components/Card.tsx. Существующие файлы не перезаписываются.",
+      "newFileLabel": "Путь",
+      "createFile": "Создать",
+      "created": "{{path}} создан."
     }
   }
 }

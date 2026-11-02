@@ -1100,7 +1100,12 @@
         "patch": "Patch · bug fixes",
         "minor": "Minor · new features",
         "major": "Major · breaking change"
-      }
+      },
+      "confirm": "Deploy and activate {{version}}?",
+      "confirmButton": "Deploy",
+      "versionLabel": "Version",
+      "start": "Deploy",
+      "busy": "Deploying …"
     },
     "details": {
       "open": "Open details of {{name}}",
@@ -1138,9 +1143,16 @@
         "invalid_manifest": "plugin.json is invalid.",
         "not_found": "File not found.",
         "project_missing": "No development project found.",
-        "unknown": "That did not work. Please try again."
+        "unknown": "That did not work. Please try again.",
+        "exists": "This file already exists."
       },
-      "backToFiles": "Back to the files"
+      "backToFiles": "Back to the files",
+      "newFile": "New file",
+      "newFileTitle": "Create new file",
+      "newFileHint": "Path relative to the project, e.g. src/components/Card.tsx. Existing files are never overwritten.",
+      "newFileLabel": "Path",
+      "createFile": "Create",
+      "created": "{{path}} created."
     }
   }
 }

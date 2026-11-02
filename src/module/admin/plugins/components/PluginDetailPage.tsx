@@ -1,19 +1,29 @@
 import { Link, useNavigate } from '@tanstack/react-router';
 import { Button } from '@ui/shad-cn/components/button.tsx';
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@ui/shad-cn/components/collapsible.tsx';
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@ui/shad-cn/components/dialog.tsx';
 import {
   Empty,
   EmptyContent,
   EmptyHeader,
   EmptyTitle,
 } from '@ui/shad-cn/components/empty.tsx';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@ui/shad-cn/components/select.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { Switch } from '@ui/shad-cn/components/switch.tsx';
-import { ArrowLeft, ChevronDown, Download, Rocket, Trash2 } from 'lucide-react';
+import { ArrowLeft, Download, FilePlus, Rocket, Trash2 } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -29,6 +39,7 @@ import type { IPluginListItem } from '../types';
 import { bumpVersion, type PluginBump } from '../version';
 import { PluginFileEditorDialog } from './PluginFileEditorDialog';
 import { PluginFileTree } from './PluginFileTree';
+import { PluginNewFileDialog } from './PluginNewFileDialog';
 import { PluginRemoveDrawer } from './PluginRemoveDrawer';
 
 const BUMPS: PluginBump[] = ['patch', 'minor', 'major'];
@@ -43,8 +54,11 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
   const deployment = usePluginDeploy(() => void reload());
   const removal = usePluginRemove(() => undefined);
   const [deployOpen, setDeployOpen] = useState(false);
+  const [bump, setBump] = useState<PluginBump>('patch');
   const [deploying, setDeploying] = useState(false);
   const [editPath, setEditPath] = useState<string | null>(null);
+  const [newFileOpen, setNewFileOpen] = useState(false);
+  const [treeKey, setTreeKey] = useState(0);
   const [removeOpen, setRemoveOpen] = useState(false);
   const busy = status.pending !== null || deploying || removal.busy;
   const active = plugin?.status === 'active';
@@ -176,7 +190,7 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
         </dd>
       </dl>
 
-      <div className="flex flex-col gap-3 px-4 py-4">
+      <div className="flex flex-col gap-4 px-4 py-4">
         <label className="flex min-h-12 items-center justify-between gap-3">
           <span className="text-body font-medium">{t('plugins.details.active')}</span>
           <Switch
@@ -188,66 +202,109 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
         </label>
 
         {plugin.development && (
-          <Collapsible open={deployOpen} onOpenChange={setDeployOpen}>
-            <CollapsibleTrigger
-              render={
-                <Button variant="outline" size="lg" className="w-full justify-between" disabled={busy} />
-              }
-            >
-              <span className="flex items-center gap-2">
-                <Rocket className="size-4" />
-                {t('plugins.details.deploy')}
-              </span>
-              <ChevronDown
-                className={`size-4 transition-transform ${deployOpen ? 'rotate-180' : ''}`}
-                aria-hidden="true"
-              />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="flex flex-col gap-2 pt-2">
-              {BUMPS.map(bump => (
-                <Button
-                  key={bump}
-                  variant="outline"
-                  size="lg"
-                  className="h-auto min-h-12 justify-between whitespace-normal py-3 text-left"
-                  disabled={busy}
-                  onClick={() => void deploy(bump)}
-                >
-                  <span>{t(`plugins.deploy.bump.${bump}`)}</span>
-                  <span className="font-mono text-caption">{bumpVersion(plugin.version, bump)}</span>
-                </Button>
-              ))}
-            </CollapsibleContent>
-          </Collapsible>
-        )}
-
-        {plugin.development && (
           <section className="flex flex-col gap-2">
-            <h2 className="text-body font-bold">{t('plugins.code.files')}</h2>
-            <PluginFileTree pluginId={plugin.pluginId} onOpenFile={setEditPath} />
+            <div className="flex items-center justify-between gap-2">
+              <h2 className="text-body font-bold">{t('plugins.code.files')}</h2>
+              <Button variant="outline" size="sm" disabled={busy} onClick={() => setNewFileOpen(true)}>
+                <FilePlus className="size-4" />
+                {t('plugins.code.newFile')}
+              </Button>
+            </div>
+            <PluginFileTree
+              pluginId={plugin.pluginId}
+              reloadKey={treeKey}
+              onOpenFile={setEditPath}
+            />
           </section>
         )}
 
-        <Button variant="outline" size="lg" disabled={busy} onClick={() => void download(plugin)}>
-          <Download className="size-4" />
-          {t('plugins.details.download')}
-        </Button>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {plugin.development && (
+            <Button variant="outline" size="lg" disabled={busy} onClick={() => setDeployOpen(true)}>
+              <Rocket className="size-4" />
+              {t('plugins.details.deploy')}
+            </Button>
+          )}
 
-        <Button
-          variant="outline"
-          size="lg"
-          className="text-destructive hover:text-destructive"
-          disabled={busy || active}
-          title={active ? t('plugins.remove.activeHint') : undefined}
-          onClick={() => setRemoveOpen(true)}
-        >
-          <Trash2 className="size-4" />
-          {t('plugins.details.remove')}
-        </Button>
+          <Button variant="outline" size="lg" disabled={busy} onClick={() => void download(plugin)}>
+            <Download className="size-4" />
+            {t('plugins.details.download')}
+          </Button>
+
+          <Button
+            variant="outline"
+            size="lg"
+            className="text-destructive hover:text-destructive"
+            disabled={busy || active}
+            title={active ? t('plugins.remove.activeHint') : undefined}
+            onClick={() => setRemoveOpen(true)}
+          >
+            <Trash2 className="size-4" />
+            {t('plugins.details.remove')}
+          </Button>
+        </div>
         {active && (
           <p className="text-caption text-muted-foreground">{t('plugins.remove.activeHint')}</p>
         )}
+
       </div>
+
+      {plugin.development && (
+        <Dialog open={deployOpen} onOpenChange={open => !busy && setDeployOpen(open)}>
+          <DialogContent className="flex flex-col gap-4">
+            <DialogHeader className="text-left">
+              <DialogTitle>{t('plugins.deploy.dialogTitle', { name: plugin.name })}</DialogTitle>
+              <DialogDescription>
+                {t('plugins.deploy.dialogDescription', { version: plugin.version })}
+              </DialogDescription>
+            </DialogHeader>
+
+            <div className="flex flex-col gap-2">
+              <span className="text-caption font-medium">{t('plugins.deploy.versionLabel')}</span>
+              <Select value={bump} onValueChange={value => setBump(value as PluginBump)}>
+                <SelectTrigger className="h-12 w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {BUMPS.map(item => (
+                    <SelectItem key={item} value={item}>
+                      {`${t(`plugins.deploy.bump.${item}`)} · ${bumpVersion(plugin.version, item)}`}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <DialogFooter className="flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+              <Button variant="ghost" size="lg" disabled={busy} onClick={() => setDeployOpen(false)}>
+                {t('plugins.deploy.cancel')}
+              </Button>
+              <Button
+                size="lg"
+                disabled={busy}
+                onClick={async () => {
+                  await deploy(bump);
+                  setDeployOpen(false);
+                }}
+              >
+                {busy ? t('plugins.deploy.busy') : t('plugins.deploy.start')}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
+
+      {plugin.development && (
+        <PluginNewFileDialog
+          pluginId={plugin.pluginId}
+          open={newFileOpen}
+          onOpenChange={setNewFileOpen}
+          onCreated={path => {
+            setTreeKey(key => key + 1);
+            setEditPath(path);
+          }}
+        />
+      )}
 
       {plugin.development && (
         <PluginFileEditorDialog

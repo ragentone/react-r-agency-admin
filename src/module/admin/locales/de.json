@@ -1100,7 +1100,12 @@
         "patch": "Patch · Fehlerbehebung",
         "minor": "Minor · neue Funktionen",
         "major": "Major · grundlegende Änderung"
-      }
+      },
+      "confirm": "{{version}} deployen und aktivieren?",
+      "confirmButton": "Deployen",
+      "versionLabel": "Version",
+      "start": "Deployen",
+      "busy": "Wird deployt …"
     },
     "details": {
       "open": "{{name}} Details öffnen",
@@ -1138,9 +1143,16 @@
         "invalid_manifest": "plugin.json ist ungültig.",
         "not_found": "Datei nicht gefunden.",
         "project_missing": "Kein Entwicklungsprojekt gefunden.",
-        "unknown": "Das hat nicht geklappt. Bitte erneut versuchen."
+        "unknown": "Das hat nicht geklappt. Bitte erneut versuchen.",
+        "exists": "Diese Datei gibt es schon."
       },
-      "backToFiles": "Zurück zu den Dateien"
+      "backToFiles": "Zurück zu den Dateien",
+      "newFile": "Neue Datei",
+      "newFileTitle": "Neue Datei anlegen",
+      "newFileHint": "Pfad relativ zum Projekt, z. B. src/components/Card.tsx. Bestehende Dateien werden nicht überschrieben.",
+      "newFileLabel": "Pfad",
+      "createFile": "Anlegen",
+      "created": "{{path}} angelegt."
     }
   }
 }
