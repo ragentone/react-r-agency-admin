@@ -6,6 +6,9 @@ import type {
   IPluginCreateResult,
   IPluginDeployResult,
   IPluginDownloadResult,
+  IPluginFileReadResult,
+  IPluginFileWriteResult,
+  IPluginFilesResult,
   IPluginListResult,
   IPluginRemoveResult,
   IPluginStatusResult,
@@ -51,6 +54,22 @@ const DeployDevMutation = parse(`
 const DownloadQuery = parse(`
   query AdminPluginDownload($pluginId: String!) {
     adminPluginDownload(pluginId: $pluginId) { success error filename data }
+  }
+`);
+
+const FilesQuery = parse(`
+  query AdminPluginFiles($pluginId: String!) {
+    adminPluginFiles(pluginId: $pluginId) { success error files }
+  }
+`);
+const FileReadQuery = parse(`
+  query AdminPluginFileRead($pluginId: String!, $path: String!) {
+    adminPluginFileRead(pluginId: $pluginId, path: $path) { success error path content }
+  }
+`);
+const FileWriteMutation = parse(`
+  mutation AdminPluginFileWrite($pluginId: String!, $path: String!, $content: String!) {
+    adminPluginFileWrite(pluginId: $pluginId, path: $path, content: $content) { success error errors }
   }
 `);
 
@@ -108,6 +127,48 @@ export const PluginApi = {
         fetchPolicy: 'no-cache',
       })) as { data?: { adminPluginDownload?: IPluginDownloadResult } };
       return response.data?.adminPluginDownload ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+
+  /** Editable files of a development project. */
+  files: async (pluginId: string): Promise<IPluginFilesResult> => {
+    try {
+      const response = (await client().query({
+        query: FilesQuery as never,
+        variables: { pluginId },
+        fetchPolicy: 'no-cache',
+      })) as { data?: { adminPluginFiles?: IPluginFilesResult } };
+      return response.data?.adminPluginFiles ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+
+  readFile: async (pluginId: string, path: string): Promise<IPluginFileReadResult> => {
+    try {
+      const response = (await client().query({
+        query: FileReadQuery as never,
+        variables: { pluginId, path },
+        fetchPolicy: 'no-cache',
+      })) as { data?: { adminPluginFileRead?: IPluginFileReadResult } };
+      return response.data?.adminPluginFileRead ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+
+  writeFile: async (pluginId: string, path: string, content: string): Promise<IPluginFileWriteResult> => {
+    try {
+      const response = (await client().mutate({
+        mutation: FileWriteMutation as never,
+        variables: { pluginId, path, content },
+      })) as { data?: { adminPluginFileWrite?: IPluginFileWriteResult } };
+      return response.data?.adminPluginFileWrite ?? { success: false, error: 'unknown' };
     } catch (error) {
       console.warn('[admin-plugins]', (error as Error)?.message);
       return { success: false, error: 'unknown' };

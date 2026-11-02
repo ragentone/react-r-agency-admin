@@ -64,6 +64,30 @@ export interface IPluginDownloadResult {
   data?: string | null;
 }
 
+export interface IPluginFileItem {
+  path: string;
+  size: number;
+}
+
+export interface IPluginFilesResult {
+  success: boolean;
+  error?: string | null;
+  files?: IPluginFileItem[] | null;
+}
+
+export interface IPluginFileReadResult {
+  success: boolean;
+  error?: string | null;
+  path?: string | null;
+  content?: string | null;
+}
+
+export interface IPluginFileWriteResult {
+  success: boolean;
+  error?: string | null;
+  errors?: string[] | null;
+}
+
 export interface IPluginRemoveResult {
   success: boolean;
   error?: string | null;

@@ -8,6 +8,10 @@ export const ADMIN_STATS_ROUTE = '/admin/stats';
 export const ADMIN_SYSTEM_ROUTE = '/admin/system';
 /** Installed plugins and plugin ZIP upload (runtime shared/plugin). */
 export const ADMIN_PLUGINS_ROUTE = '/admin/plugins';
+/** One plugin: details, deploy, activation, download, code, delete. */
+export const ADMIN_PLUGIN_ROUTE = '/admin/plugins/$pluginId';
+export const adminPluginPath = (pluginId: string) =>
+  ADMIN_PLUGIN_ROUTE.replace('$pluginId', encodeURIComponent(pluginId));
 /** localStorage keys of the last tab – the admin home sets them to open a tab directly. */
 export const ADMIN_STATS_VIEW_KEY = 'admin-stats-view';
 export const ADMIN_SYSTEM_VIEW_KEY = 'admin-system-view';

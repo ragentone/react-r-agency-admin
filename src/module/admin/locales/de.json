@@ -1110,13 +1110,35 @@
       "active": "Aktiv",
       "deploy": "Neu deployen",
       "remove": "Löschen",
-      "download": "ZIP herunterladen"
+      "download": "ZIP herunterladen",
+      "code": "Code bearbeiten",
+      "notFound": "Plugin nicht gefunden.",
+      "back": "Zurück zur Plugin-Liste"
     },
     "download": {
       "errors": {
         "not_found": "Plugin nicht gefunden.",
         "files_missing": "Die Plugin-Dateien fehlen auf dem Server.",
         "unknown": "Download fehlgeschlagen. Bitte erneut versuchen."
+      }
+    },
+    "code": {
+      "hint": "Änderungen wirken erst nach „Neu deployen“. Speichern mit dem Button oder Strg/⌘+S.",
+      "files": "Dateien",
+      "selectFile": "Datei auswählen",
+      "loading": "Lädt …",
+      "save": "Speichern",
+      "saving": "Wird gespeichert …",
+      "discard": "Verwerfen",
+      "saved": "{{path}} gespeichert.",
+      "unsaved": "Erst speichern oder verwerfen.",
+      "errors": {
+        "invalid_path": "Diese Datei kann nicht bearbeitet werden.",
+        "too_large": "Die Datei ist zu groß (max. 512 KB).",
+        "invalid_manifest": "plugin.json ist ungültig.",
+        "not_found": "Datei nicht gefunden.",
+        "project_missing": "Kein Entwicklungsprojekt gefunden.",
+        "unknown": "Das hat nicht geklappt. Bitte erneut versuchen."
       }
     }
   }

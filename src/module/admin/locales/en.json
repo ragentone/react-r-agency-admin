@@ -1110,13 +1110,35 @@
       "active": "Active",
       "deploy": "Redeploy",
       "remove": "Delete",
-      "download": "Download ZIP"
+      "download": "Download ZIP",
+      "code": "Edit code",
+      "notFound": "Plugin not found.",
+      "back": "Back to the plugin list"
     },
     "download": {
       "errors": {
         "not_found": "Plugin not found.",
         "files_missing": "The plugin files are missing on the server.",
         "unknown": "Download failed. Please try again."
+      }
+    },
+    "code": {
+      "hint": "Changes take effect after “Redeploy”. Save with the button or Ctrl/⌘+S.",
+      "files": "Files",
+      "selectFile": "Select a file",
+      "loading": "Loading …",
+      "save": "Save",
+      "saving": "Saving …",
+      "discard": "Discard",
+      "saved": "{{path}} saved.",
+      "unsaved": "Save or discard your changes first.",
+      "errors": {
+        "invalid_path": "This file cannot be edited.",
+        "too_large": "The file is too large (max. 512 KB).",
+        "invalid_manifest": "plugin.json is invalid.",
+        "not_found": "File not found.",
+        "project_missing": "No development project found.",
+        "unknown": "That did not work. Please try again."
       }
     }
   }

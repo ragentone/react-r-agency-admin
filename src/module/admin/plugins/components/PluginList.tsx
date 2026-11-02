@@ -20,17 +20,10 @@ interface IPluginListProps {
   error: boolean;
   plugins: IPluginListItem[];
   onRetry: () => void;
-  onSelect: (plugin: IPluginListItem) => void;
 }
 
 /** Loading, error, empty and list state of the installed plugins. */
-export const PluginList: React.FC<IPluginListProps> = ({
-  loading,
-  error,
-  plugins,
-  onRetry,
-  onSelect,
-}) => {
+export const PluginList: React.FC<IPluginListProps> = ({ loading, error, plugins, onRetry }) => {
   const { t } = useTranslation('admin');
 
   if (loading) {
@@ -76,7 +69,7 @@ export const PluginList: React.FC<IPluginListProps> = ({
   return (
     <ul className="flex flex-col">
       {plugins.map(plugin => (
-        <PluginRow key={plugin.pluginId} plugin={plugin} onSelect={() => onSelect(plugin)} />
+        <PluginRow key={plugin.pluginId} plugin={plugin} />
       ))}
     </ul>
   );

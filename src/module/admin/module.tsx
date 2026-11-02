@@ -4,6 +4,7 @@ import { ChartNoAxesCombined, FileText, Puzzle, Server, UsersRound } from 'lucid
 
 import {
   ADMIN_PAGES_ROUTE,
+  ADMIN_PLUGIN_ROUTE,
   ADMIN_PLUGINS_ROUTE,
   ADMIN_ROLES,
   ADMIN_ROUTE,
@@ -37,6 +38,10 @@ const PageAdminSystem = lazyPage(
 const PageAdminPlugins = lazyPage(
   () => import('./pages/PageAdminPlugins.tsx').then(m => m.PageAdminPlugins),
   'PageAdminPlugins'
+);
+const PageAdminPluginDetail = lazyPage(
+  () => import('./pages/PageAdminPluginDetail.tsx').then(m => m.PageAdminPluginDetail),
+  'PageAdminPluginDetail'
 );
 // Public dynamic pages (created in the admin area).
 const PageSite = lazyPage(() => import('./pages/PageSite.tsx').then(m => m.PageSite), 'PageSite');
@@ -77,6 +82,13 @@ Core.router.register({
   path: ADMIN_PLUGINS_ROUTE,
   target: 'admin',
   page: PageAdminPlugins,
+  meta: { title: 'Admin' },
+});
+
+Core.router.register({
+  path: ADMIN_PLUGIN_ROUTE,
+  target: 'admin',
+  page: PageAdminPluginDetail,
   meta: { title: 'Admin' },
 });
 
