@@ -1016,7 +1016,9 @@
     "status": {
       "installed": "Installiert",
       "active": "Aktiv",
-      "inactive": "Inaktiv"
+      "inactive": "Inaktiv",
+      "draft": "In Entwicklung",
+      "inDevelopment": "In Entwicklung"
     },
     "errors": {
       "no_file": "Keine Datei gewählt.",
@@ -1035,7 +1037,43 @@
       "activated": "{{name}} ist aktiv",
       "deactivated": "{{name}} ist inaktiv",
       "error": "Status konnte nicht geändert werden",
-      "appVersionTooOld": "Dieses Plugin braucht eine neuere App-Version."
+      "appVersionTooOld": "Dieses Plugin braucht eine neuere App-Version.",
+      "errors": {
+        "draft_not_activatable": "Entwurf: erst hochladen, dann aktivieren"
+      }
+    },
+    "remove": {
+      "button": "{{name}} löschen",
+      "title": "{{name}} löschen?",
+      "description": "Das Plugin und alle seine Dateien werden entfernt. Das lässt sich nicht rückgängig machen.",
+      "cancel": "Abbrechen",
+      "confirm": "Endgültig löschen",
+      "busy": "Wird gelöscht …",
+      "activeHint": "Erst deaktivieren, dann löschen",
+      "success": "{{name}} gelöscht",
+      "errors": {
+        "still_active": "Das Plugin ist noch aktiv. Bitte zuerst deaktivieren.",
+        "not_found": "Plugin nicht gefunden.",
+        "unknown": "Löschen fehlgeschlagen. Bitte erneut versuchen."
+      }
+    },
+    "create": {
+      "button": "Entwicklungs-Plugin anlegen",
+      "title": "Entwicklungs-Plugin anlegen",
+      "description": "Legt eine Vorlage mit Manifest und Platzhalter-Code an. Der Code wird lokal in plugin-dev weitergebaut.",
+      "idLabel": "Plugin-Id",
+      "idHint": "Kleinbuchstaben, Ziffern und „-“, 2–48 Zeichen, mit Buchstabe beginnen.",
+      "nameLabel": "Name",
+      "slotsLabel": "Wo das Plugin erscheint",
+      "submit": "Vorlage anlegen",
+      "busy": "Wird angelegt …",
+      "success": "Vorlage {{id}} angelegt (Status: in Entwicklung)",
+      "errors": {
+        "invalid_manifest": "Die Angaben sind ungültig.",
+        "exists": "Diese Plugin-Id gibt es schon.",
+        "not_authorized": "Keine Berechtigung.",
+        "unknown": "Anlegen fehlgeschlagen. Bitte erneut versuchen."
+      }
     }
   }
 }

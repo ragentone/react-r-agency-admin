@@ -1,4 +1,4 @@
-export type PluginStatus = 'installed' | 'active' | 'inactive';
+export type PluginStatus = 'draft' | 'installed' | 'active' | 'inactive';
 
 /** One row of `adminPluginList` (runtime `shared/plugin`). */
 export interface IPluginListItem {
@@ -7,6 +7,8 @@ export interface IPluginListItem {
   version: string;
   minAppVersion: string;
   status: PluginStatus;
+  /** Created as development template in the admin (stays set after activation). */
+  development: boolean;
 }
 
 export interface IPluginListResult {
@@ -43,5 +45,30 @@ export const PLUGIN_UPLOAD_MAX_MB = 20;
 export interface IPluginStatusResult {
   success: boolean;
   error?: string | null;
+  plugin?: { pluginId: string; version: string; status: PluginStatus } | null;
+}
+
+/** Result of `adminPluginRemove`. */
+export interface IPluginRemoveResult {
+  success: boolean;
+  error?: string | null;
+}
+
+/** Slots a plugin may declare (same list as the backend `PLUGIN_SLOTS`). */
+export const PLUGIN_SLOT_OPTIONS = [
+  'home.widget',
+  'menu',
+  'settings',
+  'admin.tab',
+  'feed.renderer',
+  'notification',
+  'chat.action',
+] as const;
+
+/** Result of `adminPluginCreateDraft`. */
+export interface IPluginCreateResult {
+  success: boolean;
+  error?: string | null;
+  errors?: string[] | null;
   plugin?: { pluginId: string; version: string; status: PluginStatus } | null;
 }

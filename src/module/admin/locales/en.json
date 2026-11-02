@@ -1016,7 +1016,9 @@
     "status": {
       "installed": "Installed",
       "active": "Active",
-      "inactive": "Inactive"
+      "inactive": "Inactive",
+      "draft": "In development",
+      "inDevelopment": "In development"
     },
     "errors": {
       "no_file": "No file selected.",
@@ -1035,7 +1037,43 @@
       "activated": "{{name}} is active",
       "deactivated": "{{name}} is inactive",
       "error": "Status could not be changed",
-      "appVersionTooOld": "This plugin needs a newer app version."
+      "appVersionTooOld": "This plugin needs a newer app version.",
+      "errors": {
+        "draft_not_activatable": "Draft: upload first, then activate"
+      }
+    },
+    "remove": {
+      "button": "Delete {{name}}",
+      "title": "Delete {{name}}?",
+      "description": "The plugin and all its files will be removed. This cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Delete permanently",
+      "busy": "Deleting …",
+      "activeHint": "Deactivate first, then delete",
+      "success": "{{name}} deleted",
+      "errors": {
+        "still_active": "The plugin is still active. Please deactivate it first.",
+        "not_found": "Plugin not found.",
+        "unknown": "Deletion failed. Please try again."
+      }
+    },
+    "create": {
+      "button": "Create development plugin",
+      "title": "Create development plugin",
+      "description": "Creates a template with manifest and placeholder code. The code is then built locally in plugin-dev.",
+      "idLabel": "Plugin id",
+      "idHint": "Lowercase letters, digits and \"-\", 2–48 characters, starting with a letter.",
+      "nameLabel": "Name",
+      "slotsLabel": "Where the plugin shows up",
+      "submit": "Create template",
+      "busy": "Creating …",
+      "success": "Template {{id}} created (status: in development)",
+      "errors": {
+        "invalid_manifest": "The input is invalid.",
+        "exists": "This plugin id already exists.",
+        "not_authorized": "Not authorized.",
+        "unknown": "Could not create. Please try again."
+      }
     }
   }
 }

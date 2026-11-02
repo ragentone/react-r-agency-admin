@@ -22,6 +22,7 @@ interface IPluginListProps {
   pendingId: string | null;
   onRetry: () => void;
   onToggle: (plugin: IPluginListItem, active: boolean) => void;
+  onRemove: (plugin: IPluginListItem) => void;
 }
 
 /** Loading, error, empty and list state of the installed plugins. */
@@ -32,6 +33,7 @@ export const PluginList: React.FC<IPluginListProps> = ({
   pendingId,
   onRetry,
   onToggle,
+  onRemove,
 }) => {
   const { t } = useTranslation('admin');
 
@@ -83,6 +85,7 @@ export const PluginList: React.FC<IPluginListProps> = ({
           plugin={plugin}
           pending={pendingId === plugin.pluginId}
           onToggle={active => onToggle(plugin, active)}
+          onRemove={() => onRemove(plugin)}
         />
       ))}
     </ul>
