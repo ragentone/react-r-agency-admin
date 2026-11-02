@@ -1139,7 +1139,8 @@
         "not_found": "File not found.",
         "project_missing": "No development project found.",
         "unknown": "That did not work. Please try again."
-      }
+      },
+      "backToFiles": "Back to the files"
     }
   }
 }

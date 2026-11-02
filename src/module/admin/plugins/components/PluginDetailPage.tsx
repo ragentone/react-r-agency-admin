@@ -13,7 +13,7 @@ import {
 } from '@ui/shad-cn/components/empty.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { Switch } from '@ui/shad-cn/components/switch.tsx';
-import { ArrowLeft, ChevronDown, Code, Download, Rocket, Trash2 } from 'lucide-react';
+import { ArrowLeft, ChevronDown, Download, Rocket, Trash2 } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -27,7 +27,8 @@ import { usePluginRemove } from '../hooks/use-plugin-remove';
 import { usePluginStatus } from '../hooks/use-plugin-status';
 import type { IPluginListItem } from '../types';
 import { bumpVersion, type PluginBump } from '../version';
-import { PluginCodeDrawer } from './PluginCodeDrawer';
+import { PluginFileEditorDialog } from './PluginFileEditorDialog';
+import { PluginFileTree } from './PluginFileTree';
 import { PluginRemoveDrawer } from './PluginRemoveDrawer';
 
 const BUMPS: PluginBump[] = ['patch', 'minor', 'major'];
@@ -43,7 +44,7 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
   const removal = usePluginRemove(() => undefined);
   const [deployOpen, setDeployOpen] = useState(false);
   const [deploying, setDeploying] = useState(false);
-  const [codeOpen, setCodeOpen] = useState(false);
+  const [editPath, setEditPath] = useState<string | null>(null);
   const [removeOpen, setRemoveOpen] = useState(false);
   const busy = status.pending !== null || deploying || removal.busy;
   const active = plugin?.status === 'active';
@@ -221,10 +222,10 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
         )}
 
         {plugin.development && (
-          <Button variant="outline" size="lg" disabled={busy} onClick={() => setCodeOpen(true)}>
-            <Code className="size-4" />
-            {t('plugins.details.code')}
-          </Button>
+          <section className="flex flex-col gap-2">
+            <h2 className="text-body font-bold">{t('plugins.code.files')}</h2>
+            <PluginFileTree pluginId={plugin.pluginId} onOpenFile={setEditPath} />
+          </section>
         )}
 
         <Button variant="outline" size="lg" disabled={busy} onClick={() => void download(plugin)}>
@@ -248,10 +249,14 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
         )}
       </div>
 
-      <PluginCodeDrawer
-        plugin={codeOpen ? plugin : null}
-        onOpenChange={open => !open && setCodeOpen(false)}
-      />
+      {plugin.development && (
+        <PluginFileEditorDialog
+          pluginId={plugin.pluginId}
+          pluginName={plugin.name}
+          path={editPath}
+          onClose={() => setEditPath(null)}
+        />
+      )}
 
       <PluginRemoveDrawer
         plugin={removeOpen ? plugin : null}

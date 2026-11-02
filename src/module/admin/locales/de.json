@@ -1139,7 +1139,8 @@
         "not_found": "Datei nicht gefunden.",
         "project_missing": "Kein Entwicklungsprojekt gefunden.",
         "unknown": "Das hat nicht geklappt. Bitte erneut versuchen."
-      }
+      },
+      "backToFiles": "Zurück zu den Dateien"
     }
   }
 }
