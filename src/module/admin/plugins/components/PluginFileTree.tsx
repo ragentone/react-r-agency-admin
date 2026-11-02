@@ -1,5 +1,12 @@
-import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { Alert, AlertTitle } from '@ui/shad-cn/components/alert.tsx';
+import { Button } from '@ui/shad-cn/components/button.tsx';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@ui/shad-cn/components/collapsible.tsx';
+import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
+import { ChevronRight, File, Folder, FolderOpen } from 'lucide-react';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -12,42 +19,123 @@ interface IPluginFileTreeProps {
   onOpenFile: (path: string) => void;
 }
 
-interface ITreeRow {
-  key: string;
-  depth: number;
-  label: string;
-  /** Set for files, `undefined` for folders. */
-  path?: string;
+interface ITreeNode {
+  name: string;
+  path: string;
+  /** Set for files. */
+  file?: IPluginFileItem;
+  children: Map<string, ITreeNode>;
 }
 
-/** Flat list of folder and file rows in tree order (folders appear before their files). */
-export const treeRows = (files: IPluginFileItem[]): ITreeRow[] => {
-  const rows: ITreeRow[] = [];
-  const seenFolders = new Set<string>();
+/** Nested tree from the flat file list. */
+export const buildTree = (files: IPluginFileItem[]): ITreeNode => {
+  const root: ITreeNode = { name: '', path: '', children: new Map() };
   for (const file of files) {
+    let node = root;
     const parts = file.path.split('/');
-    parts.slice(0, -1).forEach((part, index) => {
-      const folder = parts.slice(0, index + 1).join('/');
-      if (seenFolders.has(folder)) return;
-      seenFolders.add(folder);
-      rows.push({ key: `dir:${folder}`, depth: index, label: part });
-    });
-    rows.push({
-      key: `file:${file.path}`,
-      depth: parts.length - 1,
-      label: parts[parts.length - 1],
-      path: file.path,
+    parts.forEach((part, index) => {
+      const path = parts.slice(0, index + 1).join('/');
+      let child = node.children.get(part);
+      if (!child) {
+        child = { name: part, path, children: new Map() };
+        node.children.set(part, child);
+      }
+      if (index === parts.length - 1) child.file = file;
+      node = child;
     });
   }
-  return rows;
+  return root;
 };
 
-/** Source files of a development project as tree. A click on a file opens it in the editor. */
+/** Folders first, then files, each alphabetically. */
+const sortedChildren = (node: ITreeNode): ITreeNode[] =>
+  [...node.children.values()].sort((a, b) => {
+    const aFolder = a.file === undefined ? 0 : 1;
+    const bFolder = b.file === undefined ? 0 : 1;
+    if (aFolder !== bFolder) return aFolder - bFolder;
+    return a.name.localeCompare(b.name);
+  });
+
+const INDENT = 14;
+
+interface ITreeLevelProps {
+  nodes: ITreeNode[];
+  depth: number;
+  onOpenFile: (path: string) => void;
+}
+
+/** One level of the tree. Folders are collapsible, files open the editor. */
+const TreeLevel: React.FC<ITreeLevelProps> = ({ nodes, depth, onOpenFile }) => (
+  <ul className="flex flex-col">
+    {nodes.map(node =>
+      node.file ? (
+        <li key={node.path}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => onOpenFile(node.path)}
+            style={{ paddingLeft: `${depth * INDENT + 32}px` }}
+            className="h-auto w-full justify-start rounded-md py-2 pr-3 font-mono text-caption font-normal focus-visible:ring-1 focus-visible:ring-inset"
+            title={node.path}
+          >
+            <File className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+            <span className="truncate">{node.name}</span>
+          </Button>
+        </li>
+      ) : (
+        <li key={node.path}>
+          <TreeFolder node={node} depth={depth} onOpenFile={onOpenFile} />
+        </li>
+      )
+    )}
+  </ul>
+);
+
+interface ITreeFolderProps {
+  node: ITreeNode;
+  depth: number;
+  onOpenFile: (path: string) => void;
+}
+
+/** Folder row with its content; the first level starts open. */
+const TreeFolder: React.FC<ITreeFolderProps> = ({ node, depth, onOpenFile }) => {
+  const [open, setOpen] = useState(depth === 0);
+  return (
+    <Collapsible open={open} onOpenChange={setOpen}>
+      <CollapsibleTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="sm"
+            style={{ paddingLeft: `${depth * INDENT + 8}px` }}
+            className="h-auto w-full justify-start rounded-md py-2 pr-3 font-mono text-caption font-bold text-foreground focus-visible:ring-1 focus-visible:ring-inset"
+          />
+        }
+      >
+        <ChevronRight
+          className={`size-4 shrink-0 text-muted-foreground transition-transform ${open ? 'rotate-90' : ''}`}
+          aria-hidden="true"
+        />
+        {open ? (
+          <FolderOpen className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+        ) : (
+          <Folder className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+        )}
+        <span className="truncate">{node.name}</span>
+      </CollapsibleTrigger>
+      <CollapsibleContent>
+        <TreeLevel nodes={sortedChildren(node)} depth={depth + 1} onOpenFile={onOpenFile} />
+      </CollapsibleContent>
+    </Collapsible>
+  );
+};
+
+/** Source files of a development project as a collapsible tree. A click on a file opens it in the editor. */
 export const PluginFileTree: React.FC<IPluginFileTreeProps> = ({ pluginId, onOpenFile }) => {
   const { t } = useTranslation('admin');
   const [files, setFiles] = useState<IPluginFileItem[] | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const rows = useMemo(() => treeRows(files ?? []), [files]);
+  const root = useMemo(() => buildTree(files ?? []), [files]);
 
   useEffect(() => {
     let active = true;
@@ -85,29 +173,9 @@ export const PluginFileTree: React.FC<IPluginFileTreeProps> = ({ pluginId, onOpe
   return (
     <nav
       aria-label={t('plugins.code.files')}
-      className="flex max-h-96 flex-col overflow-y-auto border border-border py-1"
+      className="rounded-4xl border border-border px-2 py-4"
     >
-      {rows.map(row =>
-        row.path ? (
-          <button
-            key={row.key}
-            type="button"
-            onClick={() => onOpenFile(row.path as string)}
-            style={{ paddingLeft: `${row.depth * 16 + 12}px` }}
-            className="truncate py-2 pr-3 text-left font-mono text-caption transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
-          >
-            {row.label}
-          </button>
-        ) : (
-          <span
-            key={row.key}
-            style={{ paddingLeft: `${row.depth * 16 + 12}px` }}
-            className="truncate py-2 pr-3 font-mono text-caption font-bold text-muted-foreground"
-          >
-            {row.label}/
-          </span>
-        )
-      )}
+      <TreeLevel nodes={sortedChildren(root)} depth={0} onOpenFile={onOpenFile} />
     </nav>
   );
 };
