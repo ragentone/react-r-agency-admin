@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
+import { PluginApi } from '../api';
+import { saveZip } from '../download';
 import { usePluginDeploy } from '../hooks/use-plugin-deploy';
 import { usePluginList } from '../hooks/use-plugin-list';
 import { usePluginRemove } from '../hooks/use-plugin-remove';
@@ -62,6 +64,19 @@ export const PluginArea: React.FC = () => {
         result.error === 'app_version_too_old'
           ? t('plugins.toggle.appVersionTooOld')
           : t('plugins.toggle.error')
+      );
+    }
+  };
+
+  const download = async (plugin: IPluginListItem) => {
+    const result = await PluginApi.download(plugin.pluginId);
+    if (result.success && result.filename && result.data) {
+      saveZip(result.filename, result.data);
+    } else {
+      toast.error(
+        t(`plugins.download.errors.${result.error ?? 'unknown'}`, {
+          defaultValue: t('plugins.download.errors.unknown'),
+        })
       );
     }
   };
@@ -125,6 +140,7 @@ export const PluginArea: React.FC = () => {
         onToggle={toggle}
         onDeploy={deploy}
         onRemove={openRemove}
+        onDownload={download}
       />
 
       <PluginRemoveDrawer

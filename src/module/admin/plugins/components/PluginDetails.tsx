@@ -6,7 +6,7 @@ import {
   CollapsibleTrigger,
 } from '@ui/shad-cn/components/collapsible.tsx';
 import { Switch } from '@ui/shad-cn/components/switch.tsx';
-import { ChevronDown, Rocket, Trash2 } from 'lucide-react';
+import { ChevronDown, Download, Rocket, Trash2 } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -23,6 +23,7 @@ interface IPluginDetailsProps {
   /** Resolves when the deploy has finished; the drawer stays open meanwhile. */
   onDeploy: (plugin: IPluginListItem, bump: PluginBump) => Promise<void>;
   onRemove: (plugin: IPluginListItem) => void;
+  onDownload: (plugin: IPluginListItem) => void;
 }
 
 const BUMPS: PluginBump[] = ['patch', 'minor', 'major'];
@@ -39,6 +40,7 @@ export const PluginDetails: React.FC<IPluginDetailsProps> = ({
   onToggle,
   onDeploy,
   onRemove,
+  onDownload,
 }) => {
   const { t } = useTranslation('admin');
   const [deployOpen, setDeployOpen] = useState(false);
@@ -128,6 +130,11 @@ export const PluginDetails: React.FC<IPluginDetailsProps> = ({
                 </CollapsibleContent>
               </Collapsible>
             )}
+
+            <Button variant="outline" size="lg" onClick={() => onDownload(plugin)}>
+              <Download className="size-4" />
+              {t('plugins.details.download')}
+            </Button>
 
             <Button
               variant="outline"

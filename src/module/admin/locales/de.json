@@ -1109,7 +1109,15 @@
       "state": "Status",
       "active": "Aktiv",
       "deploy": "Neu deployen",
-      "remove": "Löschen"
+      "remove": "Löschen",
+      "download": "ZIP herunterladen"
+    },
+    "download": {
+      "errors": {
+        "not_found": "Plugin nicht gefunden.",
+        "files_missing": "Die Plugin-Dateien fehlen auf dem Server.",
+        "unknown": "Download fehlgeschlagen. Bitte erneut versuchen."
+      }
     }
   }
 }

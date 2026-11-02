@@ -56,6 +56,14 @@ export interface IPluginDeployResult {
   plugin?: { pluginId: string; version: string; status: PluginStatus } | null;
 }
 
+export interface IPluginDownloadResult {
+  success: boolean;
+  error?: string | null;
+  filename?: string | null;
+  /** Base64 of the ZIP. */
+  data?: string | null;
+}
+
 export interface IPluginRemoveResult {
   success: boolean;
   error?: string | null;

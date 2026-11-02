@@ -5,6 +5,7 @@ import type { PluginBump } from './version';
 import type {
   IPluginCreateResult,
   IPluginDeployResult,
+  IPluginDownloadResult,
   IPluginListResult,
   IPluginRemoveResult,
   IPluginStatusResult,
@@ -47,6 +48,12 @@ const DeployDevMutation = parse(`
   }
 `);
 
+const DownloadQuery = parse(`
+  query AdminPluginDownload($pluginId: String!) {
+    adminPluginDownload(pluginId: $pluginId) { success error filename data }
+  }
+`);
+
 const client = () => getMeshClient().graphql();
 
 /** Admin only (`admin:user`, checked in the runtime `shared/plugin`). */
@@ -86,6 +93,21 @@ export const PluginApi = {
         variables: { pluginId, bump },
       })) as { data?: { adminPluginDeployDev?: IPluginDeployResult } };
       return response.data?.adminPluginDeployDev ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+
+  /** The installed version as ZIP (base64). */
+  download: async (pluginId: string): Promise<IPluginDownloadResult> => {
+    try {
+      const response = (await client().query({
+        query: DownloadQuery as never,
+        variables: { pluginId },
+        fetchPolicy: 'no-cache',
+      })) as { data?: { adminPluginDownload?: IPluginDownloadResult } };
+      return response.data?.adminPluginDownload ?? { success: false, error: 'unknown' };
     } catch (error) {
       console.warn('[admin-plugins]', (error as Error)?.message);
       return { success: false, error: 'unknown' };
