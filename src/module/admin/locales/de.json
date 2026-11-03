@@ -1021,25 +1021,25 @@
       "inDevelopment": "In Entwicklung"
     },
     "errors": {
-      "no_file": "Keine Datei gewählt.",
-      "not_zip": "Bitte eine ZIP-Datei wählen.",
-      "too_large": "Die Datei ist zu groß.",
-      "zip_unreadable": "Die Datei ist kein lesbares ZIP.",
-      "package_invalid": "Das ZIP enthält unzulässige Dateien oder Pfade.",
-      "manifest_missing": "plugin.json fehlt im Wurzelordner.",
-      "manifest_invalid": "plugin.json ist ungültig.",
-      "version_not_newer": "Diese Version ist nicht neuer als die installierte.",
-      "not_authorized": "Keine Berechtigung.",
-      "unknown": "Unbekannter Fehler. Bitte erneut versuchen."
+      "no_file": "No file selected.",
+      "not_zip": "Please choose a ZIP file.",
+      "too_large": "The file is too large.",
+      "zip_unreadable": "The file is not a readable ZIP.",
+      "package_invalid": "The ZIP contains disallowed files or paths.",
+      "manifest_missing": "plugin.json is missing in the root folder.",
+      "manifest_invalid": "plugin.json is invalid.",
+      "version_not_newer": "This version is not newer than the installed one.",
+      "not_authorized": "Not authorized.",
+      "unknown": "Unknown error. Please try again."
     },
     "toggle": {
       "label": "{{name}} aktiv schalten",
       "activated": "{{name}} ist aktiv",
       "deactivated": "{{name}} ist inaktiv",
-      "error": "Status konnte nicht geändert werden",
-      "appVersionTooOld": "Dieses Plugin braucht eine neuere App-Version.",
+      "error": "Status could not be changed",
+      "appVersionTooOld": "This plugin needs a newer app version.",
       "errors": {
-        "draft_not_activatable": "Entwurf: erst hochladen, dann aktivieren"
+        "draft_not_activatable": "Draft: upload first, then activate"
       }
     },
     "remove": {
@@ -1052,9 +1052,9 @@
       "activeHint": "Erst deaktivieren, dann löschen",
       "success": "{{name}} gelöscht",
       "errors": {
-        "still_active": "Das Plugin ist noch aktiv. Bitte zuerst deaktivieren.",
-        "not_found": "Plugin nicht gefunden.",
-        "unknown": "Löschen fehlgeschlagen. Bitte erneut versuchen."
+        "still_active": "The plugin is still active. Please deactivate it first.",
+        "not_found": "Plugin not found.",
+        "unknown": "Deletion failed. Please try again."
       }
     },
     "create": {
@@ -1068,10 +1068,10 @@
       "busy": "Wird angelegt …",
       "success": "Vorlage {{id}} angelegt (Status: in Entwicklung). Abhängigkeiten werden im Hintergrund installiert.",
       "errors": {
-        "invalid_manifest": "Die Angaben sind ungültig.",
-        "exists": "Diese Plugin-Id gibt es schon.",
-        "not_authorized": "Keine Berechtigung.",
-        "unknown": "Anlegen fehlgeschlagen. Bitte erneut versuchen."
+        "invalid_manifest": "The input is invalid.",
+        "exists": "This plugin id already exists.",
+        "not_authorized": "Not authorized.",
+        "unknown": "Could not create. Please try again."
       }
     },
     "deploy": {
@@ -1079,19 +1079,19 @@
       "hint": "Version erhöhen, bauen und aktivieren.",
       "success": "{{name}} {{version}} deployt und aktiviert.",
       "errors": {
-        "not_found": "Plugin nicht gefunden.",
-        "not_development": "Nur Entwicklungs-Plugins können neu deployt werden.",
-        "not_available": "Nur in der Entwicklung verfügbar.",
-        "project_missing": "Kein Entwicklungsprojekt gefunden.",
-        "dependencies_missing": "Abhängigkeiten fehlen. npm install läuft noch oder ist fehlgeschlagen.",
-        "build_failed": "Build fehlgeschlagen.",
-        "manifest_invalid": "plugin.json ist ungültig.",
-        "version_not_newer": "Die Version in plugin.json ist nicht neuer als die aktive. Bitte erhöhen.",
-        "app_version_too_old": "Die App ist zu alt für dieses Plugin.",
-        "package_invalid": "Das Paket ist ungültig.",
-        "zip_missing": "Der Build hat keine ZIP-Datei erzeugt.",
-        "invalid_plugin_id": "Ungültige Plugin-Id.",
-        "unknown": "Deploy fehlgeschlagen. Bitte erneut versuchen."
+        "not_found": "Plugin not found.",
+        "not_development": "Only development plugins can be redeployed.",
+        "not_available": "Only available in development.",
+        "project_missing": "No development project found.",
+        "dependencies_missing": "Dependencies are missing. npm install is still running or failed.",
+        "build_failed": "Build failed.",
+        "manifest_invalid": "plugin.json is invalid.",
+        "version_not_newer": "The version in plugin.json is not newer than the active one. Please bump it.",
+        "app_version_too_old": "The app is too old for this plugin.",
+        "package_invalid": "The package is invalid.",
+        "zip_missing": "The build did not produce a ZIP file.",
+        "invalid_plugin_id": "Invalid plugin id.",
+        "unknown": "Deploy failed. Please try again."
       },
       "dialogTitle": "{{name}} deployen",
       "dialogDescription": "Aktuelle Version {{version}}. Welche Erhöhung soll die neue Version bekommen?",
@@ -1122,9 +1122,9 @@
     },
     "download": {
       "errors": {
-        "not_found": "Plugin nicht gefunden.",
-        "files_missing": "Die Plugin-Dateien fehlen auf dem Server.",
-        "unknown": "Download fehlgeschlagen. Bitte erneut versuchen."
+        "not_found": "Plugin not found.",
+        "files_missing": "The plugin files are missing on the server.",
+        "unknown": "Download failed. Please try again."
       }
     },
     "code": {
@@ -1138,13 +1138,13 @@
       "saved": "{{path}} gespeichert.",
       "unsaved": "Erst speichern oder verwerfen.",
       "errors": {
-        "invalid_path": "Diese Datei kann nicht bearbeitet werden.",
-        "too_large": "Die Datei ist zu groß (max. 512 KB).",
-        "invalid_manifest": "plugin.json ist ungültig.",
-        "not_found": "Datei nicht gefunden.",
-        "project_missing": "Kein Entwicklungsprojekt gefunden.",
-        "unknown": "Das hat nicht geklappt. Bitte erneut versuchen.",
-        "exists": "Diese Datei gibt es schon."
+        "invalid_path": "This file cannot be edited.",
+        "too_large": "The file is too large (max. 512 KB).",
+        "invalid_manifest": "plugin.json is invalid.",
+        "not_found": "File not found.",
+        "project_missing": "No development project found.",
+        "unknown": "That did not work. Please try again.",
+        "exists": "This file already exists."
       },
       "backToFiles": "Zurück zu den Dateien",
       "newFile": "Neue Datei",

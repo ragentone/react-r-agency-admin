@@ -100,6 +100,41 @@ export interface IMutationAdminPageUpdateArgs {
   values: ScalarJSON;
 }
 
+/** Arguments of `Mutation.adminPluginCreateDraft` */
+export interface IMutationAdminPluginCreateDraftArgs {
+  name: string;
+  slots?: InputMaybe<Array<InputMaybe<string>>>;
+}
+
+/** Arguments of `Mutation.adminPluginDeployDev` */
+export interface IMutationAdminPluginDeployDevArgs {
+  bump: string;
+  pluginId: string;
+}
+
+/** Arguments of `Mutation.adminPluginFileWrite` */
+export interface IMutationAdminPluginFileWriteArgs {
+  content: string;
+  path: string;
+  pluginId: string;
+}
+
+/** Arguments of `Mutation.adminPluginRemove` */
+export interface IMutationAdminPluginRemoveArgs {
+  pluginId: string;
+}
+
+/** Arguments of `Mutation.adminPluginSetStatus` */
+export interface IMutationAdminPluginSetStatusArgs {
+  pluginId: string;
+  status: string;
+}
+
+/** Arguments of `Mutation.adminPluginUpload` */
+export interface IMutationAdminPluginUploadArgs {
+  file: Array<InputMaybe<ScalarUpload>>;
+}
+
 /** Arguments of `Mutation.adminRoleAdd` */
 export interface IMutationAdminRoleAddArgs {
   roles: ScalarJSON;
@@ -1271,6 +1306,27 @@ export interface IQueryDbResourceReadArgs {
 /** Arguments of `Query.adminPageGet` */
 export interface IQueryAdminPageGetArgs {
   id: ScalarID;
+}
+
+/** Arguments of `Query.adminPluginDownload` */
+export interface IQueryAdminPluginDownloadArgs {
+  pluginId: string;
+}
+
+/** Arguments of `Query.adminPluginFileRead` */
+export interface IQueryAdminPluginFileReadArgs {
+  path: string;
+  pluginId: string;
+}
+
+/** Arguments of `Query.adminPluginFiles` */
+export interface IQueryAdminPluginFilesArgs {
+  pluginId: string;
+}
+
+/** Arguments of `Query.adminPluginList` */
+export interface IQueryAdminPluginListArgs {
+  search?: InputMaybe<string>;
 }
 
 /** Arguments of `Query.adminStatsGrowth` */

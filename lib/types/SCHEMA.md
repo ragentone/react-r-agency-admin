@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |    115 |
-| [Mutation](#mutation) |    220 |
-| Object-Types          |    390 |
+| [Query](#query)       |    119 |
+| [Mutation](#mutation) |    226 |
+| Object-Types          |    400 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -48,6 +48,33 @@ Query  ‹IQuery›
 │   └── success: Boolean
 ├── adminPageList: adminPageListReturn  ‹IAdminPageListReturn›
 │   ├── pages: JSON
+│   └── success: Boolean
+├── adminPluginDownload: adminPluginDownloadReturn  ‹IAdminPluginDownloadReturn›
+│   ├── $pluginId: String!
+│   ├── data: String
+│   ├── error: String
+│   ├── errors: JSON
+│   ├── filename: String
+│   └── success: Boolean
+├── adminPluginFileRead: adminPluginFileReadReturn  ‹IAdminPluginFileReadReturn›
+│   ├── $path: String!
+│   ├── $pluginId: String!
+│   ├── content: String
+│   ├── error: String
+│   ├── errors: JSON
+│   ├── path: String
+│   └── success: Boolean
+├── adminPluginFiles: adminPluginFilesReturn  ‹IAdminPluginFilesReturn›
+│   ├── $pluginId: String!
+│   ├── error: String
+│   ├── errors: JSON
+│   ├── files: JSON
+│   └── success: Boolean
+├── adminPluginList: adminPluginListReturn  ‹IAdminPluginListReturn›
+│   ├── $search: String
+│   ├── error: String
+│   ├── errors: JSON
+│   ├── plugins: JSON
 │   └── success: Boolean
 ├── adminRoleList: adminRoleListReturn  ‹IAdminRoleListReturn›
 │   ├── definitions: JSON
@@ -1060,6 +1087,45 @@ Mutation  ‹IMutation›
 │   ├── $id: ID!
 │   ├── $values: JSON!
 │   ├── page: JSON
+│   └── success: Boolean
+├── adminPluginCreateDraft: adminPluginCreateDraftReturn  ‹IAdminPluginCreateDraftReturn›
+│   ├── $name: String!
+│   ├── $slots: [String]
+│   ├── error: String
+│   ├── errors: JSON
+│   ├── plugin: JSON
+│   └── success: Boolean
+├── adminPluginDeployDev: adminPluginDeployDevReturn  ‹IAdminPluginDeployDevReturn›
+│   ├── $bump: String!
+│   ├── $pluginId: String!
+│   ├── error: String
+│   ├── errors: JSON
+│   ├── plugin: JSON
+│   └── success: Boolean
+├── adminPluginFileWrite: adminPluginFileWriteReturn  ‹IAdminPluginFileWriteReturn›
+│   ├── $content: String!
+│   ├── $path: String!
+│   ├── $pluginId: String!
+│   ├── error: String
+│   ├── errors: JSON
+│   └── success: Boolean
+├── adminPluginRemove: adminPluginRemoveReturn  ‹IAdminPluginRemoveReturn›
+│   ├── $pluginId: String!
+│   ├── error: String
+│   ├── errors: JSON
+│   └── success: Boolean
+├── adminPluginSetStatus: adminPluginSetStatusReturn  ‹IAdminPluginSetStatusReturn›
+│   ├── $pluginId: String!
+│   ├── $status: String!
+│   ├── error: String
+│   ├── errors: JSON
+│   ├── plugin: JSON
+│   └── success: Boolean
+├── adminPluginUpload: adminPluginUploadReturn  ‹IAdminPluginUploadReturn›
+│   ├── $file: [Upload]!
+│   ├── error: String
+│   ├── errors: JSON
+│   ├── plugin: JSON
 │   └── success: Boolean
 ├── adminRoleAdd: adminRoleAddReturn  ‹IAdminRoleAddReturn›
 │   ├── $roles: JSON!
@@ -2868,6 +2934,16 @@ Inputs
 | `adminPageImageUploadReturn`             | Object | `IAdminPageImageUploadReturn`             | `objects.ts` |                                                                                  |
 | `adminPageListReturn`                    | Object | `IAdminPageListReturn`                    | `objects.ts` |                                                                                  |
 | `adminPageUpdateReturn`                  | Object | `IAdminPageUpdateReturn`                  | `objects.ts` |                                                                                  |
+| `adminPluginCreateDraftReturn`           | Object | `IAdminPluginCreateDraftReturn`           | `objects.ts` |                                                                                  |
+| `adminPluginDeployDevReturn`             | Object | `IAdminPluginDeployDevReturn`             | `objects.ts` |                                                                                  |
+| `adminPluginDownloadReturn`              | Object | `IAdminPluginDownloadReturn`              | `objects.ts` |                                                                                  |
+| `adminPluginFileReadReturn`              | Object | `IAdminPluginFileReadReturn`              | `objects.ts` |                                                                                  |
+| `adminPluginFilesReturn`                 | Object | `IAdminPluginFilesReturn`                 | `objects.ts` |                                                                                  |
+| `adminPluginFileWriteReturn`             | Object | `IAdminPluginFileWriteReturn`             | `objects.ts` |                                                                                  |
+| `adminPluginListReturn`                  | Object | `IAdminPluginListReturn`                  | `objects.ts` |                                                                                  |
+| `adminPluginRemoveReturn`                | Object | `IAdminPluginRemoveReturn`                | `objects.ts` |                                                                                  |
+| `adminPluginSetStatusReturn`             | Object | `IAdminPluginSetStatusReturn`             | `objects.ts` |                                                                                  |
+| `adminPluginUploadReturn`                | Object | `IAdminPluginUploadReturn`                | `objects.ts` |                                                                                  |
 | `adminRoleAddReturn`                     | Object | `IAdminRoleAddReturn`                     | `objects.ts` |                                                                                  |
 | `adminRoleListReturn`                    | Object | `IAdminRoleListReturn`                    | `objects.ts` |                                                                                  |
 | `adminRoleUpdateReturn`                  | Object | `IAdminRoleUpdateReturn`                  | `objects.ts` |                                                                                  |
