@@ -14,15 +14,15 @@ import { PluginUnknownList } from './PluginUnknownList';
 import { PluginUnknownRemoveDrawer } from './PluginUnknownRemoveDrawer';
 import { PluginUploadDrawer } from './PluginUploadDrawer';
 
-/** `/admin/plugins`: installed plugins, plugin folders the registry does not know, and creating/uploading. */
+/** `/admin/plugins`: installed plugins, folders without registry entry (tab "Development"), creating and uploading. */
 export const PluginArea: React.FC = () => {
   const { t } = useTranslation('admin');
   const installed = usePluginList();
   const unknown = usePluginUnknown(() => void installed.reload());
+  const [tab, setTab] = useState('installed');
   const [uploadOpen, setUploadOpen] = useState(false);
   const [createOpen, setCreateOpen] = useState(false);
   const [removeTarget, setRemoveTarget] = useState<IPluginUnknownItem | null>(null);
-  const [tab, setTab] = useState('installed');
 
   const failure = (code?: string | null) =>
     t(`plugins.unknown.errors.${code ?? 'unknown'}`, { defaultValue: t('plugins.unknown.failed') });
@@ -44,24 +44,24 @@ export const PluginArea: React.FC = () => {
   };
 
   return (
-    <div data-slot="admin-plugins" className="mx-auto flex min-h-dvh w-full flex-col bg-background">
-      <header className="flex items-start gap-3 px-4 pt-3 pb-3">
-        <div className="min-w-0 flex-1">
-          <h1 className="truncate text-xl font-bold tracking-tight text-foreground">
-            {t('plugins.title')}
-          </h1>
-          <p className="text-caption text-muted-foreground">{t('plugins.subtitle')}</p>
-        </div>
-        <Button size="sm" onClick={() => setCreateOpen(true)}>
-          <Plus />
+    <div data-slot="admin-plugins" className="flex min-h-dvh w-full flex-col bg-background">
+      <header className="sticky top-0 z-10 flex h-14 items-center gap-2 border-b border-border bg-background/80 px-4 backdrop-blur">
+        <h1 className="min-w-0 flex-1 truncate text-title font-bold text-foreground">{t('plugins.title')}</h1>
+        <Button
+          variant="ghost"
+          size="icon"
+          aria-label={t('plugins.actions.upload')}
+          onClick={() => setUploadOpen(true)}
+        >
+          <Upload className="size-5" />
         </Button>
-        <Button size="sm" onClick={() => setUploadOpen(true)}>
-          <Upload />
+        <Button size="icon" aria-label={t('plugins.actions.create')} onClick={() => setCreateOpen(true)}>
+          <Plus className="size-5" />
         </Button>
       </header>
 
       <Tabs value={tab} onValueChange={setTab} className="flex flex-col">
-        <div className="px-4">
+        <div className="px-4 pt-3">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="installed">{t('plugins.tabs.installed')}</TabsTrigger>
             <TabsTrigger value="development">
@@ -79,6 +79,7 @@ export const PluginArea: React.FC = () => {
             error={installed.error}
             plugins={installed.plugins}
             onRetry={() => void installed.reload()}
+            onCreate={() => setCreateOpen(true)}
           />
         </TabsContent>
 

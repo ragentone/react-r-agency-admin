@@ -1,21 +1,21 @@
 import { parse } from 'graphql';
 import { getMeshClient } from 'r-agency-mesh-client-v1/release';
 
-import type { PluginBump } from './version';
 import type {
+  IPluginAdoptResult,
   IPluginCreateResult,
   IPluginDeployResult,
   IPluginDownloadResult,
   IPluginFileReadResult,
-  IPluginFileWriteResult,
   IPluginFilesResult,
+  IPluginFileWriteResult,
   IPluginListResult,
   IPluginRemoveResult,
   IPluginStatusResult,
-  IPluginUploadResult,
   IPluginUnknownResult,
-  IPluginAdoptResult,
+  IPluginUploadResult,
 } from './types';
+import type { PluginBump } from './version';
 
 /* Parsed here instead of codegen `graphql()` (same as module/admin/system/api.ts). */
 const ListQuery = parse(`

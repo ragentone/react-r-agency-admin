@@ -1007,7 +1007,8 @@
     },
     "empty": {
       "title": "No plugins yet",
-      "description": "Upload a plugin ZIP and it will appear here."
+      "description": "Upload a plugin ZIP and it will appear here.",
+      "action": "Create plugin"
     },
     "error": {
       "title": "Plugins could not be loaded",
@@ -1197,7 +1198,12 @@
         "exists": "Plugin is already registered.",
         "still_registered": "Plugin is registered and cannot be deleted here.",
         "not_found": "Folder not found."
-      }
+      },
+      "badge": "Not registered"
+    },
+    "actions": {
+      "create": "Create plugin",
+      "upload": "Upload ZIP"
     }
   }
 }

@@ -1,12 +1,5 @@
+import { AppFormDrawer } from '@ui/patterns';
 import { Button } from '@ui/shad-cn/components/button.tsx';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@ui/shad-cn/components/dialog.tsx';
 import { Input } from '@ui/shad-cn/components/input.tsx';
 import { Label } from '@ui/shad-cn/components/label.tsx';
 import React, { useId, useState } from 'react';
@@ -37,13 +30,11 @@ const starterFor = (path: string): string => {
 
 const PATH_PATTERN = /^[A-Za-z0-9_\-./]+$/;
 
-/** Creates a new source file in the plugin project. Existing files are never overwritten. */
-export const PluginNewFileDialog: React.FC<IPluginNewFileDialogProps> = ({
-  pluginId,
-  open,
-  onOpenChange,
-  onCreated,
-}) => {
+/**
+ * Creates a new source file in the plugin project, as drawer (the file name is kept from the earlier dialog).
+ * Existing files are never overwritten.
+ */
+export const PluginNewFileDialog: React.FC<IPluginNewFileDialogProps> = ({ pluginId, open, onOpenChange, onCreated }) => {
   const { t } = useTranslation('admin');
   const inputId = useId();
   const [path, setPath] = useState('');
@@ -80,48 +71,45 @@ export const PluginNewFileDialog: React.FC<IPluginNewFileDialogProps> = ({
   };
 
   return (
-    <Dialog open={open} onOpenChange={next => !busy && onOpenChange(next)}>
-      <DialogContent className="flex flex-col gap-4">
-        <DialogHeader className="text-left">
-          <DialogTitle>{t('plugins.code.newFileTitle')}</DialogTitle>
-          <DialogDescription>{t('plugins.code.newFileHint')}</DialogDescription>
-        </DialogHeader>
-
-        <form
-          className="flex flex-col gap-2"
-          onSubmit={event => {
-            event.preventDefault();
-            void create();
+    <AppFormDrawer
+      open={open}
+      onOpenChange={next => !busy && onOpenChange(next)}
+      title={t('plugins.code.newFileTitle')}
+      description={t('plugins.code.newFileHint')}
+      onSubmit={event => {
+        event.preventDefault();
+        void create();
+      }}
+      submitLabel={busy ? t('plugins.code.saving') : t('plugins.code.createFile')}
+      submitDisabled={!valid}
+      busy={busy}
+      locked={busy}
+      secondaryAction={
+        <Button variant="ghost" size="lg" disabled={busy} onClick={() => onOpenChange(false)}>
+          {t('plugins.deploy.cancel')}
+        </Button>
+      }
+    >
+      <div className="flex flex-col gap-2 px-4 py-4">
+        <Label htmlFor={inputId}>{t('plugins.code.newFileLabel')}</Label>
+        <Input
+          id={inputId}
+          value={path}
+          disabled={busy}
+          autoComplete="off"
+          placeholder="src/components/Card.tsx"
+          onChange={event => {
+            setPath(event.target.value);
+            setError(null);
           }}
-        >
-          <Label htmlFor={inputId}>{t('plugins.code.newFileLabel')}</Label>
-          <Input
-            id={inputId}
-            value={path}
-            disabled={busy}
-            autoComplete="off"
-            placeholder="src/components/Card.tsx"
-            onChange={event => {
-              setPath(event.target.value);
-              setError(null);
-            }}
-            className="h-12 font-mono text-base"
-          />
-          {error && (
-            <p className="text-caption text-destructive" role="alert">
-              {t(`plugins.code.errors.${error}`, { defaultValue: t('plugins.code.errors.unknown') })}
-            </p>
-          )}
-          <DialogFooter className="flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-            <Button type="button" variant="ghost" size="lg" disabled={busy} onClick={() => onOpenChange(false)}>
-              {t('plugins.deploy.cancel')}
-            </Button>
-            <Button type="submit" size="lg" disabled={!valid || busy}>
-              {busy ? t('plugins.code.saving') : t('plugins.code.createFile')}
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
+          className="h-12 font-mono text-base"
+        />
+        {error && (
+          <p className="text-caption text-destructive" role="alert">
+            {t(`plugins.code.errors.${error}`, { defaultValue: t('plugins.code.errors.unknown') })}
+          </p>
+        )}
+      </div>
+    </AppFormDrawer>
   );
 };

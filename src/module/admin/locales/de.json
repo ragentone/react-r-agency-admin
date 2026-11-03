@@ -1007,7 +1007,8 @@
     },
     "empty": {
       "title": "Noch keine Plugins",
-      "description": "Lade ein Plugin-ZIP hoch, dann erscheint es hier."
+      "description": "Lade ein Plugin-ZIP hoch, dann erscheint es hier.",
+      "action": "Plugin anlegen"
     },
     "error": {
       "title": "Plugins konnten nicht geladen werden",
@@ -1197,7 +1198,12 @@
         "exists": "Plugin ist bereits registriert.",
         "still_registered": "Plugin ist registriert und kann hier nicht gelöscht werden.",
         "not_found": "Ordner nicht gefunden."
-      }
+      },
+      "badge": "Nicht registriert"
+    },
+    "actions": {
+      "create": "Plugin anlegen",
+      "upload": "ZIP hochladen"
     }
   }
 }

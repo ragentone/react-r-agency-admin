@@ -30,7 +30,7 @@ interface ITreeNode {
 }
 
 /** Nested tree from the flat file list. */
-export const buildTree = (files: IPluginFileItem[]): ITreeNode => {
+const buildTree = (files: IPluginFileItem[]): ITreeNode => {
   const root: ITreeNode = { name: '', path: '', children: new Map() };
   for (const file of files) {
     let node = root;
@@ -139,23 +139,28 @@ export const PluginFileTree: React.FC<IPluginFileTreeProps> = ({
   onOpenFile,
 }) => {
   const { t } = useTranslation('admin');
-  const [files, setFiles] = useState<IPluginFileItem[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  // The result is kept with its key; a changed plugin or reload key means "loading" until the new result arrives.
+  const key = `${pluginId}:${reloadKey}`;
+  const [result, setResult] = useState<{ key: string; files: IPluginFileItem[]; error: string | null } | null>(null);
+  const current = result?.key === key ? result : null;
+  const files = current ? current.files : null;
+  const error = current ? current.error : null;
   const root = useMemo(() => buildTree(files ?? []), [files]);
 
   useEffect(() => {
     let active = true;
-    setFiles(null);
-    setError(null);
-    void PluginApi.files(pluginId).then(result => {
+    void PluginApi.files(pluginId).then(response => {
       if (!active) return;
-      if (result.success) setFiles(result.files ?? []);
-      else setError(result.error ?? 'unknown');
+      setResult(
+        response.success
+          ? { key, files: response.files ?? [], error: null }
+          : { key, files: [], error: response.error ?? 'unknown' }
+      );
     });
     return () => {
       active = false;
     };
-  }, [pluginId, reloadKey]);
+  }, [key, pluginId]);
 
   if (error) {
     return (

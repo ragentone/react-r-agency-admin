@@ -1,18 +1,19 @@
 import { Button } from '@ui/shad-cn/components/button.tsx';
 import {
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from '@ui/shad-cn/components/empty.tsx';
-import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
-import { Download, FolderOpen, RotateCcw, Trash2 } from 'lucide-react';
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from '@ui/shad-cn/components/item.tsx';
+import { Status, StatusLabel } from '@ui/shad-cn/components/status.tsx';
+import { Download, FolderOpen, Trash2 } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { IPluginUnknownItem } from '../types';
+import { PluginEmpty, PluginListError, PluginListLoading } from './PluginStates';
 
 interface IPluginUnknownListProps {
   loading: boolean;
@@ -24,76 +25,43 @@ interface IPluginUnknownListProps {
   onRemove: (plugin: IPluginUnknownItem) => void;
 }
 
-/** Plugin folders in `plugins/` without a registry entry: install them or delete their files. */
-export const PluginUnknownList: React.FC<IPluginUnknownListProps> = ({
-  loading,
-  error,
-  plugins,
-  busy,
-  onRetry,
-  onInstall,
-  onRemove,
-}) => {
+interface IUnknownRowProps {
+  plugin: IPluginUnknownItem;
+  busy: boolean;
+  onInstall: (plugin: IPluginUnknownItem) => void;
+  onRemove: (plugin: IPluginUnknownItem) => void;
+}
+
+/** One folder without registry entry: its facts, why it cannot be installed (if so), and its actions. */
+const UnknownRow: React.FC<IUnknownRowProps> = ({ plugin, busy, onInstall, onRemove }) => {
   const { t } = useTranslation('admin');
-
-  if (loading) {
-    return (
-      <div className="flex flex-col gap-3 px-4 py-3" aria-busy="true">
-        {[0, 1].map(index => (
-          <Skeleton key={index} className="h-14 w-full" />
-        ))}
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <Empty>
-        <EmptyHeader>
-          <EmptyTitle>{t('plugins.error.title')}</EmptyTitle>
-        </EmptyHeader>
-        <EmptyContent>
-          <Button variant="outline" size="lg" onClick={onRetry}>
-            <RotateCcw className="size-4" />
-            {t('plugins.error.retry')}
-          </Button>
-        </EmptyContent>
-      </Empty>
-    );
-  }
-
-  if (plugins.length === 0) {
-    return (
-      <Empty>
-        <EmptyHeader>
-          <EmptyMedia>
-            <FolderOpen className="size-6" />
-          </EmptyMedia>
-          <EmptyTitle>{t('plugins.unknown.empty.title')}</EmptyTitle>
-          <EmptyDescription>{t('plugins.unknown.empty.description')}</EmptyDescription>
-        </EmptyHeader>
-      </Empty>
-    );
-  }
+  const reason = plugin.error
+    ? t(`plugins.unknown.errors.${plugin.error}`, { defaultValue: plugin.error })
+    : null;
 
   return (
-    <ul className="flex flex-col">
-      {plugins.map(plugin => (
-        <li key={plugin.pluginId} className="flex items-center gap-3 border-b border-border px-4 py-3">
-          <FolderOpen className="size-5 shrink-0 text-muted-foreground" aria-hidden="true" />
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-body font-bold text-foreground">{plugin.name}</p>
-            <p className="truncate text-caption text-muted-foreground">
-              {plugin.pluginId}
-              {plugin.version && ` · ${plugin.version}`}
+    <li className="border-b border-border">
+      <Item size="sm">
+        <ItemMedia variant="icon">
+          <FolderOpen aria-hidden="true" />
+        </ItemMedia>
+        <ItemContent>
+          <ItemTitle>{plugin.name}</ItemTitle>
+          <ItemDescription className="truncate">
+            {plugin.pluginId}
+            {plugin.version && ` · ${plugin.version}`}
+          </ItemDescription>
+          <Status variant="warning" className="mt-1">
+            <StatusLabel>{t('plugins.unknown.badge')}</StatusLabel>
+          </Status>
+          {reason && (
+            <p className="mt-1 text-caption text-destructive">
+              {reason}
+              {plugin.errors[0] ? ` ${plugin.errors[0]}` : ''}
             </p>
-            {plugin.error && (
-              <p className="text-caption text-destructive">
-                {t(`plugins.unknown.errors.${plugin.error}`, { defaultValue: plugin.error })}
-                {plugin.errors[0] ? ` ${plugin.errors[0]}` : ''}
-              </p>
-            )}
-          </div>
+          )}
+        </ItemContent>
+        <ItemActions>
           <Button
             size="sm"
             variant="outline"
@@ -112,7 +80,40 @@ export const PluginUnknownList: React.FC<IPluginUnknownListProps> = ({
           >
             <Trash2 className="size-4" />
           </Button>
-        </li>
+        </ItemActions>
+      </Item>
+    </li>
+  );
+};
+
+/** Plugin folders without registry entry: install them or delete their files. */
+export const PluginUnknownList: React.FC<IPluginUnknownListProps> = ({
+  loading,
+  error,
+  plugins,
+  busy,
+  onRetry,
+  onInstall,
+  onRemove,
+}) => {
+  const { t } = useTranslation('admin');
+
+  if (loading) return <PluginListLoading />;
+  if (error) return <PluginListError onRetry={onRetry} />;
+  if (plugins.length === 0) {
+    return (
+      <PluginEmpty
+        icon={<FolderOpen className="size-6" />}
+        title={t('plugins.unknown.empty.title')}
+        description={t('plugins.unknown.empty.description')}
+      />
+    );
+  }
+
+  return (
+    <ul className="flex flex-col">
+      {plugins.map(plugin => (
+        <UnknownRow key={plugin.pluginId} plugin={plugin} busy={busy} onInstall={onInstall} onRemove={onRemove} />
       ))}
     </ul>
   );
