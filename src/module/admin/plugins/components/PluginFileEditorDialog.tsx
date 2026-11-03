@@ -24,7 +24,8 @@ interface IPluginFileEditorDialogProps {
 /** Syntax highlighting by file extension. Other text files are shown without highlighting. */
 const languageOf = (path: string): Extension[] => {
   const ext = path.slice(path.lastIndexOf('.'));
-  if (ext === '.ts' || ext === '.tsx') return [javascript({ jsx: ext === '.tsx', typescript: true })];
+  if (ext === '.ts' || ext === '.tsx')
+    return [javascript({ jsx: ext === '.tsx', typescript: true })];
   if (['.js', '.jsx', '.mjs', '.cjs'].includes(ext)) return [javascript({ jsx: ext === '.jsx' })];
   if (ext === '.json') return [json()];
   if (ext === '.css') return [css()];
@@ -36,7 +37,12 @@ const languageOf = (path: string): Extension[] => {
  * Editor for one project file, as full-height drawer. Save with the button or Ctrl/Cmd+S.
  * Unsaved changes block closing. Changes take effect after „Neu deployen“.
  */
-export const PluginFileEditorDialog: React.FC<IPluginFileEditorDialogProps> = ({ pluginId, pluginName, path, onClose }) => {
+export const PluginFileEditorDialog: React.FC<IPluginFileEditorDialogProps> = ({
+  pluginId,
+  pluginName,
+  path,
+  onClose,
+}) => {
   const { t } = useTranslation('admin');
   const [loadedPath, setLoadedPath] = useState<string | null>(null);
   const [loadFailure, setLoadFailure] = useState<{ path: string; error: string } | null>(null);
@@ -99,6 +105,7 @@ export const PluginFileEditorDialog: React.FC<IPluginFileEditorDialogProps> = ({
       title={path ?? ''}
       description={pluginName}
       size="full"
+      bodyClassName={'w-full'}
       locked={saving}
     >
       <div
@@ -132,14 +139,20 @@ export const PluginFileEditorDialog: React.FC<IPluginFileEditorDialogProps> = ({
 
         {loadError && (
           <Alert variant="destructive">
-            <AlertTitle>{t(`plugins.code.errors.${loadError}`, { defaultValue: t('plugins.code.errors.unknown') })}</AlertTitle>
+            <AlertTitle>
+              {t(`plugins.code.errors.${loadError}`, {
+                defaultValue: t('plugins.code.errors.unknown'),
+              })}
+            </AlertTitle>
           </Alert>
         )}
 
         {saveError && (
           <Alert variant="destructive">
             <AlertTitle>
-              {t(`plugins.code.errors.${saveError.error}`, { defaultValue: t('plugins.code.errors.unknown') })}
+              {t(`plugins.code.errors.${saveError.error}`, {
+                defaultValue: t('plugins.code.errors.unknown'),
+              })}
             </AlertTitle>
             {saveError.errors.length > 0 && (
               <AlertDescription>
