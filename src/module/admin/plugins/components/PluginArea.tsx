@@ -45,23 +45,20 @@ export const PluginArea: React.FC = () => {
 
   return (
     <div data-slot="admin-plugins" className="flex min-h-dvh w-full flex-col bg-background">
-      <header className="sticky top-0 z-10 flex h-14 items-center gap-2 border-b border-border bg-background/80 px-4 backdrop-blur">
-        <h1 className="min-w-0 flex-1 truncate text-title font-bold text-foreground">{t('plugins.title')}</h1>
-        <Button
-          variant="ghost"
-          size="icon"
-          aria-label={t('plugins.actions.upload')}
-          onClick={() => setUploadOpen(true)}
-        >
+      <header className="sticky top-0 z-10 flex h-14 items-center gap-2 border-b border-border/50 bg-background/80 px-4 backdrop-blur">
+        <h1 className="min-w-0 flex-1 truncate text-title font-bold text-foreground">
+          {t('plugins.title')}
+        </h1>
+        <Button aria-label={t('plugins.actions.upload')} onClick={() => setUploadOpen(true)}>
           <Upload className="size-5" />
         </Button>
-        <Button size="icon" aria-label={t('plugins.actions.create')} onClick={() => setCreateOpen(true)}>
+        <Button aria-label={t('plugins.actions.create')} onClick={() => setCreateOpen(true)}>
           <Plus className="size-5" />
         </Button>
       </header>
 
       <Tabs value={tab} onValueChange={setTab} className="flex flex-col">
-        <div className="px-4 pt-3">
+        <div className="px-2 pt-3 mb-2">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="installed">{t('plugins.tabs.installed')}</TabsTrigger>
             <TabsTrigger value="development">

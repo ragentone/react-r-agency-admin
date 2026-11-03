@@ -1,5 +1,11 @@
 import { Link } from '@tanstack/react-router';
-import { Item, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '@ui/shad-cn/components/item.tsx';
+import {
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from '@ui/shad-cn/components/item.tsx';
 import { ChevronRight, Package } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,8 +23,8 @@ export const PluginRow: React.FC<IPluginRowProps> = ({ plugin }) => {
   const { t } = useTranslation('admin');
 
   return (
-    <li className="border-b border-border">
-      <Item asChild size="sm">
+    <li className="px-2">
+      <Item asChild size="sm" variant={'outline'}>
         <Link
           to={adminPluginPath(plugin.pluginId)}
           aria-label={t('plugins.details.open', { name: plugin.name })}
