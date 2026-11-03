@@ -6,12 +6,21 @@ import type { Extension } from '@codemirror/state';
 import { AppDrawer } from '@ui/patterns';
 import { Alert, AlertDescription, AlertTitle } from '@ui/shad-cn/components/alert.tsx';
 import { Button } from '@ui/shad-cn/components/button.tsx';
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
+} from '@ui/shad-cn/components/item.tsx';
 import CodeMirror from '@uiw/react-codemirror';
+import { X } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { PluginApi } from '../api';
+import { useTheme } from '@core/theme';
 
 interface IPluginFileEditorDialogProps {
   pluginId: string;
@@ -44,6 +53,8 @@ export const PluginFileEditorDialog: React.FC<IPluginFileEditorDialogProps> = ({
   onClose,
 }) => {
   const { t } = useTranslation('admin');
+  const { theme } = useTheme();
+
   const [loadedPath, setLoadedPath] = useState<string | null>(null);
   const [loadFailure, setLoadFailure] = useState<{ path: string; error: string } | null>(null);
   const [original, setOriginal] = useState('');
@@ -104,11 +115,15 @@ export const PluginFileEditorDialog: React.FC<IPluginFileEditorDialogProps> = ({
       onOpenChange={open => !open && close()}
       title={path ?? ''}
       description={pluginName}
+      contentProps={{
+        className: 'p-0',
+      }}
       size={'fullscreen'}
+      hideHeader={true}
       locked={saving}
     >
       <div
-        className="flex h-[75dvh] flex-col gap-3 px-4 py-3 sm:px-6"
+        className="flex h-full flex-col gap-3 px-4 pb-4"
         onKeyDown={event => {
           if (event.key === 's' && (event.metaKey || event.ctrlKey)) {
             event.preventDefault();
@@ -116,25 +131,30 @@ export const PluginFileEditorDialog: React.FC<IPluginFileEditorDialogProps> = ({
           }
         }}
       >
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="min-w-0 flex-1 basis-40 truncate text-caption text-muted-foreground">
-            {dirty ? `● ${t('plugins.code.hint')}` : t('plugins.code.hint')}
-          </span>
-          <Button
-            variant="ghost"
-            size="sm"
-            disabled={!dirty || saving}
-            onClick={() => {
-              setDraft(original);
-              setSaveError(null);
-            }}
-          >
-            {t('plugins.code.discard')}
-          </Button>
-          <Button size="sm" disabled={!dirty || saving} onClick={() => void save()}>
-            {saving ? t('plugins.code.saving') : t('plugins.code.save')}
-          </Button>
-        </div>
+        <Item className={'p-0'} size={'sm'}>
+          <ItemContent className={'gap-0'}>
+            <ItemTitle className={'font-bold'}>{pluginName}</ItemTitle>
+            <ItemDescription className={'text-xs'}>{path}</ItemDescription>
+          </ItemContent>
+          <ItemActions>
+            <Button
+              size="sm"
+              disabled={!dirty || saving}
+              onClick={() => {
+                setDraft(original);
+                setSaveError(null);
+              }}
+            >
+              {t('plugins.code.discard')}
+            </Button>
+            <Button size="sm" disabled={!dirty || saving} onClick={() => void save()}>
+              {saving ? t('plugins.code.saving') : t('plugins.code.save')}
+            </Button>
+            <Button size={'sm'} onClick={close}>
+              <X />
+            </Button>
+          </ItemActions>
+        </Item>
 
         {loadError && (
           <Alert variant="destructive">
@@ -171,7 +191,7 @@ export const PluginFileEditorDialog: React.FC<IPluginFileEditorDialogProps> = ({
               value={draft}
               height="100%"
               className="h-full"
-              theme="light"
+              theme={theme === 'dark' ? 'dark' : 'light'}
               extensions={languageOf(path)}
               editable={!saving}
               onChange={value => setDraft(value)}

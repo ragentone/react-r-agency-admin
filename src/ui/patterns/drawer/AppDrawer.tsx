@@ -11,16 +11,23 @@ import { ArrowLeft, X } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+interface IStyle {
+  '--drawer-height': string;
+  '--drawer-content-max-height': string;
+  '--drawer-inset'?: string;
+}
+
 /** Almost full height on phones, max. ~830px on large screens. */
 export const APP_DRAWER_SIZE = {
   '--drawer-height': 'min(calc(100dvh - 2.5rem), 52rem)',
   '--drawer-content-max-height': 'min(calc(100dvh - 2.5rem), 52rem)',
-} as React.CSSProperties;
+} as IStyle;
 
 export const APP_DRAWER_FULL_SIZE = {
   '--drawer-height': 'min(calc(100dvh), 52rem)',
   '--drawer-content-max-height': 'min(calc(100dvh), 52rem)',
-} as React.CSSProperties;
+  '--drawer-inset': '0px',
+} as IStyle;
 
 export interface IAppDrawerProps {
   open: boolean;
@@ -57,6 +64,7 @@ export interface IAppDrawerProps {
   wrapper?: (children: React.ReactNode) => React.ReactNode;
   children: React.ReactNode;
   direction?: 'up' | 'down' | 'left' | 'right';
+  autoHeight?: boolean;
 }
 
 /**
@@ -83,6 +91,7 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
   wrapper,
   children,
   direction,
+  autoHeight = false,
 }) => {
   const { t } = useTranslation('base');
   const close = closeLabel ?? t('drawer.close');
@@ -149,14 +158,17 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
   );
 
   const getStyle = () => {
-    switch (size) {
-      case 'fullscreen':
-        return APP_DRAWER_FULL_SIZE;
-      case 'full':
-        return APP_DRAWER_SIZE;
-      default:
-        return undefined;
+    if (size === 'fullscreen') return APP_DRAWER_FULL_SIZE;
+
+    if (size === 'full') {
+      const clone: IStyle = { ...APP_DRAWER_SIZE };
+      if (autoHeight) {
+        clone['--drawer-height'] = 'auto';
+      }
+      return clone;
     }
+
+    return undefined;
   };
 
   return (
@@ -176,11 +188,11 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
             'mx-auto w-full',
             {
               'max-w-150': size !== 'fullscreen',
-              'rounded-none [--drawer-inset:0px]': size === 'fullscreen',
+              'rounded-none': size === 'fullscreen',
             },
             contentProps?.className
           )}
-          style={{ ...getStyle(), ...contentProps?.style }}
+          style={{ ...(getStyle() as React.CSSProperties), ...contentProps?.style }}
         >
           {sr && <DrawerDescription className="sr-only">{sr}</DrawerDescription>}
           {wrapper ? wrapper(inner) : inner}
