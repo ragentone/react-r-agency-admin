@@ -1204,16 +1204,9 @@
         "invalid_manifest": "plugin.json is invalid.",
         "not_found": "File not found.",
         "project_missing": "No development project found.",
-        "unknown": "That did not work. Please try again.",
-        "exists": "This file already exists."
+        "unknown": "That did not work. Please try again."
       },
-      "backToFiles": "Назад к файлам",
-      "newFile": "Новый файл",
-      "newFileTitle": "Создать новый файл",
-      "newFileHint": "Путь относительно проекта, например src/components/Card.tsx. Существующие файлы не перезаписываются.",
-      "newFileLabel": "Путь",
-      "createFile": "Создать",
-      "created": "{{path}} создан."
+      "backToFiles": "Назад к файлам"
     },
     "build": {
       "success": "{{name}} собран.",

@@ -8,7 +8,6 @@ import { PluginDetailFiles } from './PluginDetailFiles';
 import { PluginDetailHeader } from './PluginDetailHeader';
 import { PluginDetailInfo } from './PluginDetailInfo';
 import { PluginFileEditorDialog } from './PluginFileEditorDialog';
-import { PluginNewFileDialog } from './PluginNewFileDialog';
 import { PluginRemoveDrawer } from './PluginRemoveDrawer';
 
 interface IPluginDetailViewProps {
@@ -20,9 +19,7 @@ interface IPluginDetailViewProps {
 export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, reload }) => {
   const detail = usePluginDetail(plugin, reload);
   const [deployOpen, setDeployOpen] = useState(false);
-  const [newFileOpen, setNewFileOpen] = useState(false);
   const [editPath, setEditPath] = useState<string | null>(null);
-  const [treeKey, setTreeKey] = useState(0);
   const [removeOpen, setRemoveOpen] = useState(false);
 
   return (
@@ -40,9 +37,6 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
         {plugin.development && (
           <PluginDetailFiles
             pluginId={plugin.pluginId}
-            busy={detail.busy}
-            reloadKey={treeKey}
-            onNewFile={() => setNewFileOpen(true)}
             onOpenFile={setEditPath}
           />
         )}
@@ -58,15 +52,6 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
             onDeploy={async bump => {
               await detail.deploy(bump);
               setDeployOpen(false);
-            }}
-          />
-          <PluginNewFileDialog
-            pluginId={plugin.pluginId}
-            open={newFileOpen}
-            onOpenChange={setNewFileOpen}
-            onCreated={path => {
-              setTreeKey(key => key + 1);
-              setEditPath(path);
             }}
           />
           <PluginFileEditorDialog
