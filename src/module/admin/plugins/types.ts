@@ -94,17 +94,6 @@ export interface IPluginRemoveResult {
   error?: string | null;
 }
 
-/** Slots a plugin may declare (same list as the backend `PLUGIN_SLOTS`). */
-export const PLUGIN_SLOT_OPTIONS = [
-  'home.widget',
-  'menu',
-  'settings',
-  'admin.tab',
-  'feed.renderer',
-  'notification',
-  'chat.action',
-] as const;
-
 /** Result of `adminPluginCreateDraft`. */
 export interface IPluginCreateResult {
   success: boolean;

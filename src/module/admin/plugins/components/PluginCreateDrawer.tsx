@@ -2,12 +2,10 @@ import { AppFormDrawer } from '@ui/patterns';
 import { Alert, AlertDescription, AlertTitle } from '@ui/shad-cn/components/alert.tsx';
 import { Input } from '@ui/shad-cn/components/input.tsx';
 import { Label } from '@ui/shad-cn/components/label.tsx';
-import { Switch } from '@ui/shad-cn/components/switch.tsx';
 import React, { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { usePluginCreate } from '../hooks/use-plugin-create';
-import { PLUGIN_SLOT_OPTIONS } from '../types';
 
 interface IPluginCreateDrawerProps {
   open: boolean;
@@ -17,7 +15,7 @@ interface IPluginCreateDrawerProps {
 
 const ERROR_KEYS = ['invalid_manifest', 'exists', 'not_authorized'] as const;
 
-/** Form for a new development plugin: name (the id is derived from it) and the slots it will use. */
+/** Form for a new development plugin: only the name. The id is derived from it. */
 export const PluginCreateDrawer: React.FC<IPluginCreateDrawerProps> = ({
   open,
   onOpenChange,
@@ -26,19 +24,14 @@ export const PluginCreateDrawer: React.FC<IPluginCreateDrawerProps> = ({
   const { t } = useTranslation('admin');
   const nameId = useId();
   const [name, setName] = useState('');
-  const [slots, setSlots] = useState<string[]>(['home.widget']);
   const { busy, result, create, reset } = usePluginCreate(() => undefined);
 
-  const valid = name.trim().length > 0 && slots.length > 0;
-
-  const toggleSlot = (slot: string, checked: boolean) =>
-    setSlots(current => (checked ? [...current, slot] : current.filter(item => item !== slot)));
+  const valid = name.trim().length > 0;
 
   const close = (next: boolean) => {
     if (busy) return;
     if (!next) {
       setName('');
-      setSlots(['home.widget']);
       reset();
     }
     onOpenChange(next);
@@ -47,7 +40,7 @@ export const PluginCreateDrawer: React.FC<IPluginCreateDrawerProps> = ({
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!valid) return;
-    const response = await create({ name: name.trim(), slots });
+    const response = await create({ name: name.trim() });
     if (response.success) {
       onCreated(response.plugin?.pluginId ?? '');
       close(false);
@@ -84,24 +77,6 @@ export const PluginCreateDrawer: React.FC<IPluginCreateDrawerProps> = ({
           />
           <p className="text-caption text-muted-foreground">{t('plugins.create.idHint')}</p>
         </div>
-        <fieldset className="flex flex-col gap-2">
-          <legend className="mb-1 text-caption font-medium">{t('plugins.create.slotsLabel')}</legend>
-          <div className="flex flex-col divide-y rounded-md border">
-            {PLUGIN_SLOT_OPTIONS.map(slot => (
-              <label
-                key={slot}
-                className="flex min-h-12 items-center justify-between gap-3 px-4 py-3"
-              >
-                <span className="font-mono text-caption">{slot}</span>
-                <Switch
-                  checked={slots.includes(slot)}
-                  disabled={busy}
-                  onCheckedChange={checked => toggleSlot(slot, checked)}
-                />
-              </label>
-            ))}
-          </div>
-        </fieldset>
         {result && !result.success && (
           <Alert variant="destructive">
             <AlertTitle>{t(`plugins.create.errors.${errorKey}`)}</AlertTitle>

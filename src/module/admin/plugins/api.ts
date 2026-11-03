@@ -40,8 +40,8 @@ const RemoveMutation = parse(`
 `);
 
 const CreateDraftMutation = parse(`
-  mutation AdminPluginCreateDraft($name: String!, $slots: [String]) {
-    adminPluginCreateDraft(name: $name, slots: $slots) { success error errors plugin }
+  mutation AdminPluginCreateDraft($name: String!) {
+    adminPluginCreateDraft(name: $name) { success error errors plugin }
   }
 `);
 
@@ -97,7 +97,7 @@ export const PluginApi = {
     }
   },
 
-  createDraft: async (input: { name: string; slots: string[] }): Promise<IPluginCreateResult> => {
+  createDraft: async (input: { name: string }): Promise<IPluginCreateResult> => {
     try {
       const response = (await client().mutate({
         mutation: CreateDraftMutation as never,

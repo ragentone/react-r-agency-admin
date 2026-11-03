@@ -1063,7 +1063,6 @@
       "description": "Creates a template with manifest and placeholder code. The code is then built locally in plugin-dev.",
       "idHint": "The plugin id is generated automatically from the name.",
       "nameLabel": "Name",
-      "slotsLabel": "Where the plugin shows up",
       "submit": "Create template",
       "busy": "Creating …",
       "success": "Template {{id}} created (status: in development). Dependencies are installed in the background.",

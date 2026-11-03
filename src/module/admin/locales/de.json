@@ -1063,7 +1063,6 @@
       "description": "Legt eine Vorlage mit Manifest und Platzhalter-Code an. Der Code wird lokal in plugin-dev weitergebaut.",
       "idHint": "Die Plugin-Id wird automatisch aus dem Namen erstellt.",
       "nameLabel": "Name",
-      "slotsLabel": "Wo das Plugin erscheint",
       "submit": "Vorlage anlegen",
       "busy": "Wird angelegt …",
       "success": "Vorlage {{id}} angelegt (Status: in Entwicklung). Abhängigkeiten werden im Hintergrund installiert.",
