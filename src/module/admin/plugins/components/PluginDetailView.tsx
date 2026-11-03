@@ -25,20 +25,19 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
   return (
     <div className="flex w-full flex-col bg-background">
       <PluginDetailHeader name={plugin.name} pluginId={plugin.pluginId} />
-      <PluginDetailInfo plugin={plugin} />
-
-      <div className="flex flex-col gap-4 px-4 py-4">
+      <div className={'grid sm:grid-cols-2 grid-cols-1 gap-2 py-8 px-4 border-b border-border/50'}>
+        <PluginDetailInfo plugin={plugin} />
         <PluginDetailActions
           plugin={plugin}
           detail={detail}
           onDeploy={() => setDeployOpen(true)}
           onRemove={() => setRemoveOpen(true)}
         />
+      </div>
+
+      <div className="flex flex-col gap-4 px-4 py-4">
         {plugin.development && (
-          <PluginDetailFiles
-            pluginId={plugin.pluginId}
-            onOpenFile={setEditPath}
-          />
+          <PluginDetailFiles pluginId={plugin.pluginId} onOpenFile={setEditPath} />
         )}
       </div>
 

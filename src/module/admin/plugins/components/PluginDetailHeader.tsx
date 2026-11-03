@@ -15,7 +15,7 @@ export const PluginDetailHeader: React.FC<IPluginDetailHeaderProps> = ({ name, p
   const { t } = useTranslation('admin');
 
   return (
-    <header className="sticky top-0 z-10 flex h-14 items-center gap-2 border-b border-border bg-background/80 px-2 backdrop-blur">
+    <header className="sticky top-0 z-10 flex h-14 items-center gap-2 border-b border-border/50 bg-background/80 px-2 backdrop-blur">
       <Link
         to={ADMIN_PLUGINS_ROUTE}
         aria-label={t('plugins.details.back')}

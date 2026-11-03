@@ -1,4 +1,11 @@
 import { Button } from '@ui/shad-cn/components/button.tsx';
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
+} from '@ui/shad-cn/components/item.tsx';
 import { Switch } from '@ui/shad-cn/components/switch.tsx';
 import { Download, Hammer, Rocket, Trash2 } from 'lucide-react';
 import React from 'react';
@@ -15,24 +22,39 @@ interface IPluginDetailActionsProps {
 }
 
 /** Activation switch and the action buttons. Build and deploy only for development plugins. */
-export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({ plugin, detail, onDeploy, onRemove }) => {
+export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({
+  plugin,
+  detail,
+  onDeploy,
+  onRemove,
+}) => {
   const { t } = useTranslation('admin');
 
   return (
     <>
-      <label className="flex min-h-12 items-center justify-between gap-3">
-        <span className="text-body font-medium">{t('plugins.details.active')}</span>
-        <Switch
-          checked={detail.active}
-          disabled={detail.busy}
-          onCheckedChange={value => void detail.toggle(value)}
-          aria-label={t('plugins.toggle.label', { name: plugin.name })}
-        />
-      </label>
+      <div className="flex flex-col gap-2">
+        <Item variant={'outline'} className={'rounded-4xl shadow-xs'} size={'sm'}>
+          <ItemContent>
+            <ItemTitle>{t('plugins.details.active')}</ItemTitle>
+            <ItemDescription>{t('plugins.remove.activeHint')}</ItemDescription>
+          </ItemContent>
+          <ItemActions>
+            <Switch
+              checked={detail.active}
+              disabled={detail.busy}
+              onCheckedChange={value => void detail.toggle(value)}
+              aria-label={t('plugins.toggle.label', { name: plugin.name })}
+            />
+          </ItemActions>
+        </Item>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {plugin.development && (
-          <Button variant="outline" size="lg" disabled={detail.busy} onClick={() => void detail.build()}>
+          <Button
+            variant="outline"
+            size="lg"
+            disabled={detail.busy}
+            onClick={() => void detail.build()}
+          >
             <Hammer className="size-4" />
             {t('plugins.details.build')}
           </Button>
@@ -43,7 +65,12 @@ export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({ plugi
             {t('plugins.details.deploy')}
           </Button>
         )}
-        <Button variant="outline" size="lg" disabled={detail.busy} onClick={() => void detail.download()}>
+        <Button
+          variant="outline"
+          size="lg"
+          disabled={detail.busy}
+          onClick={() => void detail.download()}
+        >
           <Download className="size-4" />
           {t('plugins.details.download')}
         </Button>
@@ -59,8 +86,6 @@ export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({ plugi
           {t('plugins.details.remove')}
         </Button>
       </div>
-
-      {detail.active && <p className="text-caption text-muted-foreground">{t('plugins.remove.activeHint')}</p>}
     </>
   );
 };

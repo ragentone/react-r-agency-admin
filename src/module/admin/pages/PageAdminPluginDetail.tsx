@@ -1,9 +1,9 @@
 import { RoleGate } from '@core/auth/roles/RoleGate.tsx';
+import { AdminNoAccess } from '@module/admin/components';
 import { RoutePage } from '@router/components';
 import { useParams } from '@tanstack/react-router';
 import React from 'react';
 
-import { AdminNoAccess } from '../components/AdminNoAccess';
 import { ADMIN_ROLES } from '../const';
 import { PluginDetailPage } from '../plugins/components/PluginDetailPage';
 

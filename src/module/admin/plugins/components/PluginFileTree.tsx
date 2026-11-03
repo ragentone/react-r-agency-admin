@@ -141,7 +141,11 @@ export const PluginFileTree: React.FC<IPluginFileTreeProps> = ({
   const { t } = useTranslation('admin');
   // The result is kept with its key; a changed plugin or reload key means "loading" until the new result arrives.
   const key = `${pluginId}:${reloadKey}`;
-  const [result, setResult] = useState<{ key: string; files: IPluginFileItem[]; error: string | null } | null>(null);
+  const [result, setResult] = useState<{
+    key: string;
+    files: IPluginFileItem[];
+    error: string | null;
+  } | null>(null);
   const current = result?.key === key ? result : null;
   const files = current ? current.files : null;
   const error = current ? current.error : null;
@@ -182,10 +186,7 @@ export const PluginFileTree: React.FC<IPluginFileTreeProps> = ({
   }
 
   return (
-    <nav
-      aria-label={t('plugins.code.files')}
-      className="rounded-4xl border border-border px-2 py-4"
-    >
+    <nav aria-label={t('plugins.code.files')}>
       <TreeLevel nodes={sortedChildren(root)} depth={0} onOpenFile={onOpenFile} />
     </nav>
   );
