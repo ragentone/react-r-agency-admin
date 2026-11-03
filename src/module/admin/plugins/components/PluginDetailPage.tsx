@@ -23,7 +23,7 @@ import {
 } from '@ui/shad-cn/components/select.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { Switch } from '@ui/shad-cn/components/switch.tsx';
-import { ArrowLeft, Download, FilePlus, Rocket, Trash2 } from 'lucide-react';
+import { ArrowLeft, Download, FilePlus, Hammer, Rocket, Trash2 } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -31,6 +31,7 @@ import { toast } from 'sonner';
 import { ADMIN_PLUGINS_ROUTE } from '../../const';
 import { PluginApi } from '../api';
 import { saveZip } from '../download';
+import { usePluginBuild } from '../hooks/use-plugin-build';
 import { usePluginDeploy } from '../hooks/use-plugin-deploy';
 import { usePluginList } from '../hooks/use-plugin-list';
 import { usePluginRemove } from '../hooks/use-plugin-remove';
@@ -52,6 +53,7 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
   const plugin = plugins.find(item => item.pluginId === pluginId) ?? null;
   const status = usePluginStatus(() => void reload());
   const deployment = usePluginDeploy(() => void reload());
+  const building = usePluginBuild();
   const removal = usePluginRemove(() => undefined);
   const [deployOpen, setDeployOpen] = useState(false);
   const [bump, setBump] = useState<PluginBump>('patch');
@@ -60,7 +62,7 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
   const [newFileOpen, setNewFileOpen] = useState(false);
   const [treeKey, setTreeKey] = useState(0);
   const [removeOpen, setRemoveOpen] = useState(false);
-  const busy = status.pending !== null || deploying || removal.busy;
+  const busy = status.pending !== null || deploying || removal.busy || building.busy;
   const active = plugin?.status === 'active';
 
   const toggle = async (value: boolean) => {
@@ -75,6 +77,23 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
         result.error === 'app_version_too_old'
           ? t('plugins.toggle.appVersionTooOld')
           : t('plugins.toggle.error')
+      );
+    }
+  };
+
+  const build = async () => {
+    if (!plugin) return;
+    const result = await building.build(plugin.pluginId);
+    if (result.success) {
+      toast.success(
+        t(result.synced ? 'plugins.build.synced' : 'plugins.build.success', { name: plugin.name })
+      );
+    } else {
+      toast.error(
+        t(`plugins.build.errors.${result.error ?? 'unknown'}`, {
+          defaultValue: t('plugins.build.errors.unknown'),
+        }),
+        { description: result.errors?.join('\n') || undefined }
       );
     }
   };
@@ -219,6 +238,13 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
         )}
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {plugin.development && (
+            <Button variant="outline" size="lg" disabled={busy} onClick={() => void build()}>
+              <Hammer className="size-4" />
+              {t('plugins.details.build')}
+            </Button>
+          )}
+
           {plugin.development && (
             <Button variant="outline" size="lg" disabled={busy} onClick={() => setDeployOpen(true)}>
               <Rocket className="size-4" />

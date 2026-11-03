@@ -51,6 +51,12 @@ const DeployDevMutation = parse(`
   }
 `);
 
+const BuildDevMutation = parse(`
+  mutation AdminPluginBuildDev($pluginId: String!) {
+    adminPluginBuildDev(pluginId: $pluginId) { success error errors synced }
+  }
+`);
+
 const DownloadQuery = parse(`
   query AdminPluginDownload($pluginId: String!) {
     adminPluginDownload(pluginId: $pluginId) { success error filename data }
@@ -112,6 +118,20 @@ export const PluginApi = {
         variables: { pluginId, bump },
       })) as { data?: { adminPluginDeployDev?: IPluginDeployResult } };
       return response.data?.adminPluginDeployDev ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+
+  /** Runs `npm run build` in the development project. Changes no version. */
+  buildDev: async (pluginId: string): Promise<IPluginDeployResult> => {
+    try {
+      const response = (await client().mutate({
+        mutation: BuildDevMutation as never,
+        variables: { pluginId },
+      })) as { data?: { adminPluginBuildDev?: IPluginDeployResult } };
+      return response.data?.adminPluginBuildDev ?? { success: false, error: 'unknown' };
     } catch (error) {
       console.warn('[admin-plugins]', (error as Error)?.message);
       return { success: false, error: 'unknown' };

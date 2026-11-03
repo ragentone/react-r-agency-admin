@@ -54,6 +54,7 @@ export interface IPluginDeployResult {
   error?: string | null;
   errors?: string[] | null;
   plugin?: { pluginId: string; version: string; status: PluginStatus } | null;
+  synced?: boolean | null;
 }
 
 export interface IPluginDownloadResult {

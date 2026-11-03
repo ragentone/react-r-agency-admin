@@ -8,8 +8,8 @@
 | Bereich               | Anzahl |
 | --------------------- | -----: |
 | [Query](#query)       |    119 |
-| [Mutation](#mutation) |    226 |
-| Object-Types          |    400 |
+| [Mutation](#mutation) |    227 |
+| Object-Types          |    401 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -1088,6 +1088,12 @@ Mutation  ‹IMutation›
 │   ├── $values: JSON!
 │   ├── page: JSON
 │   └── success: Boolean
+├── adminPluginBuildDev: adminPluginBuildDevReturn  ‹IAdminPluginBuildDevReturn›
+│   ├── $pluginId: String!
+│   ├── error: String
+│   ├── errors: JSON
+│   ├── success: Boolean
+│   └── synced: Boolean
 ├── adminPluginCreateDraft: adminPluginCreateDraftReturn  ‹IAdminPluginCreateDraftReturn›
 │   ├── $name: String!
 │   ├── $slots: [String]
@@ -2934,6 +2940,7 @@ Inputs
 | `adminPageImageUploadReturn`             | Object | `IAdminPageImageUploadReturn`             | `objects.ts` |                                                                                  |
 | `adminPageListReturn`                    | Object | `IAdminPageListReturn`                    | `objects.ts` |                                                                                  |
 | `adminPageUpdateReturn`                  | Object | `IAdminPageUpdateReturn`                  | `objects.ts` |                                                                                  |
+| `adminPluginBuildDevReturn`              | Object | `IAdminPluginBuildDevReturn`              | `objects.ts` |                                                                                  |
 | `adminPluginCreateDraftReturn`           | Object | `IAdminPluginCreateDraftReturn`           | `objects.ts` |                                                                                  |
 | `adminPluginDeployDevReturn`             | Object | `IAdminPluginDeployDevReturn`             | `objects.ts` |                                                                                  |
 | `adminPluginDownloadReturn`              | Object | `IAdminPluginDownloadReturn`              | `objects.ts` |                                                                                  |

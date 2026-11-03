@@ -1118,7 +1118,8 @@
       "download": "Download ZIP",
       "code": "Edit code",
       "notFound": "Plugin not found.",
-      "back": "Back to the plugin list"
+      "back": "Back to the plugin list",
+      "build": "Build"
     },
     "download": {
       "errors": {
@@ -1153,6 +1154,22 @@
       "newFileLabel": "Path",
       "createFile": "Create",
       "created": "{{path}} created."
+    },
+    "build": {
+      "success": "{{name}} was built.",
+      "unknown": "Build failed.",
+      "errors": {
+        "not_found": "Plugin not found.",
+        "not_development": "Only development plugins can be built.",
+        "project_missing": "No development project found.",
+        "dependencies_missing": "Dependencies are missing. npm install is still running or has failed.",
+        "build_failed": "The build failed.",
+        "invalid_plugin_id": "Invalid plugin id.",
+        "unknown": "Build failed.",
+        "sync_failed": "The installed version could not be updated.",
+        "backend_failed": "The plugin backend could not be reloaded."
+      },
+      "synced": "{{name}} was built and updated on the server."
     }
   }
 }

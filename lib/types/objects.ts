@@ -82,6 +82,14 @@ export interface IAdminPageUpdateReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminPluginBuildDevReturn` */
+export interface IAdminPluginBuildDevReturn {
+  error: Maybe<string>;
+  errors: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+  synced: Maybe<boolean>;
+}
+
 /** GraphQL: `adminPluginCreateDraftReturn` */
 export interface IAdminPluginCreateDraftReturn {
   error: Maybe<string>;
@@ -2184,6 +2192,7 @@ export interface IMutation {
   adminPageImageKeep: Maybe<IAdminPageImageKeepReturn>;
   adminPageImageUpload: Maybe<IAdminPageImageUploadReturn>;
   adminPageUpdate: Maybe<IAdminPageUpdateReturn>;
+  adminPluginBuildDev: Maybe<IAdminPluginBuildDevReturn>;
   adminPluginCreateDraft: Maybe<IAdminPluginCreateDraftReturn>;
   adminPluginDeployDev: Maybe<IAdminPluginDeployDevReturn>;
   adminPluginFileWrite: Maybe<IAdminPluginFileWriteReturn>;

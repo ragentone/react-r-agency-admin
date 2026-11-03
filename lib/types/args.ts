@@ -100,6 +100,11 @@ export interface IMutationAdminPageUpdateArgs {
   values: ScalarJSON;
 }
 
+/** Arguments of `Mutation.adminPluginBuildDev` */
+export interface IMutationAdminPluginBuildDevArgs {
+  pluginId: string;
+}
+
 /** Arguments of `Mutation.adminPluginCreateDraft` */
 export interface IMutationAdminPluginCreateDraftArgs {
   name: string;

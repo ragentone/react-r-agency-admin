@@ -1118,7 +1118,8 @@
       "download": "ZIP herunterladen",
       "code": "Code bearbeiten",
       "notFound": "Plugin nicht gefunden.",
-      "back": "Zurück zur Plugin-Liste"
+      "back": "Zurück zur Plugin-Liste",
+      "build": "Build"
     },
     "download": {
       "errors": {
@@ -1153,6 +1154,22 @@
       "newFileLabel": "Pfad",
       "createFile": "Anlegen",
       "created": "{{path}} angelegt."
+    },
+    "build": {
+      "success": "{{name}} wurde gebaut.",
+      "unknown": "Build fehlgeschlagen.",
+      "errors": {
+        "not_found": "Plugin nicht gefunden.",
+        "not_development": "Nur Entwicklungsplugins können gebaut werden.",
+        "project_missing": "Kein Entwicklungsprojekt gefunden.",
+        "dependencies_missing": "Abhängigkeiten fehlen. npm install läuft noch oder ist fehlgeschlagen.",
+        "build_failed": "Der Build ist fehlgeschlagen.",
+        "invalid_plugin_id": "Ungültige Plugin-Id.",
+        "unknown": "Build fehlgeschlagen.",
+        "sync_failed": "Die installierte Version konnte nicht aktualisiert werden.",
+        "backend_failed": "Das Backend des Plugins konnte nicht neu geladen werden."
+      },
+      "synced": "{{name}} wurde gebaut und im Server aktualisiert."
     }
   }
 }
