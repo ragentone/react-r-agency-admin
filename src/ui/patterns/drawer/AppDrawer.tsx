@@ -17,6 +17,11 @@ export const APP_DRAWER_SIZE = {
   '--drawer-content-max-height': 'min(calc(100dvh - 2.5rem), 52rem)',
 } as React.CSSProperties;
 
+export const APP_DRAWER_FULL_SIZE = {
+  '--drawer-height': 'min(calc(100dvh), 52rem)',
+  '--drawer-content-max-height': 'min(calc(100dvh), 52rem)',
+} as React.CSSProperties;
+
 export interface IAppDrawerProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -37,7 +42,7 @@ export interface IAppDrawerProps {
   onBack?: () => void;
   backLabel?: string;
   /** `full` = almost full height (default), `auto` = fits the content. */
-  size?: 'full' | 'auto';
+  size?: 'full' | 'fullscreen' | 'auto';
   /**
    * No title bar – the content brings its own. The title stays for screen readers;
    * pass `title={null}` when the content renders its own `DrawerTitle`.
@@ -143,6 +148,17 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
     </>
   );
 
+  const getStyle = () => {
+    switch (size) {
+      case 'fullscreen':
+        return APP_DRAWER_FULL_SIZE;
+      case 'full':
+        return APP_DRAWER_SIZE;
+      default:
+        return undefined;
+    }
+  };
+
   return (
     <Drawer
       open={open}
@@ -156,8 +172,15 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
       <DrawerPrimitive.VirtualKeyboardProvider>
         <DrawerContent
           {...contentProps}
-          className={cn('mx-auto w-full max-w-150', contentProps?.className)}
-          style={{ ...(size === 'full' ? APP_DRAWER_SIZE : undefined), ...contentProps?.style }}
+          className={cn(
+            'mx-auto w-full',
+            {
+              'max-w-150': size !== 'fullscreen',
+              'rounded-none [--drawer-inset:0px]': size === 'fullscreen',
+            },
+            contentProps?.className
+          )}
+          style={{ ...getStyle(), ...contentProps?.style }}
         >
           {sr && <DrawerDescription className="sr-only">{sr}</DrawerDescription>}
           {wrapper ? wrapper(inner) : inner}

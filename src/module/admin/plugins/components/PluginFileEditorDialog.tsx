@@ -104,7 +104,7 @@ export const PluginFileEditorDialog: React.FC<IPluginFileEditorDialogProps> = ({
       onOpenChange={open => !open && close()}
       title={path ?? ''}
       description={pluginName}
-      size={'auto'}
+      size={'fullscreen'}
       locked={saving}
     >
       <div
