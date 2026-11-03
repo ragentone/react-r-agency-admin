@@ -1169,6 +1169,35 @@
         "backend_failed": "Das Backend des Plugins konnte nicht neu geladen werden."
       },
       "synced": "{{name}} wurde gebaut und im Server aktualisiert."
+    },
+    "tabs": {
+      "installed": "Installiert",
+      "unknown": "Development"
+    },
+    "unknown": {
+      "install": "Installieren",
+      "installed": "{{id}} wurde installiert. Zum Aktivieren die Details öffnen.",
+      "removed": "Dateien von {{id}} wurden gelöscht.",
+      "failed": "Die Aktion ist fehlgeschlagen.",
+      "delete": "Dateien von {{name}} löschen",
+      "removeTitle": "{{name}} löschen?",
+      "removeDescription": "Die Dateien des Plugins (Plugin-Ordner und Entwicklungsprojekt, falls vorhanden) werden endgültig gelöscht. Die Registry bleibt unverändert.",
+      "removeConfirm": "Dateien löschen",
+      "removeBusy": "Wird gelöscht …",
+      "empty": {
+        "title": "Keine unbekannten Plugins",
+        "description": "Alle Plugin-Ordner sind registriert."
+      },
+      "errors": {
+        "no_version": "Kein Versionsordner gefunden.",
+        "manifest_missing": "plugin.json fehlt.",
+        "manifest_invalid": "plugin.json ist ungültig.",
+        "id_mismatch": "Die Id im Manifest passt nicht zum Ordner.",
+        "bundle_missing": "frontend/index.js fehlt.",
+        "exists": "Plugin ist bereits registriert.",
+        "still_registered": "Plugin ist registriert und kann hier nicht gelöscht werden.",
+        "not_found": "Ordner nicht gefunden."
+      }
     }
   }
 }

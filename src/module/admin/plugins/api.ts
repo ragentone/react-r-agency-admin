@@ -13,6 +13,8 @@ import type {
   IPluginRemoveResult,
   IPluginStatusResult,
   IPluginUploadResult,
+  IPluginUnknownResult,
+  IPluginAdoptResult,
 } from './types';
 
 /* Parsed here instead of codegen `graphql()` (same as module/admin/system/api.ts). */
@@ -76,6 +78,22 @@ const FileReadQuery = parse(`
 const FileWriteMutation = parse(`
   mutation AdminPluginFileWrite($pluginId: String!, $path: String!, $content: String!) {
     adminPluginFileWrite(pluginId: $pluginId, path: $path, content: $content) { success error errors }
+  }
+`);
+
+const UnknownQuery = parse(`
+  query AdminPluginUnknown {
+    adminPluginUnknown { success error plugins }
+  }
+`);
+const AdoptMutation = parse(`
+  mutation AdminPluginAdopt($pluginId: String!) {
+    adminPluginAdopt(pluginId: $pluginId) { success error errors plugin }
+  }
+`);
+const RemoveUnknownMutation = parse(`
+  mutation AdminPluginRemoveUnknown($pluginId: String!) {
+    adminPluginRemoveUnknown(pluginId: $pluginId) { success error }
   }
 `);
 
@@ -231,6 +249,48 @@ export const PluginApi = {
         variables: { file: [file] },
       })) as { data?: { adminPluginUpload?: IPluginUploadResult } };
       return response.data?.adminPluginUpload ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+
+  /** Plugin folders on disk that are not registered yet. */
+  unknown: async (): Promise<IPluginUnknownResult> => {
+    try {
+      const response = (await client().query({
+        query: UnknownQuery as never,
+        fetchPolicy: 'no-cache',
+      })) as { data?: { adminPluginUnknown?: IPluginUnknownResult } };
+      return response.data?.adminPluginUnknown ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+
+  /** Registers an unknown folder as installed. */
+  adopt: async (pluginId: string): Promise<IPluginAdoptResult> => {
+    try {
+      const response = (await client().mutate({
+        mutation: AdoptMutation as never,
+        variables: { pluginId },
+      })) as { data?: { adminPluginAdopt?: IPluginAdoptResult } };
+      return response.data?.adminPluginAdopt ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+
+  /** Deletes the files of an unknown folder. The registry is not touched. */
+  removeUnknown: async (pluginId: string): Promise<IPluginRemoveResult> => {
+    try {
+      const response = (await client().mutate({
+        mutation: RemoveUnknownMutation as never,
+        variables: { pluginId },
+      })) as { data?: { adminPluginRemoveUnknown?: IPluginRemoveResult } };
+      return response.data?.adminPluginRemoveUnknown ?? { success: false, error: 'unknown' };
     } catch (error) {
       console.warn('[admin-plugins]', (error as Error)?.message);
       return { success: false, error: 'unknown' };

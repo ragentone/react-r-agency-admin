@@ -1169,6 +1169,35 @@
         "backend_failed": "The plugin backend could not be reloaded."
       },
       "synced": "{{name}} was built and updated on the server."
+    },
+    "tabs": {
+      "installed": "Installed",
+      "unknown": "Development"
+    },
+    "unknown": {
+      "install": "Install",
+      "installed": "{{id}} installed. Open the details to activate it.",
+      "removed": "Files of {{id}} deleted.",
+      "failed": "The action failed.",
+      "delete": "Delete files of {{name}}",
+      "removeTitle": "Delete {{name}}?",
+      "removeDescription": "The plugin files (plugin folder and development project, if any) are deleted for good. The registry stays unchanged.",
+      "removeConfirm": "Delete files",
+      "removeBusy": "Deleting …",
+      "empty": {
+        "title": "No unknown plugins",
+        "description": "All plugin folders are registered."
+      },
+      "errors": {
+        "no_version": "No version folder found.",
+        "manifest_missing": "plugin.json is missing.",
+        "manifest_invalid": "plugin.json is invalid.",
+        "id_mismatch": "The id in the manifest does not match the folder.",
+        "bundle_missing": "frontend/index.js is missing.",
+        "exists": "Plugin is already registered.",
+        "still_registered": "Plugin is registered and cannot be deleted here.",
+        "not_found": "Folder not found."
+      }
     }
   }
 }

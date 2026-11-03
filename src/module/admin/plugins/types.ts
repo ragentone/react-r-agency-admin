@@ -94,10 +94,39 @@ export interface IPluginRemoveResult {
   error?: string | null;
 }
 
-/** Result of `adminPluginCreateDraft`. */
+/** Result of `adminPluginCreateDraft`. The plugin is not registered yet; it shows under "Development". */
 export interface IPluginCreateResult {
+  success: boolean;
+  error?: string | null;
+  errors?: string[] | null;
+  plugin?: { pluginId: string; version: string; status?: PluginStatus } | null;
+}
+
+/** One plugin folder in `plugins/` that the registry does not know (`adminPluginUnknown`). */
+export interface IPluginUnknownItem {
+  pluginId: string;
+  name: string;
+  /** Newest version folder, null if there is none. */
+  version: string | null;
+  versions: string[];
+  /** Reason the folder cannot be installed (`manifest_invalid`, `bundle_missing`, …), null if it can. */
+  error: string | null;
+  errors: string[];
+  /** A development project exists in `plugin-dev/`. */
+  development: boolean;
+}
+
+export interface IPluginUnknownResult {
+  success: boolean;
+  error?: string | null;
+  plugins?: IPluginUnknownItem[] | null;
+}
+
+/** Result of `adminPluginAdopt`. */
+export interface IPluginAdoptResult {
   success: boolean;
   error?: string | null;
   errors?: string[] | null;
   plugin?: { pluginId: string; version: string; status: PluginStatus } | null;
 }
+
