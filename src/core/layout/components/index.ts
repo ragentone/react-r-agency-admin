@@ -1,3 +1,4 @@
+export * from './AppBrand.tsx';
 export * from './FooterCopyRight.tsx';
 export * from './HeaderLogo.tsx';
 export * from './layout.context.ts';

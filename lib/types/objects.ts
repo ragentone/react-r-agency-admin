@@ -194,6 +194,14 @@ export interface IAdminPluginRemoveUnknownReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminPluginSetScopeReturn` */
+export interface IAdminPluginSetScopeReturn {
+  error: Maybe<string>;
+  errors: Maybe<ScalarJSON>;
+  scope: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminPluginSetStatusReturn` */
 export interface IAdminPluginSetStatusReturn {
   error: Maybe<string>;
@@ -2249,6 +2257,7 @@ export interface IMutation {
   adminPluginPurgeData: Maybe<IAdminPluginPurgeDataReturn>;
   adminPluginRemove: Maybe<IAdminPluginRemoveReturn>;
   adminPluginRemoveUnknown: Maybe<IAdminPluginRemoveUnknownReturn>;
+  adminPluginSetScope: Maybe<IAdminPluginSetScopeReturn>;
   adminPluginSetStatus: Maybe<IAdminPluginSetStatusReturn>;
   adminPluginUpload: Maybe<IAdminPluginUploadReturn>;
   adminRoleAdd: Maybe<IAdminRoleAddReturn>;

@@ -1,4 +1,4 @@
-import { MenuTrigger } from './MenuTrigger.tsx';
+import { MenuTrigger } from '@core/menu';
 
 /**
  * Menu trigger (avatar / burger) inside the mobile dock – registered in `core.tsx`.

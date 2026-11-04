@@ -8,8 +8,8 @@
 | Bereich               | Anzahl |
 | --------------------- | -----: |
 | [Query](#query)       |    121 |
-| [Mutation](#mutation) |    231 |
-| Object-Types          |    407 |
+| [Mutation](#mutation) |    232 |
+| Object-Types          |    408 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -1121,6 +1121,7 @@ Mutation  ‹IMutation›
 │   └── values: JSON
 ├── adminPluginCreateDraft: adminPluginCreateDraftReturn  ‹IAdminPluginCreateDraftReturn›
 │   ├── $name: String!
+│   ├── $scope: [String]
 │   ├── $slots: [String]
 │   ├── error: String
 │   ├── errors: JSON
@@ -1155,6 +1156,13 @@ Mutation  ‹IMutation›
 │   ├── $pluginId: String!
 │   ├── error: String
 │   ├── errors: JSON
+│   └── success: Boolean
+├── adminPluginSetScope: adminPluginSetScopeReturn  ‹IAdminPluginSetScopeReturn›
+│   ├── $pluginId: String!
+│   ├── $scope: [String]!
+│   ├── error: String
+│   ├── errors: JSON
+│   ├── scope: JSON
 │   └── success: Boolean
 ├── adminPluginSetStatus: adminPluginSetStatusReturn  ‹IAdminPluginSetStatusReturn›
 │   ├── $pluginId: String!
@@ -2990,6 +2998,7 @@ Inputs
 | `adminPluginPurgeDataReturn`             | Object | `IAdminPluginPurgeDataReturn`             | `objects.ts` |                                                                                  |
 | `adminPluginRemoveReturn`                | Object | `IAdminPluginRemoveReturn`                | `objects.ts` |                                                                                  |
 | `adminPluginRemoveUnknownReturn`         | Object | `IAdminPluginRemoveUnknownReturn`         | `objects.ts` |                                                                                  |
+| `adminPluginSetScopeReturn`              | Object | `IAdminPluginSetScopeReturn`              | `objects.ts` |                                                                                  |
 | `adminPluginSetStatusReturn`             | Object | `IAdminPluginSetStatusReturn`             | `objects.ts` |                                                                                  |
 | `adminPluginUnknownReturn`               | Object | `IAdminPluginUnknownReturn`               | `objects.ts` |                                                                                  |
 | `adminPluginUploadReturn`                | Object | `IAdminPluginUploadReturn`                | `objects.ts` |                                                                                  |

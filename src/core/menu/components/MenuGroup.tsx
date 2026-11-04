@@ -7,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 
 import { type IResolvedMenuEntry, useMenuGroupOpen } from '../hooks';
 import type { IMenuContext } from '../types.ts';
-import { MenuItemAction, MenuItemBadge, MenuItemIcon } from './MenuParts.tsx';
-import { useMenuText } from './use.menu.text.ts';
+import { MenuItemAction, MenuItemBadge, MenuItemIcon } from '@core/menu';
+import { useMenuText } from '@core/menu';
 
 interface IMenuGroupProps {
   item: IResolvedMenuEntry;
@@ -94,7 +94,7 @@ export const MenuGroup = ({ item, ctx, variant, onAfterSelect }: IMenuGroupProps
 
   const parentClass = cn(
     rowBase,
-    drawer ? 'rounded-2xl px-3 py-2.5 pr-12' : 'rounded-full px-4 py-3 pr-12',
+    drawer ? 'rounded-2xl px-3 py-2.5 pr-12' : 'h-12 rounded-full px-4 py-0 pr-12',
     item.active && !childActive
       ? drawer
         ? 'bg-foreground/[0.07] text-foreground'

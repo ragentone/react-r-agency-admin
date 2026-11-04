@@ -4,6 +4,7 @@
   "sections": {
     "main": "Discover",
     "apps": "Apps",
+    "games": "Games",
     "account": "User"
   },
   "items": {
@@ -49,6 +50,9 @@
   "apps": {
     "description": "All applications",
     "empty": "No apps available"
+  },
+  "games": {
+    "description": "All games"
   },
   "sheet": {
     "close": "Close {{label}}"

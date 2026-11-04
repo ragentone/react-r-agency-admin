@@ -4,6 +4,7 @@
   "sections": {
     "main": "Обзор",
     "apps": "Приложения",
+    "games": "Игры",
     "account": "Пользователь"
   },
   "items": {
@@ -49,6 +50,9 @@
   "apps": {
     "description": "Все приложения",
     "empty": "Нет доступных приложений"
+  },
+  "games": {
+    "description": "Все игры"
   },
   "sheet": {
     "close": "Закрыть: {{label}}"

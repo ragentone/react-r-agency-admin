@@ -30,7 +30,7 @@ const MenuSettingsDrawer = ({ open, onOpenChange }: IProps) => {
   return (
     <Drawer
       open={open}
-      onOpenChange={next => onOpenChange(next)}
+      onOpenChange={(next: any) => onOpenChange(next)}
       swipeDirection={MENU_SETTINGS_DRAWER_SIDE}
     >
       <DrawerContent

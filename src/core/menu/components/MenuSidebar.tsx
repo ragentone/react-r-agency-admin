@@ -1,5 +1,4 @@
-import { CoreVariables } from '@core/core.variables.ts';
-import { HeaderLogo } from '@core/layout/components/HeaderLogo.tsx';
+import { AppBrand } from '@core/layout/components/AppBrand.tsx';
 import { cn } from '@ui/lib';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@ui/shad-cn/components/tooltip.tsx';
 import { motion } from 'framer-motion';
@@ -23,9 +22,6 @@ const MenuSidebar = ({ className }: { className?: string }) => {
   const { t } = useTranslation('menu');
   const text = useMenuText();
   const { sections, footer, ctx, hidden, items } = useMenu();
-  const title = CoreVariables.headerTitle;
-  const subtitle = CoreVariables.headerSubTitle;
-  // Components need to know the layout: expanded sidebar from `xl`, icon rail below.
   const variant: MenuComponentVariant = useMenuMinWidth(1280) ? 'sidebar' : 'rail';
 
   if (hidden || items.length === 0) return null;
@@ -34,46 +30,24 @@ const MenuSidebar = ({ className }: { className?: string }) => {
     <nav
       aria-label={t('label')}
       className={cn(
-        'relative z-10 hidden h-full w-[76px] shrink-0 flex-col border-r border-border/50 bg-background md:flex xl:w-64',
+        'relative z-10 hidden h-full w-19 shrink-0 flex-col border-r border-border/50 bg-background md:flex xl:w-80',
         className
       )}
     >
       {/* Brand (replaces the old header on desktop). */}
-      <div
-        className={'flex items-center justify-center gap-3 px-3 pt-3 pb-1 xl:justify-start xl:px-4'}
-      >
-        <HeaderLogo
-          alt={title ?? 'Logo'}
-          className={
-            'size-10 shrink-0 cursor-pointer select-none rounded-full bg-black object-contain transition-transform active:scale-95'
-          }
-        />
-        <div className={'hidden min-w-0 flex-col xl:flex'}>
-          {title && <span className={'truncate text-title font-bold tracking-tight'}>{title}</span>}
-          {subtitle && (
-            <span className={'truncate text-caption text-muted-foreground'}>{subtitle}</span>
-          )}
-        </div>
-      </div>
+      <AppBrand
+        className={'justify-center px-3 pt-3 pb-1 xl:justify-start xl:px-4'}
+        textClassName={'hidden xl:flex'}
+      />
       <div className={'flex grow flex-col gap-1 overflow-y-auto overflow-x-hidden px-3 py-3'}>
         {sections.map((section, sectionIndex) => (
           <div key={section.id} className={'flex flex-col gap-1'}>
             {sectionIndex > 0 && <div className={'mx-auto my-2 h-px w-8 bg-border xl:hidden'} />}
             {section.config.display === 'drawer' ? (
               // Only the trigger – the entries open in the bottom drawer.
-              <div className={cn(sectionIndex > 0 && 'xl:mt-3')}>
-                <MenuSectionTrigger section={section} variant={variant} />
-              </div>
+              <MenuSectionTrigger section={section} variant={variant} />
             ) : (
               <>
-                <h3
-                  className={cn(
-                    'hidden px-3 pb-1 text-micro font-semibold uppercase tracking-wider text-muted-foreground xl:block',
-                    sectionIndex > 0 && 'pt-4'
-                  )}
-                >
-                  {text(section.config.label)}
-                </h3>
                 {section.nodes.map(node => {
                   if (node.type === 'component') {
                     return (
@@ -109,17 +83,17 @@ const MenuSidebar = ({ className }: { className?: string }) => {
                             ctx={ctx}
                             label={label}
                             className={cn(
-                              'group relative flex w-full items-center justify-center gap-4 rounded-full p-3 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50 xl:justify-start xl:px-4',
+                              'group relative flex h-12 w-full items-center justify-center gap-4 rounded-full p-3 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50 xl:justify-start xl:px-4',
                               item.active
                                 ? 'text-foreground'
-                                : 'text-muted-foreground hover:bg-foreground/[0.06] hover:text-foreground'
+                                : 'text-muted-foreground hover:bg-foreground/6 hover:text-foreground'
                             )}
                           >
                             {item.active && (
                               <motion.span
                                 layoutId={'main-menu-side-active'}
                                 transition={{ type: 'spring', stiffness: 480, damping: 38 }}
-                                className={'absolute inset-0 rounded-full bg-foreground/[0.08]'}
+                                className={'absolute inset-0 rounded-full bg-foreground/8'}
                               />
                             )}
                             <span className={'relative flex'}>

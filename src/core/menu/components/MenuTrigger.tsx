@@ -30,7 +30,7 @@ const MenuTrigger = ({ className }: { className?: string }) => {
           className
         )}
       >
-        <Menu className={'size-[22px]'} />
+        <Menu className={'size-5.5'} />
       </button>
       <MenuDrawer open={open} onOpenChange={setOpen} />
     </>

@@ -119,6 +119,7 @@ export interface IMutationAdminPluginConfigSetArgs {
 /** Arguments of `Mutation.adminPluginCreateDraft` */
 export interface IMutationAdminPluginCreateDraftArgs {
   name: string;
+  scope?: InputMaybe<Array<InputMaybe<string>>>;
   slots?: InputMaybe<Array<InputMaybe<string>>>;
 }
 
@@ -148,6 +149,12 @@ export interface IMutationAdminPluginRemoveArgs {
 /** Arguments of `Mutation.adminPluginRemoveUnknown` */
 export interface IMutationAdminPluginRemoveUnknownArgs {
   pluginId: string;
+}
+
+/** Arguments of `Mutation.adminPluginSetScope` */
+export interface IMutationAdminPluginSetScopeArgs {
+  pluginId: string;
+  scope: Array<InputMaybe<string>>;
 }
 
 /** Arguments of `Mutation.adminPluginSetStatus` */

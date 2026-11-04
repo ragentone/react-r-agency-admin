@@ -10,7 +10,7 @@ export const MenuUserCard = ({ ctx }: IMenuGroupDrawerHeaderProps) => {
   const initials = (name || 'U').slice(0, 2).toUpperCase();
 
   return (
-    <div className={'flex items-center gap-3 rounded-2xl bg-foreground/[0.05] p-3'}>
+    <div className={'flex items-center gap-3 rounded-none bg-foreground/5 p-3 mb-4'}>
       <Avatar className={'size-12 shrink-0'}>
         {user.avatarUrl && (
           <AvatarImage src={user.avatarUrl} alt={name} className={'object-cover'} />

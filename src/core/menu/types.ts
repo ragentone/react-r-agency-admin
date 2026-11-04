@@ -6,7 +6,8 @@ import type { ComponentType, ReactNode, SVGProps } from 'react';
 export type MenuAudience = 'all' | 'user' | 'guest';
 
 /** Built-in sections (apps may use their own string, it gets rendered as its own group). */
-export type MenuSection = 'main' | 'apps' | 'account' | (string & {});
+export type MenuSection =
+  'main' | 'apps' | 'games' | 'account' | 'after' | 'plugins' | (string & {});
 
 /** Context handed to dynamic entry values (`to`, `visible`). */
 export interface IMenuContext {
@@ -63,8 +64,8 @@ export interface IMenuEntry {
   /**
    * How a group (entry with children) is shown:
    * - `inline` (default) – collapsible list in drawer / sidebar, popover in the icon rail.
-   * - `drawer` – one row in the main menu that opens the children in the bottom drawer
-   *   (centered, `drawerHeader` on top). Keeps the main menu short.
+   * - `drawer` – desktop: one row in the sidebar that opens the children in the bottom drawer
+   *   (centered, `drawerHeader` on top). Mobile: the children are listed inline (no nested panel).
    */
   display?: 'inline' | 'drawer';
   /**
@@ -126,8 +127,8 @@ export interface IMenuSectionConfig {
   /**
    * How the section is shown:
    * - `inline` (default) – heading + all entries directly in the menu.
-   * - `drawer` – only one trigger row in the menu, the entries open as a grid in a bottom
-   *   drawer (centered). Keeps the main menu short (e.g. the apps).
+   * - `drawer` – desktop: one trigger in the sidebar, the entries open as a grid in a bottom
+   *   drawer (centered). Mobile: the entries are listed inline under the heading.
    */
   display?: 'inline' | 'drawer';
   /** `display: 'drawer'`: icon of the trigger (default: grid). */
