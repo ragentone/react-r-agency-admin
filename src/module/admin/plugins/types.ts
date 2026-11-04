@@ -144,12 +144,15 @@ export type PluginConfigPrimitive = string | number | boolean;
 /** Configuration values of one scope, keyed by field key. */
 export type PluginConfigValues = Record<string, PluginConfigPrimitive>;
 
+/** Plain text, or one text per language (mirror of runtime `PluginConfigText`). */
+export type PluginConfigText = string | Partial<Record<'de' | 'en' | 'ru', string>>;
+
 /** Field of a plugin configuration (mirror of runtime `shared/plugin/plugin.config.schema.ts`). */
 export interface IPluginConfigField {
   key: string;
   type: 'string' | 'text' | 'number' | 'boolean' | 'select';
-  label?: string;
-  help?: string;
+  label?: PluginConfigText;
+  help?: PluginConfigText;
   required?: boolean;
   public?: boolean;
   roles?: string[];

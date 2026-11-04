@@ -11,6 +11,7 @@ import { RotateCcw } from 'lucide-react';
 import React, { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { localizedText } from '../config.utils';
 import type { IPluginConfigError, IPluginConfigField, PluginConfigPrimitive } from '../types';
 import { PluginConfigFieldControl } from './PluginConfigFieldControl';
 
@@ -30,11 +31,13 @@ export const PluginConfigField: React.FC<IPluginConfigFieldProps> = ({
   disabled,
   onChange,
 }) => {
-  const { t } = useTranslation('admin');
+  const { t, i18n } = useTranslation('admin');
+  const language = i18n.resolvedLanguage ?? i18n.language ?? 'en';
   const id = useId();
   const isBoolean = field.type === 'boolean';
   const changed = value !== field.default;
-  const title = field.label ?? field.key;
+  const title = localizedText(field.label, language) ?? field.key;
+  const help = localizedText(field.help, language);
   const messages = errors.map(error => ({
     message: t(`plugins.config.errors.${error.code}`, {
       ...error.params,
@@ -69,7 +72,7 @@ export const PluginConfigField: React.FC<IPluginConfigFieldProps> = ({
             </Button>
           )}
         </div>
-        {field.help && <FieldDescription>{field.help}</FieldDescription>}
+        {help && <FieldDescription>{help}</FieldDescription>}
       </FieldContent>
       <PluginConfigFieldControl
         id={id}

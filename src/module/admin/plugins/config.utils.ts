@@ -1,4 +1,9 @@
-import type { IPluginConfigField, PluginConfigPrimitive, PluginConfigValues } from './types';
+import type {
+  IPluginConfigField,
+  PluginConfigPrimitive,
+  PluginConfigText,
+  PluginConfigValues,
+} from './types';
 
 /** Same rule as the runtime: a field is shown when its `showIf` matches the current values. */
 export const isFieldVisible = (field: IPluginConfigField, values: PluginConfigValues): boolean =>
@@ -26,4 +31,14 @@ export const defaultsOf = (fields: IPluginConfigField[]): PluginConfigValues => 
     if (field.default !== undefined) values[field.key] = field.default;
   }
   return values;
+};
+
+/**
+ * Text for the current language. Plain text is used as it is; otherwise the language, then English,
+ * then any text that exists. Undefined when there is no text at all.
+ */
+export const localizedText = (text: PluginConfigText | undefined, language: string): string | undefined => {
+  if (text === undefined || typeof text === 'string') return text;
+  const short = language.slice(0, 2) as keyof typeof text;
+  return text[short] ?? text.en ?? Object.values(text).find(value => value !== undefined);
 };
