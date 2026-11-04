@@ -99,17 +99,19 @@ export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({
             {t('plugins.purge.button')}
           </Button>
         )}
-        <Button
-          variant="outline"
-          size="lg"
-          className="text-destructive hover:text-destructive"
-          disabled={detail.busy || detail.active}
-          title={detail.active ? t('plugins.remove.activeHint') : undefined}
-          onClick={onRemove}
-        >
-          <Trash2 className="size-4" />
-          {t('plugins.details.remove')}
-        </Button>
+        {!detail.active && (
+          <Button
+            variant="outline"
+            size="lg"
+            className="text-destructive hover:text-destructive"
+            disabled={detail.busy || detail.active}
+            title={detail.active ? t('plugins.remove.activeHint') : undefined}
+            onClick={onRemove}
+          >
+            <Trash2 className="size-4" />
+            {t('plugins.details.remove')}
+          </Button>
+        )}
       </div>
     </>
   );
