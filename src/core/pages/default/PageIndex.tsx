@@ -1,5 +1,6 @@
 import { UserGreeting } from '@core/auth';
 import { CmsContainer } from '@core/cms';
+import { PluginSlot } from '@core/plugin';
 import { RoutePage } from '@router/components';
 
 const PageIndex = () => {
@@ -12,6 +13,11 @@ const PageIndex = () => {
             <div className={'py-4 sm:bx-6 px-4 border-b border-border/50'}>
               <UserGreeting />
             </div>
+            <PluginSlot
+              name="home.widget"
+              scope="admin"
+              className="border-b border-border/50 px-4 py-3"
+            />
           </CmsContainer>
         );
       }}

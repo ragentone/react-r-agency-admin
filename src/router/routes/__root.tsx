@@ -1,12 +1,13 @@
+import { AuthProvider } from '@core/auth';
 import { CmsProvider } from '@core/cms';
 import { ProviderComposer } from '@core/components';
 import { Extensions } from '@core/extension';
+import { Layout } from '@core/layout';
+import { LayoutProvider } from '@core/layout';
+import { PluginProvider } from '@core/plugin';
 import { ProviderManager } from '@core/provider';
 import { createRootRouteWithContext } from '@tanstack/react-router';
 
-import { AuthProvider } from '../../core/auth/components/AuthProvider.tsx';
-import { Layout } from '../../core/layout/components/Layout.tsx';
-import { LayoutProvider } from '../../core/layout/components/LayoutProvider.tsx';
 import type { IRouterContext } from '../types.ts';
 /**
  * Represents the root route configuration for the application's routing structure.
@@ -21,7 +22,11 @@ export const Route = createRootRouteWithContext<IRouterContext>()({
     <LayoutProvider>
       <ProviderComposer
         providers={ProviderManager.merge(
-          [{ provider: AuthProvider }, { provider: CmsProvider }],
+          [
+            { provider: AuthProvider },
+            { provider: CmsProvider },
+            { provider: PluginProvider, props: { scope: 'admin' } },
+          ],
           'route'
         )}
       >

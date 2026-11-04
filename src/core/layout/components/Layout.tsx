@@ -1,9 +1,9 @@
 import { useAuth } from '@core/auth/components/use.auth.ts';
 import { MobileDock } from '@core/dock/components';
 import { useEvents } from '@core/event';
+import { LayoutHeader } from '@core/layout';
 import { MenuSectionDrawerHost, MenuSidebar } from '@core/menu/components';
 import { useMeshState } from '@core/mesh/components/use.mesh.ts';
-import { LayoutHeader } from './LayoutHeader.tsx';
 import { Outlet } from '@tanstack/react-router';
 import { cn } from '@ui/lib';
 import { Spinner } from '@ui/shad-cn/components/spinner.tsx';
