@@ -1,14 +1,19 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/shad-cn/components/tabs.tsx';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { usePluginDetail } from '../hooks/use-plugin-detail';
 import type { IPluginListItem } from '../types';
 import { PluginConfigDrawer } from './PluginConfigDrawer';
+import { PluginConfigFieldsTable } from './PluginConfigFieldsTable';
 import { PluginDeployDrawer } from './PluginDeployDrawer';
 import { PluginDetailActions } from './PluginDetailActions';
+import { PluginDetailActivation } from './PluginDetailActivation';
 import { PluginDetailFiles } from './PluginDetailFiles';
 import { PluginDetailHeader } from './PluginDetailHeader';
 import { PluginDetailInfo } from './PluginDetailInfo';
 import { PluginFileEditorDialog } from './PluginFileEditorDialog';
+import { PluginManifestView } from './PluginManifestView';
 import { PluginPurgeDrawer } from './PluginPurgeDrawer';
 import { PluginRemoveDrawer } from './PluginRemoveDrawer';
 
@@ -17,9 +22,14 @@ interface IPluginDetailViewProps {
   reload: () => void;
 }
 
-/** The loaded plugin page: header, facts, actions, files and the drawers the page needs. */
+/**
+ * The loaded plugin page: header with actions, then tabs. "General" is always there; configuration
+ * fields and files are tabs of development plugins only.
+ */
 export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, reload }) => {
+  const { t } = useTranslation('admin');
   const detail = usePluginDetail(plugin, reload);
+  const [tab, setTab] = useState('general');
   const [deployOpen, setDeployOpen] = useState(false);
   const [editPath, setEditPath] = useState<string | null>(null);
   const [removeOpen, setRemoveOpen] = useState(false);
@@ -28,24 +38,61 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
 
   return (
     <div className="flex w-full flex-col bg-background">
-      <PluginDetailHeader name={plugin.name} pluginId={plugin.pluginId} />
-      <div className={'grid sm:grid-cols-2 grid-cols-1 gap-2 py-8 px-4 border-b border-border/50'}>
-        <PluginDetailInfo plugin={plugin} />
-        <PluginDetailActions
-          plugin={plugin}
-          detail={detail}
-          onDeploy={() => setDeployOpen(true)}
-          onRemove={() => setRemoveOpen(true)}
-          onPurge={() => setPurgeOpen(true)}
-          onConfig={() => setConfigOpen(true)}
-        />
+      <PluginDetailHeader
+        name={plugin.name}
+        pluginId={plugin.pluginId}
+        actions={
+          <PluginDetailActions
+            plugin={plugin}
+            detail={detail}
+            onDeploy={() => setDeployOpen(true)}
+            onRemove={() => setRemoveOpen(true)}
+            onPurge={() => setPurgeOpen(true)}
+            onConfig={() => setConfigOpen(true)}
+          />
+        }
+      />
+
+      <div className="px-4 pt-4">
+        <PluginDetailActivation plugin={plugin} detail={detail} />
       </div>
 
-      <div className="flex flex-col gap-4 px-4 py-4">
+      <Tabs value={plugin.development ? tab : 'general'} onValueChange={setTab} className="flex flex-col">
         {plugin.development && (
-          <PluginDetailFiles pluginId={plugin.pluginId} onOpenFile={setEditPath} />
+          <div className="px-4 pt-3">
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="general">{t('plugins.details.tabs.general')}</TabsTrigger>
+              <TabsTrigger value="config">{t('plugins.details.tabs.config')}</TabsTrigger>
+              <TabsTrigger value="manifest">plugin.json</TabsTrigger>
+              <TabsTrigger value="files">{t('plugins.code.files')}</TabsTrigger>
+            </TabsList>
+          </div>
         )}
-      </div>
+
+        <TabsContent value="general" className="mt-0">
+          <div className="grid grid-cols-1 gap-8 px-4 py-6 md:grid-cols-2">
+            <PluginDetailInfo plugin={plugin} />
+          </div>
+        </TabsContent>
+
+        {plugin.development && (
+          <TabsContent value="config" className="mt-0 px-4 py-6">
+            <PluginConfigFieldsTable pluginId={plugin.pluginId} />
+          </TabsContent>
+        )}
+
+        {plugin.development && (
+          <TabsContent value="manifest" className="mt-0 px-4 py-6">
+            <PluginManifestView pluginId={plugin.pluginId} />
+          </TabsContent>
+        )}
+
+        {plugin.development && (
+          <TabsContent value="files" className="mt-0 px-4 py-6">
+            <PluginDetailFiles pluginId={plugin.pluginId} onOpenFile={setEditPath} />
+          </TabsContent>
+        )}
+      </Tabs>
 
       {plugin.development && (
         <>

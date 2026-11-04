@@ -61,9 +61,9 @@ const UnknownRow: React.FC<IUnknownRowProps> = ({ plugin, busy, onInstall, onRem
             </p>
           )}
         </ItemContent>
-        <ItemActions>
+        <ItemActions className="flex-wrap justify-end">
           <Button
-            size="sm"
+            size="md"
             variant="outline"
             disabled={busy || Boolean(plugin.error)}
             onClick={() => onInstall(plugin)}
@@ -72,7 +72,7 @@ const UnknownRow: React.FC<IUnknownRowProps> = ({ plugin, busy, onInstall, onRem
             {t('plugins.unknown.install')}
           </Button>
           <Button
-            size="icon"
+            size="icon-md"
             variant="ghost"
             disabled={busy}
             aria-label={t('plugins.unknown.delete', { name: plugin.name })}

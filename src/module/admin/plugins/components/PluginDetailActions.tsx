@@ -1,13 +1,21 @@
 import { Button } from '@ui/shad-cn/components/button.tsx';
 import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemTitle,
-} from '@ui/shad-cn/components/item.tsx';
-import { Switch } from '@ui/shad-cn/components/switch.tsx';
-import { Database, Download, Hammer, Rocket, RefreshCw, Settings2, Trash2 } from 'lucide-react';
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@ui/shad-cn/components/dropdown-menu.tsx';
+import {
+  Database,
+  Download,
+  EllipsisVertical,
+  Hammer,
+  RefreshCw,
+  Rocket,
+  Settings2,
+  Trash2,
+} from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -23,7 +31,10 @@ interface IPluginDetailActionsProps {
   onConfig: () => void;
 }
 
-/** Activation switch and the action buttons. Build and deploy only for development plugins. */
+/**
+ * Plugin actions in a dropdown at the top right of the page header. Development actions first,
+ * destructive actions last and only for inactive plugins.
+ */
 export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({
   plugin,
   detail,
@@ -33,86 +44,64 @@ export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({
   onConfig,
 }) => {
   const { t } = useTranslation('admin');
+  const canDelete = !detail.active;
 
   return (
     <>
-      <div className="flex flex-col gap-2">
-        <Item variant={'outline'} className={'rounded-2xl shadow-xs'} size={'sm'}>
-          <ItemContent>
-            <ItemTitle>{t('plugins.details.active')}</ItemTitle>
-            <ItemDescription>{t('plugins.remove.activeHint')}</ItemDescription>
-          </ItemContent>
-          <ItemActions>
-            <Switch
-              checked={detail.active}
-              disabled={detail.busy}
-              onCheckedChange={value => void detail.toggle(value)}
-              aria-label={t('plugins.toggle.label', { name: plugin.name })}
-            />
-          </ItemActions>
-        </Item>
+      <Button
+        variant="ghost"
+        size="icon-lg"
+        disabled={detail.busy}
+        aria-label={t('plugins.details.config')}
+        onClick={onConfig}
+      >
+        <Settings2 className="size-5" />
+      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon-lg" aria-label={t('plugins.details.more')}>
+            <EllipsisVertical className="size-5" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="min-w-56">
+          {plugin.development && (
+            <DropdownMenuItem disabled={detail.busy} onSelect={onDeploy}>
+              <Rocket />
+              {t('plugins.details.deploy')}
+            </DropdownMenuItem>
+          )}
+          {plugin.development && (
+            <DropdownMenuItem disabled={detail.busy} onSelect={() => void detail.build()}>
+              <Hammer />
+              {t('plugins.details.build')}
+            </DropdownMenuItem>
+          )}
+          {plugin.development && (
+            <DropdownMenuItem disabled={detail.busy} onSelect={() => void detail.build()}>
+              <RefreshCw />
+              {t('plugins.details.reinstall')}
+            </DropdownMenuItem>
+          )}
+          <DropdownMenuItem disabled={detail.busy} onSelect={() => void detail.download()}>
+            <Download />
+            {t('plugins.details.download')}
+          </DropdownMenuItem>
 
-        {plugin.development && (
-          <Button
-            variant="outline"
-            size="lg"
-            disabled={detail.busy}
-            onClick={() => void detail.build()}
-          >
-            <Hammer className="size-4" />
-            {t('plugins.details.build')}
-          </Button>
-        )}
-        {plugin.development && (
-          <Button
-            variant="outline"
-            size="lg"
-            disabled={detail.busy}
-            onClick={() => void detail.build()}
-          >
-            <RefreshCw className="size-4" />
-            {t('plugins.details.reinstall')}
-          </Button>
-        )}
-        {plugin.development && (
-          <Button variant="outline" size="lg" disabled={detail.busy} onClick={onDeploy}>
-            <Rocket className="size-4" />
-            {t('plugins.details.deploy')}
-          </Button>
-        )}
-        <Button variant="outline" size="lg" disabled={detail.busy} onClick={onConfig}>
-          <Settings2 className="size-4" />
-          {t('plugins.details.config')}
-        </Button>
-        <Button
-          variant="outline"
-          size="lg"
-          disabled={detail.busy}
-          onClick={() => void detail.download()}
-        >
-          <Download className="size-4" />
-          {t('plugins.details.download')}
-        </Button>
-        {!detail.active && (
-          <Button variant="outline" size="lg" disabled={detail.busy} onClick={onPurge}>
-            <Database className="size-4" />
-            {t('plugins.purge.button')}
-          </Button>
-        )}
-        {!detail.active && (
-          <Button
-            variant="outline"
-            size="lg"
-            className="text-destructive hover:text-destructive"
-            disabled={detail.busy || detail.active}
-            title={detail.active ? t('plugins.remove.activeHint') : undefined}
-            onClick={onRemove}
-          >
-            <Trash2 className="size-4" />
-            {t('plugins.details.remove')}
-          </Button>
-        )}
-      </div>
+          {canDelete && <DropdownMenuSeparator />}
+          {canDelete && (
+            <DropdownMenuItem variant="destructive" disabled={detail.busy} onSelect={onPurge}>
+              <Database />
+              {t('plugins.purge.button')}
+            </DropdownMenuItem>
+          )}
+          {canDelete && (
+            <DropdownMenuItem variant="destructive" disabled={detail.busy} onSelect={onRemove}>
+              <Trash2 />
+              {t('plugins.details.remove')}
+            </DropdownMenuItem>
+          )}
+        </DropdownMenuContent>
+      </DropdownMenu>
     </>
   );
 };

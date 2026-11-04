@@ -1,3 +1,4 @@
+import { Button } from '@ui/shad-cn/components/button.tsx';
 import { Empty, EmptyContent, EmptyHeader, EmptyTitle } from '@ui/shad-cn/components/empty.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import React from 'react';
@@ -35,9 +36,9 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
           </EmptyHeader>
           <EmptyContent>
             {error && (
-              <button type="button" className="text-body font-bold underline" onClick={() => void reload()}>
+              <Button variant="outline" size="lg" onClick={() => void reload()}>
                 {t('plugins.error.retry')}
-              </button>
+              </Button>
             )}
           </EmptyContent>
         </Empty>

@@ -49,10 +49,15 @@ export const PluginArea: React.FC = () => {
         <h1 className="min-w-0 flex-1 truncate text-title font-bold text-foreground">
           {t('plugins.title')}
         </h1>
-        <Button aria-label={t('plugins.actions.upload')} onClick={() => setUploadOpen(true)}>
+        <Button
+          variant="outline"
+          size="icon-lg"
+          aria-label={t('plugins.actions.upload')}
+          onClick={() => setUploadOpen(true)}
+        >
           <Upload className="size-5" />
         </Button>
-        <Button aria-label={t('plugins.actions.create')} onClick={() => setCreateOpen(true)}>
+        <Button size="icon-lg" aria-label={t('plugins.actions.create')} onClick={() => setCreateOpen(true)}>
           <Plus className="size-5" />
         </Button>
       </header>

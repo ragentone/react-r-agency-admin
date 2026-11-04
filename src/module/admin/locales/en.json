@@ -1122,6 +1122,11 @@
       "back": "Back to the plugin list",
       "build": "Build",
       "reinstall": "Reinstall",
+      "tabs": {
+        "general": "General",
+        "config": "Configuration"
+      },
+      "more": "Actions",
       "config": "Configuration"
     },
     "download": {
@@ -1196,6 +1201,17 @@
         "not_found": "Folder not found."
       },
       "badge": "Not registered"
+    },
+    "configFields": {
+      "title": "Configuration fields",
+      "empty": "This plugin has no configuration fields.",
+      "key": "Key",
+      "label": "Label",
+      "type": "Type",
+      "required": "Required",
+      "default": "Default",
+      "yes": "Yes",
+      "no": "No"
     },
     "actions": {
       "create": "Create plugin",

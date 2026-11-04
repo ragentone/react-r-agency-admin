@@ -1122,6 +1122,11 @@
       "back": "Zurück zur Plugin-Liste",
       "build": "Build",
       "reinstall": "Neu installieren",
+      "tabs": {
+        "general": "Allgemein",
+        "config": "Konfiguration"
+      },
+      "more": "Aktionen",
       "config": "Konfiguration"
     },
     "download": {
@@ -1196,6 +1201,17 @@
         "not_found": "Ordner nicht gefunden."
       },
       "badge": "Nicht registriert"
+    },
+    "configFields": {
+      "title": "Konfigurationsfelder",
+      "empty": "Dieses Plugin hat keine Konfigurationsfelder.",
+      "key": "Schlüssel",
+      "label": "Bezeichnung",
+      "type": "Typ",
+      "required": "Pflicht",
+      "default": "Standard",
+      "yes": "Ja",
+      "no": "Nein"
     },
     "actions": {
       "create": "Plugin anlegen",

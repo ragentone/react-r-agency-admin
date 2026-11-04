@@ -3,15 +3,19 @@ import { ArrowLeft } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { buttonVariants } from '@ui/shad-cn/components/button.tsx';
+
 import { ADMIN_PLUGINS_ROUTE } from '../../const';
 
 interface IPluginDetailHeaderProps {
   name?: string;
   pluginId?: string;
+  /** Optional actions at the right edge, e.g. the plugin action menu. */
+  actions?: React.ReactNode;
 }
 
 /** Sticky header of a plugin page: back to the list, name and id. */
-export const PluginDetailHeader: React.FC<IPluginDetailHeaderProps> = ({ name, pluginId }) => {
+export const PluginDetailHeader: React.FC<IPluginDetailHeaderProps> = ({ name, pluginId, actions }) => {
   const { t } = useTranslation('admin');
 
   return (
@@ -19,7 +23,7 @@ export const PluginDetailHeader: React.FC<IPluginDetailHeaderProps> = ({ name, p
       <Link
         to={ADMIN_PLUGINS_ROUTE}
         aria-label={t('plugins.details.back')}
-        className="inline-flex size-11 shrink-0 items-center justify-center rounded-md transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+        className={buttonVariants({ variant: 'ghost', size: 'icon-lg', className: 'shrink-0' })}
       >
         <ArrowLeft className="size-5" />
       </Link>
@@ -27,6 +31,7 @@ export const PluginDetailHeader: React.FC<IPluginDetailHeaderProps> = ({ name, p
         <h1 className="truncate text-title font-bold text-foreground">{name ?? ''}</h1>
         {pluginId && <p className="truncate font-mono text-caption text-muted-foreground">{pluginId}</p>}
       </div>
+      {actions}
     </header>
   );
 };
