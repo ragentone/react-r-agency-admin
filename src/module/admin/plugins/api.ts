@@ -10,6 +10,7 @@ import type {
   IPluginFilesResult,
   IPluginFileWriteResult,
   IPluginListResult,
+  IPluginPurgeResult,
   IPluginRemoveResult,
   IPluginStatusResult,
   IPluginUnknownResult,
@@ -94,6 +95,12 @@ const AdoptMutation = parse(`
 const RemoveUnknownMutation = parse(`
   mutation AdminPluginRemoveUnknown($pluginId: String!) {
     adminPluginRemoveUnknown(pluginId: $pluginId) { success error }
+  }
+`);
+
+const PurgeDataMutation = parse(`
+  mutation AdminPluginPurgeData($pluginId: String!) {
+    adminPluginPurgeData(pluginId: $pluginId) { success error deleted }
   }
 `);
 
@@ -291,6 +298,19 @@ export const PluginApi = {
         variables: { pluginId },
       })) as { data?: { adminPluginRemoveUnknown?: IPluginRemoveResult } };
       return response.data?.adminPluginRemoveUnknown ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+  /** Deletes all stored data of a plugin. Works after removal too. Errors: `invalid_plugin_id`, `still_active`. */
+  purgeData: async (pluginId: string): Promise<IPluginPurgeResult> => {
+    try {
+      const response = (await client().mutate({
+        mutation: PurgeDataMutation as never,
+        variables: { pluginId },
+      })) as { data?: { adminPluginPurgeData?: IPluginPurgeResult } };
+      return response.data?.adminPluginPurgeData ?? { success: false, error: 'unknown' };
     } catch (error) {
       console.warn('[admin-plugins]', (error as Error)?.message);
       return { success: false, error: 'unknown' };

@@ -1116,7 +1116,8 @@
         "still_active": "The plugin is still active. Please deactivate it first.",
         "not_found": "Plugin not found.",
         "unknown": "Deletion failed. Please try again."
-      }
+      },
+      "withData": "Также удалить сохранённые данные"
     },
     "create": {
       "button": "Создать плагин для разработки",
@@ -1257,6 +1258,20 @@
     "actions": {
       "create": "Создать плагин",
       "upload": "Загрузить ZIP"
+    },
+    "purge": {
+      "button": "Удалить данные",
+      "title": "Удалить данные {{name}}?",
+      "description": "Все сохранённые данные этого плагина будут удалены безвозвратно. Сам плагин не меняется.",
+      "cancel": "Отмена",
+      "confirm": "Удалить безвозвратно",
+      "busy": "Удаление …",
+      "success": "Удалено записей: {{count}} ({{name}})",
+      "errors": {
+        "still_active": "Плагин ещё активен. Сначала деактивируйте его.",
+        "invalid_plugin_id": "Недопустимый id плагина.",
+        "unknown": "Данные не удалось удалить. Попробуйте ещё раз."
+      }
     }
   }
 }

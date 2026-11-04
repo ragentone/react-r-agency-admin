@@ -1056,7 +1056,8 @@
         "still_active": "The plugin is still active. Please deactivate it first.",
         "not_found": "Plugin not found.",
         "unknown": "Deletion failed. Please try again."
-      }
+      },
+      "withData": "Gespeicherte Daten ebenfalls löschen"
     },
     "create": {
       "button": "Entwicklungs-Plugin anlegen",
@@ -1197,6 +1198,20 @@
     "actions": {
       "create": "Plugin anlegen",
       "upload": "ZIP hochladen"
+    },
+    "purge": {
+      "button": "Daten löschen",
+      "title": "Daten von {{name}} löschen?",
+      "description": "Alle gespeicherten Daten dieses Plugins werden endgültig entfernt. Das Plugin selbst bleibt unverändert.",
+      "cancel": "Abbrechen",
+      "confirm": "Endgültig löschen",
+      "busy": "Wird gelöscht …",
+      "success": "{{count}} Einträge von {{name}} gelöscht",
+      "errors": {
+        "still_active": "Das Plugin ist noch aktiv. Bitte zuerst deaktivieren.",
+        "invalid_plugin_id": "Ungültige Plugin-Id.",
+        "unknown": "Die Daten konnten nicht gelöscht werden. Bitte erneut versuchen."
+      }
     }
   }
 }

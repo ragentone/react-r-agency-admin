@@ -7,7 +7,7 @@ import {
   ItemTitle,
 } from '@ui/shad-cn/components/item.tsx';
 import { Switch } from '@ui/shad-cn/components/switch.tsx';
-import { Download, Hammer, Rocket, Trash2 } from 'lucide-react';
+import { Database, Download, Hammer, Rocket, Trash2 } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -19,6 +19,7 @@ interface IPluginDetailActionsProps {
   detail: PluginDetail;
   onDeploy: () => void;
   onRemove: () => void;
+  onPurge: () => void;
 }
 
 /** Activation switch and the action buttons. Build and deploy only for development plugins. */
@@ -27,6 +28,7 @@ export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({
   detail,
   onDeploy,
   onRemove,
+  onPurge,
 }) => {
   const { t } = useTranslation('admin');
 
@@ -74,6 +76,12 @@ export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({
           <Download className="size-4" />
           {t('plugins.details.download')}
         </Button>
+        {!detail.active && (
+          <Button variant="outline" size="lg" disabled={detail.busy} onClick={onPurge}>
+            <Database className="size-4" />
+            {t('plugins.purge.button')}
+          </Button>
+        )}
         <Button
           variant="outline"
           size="lg"

@@ -10,6 +10,7 @@ import type { IPluginListItem } from '../types';
 import { type PluginBump } from '../version';
 import { usePluginBuild } from './use-plugin-build';
 import { usePluginDeploy } from './use-plugin-deploy';
+import { usePluginPurge } from './use-plugin-purge';
 import { usePluginRemove } from './use-plugin-remove';
 import { usePluginStatus } from './use-plugin-status';
 
@@ -21,8 +22,9 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
   const deployment = usePluginDeploy(() => void reload());
   const building = usePluginBuild();
   const removal = usePluginRemove(() => undefined);
+  const purgeData = usePluginPurge();
   const [deploying, setDeploying] = useState(false);
-  const busy = status.pending !== null || deploying || removal.busy || building.busy;
+  const busy = status.pending !== null || deploying || removal.busy || building.busy || purgeData.busy;
 
   const toggle = async (value: boolean) => {
     const result = await status.setStatus(plugin.pluginId, value);
@@ -61,6 +63,17 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
     }
   };
 
+  /** Deletes the stored data of this (inactive) plugin. Returns `true` on success. */
+  const purge = async (): Promise<boolean> => {
+    const result = await purgeData.purge(plugin.pluginId);
+    if (result.success) {
+      toast.success(t('plugins.purge.success', { name: plugin.name, count: result.deleted ?? 0 }));
+      return true;
+    }
+    toast.error(t(`plugins.purge.errors.${result.error ?? 'unknown'}`, { defaultValue: t('plugins.purge.errors.unknown') }));
+    return false;
+  };
+
   const download = async () => {
     const result = await PluginApi.download(plugin.pluginId);
     if (result.success && result.filename && result.data) {
@@ -70,9 +83,16 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
     }
   };
 
-  const remove = async () => {
+  /** Deletes the plugin. With `withData` its stored data is deleted as well. */
+  const remove = async (withData: boolean) => {
     const result = await removal.remove(plugin.pluginId);
     if (result.success) {
+      if (withData) {
+        const purged = await purgeData.purge(plugin.pluginId);
+        if (!purged.success) {
+          toast.error(t(`plugins.purge.errors.${purged.error ?? 'unknown'}`, { defaultValue: t('plugins.purge.errors.unknown') }));
+        }
+      }
       toast.success(t('plugins.remove.success', { name: plugin.name }));
       void navigate({ to: ADMIN_PLUGINS_ROUTE });
     } else {
@@ -84,6 +104,8 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
     busy,
     active: plugin.status === 'active',
     removeBusy: removal.busy,
+    purgeBusy: purgeData.busy,
+    purge,
     toggle,
     build,
     deploy,

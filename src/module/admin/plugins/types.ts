@@ -89,6 +89,13 @@ export interface IPluginFileWriteResult {
   errors?: string[] | null;
 }
 
+export interface IPluginPurgeResult {
+  success: boolean;
+  error?: string | null;
+  /** Number of deleted rows. */
+  deleted?: number | null;
+}
+
 export interface IPluginRemoveResult {
   success: boolean;
   error?: string | null;

@@ -1056,7 +1056,8 @@
         "still_active": "The plugin is still active. Please deactivate it first.",
         "not_found": "Plugin not found.",
         "unknown": "Deletion failed. Please try again."
-      }
+      },
+      "withData": "Also delete the stored data"
     },
     "create": {
       "button": "Create development plugin",
@@ -1197,6 +1198,20 @@
     "actions": {
       "create": "Create plugin",
       "upload": "Upload ZIP"
+    },
+    "purge": {
+      "button": "Delete data",
+      "title": "Delete data of {{name}}?",
+      "description": "All stored data of this plugin will be removed permanently. The plugin itself stays unchanged.",
+      "cancel": "Cancel",
+      "confirm": "Delete permanently",
+      "busy": "Deleting …",
+      "success": "{{count}} entries of {{name}} deleted",
+      "errors": {
+        "still_active": "The plugin is still active. Please deactivate it first.",
+        "invalid_plugin_id": "Invalid plugin id.",
+        "unknown": "The data could not be deleted. Please try again."
+      }
     }
   }
 }

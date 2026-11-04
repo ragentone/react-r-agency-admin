@@ -8,6 +8,7 @@ import { PluginDetailFiles } from './PluginDetailFiles';
 import { PluginDetailHeader } from './PluginDetailHeader';
 import { PluginDetailInfo } from './PluginDetailInfo';
 import { PluginFileEditorDialog } from './PluginFileEditorDialog';
+import { PluginPurgeDrawer } from './PluginPurgeDrawer';
 import { PluginRemoveDrawer } from './PluginRemoveDrawer';
 
 interface IPluginDetailViewProps {
@@ -21,6 +22,7 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
   const [deployOpen, setDeployOpen] = useState(false);
   const [editPath, setEditPath] = useState<string | null>(null);
   const [removeOpen, setRemoveOpen] = useState(false);
+  const [purgeOpen, setPurgeOpen] = useState(false);
 
   return (
     <div className="flex w-full flex-col bg-background">
@@ -32,6 +34,7 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
           detail={detail}
           onDeploy={() => setDeployOpen(true)}
           onRemove={() => setRemoveOpen(true)}
+          onPurge={() => setPurgeOpen(true)}
         />
       </div>
 
@@ -66,7 +69,14 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
         plugin={removeOpen ? plugin : null}
         busy={detail.removeBusy}
         onOpenChange={open => !open && setRemoveOpen(false)}
-        onConfirm={() => void detail.remove()}
+        onConfirm={(_, withData) => void detail.remove(withData)}
+      />
+
+      <PluginPurgeDrawer
+        plugin={purgeOpen ? plugin : null}
+        busy={detail.purgeBusy}
+        onOpenChange={open => !open && setPurgeOpen(false)}
+        onConfirm={() => void detail.purge().then(ok => ok && setPurgeOpen(false))}
       />
     </div>
   );
