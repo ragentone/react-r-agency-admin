@@ -1081,6 +1081,20 @@
         "unknown": "Could not create. Please try again."
       }
     },
+    "scope": {
+      "title": "Bereich",
+      "drawerTitle": "Bereich ändern",
+      "description": "Wo das Plugin läuft: im Frontend, im Admin oder in beiden.",
+      "change": "Ändern",
+      "submit": "Speichern",
+      "busy": "Wird gespeichert …",
+      "saved": "Bereich von {{name}} geändert.",
+      "errors": {
+        "not_found": "Plugin nicht gefunden.",
+        "invalid_scope": "Wähle mindestens einen Bereich.",
+        "unknown": "Bereich konnte nicht geändert werden."
+      }
+    },
     "deploy": {
       "button": "{{name}} neu deployen",
       "hint": "Version erhöhen, bauen und aktivieren.",

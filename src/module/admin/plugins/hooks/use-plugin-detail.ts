@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { ADMIN_PLUGINS_ROUTE } from '../../const';
 import { PluginApi } from '../api';
 import { saveZip } from '../download';
-import type { IPluginListItem } from '../types';
+import type { IPluginListItem, PluginScope } from '../types';
 import { type PluginBump } from '../version';
 import { usePluginBuild } from './use-plugin-build';
 import { usePluginDeploy } from './use-plugin-deploy';
@@ -100,8 +100,21 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
     }
   };
 
+  /** Changes where the plugin runs. Returns `true` on success. */
+  const changeScope = async (scope: PluginScope[]): Promise<boolean> => {
+    const result = await PluginApi.setScope(plugin.pluginId, scope);
+    if (result.success) {
+      toast.success(t('plugins.scope.saved', { name: plugin.name }));
+      void reload();
+      return true;
+    }
+    toast.error(t(`plugins.scope.errors.${result.error ?? 'unknown'}`, { defaultValue: t('plugins.scope.errors.unknown') }));
+    return false;
+  };
+
   return {
     busy,
+    changeScope,
     active: plugin.status === 'active',
     removeBusy: removal.busy,
     purgeBusy: purgeData.busy,

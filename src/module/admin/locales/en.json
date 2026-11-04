@@ -1081,6 +1081,20 @@
         "unknown": "Could not create. Please try again."
       }
     },
+    "scope": {
+      "title": "Area",
+      "drawerTitle": "Change area",
+      "description": "Where the plugin runs: in the frontend, in the admin, or in both.",
+      "change": "Change",
+      "submit": "Save",
+      "busy": "Saving …",
+      "saved": "Area of {{name}} changed.",
+      "errors": {
+        "not_found": "Plugin not found.",
+        "invalid_scope": "Select at least one area.",
+        "unknown": "Could not change the area."
+      }
+    },
     "deploy": {
       "button": "Redeploy {{name}}",
       "hint": "Raise the version, build and activate.",

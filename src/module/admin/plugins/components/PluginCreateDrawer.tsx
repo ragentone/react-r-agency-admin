@@ -2,13 +2,12 @@ import { AppFormDrawer } from '@ui/patterns';
 import { Alert, AlertDescription, AlertTitle } from '@ui/shad-cn/components/alert.tsx';
 import { Input } from '@ui/shad-cn/components/input.tsx';
 import { Label } from '@ui/shad-cn/components/label.tsx';
-import { Checkbox } from '@ui/shad-cn/components/checkbox.tsx';
 import React, { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { usePluginCreate } from '../hooks/use-plugin-create';
-
-type PluginScope = 'frontend' | 'admin';
+import type { PluginScope } from '../types';
+import { PluginScopeCheckboxes } from './PluginScopeCheckboxes';
 
 interface IPluginCreateDrawerProps {
   open: boolean;
@@ -18,7 +17,6 @@ interface IPluginCreateDrawerProps {
 
 const ERROR_KEYS = ['invalid_manifest', 'exists', 'not_authorized'] as const;
 const DEFAULT_SCOPE: PluginScope[] = ['frontend'];
-const SCOPE_OPTIONS: PluginScope[] = ['frontend', 'admin'];
 
 /** Form for a new development plugin: name and the scope it runs in. The id is derived from the name. */
 export const PluginCreateDrawer: React.FC<IPluginCreateDrawerProps> = ({
@@ -33,15 +31,6 @@ export const PluginCreateDrawer: React.FC<IPluginCreateDrawerProps> = ({
   const { busy, result, create, reset } = usePluginCreate(() => undefined);
 
   const valid = name.trim().length > 0 && scope.length > 0;
-
-  // Checks or unchecks one scope. The last checked scope cannot be unchecked.
-  const toggleScope = (option: PluginScope, checked: boolean) => {
-    setScope(current => {
-      if (checked) return current.includes(option) ? current : [...current, option];
-      const next = current.filter(item => item !== option);
-      return next.length > 0 ? next : current;
-    });
-  };
 
   const close = (next: boolean) => {
     if (busy) return;
@@ -95,22 +84,7 @@ export const PluginCreateDrawer: React.FC<IPluginCreateDrawerProps> = ({
         </div>
         <div className="flex flex-col gap-2">
           <Label>{t('plugins.create.scope.label')}</Label>
-          <div className="flex flex-col gap-2">
-            {SCOPE_OPTIONS.map(option => (
-              <Label
-                key={option}
-                className="flex min-h-12 cursor-pointer items-center gap-3 rounded-md border border-border px-3 py-2 text-base font-normal"
-              >
-                <Checkbox
-                  checked={scope.includes(option)}
-                  disabled={busy}
-                  onCheckedChange={next => toggleScope(option, next === true)}
-                  className="size-5 shrink-0"
-                />
-                {t(`plugins.create.scope.${option}`)}
-              </Label>
-            ))}
-          </div>
+          <PluginScopeCheckboxes value={scope} onChange={setScope} disabled={busy} />
           <p className="text-caption text-muted-foreground">{t('plugins.create.scope.hint')}</p>
         </div>
         {result && !result.success && (

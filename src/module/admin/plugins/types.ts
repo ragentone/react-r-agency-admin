@@ -1,5 +1,8 @@
 export type PluginStatus = 'draft' | 'installed' | 'active' | 'inactive';
 
+/** Where a plugin runs. */
+export type PluginScope = 'frontend' | 'admin';
+
 /** One row of `adminPluginList` (runtime `shared/plugin`). */
 export interface IPluginListItem {
   pluginId: string;
@@ -9,6 +12,8 @@ export interface IPluginListItem {
   status: PluginStatus;
   /** Created as development template in the admin (stays set after activation). */
   development: boolean;
+  /** Where the plugin runs (frontend, admin or both). */
+  scope: PluginScope[];
 }
 
 export interface IPluginListResult {
@@ -46,6 +51,14 @@ export interface IPluginStatusResult {
   success: boolean;
   error?: string | null;
   plugin?: { pluginId: string; version: string; status: PluginStatus } | null;
+}
+
+/** Result of `adminPluginSetScope`. */
+export interface IPluginScopeResult {
+  success: boolean;
+  error?: string | null;
+  errors?: string[] | null;
+  scope?: PluginScope[] | null;
 }
 
 /** Result of `adminPluginRemove`. */

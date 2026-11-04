@@ -6,6 +6,8 @@ import type {
   IPluginConfigGetResult,
   IPluginConfigSetResult,
   IPluginCreateResult,
+  IPluginScopeResult,
+  PluginScope,
   IPluginDeployResult,
   IPluginDownloadResult,
   IPluginFileReadResult,
@@ -41,6 +43,12 @@ const SetStatusMutation = parse(`
 const RemoveMutation = parse(`
   mutation AdminPluginRemove($pluginId: String!) {
     adminPluginRemove(pluginId: $pluginId) { success error }
+  }
+`);
+
+const SetScopeMutation = parse(`
+  mutation AdminPluginSetScope($pluginId: String!, $scope: [String]!) {
+    adminPluginSetScope(pluginId: $pluginId, scope: $scope) { success error errors scope }
   }
 `);
 
@@ -130,6 +138,19 @@ export const PluginApi = {
         fetchPolicy: 'no-cache',
       })) as { data?: { adminPluginList?: IPluginListResult } };
       return response.data?.adminPluginList ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+
+  setScope: async (pluginId: string, scope: PluginScope[]): Promise<IPluginScopeResult> => {
+    try {
+      const response = (await client().mutate({
+        mutation: SetScopeMutation as never,
+        variables: { pluginId, scope },
+      })) as { data?: { adminPluginSetScope?: IPluginScopeResult } };
+      return response.data?.adminPluginSetScope ?? { success: false, error: 'unknown' };
     } catch (error) {
       console.warn('[admin-plugins]', (error as Error)?.message);
       return { success: false, error: 'unknown' };

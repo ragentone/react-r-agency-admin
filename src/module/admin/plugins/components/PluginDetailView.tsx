@@ -12,6 +12,7 @@ import { PluginDetailActivation } from './PluginDetailActivation';
 import { PluginDetailFiles } from './PluginDetailFiles';
 import { PluginDetailHeader } from './PluginDetailHeader';
 import { PluginDetailInfo } from './PluginDetailInfo';
+import { PluginDetailScope } from './PluginDetailScope';
 import { PluginFileEditorDialog } from './PluginFileEditorDialog';
 import { PluginManifestView } from './PluginManifestView';
 import { PluginPurgeDrawer } from './PluginPurgeDrawer';
@@ -55,6 +56,7 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
 
       <div className="px-4 pt-4">
         <PluginDetailActivation plugin={plugin} detail={detail} />
+        <PluginDetailScope plugin={plugin} detail={detail} />
       </div>
 
       <Tabs
