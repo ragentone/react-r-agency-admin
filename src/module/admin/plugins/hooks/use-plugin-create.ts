@@ -9,7 +9,7 @@ export const usePluginCreate = (onCreated: () => void) => {
   const [result, setResult] = useState<IPluginCreateResult | null>(null);
 
   const create = useCallback(
-    async (input: { name: string }) => {
+    async (input: { name: string; scope: Array<'frontend' | 'admin'> }) => {
       setBusy(true);
       setResult(null);
       const response = await PluginApi.createDraft(input);
