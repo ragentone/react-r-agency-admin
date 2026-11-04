@@ -175,7 +175,7 @@ Core.menu.register({
   icon: UserRound,
   section: 'account',
   audience: 'user',
-  display: 'drawer',
+  display: 'inline',
   drawerHeader: MenuUserCard,
   sortOrder: 900,
 });
