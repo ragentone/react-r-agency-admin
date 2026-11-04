@@ -13,6 +13,7 @@ import { useAdminAccess } from '../hooks';
 import { StatsUserDrawer } from '../stats/components/StatsUserDrawer';
 import { useStatsQuery } from '../stats/hooks/use.stats.query';
 import { SystemApi } from '../system/api';
+import { PluginSlot } from '@core/plugin';
 
 /**
  * Start page of the admin instance. Admins get a dashboard (mobile first, one column, from
@@ -47,9 +48,16 @@ const AdminHome: React.FC = () => {
     <div data-slot="admin-home" className="flex min-h-dvh w-full flex-col bg-background pb-10">
       <div className="flex flex-col gap-3 border-b border-border/50 px-4 py-4">
         <UserGreeting />
-        <HomeUserSearch onUser={setUserId} />
       </div>
 
+      <PluginSlot
+        name="home.widget"
+        scope="admin"
+        className="border-b border-border/50 p-4 mb-4"
+      />
+      <div className={'px-4'}>
+        <HomeUserSearch onUser={setUserId} />
+      </div>
       <HomeAttention deploys={deploys} storage={storage} onUser={setUserId} />
 
       <div className="border-t border-border/50 px-4 py-4">
