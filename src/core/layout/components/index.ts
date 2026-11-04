@@ -2,6 +2,7 @@ export * from './FooterCopyRight.tsx';
 export * from './HeaderLogo.tsx';
 export * from './layout.context.ts';
 export * from './Layout.tsx';
+export * from './LayoutHeader.tsx';
 export * from './LayoutProvider';
 export * from './PageContent.tsx';
 export * from './PageHeader.tsx';

@@ -3,6 +3,7 @@ import { MobileDock } from '@core/dock/components';
 import { useEvents } from '@core/event';
 import { MenuSectionDrawerHost, MenuSidebar } from '@core/menu/components';
 import { useMeshState } from '@core/mesh/components/use.mesh.ts';
+import { LayoutHeader } from './LayoutHeader.tsx';
 import { Outlet } from '@tanstack/react-router';
 import { cn } from '@ui/lib';
 import { Spinner } from '@ui/shad-cn/components/spinner.tsx';
@@ -46,6 +47,7 @@ const Layout = () => {
         maxHeight: '100dvh',
       }}
     >
+      <LayoutHeader loading={!connected || !loaded} />
       <div className={'relative flex grow w-full min-h-0 overflow-hidden'}>
         <MenuSidebar />
         <div className={'relative grow min-w-0 h-full overflow-hidden'}>{renderOutlet()}</div>

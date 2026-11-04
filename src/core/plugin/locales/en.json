@@ -1,0 +1,11 @@
+{
+  "validation": {
+    "required": "Required",
+    "minLength": "At least {{min}} characters",
+    "maxLength": "At most {{max}} characters",
+    "min": "At least {{min}}",
+    "max": "At most {{max}}",
+    "email": "Invalid email address",
+    "pattern": "Invalid format"
+  }
+}

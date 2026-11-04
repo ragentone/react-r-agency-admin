@@ -1,0 +1,11 @@
+{
+  "validation": {
+    "required": "Pflichtfeld",
+    "minLength": "Mindestens {{min}} Zeichen",
+    "maxLength": "Höchstens {{max}} Zeichen",
+    "min": "Mindestens {{min}}",
+    "max": "Höchstens {{max}}",
+    "email": "Ungültige E-Mail-Adresse",
+    "pattern": "Ungültiges Format"
+  }
+}
