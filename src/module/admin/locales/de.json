@@ -1291,7 +1291,9 @@
         "json": "Ungültiges JSON",
         "custom": "Ungültiger Wert",
         "validator_failed": "Prüfung fehlgeschlagen"
-      }
+      },
+      "summary": "{{count}} Felder · {{required}} Pflicht",
+      "noVisibleFields": "Für die aktuelle Auswahl gibt es keine Felder."
     }
   }
 }

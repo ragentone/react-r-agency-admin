@@ -1291,7 +1291,9 @@
         "json": "Invalid JSON",
         "custom": "Invalid value",
         "validator_failed": "Validation failed"
-      }
+      },
+      "summary": "{{count}} fields · {{required}} required",
+      "noVisibleFields": "No fields apply to the current selection."
     }
   }
 }
