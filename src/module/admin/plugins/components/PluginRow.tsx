@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router';
+import { cn } from '@ui/lib';
 import {
   Item,
   ItemContent,
@@ -6,7 +7,7 @@ import {
   ItemMedia,
   ItemTitle,
 } from '@ui/shad-cn/components/item.tsx';
-import { ChevronRight, Package } from 'lucide-react';
+import { ChevronRight, Zap, ZapOff } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -23,20 +24,26 @@ export const PluginRow: React.FC<IPluginRowProps> = ({ plugin }) => {
   const { t } = useTranslation('admin');
 
   return (
-    <li className="px-2">
-      <Item asChild size="sm" variant={'outline'}>
+    <li className="px-2 mb-2">
+      <Item
+        asChild
+        size="sm"
+        variant={'outline'}
+        className={cn({
+          'ring-2 ring-red-600/20 opacity-70': plugin.status !== 'active',
+          'ring-2 ring-green-600/20': plugin.status === 'active',
+        })}
+      >
         <Link
           to={adminPluginPath(plugin.pluginId)}
           aria-label={t('plugins.details.open', { name: plugin.name })}
           className="min-h-14 transition-colors hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
-          <ItemMedia variant="icon">
-            <Package aria-hidden="true" />
-          </ItemMedia>
-          <ItemContent>
+          <ItemMedia>{plugin.status === 'active' ? <Zap /> : <ZapOff />}</ItemMedia>
+          <ItemContent className={'gap-0'}>
             <ItemTitle>{plugin.name}</ItemTitle>
             <ItemDescription className="truncate">
-              {plugin.pluginId} · {plugin.version}
+              {plugin.version}
               {plugin.development && ` · ${t('plugins.status.inDevelopment')}`}
             </ItemDescription>
           </ItemContent>

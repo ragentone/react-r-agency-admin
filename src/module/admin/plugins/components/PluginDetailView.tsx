@@ -57,22 +57,24 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
         <PluginDetailActivation plugin={plugin} detail={detail} />
       </div>
 
-      <Tabs value={plugin.development ? tab : 'general'} onValueChange={setTab} className="flex flex-col">
+      <Tabs
+        value={plugin.development ? tab : 'general'}
+        onValueChange={setTab}
+        className="flex flex-col"
+      >
         {plugin.development && (
           <div className="px-4 pt-3">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="general">{t('plugins.details.tabs.general')}</TabsTrigger>
-              <TabsTrigger value="config">{t('plugins.details.tabs.config')}</TabsTrigger>
-              <TabsTrigger value="manifest">plugin.json</TabsTrigger>
-              <TabsTrigger value="files">{t('plugins.code.files')}</TabsTrigger>
+            <TabsList className="flex w-full justify-start overflow-x-auto scrollbar-none">
+              <TabsTrigger value="general" className="shrink-0">{t('plugins.details.tabs.general')}</TabsTrigger>
+              <TabsTrigger value="config" className="shrink-0">{t('plugins.details.tabs.config')}</TabsTrigger>
+              <TabsTrigger value="manifest" className="shrink-0">plugin.json</TabsTrigger>
+              <TabsTrigger value="files" className="shrink-0">{t('plugins.code.files')}</TabsTrigger>
             </TabsList>
           </div>
         )}
 
         <TabsContent value="general" className="mt-0">
-          <div className="grid grid-cols-1 gap-8 px-4 py-6 md:grid-cols-2">
-            <PluginDetailInfo plugin={plugin} />
-          </div>
+          <PluginDetailInfo plugin={plugin} />
         </TabsContent>
 
         {plugin.development && (
