@@ -163,7 +163,7 @@ export type PluginConfigText = string | Partial<Record<'de' | 'en' | 'ru', strin
 /** Field of a plugin configuration (mirror of runtime `shared/plugin/plugin.config.schema.ts`). */
 export interface IPluginConfigField {
   key: string;
-  type: 'string' | 'text' | 'number' | 'boolean' | 'select';
+  type: 'string' | 'text' | 'number' | 'boolean' | 'select' | 'html' | 'code';
   label?: PluginConfigText;
   help?: PluginConfigText;
   required?: boolean;
@@ -177,11 +177,17 @@ export interface IPluginConfigField {
   min?: number;
   max?: number;
   options?: string[];
+  /** Toolbar preset of the HTML editor (`html` fields). Default on the admin side: 'basic'. */
+  preset?: 'none' | 'minimal' | 'basic' | 'full';
+  /** Highlighting of a `code` field. Default: 'text'. */
+  language?: 'text' | 'json' | 'javascript' | 'css' | 'markdown';
 }
 
 /** Problem with one value. `code` is translated (`plugins.config.errors.<code>`), `key` is empty for the whole form. */
 export interface IPluginConfigError {
   key: string;
+  /** Text from a custom validator; shown instead of the translation of `code`. */
+  message?: string;
   code: string;
   params?: Record<string, string | number> | null;
 }

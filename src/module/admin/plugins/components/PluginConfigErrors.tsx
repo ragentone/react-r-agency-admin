@@ -18,11 +18,12 @@ export const PluginConfigErrors: React.FC<IPluginConfigErrorsProps> = ({ errors 
     <Alert variant="destructive">
       <AlertTitle>{t('plugins.config.errors.formTitle')}</AlertTitle>
       <AlertDescription>
-        {formErrors.map(error => (
-          <p key={error.code}>
-            {t(`plugins.config.errors.${error.code}`, {
-              defaultValue: t('plugins.config.errors.unknown'),
-            })}
+        {formErrors.map((error, index) => (
+          <p key={`${error.code}-${index}`}>
+            {error.message ??
+              t(`plugins.config.errors.${error.code}`, {
+                defaultValue: t('plugins.config.errors.unknown'),
+              })}
           </p>
         ))}
       </AlertDescription>

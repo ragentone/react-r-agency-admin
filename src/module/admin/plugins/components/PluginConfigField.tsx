@@ -39,10 +39,12 @@ export const PluginConfigField: React.FC<IPluginConfigFieldProps> = ({
   const title = localizedText(field.label, language) ?? field.key;
   const help = localizedText(field.help, language);
   const messages = errors.map(error => ({
-    message: t(`plugins.config.errors.${error.code}`, {
-      ...error.params,
-      defaultValue: t('plugins.config.errors.unknown'),
-    }),
+    message:
+      error.message ??
+      t(`plugins.config.errors.${error.code}`, {
+        ...error.params,
+        defaultValue: t('plugins.config.errors.unknown'),
+      }),
   }));
 
   return (

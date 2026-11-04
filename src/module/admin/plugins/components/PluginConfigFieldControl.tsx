@@ -1,3 +1,7 @@
+import { LazyHtmlEditor } from '@core/editor/html/lazy.html-editor.tsx';
+import CodeMirror from '@uiw/react-codemirror';
+import { useTheme } from '@core/theme';
+import { languageByName } from '../code.language';
 import { Input } from '@ui/shad-cn/components/input.tsx';
 import {
   Select,
@@ -35,6 +39,20 @@ export const PluginConfigFieldControl: React.FC<IPluginConfigFieldControlProps> 
   const text = typeof value === 'string' ? value : '';
 
   switch (field.type) {
+    case 'code':
+      return <CodeField id={id} value={text} field={field} invalid={invalid} disabled={disabled} onChange={onChange} />;
+    case 'html':
+      return (
+        <LazyHtmlEditor
+          id={id}
+          value={text}
+          editable={!disabled}
+          invalid={invalid}
+          minHeight={120}
+          features={field.preset ?? 'basic'}
+          onChange={html => onChange(html === '' ? undefined : html)}
+        />
+      );
     case 'text':
       return (
         <Textarea
@@ -102,4 +120,36 @@ export const PluginConfigFieldControl: React.FC<IPluginConfigFieldControlProps> 
         />
       );
   }
+};
+
+interface ICodeFieldProps {
+  id: string;
+  field: IPluginConfigField;
+  value: string;
+  invalid: boolean;
+  disabled: boolean;
+  onChange: (value: PluginConfigPrimitive | undefined) => void;
+}
+
+/** CodeMirror for a `code` field. Empty text is stored as "not set". */
+const CodeField: React.FC<ICodeFieldProps> = ({ id, field, value, invalid, disabled, onChange }) => {
+  const { theme } = useTheme();
+  return (
+    <div
+      id={id}
+      data-invalid={invalid || undefined}
+      className="overflow-hidden rounded-md border border-input data-[invalid=true]:border-destructive"
+    >
+      <CodeMirror
+        value={value}
+        minHeight="160px"
+        maxHeight="480px"
+        theme={theme === 'dark' ? 'dark' : 'light'}
+        extensions={languageByName(field.language)}
+        editable={!disabled}
+        onChange={next => onChange(next === '' ? undefined : next)}
+        basicSetup={{ foldGutter: false }}
+      />
+    </div>
+  );
 };

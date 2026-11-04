@@ -1,8 +1,3 @@
-import { css } from '@codemirror/lang-css';
-import { javascript } from '@codemirror/lang-javascript';
-import { json } from '@codemirror/lang-json';
-import { markdown } from '@codemirror/lang-markdown';
-import type { Extension } from '@codemirror/state';
 import { AppDrawer } from '@ui/patterns';
 import { Alert, AlertDescription, AlertTitle } from '@ui/shad-cn/components/alert.tsx';
 import { Button } from '@ui/shad-cn/components/button.tsx';
@@ -20,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { PluginApi } from '../api';
+import { languageOfPath } from '../code.language';
 import { useTheme } from '@core/theme';
 
 interface IPluginFileEditorDialogProps {
@@ -29,18 +25,6 @@ interface IPluginFileEditorDialogProps {
   path: string | null;
   onClose: () => void;
 }
-
-/** Syntax highlighting by file extension. Other text files are shown without highlighting. */
-const languageOf = (path: string): Extension[] => {
-  const ext = path.slice(path.lastIndexOf('.'));
-  if (ext === '.ts' || ext === '.tsx')
-    return [javascript({ jsx: ext === '.tsx', typescript: true })];
-  if (['.js', '.jsx', '.mjs', '.cjs'].includes(ext)) return [javascript({ jsx: ext === '.jsx' })];
-  if (ext === '.json') return [json()];
-  if (ext === '.css') return [css()];
-  if (ext === '.md') return [markdown()];
-  return [];
-};
 
 /**
  * Editor for one project file, as full-height drawer. Save with the button or Ctrl/Cmd+S.
@@ -192,7 +176,7 @@ export const PluginFileEditorDialog: React.FC<IPluginFileEditorDialogProps> = ({
               height="100%"
               className="h-full"
               theme={theme === 'dark' ? 'dark' : 'light'}
-              extensions={languageOf(path)}
+              extensions={languageOfPath(path)}
               editable={!saving}
               onChange={value => setDraft(value)}
               basicSetup={{ foldGutter: false }}
