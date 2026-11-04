@@ -7,7 +7,7 @@ import {
   ItemTitle,
 } from '@ui/shad-cn/components/item.tsx';
 import { Switch } from '@ui/shad-cn/components/switch.tsx';
-import { Database, Download, Hammer, Rocket, Trash2 } from 'lucide-react';
+import { Database, Download, Hammer, Rocket, Settings2, Trash2 } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -20,6 +20,7 @@ interface IPluginDetailActionsProps {
   onDeploy: () => void;
   onRemove: () => void;
   onPurge: () => void;
+  onConfig: () => void;
 }
 
 /** Activation switch and the action buttons. Build and deploy only for development plugins. */
@@ -29,13 +30,14 @@ export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({
   onDeploy,
   onRemove,
   onPurge,
+  onConfig,
 }) => {
   const { t } = useTranslation('admin');
 
   return (
     <>
       <div className="flex flex-col gap-2">
-        <Item variant={'outline'} className={'rounded-4xl shadow-xs'} size={'sm'}>
+        <Item variant={'outline'} className={'rounded-2xl shadow-xs'} size={'sm'}>
           <ItemContent>
             <ItemTitle>{t('plugins.details.active')}</ItemTitle>
             <ItemDescription>{t('plugins.remove.activeHint')}</ItemDescription>
@@ -67,6 +69,10 @@ export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({
             {t('plugins.details.deploy')}
           </Button>
         )}
+        <Button variant="outline" size="lg" disabled={detail.busy} onClick={onConfig}>
+          <Settings2 className="size-4" />
+          {t('plugins.details.config')}
+        </Button>
         <Button
           variant="outline"
           size="lg"

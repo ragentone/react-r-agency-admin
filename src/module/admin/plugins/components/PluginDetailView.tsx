@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { usePluginDetail } from '../hooks/use-plugin-detail';
 import type { IPluginListItem } from '../types';
+import { PluginConfigDrawer } from './PluginConfigDrawer';
 import { PluginDeployDrawer } from './PluginDeployDrawer';
 import { PluginDetailActions } from './PluginDetailActions';
 import { PluginDetailFiles } from './PluginDetailFiles';
@@ -23,6 +24,7 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
   const [editPath, setEditPath] = useState<string | null>(null);
   const [removeOpen, setRemoveOpen] = useState(false);
   const [purgeOpen, setPurgeOpen] = useState(false);
+  const [configOpen, setConfigOpen] = useState(false);
 
   return (
     <div className="flex w-full flex-col bg-background">
@@ -35,6 +37,7 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
           onDeploy={() => setDeployOpen(true)}
           onRemove={() => setRemoveOpen(true)}
           onPurge={() => setPurgeOpen(true)}
+          onConfig={() => setConfigOpen(true)}
         />
       </div>
 
@@ -64,6 +67,8 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
           />
         </>
       )}
+
+      <PluginConfigDrawer open={configOpen} plugin={plugin} onOpenChange={setConfigOpen} />
 
       <PluginRemoveDrawer
         plugin={removeOpen ? plugin : null}

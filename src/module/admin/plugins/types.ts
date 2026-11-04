@@ -137,3 +137,51 @@ export interface IPluginAdoptResult {
   plugin?: { pluginId: string; version: string; status: PluginStatus } | null;
 }
 
+
+/** Value of one configuration field. */
+export type PluginConfigPrimitive = string | number | boolean;
+
+/** Configuration values of one scope, keyed by field key. */
+export type PluginConfigValues = Record<string, PluginConfigPrimitive>;
+
+/** Field of a plugin configuration (mirror of runtime `shared/plugin/plugin.config.schema.ts`). */
+export interface IPluginConfigField {
+  key: string;
+  type: 'string' | 'text' | 'number' | 'boolean' | 'select';
+  label?: string;
+  help?: string;
+  required?: boolean;
+  public?: boolean;
+  roles?: string[];
+  showIf?: { key: string; equals: PluginConfigPrimitive };
+  default?: PluginConfigPrimitive;
+  minLength?: number;
+  maxLength?: number;
+  pattern?: string;
+  min?: number;
+  max?: number;
+  options?: string[];
+}
+
+/** Problem with one value. `code` is translated (`plugins.config.errors.<code>`), `key` is empty for the whole form. */
+export interface IPluginConfigError {
+  key: string;
+  code: string;
+  params?: Record<string, string | number> | null;
+}
+
+/** Result of `adminPluginConfigGet`. */
+export interface IPluginConfigGetResult {
+  success: boolean;
+  error?: string | null;
+  fields?: IPluginConfigField[] | null;
+  values?: PluginConfigValues | null;
+}
+
+/** Result of `adminPluginConfigSet`. `errors` only with `validation_failed`. */
+export interface IPluginConfigSetResult {
+  success: boolean;
+  error?: string | null;
+  values?: PluginConfigValues | null;
+  errors?: IPluginConfigError[] | null;
+}

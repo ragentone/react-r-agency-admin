@@ -1120,7 +1120,8 @@
       "code": "Edit code",
       "notFound": "Plugin not found.",
       "back": "Back to the plugin list",
-      "build": "Build"
+      "build": "Build",
+      "config": "Configuration"
     },
     "download": {
       "errors": {
@@ -1211,6 +1212,44 @@
         "still_active": "The plugin is still active. Please deactivate it first.",
         "invalid_plugin_id": "Invalid plugin id.",
         "unknown": "The data could not be deleted. Please try again."
+      }
+    },
+    "config": {
+      "title": "Configuration · {{name}}",
+      "description": "Global values for all users. Nothing is saved unless every input is valid.",
+      "save": "Save",
+      "busy": "Saving …",
+      "resetAll": "Reset all",
+      "resetField": "Default",
+      "resetFieldAria": "Reset {{name}} to default",
+      "public": "Visible in browser",
+      "selectPlaceholder": "Choose …",
+      "saved": "{{name}}: configuration saved",
+      "empty": {
+        "title": "No configuration",
+        "description": "This plugin has no values to set."
+      },
+      "errors": {
+        "formTitle": "Cannot save",
+        "load": "Configuration could not be loaded",
+        "retry": "Try again",
+        "required": "Required",
+        "type": "Invalid value",
+        "minLength": "At least {{min}} characters",
+        "maxLength": "At most {{max}} characters",
+        "pattern": "Format does not match",
+        "min": "At least {{min}}",
+        "max": "At most {{max}}",
+        "option": "Choose one of the options",
+        "unknown_field": "Unknown field",
+        "values_invalid": "Invalid input",
+        "save_failed": "Saving failed",
+        "no_config": "This plugin has no configuration",
+        "not_found": "Plugin not found",
+        "invalid_plugin_id": "Invalid plugin id",
+        "invalid_values": "Invalid input",
+        "validation_failed": "Please check the marked fields",
+        "unknown": "Unknown error"
       }
     }
   }

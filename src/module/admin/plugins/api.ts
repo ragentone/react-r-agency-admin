@@ -3,6 +3,8 @@ import { getMeshClient } from 'r-agency-mesh-client-v1/release';
 
 import type {
   IPluginAdoptResult,
+  IPluginConfigGetResult,
+  IPluginConfigSetResult,
   IPluginCreateResult,
   IPluginDeployResult,
   IPluginDownloadResult,
@@ -101,6 +103,17 @@ const RemoveUnknownMutation = parse(`
 const PurgeDataMutation = parse(`
   mutation AdminPluginPurgeData($pluginId: String!) {
     adminPluginPurgeData(pluginId: $pluginId) { success error deleted }
+  }
+`);
+
+const ConfigGetQuery = parse(`
+  query AdminPluginConfigGet($pluginId: String!) {
+    adminPluginConfigGet(pluginId: $pluginId) { success error fields values }
+  }
+`);
+const ConfigSetMutation = parse(`
+  mutation AdminPluginConfigSet($pluginId: String!, $values: String!) {
+    adminPluginConfigSet(pluginId: $pluginId, values: $values) { success error values errors }
   }
 `);
 
@@ -311,6 +324,33 @@ export const PluginApi = {
         variables: { pluginId },
       })) as { data?: { adminPluginPurgeData?: IPluginPurgeResult } };
       return response.data?.adminPluginPurgeData ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+  /** Configuration schema and global values. Errors: `invalid_plugin_id`, `not_found`. */
+  configGet: async (pluginId: string): Promise<IPluginConfigGetResult> => {
+    try {
+      const response = (await client().query({
+        query: ConfigGetQuery as never,
+        variables: { pluginId },
+        fetchPolicy: 'no-cache',
+      })) as { data?: { adminPluginConfigGet?: IPluginConfigGetResult } };
+      return response.data?.adminPluginConfigGet ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+  /** Stores the global values. Errors: `no_config`, `invalid_values`, `validation_failed` (+ `errors`). */
+  configSet: async (pluginId: string, values: unknown): Promise<IPluginConfigSetResult> => {
+    try {
+      const response = (await client().mutate({
+        mutation: ConfigSetMutation as never,
+        variables: { pluginId, values: JSON.stringify(values) },
+      })) as { data?: { adminPluginConfigSet?: IPluginConfigSetResult } };
+      return response.data?.adminPluginConfigSet ?? { success: false, error: 'unknown' };
     } catch (error) {
       console.warn('[admin-plugins]', (error as Error)?.message);
       return { success: false, error: 'unknown' };

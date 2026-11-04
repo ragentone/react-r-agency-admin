@@ -1120,7 +1120,8 @@
       "code": "Code bearbeiten",
       "notFound": "Plugin nicht gefunden.",
       "back": "Zurück zur Plugin-Liste",
-      "build": "Build"
+      "build": "Build",
+      "config": "Konfiguration"
     },
     "download": {
       "errors": {
@@ -1211,6 +1212,44 @@
         "still_active": "Das Plugin ist noch aktiv. Bitte zuerst deaktivieren.",
         "invalid_plugin_id": "Ungültige Plugin-Id.",
         "unknown": "Die Daten konnten nicht gelöscht werden. Bitte erneut versuchen."
+      }
+    },
+    "config": {
+      "title": "Konfiguration · {{name}}",
+      "description": "Globale Werte für alle Nutzer. Gespeichert wird nur, wenn alle Eingaben gültig sind.",
+      "save": "Speichern",
+      "busy": "Speichert …",
+      "resetAll": "Alles zurücksetzen",
+      "resetField": "Standard",
+      "resetFieldAria": "{{name}} auf Standard zurücksetzen",
+      "public": "Im Browser sichtbar",
+      "selectPlaceholder": "Auswählen …",
+      "saved": "{{name}}: Konfiguration gespeichert",
+      "empty": {
+        "title": "Keine Konfiguration",
+        "description": "Dieses Plugin hat keine einstellbaren Werte."
+      },
+      "errors": {
+        "formTitle": "Speichern nicht möglich",
+        "load": "Konfiguration konnte nicht geladen werden",
+        "retry": "Erneut versuchen",
+        "required": "Pflichtfeld",
+        "type": "Ungültiger Wert",
+        "minLength": "Mindestens {{min}} Zeichen",
+        "maxLength": "Höchstens {{max}} Zeichen",
+        "pattern": "Format passt nicht",
+        "min": "Mindestens {{min}}",
+        "max": "Höchstens {{max}}",
+        "option": "Bitte eine Option wählen",
+        "unknown_field": "Unbekanntes Feld",
+        "values_invalid": "Eingabe ungültig",
+        "save_failed": "Speichern fehlgeschlagen",
+        "no_config": "Dieses Plugin hat keine Konfiguration",
+        "not_found": "Plugin nicht gefunden",
+        "invalid_plugin_id": "Ungültige Plugin-Id",
+        "invalid_values": "Eingabe ungültig",
+        "validation_failed": "Bitte die markierten Felder prüfen",
+        "unknown": "Unbekannter Fehler"
       }
     }
   }
