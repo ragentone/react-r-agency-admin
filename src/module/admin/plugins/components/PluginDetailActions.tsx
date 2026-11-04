@@ -7,7 +7,7 @@ import {
   ItemTitle,
 } from '@ui/shad-cn/components/item.tsx';
 import { Switch } from '@ui/shad-cn/components/switch.tsx';
-import { Database, Download, Hammer, Rocket, Settings2, Trash2 } from 'lucide-react';
+import { Database, Download, Hammer, Rocket, RefreshCw, Settings2, Trash2 } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -61,6 +61,17 @@ export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({
           >
             <Hammer className="size-4" />
             {t('plugins.details.build')}
+          </Button>
+        )}
+        {plugin.development && (
+          <Button
+            variant="outline"
+            size="lg"
+            disabled={detail.busy}
+            onClick={() => void detail.build()}
+          >
+            <RefreshCw className="size-4" />
+            {t('plugins.details.reinstall')}
           </Button>
         )}
         {plugin.development && (

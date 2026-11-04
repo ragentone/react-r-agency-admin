@@ -100,9 +100,20 @@ export interface IMutationAdminPageUpdateArgs {
   values: ScalarJSON;
 }
 
+/** Arguments of `Mutation.adminPluginAdopt` */
+export interface IMutationAdminPluginAdoptArgs {
+  pluginId: string;
+}
+
 /** Arguments of `Mutation.adminPluginBuildDev` */
 export interface IMutationAdminPluginBuildDevArgs {
   pluginId: string;
+}
+
+/** Arguments of `Mutation.adminPluginConfigSet` */
+export interface IMutationAdminPluginConfigSetArgs {
+  pluginId: string;
+  values: string;
 }
 
 /** Arguments of `Mutation.adminPluginCreateDraft` */
@@ -124,8 +135,18 @@ export interface IMutationAdminPluginFileWriteArgs {
   pluginId: string;
 }
 
+/** Arguments of `Mutation.adminPluginPurgeData` */
+export interface IMutationAdminPluginPurgeDataArgs {
+  pluginId: string;
+}
+
 /** Arguments of `Mutation.adminPluginRemove` */
 export interface IMutationAdminPluginRemoveArgs {
+  pluginId: string;
+}
+
+/** Arguments of `Mutation.adminPluginRemoveUnknown` */
+export interface IMutationAdminPluginRemoveUnknownArgs {
   pluginId: string;
 }
 
@@ -1311,6 +1332,11 @@ export interface IQueryDbResourceReadArgs {
 /** Arguments of `Query.adminPageGet` */
 export interface IQueryAdminPageGetArgs {
   id: ScalarID;
+}
+
+/** Arguments of `Query.adminPluginConfigGet` */
+export interface IQueryAdminPluginConfigGetArgs {
+  pluginId: string;
 }
 
 /** Arguments of `Query.adminPluginDownload` */

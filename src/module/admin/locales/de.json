@@ -1121,6 +1121,7 @@
       "notFound": "Plugin nicht gefunden.",
       "back": "Zurück zur Plugin-Liste",
       "build": "Build",
+      "reinstall": "Neu installieren",
       "config": "Konfiguration"
     },
     "download": {

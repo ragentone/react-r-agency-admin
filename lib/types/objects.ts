@@ -82,12 +82,37 @@ export interface IAdminPageUpdateReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminPluginAdoptReturn` */
+export interface IAdminPluginAdoptReturn {
+  error: Maybe<string>;
+  errors: Maybe<ScalarJSON>;
+  plugin: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminPluginBuildDevReturn` */
 export interface IAdminPluginBuildDevReturn {
   error: Maybe<string>;
   errors: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
   synced: Maybe<boolean>;
+}
+
+/** GraphQL: `adminPluginConfigGetReturn` */
+export interface IAdminPluginConfigGetReturn {
+  error: Maybe<string>;
+  errors: Maybe<ScalarJSON>;
+  fields: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+  values: Maybe<ScalarJSON>;
+}
+
+/** GraphQL: `adminPluginConfigSetReturn` */
+export interface IAdminPluginConfigSetReturn {
+  error: Maybe<string>;
+  errors: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+  values: Maybe<ScalarJSON>;
 }
 
 /** GraphQL: `adminPluginCreateDraftReturn` */
@@ -147,8 +172,23 @@ export interface IAdminPluginListReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminPluginPurgeDataReturn` */
+export interface IAdminPluginPurgeDataReturn {
+  deleted: Maybe<number>;
+  error: Maybe<string>;
+  errors: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminPluginRemoveReturn` */
 export interface IAdminPluginRemoveReturn {
+  error: Maybe<string>;
+  errors: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminPluginRemoveUnknownReturn` */
+export interface IAdminPluginRemoveUnknownReturn {
   error: Maybe<string>;
   errors: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
@@ -159,6 +199,14 @@ export interface IAdminPluginSetStatusReturn {
   error: Maybe<string>;
   errors: Maybe<ScalarJSON>;
   plugin: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminPluginUnknownReturn` */
+export interface IAdminPluginUnknownReturn {
+  error: Maybe<string>;
+  errors: Maybe<ScalarJSON>;
+  plugins: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
 }
 
@@ -2192,11 +2240,15 @@ export interface IMutation {
   adminPageImageKeep: Maybe<IAdminPageImageKeepReturn>;
   adminPageImageUpload: Maybe<IAdminPageImageUploadReturn>;
   adminPageUpdate: Maybe<IAdminPageUpdateReturn>;
+  adminPluginAdopt: Maybe<IAdminPluginAdoptReturn>;
   adminPluginBuildDev: Maybe<IAdminPluginBuildDevReturn>;
+  adminPluginConfigSet: Maybe<IAdminPluginConfigSetReturn>;
   adminPluginCreateDraft: Maybe<IAdminPluginCreateDraftReturn>;
   adminPluginDeployDev: Maybe<IAdminPluginDeployDevReturn>;
   adminPluginFileWrite: Maybe<IAdminPluginFileWriteReturn>;
+  adminPluginPurgeData: Maybe<IAdminPluginPurgeDataReturn>;
   adminPluginRemove: Maybe<IAdminPluginRemoveReturn>;
+  adminPluginRemoveUnknown: Maybe<IAdminPluginRemoveUnknownReturn>;
   adminPluginSetStatus: Maybe<IAdminPluginSetStatusReturn>;
   adminPluginUpload: Maybe<IAdminPluginUploadReturn>;
   adminRoleAdd: Maybe<IAdminRoleAddReturn>;
@@ -2575,10 +2627,12 @@ export interface IQuery {
   accountSelfLoad: Maybe<IAccountSelfLoad>;
   adminPageGet: Maybe<IAdminPageGetReturn>;
   adminPageList: Maybe<IAdminPageListReturn>;
+  adminPluginConfigGet: Maybe<IAdminPluginConfigGetReturn>;
   adminPluginDownload: Maybe<IAdminPluginDownloadReturn>;
   adminPluginFileRead: Maybe<IAdminPluginFileReadReturn>;
   adminPluginFiles: Maybe<IAdminPluginFilesReturn>;
   adminPluginList: Maybe<IAdminPluginListReturn>;
+  adminPluginUnknown: Maybe<IAdminPluginUnknownReturn>;
   adminRoleList: Maybe<IAdminRoleListReturn>;
   adminSeoOverview: Maybe<IAdminSeoOverviewReturn>;
   adminStatsGrowth: Maybe<IAdminStatsGrowthReturn>;
