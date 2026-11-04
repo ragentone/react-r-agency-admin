@@ -54,7 +54,7 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
         }
       />
 
-      <div className="px-4 pt-4">
+      <div className="px-4 pt-4 flex flex-col gap-2">
         <PluginDetailActivation plugin={plugin} detail={detail} />
         <PluginDetailScope plugin={plugin} detail={detail} />
       </div>
