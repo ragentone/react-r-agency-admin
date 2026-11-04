@@ -6,5 +6,6 @@ export { registerPluginSlot, unregisterPlugin, usePluginSlot } from './plugin.sl
 export * from './plugin.types';
 export { PluginBoundary } from './PluginBoundary';
 export { PluginConfirmHost } from './PluginConfirmHost';
+export { PluginDrawerHost } from './PluginDrawerHost';
 export { PluginProvider } from './PluginProvider';
 export { PluginSlot } from './PluginSlot';

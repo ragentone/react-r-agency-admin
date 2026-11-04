@@ -12,7 +12,7 @@ import { NotifyProvider } from '@core/notify';
 import { ThemeProvider } from '@core/theme';
 import { RouterProvider } from '@tanstack/react-router';
 
-import { PluginConfirmHost } from '@core/plugin';
+import { PluginConfirmHost, PluginDrawerHost } from '@core/plugin';
 import { router } from './router/router.instance.ts';
 
 /**
@@ -40,6 +40,7 @@ function App() {
         <ApplicationProvider providers={[]}>
           <RouterProvider router={router} />
           <PluginConfirmHost />
+          <PluginDrawerHost />
         </ApplicationProvider>
       </ProviderComposer>
     </ErrorBoundary>

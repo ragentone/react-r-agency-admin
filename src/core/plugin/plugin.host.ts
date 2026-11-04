@@ -5,6 +5,7 @@ import * as React from 'react';
 import { toast as sonnerToast } from 'sonner';
 
 import { usePluginConfirmStore } from './plugin.confirm';
+import { openPluginDrawer } from './plugin.drawer';
 import { usePluginForm } from './plugin.form';
 import { addPluginHook } from './plugin.hooks';
 import { PLUGIN_ICONS } from './plugin.icons';
@@ -101,6 +102,7 @@ export const createPluginApi = (
     show(message, { description: options?.description });
   },
   confirm: options => usePluginConfirmStore.getState().ask(options),
+  openDrawer: (component, options) => openPluginDrawer(pluginId, component, options),
   on: ((name: PluginHookName, handler: AnyHandler, options?: IPluginHookOptions) => {
     if (!(PLUGIN_HOOK_NAMES as readonly string[]).includes(name)) {
       console.warn(`[plugin:${pluginId}] unknown hook "${name}"`);

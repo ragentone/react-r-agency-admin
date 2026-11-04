@@ -138,6 +138,27 @@ export interface IPluginConfirmOptions {
   variant?: 'default' | 'destructive';
 }
 
+/** Props the host adds to every drawer component, on top of the options' `props`. */
+export interface IPluginDrawerInjectedProps {
+  /** Closes the drawer. */
+  close: () => void;
+}
+
+/** A plugin component shown in the host drawer (`api.openDrawer`). */
+export type IPluginDrawerComponent = React.ComponentType<IPluginDrawerInjectedProps & Record<string, unknown>>;
+
+/** Options for `api.openDrawer`. */
+export interface IPluginDrawerOptions {
+  title: string;
+  description?: string;
+  /** Side the drawer slides in from. Default: `bottom`. */
+  position?: 'top' | 'bottom' | 'left' | 'right';
+  /** `full` (default) almost full height, `auto` fits the content, `fullscreen` covers the viewport. */
+  size?: 'full' | 'auto' | 'fullscreen';
+  /** Passed to the component as props (`close` is added by the host). */
+  props?: Record<string, unknown>;
+}
+
 /** Options for `api.toast`. */
 export interface IPluginToastOptions {
   type?: 'success' | 'error' | 'info' | 'warning';
@@ -490,6 +511,11 @@ export interface IPluginApi {
    * otherwise `false`. A new call closes the open one with `false`.
    */
   confirm(options: IPluginConfirmOptions): Promise<boolean>;
+  /**
+   * Opens a drawer from the host and shows a component of the plugin in it. The component gets
+   * its `props` plus `close()`. Only one drawer is open at a time; a new call replaces it.
+   */
+  openDrawer(component: IPluginDrawerComponent, options: IPluginDrawerOptions): void;
   /**
    * Subscribes to a host event. Only `router.beforeNavigate` can intervene, and only if the plugin
    * declares it in `intervene` in plugin.json. Returns a function that removes the subscription.

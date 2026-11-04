@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 interface IStyle {
   '--drawer-height': string;
   '--drawer-content-max-height': string;
+  '--drawer-content-width'?: string;
   '--drawer-inset'?: string;
 }
 
@@ -23,10 +24,20 @@ export const APP_DRAWER_SIZE = {
   '--drawer-content-max-height': 'min(calc(100dvh - 2.5rem), 52rem)',
 } as IStyle;
 
+/** `fullscreen`: the popup covers the whole viewport (100dvw × 100dvh). */
 export const APP_DRAWER_FULL_SIZE = {
-  '--drawer-height': 'min(calc(100dvh), 52rem)',
-  '--drawer-content-max-height': 'min(calc(100dvh), 52rem)',
+  '--drawer-height': '100dvh',
+  '--drawer-content-max-height': '100dvh',
+  '--drawer-content-width': '100dvw',
   '--drawer-inset': '0px',
+} as IStyle;
+
+/** Side drawers (left / right): a column of fixed width; `full` also takes the full height. */
+const APP_DRAWER_SIDE_WIDTH = { '--drawer-content-width': 'min(88dvw, 28rem)' } as IStyle;
+const APP_DRAWER_SIDE_SIZE = {
+  ...APP_DRAWER_SIDE_WIDTH,
+  '--drawer-height': '100dvh',
+  '--drawer-content-max-height': '100dvh',
 } as IStyle;
 
 export interface IAppDrawerProps {
@@ -98,6 +109,16 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
   const back = backLabel ?? t('drawer.back');
   const sr = description ?? (typeof title === 'string' ? title : '');
 
+  // Layout by size and side. Top / bottom: full-width row. Left / right: a column at its side.
+  // `fullscreen`: no radius, no border, no inset.
+  const isSide = direction === 'left' || direction === 'right';
+  const layoutClass =
+    size === 'fullscreen'
+      ? 'h-dvh w-dvw max-h-dvh max-w-none rounded-none border-0 m-0'
+      : isSide
+        ? 'max-w-none'
+        : 'mx-auto w-full max-w-150';
+
   const inner = (
     <>
       {hideHeader ? (
@@ -157,18 +178,18 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
     </>
   );
 
-  const getStyle = () => {
+  const getStyle = (): IStyle | undefined => {
     if (size === 'fullscreen') return APP_DRAWER_FULL_SIZE;
 
     if (size === 'full') {
-      const clone: IStyle = { ...APP_DRAWER_SIZE };
+      const clone: IStyle = { ...(isSide ? APP_DRAWER_SIDE_SIZE : APP_DRAWER_SIZE) };
       if (autoHeight) {
         clone['--drawer-height'] = 'auto';
       }
       return clone;
     }
 
-    return undefined;
+    return isSide ? APP_DRAWER_SIDE_WIDTH : undefined;
   };
 
   return (
@@ -184,14 +205,7 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
       <DrawerPrimitive.VirtualKeyboardProvider>
         <DrawerContent
           {...contentProps}
-          className={cn(
-            'mx-auto w-full',
-            {
-              'max-w-150': size !== 'fullscreen',
-              'rounded-none': size === 'fullscreen',
-            },
-            contentProps?.className
-          )}
+          className={cn(layoutClass, contentProps?.className)}
           style={{ ...(getStyle() as React.CSSProperties), ...contentProps?.style }}
         >
           {sr && <DrawerDescription className="sr-only">{sr}</DrawerDescription>}
