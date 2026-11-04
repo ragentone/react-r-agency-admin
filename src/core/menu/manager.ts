@@ -5,16 +5,20 @@ import type { IMenuComponentEntry, IMenuEntry, IMenuManager, IMenuSectionConfig 
 const entries = new Map<string, IMenuEntry>();
 const components = new Map<string, IMenuComponentEntry>();
 const sections: Record<string, IMenuSectionConfig> = {
-  main: { label: 'menu:sections.main', sortOrder: 0 },
+  before: { label: 'menu:sections.before', sortOrder: 0 },
+  main: { label: 'menu:sections.main', sortOrder: 10 },
+  admin: { label: 'admin:menu.group', sortOrder: 20 },
   // Apps: one trigger in the menu, the apps open in a bottom drawer.
   apps: {
     label: 'menu:sections.apps',
     description: 'menu:apps.description',
     icon: LayoutGrid,
     display: 'drawer',
-    sortOrder: 10,
+    sortOrder: 30,
   },
-  account: { label: 'menu:sections.account', sortOrder: 100 },
+  account: { label: 'menu:sections.account', sortOrder: 40 },
+  plugins: { label: 'menu:sections.plugins', sortOrder: 50 },
+  after: { label: 'menu:sections.after', sortOrder: 60 },
 };
 const listeners = new Set<() => void>();
 let version = 0;

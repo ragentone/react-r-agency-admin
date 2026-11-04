@@ -99,11 +99,6 @@ Core.router.register({
   meta: { title: 'Page' },
 });
 
-Core.menu.registerSection('admin', {
-  sortOrder: 0,
-  label: 'admin:menu.group',
-});
-
 // Admin area – role management + page builder in the "Administration" group.
 Core.menu.register({
   id: 'admin',
