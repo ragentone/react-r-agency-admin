@@ -9,6 +9,7 @@ import { usePluginForm } from './plugin.form';
 import { addPluginHook } from './plugin.hooks';
 import { PLUGIN_ICONS } from './plugin.icons';
 import { usePluginLocale } from './plugin.locale';
+import { usePluginUser } from './plugin.user';
 import { registerPluginMenu } from './plugin.menu';
 import { navigatePlugin } from './plugin.navigate';
 import { registerPluginPage } from './plugin.pages';
@@ -85,6 +86,7 @@ export const createPluginApi = (
   },
   ui: pluginUi,
   useLocale: usePluginLocale,
+  useUser: usePluginUser,
   navigate: (to, options) => navigatePlugin(pluginId, to, options),
   icons: PLUGIN_ICONS,
   useForm: usePluginForm,

@@ -1,4 +1,5 @@
 import type * as React from 'react';
+import type { IPluginUserState } from './plugin.user';
 
 /**
  * Slots a plugin can render into. Must match the backend list `PLUGIN_SLOTS`
@@ -510,6 +511,12 @@ export interface IPluginApi {
    * switches the language.
    */
   useLocale(): PluginLocale;
+
+  /**
+   * Login state of the current user. Hook: call it in a component. Re-renders on login and logout.
+   * `status` is `loading` until the state is known, so do not show guest content in that phase.
+   */
+  useUser(): IPluginUserState;
 }
 
 /** Default export of a plugin bundle. */
