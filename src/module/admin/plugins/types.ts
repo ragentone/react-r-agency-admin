@@ -188,3 +188,4 @@ export interface IPluginConfigSetResult {
   values?: PluginConfigValues | null;
   errors?: IPluginConfigError[] | null;
 }
+

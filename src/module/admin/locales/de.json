@@ -1208,7 +1208,7 @@
       "key": "Schlüssel",
       "label": "Bezeichnung",
       "type": "Typ",
-      "required": "Pflicht",
+      "required": "Pflichtfeld",
       "default": "Standard",
       "yes": "Ja",
       "no": "Nein"

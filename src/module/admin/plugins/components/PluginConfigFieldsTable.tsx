@@ -1,5 +1,6 @@
 import { Delayed } from '@ui/patterns';
 import { Button } from '@ui/shad-cn/components/button.tsx';
+import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import {
   Table,
   TableBody,
@@ -8,7 +9,6 @@ import {
   TableHeader,
   TableRow,
 } from '@ui/shad-cn/components/table.tsx';
-import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -16,13 +16,12 @@ import { localizedText } from '../config.utils';
 import { usePluginConfigFields } from '../hooks/use-plugin-config-fields';
 import type { IPluginConfigField } from '../types';
 
-/** Shows the configuration fields the plugin declares: key, label, type, required and default. */
+/** Configuration fields of a plugin as a read-only table. */
 export const PluginConfigFieldsTable: React.FC<{ pluginId: string }> = ({ pluginId }) => {
   const { t, i18n } = useTranslation('admin');
   const { loading, error, fields, retry } = usePluginConfigFields(pluginId);
 
-  const defaultOf = (field: IPluginConfigField) =>
-    field.default === undefined ? '—' : String(field.default);
+  const defaultOf = (field: IPluginConfigField) => (field.default === undefined ? '—' : String(field.default));
 
   let body: React.ReactNode;
   if (loading) {
