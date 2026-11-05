@@ -14,7 +14,9 @@
     "systemLabel": "System",
     "systemDescription": "Version, Deploys und Server-Speicher",
     "pluginsLabel": "Plugins",
-    "pluginsDescription": "Plugin-ZIP hochladen und installierte Plugins ansehen"
+    "pluginsDescription": "Plugin-ZIP hochladen und installierte Plugins ansehen",
+    "docsLabel": "Dokumentation",
+    "docsDescription": "Markdown-Dokumente des Backends lesen"
   },
   "tabs": {
     "users": "Benutzer",
@@ -1324,5 +1326,11 @@
         "load": "Repositories konnten nicht geladen werden."
       }
     }
+  },
+  "docs": {
+    "title": "Dokumentation",
+    "subtitle": "Markdown-Dateien aus dem Backend",
+    "empty": "Noch keine Dokumente.",
+    "error": "Dokumente konnten nicht geladen werden."
   }
 }

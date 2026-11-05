@@ -1,8 +1,9 @@
 import { Core } from '@core/core.api.ts';
 import { lazyPage } from '@core/page/lazy.page.ts';
-import { ChartNoAxesCombined, FileText, Puzzle, Server, UsersRound } from 'lucide-react';
+import { BookOpen, ChartNoAxesCombined, FileText, Puzzle, Server, UsersRound } from 'lucide-react';
 
 import {
+  ADMIN_DOCS_ROUTE,
   ADMIN_PAGES_ROUTE,
   ADMIN_PLUGIN_ROUTE,
   ADMIN_PLUGINS_ROUTE,
@@ -42,6 +43,10 @@ const PageAdminPlugins = lazyPage(
 const PageAdminPluginDetail = lazyPage(
   () => import('./pages/PageAdminPluginDetail.tsx').then(m => m.PageAdminPluginDetail),
   'PageAdminPluginDetail'
+);
+const PageAdminDocs = lazyPage(
+  () => import('./pages/PageAdminDocs.tsx').then(m => m.PageAdminDocs),
+  'PageAdminDocs'
 );
 // Public dynamic pages (created in the admin area).
 const PageSite = lazyPage(() => import('./pages/PageSite.tsx').then(m => m.PageSite), 'PageSite');
@@ -154,4 +159,23 @@ Core.menu.register({
   section: 'admin',
   roles: ADMIN_ROLES,
   sortOrder: 45,
+});
+
+Core.router.register({
+  path: ADMIN_DOCS_ROUTE,
+  target: 'admin',
+  page: PageAdminDocs,
+  meta: { title: 'Admin' },
+});
+
+// Admin area – runtime docs (Markdown) in the "Administration" group.
+Core.menu.register({
+  id: 'admin-docs',
+  label: 'admin:menu.docsLabel',
+  description: 'admin:menu.docsDescription',
+  icon: BookOpen,
+  to: ADMIN_DOCS_ROUTE,
+  section: 'admin',
+  roles: ADMIN_ROLES,
+  sortOrder: 50,
 });

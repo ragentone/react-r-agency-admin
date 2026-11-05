@@ -14,7 +14,9 @@
     "systemLabel": "System",
     "systemDescription": "Version, deploys and server storage",
     "pluginsLabel": "Plugins",
-    "pluginsDescription": "Upload a plugin ZIP and see installed plugins"
+    "pluginsDescription": "Upload a plugin ZIP and see installed plugins",
+    "docsLabel": "Documentation",
+    "docsDescription": "Read the Markdown documents of the backend"
   },
   "tabs": {
     "users": "Users",
@@ -1324,5 +1326,11 @@
         "load": "Repositories could not be loaded."
       }
     }
+  },
+  "docs": {
+    "title": "Documentation",
+    "subtitle": "Markdown files from the backend",
+    "empty": "No documents yet.",
+    "error": "Documents could not be loaded."
   }
 }
