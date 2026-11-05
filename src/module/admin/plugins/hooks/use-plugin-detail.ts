@@ -39,8 +39,8 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
     }
   };
 
-  const build = async () => {
-    const result = await building.build(plugin.pluginId);
+  const build = async (reinstall = false) => {
+    const result = await building.build(plugin.pluginId, reinstall);
     if (result.success) {
       toast.success(t(result.synced ? 'plugins.build.synced' : 'plugins.build.success', { name: plugin.name }));
     } else {

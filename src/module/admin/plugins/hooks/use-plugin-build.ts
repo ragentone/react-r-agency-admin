@@ -7,9 +7,9 @@ import type { IPluginDeployResult } from '../types';
 export const usePluginBuild = () => {
   const [busy, setBusy] = useState(false);
 
-  const build = useCallback(async (pluginId: string): Promise<IPluginDeployResult> => {
+  const build = useCallback(async (pluginId: string, reinstall = false): Promise<IPluginDeployResult> => {
     setBusy(true);
-    const result = await PluginApi.buildDev(pluginId);
+    const result = await PluginApi.buildDev(pluginId, reinstall);
     setBusy(false);
     return result;
   }, []);

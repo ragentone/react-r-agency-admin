@@ -84,7 +84,7 @@ export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({
             </DropdownMenuItem>
           )}
           {plugin.development && (
-            <DropdownMenuItem disabled={detail.busy} onSelect={() => void detail.build()}>
+            <DropdownMenuItem disabled={detail.busy} onSelect={() => void detail.build(true)}>
               <RefreshCw />
               {t('plugins.details.reinstall')}
             </DropdownMenuItem>

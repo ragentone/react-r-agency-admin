@@ -65,8 +65,8 @@ const DeployDevMutation = parse(`
 `);
 
 const BuildDevMutation = parse(`
-  mutation AdminPluginBuildDev($pluginId: String!) {
-    adminPluginBuildDev(pluginId: $pluginId) { success error errors synced }
+  mutation AdminPluginBuildDev($pluginId: String!, $reinstall: Boolean) {
+    adminPluginBuildDev(pluginId: $pluginId, reinstall: $reinstall) { success error errors synced }
   }
 `);
 
@@ -191,11 +191,11 @@ export const PluginApi = {
   },
 
   /** Runs `npm run build` in the development project. Changes no version. */
-  buildDev: async (pluginId: string): Promise<IPluginDeployResult> => {
+  buildDev: async (pluginId: string, reinstall = false): Promise<IPluginDeployResult> => {
     try {
       const response = (await client().mutate({
         mutation: BuildDevMutation as never,
-        variables: { pluginId },
+        variables: { pluginId, reinstall },
       })) as { data?: { adminPluginBuildDev?: IPluginDeployResult } };
       return response.data?.adminPluginBuildDev ?? { success: false, error: 'unknown' };
     } catch (error) {
