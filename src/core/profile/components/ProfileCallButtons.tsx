@@ -13,7 +13,7 @@ const iconButton =
 /** Message + voice + video call buttons for a friend's profile (header of the profile drawer). */
 export const ProfileCallButtons: React.FC<{
   profile: IUserProfile;
-  /** Closes the profile drawer before the messenger opens. */
+  /** Closes the profile drawer before another drawer opens. */
   onLeave?: () => void;
 }> = ({ profile, onLeave }) => {
   const { t } = useTranslation('call', { useSuspense: false });

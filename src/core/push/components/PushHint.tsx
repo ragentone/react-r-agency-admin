@@ -8,7 +8,7 @@ import { PUSH_HINT_DISMISSED_KEY } from '../const';
 import { pushStorage, usePushStore } from '../push';
 
 /**
- * Small card "Turn on notifications" (e.g. in the messenger) – only while the browser
+ * Small card "Turn on notifications" – only while the browser
  * has not been asked yet. The permission prompt needs this click (user gesture).
  */
 export const PushHint: React.FC<{ className?: string; accent?: string }> = ({

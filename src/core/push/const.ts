@@ -1,6 +1,6 @@
 /** localStorage: the user turned push off on this device → don't re-subscribe automatically. */
 export const PUSH_OPT_OUT_KEY = 'push.optOut';
-/** localStorage: the hint in the messenger was dismissed. */
+/** localStorage: the push hint was dismissed. */
 export const PUSH_HINT_DISMISSED_KEY = 'push.hintDismissed';
 /** Window event with the tapped notification (`IPushClick`). */
 export const PUSH_CLICK_EVENT = 'r-agency-push-click';
