@@ -1,7 +1,0 @@
-{
-  "active": true,
-  "name": "module-credits",
-  "entries": ["module.tsx"],
-  "sortOrder": 8,
-  "modes": ["development", "production"]
-}
