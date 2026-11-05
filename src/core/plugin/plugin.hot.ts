@@ -44,7 +44,9 @@ export const watchPluginDev = (ref: IPluginRef): void => {
             ref.assetBaseUrl,
             ref.pages,
             ref.intervene,
-            ref.config ?? {}
+            ref.config ?? {},
+
+            { emits: ref.emits, listens: ref.listens, capabilities: ref.capabilities, live: ref.live }
           )
         );
         console.info(`[plugin:${ref.id}] neu geladen (${revision})`);

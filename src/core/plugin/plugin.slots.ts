@@ -1,5 +1,7 @@
 import { useSyncExternalStore } from 'react';
 
+import { clearPluginEvents } from './plugin.events';
+import { clearPluginLive } from './plugin.live';
 import { clearPluginHooks } from './plugin.hooks';
 import { clearPluginMenu } from './plugin.menu';
 import { clearPluginPages } from './plugin.pages';
@@ -37,6 +39,8 @@ export const unregisterPlugin = (pluginId: string) => {
   clearPluginPages(pluginId);
   clearPluginMenu(pluginId);
   clearPluginHooks(pluginId);
+  clearPluginEvents(pluginId);
+  clearPluginLive(pluginId);
   notify();
 };
 

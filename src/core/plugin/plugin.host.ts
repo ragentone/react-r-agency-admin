@@ -6,6 +6,10 @@ import { toast as sonnerToast } from 'sonner';
 
 import { usePluginConfirmStore } from './plugin.confirm';
 import { openPluginDrawer } from './plugin.drawer';
+import { emitPluginEvent, subscribePluginEvent } from './plugin.events';
+import { withCapabilities } from './plugin.capabilities';
+import { subscribePluginLive } from './plugin.live';
+import type { IPluginGrants } from './plugin.types';
 import { usePluginForm } from './plugin.form';
 import { addPluginHook } from './plugin.hooks';
 import { PLUGIN_ICONS } from './plugin.icons';
@@ -73,13 +77,14 @@ export const callPluginAction = async <T = unknown>(
  * The API a plugin gets in `register()`. `allowedSlots` comes from the manifest:
  * a plugin may only register components for slots it declared.
  */
-export const createPluginApi = (
+const buildPluginApi = (
   pluginId: string,
   allowedSlots: PluginSlotName[],
   assetBaseUrl: string,
   allowedPages: string[],
   allowedIntervene: string[],
-  publicConfig: Record<string, PluginConfigPrimitive> = {}
+  publicConfig: Record<string, PluginConfigPrimitive> = {},
+  events: IPluginGrants = { emits: [], listens: [], capabilities: null, live: [] }
 ): IPluginApi => ({
   React,
   config: {
@@ -103,6 +108,28 @@ export const createPluginApi = (
   },
   confirm: options => usePluginConfirmStore.getState().ask(options),
   openDrawer: (component, options) => openPluginDrawer(pluginId, component, options),
+  emit: (name, payload) => {
+    // Only own events, declared in `emits`. Anything else is dropped with a warning.
+    if (!name.startsWith(`${pluginId}.`) || !events.emits.includes(name)) {
+      console.warn(`[plugin:${pluginId}] event "${name}" not declared in emits (own id as prefix)`);
+      return;
+    }
+    emitPluginEvent(pluginId, name, payload);
+  },
+  onLive: (topic, handler) => {
+    if (!events.live.includes(topic)) {
+      console.warn(`[plugin:${pluginId}] live topic "${topic}" not declared in live`);
+      return () => undefined;
+    }
+    return subscribePluginLive(pluginId, topic, handler);
+  },
+  subscribe: (name, handler) => {
+    if (!events.listens.includes(name)) {
+      console.warn(`[plugin:${pluginId}] event "${name}" not declared in listens`);
+      return () => undefined;
+    }
+    return subscribePluginEvent(pluginId, name, handler);
+  },
   on: ((name: PluginHookName, handler: AnyHandler, options?: IPluginHookOptions) => {
     if (!(PLUGIN_HOOK_NAMES as readonly string[]).includes(name)) {
       console.warn(`[plugin:${pluginId}] unknown hook "${name}"`);
@@ -140,3 +167,19 @@ export const createPluginApi = (
     registerPluginPage(pluginId, path, component, options);
   },
 });
+
+/** The API a plugin gets: the host methods, limited to the plugin's capabilities. */
+export const createPluginApi = (
+  pluginId: string,
+  allowedSlots: PluginSlotName[],
+  assetBaseUrl: string,
+  allowedPages: string[],
+  allowedIntervene: string[],
+  publicConfig: Record<string, PluginConfigPrimitive> = {},
+  events: IPluginGrants = { emits: [], listens: [], capabilities: null, live: [] }
+): IPluginApi =>
+  withCapabilities(
+    pluginId,
+    buildPluginApi(pluginId, allowedSlots, assetBaseUrl, allowedPages, allowedIntervene, publicConfig, events),
+    events.capabilities
+  );

@@ -159,6 +159,13 @@ export interface IPluginDrawerOptions {
   props?: Record<string, unknown>;
 }
 
+/** Who sent an event (`api.subscribe`). */
+export interface IPluginEventMeta {
+  /** Plugin id of the sender. */
+  from: string;
+  name: string;
+}
+
 /** Options for `api.toast`. */
 export interface IPluginToastOptions {
   type?: 'success' | 'error' | 'info' | 'warning';
@@ -517,6 +524,18 @@ export interface IPluginApi {
    */
   openDrawer(component: IPluginDrawerComponent, options: IPluginDrawerOptions): void;
   /**
+   * Sends an event to plugins that listen for it. Only names from `emits` in plugin.json, with this
+   * plugin's id as prefix (e.g. `demo.orderPlaced`). Delivery is asynchronous.
+   */
+  emit(name: string, payload?: unknown): void;
+  /**
+   * Listens to an event of another plugin (`<plugin-id>.<name>`), only if it is in `listens` in
+   * plugin.json. Returns a function that removes the subscription.
+   */
+  subscribe(name: string, handler: (payload: unknown, meta: IPluginEventMeta) => void | Promise<void>): () => void;
+  /** Receives a live push of this plugin's backend (`api.publish` there), only for topics in `live` of plugin.json. */
+  onLive(topic: string, handler: (payload: unknown) => void): () => void;
+  /**
    * Subscribes to a host event. Only `router.beforeNavigate` can intervene, and only if the plugin
    * declares it in `intervene` in plugin.json. Returns a function that removes the subscription.
    */
@@ -563,6 +582,18 @@ export interface IPluginDevRef {
 /** Value of one configuration field. */
 export type PluginConfigPrimitive = string | number | boolean;
 
+/** Host API areas a plugin may use (from `capabilities` in plugin.json). */
+export const PLUGIN_CAPABILITIES = ['drawer', 'confirm', 'navigate', 'toast', 'user'] as const;
+export type PluginCapability = (typeof PLUGIN_CAPABILITIES)[number];
+
+/** What the host grants a plugin, read from plugin.json. `capabilities: null` = no list (everything). */
+export interface IPluginGrants {
+  emits: string[];
+  listens: string[];
+  live: string[];
+  capabilities: PluginCapability[] | null;
+}
+
 export interface IPluginRef {
   id: string;
   slots: PluginSlotName[];
@@ -574,6 +605,14 @@ export interface IPluginRef {
   pages: string[];
   /** Hooks this plugin may intervene in (from plugin.json). */
   intervene: string[];
+  /** Events this plugin may send (from plugin.json). */
+  emits: string[];
+  /** Events this plugin listens for (from plugin.json). */
+  listens: string[];
+  /** Capabilities from plugin.json. `null` = no list, everything allowed. */
+  capabilities: PluginCapability[] | null;
+  /** Live topics from plugin.json (`onLive`). */
+  live: string[];
   /** Public configuration values (fields with `public: true`). */
   config?: Record<string, PluginConfigPrimitive>;
   /** Present for a development plugin in a non-production environment: enables hot reload. */

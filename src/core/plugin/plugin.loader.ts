@@ -36,7 +36,9 @@ export const loadPlugin = async (ref: IPluginRef): Promise<boolean> => {
         ref.assetBaseUrl,
         ref.pages,
         ref.intervene,
-        ref.config ?? {}
+        ref.config ?? {},
+
+        { emits: ref.emits, listens: ref.listens, capabilities: ref.capabilities, live: ref.live }
       )
     );
     return true;

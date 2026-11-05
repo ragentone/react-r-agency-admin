@@ -3,7 +3,13 @@ import { useEffect, useState } from 'react';
 
 import { watchPluginDev } from './plugin.hot';
 import { loadPlugins } from './plugin.loader';
-import { type IPluginRef, type PluginConfigPrimitive, type PluginScope, type PluginSlotName } from './plugin.types';
+import {
+  type IPluginRef,
+  type PluginCapability,
+  type PluginConfigPrimitive,
+  type PluginScope,
+  type PluginSlotName,
+} from './plugin.types';
 
 interface IPluginListItem {
   id: string;
@@ -14,6 +20,10 @@ interface IPluginListItem {
   assetsPath: string;
   pages: string[];
   intervene: string[];
+  emits?: string[];
+  listens?: string[];
+  capabilities?: string[] | null;
+  live?: string[];
   /** Only outside production, for development plugins. */
   dev: { revisionPath: string; revision: string } | null;
   /** Public configuration values of the plugin. */
@@ -47,6 +57,10 @@ export const fetchActivePlugins = async (scope: PluginScope = 'frontend'): Promi
       assetBaseUrl: `${endpoint()}${plugin.assetsPath}`,
       pages: plugin.pages ?? [],
       intervene: plugin.intervene ?? [],
+      emits: plugin.emits ?? [],
+      listens: plugin.listens ?? [],
+      capabilities: (plugin.capabilities ?? null) as PluginCapability[] | null,
+      live: plugin.live ?? [],
       config: plugin.config ?? {},
       dev: plugin.dev
         ? { revisionUrl: `${endpoint()}${plugin.dev.revisionPath}`, revision: plugin.dev.revision }
