@@ -443,6 +443,167 @@ export interface IPluginUi {
   TabsTrigger: React.ComponentType<UiButton & { value: string; disabled?: boolean }>;
   TabsContent: React.ComponentType<UiDiv & { value: string }>;
   Textarea: React.ComponentType<React.TextareaHTMLAttributes<HTMLTextAreaElement>>;
+  ToggleGroup: React.ComponentType<
+    UiDiv & {
+      type: 'single' | 'multiple';
+      value?: string | string[];
+      defaultValue?: string | string[];
+      onValueChange?: (value: string | string[]) => void;
+      variant?: 'default' | 'outline';
+      size?: 'default' | 'sm' | 'lg';
+      orientation?: 'horizontal' | 'vertical';
+      disabled?: boolean;
+    }
+  >;
+  ToggleGroupItem: React.ComponentType<
+    UiButton & { value: string; variant?: 'default' | 'outline'; size?: 'default' | 'sm' | 'lg' }
+  >;
+  Accordion: React.ComponentType<{
+    value?: unknown[];
+    defaultValue?: unknown[];
+    onValueChange?: (value: unknown[]) => void;
+    multiple?: boolean;
+    disabled?: boolean;
+    children?: React.ReactNode;
+  }>;
+  AccordionItem: React.ComponentType<UiDiv & { value: unknown; disabled?: boolean }>;
+  AccordionTrigger: React.ComponentType<UiButton>;
+  AccordionContent: React.ComponentType<UiDiv>;
+  ButtonGroup: React.ComponentType<UiDiv & { orientation?: 'horizontal' | 'vertical' }>;
+  ButtonGroupSeparator: React.ComponentType<UiDiv & { orientation?: 'horizontal' | 'vertical' }>;
+  ButtonGroupText: React.ComponentType<UiDiv & { asChild?: boolean }>;
+  Slider: React.ComponentType<{
+    value?: number[];
+    defaultValue?: number[];
+    onValueChange?: (value: number[]) => void;
+    onValueCommit?: (value: number[]) => void;
+    min?: number;
+    max?: number;
+    step?: number;
+    name?: string;
+    orientation?: 'horizontal' | 'vertical';
+    disabled?: boolean;
+    className?: string;
+  }>;
+  Tooltip: React.ComponentType<{
+    open?: boolean;
+    defaultOpen?: boolean;
+    onOpenChange?: (open: boolean) => void;
+    delayDuration?: number;
+    children?: React.ReactNode;
+  }>;
+  TooltipProvider: React.ComponentType<{ delayDuration?: number; children?: React.ReactNode }>;
+  TooltipTrigger: React.ComponentType<UiButton & { asChild?: boolean }>;
+  TooltipContent: React.ComponentType<
+    UiDiv & {
+      side?: 'top' | 'right' | 'bottom' | 'left';
+      align?: 'start' | 'center' | 'end';
+      sideOffset?: number;
+    }
+  >;
+  Popover: React.ComponentType<{
+    open?: boolean;
+    defaultOpen?: boolean;
+    onOpenChange?: (open: boolean) => void;
+    modal?: boolean;
+    children?: React.ReactNode;
+  }>;
+  PopoverTrigger: React.ComponentType<UiButton & { asChild?: boolean }>;
+  PopoverAnchor: React.ComponentType<UiDiv & { asChild?: boolean }>;
+  PopoverContent: React.ComponentType<
+    UiDiv & {
+      side?: 'top' | 'right' | 'bottom' | 'left';
+      align?: 'start' | 'center' | 'end';
+      sideOffset?: number;
+    }
+  >;
+  DropdownMenu: React.ComponentType<{
+    open?: boolean;
+    defaultOpen?: boolean;
+    onOpenChange?: (open: boolean) => void;
+    modal?: boolean;
+    children?: React.ReactNode;
+  }>;
+  DropdownMenuTrigger: React.ComponentType<UiButton & { asChild?: boolean }>;
+  DropdownMenuContent: React.ComponentType<
+    UiDiv & {
+      side?: 'top' | 'right' | 'bottom' | 'left';
+      align?: 'start' | 'center' | 'end';
+      sideOffset?: number;
+    }
+  >;
+  DropdownMenuGroup: React.ComponentType<UiDiv>;
+  DropdownMenuLabel: React.ComponentType<UiDiv & { inset?: boolean }>;
+  DropdownMenuItem: React.ComponentType<
+    UiDiv & {
+      variant?: 'default' | 'destructive';
+      inset?: boolean;
+      disabled?: boolean;
+      onSelect?: (event: Event) => void;
+    }
+  >;
+  DropdownMenuSeparator: React.ComponentType<UiDiv>;
+  Carousel: React.ComponentType<
+    UiDiv & {
+      opts?: {
+        align?: 'start' | 'center' | 'end';
+        loop?: boolean;
+        dragFree?: boolean;
+        skipSnaps?: boolean;
+        startIndex?: number;
+        containScroll?: 'trimSnaps' | 'keepSnaps' | false;
+      };
+      orientation?: 'horizontal' | 'vertical';
+      setApi?: (api: {
+        scrollPrev(): void;
+        scrollNext(): void;
+        scrollTo(index: number): void;
+        canScrollPrev(): boolean;
+        canScrollNext(): boolean;
+        selectedScrollSnap(): number;
+        on(event: 'select' | 'reInit', handler: () => void): void;
+      }) => void;
+    }
+  >;
+  CarouselContent: React.ComponentType<UiDiv>;
+  CarouselItem: React.ComponentType<UiDiv>;
+  CarouselPrevious: React.ComponentType<UiButton>;
+  CarouselNext: React.ComponentType<UiButton>;
+  Table: React.ComponentType<React.TableHTMLAttributes<HTMLTableElement>>;
+  TableHeader: React.ComponentType<React.HTMLAttributes<HTMLTableSectionElement>>;
+  TableBody: React.ComponentType<React.HTMLAttributes<HTMLTableSectionElement>>;
+  TableFooter: React.ComponentType<React.HTMLAttributes<HTMLTableSectionElement>>;
+  TableHead: React.ComponentType<React.ThHTMLAttributes<HTMLTableCellElement>>;
+  TableRow: React.ComponentType<React.HTMLAttributes<HTMLTableRowElement>>;
+  TableCell: React.ComponentType<React.TdHTMLAttributes<HTMLTableCellElement>>;
+  TableCaption: React.ComponentType<React.HTMLAttributes<HTMLTableCaptionElement>>;
+  Calendar: React.ComponentType<{
+    mode?: 'single' | 'range' | 'multiple';
+    value?: Date | { from: Date | undefined; to: Date | undefined } | Date[];
+    defaultValue?: Date | { from: Date | undefined; to: Date | undefined } | Date[];
+    onChange?: (value: Date | { from: Date | undefined; to: Date | undefined } | Date[] | undefined) => void;
+    minDate?: Date;
+    maxDate?: Date;
+    disabledDates?: Date[];
+    disableWeekends?: boolean;
+    disablePastDates?: boolean;
+    disableFutureDates?: boolean;
+    weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+    showTodayButton?: boolean;
+    showClearButton?: boolean;
+    size?: 'sm' | 'md' | 'lg';
+    className?: string;
+  }>;
+  DatePicker: React.ComponentType<{
+    value?: Date;
+    onChange?: (value: Date | undefined) => void;
+    title: string;
+    placeholder?: string;
+    disabled?: boolean;
+    minDate?: Date;
+    maxDate?: Date;
+    className?: string;
+  }>;
   Field: React.ComponentType<
     UiDiv & { orientation?: 'vertical' | 'horizontal' | 'responsive'; 'data-invalid'?: boolean }
   >;

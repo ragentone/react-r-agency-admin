@@ -28,6 +28,17 @@ import { Spinner } from '@ui/shad-cn/components/spinner';
 import { Switch } from '@ui/shad-cn/components/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/shad-cn/components/tabs';
 import { Textarea } from '@ui/shad-cn/components/textarea';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@ui/shad-cn/components/accordion';
+import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from '@ui/shad-cn/components/button-group';
+import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from '@ui/shad-cn/components/popover';
+import { Slider } from '@ui/shad-cn/components/slider';
+import { ToggleGroup, ToggleGroupItem } from '@ui/shad-cn/components/toggle-group';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@ui/shad-cn/components/tooltip';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@ui/shad-cn/components/dropdown-menu';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@ui/shad-cn/components/carousel';
+import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@ui/shad-cn/components/table';
+import { AnimatedCalendarStandalone as Calendar } from '@ui/shad-cn/components/calender';
+import { DatePicker } from '@ui/components/DatePicker';
 import {
   Drawer,
   DrawerClose,
@@ -74,7 +85,17 @@ export const pluginUi = {
   Switch,
   Tabs, TabsList, TabsTrigger, TabsContent,
   Textarea,
+  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuItem, DropdownMenuSeparator,
+  Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext,
+  Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption,
+  Calendar, DatePicker,
   Field, FieldSet, FieldLegend, FieldGroup, FieldContent, FieldLabel, FieldTitle, FieldDescription, FieldSeparator, FieldError,
+  ToggleGroup, ToggleGroupItem,
+  Accordion, AccordionItem, AccordionTrigger, AccordionContent,
+  ButtonGroup, ButtonGroupSeparator, ButtonGroupText,
+  Slider,
+  Tooltip, TooltipProvider, TooltipTrigger, TooltipContent,
+  Popover, PopoverTrigger, PopoverContent, PopoverAnchor,
   Drawer, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription,
   Dialog, DialogTrigger, DialogClose, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription,
 } as unknown as IPluginUi;
