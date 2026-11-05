@@ -556,7 +556,11 @@
     "security": {
       "failures": "Failed sign-ins"
     },
-    "bots": "Bots"
+    "bots": "Bots",
+    "error": {
+      "title": "Could not load",
+      "text": "Please try again in a moment."
+    }
   },
   "system": {
     "title": "System",

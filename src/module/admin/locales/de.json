@@ -556,7 +556,11 @@
     "security": {
       "failures": "Fehlgeschlagene Anmeldungen"
     },
-    "bots": "Bots"
+    "bots": "Bots",
+    "error": {
+      "title": "Konnte nicht laden",
+      "text": "Bitte versuche es gleich noch einmal."
+    }
   },
   "system": {
     "title": "System",
