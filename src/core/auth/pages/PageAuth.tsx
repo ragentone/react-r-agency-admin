@@ -6,7 +6,6 @@ import {
 import { AuthProgressBar } from '@core/auth/components/AuthProgressBar.tsx';
 import { AuthFlow } from '@core/auth/components/flow/AuthFlow.tsx';
 import { useAuth } from '@core/auth/components/use.auth.ts';
-import { UserGreeting } from '@core/auth/components/user/UserGreeting.tsx';
 import { CoreVariables } from '@core/core.variables.ts';
 import { RoutePage } from '@router/components';
 import { Link } from '@tanstack/react-router';
@@ -30,7 +29,7 @@ const PageAuth = () => {
     return (
       <RoutePage width={'100%'} scrollable={true}>
         <div className="mx-auto flex w-full max-w-[440px] flex-col px-5 pt-8 pb-12 sm:pt-16">
-          <UserGreeting>
+          <div className="flex flex-col">
             <p className="mb-4 text-body text-muted-foreground">
               {t('page.signedIn.text', { defaultValue: 'Du bist bereits angemeldet.' })}
             </p>
@@ -53,7 +52,7 @@ const PageAuth = () => {
                 {t('logout.trigger')}
               </button>
             </div>
-          </UserGreeting>
+          </div>
         </div>
       </RoutePage>
     );

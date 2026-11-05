@@ -1,4 +1,3 @@
-import { UserGreeting } from '@core/auth';
 import { PageIndex } from '@core/pages/default/PageIndex.tsx';
 import { RoutePage } from '@router/components';
 import React, { useState } from 'react';
@@ -46,16 +45,8 @@ const AdminHome: React.FC = () => {
 
   return (
     <div data-slot="admin-home" className="flex min-h-dvh w-full flex-col bg-background pb-10">
-      <div className="flex flex-col gap-3 border-b border-border/50 px-4 py-4">
-        <UserGreeting />
-      </div>
-
-      <PluginSlot
-        name="home.widget"
-        scope="admin"
-        className="border-b border-border/50 p-4 mb-4"
-      />
-      <div className={'px-4'}>
+      <PluginSlot name="home.widget" scope="admin" className="border-b border-border/50 p-4 mb-4" />
+      <div className={'px-4 pt-4'}>
         <HomeUserSearch onUser={setUserId} />
       </div>
       <HomeAttention deploys={deploys} storage={storage} onUser={setUserId} />
