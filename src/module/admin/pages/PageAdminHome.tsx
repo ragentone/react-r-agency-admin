@@ -1,4 +1,5 @@
 import { PageIndex } from '@core/pages/default/PageIndex.tsx';
+import { PluginSlot } from '@core/plugin';
 import { RoutePage } from '@router/components';
 import React, { useState } from 'react';
 
@@ -12,7 +13,6 @@ import { useAdminAccess } from '../hooks';
 import { StatsUserDrawer } from '../stats/components/StatsUserDrawer';
 import { useStatsQuery } from '../stats/hooks/use.stats.query';
 import { SystemApi } from '../system/api';
-import { PluginSlot } from '@core/plugin';
 
 /**
  * Start page of the admin instance. Admins get a dashboard (mobile first, one column, from
