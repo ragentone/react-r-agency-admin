@@ -7,6 +7,7 @@ import type {
   IPluginConfigSetResult,
   IPluginCreateResult,
   IPluginScopeResult,
+  IPluginTablesResult,
   PluginScope,
   IPluginDeployResult,
   IPluginDownloadResult,
@@ -120,6 +121,11 @@ const PurgeDataMutation = parse(`
   }
 `);
 
+const TablesQuery = parse(`
+  query AdminPluginTables($pluginId: String!) {
+    adminPluginTables(pluginId: $pluginId) { success error tables }
+  }
+`);
 const ConfigGetQuery = parse(`
   query AdminPluginConfigGet($pluginId: String!) {
     adminPluginConfigGet(pluginId: $pluginId) { success error fields values }
@@ -372,6 +378,19 @@ export const PluginApi = {
     }
   },
   /** Configuration schema and global values. Errors: `invalid_plugin_id`, `not_found`. */
+  tables: async (pluginId: string): Promise<IPluginTablesResult> => {
+    try {
+      const response = (await client().query({
+        query: TablesQuery as never,
+        variables: { pluginId },
+        fetchPolicy: 'no-cache',
+      })) as { data?: { adminPluginTables?: IPluginTablesResult } };
+      return response.data?.adminPluginTables ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
   configGet: async (pluginId: string): Promise<IPluginConfigGetResult> => {
     try {
       const response = (await client().query({

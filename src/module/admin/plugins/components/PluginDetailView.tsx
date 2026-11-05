@@ -99,8 +99,7 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
 
         {plugin.development && (
           <TabsContent value="repositories" className="mt-0 px-4 py-6">
-            {/* Data source for the repositories is not defined yet; the tree shows its empty state until it is. */}
-            <PluginRepositoriesTree repositories={[]} />
+            <PluginRepositoriesTree pluginId={plugin.pluginId} />
           </TabsContent>
         )}
 

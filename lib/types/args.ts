@@ -108,6 +108,7 @@ export interface IMutationAdminPluginAdoptArgs {
 /** Arguments of `Mutation.adminPluginBuildDev` */
 export interface IMutationAdminPluginBuildDevArgs {
   pluginId: string;
+  reinstall?: InputMaybe<boolean>;
 }
 
 /** Arguments of `Mutation.adminPluginConfigSet` */
@@ -133,6 +134,11 @@ export interface IMutationAdminPluginDeployDevArgs {
 export interface IMutationAdminPluginFileWriteArgs {
   content: string;
   path: string;
+  pluginId: string;
+}
+
+/** Arguments of `Mutation.adminPluginInstallDev` */
+export interface IMutationAdminPluginInstallDevArgs {
   pluginId: string;
 }
 
@@ -1365,6 +1371,11 @@ export interface IQueryAdminPluginFilesArgs {
 /** Arguments of `Query.adminPluginList` */
 export interface IQueryAdminPluginListArgs {
   search?: InputMaybe<string>;
+}
+
+/** Arguments of `Query.adminPluginTables` */
+export interface IQueryAdminPluginTablesArgs {
+  pluginId: string;
 }
 
 /** Arguments of `Query.adminStatsGrowth` */

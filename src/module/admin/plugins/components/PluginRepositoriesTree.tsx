@@ -5,13 +5,22 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@ui/shad-cn/components/collapsible.tsx';
+import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { ChevronRight, File, Folder, FolderOpen } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import type { IPluginRepository, IPluginRepositoryColumn, IPluginRepositoryConfig } from '../types';
+import { usePluginTables } from '../hooks/use-plugin-tables';
+import type { IPluginFieldSpec, IPluginTableDefinition, PluginTableFieldType } from '../types';
 
 const INDENT = 14;
+
+/** A field written in the short form (`'string'`) becomes `{ type: 'string' }`. */
+const specOf = (value: PluginTableFieldType | IPluginFieldSpec): IPluginFieldSpec =>
+  typeof value === 'string' ? { type: value } : value;
+
+/** Shows a default or other value as text; objects as JSON. */
+const show = (value: unknown): string => (typeof value === 'object' && value !== null ? JSON.stringify(value) : String(value));
 
 interface ITreeFolderProps {
   label: string;
@@ -20,7 +29,7 @@ interface ITreeFolderProps {
   children: React.ReactNode;
 }
 
-/** Folder row (repository or column). Starts closed and shows how many entries it holds. */
+/** Folder row (table or column). Starts closed and shows how many entries it holds. */
 const TreeFolder: React.FC<ITreeFolderProps> = ({ label, count, depth, children }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -53,74 +62,117 @@ const TreeFolder: React.FC<ITreeFolderProps> = ({ label, count, depth, children 
 };
 
 interface IConfigRowProps {
-  config: IPluginRepositoryConfig;
+  label: string;
+  value: string;
   depth: number;
 }
 
-/** Leaf of the tree: one configuration entry with its type, required flag and default. */
-const ConfigRow: React.FC<IConfigRowProps> = ({ config, depth }) => {
+/** Leaf of the tree: one setting, e.g. the type of a column. */
+const ConfigRow: React.FC<IConfigRowProps> = ({ label, value, depth }) => (
+  <li
+    className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md py-2 pr-3 text-caption"
+    style={{ paddingLeft: `${depth * INDENT + 32}px` }}
+  >
+    <File className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+    <span className="text-muted-foreground">{label}</span>
+    <Badge variant="outline" className="font-mono">{value}</Badge>
+  </li>
+);
+
+interface IFieldNodeProps {
+  name: string;
+  spec: IPluginFieldSpec;
+  depth: number;
+}
+
+/** Column of a table. Its settings (type, required, default, from) are the configs below it. */
+const FieldNode: React.FC<IFieldNodeProps> = ({ name, spec, depth }) => {
   const { t } = useTranslation('admin');
-  const hasDefault = config.default !== undefined && config.default !== null;
+  const configs: { label: string; value: string }[] = [
+    { label: t('plugins.repositories.keys.type'), value: spec.type },
+  ];
+  if (spec.required !== undefined) {
+    configs.push({
+      label: t('plugins.repositories.keys.required'),
+      value: spec.required ? t('plugins.configFields.yes') : t('plugins.configFields.no'),
+    });
+  }
+  if (spec.default !== undefined) {
+    configs.push({ label: t('plugins.repositories.keys.default'), value: show(spec.default) });
+  }
+  if (spec.from !== undefined) {
+    configs.push({ label: t('plugins.repositories.keys.from'), value: spec.from });
+  }
+
   return (
-    <li
-      className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md py-2 pr-3 text-caption"
-      style={{ paddingLeft: `${depth * INDENT + 32}px` }}
-    >
-      <File className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
-      <span className="font-mono font-bold">{config.key}</span>
-      <Badge variant="outline" className="font-mono">{config.type}</Badge>
-      {config.required && (
-        <span className="text-muted-foreground">{t('plugins.repositories.required')}</span>
-      )}
-      {hasDefault && (
-        <span className="font-mono text-muted-foreground">= {String(config.default)}</span>
-      )}
+    <li>
+      <TreeFolder label={name} count={configs.length} depth={depth}>
+        <ul className="flex flex-col">
+          {configs.map(config => (
+            <ConfigRow key={config.label} label={config.label} value={config.value} depth={depth + 1} />
+          ))}
+        </ul>
+      </TreeFolder>
     </li>
   );
 };
 
-interface IColumnNodeProps {
-  column: IPluginRepositoryColumn;
+interface ITableNodeProps {
+  table: IPluginTableDefinition;
   depth: number;
 }
 
-const ColumnNode: React.FC<IColumnNodeProps> = ({ column, depth }) => (
-  <li>
-    <TreeFolder label={column.name} count={column.configs.length} depth={depth}>
-      <ul className="flex flex-col">
-        {column.configs.map(config => (
-          <ConfigRow key={config.key} config={config} depth={depth + 1} />
-        ))}
-      </ul>
-    </TreeFolder>
-  </li>
-);
+/** One table definition: its own settings (owner) first, then its columns. */
+const TableNode: React.FC<ITableNodeProps> = ({ table, depth }) => {
+  const { t } = useTranslation('admin');
+  const fields = Object.entries(table.fields);
+  return (
+    <li>
+      <TreeFolder label={table.name} count={fields.length} depth={depth}>
+        <ul className="flex flex-col">
+          <ConfigRow
+            label={t('plugins.repositories.keys.owner')}
+            value={table.owner ? t('plugins.configFields.yes') : t('plugins.configFields.no')}
+            depth={depth + 1}
+          />
+          {fields.map(([name, value]) => (
+            <FieldNode key={name} name={name} spec={specOf(value)} depth={depth + 1} />
+          ))}
+        </ul>
+      </TreeFolder>
+    </li>
+  );
+};
 
 interface IPluginRepositoriesTreeProps {
-  repositories: IPluginRepository[];
+  pluginId: string;
 }
 
-/** Repositories as a collapsible tree: repository → columns → configuration entries. */
-export const PluginRepositoriesTree: React.FC<IPluginRepositoriesTreeProps> = ({ repositories }) => {
+/** Table definitions of a plugin (`IPluginTableDefinition`) as a tree: table → columns → settings. */
+export const PluginRepositoriesTree: React.FC<IPluginRepositoriesTreeProps> = ({ pluginId }) => {
   const { t } = useTranslation('admin');
+  const { loading, error, tables, retry } = usePluginTables(pluginId);
 
   let body: React.ReactNode;
-  if (repositories.length === 0) {
+  if (loading) {
+    body = <Skeleton className="h-24 w-full" />;
+  } else if (error) {
+    body = (
+      <div className="flex items-center justify-between gap-2 rounded-md border border-border p-3">
+        <p className="text-caption text-destructive">{t('plugins.repositories.errors.load')}</p>
+        <Button variant="outline" size="md" onClick={retry}>
+          {t('plugins.error.retry')}
+        </Button>
+      </div>
+    );
+  } else if (tables.length === 0) {
     body = <p className="text-caption text-muted-foreground">{t('plugins.repositories.empty')}</p>;
   } else {
     body = (
       <nav aria-label={t('plugins.repositories.title')}>
         <ul className="flex flex-col">
-          {repositories.map(repository => (
-            <li key={repository.name}>
-              <TreeFolder label={repository.name} count={repository.columns.length} depth={0}>
-                <ul className="flex flex-col">
-                  {repository.columns.map(column => (
-                    <ColumnNode key={column.name} column={column} depth={1} />
-                  ))}
-                </ul>
-              </TreeFolder>
-            </li>
+          {tables.map(table => (
+            <TableNode key={table.name} table={table} depth={0} />
           ))}
         </ul>
       </nav>

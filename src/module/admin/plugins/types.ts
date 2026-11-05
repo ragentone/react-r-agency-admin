@@ -209,23 +209,29 @@ export interface IPluginConfigSetResult {
 }
 
 
-/** One configuration entry of a repository column. */
-export interface IPluginRepositoryConfig {
-  key: string;
-  /** Field type, e.g. `string`, `number`, `select`. */
-  type: string;
-  required: boolean;
-  default?: string | number | boolean | null;
+/** Field types of a plugin table (`PLUGIN_TABLE_FIELD_TYPES` in runtime). */
+export type PluginTableFieldType = 'string' | 'text' | 'integer' | 'number' | 'boolean' | 'date' | 'json';
+
+/** A field with options. A plain type name is the short form. */
+export interface IPluginFieldSpec {
+  type: PluginTableFieldType;
+  /** Old column name (rename or cast). */
+  from?: string;
+  required?: boolean;
+  default?: unknown;
 }
 
-/** A column of a repository; holds its configuration entries. */
-export interface IPluginRepositoryColumn {
+/** Table definition a plugin backend declares with `definePluginRepo` (`IPluginTableDefinition` in runtime). */
+export interface IPluginTableDefinition {
   name: string;
-  configs: IPluginRepositoryConfig[];
+  fields: Record<string, PluginTableFieldType | IPluginFieldSpec>;
+  /** Adds an `ownerId` column. */
+  owner?: boolean;
 }
 
-/** A repository, shown as the top level of the repositories tree. */
-export interface IPluginRepository {
-  name: string;
-  columns: IPluginRepositoryColumn[];
+/** Result of `adminPluginTables`. */
+export interface IPluginTablesResult {
+  success: boolean;
+  error?: string | null;
+  tables?: IPluginTableDefinition[] | null;
 }

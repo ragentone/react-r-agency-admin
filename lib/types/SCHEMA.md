@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |    121 |
-| [Mutation](#mutation) |    232 |
-| Object-Types          |    408 |
+| [Query](#query)       |    122 |
+| [Mutation](#mutation) |    233 |
+| Object-Types          |    410 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -83,6 +83,12 @@ Query  ‹IQuery›
 │   ├── errors: JSON
 │   ├── plugins: JSON
 │   └── success: Boolean
+├── adminPluginTables: adminPluginTablesReturn  ‹IAdminPluginTablesReturn›
+│   ├── $pluginId: String!
+│   ├── error: String
+│   ├── errors: JSON
+│   ├── success: Boolean
+│   └── tables: JSON
 ├── adminPluginUnknown: adminPluginUnknownReturn  ‹IAdminPluginUnknownReturn›
 │   ├── error: String
 │   ├── errors: JSON
@@ -1108,6 +1114,7 @@ Mutation  ‹IMutation›
 │   └── success: Boolean
 ├── adminPluginBuildDev: adminPluginBuildDevReturn  ‹IAdminPluginBuildDevReturn›
 │   ├── $pluginId: String!
+│   ├── $reinstall: Boolean
 │   ├── error: String
 │   ├── errors: JSON
 │   ├── success: Boolean
@@ -1137,6 +1144,11 @@ Mutation  ‹IMutation›
 ├── adminPluginFileWrite: adminPluginFileWriteReturn  ‹IAdminPluginFileWriteReturn›
 │   ├── $content: String!
 │   ├── $path: String!
+│   ├── $pluginId: String!
+│   ├── error: String
+│   ├── errors: JSON
+│   └── success: Boolean
+├── adminPluginInstallDev: adminPluginInstallDevReturn  ‹IAdminPluginInstallDevReturn›
 │   ├── $pluginId: String!
 │   ├── error: String
 │   ├── errors: JSON
@@ -2994,12 +3006,14 @@ Inputs
 | `adminPluginFileReadReturn`              | Object | `IAdminPluginFileReadReturn`              | `objects.ts` |                                                                                  |
 | `adminPluginFilesReturn`                 | Object | `IAdminPluginFilesReturn`                 | `objects.ts` |                                                                                  |
 | `adminPluginFileWriteReturn`             | Object | `IAdminPluginFileWriteReturn`             | `objects.ts` |                                                                                  |
+| `adminPluginInstallDevReturn`            | Object | `IAdminPluginInstallDevReturn`            | `objects.ts` |                                                                                  |
 | `adminPluginListReturn`                  | Object | `IAdminPluginListReturn`                  | `objects.ts` |                                                                                  |
 | `adminPluginPurgeDataReturn`             | Object | `IAdminPluginPurgeDataReturn`             | `objects.ts` |                                                                                  |
 | `adminPluginRemoveReturn`                | Object | `IAdminPluginRemoveReturn`                | `objects.ts` |                                                                                  |
 | `adminPluginRemoveUnknownReturn`         | Object | `IAdminPluginRemoveUnknownReturn`         | `objects.ts` |                                                                                  |
 | `adminPluginSetScopeReturn`              | Object | `IAdminPluginSetScopeReturn`              | `objects.ts` |                                                                                  |
 | `adminPluginSetStatusReturn`             | Object | `IAdminPluginSetStatusReturn`             | `objects.ts` |                                                                                  |
+| `adminPluginTablesReturn`                | Object | `IAdminPluginTablesReturn`                | `objects.ts` |                                                                                  |
 | `adminPluginUnknownReturn`               | Object | `IAdminPluginUnknownReturn`               | `objects.ts` |                                                                                  |
 | `adminPluginUploadReturn`                | Object | `IAdminPluginUploadReturn`                | `objects.ts` |                                                                                  |
 | `adminRoleAddReturn`                     | Object | `IAdminRoleAddReturn`                     | `objects.ts` |                                                                                  |

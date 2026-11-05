@@ -1311,8 +1311,17 @@
     },
     "repositories": {
       "title": "Repositories",
-      "empty": "No repositories yet.",
-      "required": "required"
+      "empty": "This plugin declares no tables.",
+      "keys": {
+        "type": "Type",
+        "required": "Required",
+        "default": "Default",
+        "from": "Previous name",
+        "owner": "Owner"
+      },
+      "errors": {
+        "load": "Repositories could not be loaded."
+      }
     }
   }
 }
