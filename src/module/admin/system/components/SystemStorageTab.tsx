@@ -46,16 +46,7 @@ const Storage: React.FC<{
   const items = [
     {
       key: 'uploads',
-      label: (
-        <>
-          {t('system.storage.uploads')}
-          {parts.kidsUploads > 0 && (
-            <span className="block text-caption font-normal text-muted-foreground">
-              {t('system.storage.kidsUploads')} {size(parts.kidsUploads)}
-            </span>
-          )}
-        </>
-      ),
+      label: t('system.storage.uploads'),
       value: parts.uploads,
       display: share(parts.uploads),
     },

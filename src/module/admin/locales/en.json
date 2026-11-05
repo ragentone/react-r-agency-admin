@@ -579,7 +579,6 @@
       "parts": "What takes up space",
       "partsText": "Share of the whole disk.",
       "uploads": "Uploads",
-      "kidsUploads": "of which kids",
       "backups": "Database backups",
       "logs": "Logs",
       "binlogs": "Database binlogs",

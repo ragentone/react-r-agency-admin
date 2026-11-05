@@ -37,8 +37,6 @@ export interface ISystemStorage {
   disk: { total: number; free: number; used: number; percent: number };
   parts: {
     uploads: number;
-    /** Part of `uploads`. */
-    kidsUploads: number;
     backups: number;
     logs: number;
     /** `null` = binary log off or not readable. */
