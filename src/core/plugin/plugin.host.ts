@@ -13,6 +13,7 @@ import type { IPluginGrants } from './plugin.types';
 import { usePluginForm } from './plugin.form';
 import { addPluginHook } from './plugin.hooks';
 import { PLUGIN_ICONS } from './plugin.icons';
+import './plugin.motion';
 import { usePluginLocale } from './plugin.locale';
 import { usePluginPlatform, usePluginUser } from './plugin.user';
 import { registerPluginMenu } from './plugin.menu';
