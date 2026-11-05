@@ -1142,6 +1142,7 @@
       "notFound": "Plugin not found.",
       "back": "Back to the plugin list",
       "build": "Build",
+      "install": "npm install",
       "reinstall": "Reinstall",
       "tabs": {
         "general": "General",
@@ -1176,6 +1177,18 @@
         "unknown": "That did not work. Please try again."
       },
       "backToFiles": "Back to the files"
+    },
+    "install": {
+      "started": "npm install for {{name}} is running in the background. The result appears as a notice.",
+      "errors": {
+        "not_found": "Plugin not found.",
+        "not_development": "Only development plugins can be installed.",
+        "project_missing": "No development project found.",
+        "invalid_plugin_id": "Invalid plugin id.",
+        "install_running": "npm install is already running for this plugin.",
+        "dev_disabled": "Only available in development.",
+        "unknown": "npm install could not be started."
+      }
     },
     "build": {
       "success": "{{name}} was built.",

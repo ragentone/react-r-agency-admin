@@ -1202,6 +1202,7 @@
       "notFound": "Плагин не найден.",
       "back": "Назад к списку плагинов",
       "build": "Сборка",
+      "install": "npm install",
       "reinstall": "Переустановить",
       "tabs": {
         "general": "Общее",
@@ -1236,6 +1237,18 @@
         "unknown": "That did not work. Please try again."
       },
       "backToFiles": "Назад к файлам"
+    },
+    "install": {
+      "started": "npm install для {{name}} выполняется в фоне. Результат появится в уведомлении.",
+      "errors": {
+        "not_found": "Плагин не найден.",
+        "not_development": "Установить зависимости можно только для плагинов в разработке.",
+        "project_missing": "Проект разработки не найден.",
+        "invalid_plugin_id": "Неверный id плагина.",
+        "install_running": "npm install для этого плагина уже выполняется.",
+        "dev_disabled": "Доступно только в среде разработки.",
+        "unknown": "Не удалось запустить npm install."
+      }
     },
     "build": {
       "success": "{{name}} собран.",

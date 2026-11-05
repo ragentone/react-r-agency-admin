@@ -10,6 +10,7 @@ import type { IPluginListItem, PluginScope } from '../types';
 import { type PluginBump } from '../version';
 import { usePluginBuild } from './use-plugin-build';
 import { usePluginDeploy } from './use-plugin-deploy';
+import { usePluginInstall } from './use-plugin-install';
 import { usePluginPurge } from './use-plugin-purge';
 import { usePluginRemove } from './use-plugin-remove';
 import { usePluginStatus } from './use-plugin-status';
@@ -21,10 +22,11 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
   const status = usePluginStatus(() => void reload());
   const deployment = usePluginDeploy(() => void reload());
   const building = usePluginBuild();
+  const installing = usePluginInstall();
   const removal = usePluginRemove(() => undefined);
   const purgeData = usePluginPurge();
   const [deploying, setDeploying] = useState(false);
-  const busy = status.pending !== null || deploying || removal.busy || building.busy || purgeData.busy;
+  const busy = status.pending !== null || deploying || removal.busy || building.busy || installing.busy || purgeData.busy;
 
   const toggle = async (value: boolean) => {
     const result = await status.setStatus(plugin.pluginId, value);
@@ -44,6 +46,18 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
     } else {
       toast.error(
         t(`plugins.build.errors.${result.error ?? 'unknown'}`, { defaultValue: t('plugins.build.errors.unknown') }),
+        { description: result.errors?.join('\n') || undefined }
+      );
+    }
+  };
+
+  const install = async () => {
+    const result = await installing.install(plugin.pluginId);
+    if (result.success) {
+      toast.success(t('plugins.install.started', { name: plugin.name }));
+    } else {
+      toast.error(
+        t(`plugins.install.errors.${result.error ?? 'unknown'}`, { defaultValue: t('plugins.install.errors.unknown') }),
         { description: result.errors?.join('\n') || undefined }
       );
     }
@@ -121,6 +135,7 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
     purge,
     toggle,
     build,
+    install,
     deploy,
     download,
     remove,

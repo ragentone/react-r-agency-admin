@@ -11,6 +11,7 @@ import {
   Download,
   EllipsisVertical,
   Hammer,
+  Package,
   RefreshCw,
   Rocket,
   Settings2,
@@ -68,6 +69,12 @@ export const PluginDetailActions: React.FC<IPluginDetailActionsProps> = ({
             <DropdownMenuItem disabled={detail.busy} onSelect={onDeploy}>
               <Rocket />
               {t('plugins.details.deploy')}
+            </DropdownMenuItem>
+          )}
+          {plugin.development && (
+            <DropdownMenuItem disabled={detail.busy} onSelect={() => void detail.install()}>
+              <Package />
+              {t('plugins.details.install')}
             </DropdownMenuItem>
           )}
           {plugin.development && (
