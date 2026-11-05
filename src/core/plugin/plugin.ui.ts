@@ -60,6 +60,7 @@ import {
   DialogTrigger,
 } from '@ui/shad-cn/components/dialog';
 
+import { PluginColorPicker, PluginDateTimePicker, PluginEmojiPicker, PluginHtmlEditor } from './plugin.editor';
 import type { IPluginUi } from './plugin.types';
 
 /**
@@ -89,6 +90,7 @@ export const pluginUi = {
   Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext,
   Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption,
   Calendar, DatePicker,
+  HtmlEditor: PluginHtmlEditor, ColorPicker: PluginColorPicker, EmojiPicker: PluginEmojiPicker, DateTimePicker: PluginDateTimePicker,
   Field, FieldSet, FieldLegend, FieldGroup, FieldContent, FieldLabel, FieldTitle, FieldDescription, FieldSeparator, FieldError,
   ToggleGroup, ToggleGroupItem,
   Accordion, AccordionItem, AccordionTrigger, AccordionContent,

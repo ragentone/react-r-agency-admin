@@ -604,6 +604,62 @@ export interface IPluginUi {
     maxDate?: Date;
     className?: string;
   }>;
+  HtmlEditor: React.ComponentType<{
+    value?: string;
+    defaultValue?: string;
+    onChange?: (html: string) => void;
+    onBlur?: (html: string) => void;
+    placeholder?: string;
+    editable?: boolean;
+    autoFocus?: boolean;
+    minHeight?: number | string;
+    maxHeight?: number | string;
+    showToolbar?: boolean;
+    stickyToolbar?: boolean;
+    features?: 'none' | 'minimal' | 'basic' | 'full' | ({ preset?: 'none' | 'minimal' | 'basic' | 'full' } & Partial<Record<'history' | 'heading' | 'bold' | 'italic' | 'underline' | 'strike' | 'code' | 'highlight' | 'textColor' | 'backgroundColor' | 'bulletList' | 'orderedList' | 'blockquote' | 'codeBlock' | 'textAlign' | 'link' | 'image' | 'horizontalRule' | 'emoji' | 'dateTime' | 'clearFormatting' | 'source' | 'characterCount' | 'clear', boolean>>);
+    invalid?: boolean;
+    id?: string;
+    name?: string;
+    className?: string;
+  }>;
+  ColorPicker: React.ComponentType<{
+    value?: string | null;
+    onChange?: (color: string) => void;
+    onChangeComplete?: (color: string, source: 'swatch' | 'custom') => void;
+    palette?: string[][];
+    swatchSize?: number;
+    showCustom?: boolean;
+    customOpen?: boolean;
+    showRecent?: boolean;
+    maxRecent?: number;
+    persist?: boolean;
+    fluid?: boolean;
+    className?: string;
+  }>;
+  EmojiPicker: React.ComponentType<{
+    onSelect: (emoji: { id: string; native: string; name: string; skin: 0 | 1 | 2 | 3 | 4 | 5 }) => void;
+    emojiSize?: number;
+    columns?: number;
+    height?: number;
+    categories?: Array<'people' | 'nature' | 'foods' | 'activity' | 'places' | 'objects' | 'symbols' | 'flags'>;
+    maxVersion?: number;
+    showSearch?: boolean;
+    className?: string;
+  }>;
+  DateTimePicker: React.ComponentType<{
+    value?: Date | null;
+    onChange: (date: Date) => void;
+    mode?: 'date' | 'time' | 'datetime';
+    min?: Date;
+    max?: Date;
+    minuteStep?: number;
+    weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+    hourCycle?: 'h12' | 'h23';
+    locale?: string;
+    showToday?: boolean;
+    defaultViewDate?: Date;
+    className?: string;
+  }>;
   Field: React.ComponentType<
     UiDiv & { orientation?: 'vertical' | 'horizontal' | 'responsive'; 'data-invalid'?: boolean }
   >;
