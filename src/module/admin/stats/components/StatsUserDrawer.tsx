@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { AdminUserDrawer } from '../../components/AdminUserDrawer';
 import { useAdminRoleUpdate, useAdminUser } from '../../hooks';
 
-/** Opens the normal admin user drawer (roles, ban, activity) for a user from the statistics. */
+/** Opens the admin user drawer (roles, ban) for a user picked on the start page. */
 export const StatsUserDrawer: React.FC<{
   userId: string | null;
   onClose: () => void;
@@ -28,7 +28,6 @@ export const StatsUserDrawer: React.FC<{
       saving={saving}
       onUpdate={update}
       onChanged={setUser}
-      initialTab="activity"
     />
   );
 };

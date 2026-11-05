@@ -690,7 +690,9 @@
       "pwaTrend": "Anteil pro Tag",
       "platforms": "Betriebssystem",
       "browsers": "Browser",
-      "locales": "Sprache"
+      "locales": "Sprache",
+      "perDayTitle": "Pro Tag",
+      "perDayText": "Nutzer und Gäste pro Tag, gestapelt"
     },
     "growth": {
       "cohorts": "Bleiben neue Nutzer?",
@@ -742,16 +744,16 @@
       "topInviters": "Wer am meisten einlädt"
     },
     "security": {
-      "failures": "Fehlversuche",
+      "failures": "Fehlgeschlagene Anmeldungen",
       "failuresShort": "Fehler",
       "stepUps": "Step-ups",
       "bots": "Bots",
       "keep30": "Nur die letzten 30 Tage gespeichert",
       "failuresChart": "Fehlgeschlagene Anmeldungen",
-      "failuresText": "Pro Tag, bekannte Geräte gefüllt",
+      "failuresText": "Pro Tag, aufgeteilt nach bekannten und neuen Geräten",
       "failuresLabel": "Gestapelte Balken: Fehlversuche von bekannten und unbekannten Geräten",
       "known": "Bekanntes Gerät",
-      "unknown": "Unbekanntes Gerät",
+      "unknown": "Neues Gerät",
       "trend": "Step-ups und Bots",
       "trendText": "Step-up: Anmeldung nur noch per Code (geschätzt)",
       "trendLabel": "Linien: Step-ups und Bot-Aufrufe pro Tag",
@@ -771,7 +773,8 @@
       "ipsEmpty": "Keine auffälligen IP-Adressen",
       "ip": "IP",
       "accounts": "Konten",
-      "last": "Zuletzt"
+      "last": "Zuletzt",
+      "botsText": "Crawler und Tools, pro Tag"
     },
     "activity": {
       "minor": "Keine Aktivität gespeichert",
@@ -831,7 +834,8 @@
       "news": "News",
       "resume": "Lebenslauf"
     },
-    "loading": "Wird geladen …"
+    "loading": "Wird geladen …",
+    "bots": "Bots"
   },
   "system": {
     "title": "System",

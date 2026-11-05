@@ -690,7 +690,9 @@
       "pwaTrend": "Share per day",
       "platforms": "Operating system",
       "browsers": "Browser",
-      "locales": "Language"
+      "locales": "Language",
+      "perDayTitle": "Per day",
+      "perDayText": "Signed-in users and guests per day, stacked"
     },
     "growth": {
       "cohorts": "Do new users stay?",
@@ -742,16 +744,16 @@
       "topInviters": "Who invites the most"
     },
     "security": {
-      "failures": "Failed attempts",
+      "failures": "Failed sign-ins",
       "failuresShort": "Failures",
       "stepUps": "Step-ups",
       "bots": "Bots",
       "keep30": "Only the last 30 days are stored",
       "failuresChart": "Failed sign-ins",
-      "failuresText": "Per day, known devices filled",
+      "failuresText": "Per day, split by known and new devices",
       "failuresLabel": "Stacked bars: failed attempts from known and unknown devices",
       "known": "Known device",
-      "unknown": "Unknown device",
+      "unknown": "New device",
       "trend": "Step-ups and bots",
       "trendText": "Step-up: sign-in only with a code (estimated)",
       "trendLabel": "Lines: step-ups and bot requests per day",
@@ -771,7 +773,8 @@
       "ipsEmpty": "No conspicuous IP addresses",
       "ip": "IP",
       "accounts": "Accounts",
-      "last": "Last"
+      "last": "Last",
+      "botsText": "Crawlers and tools, per day"
     },
     "activity": {
       "minor": "No activity stored",
@@ -831,7 +834,8 @@
       "news": "News",
       "resume": "Résumé"
     },
-    "loading": "Loading …"
+    "loading": "Loading …",
+    "bots": "Bots"
   },
   "system": {
     "title": "System",

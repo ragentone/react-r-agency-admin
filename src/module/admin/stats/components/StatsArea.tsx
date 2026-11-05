@@ -6,14 +6,11 @@ import { useTranslation } from 'react-i18next';
 import { ADMIN_STATS_VIEW_KEY } from '../../const';
 import type { StatsRange, StatsTab } from '../types';
 import { StatsRangeToggle } from './common';
-import { StatsGrowthTab } from './StatsGrowthTab';
 import { StatsLiveTab } from './StatsLiveTab';
 import { StatsOverviewTab } from './StatsOverviewTab';
 import { StatsSecurityTab } from './StatsSecurityTab';
-import { StatsUserDrawer } from './StatsUserDrawer';
-import { StatsVisitorsTab } from './StatsVisitorsTab';
 
-const TABS: StatsTab[] = ['live', 'visitors', 'overview', 'growth', 'security'];
+const TABS: StatsTab[] = ['live', 'overview', 'security'];
 const STORE_KEY = ADMIN_STATS_VIEW_KEY;
 
 const restore = (): { tab: StatsTab; range: StatsRange } => {
@@ -28,11 +25,10 @@ const restore = (): { tab: StatsTab; range: StatsRange } => {
   }
 };
 
-/** `/admin/stats`: who visits the site – live, visitors, statistics, growth, security. */
+/** `/admin/stats`: visitor counts – live, overview, security. */
 export const StatsArea: React.FC = () => {
   const { t } = useTranslation('admin');
   const [state, setState] = useState(restore);
-  const [userId, setUserId] = useState<string | null>(null);
   const update = (next: Partial<typeof state>) =>
     setState(previous => {
       const value = { ...previous, ...next };
@@ -82,23 +78,15 @@ export const StatsArea: React.FC = () => {
           ))}
         </TabsList>
         <TabsContent value="live" className="mt-0 pb-10">
-          <StatsLiveTab onUser={setUserId} />
-        </TabsContent>
-        <TabsContent value="visitors" className="mt-0 pb-10">
-          <StatsVisitorsTab range={state.range} onUser={setUserId} />
+          <StatsLiveTab />
         </TabsContent>
         <TabsContent value="overview" className="mt-0 pb-10">
           <StatsOverviewTab range={state.range} />
-        </TabsContent>
-        <TabsContent value="growth" className="mt-0 pb-10">
-          <StatsGrowthTab range={state.range} onUser={setUserId} />
         </TabsContent>
         <TabsContent value="security" className="mt-0 pb-10">
           <StatsSecurityTab range={state.range} />
         </TabsContent>
       </Tabs>
-
-      <StatsUserDrawer userId={userId} onClose={() => setUserId(null)} />
     </div>
   );
 };

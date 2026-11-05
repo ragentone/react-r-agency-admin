@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 import { HomeAttention } from '../home/components/HomeAttention';
 import { HomeKpis } from '../home/components/HomeKpis';
 import { HomeLive } from '../home/components/HomeLive';
-import { HomeMembers } from '../home/components/HomeMembers';
 import { HomeSystem } from '../home/components/HomeSystem';
 import { HomeUserSearch } from '../home/components/HomeUserSearch';
 import { useAdminAccess } from '../hooks';
@@ -49,7 +48,7 @@ const AdminHome: React.FC = () => {
       <div className={'px-4 pt-4'}>
         <HomeUserSearch onUser={setUserId} />
       </div>
-      <HomeAttention deploys={deploys} storage={storage} onUser={setUserId} />
+      <HomeAttention deploys={deploys} storage={storage} />
 
       <div className="border-t border-border/50 px-4 py-4">
         <HomeLive />
@@ -59,13 +58,8 @@ const AdminHome: React.FC = () => {
         <HomeKpis />
       </div>
 
-      <div className="grid border-t border-border/50 md:grid-cols-2 md:divide-x md:divide-border/50">
-        <HomeMembers onUser={setUserId} />
-        <HomeSystem
-          deploys={deploys}
-          storage={storage}
-          className="border-t border-border/50 md:border-t-0"
-        />
+      <div className="border-t border-border/50">
+        <HomeSystem deploys={deploys} storage={storage} />
       </div>
 
       <StatsUserDrawer userId={userId} onClose={() => setUserId(null)} />
