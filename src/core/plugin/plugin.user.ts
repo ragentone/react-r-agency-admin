@@ -2,6 +2,7 @@ import { useContext, useMemo } from 'react';
 
 import { AuthContext } from '@core/auth/components/auth.context';
 import { hasRoles } from '@core/auth/roles/roles';
+import { type ClientPlatform, useClientPlatform } from '@core/native';
 
 /**
  * - `loading`: the login state is not known yet (show nothing or a placeholder).
@@ -16,6 +17,8 @@ export interface IPluginUser {
   alias: string | null;
   email: string | null;
   avatarUrl: string | null;
+  /** ISO time of the last login activity, `null` if unknown. */
+  lastLogin: string | null;
 }
 
 export interface IPluginUserState {
@@ -47,9 +50,26 @@ export const usePluginUser = (): IPluginUserState => {
               alias: meta.alias ?? null,
               email: meta.email ?? null,
               avatarUrl: meta.avatarUrl ?? null,
+              lastLogin: toIsoOrNull(meta.lastLogin),
             }
           : null,
       can: role => status === 'user' && hasRoles(meta, role),
     };
   }, [authorized, loaded, meta]);
+};
+
+/** Client platform: Android, iOS or macOS app, otherwise web. */
+export type PluginClientPlatform = ClientPlatform;
+
+/** Current client platform. Hook: re-renders when the native app reports its platform. */
+export const usePluginPlatform = (): PluginClientPlatform => useClientPlatform();
+
+/** ISO string of a date value, `null` for missing or invalid values. */
+const toIsoOrNull = (value: unknown): string | null => {
+  if (value == null) return null;
+  const date =
+    value instanceof Date
+      ? value
+      : new Date(typeof value === 'string' && /^\d+$/.test(value) ? Number(value) : (value as string | number));
+  return Number.isNaN(date.getTime()) ? null : date.toISOString();
 };

@@ -1,4 +1,13 @@
 import {
+  ArrowRight,
+  Coffee,
+  Laptop,
+  Moon,
+  PartyPopper,
+  Smartphone,
+  Sun,
+  Sunrise,
+  Sunset,
   Bell,
   Bookmark,
   Box,
@@ -92,6 +101,15 @@ export const PLUGIN_ICONS: Record<PluginIconName, PluginIcon> = {
   User,
   Users,
   Zap,
+  ArrowRight,
+  Coffee,
+  Laptop,
+  Moon,
+  PartyPopper,
+  Smartphone,
+  Sun,
+  Sunrise,
+  Sunset,
 };
 
 // Plugin bundles import icons from `lucide-react`, which the build maps to the SDK's `lucide` module.

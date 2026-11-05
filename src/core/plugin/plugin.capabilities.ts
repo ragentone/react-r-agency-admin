@@ -10,7 +10,7 @@ const CAPABILITY_METHODS: Record<PluginCapability, (keyof IPluginApi)[]> = {
   confirm: ['confirm'],
   navigate: ['navigate'],
   toast: ['toast'],
-  user: ['useUser'],
+  user: ['useUser', 'usePlatform'],
 };
 
 const GUEST = { status: 'guest', loggedIn: false, user: null, can: () => false };
@@ -18,6 +18,7 @@ const GUEST = { status: 'guest', loggedIn: false, user: null, can: () => false }
 const stubFor = (pluginId: string, cap: PluginCapability, key: keyof IPluginApi): unknown => {
   if (key === 'confirm') return async () => false;
   if (key === 'useUser') return () => GUEST;
+  if (key === 'usePlatform') return () => 'web';
   return () => {
     console.warn(`[plugin:${pluginId}] "${String(key)}" needs capability "${cap}" in plugin.json`);
   };

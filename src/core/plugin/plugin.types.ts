@@ -1,5 +1,5 @@
 import type * as React from 'react';
-import type { IPluginUserState } from './plugin.user';
+import type { IPluginUserState, PluginClientPlatform } from './plugin.user';
 
 /**
  * Slots a plugin can render into. Must match the backend list `PLUGIN_SLOTS`
@@ -25,6 +25,15 @@ export type PluginIcon = React.ComponentType<
 
 /** Names of the icons the host provides (`api.icons.<Name>`). Keep in sync with the host. */
 export const PLUGIN_ICON_NAMES = [
+  'ArrowRight',
+  'Coffee',
+  'Laptop',
+  'Moon',
+  'PartyPopper',
+  'Smartphone',
+  'Sun',
+  'Sunrise',
+  'Sunset',
   'Bell',
   'Bookmark',
   'Box',
@@ -562,6 +571,9 @@ export interface IPluginApi {
    * `status` is `loading` until the state is known, so do not show guest content in that phase.
    */
   useUser(): IPluginUserState;
+
+  /** Client platform: Android, iOS or macOS app, otherwise web. Hook: call it in a component. */
+  usePlatform(): PluginClientPlatform;
 }
 
 /** Default export of a plugin bundle. */
