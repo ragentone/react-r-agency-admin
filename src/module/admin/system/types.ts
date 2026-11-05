@@ -1,4 +1,4 @@
-export type SystemTab = 'version' | 'storage' | 'database' | 'entities';
+export type SystemTab = 'version' | 'storage' | 'database';
 
 export type SystemReleaseBump = 'patch' | 'minor' | 'major';
 

@@ -35,6 +35,14 @@ export interface IAdminAddUserRoleReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminDbUsageEntitiesReturn` */
+export interface IAdminDbUsageEntitiesReturn {
+  entities: Maybe<ScalarJSON>;
+  error: Maybe<string>;
+  report: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminDbUsageReportReturn` */
 export interface IAdminDbUsageReportReturn {
   error: Maybe<string>;
@@ -1319,6 +1327,7 @@ export interface IMyEventsMemberSetRoleReturn {
 export interface IQuery {
   DbResourceRead: Maybe<IDbResourceReadResult>;
   accountSelfLoad: Maybe<IAccountSelfLoad>;
+  adminDbUsageEntities: Maybe<IAdminDbUsageEntitiesReturn>;
   adminDbUsageReport: Maybe<IAdminDbUsageReportReturn>;
   adminPageGet: Maybe<IAdminPageGetReturn>;
   adminPageList: Maybe<IAdminPageListReturn>;

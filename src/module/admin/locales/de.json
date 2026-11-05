@@ -569,8 +569,7 @@
     "tabs": {
       "version": "Version",
       "storage": "Speicher",
-      "database": "Datenbank",
-      "entities": "Entities"
+      "database": "Datenbank"
     },
     "storage": {
       "title": "Server-Speicher",
@@ -672,7 +671,12 @@
         "copyFailed": "Kopieren nicht möglich",
         "empty": "Keine Kandidaten, kein SQL nötig.",
         "open": "SQL anzeigen"
-      }
+      },
+      "views": {
+        "usage": "Nutzung",
+        "entities": "Entities"
+      },
+      "viewsLabel": "Datenbank-Ansicht"
     },
     "entities": {
       "title": "Entities",

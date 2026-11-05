@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |     93 |
+| [Query](#query)       |     94 |
 | [Mutation](#mutation) |    136 |
-| Object-Types          |    284 |
+| Object-Types          |    285 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -42,6 +42,11 @@ Query  ‹IQuery›
 │       │   └── showFullName: Boolean
 │       ├── superUser: Boolean
 │       └── userType: String!
+├── adminDbUsageEntities: adminDbUsageEntitiesReturn  ‹IAdminDbUsageEntitiesReturn›
+│   ├── entities: JSON
+│   ├── error: String
+│   ├── report: JSON
+│   └── success: Boolean
 ├── adminDbUsageReport: adminDbUsageReportReturn  ‹IAdminDbUsageReportReturn›
 │   ├── error: String
 │   ├── report: JSON
@@ -1912,6 +1917,7 @@ Inputs
 | `accountUpdateData`                      | Input  | `IAccountUpdateData`                      | `inputs.ts`  |                                                                                  |
 | `adminAddRoleReturn`                     | Object | `IAdminAddRoleReturn`                     | `objects.ts` |                                                                                  |
 | `adminAddUserRoleReturn`                 | Object | `IAdminAddUserRoleReturn`                 | `objects.ts` |                                                                                  |
+| `adminDbUsageEntitiesReturn`             | Object | `IAdminDbUsageEntitiesReturn`             | `objects.ts` |                                                                                  |
 | `adminDbUsageReportReturn`               | Object | `IAdminDbUsageReportReturn`               | `objects.ts` |                                                                                  |
 | `adminPageCreateReturn`                  | Object | `IAdminPageCreateReturn`                  | `objects.ts` |                                                                                  |
 | `adminPageDeleteReturn`                  | Object | `IAdminPageDeleteReturn`                  | `objects.ts` |                                                                                  |
