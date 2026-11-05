@@ -1,4 +1,5 @@
 import type * as React from 'react';
+import type { PluginServiceInput, PluginServiceNameAny, PluginServiceOutput } from './plugin.service';
 import type { IPluginUserState, PluginClientPlatform } from './plugin.user';
 
 /**
@@ -860,7 +861,10 @@ export interface IPluginApi {
 
   /** Calls a host service, e.g. `api.host.call('route.current')`. Never throws. */
   host: {
-    call<T = unknown>(service: string, payload?: unknown): Promise<IPluginRequestResult<T>>;
+    call<K extends PluginServiceNameAny>(
+      service: K,
+      payload?: PluginServiceInput<K>
+    ): Promise<IPluginRequestResult<PluginServiceOutput<K>>>;
   };
 }
 

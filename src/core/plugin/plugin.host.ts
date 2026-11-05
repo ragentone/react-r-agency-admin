@@ -10,6 +10,7 @@ import { emitPluginEvent, registerPluginRequestHandler, requestPluginEvent, subs
 import { addPluginDisposer } from './plugin.dispose';
 import { pluginAppInfo, usePluginRoute, usePluginTheme, usePluginViewport } from './plugin.context';
 import { callPluginService } from './plugin.services';
+import type { PluginServiceInput, PluginServiceNameAny } from './plugin.service';
 import { withCapabilities } from './plugin.capabilities';
 import { subscribePluginLive } from './plugin.live';
 import type { IPluginGrants } from './plugin.types';
@@ -174,8 +175,8 @@ const buildPluginApi = (
     return requestPluginEvent<T>(pluginId, name, payload, options?.timeoutMs);
   },
   host: {
-    call: <T = unknown>(service: string, payload?: unknown) =>
-      Promise.resolve(callPluginService<T>(events.capabilities, service, payload)),
+    call: <K extends PluginServiceNameAny>(service: K, payload?: PluginServiceInput<K>) =>
+      Promise.resolve(callPluginService(events.capabilities, service, payload)),
   },
   assetUrl: path =>
     assetBaseUrl +
