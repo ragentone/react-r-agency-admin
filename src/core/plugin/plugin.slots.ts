@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from 'react';
 
-import { clearPluginEvents } from './plugin.events';
+import { clearPluginEvents, clearPluginRequestHandlers } from './plugin.events';
+import { runPluginDisposers } from './plugin.dispose';
 import { clearPluginLive } from './plugin.live';
 import { clearPluginHooks } from './plugin.hooks';
 import { clearPluginMenu } from './plugin.menu';
@@ -62,10 +63,12 @@ export const unregisterPlugin = (pluginId: string) => {
     next[slot] = entries.filter(entry => entry.pluginId !== pluginId);
   }
   slots = next;
+  runPluginDisposers(pluginId);
   clearPluginPages(pluginId);
   clearPluginMenu(pluginId);
   clearPluginHooks(pluginId);
   clearPluginEvents(pluginId);
+  clearPluginRequestHandlers(pluginId);
   clearPluginLive(pluginId);
   notify();
 };

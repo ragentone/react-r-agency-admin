@@ -6,7 +6,10 @@ import { toast as sonnerToast } from 'sonner';
 
 import { usePluginConfirmStore } from './plugin.confirm';
 import { openPluginDrawer } from './plugin.drawer';
-import { emitPluginEvent, subscribePluginEvent } from './plugin.events';
+import { emitPluginEvent, registerPluginRequestHandler, requestPluginEvent, subscribePluginEvent } from './plugin.events';
+import { addPluginDisposer } from './plugin.dispose';
+import { pluginAppInfo, usePluginRoute, usePluginTheme, usePluginViewport } from './plugin.context';
+import { callPluginService } from './plugin.services';
 import { withCapabilities } from './plugin.capabilities';
 import { subscribePluginLive } from './plugin.live';
 import type { IPluginGrants } from './plugin.types';
@@ -150,6 +153,30 @@ const buildPluginApi = (
   },
   Link: PluginLink,
   call: (action, body) => callPluginAction(pluginId, action, body),
+  useRoute: usePluginRoute,
+  useViewport: usePluginViewport,
+  useTheme: usePluginTheme,
+  appInfo: pluginAppInfo,
+  onDispose: fn => addPluginDisposer(pluginId, fn),
+  handle: (name, handler) => {
+    // Only own request names, declared in `emits`: the owner answers, others ask.
+    if (!name.startsWith(`${pluginId}.`) || !events.emits.includes(name)) {
+      console.warn(`[plugin:${pluginId}] request "${name}" not declared in emits (own id as prefix)`);
+      return () => undefined;
+    }
+    return registerPluginRequestHandler(pluginId, name, handler);
+  },
+  request: <T = unknown>(name: string, payload?: unknown, options?: { timeoutMs?: number }) => {
+    if (!events.listens.includes(name)) {
+      console.warn(`[plugin:${pluginId}] request "${name}" not declared in listens`);
+      return Promise.resolve({ ok: false, data: null, error: 'not_listening' });
+    }
+    return requestPluginEvent<T>(pluginId, name, payload, options?.timeoutMs);
+  },
+  host: {
+    call: <T = unknown>(service: string, payload?: unknown) =>
+      Promise.resolve(callPluginService<T>(events.capabilities, service, payload)),
+  },
   assetUrl: path =>
     assetBaseUrl +
     path

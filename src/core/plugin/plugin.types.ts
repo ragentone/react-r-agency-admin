@@ -827,9 +827,89 @@ export interface IPluginApi {
 
   /** Client platform: Android, iOS or macOS app, otherwise web. Hook: call it in a component. */
   usePlatform(): PluginClientPlatform;
+
+  /** Path and query of the current page. Hook: re-renders on navigation. */
+  useRoute(): IPluginRoute;
+
+  /** Breakpoint and mobile/desktop flags. Hook: re-renders on change. Mobile first: `isMobile` below `md`. */
+  useViewport(): IPluginViewport;
+
+  /** Light or dark mode in use. Hook: re-renders on change. */
+  useTheme(): IPluginTheme;
+
+  /** Read-only facts about the running build. */
+  readonly appInfo: IPluginAppInfo;
+
+  /**
+   * Registers a cleanup function. The host calls it when the plugin is unloaded, before a hot reload
+   * and when it is removed. Returns a function that drops it again.
+   */
+  onDispose(fn: () => void): () => void;
+
+  /**
+   * Answers requests of other plugins for `<plugin-id>.<name>`. The name must be in `emits` in plugin.json.
+   * One handler per name; a later call replaces it. Returns a function that removes it.
+   */
+  handle(name: string, handler: IPluginRequestHandler): () => void;
+
+  /**
+   * Asks the plugin that handles `name`. The name must be in `listens` in plugin.json. Never throws:
+   * check `ok` and `error`.
+   */
+  request<T = unknown>(name: string, payload?: unknown, options?: IPluginRequestOptions): Promise<IPluginRequestResult<T>>;
+
+  /** Calls a host service, e.g. `api.host.call('route.current')`. Never throws. */
+  host: {
+    call<T = unknown>(service: string, payload?: unknown): Promise<IPluginRequestResult<T>>;
+  };
 }
 
+/** Breakpoints of the host (min-width, same values as the host's layout). */
+export type PluginBreakpoint = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
+/** Path and query of the current page (`api.useRoute`). */
+export interface IPluginRoute {
+  pathname: string;
+  search: Record<string, unknown>;
+}
+
+/** Breakpoint and flags (`api.useViewport`). `isMobile` is true below `md`. */
+export interface IPluginViewport {
+  /** Largest breakpoint that matches, `null` below `sm`. */
+  breakpoint: PluginBreakpoint | null;
+  isMobile: boolean;
+  isDesktop: boolean;
+}
+
+/** Light or dark mode in use, and the user's setting (`api.useTheme`). */
+export interface IPluginTheme {
+  mode: 'light' | 'dark';
+  preference: 'light' | 'dark' | 'system';
+}
+
+/** Read-only facts about the running build (`api.appInfo`). */
+export interface IPluginAppInfo {
+  environment: 'development' | 'production';
+}
+
+/** Result of `api.request` and `api.host.call`. Never thrown, always this shape. */
+export interface IPluginRequestResult<T = unknown> {
+  ok: boolean;
+  data: T | null;
+  /** `no_handler`, `timeout`, `handler_error`, `not_listening`, `unknown_service`, `not_granted`, `service_error`. */
+  error: string | null;
+}
+
+export interface IPluginRequestOptions {
+  /** Default 2000 ms. */
+  timeoutMs?: number;
+}
+
+/** Answers a request of another plugin. The return value (or a resolved promise) is the answer. */
+export type IPluginRequestHandler = (payload: unknown, meta: IPluginEventMeta) => unknown | Promise<unknown>;
+
 /** Default export of a plugin bundle. */
+
 export interface IPluginModule {
   id: string;
   register(api: IPluginApi): void;
