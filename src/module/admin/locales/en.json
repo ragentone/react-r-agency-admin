@@ -1146,7 +1146,8 @@
       "reinstall": "Reinstall",
       "tabs": {
         "general": "General",
-        "config": "Configuration"
+        "config": "Configuration",
+        "repositories": "Repositories"
       },
       "more": "Actions",
       "config": "Configuration"
@@ -1307,6 +1308,11 @@
       },
       "summary": "{{count}} fields · {{required}} required",
       "noVisibleFields": "No fields apply to the current selection."
+    },
+    "repositories": {
+      "title": "Repositories",
+      "empty": "No repositories yet.",
+      "required": "required"
     }
   }
 }

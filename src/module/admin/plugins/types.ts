@@ -208,3 +208,24 @@ export interface IPluginConfigSetResult {
   errors?: IPluginConfigError[] | null;
 }
 
+
+/** One configuration entry of a repository column. */
+export interface IPluginRepositoryConfig {
+  key: string;
+  /** Field type, e.g. `string`, `number`, `select`. */
+  type: string;
+  required: boolean;
+  default?: string | number | boolean | null;
+}
+
+/** A column of a repository; holds its configuration entries. */
+export interface IPluginRepositoryColumn {
+  name: string;
+  configs: IPluginRepositoryConfig[];
+}
+
+/** A repository, shown as the top level of the repositories tree. */
+export interface IPluginRepository {
+  name: string;
+  columns: IPluginRepositoryColumn[];
+}

@@ -17,6 +17,7 @@ import { PluginFileEditorDialog } from './PluginFileEditorDialog';
 import { PluginManifestView } from './PluginManifestView';
 import { PluginPurgeDrawer } from './PluginPurgeDrawer';
 import { PluginRemoveDrawer } from './PluginRemoveDrawer';
+import { PluginRepositoriesTree } from './PluginRepositoriesTree';
 
 interface IPluginDetailViewProps {
   plugin: IPluginListItem;
@@ -67,10 +68,21 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
         {plugin.development && (
           <div className="px-4 pt-3">
             <TabsList className="flex w-full justify-start overflow-x-auto scrollbar-none">
-              <TabsTrigger value="general" className="shrink-0">{t('plugins.details.tabs.general')}</TabsTrigger>
-              <TabsTrigger value="config" className="shrink-0">{t('plugins.details.tabs.config')}</TabsTrigger>
-              <TabsTrigger value="manifest" className="shrink-0">plugin.json</TabsTrigger>
-              <TabsTrigger value="files" className="shrink-0">{t('plugins.code.files')}</TabsTrigger>
+              <TabsTrigger value="general" className="shrink-0">
+                {t('plugins.details.tabs.general')}
+              </TabsTrigger>
+              <TabsTrigger value="config" className="shrink-0">
+                {t('plugins.details.tabs.config')}
+              </TabsTrigger>
+              <TabsTrigger value="repositories" className="shrink-0">
+                {t('plugins.details.tabs.repositories')}
+              </TabsTrigger>
+              <TabsTrigger value="files" className="shrink-0">
+                {t('plugins.code.files')}
+              </TabsTrigger>
+              <TabsTrigger value="manifest" className="shrink-0">
+                plugin.json
+              </TabsTrigger>
             </TabsList>
           </div>
         )}
@@ -82,6 +94,13 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
         {plugin.development && (
           <TabsContent value="config" className="mt-0 px-4 py-6">
             <PluginConfigFieldsTable pluginId={plugin.pluginId} />
+          </TabsContent>
+        )}
+
+        {plugin.development && (
+          <TabsContent value="repositories" className="mt-0 px-4 py-6">
+            {/* Data source for the repositories is not defined yet; the tree shows its empty state until it is. */}
+            <PluginRepositoriesTree repositories={[]} />
           </TabsContent>
         )}
 
