@@ -81,7 +81,7 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
                 {t('plugins.code.files')}
               </TabsTrigger>
               <TabsTrigger value="manifest" className="shrink-0">
-                plugin.json
+                {t('plugins.details.tabs.manifest')}
               </TabsTrigger>
             </TabsList>
           </div>

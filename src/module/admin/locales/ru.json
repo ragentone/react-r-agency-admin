@@ -1207,7 +1207,8 @@
       "tabs": {
         "general": "Общее",
         "config": "Конфигурация",
-        "repositories": "Репозитории"
+        "repositories": "Репозитории",
+        "manifest": "Манифест"
       },
       "more": "Действия",
       "config": "Настройки"

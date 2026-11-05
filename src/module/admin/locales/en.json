@@ -1147,7 +1147,8 @@
       "tabs": {
         "general": "General",
         "config": "Configuration",
-        "repositories": "Repositories"
+        "repositories": "Repositories",
+        "manifest": "Manifest"
       },
       "more": "Actions",
       "config": "Configuration"
