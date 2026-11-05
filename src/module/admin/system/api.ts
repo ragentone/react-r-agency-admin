@@ -11,8 +11,8 @@ import type {
 
 /* Parsed here instead of codegen `graphql()` (works before Vite saw the new operation). */
 const DeploysQuery = parse(`
-  query AdminSystemDeploys($limit: Int) {
-    adminSystemDeploys(limit: $limit) { success error history }
+  query AdminSystemDeploys {
+    adminSystemDeploys { success error history }
   }
 `);
 const StorageQuery = parse(`
@@ -50,10 +50,8 @@ const query = async <T extends IStatsResult>(
 
 /** Admin only (`admin:user`, checked in the runtime `shared/system`). */
 export const SystemApi = {
-  deploys: (limit = 50) =>
-    query<IStatsResult & { history?: ISystemDeployHistory }>(DeploysQuery, 'adminSystemDeploys', {
-      limit,
-    }),
+  deploys: () =>
+    query<IStatsResult & { history?: ISystemDeployHistory }>(DeploysQuery, 'adminSystemDeploys'),
   storage: (refresh = false) =>
     query<IStatsResult & { storage?: ISystemStorage }>(StorageQuery, 'adminSystemStorage', {
       refresh,

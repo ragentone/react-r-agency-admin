@@ -2,19 +2,11 @@ import { Link } from '@tanstack/react-router';
 import { cn } from '@ui/lib/utils';
 import { Badge } from '@ui/shad-cn/components/badge.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
-import {
-  ChevronRight,
-  CircleCheck,
-  Hammer,
-  HardDrive,
-  NotebookPen,
-  TriangleAlert,
-} from 'lucide-react';
+import { ChevronRight, CircleCheck, HardDrive, NotebookPen } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ADMIN_SYSTEM_ROUTE } from '../../const';
-import { formatAgo } from '../../stats/utils';
 import type { ISystemDeployHistory, ISystemStorage } from '../../system/types';
 import { formatBytes } from '../../system/utils';
 import { rememberSystemTab } from '../utils';
@@ -58,29 +50,6 @@ export const HomeAttention: React.FC<{
 
   const history = deploys.data;
   if (history) {
-    const stuck = history.deploys.filter(deploy => deploy.status === 'stuck');
-    if (stuck.length) {
-      items.push({
-        id: 'deploy-stuck',
-        tone: 'alert',
-        icon: <TriangleAlert />,
-        title: t('home.attention.stuck', { count: stuck.length }),
-        text: t('home.attention.since', { ago: formatAgo(stuck[0].startedAt, locale) }),
-        to: ADMIN_SYSTEM_ROUTE,
-        onNavigate: toSystem('version'),
-      });
-    }
-    if (history.running > 0) {
-      items.push({
-        id: 'deploy-running',
-        tone: 'info',
-        icon: <Hammer />,
-        title: t('home.attention.running'),
-        text: t('home.attention.runningText'),
-        to: ADMIN_SYSTEM_ROUTE,
-        onNavigate: toSystem('version'),
-      });
-    }
     const notes = history.release.plan.notes.length;
     if (notes > 0) {
       items.push({

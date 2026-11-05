@@ -31,7 +31,7 @@ const AdminHome: React.FC = () => {
   const [userId, setUserId] = useState<string | null>(null);
   // Used by "needs attention" and "system" – loaded once.
   const deploys = useStatsQuery(
-    () => SystemApi.deploys(5),
+    () => SystemApi.deploys(),
     result => result.history,
     'home-deploys',
     60_000

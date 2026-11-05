@@ -47,8 +47,6 @@ export interface IPwaRelease {
 
 /** Events on the `system` websocket channel (runtime `shared/system/system.deploy.ts`). */
 export interface IPwaLiveEvents {
-  /** A production frontend build started – an update is on its way. */
-  deploy: { phase: 'before'; deploymentId: string; at: number };
   /** A new frontend build is live; `buildId` = `import.meta.env.VITE_APP.id` of that build. */
   version: IPwaRelease & {
     deploymentId: string;

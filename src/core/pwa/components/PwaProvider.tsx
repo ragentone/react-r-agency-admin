@@ -109,11 +109,10 @@ export const PwaProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [updateServiceWorker]);
 
-  // Deploy running / new version: toast in every open tab (+ the blinking dot as before).
+  // New version finished: toast in every open tab (+ the blinking dot as before).
   const deployToast = usePwaDeployToast(updateWaiting, update, newer);
   usePwaVersionLive(registrationRef, {
     onWithoutWorker: () => setServerVersion(true),
-    onDeployStart: deployToast.onDeployStart,
     onVersion: deployToast.onVersion,
     onAvailable: setNewer,
     onOwn: setOwn,

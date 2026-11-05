@@ -16,8 +16,6 @@ const OWN_BUILD = import.meta.env.VITE_APP?.id ?? null;
 export interface IPwaVersionLiveHandlers {
   /** No service worker here → the new version can only be loaded by a plain reload. */
   onWithoutWorker: () => void;
-  /** Runtime: a production build started (push only). */
-  onDeployStart: (deploymentId: string) => void;
   /**
    * Runtime: a build is live (push only). `release` = that build when it is newer than this
    * tab, `null` when this tab already runs it (or dev).
@@ -31,7 +29,7 @@ export interface IPwaVersionLiveHandlers {
 
 /**
  * Keeps open tabs on the newest frontend build.
- * - Push: runtime broadcasts `system` → `deploy` (build started) and `version` (build live).
+ * - Push: runtime broadcasts `system` → `version` (build finished and live).
  * - Pull: on every (re)connect and when the tab comes back to the foreground the tab asks
  *   `systemVersion` – the live build and the version of this tab. Catches missed broadcasts
  *   (offline, phone in the background, runtime restarted after the build).
@@ -108,11 +106,6 @@ export const usePwaVersionLive = (
   useEffect(() => {
     const channel = websocket.channel<IPwaLiveEvents>(PWA_LIVE_CHANNEL);
     const offs = [
-      channel.on('deploy', ({ payload }) => {
-        if (payload?.phase === 'before' && payload.deploymentId) {
-          latest.current.onDeployStart(payload.deploymentId);
-        }
-      }),
       channel.on('version', ({ payload }) => {
         latest.current.onVersion(handle(payload, PWA_VERSION_JITTER_MS));
       }),

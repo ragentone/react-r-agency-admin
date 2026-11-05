@@ -5,7 +5,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ADMIN_SYSTEM_ROUTE } from '../../const';
-import { formatAgo, formatDuration } from '../../stats/utils';
+import { formatAgo } from '../../stats/utils';
 import type { ISystemDeployHistory, ISystemStorage } from '../../system/types';
 import { formatBytes } from '../../system/utils';
 import { rememberSystemTab } from '../utils';
@@ -27,7 +27,7 @@ export const HomeSystem: React.FC<{
   const { t, i18n } = useTranslation('admin');
   const locale = i18n.language;
   const history = deploys.data;
-  const last = history?.deploys.find(deploy => deploy.status === 'done');
+  const current = history?.current ?? null;
   const disk = storage.data?.disk;
 
   return (
@@ -61,12 +61,8 @@ export const HomeSystem: React.FC<{
                     : '–'}
                 </span>
                 <span className="block text-caption text-muted-foreground">
-                  {last
-                    ? t('home.system.lastBuild', {
-                        ago: formatAgo(last.finishedAt ?? last.startedAt, locale),
-                        duration:
-                          last.durationMs === null ? '–' : formatDuration(last.durationMs / 1000),
-                      })
+                  {current
+                    ? t('home.system.lastBuild', { ago: formatAgo(current.finishedAt, locale) })
                     : t('home.system.noBuild')}
                 </span>
               </>

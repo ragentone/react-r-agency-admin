@@ -1,26 +1,19 @@
 export type SystemTab = 'version' | 'storage';
 
-/** One production frontend build (runtime `shared/system`, `adminSystemDeploys`). */
-export interface ISystemDeploy {
-  id: string;
+export type SystemReleaseBump = 'patch' | 'minor' | 'major';
+
+/** The live frontend build – the only version that is stored and shown (runtime `system.deploy.service`). */
+export interface ISystemVersion {
   deploymentId: string;
   buildId: string | null;
-  name: string | null;
-  mode: string;
-  status: 'running' | 'done' | 'stuck';
-  startedAt: string;
-  finishedAt: string | null;
-  durationMs: number | null;
-  /** Devices told about the new version (null = no broadcast). */
-  clients: number | null;
-  /** Final once done, a preview while running, `null` for builds before version management. */
+  /** ISO time the build finished. */
+  finishedAt: string;
+  /** `null` = no version yet (before version management). */
   version: string | null;
   bump: SystemReleaseBump | null;
   notes: string[];
   required: boolean;
 }
-
-export type SystemReleaseBump = 'patch' | 'minor' | 'major';
 
 /** Internal version management (runtime `shared/system/system.version.ts`). */
 export interface ISystemRelease {
@@ -33,10 +26,8 @@ export interface ISystemRelease {
 }
 
 export interface ISystemDeployHistory {
-  deploys: ISystemDeploy[];
-  /** Median duration of the finished builds (ms). */
-  medianMs: number | null;
-  running: number;
+  /** The live build (`null` = none yet). */
+  current: ISystemVersion | null;
   release: ISystemRelease;
 }
 

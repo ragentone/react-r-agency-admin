@@ -2,15 +2,14 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
-import { PWA_DEPLOY_READY_MAX_MS, PWA_DEPLOY_TOAST_ID, PWA_DEPLOY_TOAST_MAX_MS } from '../const';
+import { PWA_DEPLOY_READY_MAX_MS, PWA_DEPLOY_TOAST_ID } from '../const';
 import type { IPwaRelease } from '../types';
 
 /**
- * Toasts for every open tab while a frontend deploy runs (one toast, replaced in place):
- * 1. build started → "Installing an update …" (spinner, closes itself after 15 min)
- * 2. new version ready here (service worker waiting / no worker) → "New version 1.1.0" with the
- *    first "what's new" note and "Update". Required versions: cannot be dismissed (also when
- *    the tab only found out by asking, not by the push).
+ * Toast for every open tab once a new version is ready here (service worker waiting / no
+ * worker) → "New version 1.1.0" with the first "what's new" note and "Update". Nothing is shown
+ * while a build runs, only when it is finished. Required versions: cannot be dismissed (also when
+ * the tab only found out by asking, not by the push).
  * Same build as this tab (or dev) → the first toast just goes. "Update" = `update` of the PWA
  * context, so it only shows once the new worker is really waiting (no reload into the old app).
  */
@@ -34,15 +33,6 @@ export const usePwaDeployToast = (
     window.clearTimeout(timer.current);
     timer.current = window.setTimeout(fn, ms);
   }, []);
-
-  const onDeployStart = useCallback(() => {
-    toast.loading(t('deploy.before.title'), {
-      id: PWA_DEPLOY_TOAST_ID,
-      description: t('deploy.before.text'),
-      duration: Number.POSITIVE_INFINITY,
-    });
-    later(PWA_DEPLOY_TOAST_MAX_MS, () => toast.dismiss(PWA_DEPLOY_TOAST_ID));
-  }, [later, t]);
 
   const onVersion = useCallback(
     (release: IPwaRelease | null) => {
@@ -89,5 +79,5 @@ export const usePwaDeployToast = (
 
   useEffect(() => () => window.clearTimeout(timer.current), []);
 
-  return { onDeployStart, onVersion };
+  return { onVersion };
 };
