@@ -1331,6 +1331,20 @@
     "title": "Documentation",
     "subtitle": "Markdown files from the backend",
     "empty": "No documents yet.",
-    "error": "Documents could not be loaded."
+    "error": "Documents could not be loaded.",
+    "search": {
+      "placeholder": "Search in document",
+      "label": "Search in document",
+      "none": "No matches",
+      "prev": "Previous match",
+      "next": "Next match",
+      "open": "Search in document"
+    },
+    "sections": {
+      "open": "Sections",
+      "none": "No sections",
+      "title": "Contents",
+      "current": "Current"
+    }
   }
 }

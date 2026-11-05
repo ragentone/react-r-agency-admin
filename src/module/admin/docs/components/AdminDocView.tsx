@@ -1,7 +1,4 @@
-import React, { useMemo } from 'react';
-
-import { renderDocHtml } from '../markdown';
-import type { IAdminDoc } from '../types';
+import React from 'react';
 
 /* Typography for the rendered Markdown – only the defined text sizes, black/white tokens. */
 const PROSE = [
@@ -23,8 +20,14 @@ const PROSE = [
   '[&_hr]:my-6 [&_hr]:border-border',
 ].join(' ');
 
+export interface IAdminDocViewProps {
+  /** Sanitized HTML of the doc (see `renderDocHtml`). */
+  html: string;
+  /** Read by the search hook to highlight and scroll to hits. */
+  articleRef: React.RefObject<HTMLElement | null>;
+}
+
 /** One doc rendered as Markdown (inside the drawer). */
-export const AdminDocView: React.FC<{ doc: IAdminDoc }> = ({ doc }) => {
-  const html = useMemo(() => renderDocHtml(doc.content), [doc.content]);
-  return <article className={PROSE} dangerouslySetInnerHTML={{ __html: html }} />;
-};
+export const AdminDocView: React.FC<IAdminDocViewProps> = ({ html, articleRef }) => (
+  <article ref={articleRef} className={PROSE} dangerouslySetInnerHTML={{ __html: html }} />
+);
