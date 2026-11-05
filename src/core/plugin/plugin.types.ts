@@ -155,6 +155,26 @@ export interface IPluginConfirmOptions {
   variant?: 'default' | 'destructive';
 }
 
+/** Props of `ui.ConfirmPopoverButton`: a trigger button that opens a small confirm popover. */
+export interface IPluginConfirmPopoverButtonProps {
+  children?: React.ReactNode;
+  title: React.ReactNode;
+  description?: React.ReactNode;
+  confirmLabel?: string;
+  cancelLabel?: string;
+  confirmVariant?: 'default' | 'destructive';
+  onConfirm: () => void | Promise<void>;
+  side?: 'top' | 'right' | 'bottom' | 'left';
+  align?: 'start' | 'center' | 'end';
+  variant?: 'default' | 'outline' | 'secondary' | 'ghost' | 'destructive' | 'destructive-outline' | 'link';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'icon-xs' | 'icon-sm' | 'icon-md' | 'icon-lg' | 'icon-xl';
+  fullWidth?: boolean;
+  isLoading?: boolean;
+  disabled?: boolean;
+  className?: string;
+  'aria-label'?: string;
+}
+
 /** Props the host adds to every drawer component, on top of the options' `props`. */
 export interface IPluginDrawerInjectedProps {
   /** Closes the drawer. */
@@ -532,6 +552,7 @@ export interface IPluginUi {
       sideOffset?: number;
     }
   >;
+  ConfirmPopoverButton: React.ComponentType<IPluginConfirmPopoverButtonProps>;
   DropdownMenu: React.ComponentType<{
     open?: boolean;
     defaultOpen?: boolean;

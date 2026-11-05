@@ -39,6 +39,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@ui/shad-cn/components/table';
 import { AnimatedCalendarStandalone as Calendar } from '@ui/shad-cn/components/calender';
 import { DatePicker } from '@ui/components/DatePicker';
+import { ConfirmPopoverButton } from '@ui/components/ConfirmPopoverButton';
 import {
   Drawer,
   DrawerClose,
@@ -98,6 +99,7 @@ export const pluginUi = {
   Slider,
   Tooltip, TooltipProvider, TooltipTrigger, TooltipContent,
   Popover, PopoverTrigger, PopoverContent, PopoverAnchor,
+  ConfirmPopoverButton,
   Drawer, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription,
   Dialog, DialogTrigger, DialogClose, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription,
 } as unknown as IPluginUi;
