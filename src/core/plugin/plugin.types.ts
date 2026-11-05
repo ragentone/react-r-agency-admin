@@ -158,7 +158,7 @@ export interface IPluginConfirmOptions {
 /** Props of `ui.ConfirmPopoverButton`: a trigger button that opens a small confirm popover. */
 export interface IPluginConfirmPopoverButtonProps {
   children?: React.ReactNode;
-  title: React.ReactNode;
+  title?: React.ReactNode;
   description?: React.ReactNode;
   confirmLabel?: string;
   cancelLabel?: string;

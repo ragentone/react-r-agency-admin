@@ -10,7 +10,7 @@ export interface IConfirmPopoverButtonProps extends Omit<
   /** Text of the trigger button. */
   children: React.ReactNode;
   /** Question shown in the popover, e.g. „Wirklich löschen?“. */
-  title: React.ReactNode;
+  title?: React.ReactNode;
   /** Optional detail text under the question. */
   description?: React.ReactNode;
   /** Label of the confirm button. Default: `base` → `confirm.ok`. */
@@ -66,10 +66,10 @@ export const ConfirmPopoverButton: React.FC<IConfirmPopoverButtonProps> = ({
       </PopoverTrigger>
       <PopoverContent side={side} align={align} className="w-72 space-y-4 border-border/50 p-4">
         <div className="space-y-1">
-          <p className="text-body font-bold text-foreground">{title}</p>
+          {title && <p className="text-body font-bold text-foreground">{title}</p>}
           {description && <p className="text-caption text-muted-foreground">{description}</p>}
         </div>
-        <div className="flex justify-end gap-2">
+        <div className="grid grid-cols-2 gap-2">
           <Button variant="outline" size="sm" disabled={busy} onClick={() => setOpen(false)}>
             {cancelLabel ?? t('confirm.cancel')}
           </Button>
