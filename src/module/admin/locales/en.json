@@ -568,7 +568,8 @@
     "tabsLabel": "System sections",
     "tabs": {
       "version": "Version",
-      "storage": "Storage"
+      "storage": "Storage",
+      "database": "Database"
     },
     "storage": {
       "title": "Server storage",
@@ -626,6 +627,39 @@
         "saved": "Saved – applies to the next deploy",
         "saveError": "Could not be saved",
         "reset": "Reset"
+      }
+    },
+    "database": {
+      "title": "Database",
+      "meta": "{{name}} · measured {{ago}}",
+      "refresh": "Refresh",
+      "refreshing": "Refreshing …",
+      "hint": "A cleanup aid, not a deletion recommendation. Check that a table is really unused before dropping it.",
+      "filterLabel": "Filter",
+      "listLabel": "Tables",
+      "summary": {
+        "candidates": "Candidates",
+        "storage": "Storages",
+        "inUse": "In use",
+        "missing": "Missing"
+      },
+      "filter": {
+        "candidates": "Candidates",
+        "storage": "Storages",
+        "in-use": "In use",
+        "all": "All"
+      },
+      "status": {
+        "unknown": "Not in code",
+        "plugin-orphan": "Orphaned plugin",
+        "storage": "Storage",
+        "in-use": "In use"
+      },
+      "rows": "{{count}} rows",
+      "empty": "No tables in this view.",
+      "missing": {
+        "title": "Expected by code, missing in DB",
+        "text": "These tables belong to the code but do not exist. Often the schema sync has not run."
       }
     }
   },

@@ -3,6 +3,7 @@ import { getMeshClient } from 'r-agency-mesh-client-v1/release';
 
 import type { IStatsResult } from '../stats/api';
 import type {
+  IDbUsageReport,
   ISystemDeployHistory,
   ISystemRelease,
   ISystemStorage,
@@ -18,6 +19,11 @@ const DeploysQuery = parse(`
 const StorageQuery = parse(`
   query AdminSystemStorage($refresh: Boolean) {
     adminSystemStorage(refresh: $refresh) { success error storage }
+  }
+`);
+const DbUsageQuery = parse(`
+  query AdminDbUsageReport {
+    adminDbUsageReport { success error report }
   }
 `);
 const ReleasePlanMutation = parse(`
@@ -52,6 +58,8 @@ const query = async <T extends IStatsResult>(
 export const SystemApi = {
   deploys: () =>
     query<IStatsResult & { history?: ISystemDeployHistory }>(DeploysQuery, 'adminSystemDeploys'),
+  dbUsage: () =>
+    query<IStatsResult & { report?: IDbUsageReport }>(DbUsageQuery, 'adminDbUsageReport'),
   storage: (refresh = false) =>
     query<IStatsResult & { storage?: ISystemStorage }>(StorageQuery, 'adminSystemStorage', {
       refresh,

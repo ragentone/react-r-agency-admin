@@ -1,4 +1,4 @@
-export type SystemTab = 'version' | 'storage';
+export type SystemTab = 'version' | 'storage' | 'database';
 
 export type SystemReleaseBump = 'patch' | 'minor' | 'major';
 
@@ -45,4 +45,28 @@ export interface ISystemStorage {
   binlogExpire: string;
   /** From this usage on the admins get an inbox message. */
   warnPercent: number;
+}
+
+/** Table usage check (runtime `shared/db-usage`, admin only, read-only). */
+export type DbUsageStatus = 'in-use' | 'storage' | 'unknown' | 'plugin-orphan';
+
+export interface IDbUsageTable {
+  name: string;
+  rows: number;
+  status: DbUsageStatus;
+  reason: string;
+}
+
+export interface IDbUsageReport {
+  generatedAt: string;
+  database: string;
+  summary: {
+    inUse: number;
+    storage: number;
+    unknown: number;
+    pluginOrphan: number;
+    missing: number;
+  };
+  tables: IDbUsageTable[];
+  missing: string[];
 }

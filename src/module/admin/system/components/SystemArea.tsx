@@ -5,10 +5,11 @@ import { useTranslation } from 'react-i18next';
 
 import { ADMIN_SYSTEM_VIEW_KEY } from '../../const';
 import type { SystemTab } from '../types';
+import { SystemDatabaseTab } from './SystemDatabaseTab';
 import { SystemDeploysTab } from './SystemDeploysTab';
 import { SystemStorageTab } from './SystemStorageTab';
 
-const TABS: SystemTab[] = ['version', 'storage'];
+const TABS: SystemTab[] = ['version', 'storage', 'database'];
 const STORE_KEY = ADMIN_SYSTEM_VIEW_KEY;
 
 const restore = (): SystemTab => {
@@ -66,6 +67,9 @@ export const SystemArea: React.FC = () => {
         </TabsContent>
         <TabsContent value="storage" className="mt-0 pb-10">
           <SystemStorageTab />
+        </TabsContent>
+        <TabsContent value="database" className="mt-0 pb-10">
+          <SystemDatabaseTab />
         </TabsContent>
       </Tabs>
     </div>

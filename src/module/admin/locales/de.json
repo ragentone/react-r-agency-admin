@@ -568,7 +568,8 @@
     "tabsLabel": "Bereiche des Systems",
     "tabs": {
       "version": "Version",
-      "storage": "Speicher"
+      "storage": "Speicher",
+      "database": "Datenbank"
     },
     "storage": {
       "title": "Server-Speicher",
@@ -626,6 +627,39 @@
         "saved": "Gespeichert – gilt für den nächsten Deploy",
         "saveError": "Konnte nicht gespeichert werden",
         "reset": "Zurücksetzen"
+      }
+    },
+    "database": {
+      "title": "Datenbank",
+      "meta": "{{name}} · Stand {{ago}}",
+      "refresh": "Aktualisieren",
+      "refreshing": "Aktualisiere …",
+      "hint": "Hilfe zum Aufräumen, keine Löschempfehlung. Vor dem Löschen prüfen, ob die Tabelle wirklich ungenutzt ist.",
+      "filterLabel": "Filter",
+      "listLabel": "Tabellen",
+      "summary": {
+        "candidates": "Kandidaten",
+        "storage": "Storages",
+        "inUse": "In Benutzung",
+        "missing": "Fehlen"
+      },
+      "filter": {
+        "candidates": "Kandidaten",
+        "storage": "Storages",
+        "in-use": "In Benutzung",
+        "all": "Alle"
+      },
+      "status": {
+        "unknown": "Nicht im Code",
+        "plugin-orphan": "Plugin verwaist",
+        "storage": "Storage",
+        "in-use": "In Benutzung"
+      },
+      "rows": "{{count}} Zeilen",
+      "empty": "Keine Tabellen in dieser Ansicht.",
+      "missing": {
+        "title": "Im Code erwartet, fehlt in der DB",
+        "text": "Diese Tabellen gehören zum Code, existieren aber nicht. Oft fehlt die Schema-Synchronisierung."
       }
     }
   },
