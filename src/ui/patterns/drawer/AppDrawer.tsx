@@ -11,34 +11,27 @@ import { ArrowLeft, X } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-interface IStyle {
-  '--drawer-height': string;
-  '--drawer-content-max-height': string;
-  '--drawer-content-width'?: string;
-  '--drawer-inset'?: string;
-}
-
 /** Almost full height on phones, max. ~830px on large screens. */
 export const APP_DRAWER_SIZE = {
   '--drawer-height': 'min(calc(100dvh - 2.5rem), 52rem)',
   '--drawer-content-max-height': 'min(calc(100dvh - 2.5rem), 52rem)',
-} as IStyle;
+} as React.CSSProperties;
 
-/** `fullscreen`: the popup covers the whole viewport (100dvw × 100dvh). */
-export const APP_DRAWER_FULL_SIZE = {
-  '--drawer-height': '100dvh',
-  '--drawer-content-max-height': '100dvh',
-  '--drawer-content-width': '100dvw',
-  '--drawer-inset': '0px',
-} as IStyle;
-
-/** Side drawers (left / right): a column of fixed width; `full` also takes the full height. */
-const APP_DRAWER_SIDE_WIDTH = { '--drawer-content-width': 'min(88dvw, 28rem)' } as IStyle;
+/** Side drawers (left / right): column width on any screen, full height for `full`. */
+const APP_DRAWER_SIDE_WIDTH = { '--drawer-content-width': 'min(88dvw, 28rem)' } as React.CSSProperties;
 const APP_DRAWER_SIDE_SIZE = {
   ...APP_DRAWER_SIDE_WIDTH,
   '--drawer-height': '100dvh',
   '--drawer-content-max-height': '100dvh',
-} as IStyle;
+} as React.CSSProperties;
+
+/** `fullscreen`: the popup covers the whole viewport (100dvw × 100dvh). */
+const APP_DRAWER_FULLSCREEN_SIZE = {
+  '--drawer-height': '100dvh',
+  '--drawer-content-max-height': '100dvh',
+  '--drawer-content-width': '100dvw',
+  '--drawer-inset': '0px',
+} as React.CSSProperties;
 
 export interface IAppDrawerProps {
   open: boolean;
@@ -59,13 +52,15 @@ export interface IAppDrawerProps {
   /** Back arrow before the title (sub pane inside the drawer). */
   onBack?: () => void;
   backLabel?: string;
-  /** `full` = almost full height (default), `auto` = fits the content. */
-  size?: 'full' | 'fullscreen' | 'auto';
+  /** `full` = almost full height (default), `auto` = fits the content, `fullscreen` = whole viewport, no radius. */
+  size?: 'full' | 'auto' | 'fullscreen';
   /**
    * No title bar – the content brings its own. The title stays for screen readers;
    * pass `title={null}` when the content renders its own `DrawerTitle`.
    */
   hideHeader?: boolean;
+  /** Grip bar at the drawer edge (default: shown). */
+  showSwipeHandle?: boolean;
   /** Changes → the body is new (scroll position starts at the top). */
   bodyKey?: React.Key;
   bodyClassName?: string;
@@ -75,6 +70,7 @@ export interface IAppDrawerProps {
   wrapper?: (children: React.ReactNode) => React.ReactNode;
   children: React.ReactNode;
   direction?: 'up' | 'down' | 'left' | 'right';
+  /** `full` only: the height follows the content instead of the fixed drawer height. */
   autoHeight?: boolean;
 }
 
@@ -96,6 +92,7 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
   backLabel,
   size = 'full',
   hideHeader,
+  showSwipeHandle = true,
   bodyKey,
   bodyClassName,
   contentProps,
@@ -109,8 +106,8 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
   const back = backLabel ?? t('drawer.back');
   const sr = description ?? (typeof title === 'string' ? title : '');
 
-  // Layout by size and side. Top / bottom: full-width row. Left / right: a column at its side.
-  // `fullscreen`: no radius, no border, no inset.
+  // Layout by size and side. Top / bottom: full-width row. Left / right: a column that stays
+  // at its side. `fullscreen`: no radius, no border, no inset.
   const isSide = direction === 'left' || direction === 'right';
   const layoutClass =
     size === 'fullscreen'
@@ -118,6 +115,17 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
       : isSide
         ? 'max-w-none'
         : 'mx-auto w-full max-w-150';
+  const fullStyle: React.CSSProperties = isSide ? APP_DRAWER_SIDE_SIZE : APP_DRAWER_SIZE;
+  const layoutStyle: React.CSSProperties | undefined =
+    size === 'fullscreen'
+      ? APP_DRAWER_FULLSCREEN_SIZE
+      : size === 'full'
+        ? autoHeight
+          ? ({ ...fullStyle, '--drawer-height': 'auto' } as React.CSSProperties)
+          : fullStyle
+        : isSide
+          ? APP_DRAWER_SIDE_WIDTH
+          : undefined;
 
   const inner = (
     <>
@@ -178,20 +186,6 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
     </>
   );
 
-  const getStyle = (): IStyle | undefined => {
-    if (size === 'fullscreen') return APP_DRAWER_FULL_SIZE;
-
-    if (size === 'full') {
-      const clone: IStyle = { ...(isSide ? APP_DRAWER_SIDE_SIZE : APP_DRAWER_SIZE) };
-      if (autoHeight) {
-        clone['--drawer-height'] = 'auto';
-      }
-      return clone;
-    }
-
-    return isSide ? APP_DRAWER_SIDE_WIDTH : undefined;
-  };
-
   return (
     <Drawer
       open={open}
@@ -199,14 +193,14 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
         if (!next && locked) return;
         onOpenChange(next);
       }}
-      showSwipeHandle
+      showSwipeHandle={showSwipeHandle}
       swipeDirection={direction}
     >
       <DrawerPrimitive.VirtualKeyboardProvider>
         <DrawerContent
           {...contentProps}
           className={cn(layoutClass, contentProps?.className)}
-          style={{ ...(getStyle() as React.CSSProperties), ...contentProps?.style }}
+          style={{ ...layoutStyle, ...contentProps?.style }}
         >
           {sr && <DrawerDescription className="sr-only">{sr}</DrawerDescription>}
           {wrapper ? wrapper(inner) : inner}
