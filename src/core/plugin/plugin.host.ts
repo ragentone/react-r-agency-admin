@@ -19,7 +19,7 @@ import { usePluginPlatform, usePluginUser } from './plugin.user';
 import { registerPluginMenu } from './plugin.menu';
 import { navigatePlugin } from './plugin.navigate';
 import { registerPluginPage } from './plugin.pages';
-import { registerPluginSlot } from './plugin.slots';
+import { DEFAULT_SLOT_SORT_ORDER, registerPluginSlot } from './plugin.slots';
 import type {
   IPluginApi,
   IPluginCallResult,
@@ -157,11 +157,14 @@ const buildPluginApi = (
       .filter(part => part !== '' && part !== '.' && part !== '..')
       .map(encodeURIComponent)
       .join('/'),
-  registerSlot: (slot, component) => {
+  registerSlot: (slot, component, options) => {
     if (!allowedSlots.includes(slot)) {
       throw new Error(`plugin ${pluginId}: slot "${slot}" not declared in manifest`);
     }
-    registerPluginSlot(pluginId, slot, component);
+    registerPluginSlot(pluginId, slot, component, {
+      sortOrder: options?.sortOrder ?? DEFAULT_SLOT_SORT_ORDER,
+      disabled: options?.disabled === true,
+    });
   },
   registerPage: (path, component, options) => {
     // Pages the user may not open are not in `allowedPages`. They are skipped, not an error.

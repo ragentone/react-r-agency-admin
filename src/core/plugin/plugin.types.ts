@@ -18,6 +18,14 @@ export type PluginLocale = 'de' | 'en' | 'ru';
 /** Component a plugin registers for a slot. Gets the plugin id as prop. */
 export type PluginSlotComponent = React.ComponentType<{ pluginId: string }>;
 
+/** Options for `api.registerSlot`. */
+export interface IPluginSlotOptions {
+  /** Position inside the slot. Lower first. Default 100. Equal values keep a stable order by plugin id. */
+  sortOrder?: number;
+  /** `true`: the component is registered but not rendered. Default false. */
+  disabled?: boolean;
+}
+
 /** Lucide icon component the host provides, e.g. `api.icons.Info`. */
 export type PluginIcon = React.ComponentType<
   React.SVGProps<SVGSVGElement> & { strokeWidth?: number }
@@ -720,7 +728,7 @@ export interface IPluginApi {
   /** URL of a file in the plugin's `assets/` folder (images only). */
   assetUrl(path: string): string;
   /** Registers a component for a slot. Slots not listed in the manifest are rejected. */
-  registerSlot(slot: PluginSlotName, component: PluginSlotComponent): void;
+  registerSlot(slot: PluginSlotName, component: PluginSlotComponent, options?: IPluginSlotOptions): void;
   /**
    * Page under `/plugin/<id>/<path>`. The path must be declared under `pages` in plugin.json.
    * A page the current user may not open is skipped.
