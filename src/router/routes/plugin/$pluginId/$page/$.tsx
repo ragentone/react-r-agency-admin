@@ -5,6 +5,7 @@ import { createFileRoute, type NotFoundRouteProps, useNavigate } from '@tanstack
 import { FullscreenPage } from '@ui/base/FullscreenPage';
 import { Spinner } from '@ui/shad-cn/components/spinner';
 import { createElement, type FunctionComponent } from 'react';
+import { cn } from '@ui/lib';
 
 /** Width of a `route` page, as CSS for `RoutePage`. `default` keeps the page's own default. */
 const WIDTH: Record<'narrow' | 'default' | 'wide' | 'full', string | undefined> = {
@@ -20,7 +21,7 @@ const WIDTH: Record<'narrow' | 'default' | 'wide' | 'full', string | undefined> 
  * The plugin registers its page after the plugin list is loaded, so the route waits for that and then
  * looks the page up. Unknown plugin, unknown page, or a page the user may not open → 404.
  */
-export const Route = createFileRoute('/_admin/plugin/$pluginId/$page/$')({
+export const Route = createFileRoute('/plugin/$pluginId/$page/$')({
   // Keep every query parameter; the page decides what it means.
   validateSearch: (search: Record<string, unknown>) => search,
   component: PluginPageRoute,
@@ -36,7 +37,10 @@ function PluginPageRoute() {
   if (!loaded) return <Spinner />;
   if (!entry) {
     console.warn(`[plugin:${pluginId}] page "${page}" is not available`);
-    return createElement(PageManager.getPage('404') as FunctionComponent<NotFoundRouteProps>, {} as NotFoundRouteProps);
+    return createElement(
+      PageManager.getPage('404') as FunctionComponent<NotFoundRouteProps>,
+      {} as NotFoundRouteProps
+    );
   }
 
   // The router has already decoded `_splat`, so the segments are used as they are.
@@ -54,10 +58,17 @@ function PluginPageRoute() {
       </FullscreenPage>
     );
   }
-  // `full` uses the whole width, so the side borders of the column are removed.
-  const classes = entry.width === 'full' ? { scroll: 'sm:border-x-0' } : undefined;
   return (
-    <RoutePage width={WIDTH[entry.width]} scrollable={entry.scrollable} classes={classes}>
+    <RoutePage
+      width={WIDTH[entry.width]}
+      scrollable={entry.scrollable}
+      classes={{
+        scroll: cn('', {
+          'p-0': true,
+          'sm:border-x-0': entry.width === 'full',
+        }),
+      }}
+    >
       {content}
     </RoutePage>
   );

@@ -25,7 +25,21 @@ const compareSlotEntries = (a: IPluginSlotEntry, b: IPluginSlotEntry) =>
 let slots: Partial<Record<PluginSlotName, IPluginSlotEntry[]>> = {};
 const listeners = new Set<() => void>();
 
-const notify = () => listeners.forEach(listener => listener());
+/** Visible components per slot (disabled ones removed). Rebuilt only in `notify`, so `getSnapshot` returns the same references between changes. */
+let visibleSlots: Partial<Record<PluginSlotName, IPluginSlotEntry[]>> = {};
+
+const computeVisibleSlots = () => {
+  const next: Partial<Record<PluginSlotName, IPluginSlotEntry[]>> = {};
+  for (const [slot, entries] of Object.entries(slots) as [PluginSlotName, IPluginSlotEntry[]][]) {
+    next[slot] = entries.some(entry => entry.disabled) ? entries.filter(entry => !entry.disabled) : entries;
+  }
+  visibleSlots = next;
+};
+
+const notify = () => {
+  computeVisibleSlots();
+  listeners.forEach(listener => listener());
+};
 
 /** Adds or replaces the component of `pluginId` for `slot`. Entries stay sorted by `sortOrder`. */
 export const registerPluginSlot = (
@@ -64,11 +78,7 @@ const subscribe = (listener: () => void) => {
 };
 
 const emptyEntries: IPluginSlotEntry[] = [];
-const snapshotOf = (slot: PluginSlotName) => {
-  const entries = slots[slot] ?? emptyEntries;
-  // Disabled components stay registered but are not rendered.
-  return entries.some(entry => entry.disabled) ? entries.filter(entry => !entry.disabled) : entries;
-};
+const snapshotOf = (slot: PluginSlotName) => visibleSlots[slot] ?? emptyEntries;
 
 /** Current components of one slot; re-renders when a plugin registers or unregisters. */
 export const usePluginSlot = (slot: PluginSlotName): IPluginSlotEntry[] =>
