@@ -18,6 +18,14 @@ const BADGE: Record<DbUsageStatus, 'destructive' | 'secondary' | 'outline'> = {
   'in-use': 'outline',
 };
 
+/** Red fills need white text, as on the destructive button. */
+const BADGE_TEXT: Record<DbUsageStatus, string | undefined> = {
+  unknown: 'text-white',
+  'plugin-orphan': 'text-white',
+  storage: undefined,
+  'in-use': undefined,
+};
+
 /** One row per table, candidates first (the list is already sorted by the runtime). */
 export const DatabaseTableList: React.FC<{ tables: IDbUsageTable[] }> = ({ tables }) => {
   const { t, i18n } = useTranslation('admin');
@@ -40,7 +48,7 @@ export const DatabaseTableList: React.FC<{ tables: IDbUsageTable[] }> = ({ table
               </ItemDescription>
             </ItemContent>
             <ItemActions>
-              <Badge variant={BADGE[table.status]}>
+              <Badge variant={BADGE[table.status]} className={BADGE_TEXT[table.status]}>
                 {t(`system.database.status.${table.status}`)}
               </Badge>
             </ItemActions>

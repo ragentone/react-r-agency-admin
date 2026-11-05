@@ -1,4 +1,4 @@
-export type SystemTab = 'version' | 'storage' | 'database';
+export type SystemTab = 'version' | 'storage' | 'database' | 'entities';
 
 export type SystemReleaseBump = 'patch' | 'minor' | 'major';
 
@@ -69,4 +69,14 @@ export interface IDbUsageReport {
   };
   tables: IDbUsageTable[];
   missing: string[];
+}
+
+/** One registered entity and its table (runtime `db-usage-service.entities()`). */
+export interface IDbEntity {
+  entity: string;
+  table: string;
+  columns: number;
+  relations: number;
+  /** `null` = table does not exist in the database. */
+  rows: number | null;
 }

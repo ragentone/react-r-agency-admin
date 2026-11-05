@@ -569,7 +569,8 @@
     "tabs": {
       "version": "Version",
       "storage": "Storage",
-      "database": "Database"
+      "database": "Database",
+      "entities": "Entities"
     },
     "storage": {
       "title": "Server storage",
@@ -660,7 +661,29 @@
       "missing": {
         "title": "Expected by code, missing in DB",
         "text": "These tables belong to the code but do not exist. Often the schema sync has not run."
+      },
+      "sql": {
+        "header1": "Before running: create a backup and check that every table is really unused.",
+        "header2": "Storage tables without registration may have been created at runtime.",
+        "title": "Drop SQL",
+        "text": "Generated from the candidates automatically. Nothing is run here.",
+        "copy": "Copy",
+        "copied": "SQL copied",
+        "copyFailed": "Copy not possible",
+        "empty": "No candidates, no SQL needed.",
+        "open": "Show SQL"
       }
+    },
+    "entities": {
+      "title": "Entities",
+      "count": "{{count}} entities",
+      "search": "Search name or table",
+      "listLabel": "Entities",
+      "columns": "{{count}} columns",
+      "relations": "{{count}} relations",
+      "rows": "{{count}} rows",
+      "missing": "Missing in DB",
+      "empty": "No entities found."
     }
   },
   "rolePicker": {

@@ -3,6 +3,7 @@ import { getMeshClient } from 'r-agency-mesh-client-v1/release';
 
 import type { IStatsResult } from '../stats/api';
 import type {
+  IDbEntity,
   IDbUsageReport,
   ISystemDeployHistory,
   ISystemRelease,
@@ -24,6 +25,11 @@ const StorageQuery = parse(`
 const DbUsageQuery = parse(`
   query AdminDbUsageReport {
     adminDbUsageReport { success error report }
+  }
+`);
+const DbEntitiesQuery = parse(`
+  query AdminDbUsageEntities {
+    adminDbUsageEntities { success error entities }
   }
 `);
 const ReleasePlanMutation = parse(`
@@ -58,6 +64,8 @@ const query = async <T extends IStatsResult>(
 export const SystemApi = {
   deploys: () =>
     query<IStatsResult & { history?: ISystemDeployHistory }>(DeploysQuery, 'adminSystemDeploys'),
+  dbEntities: () =>
+    query<IStatsResult & { entities?: IDbEntity[] }>(DbEntitiesQuery, 'adminDbUsageEntities'),
   dbUsage: () =>
     query<IStatsResult & { report?: IDbUsageReport }>(DbUsageQuery, 'adminDbUsageReport'),
   storage: (refresh = false) =>

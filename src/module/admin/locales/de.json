@@ -569,7 +569,8 @@
     "tabs": {
       "version": "Version",
       "storage": "Speicher",
-      "database": "Datenbank"
+      "database": "Datenbank",
+      "entities": "Entities"
     },
     "storage": {
       "title": "Server-Speicher",
@@ -660,7 +661,29 @@
       "missing": {
         "title": "Im Code erwartet, fehlt in der DB",
         "text": "Diese Tabellen gehören zum Code, existieren aber nicht. Oft fehlt die Schema-Synchronisierung."
+      },
+      "sql": {
+        "header1": "Vor dem Ausführen: Backup erstellen und prüfen, ob jede Tabelle wirklich ungenutzt ist.",
+        "header2": "Storage-Tabellen ohne Registrierung können zur Laufzeit angelegt worden sein.",
+        "title": "Lösch-SQL",
+        "text": "Automatisch aus den Kandidaten erzeugt. Hier wird nichts ausgeführt.",
+        "copy": "Kopieren",
+        "copied": "SQL kopiert",
+        "copyFailed": "Kopieren nicht möglich",
+        "empty": "Keine Kandidaten, kein SQL nötig.",
+        "open": "SQL anzeigen"
       }
+    },
+    "entities": {
+      "title": "Entities",
+      "count": "{{count}} Entities",
+      "search": "Name oder Tabelle suchen",
+      "listLabel": "Entities",
+      "columns": "{{count}} Spalten",
+      "relations": "{{count}} Relationen",
+      "rows": "{{count}} Zeilen",
+      "missing": "Fehlt in DB",
+      "empty": "Keine Entities gefunden."
     }
   },
   "rolePicker": {

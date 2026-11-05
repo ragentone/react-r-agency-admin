@@ -7,9 +7,10 @@ import { ADMIN_SYSTEM_VIEW_KEY } from '../../const';
 import type { SystemTab } from '../types';
 import { SystemDatabaseTab } from './SystemDatabaseTab';
 import { SystemDeploysTab } from './SystemDeploysTab';
+import { SystemEntitiesTab } from './SystemEntitiesTab';
 import { SystemStorageTab } from './SystemStorageTab';
 
-const TABS: SystemTab[] = ['version', 'storage', 'database'];
+const TABS: SystemTab[] = ['version', 'storage', 'database', 'entities'];
 const STORE_KEY = ADMIN_SYSTEM_VIEW_KEY;
 
 const restore = (): SystemTab => {
@@ -70,6 +71,9 @@ export const SystemArea: React.FC = () => {
         </TabsContent>
         <TabsContent value="database" className="mt-0 pb-10">
           <SystemDatabaseTab />
+        </TabsContent>
+        <TabsContent value="entities" className="mt-0 pb-10">
+          <SystemEntitiesTab />
         </TabsContent>
       </Tabs>
     </div>

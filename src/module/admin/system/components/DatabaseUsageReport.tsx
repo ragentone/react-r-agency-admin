@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { formatAgo } from '../../stats/utils';
 import type { DbUsageStatus, IDbUsageReport } from '../types';
+import { DatabaseDropSql } from './DatabaseDropSql';
 import { DatabaseMissingList } from './DatabaseMissingList';
 import { DatabaseTableList } from './DatabaseTableList';
 
@@ -35,6 +36,10 @@ export const DatabaseUsageReport: React.FC<Props> = ({ report, refreshing, onRef
     [report.tables, filter]
   );
   const { summary } = report;
+  const candidates = useMemo(
+    () => report.tables.filter(table => MATCH.candidates.includes(table.status)),
+    [report.tables]
+  );
 
   return (
     <div className="flex flex-col gap-4 px-4 py-4">
@@ -93,6 +98,11 @@ export const DatabaseUsageReport: React.FC<Props> = ({ report, refreshing, onRef
           </Button>
         ))}
       </div>
+      <DatabaseDropSql
+        candidates={candidates}
+        database={report.database}
+        generatedAt={report.generatedAt}
+      />
 
       <DatabaseTableList tables={tables} />
       <DatabaseMissingList missing={report.missing} />
