@@ -72,6 +72,8 @@ export const fetchActivePlugins = async (scope: PluginScope = 'frontend'): Promi
 };
 
 const started: Partial<Record<PluginScope, Promise<number>>> = {};
+/** Set once the plugins of a scope are loaded. Read synchronously, so a remount does not wait again. */
+const loadedScopes: Partial<Record<PluginScope, boolean>> = {};
 
 /**
  * Loads the active plugins once per page load. Later calls get the same promise, so it is
@@ -83,6 +85,7 @@ export const loadActivePlugins = (scope: PluginScope = 'frontend'): Promise<numb
       const loaded = await loadPlugins(refs);
       // Dev plugins (outside production only) reload on every new dev build.
       refs.forEach(ref => ref.dev && watchPluginDev(ref));
+      loadedScopes[scope] = true;
       return loaded;
     });
   }
@@ -91,8 +94,9 @@ export const loadActivePlugins = (scope: PluginScope = 'frontend'): Promise<numb
 
 /** `true` once the active plugins are loaded. Wait for it before looking up a plugin page. */
 export const usePluginsLoaded = (scope: PluginScope = 'frontend'): boolean => {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(() => loadedScopes[scope] === true);
   useEffect(() => {
+    if (loaded) return;
     let alive = true;
     void loadActivePlugins(scope).then(() => {
       if (alive) setLoaded(true);
@@ -100,6 +104,24 @@ export const usePluginsLoaded = (scope: PluginScope = 'frontend'): boolean => {
     return () => {
       alive = false;
     };
-  }, [scope]);
+  }, [scope, loaded]);
   return loaded;
+};
+
+/** Longest wait for the plugins before the content below a slot is shown anyway. */
+export const PLUGIN_WAIT_MS = 400;
+
+/**
+ * `true` once the plugins are loaded, or after `timeoutMs` if they are still loading. A slow or
+ * failing plugin must not keep the page below it hidden.
+ */
+export const usePluginsReady = (scope: PluginScope = 'frontend', timeoutMs: number = PLUGIN_WAIT_MS): boolean => {
+  const loaded = usePluginsLoaded(scope);
+  const [timedOut, setTimedOut] = useState(false);
+  useEffect(() => {
+    if (loaded) return;
+    const timer = setTimeout(() => setTimedOut(true), timeoutMs);
+    return () => clearTimeout(timer);
+  }, [loaded, timeoutMs]);
+  return loaded || timedOut;
 };

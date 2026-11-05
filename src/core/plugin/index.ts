@@ -1,4 +1,4 @@
-export { fetchActivePlugins, loadActivePlugins, usePluginsLoaded } from './plugin.bootstrap';
+export { fetchActivePlugins, loadActivePlugins, usePluginsLoaded, usePluginsReady } from './plugin.bootstrap';
 export { callPluginAction, createPluginApi } from './plugin.host';
 export { loadPlugin, loadPlugins } from './plugin.loader';
 export { clearPluginPages, pagePermission, registerPluginPage, usePluginPage } from './plugin.pages';

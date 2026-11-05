@@ -1,7 +1,7 @@
 import { cn } from '@ui/lib/utils';
 import React, { useEffect, useState } from 'react';
 
-import { usePluginsLoaded } from './plugin.bootstrap';
+import { usePluginsReady } from './plugin.bootstrap';
 import { usePluginSlot } from './plugin.slots';
 import type { PluginScope, PluginSlotName } from './plugin.types';
 import { PluginBoundary } from './PluginBoundary';
@@ -11,6 +11,11 @@ interface IPluginSlotProps {
   className?: string;
   /** App the slot lives in. Plugins of other scopes are not loaded here. */
   scope?: PluginScope;
+  /**
+   * Content that follows the slot (e.g. the timeline). It is held back until the plugins are loaded
+   * (or the wait times out), then shown in the same frame as the plugin components, so nothing moves.
+   */
+  children?: React.ReactNode;
 }
 
 /**
@@ -37,16 +42,18 @@ const Reveal: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 };
 
 /**
- * Renders every plugin component registered for `name`. Nothing is shown while the plugins load;
- * then the components open in. Renders nothing if there are no components.
+ * Renders every plugin component registered for `name`. Nothing is shown while the plugins load.
+ * With `children`, the plugin components and the children appear together, without a height
+ * animation, so the content below does not move. Without children, the components open in with `Reveal`.
  */
-export const PluginSlot: React.FC<IPluginSlotProps> = ({ name, className, scope = 'frontend' }) => {
+export const PluginSlot: React.FC<IPluginSlotProps> = ({ name, className, scope = 'frontend', children }) => {
   const entries = usePluginSlot(name);
-  const loaded = usePluginsLoaded(scope);
-  if (!loaded || entries.length === 0) return null;
+  const ready = usePluginsReady(scope);
+  if (!ready) return null;
 
-  return (
-    <Reveal>
+  const hasChildren = children !== undefined && children !== null && children !== false;
+  const components =
+    entries.length === 0 ? null : (
       <div data-slot="plugin-slot" data-name={name} className={className}>
         {entries.map(({ pluginId, component: Component }) => (
           <PluginBoundary key={pluginId} pluginId={pluginId} slot={name}>
@@ -54,6 +61,14 @@ export const PluginSlot: React.FC<IPluginSlotProps> = ({ name, className, scope 
           </PluginBoundary>
         ))}
       </div>
-    </Reveal>
+    );
+
+  if (!hasChildren) return components ? <Reveal>{components}</Reveal> : null;
+
+  return (
+    <>
+      {components}
+      {children}
+    </>
   );
 };
