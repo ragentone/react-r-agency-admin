@@ -269,6 +269,9 @@ export type PluginPageDisplay = 'route' | 'fullscreen';
 /** Width of a `route` page inside the app shell. */
 export type PluginPageWidth = 'narrow' | 'default' | 'wide' | 'full';
 
+/** Who may open a page: everyone (default), only logged-in users, or only guests. */
+export type PluginPageAudience = 'all' | 'user' | 'guest';
+
 export interface IPluginPageOptions {
   /** Default `route`. */
   display?: PluginPageDisplay;
@@ -276,6 +279,10 @@ export interface IPluginPageOptions {
   width?: PluginPageWidth;
   /** Only for `route`: the page scrolls itself (instead of its content). Default `false`. */
   scrollable?: boolean;
+  /** Default `all`. When the user does not match, the host shows an error message instead of the page. */
+  audience?: PluginPageAudience;
+  /** Roles that may open the page (any of them). Implies a logged-in user. A host check, not a security boundary: protect data with `roles` on actions. */
+  userRoles?: string[];
 }
 
 /** Props a plugin page gets: the plugin id, the path segments after the page and the query parameters. */

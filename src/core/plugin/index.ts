@@ -1,7 +1,8 @@
 export { fetchActivePlugins, loadActivePlugins, usePluginsLoaded } from './plugin.bootstrap';
 export { callPluginAction, createPluginApi } from './plugin.host';
 export { loadPlugin, loadPlugins } from './plugin.loader';
-export { clearPluginPages, registerPluginPage, usePluginPage } from './plugin.pages';
+export { clearPluginPages, pagePermission, registerPluginPage, usePluginPage } from './plugin.pages';
+export { usePluginUser } from './plugin.user';
 export { registerPluginSlot, unregisterPlugin, usePluginSlot } from './plugin.slots';
 export * from './plugin.types';
 export { PluginBoundary } from './PluginBoundary';
