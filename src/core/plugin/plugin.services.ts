@@ -1,4 +1,9 @@
-import type { IPluginServices, PluginServiceInput, PluginServiceName, PluginServiceOutput } from './plugin.service';
+import type {
+  IPluginServices,
+  PluginServiceInput,
+  PluginServiceName,
+  PluginServiceOutput,
+} from './plugin.service';
 import type { IPluginRequestResult, PluginCapability } from './plugin.types';
 
 /**
@@ -19,8 +24,12 @@ interface IRegisteredService {
 const SERVICES = new Map<string, IRegisteredService>();
 
 /** Registers the implementation of a service. A second registration of the same name replaces the first. */
-export const registerPluginService = <K extends PluginServiceName>(name: K, def: ServiceDef<K>): void => {
-  if (SERVICES.has(name)) console.warn(`[plugin host] service "${name}" registered twice, the later one wins`);
+export const registerPluginService = <K extends PluginServiceName>(
+  name: K,
+  def: ServiceDef<K>
+): void => {
+  if (SERVICES.has(name))
+    console.warn(`[plugin host] service "${name}" registered twice, the later one wins`);
   SERVICES.set(name, def as unknown as IRegisteredService);
 };
 
@@ -65,4 +74,9 @@ registerPluginService('viewport.current', {
 registerPluginService('theme.current', {
   capability: null,
   run: () => ({ mode: document.documentElement.classList.contains('dark') ? 'dark' : 'light' }),
+});
+
+registerPluginService('app.reload', {
+  run: () => window.location.reload(),
+  capability: 'navigate',
 });

@@ -32,6 +32,11 @@ export interface IPluginServices {
     input: void;
     output: { mode: 'light' | 'dark' };
   };
+  'app.reload': {
+    capability: 'navigate';
+    input: void;
+    output: void;
+  };
 }
 
 export type PluginServiceName = keyof IPluginServices;
