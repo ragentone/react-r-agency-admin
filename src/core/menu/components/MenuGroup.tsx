@@ -1,3 +1,5 @@
+import { MenuItemAction, MenuItemBadge, MenuItemIcon } from '@core/menu';
+import { useMenuText } from '@core/menu';
 import { cn } from '@ui/lib';
 import { Popover, PopoverContent, PopoverTrigger } from '@ui/shad-cn/components/popover.tsx';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
@@ -7,8 +9,6 @@ import { useTranslation } from 'react-i18next';
 
 import { type IResolvedMenuEntry, useMenuGroupOpen } from '../hooks';
 import type { IMenuContext } from '../types.ts';
-import { MenuItemAction, MenuItemBadge, MenuItemIcon } from '@core/menu';
-import { useMenuText } from '@core/menu';
 
 interface IMenuGroupProps {
   item: IResolvedMenuEntry;
@@ -112,11 +112,11 @@ export const MenuGroup = ({ item, ctx, variant, onAfterSelect }: IMenuGroupProps
         <span className={cn('truncate text-title', item.active ? 'font-bold' : 'font-medium')}>
           {label}
         </span>
-        {drawer && item.entry.description && (
-          <span className={'truncate text-caption text-muted-foreground'}>
-            {text(item.entry.description)}
-          </span>
-        )}
+        {/*{drawer && item.entry.description && (*/}
+        {/*  <span className={'truncate text-caption text-muted-foreground'}>*/}
+        {/*    {text(item.entry.description)}*/}
+        {/*  </span>*/}
+        {/*)}*/}
       </span>
       {/* Open: the children show their own badges – collapsed: summed on the parent. */}
       {(!open || item.entry.useBadge) && <MenuItemBadge item={item} />}
@@ -277,7 +277,7 @@ export const MenuRailGroup = ({ item, ctx }: { item: IResolvedMenuEntry; ctx: IM
                 className={cn(
                   rowBase,
                   'gap-3 rounded-lg px-2.5 py-2',
-                  child.active ? 'bg-foreground/[0.07] font-bold' : 'hover:bg-foreground/[0.05]'
+                  child.active ? 'bg-foreground/[0.07] font-bold' : 'hover:bg-foreground/5'
                 )}
               >
                 <MenuItemIcon item={child} className={'size-5'} />

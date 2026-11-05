@@ -64,7 +64,6 @@ const MenuDrawer = ({ open, onOpenChange }: IProps) => {
 
   const renderSectionRow = (section: IResolvedMenuSection) => {
     const item = triggerItemOf(section);
-    const count = tilesOf(section).length;
 
     return (
       <button
@@ -79,9 +78,6 @@ const MenuDrawer = ({ open, onOpenChange }: IProps) => {
         <MenuItemIcon item={item} />
         <span className={'min-w-0 flex-1 truncate'}>{text(section.config.label)}</span>
         <MenuItemBadge item={item} />
-        {count > 0 && (
-          <span className={'shrink-0 text-caption tabular-nums text-muted-foreground'}>{count}</span>
-        )}
         <ChevronRight className={'size-4 shrink-0 text-muted-foreground'} aria-hidden />
       </button>
     );
@@ -118,13 +114,23 @@ const MenuDrawer = ({ open, onOpenChange }: IProps) => {
         footer.length > 0 ? (
           <div className={'flex flex-col'}>
             {footer.map(entry => (
-              <MenuComponentSlot key={entry.id} entry={entry} variant={'drawer'} ctx={ctx} close={close} />
+              <MenuComponentSlot
+                key={entry.id}
+                entry={entry}
+                variant={'drawer'}
+                ctx={ctx}
+                close={close}
+              />
             ))}
           </div>
         ) : undefined
       }
     >
-      <div className={'min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[max(1.5rem,env(safe-area-inset-bottom))]'}>
+      <div
+        className={
+          'min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[max(1.5rem,env(safe-area-inset-bottom))]'
+        }
+      >
         <AppBrand className={'px-4 pt-4 pb-3'} />
         {visibleSections.map(section =>
           section.config.display === 'drawer' ? (

@@ -94,8 +94,8 @@ export const MenuGroupDrawer = ({
             className={cn(
               'group relative flex w-full items-center justify-center rounded-full p-3 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50',
               item.active || open
-                ? 'bg-foreground/[0.08] text-foreground'
-                : 'text-muted-foreground hover:bg-foreground/[0.06] hover:text-foreground'
+                ? 'bg-foreground/8 text-foreground'
+                : 'text-muted-foreground hover:bg-foreground/6 hover:text-foreground'
             )}
           >
             <span className={'relative flex'}>
@@ -121,7 +121,7 @@ export const MenuGroupDrawer = ({
         'flex h-12 w-full items-center gap-4 rounded-full px-4 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50',
         item.active || open
           ? 'bg-foreground/[0.07] text-foreground'
-          : 'text-muted-foreground hover:bg-foreground/[0.06] hover:text-foreground'
+          : 'text-muted-foreground hover:bg-foreground/6 hover:text-foreground'
       )}
     >
       <MenuItemIcon item={item} />

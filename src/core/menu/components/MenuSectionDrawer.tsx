@@ -7,7 +7,6 @@ import { openMenuSection, useMenuSheetOpen } from '../store.ts';
 import type { MenuComponentVariant } from '../types.ts';
 import { MenuItemBadge, MenuItemIcon } from './MenuParts.tsx';
 import { useMenuText } from './use.menu.text.ts';
-import { Badge } from '@ui/shad-cn/components/badge.tsx';
 
 /** Entries of a section as flat tiles: groups contribute their (navigating) parent + children. */
 export const tilesOf = (section: IResolvedMenuSection): IResolvedMenuEntry[] =>
@@ -47,7 +46,6 @@ export const MenuSectionTrigger = ({
   const isOpen = useMenuSheetOpen('section', section.id);
   const item = triggerItemOf(section);
   const label = text(section.config.label);
-  const count = item.children?.length ?? 0;
   const onClick = () => openMenuSection(section.id);
 
   if (variant === 'rail') {
@@ -107,7 +105,6 @@ export const MenuSectionTrigger = ({
         {label}
       </span>
       <MenuItemBadge item={item} />
-      {count > 0 && <Badge className={'shrink-0'}>{count}</Badge>}
     </button>
   );
 };
