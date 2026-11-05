@@ -1,25 +1,32 @@
 import { Input } from '@ui/shad-cn/components/input.tsx';
 import { Search } from 'lucide-react';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { StatsError, StatsSkeleton } from '../../stats/components/common';
 import { useStatsQuery } from '../../stats/hooks/use.stats.query';
 import { SystemApi } from '../api';
+import { readLast, rememberLast } from '../last.loaded';
 import type { IDbEntity } from '../types';
 import { EntityList } from './EntityList';
 
-/** Tab "Entities": every registered entity with its table, columns and row count. */
+const ENTITIES_KEY = 'db-entities';
+
+/** Entities view: every registered entity with its table, columns and row count. */
 export const SystemEntitiesTab: React.FC = () => {
   const { data, loading, error, reload } = useStatsQuery(
     () => SystemApi.dbEntities(),
     result => result.entities,
-    'db-entities'
+    ENTITIES_KEY
   );
-  if (loading && !data) return <StatsSkeleton tiles={0} variant="list" />;
-  if (error && !data) return <StatsError onRetry={() => void reload()} />;
-  if (!data) return null;
-  return <EntitiesView entities={data} />;
+  useEffect(() => {
+    if (data) rememberLast(ENTITIES_KEY, data);
+  }, [data]);
+  const shown = data ?? readLast<IDbEntity[]>(ENTITIES_KEY);
+  if (!shown && loading) return <StatsSkeleton tiles={0} variant="list" />;
+  if (!shown && error) return <StatsError onRetry={() => void reload()} />;
+  if (!shown) return null;
+  return <EntitiesView entities={shown} />;
 };
 
 const EntitiesView: React.FC<{ entities: IDbEntity[] }> = ({ entities }) => {

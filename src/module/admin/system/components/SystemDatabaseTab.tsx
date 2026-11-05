@@ -1,15 +1,18 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/shad-cn/components/tabs.tsx';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { StatsError, StatsSkeleton } from '../../stats/components/common';
 import { useStatsQuery } from '../../stats/hooks/use.stats.query';
 import { SystemApi } from '../api';
+import { readLast, rememberLast } from '../last.loaded';
+import type { IDbUsageReport } from '../types';
 import { DatabaseUsageReport } from './DatabaseUsageReport';
 import { SystemEntitiesTab } from './SystemEntitiesTab';
 
 type DatabaseView = 'usage' | 'entities';
 const VIEWS: DatabaseView[] = ['usage', 'entities'];
+const USAGE_KEY = 'db-usage';
 
 /** Tab "Datenbank": table usage (read-only) and the list of registered entities. */
 export const SystemDatabaseTab: React.FC = () => {
@@ -34,17 +37,25 @@ export const SystemDatabaseTab: React.FC = () => {
   );
 };
 
-/** Table usage report, loaded when the view is shown. */
+/** Table usage report. Shows the last result at once while it refreshes. */
 const UsageView: React.FC = () => {
   const { data, loading, refreshing, error, reload } = useStatsQuery(
     () => SystemApi.dbUsage(),
     result => result.report,
-    'db-usage'
+    USAGE_KEY
   );
-  if (loading && !data) return <StatsSkeleton tiles={4} variant="list" />;
-  if (error && !data) return <StatsError onRetry={() => void reload()} />;
-  if (!data) return null;
+  useEffect(() => {
+    if (data) rememberLast(USAGE_KEY, data);
+  }, [data]);
+  const shown = data ?? readLast<IDbUsageReport>(USAGE_KEY);
+  if (!shown && loading) return <StatsSkeleton tiles={4} variant="list" />;
+  if (!shown && error) return <StatsError onRetry={() => void reload()} />;
+  if (!shown) return null;
   return (
-    <DatabaseUsageReport report={data} refreshing={refreshing} onRefresh={() => void reload()} />
+    <DatabaseUsageReport
+      report={shown}
+      refreshing={refreshing || loading}
+      onRefresh={() => void reload()}
+    />
   );
 };
