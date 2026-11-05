@@ -2,8 +2,6 @@
 export const ADMIN_ROUTE = '/admin';
 /** Dynamic pages of the admin area (own route + menu entry). */
 export const ADMIN_PAGES_ROUTE = '/admin/pages';
-/** Visitor statistics (runtime shared/stats). */
-export const ADMIN_STATS_ROUTE = '/admin/stats';
 /** Version, deploys, server storage (runtime shared/system). */
 export const ADMIN_SYSTEM_ROUTE = '/admin/system';
 /** Runtime Markdown docs (`docs/` of the runtime, GraphQL `adminSystemDocsList`). */
@@ -14,8 +12,7 @@ export const ADMIN_PLUGINS_ROUTE = '/admin/plugins';
 export const ADMIN_PLUGIN_ROUTE = '/admin/plugins/$pluginId';
 export const adminPluginPath = (pluginId: string) =>
   ADMIN_PLUGIN_ROUTE.replace('$pluginId', encodeURIComponent(pluginId));
-/** localStorage keys of the last tab – the admin home sets them to open a tab directly. */
-export const ADMIN_STATS_VIEW_KEY = 'admin-stats-view';
+/** localStorage key of the last system tab – the admin home sets it to open a tab directly. */
 export const ADMIN_SYSTEM_VIEW_KEY = 'admin-system-view';
 /** Who may use it – same check as the backend (`@GraphqlAuth({ role: 'admin:user' })`). */
 export const ADMIN_ROLES = 'admin:user';

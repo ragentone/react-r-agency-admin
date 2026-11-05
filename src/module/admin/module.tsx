@@ -1,6 +1,6 @@
 import { Core } from '@core/core.api.ts';
 import { lazyPage } from '@core/page/lazy.page.ts';
-import { BookOpen, ChartNoAxesCombined, FileText, Puzzle, Server, UsersRound } from 'lucide-react';
+import { BookOpen, FileText, Puzzle, Server, UsersRound } from 'lucide-react';
 
 import {
   ADMIN_DOCS_ROUTE,
@@ -9,7 +9,6 @@ import {
   ADMIN_PLUGINS_ROUTE,
   ADMIN_ROLES,
   ADMIN_ROUTE,
-  ADMIN_STATS_ROUTE,
   ADMIN_SYSTEM_ROUTE,
   SITE_PAGE_ROUTE,
 } from './const';
@@ -22,10 +21,6 @@ const PageAdmin = lazyPage(
 const PageAdminPages = lazyPage(
   () => import('./pages/PageAdminPages.tsx').then(m => m.PageAdminPages),
   'PageAdminPages'
-);
-const PageAdminStats = lazyPage(
-  () => import('./pages/PageAdminStats.tsx').then(m => m.PageAdminStats),
-  'PageAdminStats'
 );
 // Admin instance: the start page becomes the admin dashboard (non-admins keep the core page).
 const PageAdminHome = lazyPage(
@@ -65,13 +60,6 @@ Core.router.register({
   path: ADMIN_PAGES_ROUTE,
   target: 'admin',
   page: PageAdminPages,
-  meta: { title: 'Admin' },
-});
-
-Core.router.register({
-  path: ADMIN_STATS_ROUTE,
-  target: 'admin',
-  page: PageAdminStats,
   meta: { title: 'Admin' },
 });
 
@@ -126,17 +114,6 @@ Core.menu.register({
   section: 'admin',
   roles: ADMIN_ROLES,
   sortOrder: 20,
-});
-
-Core.menu.register({
-  id: 'admin-stats',
-  label: 'admin:menu.statsLabel',
-  description: 'admin:menu.statsDescription',
-  icon: ChartNoAxesCombined,
-  to: ADMIN_STATS_ROUTE,
-  section: 'admin',
-  roles: ADMIN_ROLES,
-  sortOrder: 30,
 });
 
 Core.menu.register({
