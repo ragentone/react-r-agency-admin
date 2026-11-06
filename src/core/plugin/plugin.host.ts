@@ -1,3 +1,4 @@
+import type { PluginScope } from './plugin.types';
 import { useAuthTokenStore } from '@core/auth/auth.token.store.tsx';
 import { Link } from '@tanstack/react-router';
 import { getMeshClient } from 'r-agency-mesh-client-v1/release';
@@ -82,6 +83,13 @@ export const callPluginAction = async <T = unknown>(
  * The API a plugin gets in `register()`. `allowedSlots` comes from the manifest:
  * a plugin may only register components for slots it declared.
  */
+let pluginAppScope: PluginScope = 'frontend';
+
+/** Set by the app's PluginProvider before plugins load: `frontend` or `admin`. */
+export const setPluginAppScope = (scope: PluginScope): void => {
+  pluginAppScope = scope;
+};
+
 const buildPluginApi = (
   pluginId: string,
   allowedSlots: PluginSlotName[],
@@ -92,6 +100,7 @@ const buildPluginApi = (
   events: IPluginGrants = { emits: [], listens: [], capabilities: null, live: [] }
 ): IPluginApi => ({
   React,
+  scope: pluginAppScope,
   config: {
     get: () => ({ ...publicConfig }),
   },
@@ -122,12 +131,13 @@ const buildPluginApi = (
     }
     emitPluginEvent(pluginId, name, payload);
   },
-  onLive: (topic, handler) => {
+  onLive: <T = unknown>(topic: string, handler: (payload: T) => void) => {
     if (!events.live.includes(topic)) {
       console.warn(`[plugin:${pluginId}] live topic "${topic}" not declared in live`);
       return () => undefined;
     }
-    return subscribePluginLive(pluginId, topic, handler);
+    // The payload comes from the backend and is not validated at runtime; T is the plugin's promise about its shape.
+    return subscribePluginLive(pluginId, topic, handler as (payload: unknown) => void);
   },
   subscribe: (name, handler) => {
     if (!events.listens.includes(name)) {

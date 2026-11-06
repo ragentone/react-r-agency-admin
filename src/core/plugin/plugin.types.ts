@@ -741,6 +741,8 @@ export interface IPluginUi {
 
 /** What the host hands to a plugin in `register(api)`. */
 export interface IPluginApi {
+  /** Scope der App, in der das Plugin läuft: `frontend` oder `admin`. */
+  readonly scope: PluginScope;
   /** Fertige Bausteine des Hosts, siehe `IPluginUi`. */
   ui: IPluginUi;
   /**
@@ -797,7 +799,7 @@ export interface IPluginApi {
    */
   subscribe(name: string, handler: (payload: unknown, meta: IPluginEventMeta) => void | Promise<void>): () => void;
   /** Receives a live push of this plugin's backend (`api.publish` there), only for topics in `live` of plugin.json. */
-  onLive(topic: string, handler: (payload: unknown) => void): () => void;
+  onLive<T = unknown>(topic: string, handler: (payload: T) => void): () => void;
   /**
    * Subscribes to a host event. Only `router.beforeNavigate` can intervene, and only if the plugin
    * declares it in `intervene` in plugin.json. Returns a function that removes the subscription.
