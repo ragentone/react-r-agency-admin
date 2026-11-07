@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../vite/import/module.config.schema.json",
+  "active": true,
+  "name": "module-cli-auth",
+  "entries": ["module.tsx"],
+  "sortOrder": 0
+}
