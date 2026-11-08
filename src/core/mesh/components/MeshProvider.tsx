@@ -3,6 +3,7 @@ import i18n from 'i18next';
 import { useMesh } from 'r-agency-mesh-client-v1/release';
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import { installDebugGlobalHandlers } from '../debug/debug.reporter.ts';
 import { resetMeshReconnectCount, startMeshKeepAlive } from '../keep.alive.ts';
 import { type IMeshContext, type MeshConnectionStatus, MeshContext } from './mesh.context.ts';
 import { MeshError } from './MeshError.tsx';
@@ -36,6 +37,7 @@ const MeshProvider = ({ children, fallback, afterLoadDelay = 0 }: IProps) => {
     // hot reload would add another set of listeners (and another header hook).
     const unsubscribe: Array<() => void> = [];
     const init = () => {
+      installDebugGlobalHandlers();
       config({
         endpoint: import.meta.env.VITE_MESH_SERVER_ENDPOINT,
         onTryReconnect: (count: number) => {

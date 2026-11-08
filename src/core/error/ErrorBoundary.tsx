@@ -1,5 +1,6 @@
 import React, { Component, type ComponentType, type ErrorInfo, type ReactNode } from 'react';
 
+import { reportClientError } from '../mesh/debug/debug.reporter.ts';
 import { ErrorFallback } from './ErrorFallback.tsx';
 import type { ErrorBoundaryProps, ErrorBoundaryState, ErrorFallbackProps } from './types.ts';
 
@@ -24,6 +25,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
   public override componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     this.setState({ errorInfo });
+    reportClientError('ErrorBoundary', error, errorInfo.componentStack ?? undefined);
     this.props.onError?.(error, errorInfo);
     // Log to console in development
     if (import.meta.env.DEV) {
