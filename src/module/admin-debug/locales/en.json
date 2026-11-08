@@ -36,6 +36,10 @@
     "tag": "Tag",
     "message": "Message",
     "error": "Error",
-    "device": "Device"
-  }
+    "device": "Device",
+    "json": "JSON",
+    "source": "Source"
+  },
+  "sortBy": "Sort by",
+  "source": "Source"
 }

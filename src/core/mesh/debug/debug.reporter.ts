@@ -22,6 +22,8 @@ const MAX_FIELD_LENGTH = 1000;
 const QUEUE_CAPACITY = 200;
 const BATCH_DELAY_MS = 1_000;
 const SEND_TIMEOUT_MS = 5_000;
+/** Sender of every event from this app (runtime `DEBUG_REPORT_SOURCES`). */
+const DEBUG_REPORT_SOURCE = 'admin';
 
 const queue: IDebugReportEvent[] = [];
 let timer: ReturnType<typeof setTimeout> | undefined;
@@ -87,7 +89,7 @@ export const flushDebugReports = async (): Promise<void> => {
         .graphql()
         .mutate({
           mutation: DebugClientReportMutation,
-          variables: { events: batch },
+          variables: { events: batch.map(event => ({ ...event, source: DEBUG_REPORT_SOURCE })) },
         }),
       SEND_TIMEOUT_MS
     );

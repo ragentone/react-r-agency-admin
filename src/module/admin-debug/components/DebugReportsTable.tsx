@@ -26,12 +26,16 @@ import { useStatsQuery } from '../../admin/stats/hooks/use.stats.query';
 import { AdminDebugApi } from '../api';
 import { ADMIN_DEBUG_PAGE_SIZE } from '../const';
 import type { DebugSortDir, DebugSortField, IDebugReport } from '../types';
+import { DebugReportCard } from './DebugReportCard';
 import { DebugReportDrawer } from './DebugReportDrawer';
 
 /** A destructive action waits for a second click (no modal, see design rules). */
 type Confirm = 'selected' | 'all' | null;
 
-/** Paginated list of stored client debug reports with sorting, detail drawer, test send and delete. */
+/**
+ * Paginated list of stored client debug reports. Mobile: cards; from `sm`: table.
+ * Sorting, detail drawer, test send and delete.
+ */
 export const DebugReportsTable: React.FC = () => {
   const { t, i18n } = useTranslation('admin-debug');
   const [page, setPage] = useState(1);
@@ -147,8 +151,8 @@ export const DebugReportsTable: React.FC = () => {
   };
 
   return (
-    <section className="space-y-4 px-4 pt-4">
-      <div className="flex flex-wrap items-center justify-between gap-2">
+    <section className="space-y-4 px-4 pt-4 pb-10">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-caption text-muted-foreground">{t('count', { count: view.total })}</p>
         <div className="flex flex-wrap items-center gap-2">
           <Button variant="outline" size="sm" onClick={() => void sendTest()} disabled={busy}>
@@ -185,96 +189,128 @@ export const DebugReportsTable: React.FC = () => {
           </Button>
         )}
         {message && (
-          <p aria-live="polite" className="text-caption text-muted-foreground">
+          <p aria-live="polite" className="w-full text-caption text-muted-foreground sm:w-auto">
             {message}
           </p>
         )}
       </div>
 
+      {/* Mobile sort: same two sort fields as the table headers. */}
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-caption sm:hidden">
+        <span className="text-muted-foreground">{t('sortBy')}</span>
+        {sortHeader('createdAt', t('time'))}
+        {sortHeader('level', t('level'))}
+      </div>
+
       {items.length === 0 ? (
         <p className="py-10 text-center text-body text-muted-foreground">{t('empty')}</p>
       ) : (
-        <div
-          className={cn(
-            'overflow-x-auto rounded-2xl border border-border/50 transition-opacity',
-            (refreshing || loading || busy) && 'opacity-60'
-          )}
-        >
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-10">
-                  <Checkbox
-                    checked={allOnPage}
-                    onCheckedChange={value => togglePage(value === true)}
-                    aria-label={t('selectAll')}
-                  />
-                </TableHead>
-                <TableHead>{sortHeader('createdAt', t('time'))}</TableHead>
-                <TableHead>{sortHeader('level', t('level'))}</TableHead>
-                <TableHead>{t('tag')}</TableHead>
-                <TableHead>{t('message')}</TableHead>
-                <TableHead className="hidden sm:table-cell">{t('device')}</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {items.map(item => (
-                <TableRow
-                  key={item.id}
-                  data-state={selected.has(item.id) ? 'selected' : undefined}
-                  className="cursor-pointer"
-                  tabIndex={0}
-                  onClick={() => openDetail(item)}
-                  onKeyDown={event => {
-                    if (event.key === 'Enter') openDetail(item);
-                  }}
-                >
-                  <TableCell onClick={event => event.stopPropagation()}>
+        <>
+          <ul
+            className={cn(
+              'space-y-2 transition-opacity sm:hidden',
+              (refreshing || loading || busy) && 'opacity-60'
+            )}
+          >
+            {items.map(item => (
+              <DebugReportCard
+                key={item.id}
+                item={item}
+                time={formatTime(item.createdAt)}
+                selected={selected.has(item.id)}
+                selectLabel={t('selectRow')}
+                onToggle={on => toggleRow(item.id, on)}
+                onOpen={() => openDetail(item)}
+              />
+            ))}
+          </ul>
+
+          <div
+            className={cn(
+              'hidden overflow-x-auto rounded-2xl border border-border/50 transition-opacity sm:block',
+              (refreshing || loading || busy) && 'opacity-60'
+            )}
+          >
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-10">
                     <Checkbox
-                      checked={selected.has(item.id)}
-                      onCheckedChange={value => toggleRow(item.id, value === true)}
-                      aria-label={t('selectRow')}
+                      checked={allOnPage}
+                      onCheckedChange={value => togglePage(value === true)}
+                      aria-label={t('selectAll')}
                     />
-                  </TableCell>
-                  <TableCell className="whitespace-nowrap text-caption text-muted-foreground">
-                    {formatTime(item.createdAt)}
-                  </TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={item.level === 'error' ? 'destructive' : 'outline'}
-                      className={item.level === 'error' ? 'text-white' : undefined}
-                    >
-                      {item.level}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="font-mono text-caption whitespace-nowrap">
-                    {item.tag}
-                  </TableCell>
-                  <TableCell className="max-w-[260px]">
-                    <p className="truncate text-body" title={item.message}>
-                      {item.message}
-                    </p>
-                    {item.error && (
-                      <p className="truncate text-caption text-muted-foreground" title={item.error}>
-                        {item.error.split('\n')[0]}
-                      </p>
-                    )}
-                  </TableCell>
-                  <TableCell className="hidden font-mono text-caption text-muted-foreground sm:table-cell">
-                    {item.deviceId}
-                  </TableCell>
+                  </TableHead>
+                  <TableHead>{sortHeader('createdAt', t('time'))}</TableHead>
+                  <TableHead>{sortHeader('level', t('level'))}</TableHead>
+                  <TableHead>{t('source')}</TableHead>
+                  <TableHead>{t('tag')}</TableHead>
+                  <TableHead>{t('message')}</TableHead>
+                  <TableHead className="hidden md:table-cell">{t('device')}</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
+              </TableHeader>
+              <TableBody>
+                {items.map(item => (
+                  <TableRow
+                    key={item.id}
+                    data-state={selected.has(item.id) ? 'selected' : undefined}
+                    className="cursor-pointer"
+                    tabIndex={0}
+                    onClick={() => openDetail(item)}
+                    onKeyDown={event => {
+                      if (event.key === 'Enter') openDetail(item);
+                    }}
+                  >
+                    <TableCell onClick={event => event.stopPropagation()}>
+                      <Checkbox
+                        checked={selected.has(item.id)}
+                        onCheckedChange={value => toggleRow(item.id, value === true)}
+                        aria-label={t('selectRow')}
+                      />
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap text-caption text-muted-foreground">
+                      {formatTime(item.createdAt)}
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={item.level === 'error' ? 'destructive' : 'outline'}
+                        className={item.level === 'error' ? 'text-white' : undefined}
+                      >
+                        {item.level}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-caption whitespace-nowrap text-muted-foreground">
+                      {item.source}
+                    </TableCell>
+                    <TableCell className="font-mono text-caption whitespace-nowrap">
+                      {item.tag}
+                    </TableCell>
+                    <TableCell className="max-w-[260px]">
+                      <p className="truncate text-body" title={item.message}>
+                        {item.message}
+                      </p>
+                      {item.error && (
+                        <p className="truncate text-caption text-muted-foreground" title={item.error}>
+                          {item.error.split('\n')[0]}
+                        </p>
+                      )}
+                    </TableCell>
+                    <TableCell className="hidden font-mono text-caption text-muted-foreground md:table-cell">
+                      {item.deviceId}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </>
       )}
 
       <DebugReportDrawer open={detailOpen} onOpenChange={setDetailOpen} report={detail} />
 
       {pages > 1 && (
         <Pagination>
-          <PaginationContent>
+          <PaginationContent className="flex-wrap justify-center">
             <PaginationItem>
               <PaginationPrevious
                 href="#"

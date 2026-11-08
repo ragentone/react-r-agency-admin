@@ -78,9 +78,9 @@ export const AdminDebugApi = {
           mutation: DebugTestMutation as never,
           variables: {
             events: [
-              { level: 'error', tag: 'admin-test', message: 'Test error from admin', error: 'Error: admin test' },
-              { level: 'warn', tag: 'admin-test', message: 'Test warning from admin' },
-              { level: 'info', tag: 'admin-test', message: 'Test info from admin' },
+              { level: 'error', source: 'admin', tag: 'admin-test', message: 'Test error from admin', error: 'Error: admin test' },
+              { level: 'warn', source: 'admin', tag: 'admin-test', message: 'Test warning from admin' },
+              { level: 'info', source: 'admin', tag: 'admin-test', message: 'Test info from admin' },
             ],
           },
         }),

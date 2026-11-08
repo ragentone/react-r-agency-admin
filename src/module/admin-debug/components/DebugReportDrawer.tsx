@@ -44,6 +44,7 @@ export const DebugReportDrawer: React.FC<IProps> = ({ open, onOpenChange, report
               {report.level}
             </Badge>
           </Field>
+          <Field label={t('detail.source')}>{report.source}</Field>
           <Field label={t('detail.createdAt')}>{formatTime(report.createdAt)}</Field>
           <Field label={t('detail.reportedAt')}>{formatTime(report.reportedAt)}</Field>
           <Field label={t('detail.tag')}>
@@ -69,6 +70,25 @@ export const DebugReportDrawer: React.FC<IProps> = ({ open, onOpenChange, report
           </Field>
           <Field label={t('detail.id')}>
             <span className="font-mono text-caption">{report.id}</span>
+          </Field>
+          <Field label={t('detail.json')}>
+            <pre className="max-h-96 overflow-auto rounded-xl border border-border/50 bg-foreground/[0.04] p-3 font-mono text-micro whitespace-pre-wrap break-all text-foreground">
+              {JSON.stringify(
+                {
+                  id: report.id,
+                  createdAt: report.createdAt,
+                  reportedAt: report.reportedAt,
+                  deviceId: report.deviceId,
+                  level: report.level,
+                  tag: report.tag,
+                  message: report.message,
+                  error: report.error,
+                  source: report.source,
+                },
+                null,
+                2
+              )}
+            </pre>
           </Field>
         </dl>
       )}

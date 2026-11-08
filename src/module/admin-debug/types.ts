@@ -10,6 +10,8 @@ export interface IDebugReport {
   tag: string;
   message: string;
   error: string;
+  /** Sender: frontend, admin, app (`unknown` for older clients). */
+  source: string;
 }
 
 /** Sortable columns of the list: time (`createdAt`) and level. */
