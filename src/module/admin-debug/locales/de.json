@@ -1,0 +1,41 @@
+{
+  "title": "Client-Fehler",
+  "subtitle": "Fehlerberichte aus Frontend und App",
+  "menu": {
+    "label": "Client-Fehler",
+    "description": "Fehlerberichte aus Frontend und App"
+  },
+  "count": "{{count}} Einträge",
+  "empty": "Keine Client-Fehler gespeichert.",
+  "refresh": "Neu laden",
+  "time": "Zeit",
+  "level": "Level",
+  "tag": "Tag",
+  "message": "Nachricht",
+  "device": "Gerät",
+  "page": "Seite {{page}} von {{pages}}",
+  "prev": "Zurück",
+  "next": "Weiter",
+  "sendTest": "Test senden",
+  "sent": "{{count}} Testeinträge gesendet",
+  "actionFailed": "Aktion fehlgeschlagen.",
+  "deleteSelected": "{{count}} löschen",
+  "confirmSelected": "{{count}} wirklich löschen?",
+  "deleteAll": "Alle löschen",
+  "confirmAll": "Wirklich alle löschen?",
+  "cancel": "Abbrechen",
+  "deleted": "{{count}} gelöscht",
+  "selectAll": "Alle auf dieser Seite auswählen",
+  "selectRow": "Eintrag auswählen",
+  "detail": {
+    "title": "Eintrag",
+    "id": "ID",
+    "createdAt": "Erstellt",
+    "reportedAt": "Empfangen",
+    "level": "Level",
+    "tag": "Tag",
+    "message": "Nachricht",
+    "error": "Fehler",
+    "device": "Gerät"
+  }
+}

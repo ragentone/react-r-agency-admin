@@ -343,6 +343,17 @@ export interface IMutationCronExecuteArgs {
   name: string;
 }
 
+/** Arguments of `Mutation.debugClientReport` */
+export interface IMutationDebugClientReportArgs {
+  events: ScalarJSON;
+}
+
+/** Arguments of `Mutation.debugReportDelete` */
+export interface IMutationDebugReportDeleteArgs {
+  all?: InputMaybe<boolean>;
+  ids?: InputMaybe<ScalarJSON>;
+}
+
 /** Arguments of `Mutation.deleteMedia` */
 export interface IMutationDeleteMediaArgs {
   id: ScalarID;
@@ -872,6 +883,12 @@ export interface IQueryClientWriteDataArgs {
 /** Arguments of `Query.currencyGet` */
 export interface IQueryCurrencyGetArgs {
   params: ICurrencyParams;
+}
+
+/** Arguments of `Query.debugReportList` */
+export interface IQueryDebugReportListArgs {
+  page?: InputMaybe<number>;
+  pageSize?: InputMaybe<number>;
 }
 
 /** Arguments of `Query.getLocationByCoords` */

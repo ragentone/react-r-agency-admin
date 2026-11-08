@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |     94 |
-| [Mutation](#mutation) |    136 |
-| Object-Types          |    285 |
+| [Query](#query)       |     95 |
+| [Mutation](#mutation) |    138 |
+| Object-Types          |    288 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -259,6 +259,15 @@ Query  ‹IQuery›
 │   ├── count: Int
 │   ├── records: JSON
 │   ├── requestId: String
+│   ├── success: Boolean
+│   └── total: Int
+├── debugReportList: debugReportListReturn  ‹IDebugReportListReturn›
+│   ├── $page: Int
+│   ├── $pageSize: Int
+│   ├── error: String
+│   ├── items: JSON
+│   ├── page: Int
+│   ├── pageSize: Int
 │   ├── success: Boolean
 │   └── total: Int
 ├── developerTestSource: developerTestSourceReturn  ‹IDeveloperTestSourceReturn›
@@ -1319,6 +1328,16 @@ Mutation  ‹IMutation›
 │   ├── $alias: String!
 │   ├── $records: [JSON!]!
 │   └── success: Boolean
+├── debugClientReport: debugClientReportReturn  ‹IDebugClientReportReturn›
+│   ├── $events: JSON!
+│   ├── accepted: Int
+│   └── success: Boolean
+├── debugReportDelete: debugReportDeleteReturn  ‹IDebugReportDeleteReturn›
+│   ├── $all: Boolean
+│   ├── $ids: JSON
+│   ├── deleted: Int
+│   ├── error: String
+│   └── success: Boolean
 ├── deleteAllDummyUsers: deleteAllDummyUsersReturn  ‹IDeleteAllDummyUsersReturn›
 │   └── success: Boolean
 ├── deleteMedia: deleteMediaReturn  ‹IDeleteMediaReturn›
@@ -2026,6 +2045,9 @@ Inputs
 | `dbResourceDeleteResult`                 | Object | `IDbResourceDeleteResult`                 | `objects.ts` |                                                                                  |
 | `dbResourceReadResult`                   | Object | `IDbResourceReadResult`                   | `objects.ts` |                                                                                  |
 | `dbResourceWriteResult`                  | Object | `IDbResourceWriteResult`                  | `objects.ts` |                                                                                  |
+| `debugClientReportReturn`                | Object | `IDebugClientReportReturn`                | `objects.ts` |                                                                                  |
+| `debugReportDeleteReturn`                | Object | `IDebugReportDeleteReturn`                | `objects.ts` |                                                                                  |
+| `debugReportListReturn`                  | Object | `IDebugReportListReturn`                  | `objects.ts` |                                                                                  |
 | `deleteAllDummyUsersReturn`              | Object | `IDeleteAllDummyUsersReturn`              | `objects.ts` |                                                                                  |
 | `deleteMediaReturn`                      | Object | `IDeleteMediaReturn`                      | `objects.ts` |                                                                                  |
 | `developerTestReturn`                    | Object | `IDeveloperTestReturn`                    | `objects.ts` |                                                                                  |

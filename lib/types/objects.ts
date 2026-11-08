@@ -876,6 +876,29 @@ export interface IDbResourceWriteResult {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `debugClientReportReturn` */
+export interface IDebugClientReportReturn {
+  accepted: Maybe<number>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `debugReportDeleteReturn` */
+export interface IDebugReportDeleteReturn {
+  deleted: Maybe<number>;
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `debugReportListReturn` */
+export interface IDebugReportListReturn {
+  error: Maybe<string>;
+  items: Maybe<ScalarJSON>;
+  page: Maybe<number>;
+  pageSize: Maybe<number>;
+  success: Maybe<boolean>;
+  total: Maybe<number>;
+}
+
 /** GraphQL: `deleteAllDummyUsersReturn` */
 export interface IDeleteAllDummyUsersReturn {
   success: Maybe<boolean>;
@@ -1091,6 +1114,8 @@ export interface IMutation {
   createAuthToken: Maybe<ICreateAuthTokenReturn>;
   createDummyUsers: Maybe<ICreateDummyUsersReturn>;
   cronExecute: Maybe<ICronExecuteReturn>;
+  debugClientReport: Maybe<IDebugClientReportReturn>;
+  debugReportDelete: Maybe<IDebugReportDeleteReturn>;
   deleteAllDummyUsers: Maybe<IDeleteAllDummyUsersReturn>;
   deleteMedia: Maybe<IDeleteMediaReturn>;
   developerTest: Maybe<IDeveloperTestReturn>;
@@ -1362,6 +1387,7 @@ export interface IQuery {
   cronJobList: Maybe<ICronJobListReturn>;
   cronRunnerList: Maybe<ICronRunnerListReturn>;
   currencyGet: Maybe<ICurrencyGetReturn>;
+  debugReportList: Maybe<IDebugReportListReturn>;
   developerTestSource: Maybe<IDeveloperTestSourceReturn>;
   getLocationByCoords: Maybe<IGetLocationByCoords>;
   getLocationByIp: Maybe<IGetLocationByIp>;

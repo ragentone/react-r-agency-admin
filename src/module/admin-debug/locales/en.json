@@ -1,0 +1,41 @@
+{
+  "title": "Client errors",
+  "subtitle": "Error reports from frontend and app",
+  "menu": {
+    "label": "Client errors",
+    "description": "Error reports from frontend and app"
+  },
+  "count": "{{count}} entries",
+  "empty": "No client errors stored.",
+  "refresh": "Reload",
+  "time": "Time",
+  "level": "Level",
+  "tag": "Tag",
+  "message": "Message",
+  "device": "Device",
+  "page": "Page {{page}} of {{pages}}",
+  "prev": "Previous",
+  "next": "Next",
+  "sendTest": "Send test",
+  "sent": "{{count}} test entries sent",
+  "actionFailed": "Action failed.",
+  "deleteSelected": "Delete {{count}}",
+  "confirmSelected": "Really delete {{count}}?",
+  "deleteAll": "Delete all",
+  "confirmAll": "Really delete all?",
+  "cancel": "Cancel",
+  "deleted": "{{count}} deleted",
+  "selectAll": "Select all on this page",
+  "selectRow": "Select entry",
+  "detail": {
+    "title": "Entry",
+    "id": "ID",
+    "createdAt": "Created",
+    "reportedAt": "Received",
+    "level": "Level",
+    "tag": "Tag",
+    "message": "Message",
+    "error": "Error",
+    "device": "Device"
+  }
+}
