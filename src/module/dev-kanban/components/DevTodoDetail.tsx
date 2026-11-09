@@ -1,4 +1,5 @@
 import { LazyHtmlEditor as HtmlEditor } from '@core/editor/html/lazy.html-editor.tsx';
+import { AppDialog } from '@ui/components/app-dialog';
 import { kanbanMoreTriggerClassName } from '@ui/components/kanban';
 import { cn } from '@ui/lib/utils';
 import {
@@ -13,14 +14,6 @@ import {
 } from '@ui/shad-cn/components/alert-dialog';
 import { Avatar, AvatarFallback, AvatarImage } from '@ui/shad-cn/components/avatar';
 import { Button, buttonVariants } from '@ui/shad-cn/components/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@ui/shad-cn/components/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -72,6 +65,14 @@ const toDraft = (todo: IDevTodo): IDraft => ({
   priority: todo.priority,
 });
 
+const initials = (name: string | null | undefined) =>
+  (name ?? '?')
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(part => part[0]?.toUpperCase() ?? '')
+    .join('') || '?';
+
 const Field2 = ({ label, children }: { label: string; children: React.ReactNode }) => (
   <div className="flex flex-col gap-1.5">
     <dt className="text-micro font-semibold tracking-wide text-muted-foreground uppercase">
@@ -80,14 +81,6 @@ const Field2 = ({ label, children }: { label: string; children: React.ReactNode 
     <dd className="text-body text-foreground">{children}</dd>
   </div>
 );
-
-const initials = (name: string | null | undefined) =>
-  (name ?? '?')
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map(part => part[0]?.toUpperCase() ?? '')
-    .join('') || '?';
 
 /** Avatar with the name, or initials if the user has no avatar. */
 const ActorRow = ({ actor, line }: { actor: IDevTodoActor | null | undefined; line: string }) => (
@@ -185,42 +178,40 @@ export const DevTodoDetail = ({
 
   return (
     <>
-      <Dialog open={open} onOpenChange={close}>
-        <DialogContent className="max-h-[90dvh] gap-0 overflow-y-auto p-0 sm:max-w-4xl">
-          <DialogHeader className="flex flex-row items-start justify-between gap-3 space-y-0 border-b border-border/50 py-4 pr-14 pl-6">
-            <div className="min-w-0 flex-1 space-y-1">
-              <p className="text-caption font-semibold text-muted-foreground">{key}</p>
-              {editing ? (
-                <Field data-invalid={titleTouched && titleError ? true : undefined}>
-                  <FieldLabel htmlFor="dev-todo-title" className="sr-only">
-                    {t('form.title')}
-                  </FieldLabel>
-                  <Input
-                    id="dev-todo-title"
-                    autoFocus
-                    value={current.title}
-                    maxLength={DEV_TODO_TITLE_MAX}
-                    placeholder={t('form.titlePlaceholder')}
-                    aria-invalid={titleTouched && titleError ? true : undefined}
-                    className="text-title font-bold"
-                    onChange={event => patch({ title: event.target.value })}
-                  />
-                  {titleTouched && titleError && <FieldError>{titleError}</FieldError>}
-                </Field>
-              ) : (
-                <DialogTitle className="text-title font-bold break-words">{todo.title}</DialogTitle>
-              )}
-              <DialogDescription className="sr-only">
-                {t('detail.dialogDescription')}
-              </DialogDescription>
-            </div>
-            <div className="flex shrink-0 items-center gap-2">
-              {!editing && (
-                <Button variant="outline" size="sm" disabled={busy} onClick={startEditing}>
-                  <Pencil className="size-4" />
-                  {t('detail.edit')}
-                </Button>
-              )}
+      <AppDialog
+        open={open}
+        onOpenChange={close}
+        size="xl"
+        description={key}
+        title={
+          editing ? (
+            <Field data-invalid={titleTouched && titleError ? true : undefined}>
+              <FieldLabel htmlFor="dev-todo-title" className="sr-only">
+                {t('form.title')}
+              </FieldLabel>
+              <Input
+                id="dev-todo-title"
+                autoFocus
+                value={current.title}
+                maxLength={DEV_TODO_TITLE_MAX}
+                placeholder={t('form.titlePlaceholder')}
+                aria-invalid={titleTouched && titleError ? true : undefined}
+                className="text-title font-bold"
+                onChange={event => patch({ title: event.target.value })}
+              />
+              {titleTouched && titleError && <FieldError>{titleError}</FieldError>}
+            </Field>
+          ) : (
+            todo.title
+          )
+        }
+        headerActions={
+          editing ? undefined : (
+            <>
+              <Button variant="outline" size="sm" disabled={busy} onClick={startEditing}>
+                <Pencil className="size-4" />
+                {t('detail.edit')}
+              </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger
                   aria-label={t('moreActions')}
@@ -238,178 +229,151 @@ export const DevTodoDetail = ({
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            </div>
-          </DialogHeader>
-
-          <div className="flex flex-col gap-6 px-6 py-5 md:flex-row md:gap-8">
-            <div className="flex min-w-0 flex-1 flex-col gap-6">
-              <section className="flex flex-col gap-2">
-                <h3 className="text-caption font-semibold text-muted-foreground">
-                  {t('detail.summary')}
-                </h3>
-                {editing ? (
-                  <>
-                    <Textarea
-                      rows={2}
-                      value={current.summary}
-                      maxLength={DEV_TODO_SUMMARY_MAX}
-                      placeholder={t('form.summaryPlaceholder')}
-                      aria-label={t('form.summary')}
-                      onChange={event => patch({ summary: event.target.value })}
-                    />
-                    <span className="text-micro text-muted-foreground tabular-nums">
-                      {t('form.counter', {
-                        count: current.summary.length,
-                        max: DEV_TODO_SUMMARY_MAX,
-                      })}
-                    </span>
-                  </>
-                ) : (
-                  <p className="text-body break-words whitespace-pre-line text-foreground">
-                    {todo.summary || t('detail.noSummary')}
-                  </p>
-                )}
-              </section>
-
-              <section className="flex flex-col gap-2">
-                <h3 className="text-caption font-semibold text-muted-foreground">
-                  {t('detail.description')}
-                </h3>
-                {editing ? (
-                  <HtmlEditor
-                    name="description"
-                    value={current.description}
-                    onChange={next => patch({ description: next })}
-                    placeholder={t('form.descriptionPlaceholder')}
-                    features={{
-                      bold: true,
-                      italic: true,
-                      underline: true,
-                      strike: true,
-                      bulletList: true,
-                      orderedList: true,
-                      characterCount: true,
-                    }}
-                    maxLength={DEV_TODO_DESCRIPTION_MAX}
-                    maxLengthMode="block"
-                    minHeight={160}
-                    maxHeight={360}
-                  />
-                ) : html ? (
-                  <div
-                    className="text-body break-words text-foreground [&_a]:underline [&_ol]:list-decimal [&_ol]:pl-5 [&_p+p]:mt-2 [&_strong]:font-bold [&_ul]:list-disc [&_ul]:pl-5"
-                    dangerouslySetInnerHTML={{ __html: html }}
-                  />
-                ) : (
-                  <p className="text-body text-muted-foreground">{t('detail.noDescription')}</p>
-                )}
-              </section>
-            </div>
-
-            <aside className="flex w-full shrink-0 flex-col gap-5 rounded-lg bg-muted/60 p-4 md:w-64">
-              <dl className="flex flex-col gap-5">
-                <Field2 label={t('detail.status')}>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger
-                      disabled={busy || editing || transitions.length === 0}
-                      aria-label={t('detail.status')}
-                      className={cn(
-                        buttonVariants({ variant: 'secondary' }),
-                        'w-full justify-between'
-                      )}
-                    >
-                      {t(`columns.${todo.status}`)}
-                      <ChevronDown className="size-4" />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="start">
-                      {transitions.map(next => (
-                        <DropdownMenuItem
-                          key={next}
-                          onSelect={() => void onUpdate(todo, { status: next })}
-                        >
-                          {t('workflow.moveTo')} {t(`columns.${next}`)}
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </Field2>
-
-                <Field2 label={t('detail.priority')}>
-                  {editing ? (
-                    <Select
-                      value={current.priority}
-                      onValueChange={value => patch({ priority: value as DevTodoPriority })}
-                    >
-                      <SelectTrigger
-                        className="w-full bg-background"
-                        aria-label={t('detail.priority')}
-                      >
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {DEV_TODO_PRIORITIES.map(priority => (
-                          <SelectItem key={priority} value={priority}>
-                            {t(`priority.${priority}`)}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  ) : (
-                    <Select
-                      value={todo.priority}
-                      disabled={busy}
-                      onValueChange={value =>
-                        void onUpdate(todo, { priority: value as DevTodoPriority })
-                      }
-                    >
-                      <SelectTrigger
-                        className="w-full bg-background"
-                        aria-label={t('detail.priority')}
-                      >
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {DEV_TODO_PRIORITIES.map(priority => (
-                          <SelectItem key={priority} value={priority}>
-                            {t(`priority.${priority}`)}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
-                </Field2>
-
-                <Field2 label={t('detail.createdBy', { name: nameOf(todo.createdBy) })}>
-                  <ActorRow
-                    actor={todo.createdBy}
-                    line={actorLine(todo.createdBy, todo.createdAt)}
-                  />
-                </Field2>
-
-                <Field2 label={t('detail.updatedBy', { name: nameOf(todo.updatedBy) })}>
-                  <ActorRow
-                    actor={todo.updatedBy}
-                    line={actorLine(todo.updatedBy, todo.updatedAt)}
-                  />
-                </Field2>
-
-                {todo.doneAt && <Field2 label={t('detail.done')}>{formatDate(todo.doneAt)}</Field2>}
-              </dl>
-            </aside>
-          </div>
-
-          {editing && (
-            <DialogFooter className="gap-2 border-t border-border/50 px-6 py-4">
+            </>
+          )
+        }
+        footer={
+          editing ? (
+            <>
               <Button type="button" variant="outline" disabled={busy} onClick={cancelEditing}>
                 {t('form.cancel')}
               </Button>
               <Button type="button" disabled={busy || !valid} onClick={() => void save()}>
                 {t('save')}
               </Button>
-            </DialogFooter>
-          )}
-        </DialogContent>
-      </Dialog>
+            </>
+          ) : undefined
+        }
+      >
+        <div className="flex flex-col gap-6 md:flex-row md:gap-8">
+          <div className="flex min-w-0 flex-1 flex-col gap-6">
+            <section className="flex flex-col gap-2">
+              <h3 className="text-caption font-semibold text-muted-foreground">
+                {t('detail.summary')}
+              </h3>
+              {editing ? (
+                <>
+                  <Textarea
+                    rows={2}
+                    value={current.summary}
+                    maxLength={DEV_TODO_SUMMARY_MAX}
+                    placeholder={t('form.summaryPlaceholder')}
+                    aria-label={t('form.summary')}
+                    onChange={event => patch({ summary: event.target.value })}
+                  />
+                  <span className="text-micro text-muted-foreground tabular-nums">
+                    {t('form.counter', {
+                      count: current.summary.length,
+                      max: DEV_TODO_SUMMARY_MAX,
+                    })}
+                  </span>
+                </>
+              ) : (
+                <p className="text-body break-words whitespace-pre-line text-foreground">
+                  {todo.summary || t('detail.noSummary')}
+                </p>
+              )}
+            </section>
+
+            <section className="flex flex-col gap-2">
+              <h3 className="text-caption font-semibold text-muted-foreground">
+                {t('detail.description')}
+              </h3>
+              {editing ? (
+                <HtmlEditor
+                  name="description"
+                  value={current.description}
+                  onChange={next => patch({ description: next })}
+                  placeholder={t('form.descriptionPlaceholder')}
+                  features={{
+                    bold: true,
+                    italic: true,
+                    underline: true,
+                    strike: true,
+                    bulletList: true,
+                    orderedList: true,
+                    characterCount: true,
+                  }}
+                  maxLength={DEV_TODO_DESCRIPTION_MAX}
+                  maxLengthMode="block"
+                  minHeight={160}
+                  maxHeight={360}
+                />
+              ) : html ? (
+                <div
+                  className="text-body break-words text-foreground [&_a]:underline [&_ol]:list-decimal [&_ol]:pl-5 [&_p+p]:mt-2 [&_strong]:font-bold [&_ul]:list-disc [&_ul]:pl-5"
+                  dangerouslySetInnerHTML={{ __html: html }}
+                />
+              ) : (
+                <p className="text-body text-muted-foreground">{t('detail.noDescription')}</p>
+              )}
+            </section>
+          </div>
+
+          <aside className="flex w-full shrink-0 flex-col gap-5 rounded-lg bg-muted/60 p-4 md:w-64">
+            <dl className="flex flex-col gap-5">
+              <Field2 label={t('detail.status')}>
+                <DropdownMenu>
+                  <DropdownMenuTrigger
+                    disabled={busy || editing || transitions.length === 0}
+                    aria-label={t('detail.status')}
+                    className={cn(
+                      buttonVariants({ variant: 'secondary' }),
+                      'w-full justify-between'
+                    )}
+                  >
+                    {t(`columns.${todo.status}`)}
+                    <ChevronDown className="size-4" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start">
+                    {transitions.map(next => (
+                      <DropdownMenuItem
+                        key={next}
+                        onSelect={() => void onUpdate(todo, { status: next })}
+                      >
+                        {t('workflow.moveTo')} {t(`columns.${next}`)}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </Field2>
+
+              <Field2 label={t('detail.priority')}>
+                <Select
+                  value={editing ? current.priority : todo.priority}
+                  disabled={busy}
+                  onValueChange={value =>
+                    editing
+                      ? patch({ priority: value as DevTodoPriority })
+                      : void onUpdate(todo, { priority: value as DevTodoPriority })
+                  }
+                >
+                  <SelectTrigger className="w-full bg-background" aria-label={t('detail.priority')}>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {DEV_TODO_PRIORITIES.map(priority => (
+                      <SelectItem key={priority} value={priority}>
+                        {t(`priority.${priority}`)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </Field2>
+
+              <Field2 label={t('detail.createdBy', { name: nameOf(todo.createdBy) })}>
+                <ActorRow actor={todo.createdBy} line={actorLine(todo.createdBy, todo.createdAt)} />
+              </Field2>
+
+              <Field2 label={t('detail.updatedBy', { name: nameOf(todo.updatedBy) })}>
+                <ActorRow actor={todo.updatedBy} line={actorLine(todo.updatedBy, todo.updatedAt)} />
+              </Field2>
+
+              {todo.doneAt && <Field2 label={t('detail.done')}>{formatDate(todo.doneAt)}</Field2>}
+            </dl>
+          </aside>
+        </div>
+      </AppDialog>
 
       <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
         <AlertDialogContent>

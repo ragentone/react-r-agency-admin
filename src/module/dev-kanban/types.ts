@@ -1,4 +1,12 @@
-export const DEV_TODO_STATUSES = ['open', 'in_progress', 'review', 'done'] as const;
+export const DEV_TODO_STATUSES = [
+  'backlog',
+  'open',
+  'in_progress',
+  'review',
+  'on_hold',
+  'rejected',
+  'done',
+] as const;
 export const DEV_TODO_PRIORITIES = ['low', 'normal', 'high'] as const;
 export const DEV_TODO_TITLE_MAX = 200;
 export const DEV_TODO_DESCRIPTION_MAX = 5000;
@@ -40,10 +48,13 @@ export interface IDevTodoActor {
 
 /** Jira-like workflow: a status may only change along these transitions (same as the backend). */
 export const DEV_TODO_TRANSITIONS: Record<DevTodoStatus, readonly DevTodoStatus[]> = {
-  open: ['in_progress', 'done'],
-  in_progress: ['open', 'review', 'done'],
-  review: ['in_progress', 'done'],
-  done: ['open'],
+  backlog: ['open', 'rejected'],
+  open: ['backlog', 'in_progress', 'review', 'on_hold', 'rejected', 'done'],
+  in_progress: ['open', 'review', 'on_hold', 'rejected', 'done'],
+  review: ['open', 'in_progress', 'on_hold', 'rejected', 'done'],
+  on_hold: ['open', 'in_progress', 'review', 'rejected'],
+  rejected: ['open', 'in_progress'],
+  done: ['open', 'in_progress'],
 };
 
 export const canDevTodoTransition = (from: DevTodoStatus, to: DevTodoStatus) =>

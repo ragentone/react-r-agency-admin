@@ -11,7 +11,10 @@
     "open": "Открыто",
     "in_progress": "В работе",
     "review": "Ревью",
-    "done": "Готово"
+    "done": "Готово",
+    "on_hold": "На паузе",
+    "rejected": "Отклонено",
+    "backlog": "Бэклог"
   },
   "empty": "Задач нет",
   "moreActions": "Другие действия",
@@ -34,7 +37,8 @@
       "titleRequired": "Укажите заголовок"
     },
     "counter": "{{count}} / {{max}}",
-    "cancel": "Отмена"
+    "cancel": "Отмена",
+    "status": "Статус"
   },
   "priority": {
     "low": "Низкий",
@@ -84,5 +88,10 @@
   "workflow": {
     "moveTo": "Перейти в",
     "invalid": "Этот переход статуса не разрешён workflow."
+  },
+  "backlog": {
+    "title": "Бэклог",
+    "button": "Открыть бэклог",
+    "empty": "В бэклоге нет задач"
   }
 }

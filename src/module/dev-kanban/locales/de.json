@@ -11,7 +11,10 @@
     "open": "Offen",
     "in_progress": "In Arbeit",
     "review": "Review",
-    "done": "Erledigt"
+    "done": "Erledigt",
+    "on_hold": "Auf Eis",
+    "rejected": "Abgelehnt",
+    "backlog": "Backlog"
   },
   "empty": "Keine Aufgaben",
   "moreActions": "Weitere Aktionen",
@@ -34,7 +37,8 @@
       "titleRequired": "Titel ist erforderlich"
     },
     "counter": "{{count}} / {{max}}",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "status": "Status"
   },
   "priority": {
     "low": "Niedrig",
@@ -84,5 +88,10 @@
   "workflow": {
     "moveTo": "Wechseln nach",
     "invalid": "Dieser Statuswechsel ist im Workflow nicht erlaubt."
+  },
+  "backlog": {
+    "title": "Backlog",
+    "button": "Backlog öffnen",
+    "empty": "Keine Aufgaben im Backlog"
   }
 }

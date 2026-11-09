@@ -1,17 +1,9 @@
 import { cva } from 'class-variance-authority';
 
-/** Mobile: only the active column is shown (tab bar). md+: all columns side by side. */
-export const kanbanColumnVariants = cva('min-w-0 flex-col gap-2 rounded-lg bg-muted/60 p-2', {
-  variants: {
-    active: {
-      true: 'flex',
-      false: 'hidden md:flex',
-    },
-  },
-  defaultVariants: {
-    active: false,
-  },
-});
+/** Fixed width and height: the row scrolls sideways, each column scrolls its cards up and down. */
+export const kanbanColumnVariants = cva(
+  'flex h-[calc(100dvh-14rem)] w-72 shrink-0 snap-start flex-col gap-2 rounded-lg bg-muted/60 p-2'
+);
 
 export const kanbanCardClassName =
   'flex items-start gap-2 rounded-md border border-border/50 bg-background p-3 shadow-sm transition-shadow hover:shadow-md';

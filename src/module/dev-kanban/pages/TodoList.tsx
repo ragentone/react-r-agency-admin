@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
+import { DevTodoBacklogDialog } from '../components/DevTodoBacklogDialog';
 import { DevTodoDetail } from '../components/DevTodoDetail';
 import { DevTodoFormDialog } from '../components/DevTodoFormDialog';
 import { useDevTodos } from '../hooks/use-dev-todos';
@@ -25,7 +26,7 @@ const PriorityIcon = ({ priority }: { priority: DevTodoPriority }) => {
   return <Icon className="size-3.5" aria-hidden />;
 };
 
-/** Dev todos as a board: columns = status. Click a card for details, ⋯ or drag to move. */
+/** Board: one column per status. The backlog lives in its own drawer, not on the board. */
 export const TodoList = () => {
   const { t } = useTranslation('dev-kanban');
   const { todos, loaded, loading, saving, error, load, create, update, remove, setStatus } =
@@ -33,15 +34,22 @@ export const TodoList = () => {
   const [formOpen, setFormOpen] = useState(false);
   const [formKey, setFormKey] = useState(0);
   const [viewingId, setViewingId] = useState<string | null>(null);
+  const [backlogOpen, setBacklogOpen] = useState(false);
   // Always the current state of the todo, so the detail reflects every change.
   const viewing = viewingId ? (todos.find(todo => todo.id === viewingId) ?? null) : null;
+  const backlog = useMemo(() => todos.filter(todo => todo.status === 'backlog'), [todos]);
+  const boardItems = useMemo(() => todos.filter(todo => todo.status !== 'backlog'), [todos]);
 
   useEffect(() => {
     void load();
   }, [load]);
 
   const columns = useMemo<KanbanColumnDef[]>(
-    () => DEV_TODO_STATUSES.map(id => ({ id, label: t(`columns.${id}`) })),
+    () =>
+      DEV_TODO_STATUSES.filter(id => id !== 'backlog').map(id => ({
+        id,
+        label: t(`columns.${id}`),
+      })),
     [t]
   );
 
@@ -63,10 +71,10 @@ export const TodoList = () => {
     else toast.error(t('toast.error'));
   };
 
-  const save = async (values: IDevTodoValues, id: string | null) => {
-    const result = id ? await update(id, values) : await create(values);
+  const save = async (values: IDevTodoValues) => {
+    const result = await create(values);
     if (result) {
-      toast.success(t(id ? 'toast.updated' : 'toast.created'));
+      toast.success(t('toast.created'));
       return true;
     }
     toast.error(t('toast.error'));
@@ -92,14 +100,25 @@ export const TodoList = () => {
     setFormOpen(true);
   };
 
+  const openFromBacklog = (todo: IDevTodo) => {
+    setBacklogOpen(false);
+    setViewingId(todo.id);
+  };
+
   return (
-    <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-4 px-4 py-6">
-      <header className="flex items-center justify-between gap-3">
+    <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-4 px-4 py-6">
+      <header className="flex flex-wrap items-center justify-between gap-3">
         <div className="min-w-0">
           <h1 className="text-title font-bold">{t('title')}</h1>
           <p className="text-caption text-muted-foreground">{t('subtitle')}</p>
         </div>
-        <Button onClick={() => openForm()}>{t('new')}</Button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" onClick={() => setBacklogOpen(true)}>
+            {t('backlog.title')}
+            <span className="text-muted-foreground tabular-nums">{backlog.length}</span>
+          </Button>
+          <Button onClick={openForm}>{t('new')}</Button>
+        </div>
       </header>
 
       {!loaded || (loading && todos.length === 0) ? (
@@ -118,7 +137,7 @@ export const TodoList = () => {
       ) : (
         <Kanban
           columns={columns}
-          items={todos}
+          items={boardItems}
           getId={todo => todo.id}
           getColumnId={todo => todo.status}
           labels={labels}
@@ -150,6 +169,13 @@ export const TodoList = () => {
           )}
         />
       )}
+
+      <DevTodoBacklogDialog
+        open={backlogOpen}
+        onOpenChange={setBacklogOpen}
+        items={backlog}
+        onOpenItem={openFromBacklog}
+      />
 
       <DevTodoDetail
         open={viewing !== null}
