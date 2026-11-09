@@ -5,6 +5,15 @@ import { RoutePage } from '@router/components';
 import { useParams, useRouter } from '@tanstack/react-router';
 import { Button } from '@ui/shad-cn/components/button.tsx';
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@ui/shad-cn/components/dropdown-menu.tsx';
+import {
   Empty,
   EmptyContent,
   EmptyDescription,
@@ -12,7 +21,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from '@ui/shad-cn/components/empty.tsx';
-import { ArrowLeft, Link2Off, Share2 } from 'lucide-react';
+import { ArrowLeft, Check, ExternalLink, Link2Off, Menu, Share2 } from 'lucide-react';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -21,16 +30,20 @@ import { LinkContentView } from '../components/LinkContent.tsx';
 import { getLinkPath, LINK_GROUP_LEGAL } from '../const.ts';
 import { useLinkAccess, useLinkRegistry, useLinkRoute, useLinks } from '../hooks';
 import { LinkManager } from '../manager.ts';
-import { formatLinkDate } from '../utils.ts';
+import { formatLinkDate, LINK_KIND_ICONS } from '../utils.ts';
 
 /** Sticky, blurred X-style top bar: back arrow, title (+ "last updated"), share. */
 const LinkPageHeader: React.FC<{
   title: string;
   subtitle?: string;
+  currentId: string;
   onBack: () => void;
   onShare?: () => void;
-}> = ({ title, subtitle, onBack, onShare }) => {
+}> = ({ title, subtitle, currentId, onBack, onShare }) => {
   const { t } = useTranslation('links');
+  const text = useMenuText();
+  const { openLink } = useLinkRoute();
+  const { groups } = useLinks();
   return (
     <header className="sticky top-0 z-20 border-b border-border/50 bg-background/80 pt-[env(safe-area-inset-top)] backdrop-blur">
       <div className="flex h-14 items-center gap-3 px-2">
@@ -46,6 +59,48 @@ const LinkPageHeader: React.FC<{
             <Share2 className="size-5" />
           </Button>
         )}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon-lg" aria-label={t('allLinks')}>
+              <Menu className="size-5" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="max-h-[70dvh] w-64 overflow-y-auto">
+            {groups.map((group, index) => (
+              <DropdownMenuGroup key={group.id}>
+                {index > 0 && <DropdownMenuSeparator className="border-border/50" />}
+                <DropdownMenuLabel className="text-micro tracking-wider text-muted-foreground uppercase">
+                  {text(group.config.label)}
+                </DropdownMenuLabel>
+                {group.links.map(link => {
+                  const Icon = link.icon ?? LINK_KIND_ICONS[link.kind ?? 'custom'];
+                  const external = link.content.type === 'url';
+                  const current = link.id === currentId;
+                  return (
+                    <DropdownMenuItem
+                      key={link.id}
+                      className="cursor-pointer gap-3"
+                      aria-current={current ? 'page' : undefined}
+                      onSelect={() =>
+                        external ? LinkManager.open(link.id) : openLink(link.id)
+                      }
+                    >
+                      <Icon className="size-4 shrink-0" aria-hidden="true" />
+                      <span className="min-w-0 flex-1 truncate">{text(link.label)}</span>
+                      {external && (
+                        <ExternalLink
+                          className="size-3.5 shrink-0 text-muted-foreground"
+                          aria-label={t('external.hint')}
+                        />
+                      )}
+                      {current && <Check className="size-4 shrink-0" aria-hidden="true" />}
+                    </DropdownMenuItem>
+                  );
+                })}
+              </DropdownMenuGroup>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
@@ -129,6 +184,7 @@ export const PageLink: React.FC = () => {
           <LinkPageHeader
             title={title}
             subtitle={subtitle}
+            currentId={link?.id ?? ''}
             onBack={close}
             onShare={link ? () => void share() : undefined}
           />
