@@ -1,5 +1,6 @@
 import { useAccount } from '@core/account/hooks';
 import { CmsContainer } from '@core/cms';
+import { PluginSlot } from '@core/plugin/index.ts';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -51,14 +52,14 @@ export const AccountView: React.FC<IAccountViewProps> = ({ onBack, onScrollTop }
         {error && !account && <AccountErrorState error={error} onRetry={() => loadAccount()} />}
 
         {account && (
-          <div>
+          <div className={'w-full relative flex flex-col'}>
             <AccountProfileOverview
               account={account}
               onAvatarUpdated={() => {
                 void loadAccount();
               }}
             />
-
+            <PluginSlot scope={'admin'} name={'account_before.widget'} />
             <AccountSectionsAccordion
               account={account}
               openSections={openSections}
@@ -66,6 +67,7 @@ export const AccountView: React.FC<IAccountViewProps> = ({ onBack, onScrollTop }
               onReload={() => loadAccount()}
               onLogout={() => logout()}
             />
+            <PluginSlot scope={'admin'} name={'account_after.widget'} />
           </div>
         )}
       </div>
