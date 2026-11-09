@@ -56,7 +56,7 @@ const MobileDock = ({ className, loading = false }: IMobileDockProps) => {
       {/* All buttons centered in one row – order: left → center → right group. */}
       <div
         className={
-          'flex min-h-14 items-center justify-center-safe gap-1.5 overflow-x-auto border-t border-border/50 bg-background/85 px-2 pt-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))] backdrop-blur-xl [scrollbar-width:none] dark:bg-black/80'
+          'flex min-h-14 items-center justify-center-safe gap-1.5 overflow-x-auto bg-background/85 px-2 pt-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))] backdrop-blur-xl [scrollbar-width:none] dark:bg-black/80'
         }
       >
         {loading
