@@ -1,6 +1,12 @@
 import { AppFormDrawer } from '@ui/patterns';
 import { Button } from '@ui/shad-cn/components/button.tsx';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@ui/shad-cn/components/select.tsx';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@ui/shad-cn/components/select.tsx';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -26,12 +32,13 @@ export const PluginDeployDrawer: React.FC<IPluginDeployDrawerProps> = ({
   onDeploy,
 }) => {
   const { t } = useTranslation('admin');
-  const [bump, setBump] = useState<PluginBump>('patch');
+  const [bump, setBump] = useState<PluginBump>('minor');
 
   return (
     <AppFormDrawer
       open={open}
       onOpenChange={next => !busy && onOpenChange(next)}
+      autoHeight={true}
       title={t('plugins.deploy.dialogTitle', { name: plugin.name })}
       description={t('plugins.deploy.dialogDescription', { version: plugin.version })}
       onSubmit={event => {

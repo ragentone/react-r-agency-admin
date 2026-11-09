@@ -25,15 +25,7 @@ export const PluginRow: React.FC<IPluginRowProps> = ({ plugin }) => {
 
   return (
     <li className="px-2 mb-2">
-      <Item
-        asChild
-        size="sm"
-        variant={'outline'}
-        className={cn({
-          'ring-2 ring-red-600/20 opacity-70': plugin.status !== 'active',
-          'ring-2 ring-green-600/20': plugin.status === 'active',
-        })}
-      >
+      <Item asChild size="sm" variant={'outline'} className={cn({})}>
         <Link
           to={adminPluginPath(plugin.pluginId)}
           aria-label={t('plugins.details.open', { name: plugin.name })}
