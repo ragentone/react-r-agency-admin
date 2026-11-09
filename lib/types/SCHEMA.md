@@ -8,8 +8,8 @@
 | Bereich               | Anzahl |
 | --------------------- | -----: |
 | [Query](#query)       |     97 |
-| [Mutation](#mutation) |    140 |
-| Object-Types          |    292 |
+| [Mutation](#mutation) |    141 |
+| Object-Types          |    293 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -1363,6 +1363,10 @@ Mutation  ‹IMutation›
 │   ├── error: String
 │   ├── success: Boolean
 │   └── todo: JSON
+├── developerTodoDelete: developerTodoDeleteReturn  ‹IDeveloperTodoDeleteReturn›
+│   ├── $id: ID!
+│   ├── error: String
+│   └── success: Boolean
 ├── developerTodoUpdate: developerTodoUpdateReturn  ‹IDeveloperTodoUpdateReturn›
 │   ├── $id: ID!
 │   ├── $values: JSON!
@@ -2077,6 +2081,7 @@ Inputs
 | `developerTestReturn`                    | Object | `IDeveloperTestReturn`                    | `objects.ts` |                                                                                  |
 | `developerTestSourceReturn`              | Object | `IDeveloperTestSourceReturn`              | `objects.ts` |                                                                                  |
 | `developerTodoCreateReturn`              | Object | `IDeveloperTodoCreateReturn`              | `objects.ts` |                                                                                  |
+| `developerTodoDeleteReturn`              | Object | `IDeveloperTodoDeleteReturn`              | `objects.ts` |                                                                                  |
 | `developerTodoListReturn`                | Object | `IDeveloperTodoListReturn`                | `objects.ts` |                                                                                  |
 | `developerTodoUpdateReturn`              | Object | `IDeveloperTodoUpdateReturn`              | `objects.ts` |                                                                                  |
 | `Email`                                  | Scalar | `ScalarEmail`                             | `scalars.ts` |                                                                                  |

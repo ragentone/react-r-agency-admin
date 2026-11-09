@@ -935,6 +935,12 @@ export interface IDeveloperTodoCreateReturn {
   todo: Maybe<ScalarJSON>;
 }
 
+/** GraphQL: `developerTodoDeleteReturn` */
+export interface IDeveloperTodoDeleteReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `developerTodoListReturn` */
 export interface IDeveloperTodoListReturn {
   error: Maybe<string>;
@@ -1149,6 +1155,7 @@ export interface IMutation {
   deleteMedia: Maybe<IDeleteMediaReturn>;
   developerTest: Maybe<IDeveloperTestReturn>;
   developerTodoCreate: Maybe<IDeveloperTodoCreateReturn>;
+  developerTodoDelete: Maybe<IDeveloperTodoDeleteReturn>;
   developerTodoUpdate: Maybe<IDeveloperTodoUpdateReturn>;
   googleAuthAfter: Maybe<IGoogleAuthAfterReturn>;
   linkCreate: Maybe<ILinkCreateReturn>;

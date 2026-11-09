@@ -369,6 +369,11 @@ export interface IMutationDeveloperTodoCreateArgs {
   values: ScalarJSON;
 }
 
+/** Arguments of `Mutation.developerTodoDelete` */
+export interface IMutationDeveloperTodoDeleteArgs {
+  id: ScalarID;
+}
+
 /** Arguments of `Mutation.developerTodoUpdate` */
 export interface IMutationDeveloperTodoUpdateArgs {
   id: ScalarID;
