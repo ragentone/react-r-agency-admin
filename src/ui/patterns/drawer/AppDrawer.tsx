@@ -113,7 +113,7 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
     size === 'fullscreen'
       ? 'h-dvh w-dvw max-h-dvh max-w-none rounded-none border-0 m-0'
       : isSide
-        ? 'max-w-none'
+        ? 'max-w-none rounded-none'
         : 'mx-auto w-full max-w-150';
   const fullStyle: React.CSSProperties = isSide ? APP_DRAWER_SIDE_SIZE : APP_DRAWER_SIZE;
   const layoutStyle: React.CSSProperties | undefined =

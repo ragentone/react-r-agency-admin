@@ -35,7 +35,7 @@ const MenuSettingsDrawer = ({ open, onOpenChange }: IProps) => {
     >
       <DrawerContent
         className={
-          'data-[swipe-axis=x]:[--drawer-content-width:min(86vw,22rem)] [--drawer-inset:0px] rounded-none rounded-l-3xl border-0 border-l border-border/50 bg-background'
+          'data-[swipe-axis=x]:[--drawer-content-width:min(86vw,22rem)] [--drawer-inset:0px] rounded-none border-0 border-l border-border/50 bg-background'
         }
       >
         <div

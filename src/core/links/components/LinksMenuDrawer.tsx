@@ -34,7 +34,7 @@ export const LinksMenuDrawer: React.FC = () => {
 
   return (
     <Drawer open={open} onOpenChange={setOpen} swipeDirection={LINKS_MENU_SIDE}>
-      <DrawerContent className="[--drawer-inset:0px] data-[swipe-axis=x]:[--drawer-content-width:min(86vw,22rem)] rounded-none rounded-l-3xl border-0 border-l border-border/50 bg-background">
+      <DrawerContent className="[--drawer-inset:0px] data-[swipe-axis=x]:[--drawer-content-width:min(86vw,22rem)] rounded-none border-0 border-l border-border/50 bg-background">
         <div className="flex h-full min-h-0 flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
           <div className="flex items-center justify-between gap-2 py-3 pr-3 pl-6">
             <div className="min-w-0 flex-1">
