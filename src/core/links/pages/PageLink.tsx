@@ -123,7 +123,7 @@ export const PageLink: React.FC = () => {
 
   return (
     // Same 600px column as profile / account; phones edge to edge (no page padding).
-    <RoutePage width={600} scrollable={true} classes={{ scroll: 'p-0 overscroll-contain' }}>
+    <RoutePage width={720} scrollable={true} classes={{ scroll: 'p-0 overscroll-contain' }}>
       {() => (
         <article className="flex min-h-full flex-col">
           <LinkPageHeader
