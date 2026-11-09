@@ -1,8 +1,15 @@
 import { AppFormDrawer } from '@ui/patterns';
 import { Alert, AlertDescription, AlertTitle } from '@ui/shad-cn/components/alert.tsx';
-import { Input } from '@ui/shad-cn/components/input.tsx';
-import { Label } from '@ui/shad-cn/components/label.tsx';
-import React, { useId, useState } from 'react';
+import { Button } from '@ui/shad-cn/components/button.tsx';
+import {
+  FileUpload,
+  FileUploadDescription,
+  FileUploadDropzone,
+  FileUploadList,
+  FileUploadTitle,
+  FileUploadTrigger,
+} from '@ui/shad-cn/components/file-upload.tsx';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
@@ -25,7 +32,6 @@ export const PluginUploadDrawer: React.FC<IPluginUploadDrawerProps> = ({
   onUploaded,
 }) => {
   const { t } = useTranslation('admin');
-  const fileId = useId();
   const [file, setFile] = useState<File | null>(null);
   const { busy, result, upload, reset } = usePluginUpload(onUploaded);
 
@@ -56,6 +62,7 @@ export const PluginUploadDrawer: React.FC<IPluginUploadDrawerProps> = ({
 
   return (
     <AppFormDrawer
+      autoHeight={true}
       open={open}
       onOpenChange={close}
       title={t('plugins.upload.title')}
@@ -68,23 +75,29 @@ export const PluginUploadDrawer: React.FC<IPluginUploadDrawerProps> = ({
     >
       <div className="flex flex-col gap-4 px-4 py-3">
         <p className="text-caption text-muted-foreground">{t('plugins.upload.description')}</p>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor={fileId}>{t('plugins.upload.file')}</Label>
-          <Input
-            id={fileId}
-            type="file"
-            accept=".zip,application/zip"
-            disabled={busy}
-            onChange={event => {
-              setFile(event.target.files?.[0] ?? null);
-              reset();
-            }}
-            className="h-12 text-base"
-          />
-          <p className="text-caption text-muted-foreground">
-            {t('plugins.upload.fileHint', { size: PLUGIN_UPLOAD_MAX_MB })}
-          </p>
-        </div>
+        <FileUpload
+          accept={{ 'application/zip': ['.zip'] }}
+          maxFiles={1}
+          disabled={busy}
+          onFileChange={({ acceptedFiles }) => {
+            setFile(acceptedFiles[0] ?? null);
+            reset();
+          }}
+          className="w-full"
+        >
+          <FileUploadDropzone className="border-border/50">
+            <FileUploadTitle>{t('plugins.upload.file')}</FileUploadTitle>
+            <FileUploadDescription>
+              {t('plugins.upload.fileHint', { size: PLUGIN_UPLOAD_MAX_MB })}
+            </FileUploadDescription>
+            <FileUploadTrigger asChild>
+              <Button type="button" variant="outline" size="lg" disabled={busy}>
+                {t('plugins.upload.file')}
+              </Button>
+            </FileUploadTrigger>
+          </FileUploadDropzone>
+          <FileUploadList className="border-border/50" />
+        </FileUpload>
         {result && !result.success && (
           <Alert variant="destructive">
             <AlertTitle>{t(`plugins.errors.${errorKey(result.error)}`)}</AlertTitle>
