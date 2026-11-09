@@ -1,5 +1,6 @@
 import { useApp } from '@core/app';
 import { Animation } from '@core/components';
+import { PluginSlot } from '@core/plugin/PluginSlot.tsx';
 import { parseCssWidthOrHeight } from '@core/utils';
 import type { IRoutePageClasses } from '@router/components';
 import { cn } from '@ui/lib';
@@ -70,7 +71,9 @@ const PageContent = ({
             height: '100%',
           }}
         >
+          <PluginSlot name={'page_before.widget'} scope={'admin'} className={'mb-4 border-b border-border/50 pb-4'} />
           {children}
+          <PluginSlot name={'page_after.widget'} scope={'admin'} className={'mt-4 border-t border-border/50 pt-4'} />
         </Animation>
       </div>
     </div>

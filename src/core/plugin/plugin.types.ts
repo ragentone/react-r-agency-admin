@@ -6,7 +6,7 @@ import type { IPluginUserState, PluginClientPlatform } from './plugin.user';
  * Slots a plugin can render into. Must match the backend list `PLUGIN_SLOTS`
  * (`runtime/src/shared/plugin/plugin.manifest.ts`).
  */
-export const PLUGIN_SLOT_NAMES = ['home.widget', 'header.widget', 'menu_before.widget', 'menu_after.widget'] as const;
+export const PLUGIN_SLOT_NAMES = ['home.widget', 'header.widget', 'menu_before.widget', 'menu_after.widget', 'footer.widget', 'page_before.widget', 'page_after.widget'] as const;
 
 export type PluginSlotName = (typeof PLUGIN_SLOT_NAMES)[number] | string;
 

@@ -2,6 +2,7 @@ import { useAuth } from '@core/auth/components/use.auth.ts';
 import { MobileDock } from '@core/dock/components';
 import { useEvents } from '@core/event';
 import { LayoutHeader } from '@core/layout';
+import { PluginSlot } from '@core/plugin/PluginSlot.tsx';
 import { MenuSectionDrawerHost, MenuSidebar } from '@core/menu/components';
 import { useMeshState } from '@core/mesh/components/use.mesh.ts';
 import { Outlet } from '@tanstack/react-router';
@@ -52,6 +53,7 @@ const Layout = () => {
         <MenuSidebar />
         <div className={'relative grow min-w-0 h-full overflow-hidden'}>{renderOutlet()}</div>
       </div>
+      <PluginSlot name={'footer.widget'} scope={'admin'} className={'border-t border-border/50 px-4 py-3'} />
       {/* Dock with registered buttons (menu, search, page actions …) – skeleton until loaded. */}
       <MobileDock loading={!connected || !loaded} />
       {/* Bottom drawer of menu sections with `display: 'drawer'` (apps). */}
