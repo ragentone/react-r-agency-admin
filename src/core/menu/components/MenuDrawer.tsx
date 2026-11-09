@@ -4,6 +4,7 @@ import { MenuGroup } from '@core/menu';
 import { MenuItemBadge, MenuItemIcon } from '@core/menu';
 import { tilesOf, triggerItemOf } from '@core/menu';
 import { useMenuText } from '@core/menu';
+import { cn } from '@ui/lib';
 import { AppDrawer } from '@ui/patterns';
 import { ChevronRight } from 'lucide-react';
 import type { CSSProperties } from 'react';
@@ -132,17 +133,22 @@ const MenuDrawer = ({ open, onOpenChange }: IProps) => {
         }
       >
         <AppBrand className={'px-4 pt-4 pb-3'} />
-        {visibleSections.map(section =>
-          section.config.display === 'drawer' ? (
-            <div key={section.id} className={'flex flex-col'}>
+        {visibleSections.map((section, sectionIndex) => {
+          const separator = sectionIndex > 0 ? 'mt-2 border-t border-border/50 pt-2' : undefined;
+          return section.config.display === 'drawer' ? (
+            <div key={section.id} className={cn('flex flex-col', separator)}>
               {renderSectionRow(section)}
             </div>
           ) : (
-            <section key={section.id} aria-label={text(section.config.label)}>
+            <section
+              key={section.id}
+              aria-label={text(section.config.label)}
+              className={separator}
+            >
               {renderNodes(section)}
             </section>
-          )
-        )}
+          );
+        })}
       </div>
     </AppDrawer>
   );

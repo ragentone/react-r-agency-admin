@@ -42,7 +42,7 @@ const MenuSidebar = ({ className }: { className?: string }) => {
       <div className={'flex grow flex-col gap-1 overflow-y-auto overflow-x-hidden px-3 py-3'}>
         {sections.map((section, sectionIndex) => (
           <div key={section.id} className={'flex flex-col gap-1'}>
-            {sectionIndex > 0 && <div className={'mx-auto my-2 h-px w-8 bg-border xl:hidden'} />}
+            {sectionIndex > 0 && <div className={'mx-auto my-2 h-px w-8 bg-border xl:mx-0 xl:w-full xl:bg-border/50'} />}
             {section.config.display === 'drawer' ? (
               // Only the trigger – the entries open in the bottom drawer.
               <MenuSectionTrigger section={section} variant={variant} />
