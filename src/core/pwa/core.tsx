@@ -24,7 +24,7 @@ Core.provider.add({
 Core.menu.registerComponent({
   id: 'pwa-install',
   component: PwaMenuInstall,
-  placement: 'footer',
+  placement: 'settings',
   sortOrder: 50,
 });
 
