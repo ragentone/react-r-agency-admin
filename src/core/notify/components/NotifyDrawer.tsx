@@ -181,18 +181,21 @@ export const NotifyDrawer: React.FC = () => {
   };
 
   return (
-    <Drawer open={open} onOpenChange={next => !next && closeDrawer()} showSwipeHandle>
-      <DrawerContent className="mx-auto w-full max-w-[640px] [--drawer-height:92dvh] sm:[--drawer-height:82dvh]">
+    <Drawer open={open} onOpenChange={next => !next && closeDrawer()} swipeDirection="right">
+      <DrawerContent className="data-[swipe-axis=x]:[--drawer-content-width:min(92vw,26rem)] [--drawer-inset:0px] rounded-none border-0 border-l border-border/50 bg-background">
         <div className="flex h-full min-h-0 flex-col">
-          <header className="flex items-center gap-3 px-4 pt-1 pb-2">
+          <header className="flex items-center gap-2 pr-3 pb-2 pl-3 pt-1">
             <span className="grid size-10 shrink-0 place-items-center rounded-2xl bg-foreground text-background">
               <Bell className="size-5" strokeWidth={2.25} />
             </span>
             <div className="min-w-0 flex-1">
-              <DrawerTitle className="text-title leading-6 font-extrabold tracking-tight">
+              <DrawerTitle className="truncate text-title leading-6 font-extrabold tracking-tight">
                 {t('title')}
               </DrawerTitle>
-              <DrawerDescription className="text-caption text-muted-foreground" aria-live="polite">
+              <DrawerDescription
+                className="truncate text-caption text-muted-foreground"
+                aria-live="polite"
+              >
                 {unread > 0 ? t('subtitle', { count: unread }) : t('subtitleNone')}
               </DrawerDescription>
             </div>
@@ -200,12 +203,11 @@ export const NotifyDrawer: React.FC = () => {
               type="button"
               onClick={() => void onMarkAll()}
               disabled={unread === 0}
+              aria-label={t('actions.markAllRead')}
               title={t('actions.markAllRead')}
-              className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-foreground/[0.06] px-3.5 text-sm font-bold text-foreground transition-[opacity,background-color] hover:bg-foreground/[0.1] disabled:opacity-40"
+              className="grid size-10 shrink-0 place-items-center rounded-full text-foreground transition-[opacity,background-color] hover:bg-foreground/[0.06] disabled:opacity-40"
             >
-              <CheckCheck className="size-4" />
-              <span className="hidden min-[400px]:inline">{t('actions.markAllReadShort')}</span>
-              <span className="sr-only min-[400px]:hidden">{t('actions.markAllRead')}</span>
+              <CheckCheck className="size-5" />
             </button>
             {total > 0 && (
               <NotifyItemMenu
