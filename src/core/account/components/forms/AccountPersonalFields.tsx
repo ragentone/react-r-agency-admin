@@ -3,17 +3,12 @@ import { DateTimeSelector, toISODateString } from '@ui/base';
 import { cn } from '@ui/lib/utils';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@ui/shad-cn/components/field';
 import { Input } from '@ui/shad-cn/components/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@ui/shad-cn/components/select';
 import { useFormikContext } from 'formik';
 import { AtSign, Lock, Mail } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
+import { AccountGenderSelect } from './AccountGenderSelect';
 
 /** 44px fields – comfortable touch targets on phones (inputs default to 32px). */
 const FIELD_HEIGHT = 'h-11 rounded-lg';
@@ -122,20 +117,14 @@ export const AccountPersonalFields: React.FC<AccountPersonalFieldsProps> = ({
         {/* Gender */}
         <Field data-invalid={genderInvalid}>
           <FieldLabel htmlFor="account-gender">{t('form.gender')}</FieldLabel>
-          <Select
+          <AccountGenderSelect
+            id="account-gender"
             disabled={isDisabled}
+            invalid={genderInvalid}
             value={formik?.values?.gender || 'unknown'}
-            onValueChange={val => formik?.setFieldValue('gender', val)}
-          >
-            <SelectTrigger id="account-gender" className={cn(FIELD_HEIGHT, 'w-full')}>
-              <SelectValue placeholder={t('form.genderPlaceholder')} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="male">{t('form.genderMale')}</SelectItem>
-              <SelectItem value="female">{t('form.genderFemale')}</SelectItem>
-              <SelectItem value="unknown">{t('form.genderUnknown')}</SelectItem>
-            </SelectContent>
-          </Select>
+            onValueChange={val => void formik?.setFieldValue('gender', val)}
+            className={FIELD_HEIGHT}
+          />
           {genderInvalid && <FieldError>{formik?.errors?.gender}</FieldError>}
         </Field>
 

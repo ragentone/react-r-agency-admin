@@ -21,7 +21,7 @@ export const PageAccount: React.FC = () => {
 
   return (
     // Same 600px column as the profile; phones edge to edge (no page padding).
-    <RoutePage width={600} scrollable={true} classes={{ scroll: 'p-0 overscroll-contain' }}>
+    <RoutePage width={720} scrollable={true} classes={{ scroll: 'p-0 overscroll-contain' }}>
       {() => <AccountView onBack={back} />}
     </RoutePage>
   );
