@@ -19,6 +19,7 @@ import type { IPwaContext, IPwaRelease, PwaInstallOutcome } from '../types';
 import { PwaContext } from './pwa.context.ts';
 import { PwaInstallSheet } from './PwaInstallSheet.tsx';
 import { PwaOfflineIndicator } from './PwaOfflineIndicator.tsx';
+import { PwaUpdateDrawer } from './PwaUpdateDrawer.tsx';
 import { PwaUpdateNotifier } from './PwaUpdateNotifier.tsx';
 import { PwaWhatsNew } from './PwaWhatsNew.tsx';
 import { usePwaDeployToast } from './use.pwa.deploy.toast.ts';
@@ -109,8 +110,8 @@ export const PwaProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [updateServiceWorker]);
 
-  // New version finished: toast in every open tab (+ the blinking dot as before).
-  const deployToast = usePwaDeployToast(updateWaiting, update, newer);
+  // New version finished: the update drawer announces it (see PwaUpdateDrawer).
+  const deployToast = usePwaDeployToast();
   usePwaVersionLive(registrationRef, {
     onWithoutWorker: () => setServerVersion(true),
     onVersion: deployToast.onVersion,
@@ -170,6 +171,7 @@ export const PwaProvider = ({ children }: { children: ReactNode }) => {
     <PwaContext.Provider value={value}>
       {children}
       <PwaUpdateNotifier />
+      <PwaUpdateDrawer />
       <PwaOfflineIndicator />
       <PwaInstallSheet />
       <PwaWhatsNew own={own} />
