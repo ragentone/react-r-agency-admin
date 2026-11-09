@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { HomeAttention } from '../home/components/HomeAttention';
 import { HomeKpis } from '../home/components/HomeKpis';
 import { HomeLive } from '../home/components/HomeLive';
+import { HomeNewUsers } from '../home/components/HomeNewUsers';
 import { HomeSystem } from '../home/components/HomeSystem';
 import { HomeUserSearch } from '../home/components/HomeUserSearch';
 import { useAdminAccess } from '../hooks';
@@ -56,6 +57,10 @@ const AdminHome: React.FC = () => {
 
       <div className="border-t border-border/50">
         <HomeKpis />
+      </div>
+
+      <div className="border-t border-border/50">
+        <HomeNewUsers onUser={setUserId} />
       </div>
 
       <div className="border-t border-border/50">

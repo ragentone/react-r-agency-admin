@@ -705,6 +705,7 @@
     "close": "Close"
   },
   "home": {
+    "newUsers": {"title": "New sign-ups", "empty": "No new sign-ups in the last 7 days", "minor": "Under 16 – no details", "unconfirmed": "Not confirmed", "more": "{{value}} more in the last 7 days"},
     "error": "Could not be loaded.",
     "more": "All",
     "live": {

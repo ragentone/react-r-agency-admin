@@ -46,3 +46,19 @@ export interface IStatsUserRef {
   alias: string;
   avatarUrl: string | null;
 }
+
+/** One new account (admin home). Under 16: no alias, no e-mail, no id. */
+export interface IStatsNewUser {
+  id: string | null;
+  alias: string | null;
+  email: string | null;
+  registeredAt: string;
+  confirmed: boolean;
+  minor: boolean;
+}
+
+export interface IStatsNewUsers {
+  range: StatsRange;
+  total: number;
+  users: IStatsNewUser[];
+}

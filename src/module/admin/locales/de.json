@@ -705,6 +705,7 @@
     "close": "Schließen"
   },
   "home": {
+    "newUsers": {"title": "Neue Registrierungen", "empty": "Keine neuen Registrierungen in den letzten 7 Tagen", "minor": "Unter 16 – ohne Angaben", "unconfirmed": "Nicht bestätigt", "more": "{{value}} weitere in den letzten 7 Tagen"},
     "error": "Konnte nicht geladen werden.",
     "more": "Alle",
     "live": {

@@ -1,7 +1,13 @@
 import { parse } from 'graphql';
 import { getMeshClient } from 'r-agency-mesh-client-v1/release';
 
-import type { IStatsLive, IStatsOverview, IStatsSecurity, StatsRange } from './types';
+import type {
+  IStatsLive,
+  IStatsNewUsers,
+  IStatsOverview,
+  IStatsSecurity,
+  StatsRange,
+} from './types';
 
 /*
  * Parsed here instead of codegen `graphql()`: an operation codegen hasn't seen yet (Vite not
@@ -15,6 +21,11 @@ const LiveQuery = parse(`
 const OverviewQuery = parse(`
   query AdminStatsOverview($range: Int) {
     adminStatsOverview(range: $range) { success error stats }
+  }
+`);
+const NewUsersQuery = parse(`
+  query AdminStatsNewUsers($range: Int) {
+    adminStatsNewUsers(range: $range) { success error newUsers }
   }
 `);
 const SecurityQuery = parse(`
@@ -53,6 +64,10 @@ export const StatsApi = {
   live: () => query<IStatsResult & { live?: IStatsLive }>(LiveQuery, 'adminStatsLive'),
   overview: (range: StatsRange) =>
     query<IStatsResult & { stats?: IStatsOverview }>(OverviewQuery, 'adminStatsOverview', {
+      range,
+    }),
+  newUsers: (range: StatsRange) =>
+    query<IStatsResult & { newUsers?: IStatsNewUsers }>(NewUsersQuery, 'adminStatsNewUsers', {
       range,
     }),
   security: (range: StatsRange) =>
