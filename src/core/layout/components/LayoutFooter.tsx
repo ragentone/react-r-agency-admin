@@ -7,9 +7,10 @@ interface IProps {
 
 export const LayoutFooter = ({ loading }: IProps) => {
   return (
-    <div className={'flex flex-col'}>
-      <PluginSlot scope={'admin'} name={'footer.widget'} />
+    <div className={'flex flex-col w-full'}>
+      <PluginSlot scope={'admin'} name={'footer_before.widget'} />
       <MobileDock loading={loading} />
+      <PluginSlot scope={'admin'} name={'footer_after.widget'} />
     </div>
   );
 };
