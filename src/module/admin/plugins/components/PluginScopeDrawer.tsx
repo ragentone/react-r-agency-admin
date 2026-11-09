@@ -38,6 +38,7 @@ export const PluginScopeDrawer: React.FC<IPluginScopeDrawerProps> = ({ open, onO
 
   return (
     <AppFormDrawer
+      autoHeight={true}
       open={open}
       onOpenChange={next => {
         if (!busy) onOpenChange(next);
