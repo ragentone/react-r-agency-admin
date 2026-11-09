@@ -20,7 +20,7 @@ import { useLinkOpenStore } from '../store.ts';
 import { LINK_KIND_ICONS } from '../utils.ts';
 
 /**
- * Links menu ("Legal & links"): own drawer from the right with all visible links, grouped
+ * Links menu ("Legal & links"): own bottom sheet with all visible links, grouped
  * (legal, app groups, custom). A tap opens the link page `/link/<id>` (or a new tab for urls).
  */
 export const LinksMenuDrawer: React.FC = () => {
@@ -33,8 +33,8 @@ export const LinksMenuDrawer: React.FC = () => {
   let index = 0;
 
   return (
-    <Drawer open={open} onOpenChange={setOpen} swipeDirection={LINKS_MENU_SIDE}>
-      <DrawerContent className="[--drawer-inset:0px] data-[swipe-axis=x]:[--drawer-content-width:min(86vw,22rem)] rounded-none border-0 border-l border-border/50 bg-background">
+    <Drawer open={open} onOpenChange={setOpen} swipeDirection={LINKS_MENU_SIDE} showSwipeHandle>
+      <DrawerContent className="mx-auto h-[88dvh] max-h-[88dvh] w-full max-w-[600px] [--drawer-inset:0px] rounded-t-3xl rounded-b-none border-x-0 border-b-0 border-t border-border/50 bg-background">
         <div className="flex h-full min-h-0 flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
           <div className="flex items-center justify-between gap-2 py-3 pr-3 pl-6">
             <div className="min-w-0 flex-1">
@@ -81,8 +81,8 @@ export const LinksMenuDrawer: React.FC = () => {
                     return (
                       <motion.li
                         key={link.id}
-                        initial={{ opacity: 0, x: 16 }}
-                        animate={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.08 + delay, duration: 0.25, ease: 'easeOut' }}
                       >
                         <button

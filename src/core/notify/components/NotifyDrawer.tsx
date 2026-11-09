@@ -43,7 +43,7 @@ const pathOf = (item: INotifyItem) => {
     : null;
 };
 
-/** Notification center (bottom sheet, like the friends drawer): tabs all / unread. */
+/** Notification center: bottom sheet (swipe down / back / backdrop closes it), tabs all / unread. */
 export const NotifyDrawer: React.FC = () => {
   const { t } = useTranslation('notify');
   const router = useRouter();
@@ -181,8 +181,13 @@ export const NotifyDrawer: React.FC = () => {
   };
 
   return (
-    <Drawer open={open} onOpenChange={next => !next && closeDrawer()} swipeDirection="right">
-      <DrawerContent className="data-[swipe-axis=x]:[--drawer-content-width:min(92vw,26rem)] [--drawer-inset:0px] rounded-none border-0 border-l border-border/50 bg-background">
+    <Drawer
+      open={open}
+      onOpenChange={next => !next && closeDrawer()}
+      swipeDirection="down"
+      showSwipeHandle
+    >
+      <DrawerContent className="mx-auto h-[88dvh] max-h-[88dvh] w-full max-w-[600px] [--drawer-inset:0px] rounded-t-3xl rounded-b-none border-x-0 border-b-0 border-t border-border/50 bg-background">
         <div className="flex h-full min-h-0 flex-col">
           <header className="flex items-center gap-2 pr-3 pb-2 pl-3 pt-1">
             <span className="grid size-10 shrink-0 place-items-center rounded-2xl bg-foreground text-background">

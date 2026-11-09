@@ -20,5 +20,5 @@ export const LINK_SEARCH_KEY = 'link';
 export const LINK_GROUP_LEGAL = 'legal';
 export const LINK_GROUP_DEFAULT = 'links';
 
-/** Links menu slides in from the right (like the settings drawer). */
-export const LINKS_MENU_SIDE = 'right' as const;
+/** Links menu slides up from the bottom (bottom sheet). */
+export const LINKS_MENU_SIDE = 'down' as const;

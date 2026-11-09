@@ -19,7 +19,7 @@ interface IProps {
 }
 
 /**
- * Settings drawer sliding in from the right (swipe right / back / overlay closes it).
+ * Settings bottom sheet (swipe down / back / overlay closes it).
  * Renders all menu components registered with `placement: 'settings'` (language, theme …).
  */
 const MenuSettingsDrawer = ({ open, onOpenChange }: IProps) => {
@@ -32,10 +32,11 @@ const MenuSettingsDrawer = ({ open, onOpenChange }: IProps) => {
       open={open}
       onOpenChange={(next: any) => onOpenChange(next)}
       swipeDirection={MENU_SETTINGS_DRAWER_SIDE}
+      showSwipeHandle
     >
       <DrawerContent
         className={
-          'data-[swipe-axis=x]:[--drawer-content-width:min(86vw,22rem)] [--drawer-inset:0px] rounded-none border-0 border-l border-border/50 bg-background'
+          'mx-auto h-[88dvh] max-h-[88dvh] w-full max-w-[600px] [--drawer-inset:0px] rounded-t-3xl rounded-b-none border-x-0 border-b-0 border-t border-border/50 bg-background'
         }
       >
         <div
@@ -73,8 +74,8 @@ const MenuSettingsDrawer = ({ open, onOpenChange }: IProps) => {
               {settings.map((entry, i) => (
                 <motion.li
                   key={entry.id}
-                  initial={{ opacity: 0, x: 16 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{
                     delay: 0.08 + Math.min(i, 12) * 0.03,
                     duration: 0.25,
