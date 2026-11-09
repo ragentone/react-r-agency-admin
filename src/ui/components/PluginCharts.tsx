@@ -127,7 +127,7 @@ export function PluginPieChart({
             stroke="var(--background)"
           >
             {data.map((_, index) => (
-              <Cell key={index} fill="currentColor" fillOpacity={shade(index)} />
+              <Cell key={index} fill={`var(--chart-${(index % 5) + 1})`} />
             ))}
           </Pie>
         </PieChart>
