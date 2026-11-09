@@ -368,8 +368,50 @@ export interface IPluginPageLayoutProps {
   children?: React.ReactNode;
 }
 
+/** Balkendiagramm (`api.ui.BarChart`): eine Säule pro Eintrag. Wird vom Host mit Recharts gezeichnet. */
+export interface IPluginBarChartProps {
+  data: { label: string; value: number }[];
+  /** Formats values in the axis and the tooltip, e.g. file sizes. */
+  formatValue?: (value: number) => string;
+  /** Height in pixels. Default 240. */
+  height?: number;
+  /** Text for screen readers. */
+  ariaLabel?: string;
+}
+
+/** Liniendiagramm (`api.ui.LineChart`). Eine Linie pro Serie; die erste durchgezogen, weitere gestrichelt. */
+export interface IPluginLineChartProps {
+  /** One object per x value. Keys of `series` are the value keys. */
+  data: Record<string, string | number>[];
+  /** Key in `data` for the x axis, e.g. a date label. */
+  xKey: string;
+  series: { key: string; label: string }[];
+  /** Formats values in the axis and the tooltip. */
+  formatValue?: (value: number) => string;
+  /** Height in pixels. Default 240. */
+  height?: number;
+  ariaLabel?: string;
+}
+
+/** Flächendiagramm (`api.ui.AreaChart`). Gleiche Props wie das Liniendiagramm. */
+export type IPluginAreaChartProps = IPluginLineChartProps;
+
+/** Kreisdiagramm (`api.ui.PieChart`). Eine Scheibe pro Eintrag, optional als Donut. */
+export interface IPluginPieChartProps {
+  data: { label: string; value: number }[];
+  formatValue?: (value: number) => string;
+  /** Hole in the middle. */
+  donut?: boolean;
+  height?: number;
+  ariaLabel?: string;
+}
+
 export interface IPluginUi {
   PageLayout: React.ComponentType<IPluginPageLayoutProps>;
+  BarChart: React.ComponentType<IPluginBarChartProps>;
+  LineChart: React.ComponentType<IPluginLineChartProps>;
+  AreaChart: React.ComponentType<IPluginAreaChartProps>;
+  PieChart: React.ComponentType<IPluginPieChartProps>;
   Alert: React.ComponentType<UiDiv & { variant?: 'default' | 'destructive' }>;
   AlertTitle: React.ComponentType<UiDiv>;
   AlertDescription: React.ComponentType<UiDiv>;
