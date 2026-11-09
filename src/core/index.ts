@@ -9,7 +9,6 @@ export * from './components';
 export * from './cookie';
 export { Core } from './core.api.ts';
 export { CoreVariables } from './core.variables.ts';
-export * from './developer';
 export * from './error';
 export * from './event';
 export * from './hooks';

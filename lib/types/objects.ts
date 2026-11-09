@@ -325,6 +325,14 @@ export interface IAdminStatsLiveReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminStatsNewUsersReturn` */
+export interface IAdminStatsNewUsersReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  newUsers: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminStatsOverviewReturn` */
 export interface IAdminStatsOverviewReturn {
   error: Maybe<string>;
@@ -920,6 +928,27 @@ export interface IDeveloperTestSourceReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `developerTodoCreateReturn` */
+export interface IDeveloperTodoCreateReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+  todo: Maybe<ScalarJSON>;
+}
+
+/** GraphQL: `developerTodoListReturn` */
+export interface IDeveloperTodoListReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+  todos: Maybe<ScalarJSON>;
+}
+
+/** GraphQL: `developerTodoUpdateReturn` */
+export interface IDeveloperTodoUpdateReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+  todo: Maybe<ScalarJSON>;
+}
+
 /** GraphQL: `getLocationByCoords` */
 export interface IGetLocationByCoords {
   address: Maybe<IGetLocationByCoordsAddress>;
@@ -1119,6 +1148,8 @@ export interface IMutation {
   deleteAllDummyUsers: Maybe<IDeleteAllDummyUsersReturn>;
   deleteMedia: Maybe<IDeleteMediaReturn>;
   developerTest: Maybe<IDeveloperTestReturn>;
+  developerTodoCreate: Maybe<IDeveloperTodoCreateReturn>;
+  developerTodoUpdate: Maybe<IDeveloperTodoUpdateReturn>;
   googleAuthAfter: Maybe<IGoogleAuthAfterReturn>;
   linkCreate: Maybe<ILinkCreateReturn>;
   linkParse: Maybe<ILinkParseReturn>;
@@ -1366,6 +1397,7 @@ export interface IQuery {
   adminRoleList: Maybe<IAdminRoleListReturn>;
   adminSeoOverview: Maybe<IAdminSeoOverviewReturn>;
   adminStatsLive: Maybe<IAdminStatsLiveReturn>;
+  adminStatsNewUsers: Maybe<IAdminStatsNewUsersReturn>;
   adminStatsOverview: Maybe<IAdminStatsOverviewReturn>;
   adminStatsSecurity: Maybe<IAdminStatsSecurityReturn>;
   adminSystemDeploys: Maybe<IAdminSystemDeploysReturn>;
@@ -1389,6 +1421,7 @@ export interface IQuery {
   currencyGet: Maybe<ICurrencyGetReturn>;
   debugReportList: Maybe<IDebugReportListReturn>;
   developerTestSource: Maybe<IDeveloperTestSourceReturn>;
+  developerTodoList: Maybe<IDeveloperTodoListReturn>;
   getLocationByCoords: Maybe<IGetLocationByCoords>;
   getLocationByIp: Maybe<IGetLocationByIp>;
   holidays: Maybe<IHolidays>;

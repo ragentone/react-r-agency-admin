@@ -364,6 +364,17 @@ export interface IMutationDeveloperTestArgs {
   delay?: InputMaybe<number>;
 }
 
+/** Arguments of `Mutation.developerTodoCreate` */
+export interface IMutationDeveloperTodoCreateArgs {
+  values: ScalarJSON;
+}
+
+/** Arguments of `Mutation.developerTodoUpdate` */
+export interface IMutationDeveloperTodoUpdateArgs {
+  id: ScalarID;
+  values: ScalarJSON;
+}
+
 /** Arguments of `Mutation.googleAuthAfter` */
 export interface IMutationGoogleAuthAfterArgs {
   accessToken: string;
@@ -812,6 +823,11 @@ export interface IQueryAdminPluginTablesArgs {
   pluginId: string;
 }
 
+/** Arguments of `Query.adminStatsNewUsers` */
+export interface IQueryAdminStatsNewUsersArgs {
+  range?: InputMaybe<number>;
+}
+
 /** Arguments of `Query.adminStatsOverview` */
 export interface IQueryAdminStatsOverviewArgs {
   range?: InputMaybe<number>;
@@ -887,6 +903,8 @@ export interface IQueryCurrencyGetArgs {
 
 /** Arguments of `Query.debugReportList` */
 export interface IQueryDebugReportListArgs {
+  orderBy?: InputMaybe<string>;
+  orderDir?: InputMaybe<string>;
   page?: InputMaybe<number>;
   pageSize?: InputMaybe<number>;
 }

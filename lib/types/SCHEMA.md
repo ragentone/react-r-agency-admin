@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |     95 |
-| [Mutation](#mutation) |    138 |
-| Object-Types          |    288 |
+| [Query](#query)       |     97 |
+| [Mutation](#mutation) |    140 |
+| Object-Types          |    292 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -119,6 +119,12 @@ Query  ‹IQuery›
 │   ├── error: String
 │   ├── field: String
 │   ├── live: JSON
+│   └── success: Boolean
+├── adminStatsNewUsers: adminStatsNewUsersReturn  ‹IAdminStatsNewUsersReturn›
+│   ├── $range: Int
+│   ├── error: String
+│   ├── field: String
+│   ├── newUsers: JSON
 │   └── success: Boolean
 ├── adminStatsOverview: adminStatsOverviewReturn  ‹IAdminStatsOverviewReturn›
 │   ├── $range: Int
@@ -262,6 +268,8 @@ Query  ‹IQuery›
 │   ├── success: Boolean
 │   └── total: Int
 ├── debugReportList: debugReportListReturn  ‹IDebugReportListReturn›
+│   ├── $orderBy: String
+│   ├── $orderDir: String
 │   ├── $page: Int
 │   ├── $pageSize: Int
 │   ├── error: String
@@ -273,6 +281,10 @@ Query  ‹IQuery›
 ├── developerTestSource: developerTestSourceReturn  ‹IDeveloperTestSourceReturn›
 │   ├── news: JSON
 │   └── success: Boolean
+├── developerTodoList: developerTodoListReturn  ‹IDeveloperTodoListReturn›
+│   ├── error: String
+│   ├── success: Boolean
+│   └── todos: JSON
 ├── getLocationByCoords: getLocationByCoords  ‹IGetLocationByCoords›
 │   ├── $lat: String!
 │   ├── $lon: String!
@@ -1346,6 +1358,17 @@ Mutation  ‹IMutation›
 ├── developerTest: developerTestReturn  ‹IDeveloperTestReturn›
 │   ├── $delay: Int
 │   └── success: Boolean
+├── developerTodoCreate: developerTodoCreateReturn  ‹IDeveloperTodoCreateReturn›
+│   ├── $values: JSON!
+│   ├── error: String
+│   ├── success: Boolean
+│   └── todo: JSON
+├── developerTodoUpdate: developerTodoUpdateReturn  ‹IDeveloperTodoUpdateReturn›
+│   ├── $id: ID!
+│   ├── $values: JSON!
+│   ├── error: String
+│   ├── success: Boolean
+│   └── todo: JSON
 ├── googleAuthAfter: googleAuthAfterReturn  ‹IGoogleAuthAfterReturn›
 │   ├── $accessToken: String!
 │   ├── $idToken: String!
@@ -1975,6 +1998,7 @@ Inputs
 | `adminSeoSettingsSaveReturn`             | Object | `IAdminSeoSettingsSaveReturn`             | `objects.ts` |                                                                                  |
 | `adminSeoSitemapReturn`                  | Object | `IAdminSeoSitemapReturn`                  | `objects.ts` |                                                                                  |
 | `adminStatsLiveReturn`                   | Object | `IAdminStatsLiveReturn`                   | `objects.ts` |                                                                                  |
+| `adminStatsNewUsersReturn`               | Object | `IAdminStatsNewUsersReturn`               | `objects.ts` |                                                                                  |
 | `adminStatsOverviewReturn`               | Object | `IAdminStatsOverviewReturn`               | `objects.ts` |                                                                                  |
 | `adminStatsSecurityReturn`               | Object | `IAdminStatsSecurityReturn`               | `objects.ts` |                                                                                  |
 | `adminSystemDeploysReturn`               | Object | `IAdminSystemDeploysReturn`               | `objects.ts` |                                                                                  |
@@ -2052,6 +2076,9 @@ Inputs
 | `deleteMediaReturn`                      | Object | `IDeleteMediaReturn`                      | `objects.ts` |                                                                                  |
 | `developerTestReturn`                    | Object | `IDeveloperTestReturn`                    | `objects.ts` |                                                                                  |
 | `developerTestSourceReturn`              | Object | `IDeveloperTestSourceReturn`              | `objects.ts` |                                                                                  |
+| `developerTodoCreateReturn`              | Object | `IDeveloperTodoCreateReturn`              | `objects.ts` |                                                                                  |
+| `developerTodoListReturn`                | Object | `IDeveloperTodoListReturn`                | `objects.ts` |                                                                                  |
+| `developerTodoUpdateReturn`              | Object | `IDeveloperTodoUpdateReturn`              | `objects.ts` |                                                                                  |
 | `Email`                                  | Scalar | `ScalarEmail`                             | `scalars.ts` |                                                                                  |
 | `findOptions`                            | Input  | `IFindOptions`                            | `inputs.ts`  |                                                                                  |
 | `Float`                                  | Scalar | –                                         | built-in     | The `Float` scalar type represents signed double-precision fractional values as… |
