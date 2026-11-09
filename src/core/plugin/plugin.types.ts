@@ -353,7 +353,23 @@ type UiOverlayRoot = {
 /** Triggers and close buttons: a button, or another element through `render` (base-ui). */
 type UiTrigger = UiButton & { render?: React.ReactElement };
 
+/** Gemeinsames Seitenlayout: fixer Header (Zurück, Titel, Untertitel, rechter Slot), scrollbarer Inhalt, fixer Footer. */
+export interface IPluginPageLayoutProps {
+  title: string;
+  subtitle?: React.ReactNode;
+  /** Zurück-Button links. Ohne Angabe wird keiner angezeigt. */
+  onBack?: () => void;
+  /** Accessible name of the back button. */
+  backLabel?: string;
+  /** Rechter Bereich des Headers, z. B. Buttons. */
+  actions?: React.ReactNode;
+  /** Fester Bereich unten. */
+  footer?: React.ReactNode;
+  children?: React.ReactNode;
+}
+
 export interface IPluginUi {
+  PageLayout: React.ComponentType<IPluginPageLayoutProps>;
   Alert: React.ComponentType<UiDiv & { variant?: 'default' | 'destructive' }>;
   AlertTitle: React.ComponentType<UiDiv>;
   AlertDescription: React.ComponentType<UiDiv>;

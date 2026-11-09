@@ -40,6 +40,7 @@ import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, Tabl
 import { AnimatedCalendarStandalone as Calendar } from '@ui/shad-cn/components/calender';
 import { DatePicker } from '@ui/components/DatePicker';
 import { ConfirmPopoverButton } from '@ui/components/ConfirmPopoverButton';
+import { PluginPageLayout } from '@ui/components/PluginPageLayout';
 import {
   Drawer,
   DrawerClose,
@@ -100,6 +101,7 @@ export const pluginUi = {
   Tooltip, TooltipProvider, TooltipTrigger, TooltipContent,
   Popover, PopoverTrigger, PopoverContent, PopoverAnchor,
   ConfirmPopoverButton,
+  PageLayout: PluginPageLayout,
   Drawer, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription,
   Dialog, DialogTrigger, DialogClose, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription,
 } as unknown as IPluginUi;
