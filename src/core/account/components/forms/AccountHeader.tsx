@@ -11,9 +11,9 @@ export const AccountHeader: React.FC<AccountHeaderProps> = ({ title, description
   if (!title && !description) return null;
 
   return (
-    <div className={cn('space-y-1 mb-4', className)}>
-      {title && <h3 className="text-base font-semibold tracking-tight">{title}</h3>}
-      {description && <p className="text-muted-foreground text-sm">{description}</p>}
+    <div className={cn('mb-4 space-y-1', className)}>
+      {title && <h3 className="text-title font-bold text-foreground">{title}</h3>}
+      {description && <p className="text-caption text-muted-foreground">{description}</p>}
     </div>
   );
 };

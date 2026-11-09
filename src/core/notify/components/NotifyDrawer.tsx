@@ -11,13 +11,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@ui/shad-cn/components/alert-dialog.tsx';
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerTitle,
-} from '@ui/shad-cn/components/drawer.tsx';
-import { Bell, CheckCheck, Trash2, X } from 'lucide-react';
+import { Drawer, DrawerContent } from '@ui/shad-cn/components/drawer.tsx';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -27,13 +21,11 @@ import { type INotifyActivity, useNotifyActivityStore } from '../activity';
 import { NOTIFY_LAYER_DELAY_MS } from '../const';
 import { useNotifyStore } from '../store';
 import type { INotifyAction, INotifyItem, NotifyFilter } from '../types';
-import { badgeText, notifyText } from '../utils';
+import { notifyText } from '../utils';
 import { NotifyActivityList } from './NotifyActivityList';
-import { NotifyItemMenu } from './NotifyItemMenu';
+import { NotifyDrawerHeader } from './NotifyDrawerHeader';
 import { NotifyList } from './NotifyList';
 import { NotifySystemBanner } from './NotifySystemBanner';
-
-const TABS: NotifyFilter[] = ['all', 'unread'];
 
 /** In-app path a notification may carry in its args (`path` / `url` starting with `/`). */
 const pathOf = (item: INotifyItem) => {
@@ -187,89 +179,17 @@ export const NotifyDrawer: React.FC = () => {
       swipeDirection="down"
       showSwipeHandle
     >
-      <DrawerContent className="mx-auto h-[88dvh] max-h-[88dvh] w-full max-w-[600px] [--drawer-inset:0px] rounded-t-3xl rounded-b-none border-x-0 border-b-0 border-t border-border/50 bg-background">
+      <DrawerContent className="mx-auto h-[88dvh] max-h-[88dvh] w-full max-w-150 [--drawer-inset:0px] rounded-t-3xl rounded-b-none border-x-0 border-b-0 border-t border-border/50 bg-background">
         <div className="flex h-full min-h-0 flex-col">
-          <header className="flex items-center gap-2 pr-3 pb-2 pl-3 pt-1">
-            <span className="grid size-10 shrink-0 place-items-center rounded-2xl bg-foreground text-background">
-              <Bell className="size-5" strokeWidth={2.25} />
-            </span>
-            <div className="min-w-0 flex-1">
-              <DrawerTitle className="truncate text-title leading-6 font-extrabold tracking-tight">
-                {t('title')}
-              </DrawerTitle>
-              <DrawerDescription
-                className="truncate text-caption text-muted-foreground"
-                aria-live="polite"
-              >
-                {unread > 0 ? t('subtitle', { count: unread }) : t('subtitleNone')}
-              </DrawerDescription>
-            </div>
-            <button
-              type="button"
-              onClick={() => void onMarkAll()}
-              disabled={unread === 0}
-              aria-label={t('actions.markAllRead')}
-              title={t('actions.markAllRead')}
-              className="grid size-10 shrink-0 place-items-center rounded-full text-foreground transition-[opacity,background-color] hover:bg-foreground/[0.06] disabled:opacity-40"
-            >
-              <CheckCheck className="size-5" />
-            </button>
-            {total > 0 && (
-              <NotifyItemMenu
-                title={t('title')}
-                className="size-10"
-                items={[
-                  {
-                    key: 'clear',
-                    label: t('actions.clearAll'),
-                    icon: Trash2,
-                    destructive: true,
-                    onSelect: () => setConfirmClear(true),
-                  },
-                ]}
-              />
-            )}
-            <button
-              type="button"
-              onClick={closeDrawer}
-              aria-label={t('actions.close')}
-              className="grid size-10 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/[0.06] hover:text-foreground"
-            >
-              <X className="size-5" />
-            </button>
-          </header>
-
-          {/* Tabs (like X): the underline marks the active one. */}
-          <div role="tablist" aria-label={t('title')} className="flex border-b border-border/50">
-            {TABS.map(tab => {
-              const active = tab === filter;
-              return (
-                <button
-                  key={tab}
-                  type="button"
-                  role="tab"
-                  id={`notify-tab-${tab}`}
-                  aria-selected={active}
-                  aria-controls="notify-panel"
-                  onClick={() => selectTab(tab)}
-                  className={cn(
-                    'relative flex h-12 flex-1 items-center justify-center gap-2 text-body outline-none transition-colors hover:bg-foreground/[0.03] focus-visible:bg-foreground/[0.05]',
-                    active ? 'font-bold text-foreground' : 'font-semibold text-muted-foreground'
-                  )}
-                >
-                  {t(`tabs.${tab}`)}
-                  {tab === 'unread' && unread > 0 && (
-                    <span className="min-w-5 rounded-full bg-foreground px-1.5 text-center text-micro leading-5 font-bold text-background tabular-nums">
-                      {badgeText(unread)}
-                    </span>
-                  )}
-                  {active && (
-                    <span className="absolute bottom-0 left-1/2 h-1 w-14 -translate-x-1/2 rounded-full bg-foreground" />
-                  )}
-                </button>
-              );
-            })}
-          </div>
+          <NotifyDrawerHeader
+            filter={filter}
+            unread={unread}
+            total={total}
+            onSelectTab={selectTab}
+            onMarkAll={() => void onMarkAll()}
+            onClear={() => setConfirmClear(true)}
+            onClose={closeDrawer}
+          />
 
           <div
             ref={scrollRef}

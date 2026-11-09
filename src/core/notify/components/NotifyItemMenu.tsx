@@ -1,10 +1,5 @@
 import { cn } from '@ui/lib/utils';
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerTitle,
-} from '@ui/shad-cn/components/drawer.tsx';
+import { AppDrawer } from '@ui/patterns';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,13 +22,13 @@ export interface INotifyMenuItem {
 }
 
 export interface INotifyItemMenuProps {
-  /** Header of the mobile action sheet. */
+  /** Title of the mobile action drawer. */
   title: string;
   items: INotifyMenuItem[];
   className?: string;
 }
 
-/** "…" of a notification – mobile: bottom action sheet, desktop: dropdown menu. */
+/** "…" of a notification – mobile: bottom drawer with flat rows, desktop: dropdown menu. */
 export const NotifyItemMenu: React.FC<INotifyItemMenuProps> = ({ title, items, className }) => {
   const { t } = useTranslation('notify');
   const mobile = useIsMobile();
@@ -42,7 +37,7 @@ export const NotifyItemMenu: React.FC<INotifyItemMenuProps> = ({ title, items, c
   if (items.length === 0) return null;
 
   const trigger = cn(
-    'grid size-9 shrink-0 place-items-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-foreground/[0.06] hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring',
+    'grid size-10 shrink-0 place-items-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-foreground/6 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring',
     className
   );
 
@@ -55,7 +50,7 @@ export const NotifyItemMenu: React.FC<INotifyItemMenuProps> = ({ title, items, c
           title={t('actions.more')}
           onClick={event => event.stopPropagation()}
         >
-          <MoreHorizontal className="size-[18px]" />
+          <MoreHorizontal className="size-5" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="min-w-56 rounded-xl">
           {items.map(item => (
@@ -79,7 +74,7 @@ export const NotifyItemMenu: React.FC<INotifyItemMenuProps> = ({ title, items, c
     );
   }
 
-  // Sheet closes first (back-button history), then the action runs.
+  // Drawer closes first (back-button history), then the action runs.
   const select = (item: INotifyMenuItem) => {
     setOpen(false);
     window.setTimeout(item.onSelect, NOTIFY_LAYER_DELAY_MS);
@@ -97,42 +92,34 @@ export const NotifyItemMenu: React.FC<INotifyItemMenuProps> = ({ title, items, c
           setOpen(true);
         }}
       >
-        <MoreHorizontal className="size-[18px]" />
+        <MoreHorizontal className="size-5" />
       </button>
-      <Drawer open={open} onOpenChange={setOpen} showSwipeHandle>
-        <DrawerContent className="mx-auto w-full max-w-[640px]">
-          <div className="px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-            <div className="px-2 pt-1 pb-3">
-              <DrawerTitle className="line-clamp-2 text-body font-bold">{title}</DrawerTitle>
-              <DrawerDescription className="sr-only">{t('actions.more')}</DrawerDescription>
-            </div>
-            <ul className="overflow-hidden rounded-2xl bg-foreground/[0.04]">
-              {items.map(item => (
-                <li key={item.key} className="border-b border-border/40 last:border-b-0">
-                  <button
-                    type="button"
-                    onClick={() => select(item)}
-                    className={cn(
-                      'flex h-14 w-full items-center gap-3.5 px-4 text-left text-body font-semibold outline-none transition-colors focus-visible:bg-foreground/[0.06] active:bg-foreground/[0.06]',
-                      item.destructive && 'text-destructive'
-                    )}
-                  >
-                    <item.icon className="size-5 shrink-0" strokeWidth={2} />
-                    {item.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              className="mt-2 h-12 w-full rounded-2xl bg-foreground/[0.04] text-body font-bold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring active:bg-foreground/[0.08]"
-            >
-              {t('actions.back')}
-            </button>
-          </div>
-        </DrawerContent>
-      </Drawer>
+      <AppDrawer
+        open={open}
+        onOpenChange={setOpen}
+        title={title}
+        description={t('actions.more')}
+        size="auto"
+        bodyClassName="px-0 pt-0"
+      >
+        <ul className="flex flex-col">
+          {items.map(item => (
+            <li key={item.key}>
+              <button
+                type="button"
+                onClick={() => select(item)}
+                className={cn(
+                  'flex h-12 w-full items-center gap-3 px-4 text-left text-body font-medium outline-none transition-colors hover:bg-accent/50 focus-visible:bg-accent/50 active:bg-accent',
+                  item.destructive ? 'text-destructive' : 'text-foreground'
+                )}
+              >
+                <item.icon className="size-5 shrink-0" aria-hidden="true" />
+                {item.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </AppDrawer>
     </>
   );
 };

@@ -109,7 +109,7 @@ const BadgeView = ({
   return (
     <span
       className={cn(
-        'pointer-events-none inline-flex items-center justify-center rounded-full bg-foreground text-background font-semibold tabular-nums ring-2 ring-background',
+        'pointer-events-none inline-flex items-center justify-center rounded-full bg-foreground text-background font-bold tabular-nums ring-2 ring-background',
         variant === 'dot'
           ? 'min-w-4 h-4 px-1 text-micro leading-none'
           : 'min-w-5 h-5 px-1.5 text-micro',

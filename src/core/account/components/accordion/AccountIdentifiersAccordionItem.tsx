@@ -1,5 +1,7 @@
 import { AccountSection } from '@core/account/components/AccountSection';
 import { cn } from '@ui/lib/utils';
+import { Button } from '@ui/shad-cn/components/button';
+import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { Check, Copy, Fingerprint } from 'lucide-react';
 import { getDeviceId, getMeshClient } from 'r-agency-mesh-client-v1/release';
 import React, { useEffect, useState } from 'react';
@@ -64,15 +66,15 @@ const IdRow: React.FC<{ label: string; value: string | null; loading?: boolean }
   };
 
   return (
-    <div className="flex items-center gap-2 rounded-xl border border-border/50 py-2 pr-1.5 pl-3">
+    <div className="flex items-center gap-2 border-b border-border/50 py-2">
       <div className="min-w-0 flex-1">
         <div className="text-caption leading-4 font-medium text-muted-foreground">{label}</div>
         {loading ? (
-          <div className="mt-1 h-4 w-40 animate-pulse rounded-full bg-foreground/[0.07]" />
+          <Skeleton className="mt-1 h-4 w-40 rounded-full" />
         ) : (
           <div
             className={cn(
-              'mt-0.5 font-mono text-[13px] leading-5 break-all select-all',
+              'mt-0.5 font-mono text-caption break-all select-all',
               value ? 'text-foreground' : 'text-muted-foreground'
             )}
           >
@@ -80,16 +82,17 @@ const IdRow: React.FC<{ label: string; value: string | null; loading?: boolean }
           </div>
         )}
       </div>
-      <button
-        type="button"
+      <Button
+        variant="ghost"
+        size="icon-lg"
         onClick={() => void copy()}
         disabled={!value}
         aria-label={t('ids.copyLabel', { label, defaultValue: `${label} kopieren` })}
         title={t('ids.copy', { defaultValue: 'Kopieren' })}
-        className="grid size-10 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors outline-none hover:bg-foreground/[0.06] hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-40"
+        className="shrink-0 text-muted-foreground"
       >
         {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
-      </button>
+      </Button>
     </div>
   );
 };
@@ -113,14 +116,14 @@ export const AccountIdentifiersAccordionItem: React.FC<AccountIdentifiersAccordi
       })}
       className={className}
     >
-      <div className="space-y-2">
+      <div>
         <IdRow label={t('ids.userId', { defaultValue: 'Nutzer-ID' })} value={userId || null} />
         <IdRow
           label={t('ids.deviceId', { defaultValue: 'Geräte-ID' })}
           value={deviceId}
           loading={loading && !deviceId}
         />
-        <p className="px-1 pt-1 text-caption leading-4 text-muted-foreground">
+        <p className="pt-3 text-caption text-muted-foreground">
           {t('ids.hint', {
             defaultValue: 'Die Geräte-ID gilt nur für dieses Gerät bzw. diesen Browser.',
           })}

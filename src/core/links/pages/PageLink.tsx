@@ -32,22 +32,18 @@ const LinkPageHeader: React.FC<{
 }> = ({ title, subtitle, onBack, onShare }) => {
   const { t } = useTranslation('links');
   return (
-    <header className="sticky top-0 z-20 border-b border-border/50 bg-background/85 pt-[env(safe-area-inset-top)] backdrop-blur-md">
-      <div className="flex min-h-14 items-center gap-4 px-2 py-1.5 sm:gap-6 sm:px-3">
-        <Button variant="ghost" size="icon-md" onClick={onBack} aria-label={t('back')}>
+    <header className="sticky top-0 z-20 border-b border-border/50 bg-background/80 pt-[env(safe-area-inset-top)] backdrop-blur">
+      <div className="flex h-14 items-center gap-3 px-2">
+        <Button variant="ghost" size="icon-lg" onClick={onBack} aria-label={t('back')}>
           <ArrowLeft className="size-5" />
         </Button>
         <div className="min-w-0 flex-1">
-          <h1 className="truncate text-xl leading-6 font-bold tracking-tight text-foreground">
-            {title}
-          </h1>
-          {subtitle && (
-            <p className="truncate text-caption leading-4 text-muted-foreground">{subtitle}</p>
-          )}
+          <h1 className="truncate text-title font-bold text-foreground">{title}</h1>
+          {subtitle && <p className="truncate text-caption text-muted-foreground">{subtitle}</p>}
         </div>
         {onShare && (
-          <Button variant="ghost" size="icon-md" onClick={onShare} aria-label={t('share')}>
-            <Share2 className="size-[1.125rem]" />
+          <Button variant="ghost" size="icon-lg" onClick={onShare} aria-label={t('share')}>
+            <Share2 className="size-5" />
           </Button>
         )}
       </div>

@@ -54,18 +54,27 @@ export const useSearchConfig = (enabled: boolean) => {
       : bundles.filter(bundle => bundle.active).map(bundle => bundle.alias);
   }, [bundles, selection]);
 
+  const allSelected = bundles.length > 0 && selected.length === bundles.length;
+
+  const save = useCallback((next: string[]) => {
+    setSelection(next);
+    writeSelection(next);
+  }, []);
+
+  /** Chip logic: from "all", a tap focuses one bundle; afterwards taps add/remove bundles. */
   const toggle = useCallback(
     (alias: string) => {
+      if (allSelected && bundles.length > 1) return save([alias]);
       const next = selected.includes(alias)
         ? selected.filter(item => item !== alias)
         : [...selected, alias];
-      // At least one bundle stays selected.
-      if (next.length === 0) return;
-      setSelection(next);
-      writeSelection(next);
+      // Nothing left → back to all bundles.
+      save(next.length > 0 ? next : bundles.map(bundle => bundle.alias));
     },
-    [selected]
+    [allSelected, bundles, save, selected]
   );
 
-  return { bundles, selected, toggle, loaded };
+  const selectAll = useCallback(() => save(bundles.map(bundle => bundle.alias)), [bundles, save]);
+
+  return { bundles, selected, allSelected, toggle, selectAll, loaded };
 };

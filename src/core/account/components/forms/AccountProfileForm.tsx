@@ -46,7 +46,6 @@ export const AccountProfileForm: React.FC<AccountProfileFormProps> = ({
   const { updateAccount } = useAccount(false);
   const graphql = useGraphQl();
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
 
   const validationSchema = useMemo(() => {
     return (
@@ -96,7 +95,6 @@ export const AccountProfileForm: React.FC<AccountProfileFormProps> = ({
     formikHelpers: FormikHelpers<IAccountFormValues>
   ) => {
     setSubmitError(null);
-    setSubmitSuccess(null);
     try {
       if (onSubmit) {
         await onSubmit(values, formikHelpers);
@@ -120,8 +118,6 @@ export const AccountProfileForm: React.FC<AccountProfileFormProps> = ({
           throw new Error(t('messages.updateError'));
         }
       }
-
-      setSubmitSuccess(t('messages.updateSuccess'));
       toast.success(t('messages.updateSuccess'));
       onSuccess?.();
     } catch (err: unknown) {
@@ -146,14 +142,13 @@ export const AccountProfileForm: React.FC<AccountProfileFormProps> = ({
         {() => (
           <Form className="space-y-4" noValidate>
             <AccountAlert type="error" message={submitError} />
-            <AccountAlert type="success" message={submitSuccess} />
 
             <AccountPersonalFields />
 
             {showBioField && <AccountBioField />}
 
             <div className="flex justify-end pt-2">
-              <AccountSubmitButton className="w-full sm:w-auto shadow-none" />
+              <AccountSubmitButton className="w-full sm:w-auto" />
             </div>
           </Form>
         )}

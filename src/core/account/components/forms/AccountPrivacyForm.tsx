@@ -43,7 +43,6 @@ export const AccountPrivacyForm: React.FC<AccountPrivacyFormProps> = ({
   const { t } = useTranslation('account');
   const { updateSettings } = useAccount(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
 
   const validationSchema = useMemo(() => {
     return customValidationSchema || createPrivacyValidationSchema();
@@ -89,7 +88,6 @@ export const AccountPrivacyForm: React.FC<AccountPrivacyFormProps> = ({
     formikHelpers: FormikHelpers<IAccountFormValues>
   ) => {
     setSubmitError(null);
-    setSubmitSuccess(null);
     try {
       if (onSubmit) {
         await onSubmit(values, formikHelpers);
@@ -106,8 +104,6 @@ export const AccountPrivacyForm: React.FC<AccountPrivacyFormProps> = ({
           throw new Error(t('messages.updateError'));
         }
       }
-
-      setSubmitSuccess(t('messages.updateSuccess'));
       toast.success(t('messages.updateSuccess'));
       onSuccess?.();
     } catch (err: unknown) {
@@ -132,11 +128,10 @@ export const AccountPrivacyForm: React.FC<AccountPrivacyFormProps> = ({
         {() => (
           <Form className="space-y-4" noValidate>
             <AccountAlert type="error" message={submitError} />
-            <AccountAlert type="success" message={submitSuccess} />
             {/* Full-bleed rows inside the settings section (which has px-4). */}
             <AccountPrivacyFields className="-mx-4" />
             <div className="flex justify-end pt-2">
-              <AccountSubmitButton className="w-full sm:w-auto shadow-none" />
+              <AccountSubmitButton className="w-full sm:w-auto" />
             </div>
           </Form>
         )}

@@ -1,5 +1,6 @@
 import { isNativeApp } from '@core/native';
-import { BellRing, Loader2, X } from 'lucide-react';
+import { Button } from '@ui/shad-cn/components/button';
+import { BellRing, X } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -8,7 +9,7 @@ import { useSystemNotify } from '../system';
 
 /**
  * Offer at the top of the drawer: notifications on this device (system notifications in the
- * app / browser). Hidden once switched on or dismissed.
+ * app / browser). Hidden once switched on or dismissed. Flat row like a notification.
  */
 export const NotifySystemBanner: React.FC = () => {
   const { t } = useTranslation('notify');
@@ -28,37 +29,32 @@ export const NotifySystemBanner: React.FC = () => {
   };
 
   return (
-    <div className="mx-4 mt-3 flex items-start gap-3 rounded-2xl border border-border/60 p-3">
-      <span className="grid size-10 shrink-0 place-items-center rounded-full bg-foreground text-background">
-        <BellRing className="size-5" strokeWidth={2.25} />
+    <div className="flex items-start gap-3 border-b border-border/50 px-4 py-3">
+      <span className="grid size-10 shrink-0 place-items-center rounded-full bg-foreground/6 text-foreground">
+        <BellRing className="size-5" aria-hidden="true" />
       </span>
-      <div className="min-w-0 flex-1">
-        <p className="text-body leading-5 font-bold">{t('system.title')}</p>
+      <div className="min-w-0 flex-1 pt-0.5">
+        <p className="text-body font-bold text-foreground">{t('system.title')}</p>
         <p className="mt-0.5 text-caption text-muted-foreground">
           {denied
             ? t(app ? 'system.deniedApp' : 'system.deniedBrowser')
             : t(app ? 'system.textApp' : 'system.textBrowser')}
         </p>
         {!denied && (
-          <button
-            type="button"
-            onClick={() => void onEnable()}
-            disabled={busy}
-            className="mt-2.5 inline-flex h-9 items-center gap-1.5 rounded-full bg-foreground px-4 text-sm font-bold text-background transition-opacity hover:opacity-90 disabled:opacity-60"
-          >
-            {busy && <Loader2 className="size-4 animate-spin" />}
+          <Button size="md" onClick={() => void onEnable()} isLoading={busy} className="mt-2.5">
             {t('system.enable')}
-          </button>
+          </Button>
         )}
       </div>
-      <button
-        type="button"
+      <Button
+        variant="ghost"
+        size="icon-md"
         onClick={dismiss}
         aria-label={t('system.dismiss')}
-        className="-mt-1 -mr-1 grid size-9 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/[0.06] hover:text-foreground"
+        className="-mt-1 -mr-2 text-muted-foreground"
       >
         <X className="size-4" />
-      </button>
+      </Button>
     </div>
   );
 };

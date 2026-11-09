@@ -1,4 +1,5 @@
 import { cn } from '@ui/lib/utils';
+import { Button } from '@ui/shad-cn/components/button';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { AlertCircle, Check, Loader2, X } from 'lucide-react';
 import React from 'react';
@@ -101,25 +102,22 @@ const ActivityRow: React.FC<{
           )}
 
           {activity.action && !running && (
-            <button
-              type="button"
-              onClick={() => onAction(activity)}
-              className="mt-2.5 inline-flex h-9 items-center rounded-full bg-foreground px-4 text-sm font-bold text-background outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring active:opacity-75"
-            >
+            <Button size="md" onClick={() => onAction(activity)} className="mt-2.5">
               {activity.action.label}
-            </button>
+            </Button>
           )}
         </div>
 
         {!running && (
-          <button
-            type="button"
+          <Button
+            variant="ghost"
+            size="icon-md"
             onClick={() => remove(activity.id)}
             aria-label={t('actions.dismiss')}
-            className="-mt-1 -mr-2 grid size-9 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/[0.06] hover:text-foreground"
+            className="-mt-1 -mr-2 text-muted-foreground"
           >
             <X className="size-4" />
-          </button>
+          </Button>
         )}
       </div>
     </motion.li>

@@ -33,7 +33,7 @@ const NotifySystemTpl = (props: IProps) => {
   return (
     <div
       className={cn(
-        'border-y sm:border sm:px-6 px-4 py-4 shadow border-border/50 bg-background w-full min-w-64 sm:max-w-[320px] max-w-full rounded-none sm:rounded-4xl',
+        'border-y sm:border sm:px-6 px-4 py-4 shadow border-border/50 bg-background w-full min-w-64 sm:max-w-80 max-w-full rounded-none sm:rounded-4xl',
         props.options.className
       )}
     >
@@ -60,13 +60,7 @@ const NotifySystemTpl = (props: IProps) => {
                 variant={action.variant}
                 size={'sm'}
                 onClick={async () => await handleActionClick(action)}
-                className={cn(
-                  'w-full',
-                  {
-                    'text-white': action.variant === 'destructive',
-                  },
-                  action.className
-                )}
+                className={cn('w-full', action.className)}
               >
                 {busy && <Spinner />}
                 {options.translate ? t(action.label) : action.label}

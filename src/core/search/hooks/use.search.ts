@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { SearchApi } from '../api';
 import { SEARCH_DEBOUNCE_MS, SEARCH_LIMIT, SEARCH_MIN_LENGTH } from '../const';
@@ -22,6 +22,7 @@ export const useSearch = (term: string, bundles: string[]) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [searchedKey, setSearchedKey] = useState(() => (cached(key) ? key : ''));
+  const [attempt, setAttempt] = useState(0);
   const request = useRef(0);
 
   useEffect(() => {
@@ -54,7 +55,14 @@ export const useSearch = (term: string, bundles: string[]) => {
     return () => window.clearTimeout(timer);
     // `key` covers query + bundles.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active, key]);
+  }, [active, key, attempt]);
+
+  /** Run the same search again (after an error). */
+  const retry = useCallback(() => {
+    cache.delete(key);
+    setError(null);
+    setAttempt(value => value + 1);
+  }, [key]);
 
   return {
     active,
@@ -64,5 +72,6 @@ export const useSearch = (term: string, bundles: string[]) => {
     /** Result belongs to an older term (shown dimmed while the new one loads). */
     stale: active && searchedKey !== key,
     error: active ? error : null,
+    retry,
   };
 };

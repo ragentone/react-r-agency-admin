@@ -5,6 +5,7 @@ import { type DateTimeFormat, formatDateTime, type Locales } from '@core/i18n';
 import { Link, useRouterState } from '@tanstack/react-router';
 import { cn } from '@ui/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@ui/shad-cn/components/avatar.tsx';
+import { buttonVariants } from '@ui/shad-cn/components/button';
 import { CalendarDays, Clock, Lock, User } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -79,7 +80,7 @@ export const ProfileCard: React.FC<IProfileCardProps> = ({
             </Avatar>
             {profile.online && (
               <span
-                className="absolute right-1.5 bottom-1.5 size-4 rounded-full border-[3px] border-background bg-foreground sm:right-2.5 sm:bottom-2.5 sm:size-5"
+                className="absolute right-1.5 bottom-1.5 size-4 rounded-full border-2 border-background bg-foreground sm:right-2.5 sm:bottom-2.5 sm:size-5"
                 aria-label={t('meta.online')}
                 role="img"
               />
@@ -100,32 +101,30 @@ export const ProfileCard: React.FC<IProfileCardProps> = ({
               to={CoreVariables.routePathAccount as '/'}
               // Account knows it was opened from the profile → hides its "view profile" button.
               search={{ [ACCOUNT_FROM_PROFILE_KEY]: 1 } as never}
-              className="mb-1 inline-flex h-9 items-center rounded-full border border-border/50 px-4 text-sm font-bold text-foreground transition-colors hover:bg-foreground/10"
+              className={cn(buttonVariants({ variant: 'outline', size: 'md' }), 'mb-1 shrink-0')}
             >
               {t('actions.editProfile')}
             </Link>
           )}
         </div>
 
-        <h2 className="truncate text-xl leading-6 font-extrabold tracking-tight text-foreground">
-          {name}
-        </h2>
+        <h2 className="truncate text-title font-bold text-foreground">{name}</h2>
         <p className="truncate text-body leading-5 text-muted-foreground">@{profile.alias}</p>
 
         <div className="mt-3 flex flex-wrap gap-1.5">
           {own && (
-            <span className="inline-flex h-6 items-center rounded-full bg-foreground px-2.5 text-xs font-medium text-background">
+            <span className="inline-flex h-6 items-center rounded-full bg-foreground px-2.5 text-micro font-medium text-background">
               {t('badge.own')}
             </span>
           )}
           {params && !params.isPublic && (
-            <span className="inline-flex h-6 items-center gap-1 rounded-full border border-border/50 px-2.5 text-xs font-medium text-muted-foreground">
+            <span className="inline-flex h-6 items-center gap-1 rounded-full border border-border/50 px-2.5 text-micro font-medium text-muted-foreground">
               <Lock className="size-3" aria-hidden="true" />
               {t('badge.private')}
             </span>
           )}
           {profile.online && (
-            <span className="inline-flex h-6 items-center gap-1 rounded-full border border-border/50 px-2.5 text-xs font-medium text-muted-foreground">
+            <span className="inline-flex h-6 items-center gap-1 rounded-full border border-border/50 px-2.5 text-micro font-medium text-muted-foreground">
               <span className="size-1.5 rounded-full bg-foreground" aria-hidden="true" />
               {t('meta.online')}
             </span>

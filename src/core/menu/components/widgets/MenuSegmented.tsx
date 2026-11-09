@@ -50,7 +50,7 @@ const MenuSegmented = <T extends string>({
           aria-label={option.label}
           title={option.label}
           className={cn(
-            'relative h-8 min-w-9 rounded-full px-2 text-micro font-semibold uppercase [-webkit-tap-highlight-color:transparent]',
+            'relative h-9 min-w-10 rounded-full px-2 text-micro font-bold uppercase [-webkit-tap-highlight-color:transparent]',
             'hover:bg-transparent data-[state=on]:bg-transparent',
             'focus-visible:ring-2 focus-visible:ring-ring/50',
             active

@@ -15,12 +15,31 @@
   "emptyText": "Versuche einen anderen Begriff oder aktiviere weitere Suchbereiche.",
   "stats_one": "{{count}} Treffer · {{ms}} ms",
   "stats_other": "{{count}} Treffer · {{ms}} ms",
-  "keys": { "navigate": "navigieren", "open": "öffnen" },
-  "menu": { "label": "Suche", "description": "Menschen und Beiträge finden" },
+  "keys": {
+    "navigate": "navigieren",
+    "open": "öffnen",
+    "close": "schließen"
+  },
+  "menu": {
+    "label": "Suche",
+    "description": "Menschen und Beiträge finden"
+  },
   "bundleLabels": {
     "user-search": "Menschen",
     "timeline-search": "Beiträge",
     "timeline-page-search": "Seiten"
   },
-  "groups": { "user": "Menschen", "timeline": "Beiträge" }
+  "groups": {
+    "user": "Menschen",
+    "timeline": "Beiträge"
+  },
+  "close": "Schließen",
+  "loading": "Wird geladen …",
+  "all": "Alle",
+  "retry": "Erneut versuchen",
+  "searchEverywhere": "Überall suchen",
+  "newSearch": "Neue Suche",
+  "idleTitle": "Was suchst du?",
+  "idleText": "Finde Menschen, Beiträge und Seiten.",
+  "errorTitle": "Etwas ist schiefgelaufen"
 }

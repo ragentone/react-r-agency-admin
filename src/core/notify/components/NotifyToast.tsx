@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@ui/shad-cn/components/avatar.tsx';
+import { Button } from '@ui/shad-cn/components/button';
 import { UserRound, X } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -50,7 +51,7 @@ export const NotifyToast: React.FC<INotifyToastProps> = ({ item, onOpen, onClose
           </span>
         )}
         {onOpen && actions.length > 0 && (
-          <span className="mt-1 block text-caption font-semibold text-foreground underline-offset-2">
+          <span className="mt-1 block text-caption font-bold text-foreground underline-offset-2">
             {t('toast.openActions')}
           </span>
         )}
@@ -61,7 +62,7 @@ export const NotifyToast: React.FC<INotifyToastProps> = ({ item, onOpen, onClose
   return (
     <div
       role="status"
-      className="flex w-full max-w-full sm:max-w-sm items-start gap-1 rounded-none sm:rounded-2xl border-y sm:border border-border/60 bg-background p-1 shadow-lg"
+      className="flex w-full max-w-full sm:max-w-sm items-start gap-1 rounded-none sm:rounded-2xl border-y sm:border border-border/50 bg-background p-1 shadow-lg"
     >
       {onOpen ? (
         <button
@@ -74,14 +75,15 @@ export const NotifyToast: React.FC<INotifyToastProps> = ({ item, onOpen, onClose
       ) : (
         <div className="flex min-w-0 flex-1 items-start gap-3 p-2">{content}</div>
       )}
-      <button
-        type="button"
+      <Button
+        variant="ghost"
+        size="icon-md"
         onClick={onClose}
         aria-label={t('actions.close')}
-        className="grid size-9 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/[0.06] hover:text-foreground"
+        className="text-muted-foreground"
       >
         <X className="size-4" />
-      </button>
+      </Button>
     </div>
   );
 };

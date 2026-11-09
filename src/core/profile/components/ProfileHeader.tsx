@@ -1,6 +1,7 @@
 import { CoreVariables } from '@core/core.variables.ts';
 import { useRouter } from '@tanstack/react-router';
 import { cn } from '@ui/lib/utils';
+import { Button } from '@ui/shad-cn/components/button';
 import { ArrowLeft, X } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -18,7 +19,7 @@ export interface IProfileHeaderProps {
   className?: string;
 }
 
-/** Sticky, blurred X-style top bar with a back button. */
+/** Sticky, blurred X-style top bar with a back button (same as the account header). */
 export const ProfileHeader: React.FC<IProfileHeaderProps> = ({
   title,
   subtitle,
@@ -41,46 +42,27 @@ export const ProfileHeader: React.FC<IProfileHeaderProps> = ({
     <header
       data-slot="profile-header"
       className={cn(
-        'sticky top-0 z-20 border-b border-border/50 bg-background backdrop-blur-md',
+        'sticky top-0 z-20 border-b border-border/50 bg-background/80 backdrop-blur',
         !drawer && 'pt-[env(safe-area-inset-top)]',
         className
       )}
     >
-      <div
-        className={cn(
-          'flex min-h-13.25 items-center px-2 py-4 sm:px-3',
-          drawer ? 'gap-3' : 'gap-6'
-        )}
-      >
+      <div className={cn('flex h-14 items-center gap-3 px-2', drawer && 'pl-4')}>
         {!drawer && (
-          <button
-            type="button"
-            onClick={back}
-            aria-label={t('back')}
-            className="grid size-9 shrink-0 place-items-center rounded-full text-foreground transition-colors hover:bg-foreground/10"
-          >
+          <Button variant="ghost" size="icon-lg" onClick={back} aria-label={t('back')}>
             <ArrowLeft className="size-5" />
-          </button>
+          </Button>
         )}
-        <div className={cn('min-w-0', drawer && 'flex-1 pl-2')}>
-          <h1 className="truncate text-xl leading-6 font-bold tracking-tight text-foreground">
-            {title || t('title')}
-          </h1>
-          {subtitle && (
-            <p className="truncate text-caption leading-4 text-muted-foreground">{subtitle}</p>
-          )}
+        <div className="min-w-0 flex-1">
+          <h1 className="truncate text-title font-bold text-foreground">{title || t('title')}</h1>
+          {subtitle && <p className="truncate text-caption text-muted-foreground">{subtitle}</p>}
         </div>
         {actions && <div className="flex shrink-0 items-center gap-1">{actions}</div>}
         {/* Drawer: close (✕) on the right like all drawers. */}
         {drawer && (
-          <button
-            type="button"
-            onClick={back}
-            aria-label={t('close')}
-            className="grid size-9 shrink-0 place-items-center rounded-full text-foreground transition-colors hover:bg-foreground/10"
-          >
+          <Button variant="ghost" size="icon-lg" onClick={back} aria-label={t('close')}>
             <X className="size-5" />
-          </button>
+          </Button>
         )}
       </div>
     </header>

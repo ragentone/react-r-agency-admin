@@ -39,7 +39,7 @@ export const ProfileRelationBadge: React.FC<IProfileRelationBadgeProps> = ({
     <span
       data-slot="profile-relation"
       className={cn(
-        'inline-flex h-6 items-center gap-1 rounded-full px-2.5 text-xs font-medium',
+        'inline-flex h-6 items-center gap-1 rounded-full px-2.5 text-micro font-medium',
         solid ? 'bg-foreground text-background' : 'border border-border/50 text-muted-foreground',
         className
       )}

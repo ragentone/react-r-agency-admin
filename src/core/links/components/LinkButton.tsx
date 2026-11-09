@@ -29,7 +29,7 @@ export const LinkButton: React.FC<ILinkButtonProps> = ({ id, children, className
       type="button"
       onClick={() => LinkManager.open(id)}
       className={cn(
-        'inline font-medium text-foreground underline underline-offset-2 hover:opacity-80',
+        'inline rounded-sm font-medium text-foreground underline underline-offset-2 outline-none hover:opacity-80 focus-visible:ring-2 focus-visible:ring-ring',
         className
       )}
     >
@@ -62,7 +62,7 @@ export const LinksInline: React.FC<ILinksInlineProps> = ({ groups = ['legal'], c
           <button
             type="button"
             onClick={() => LinkManager.open(link.id)}
-            className="rounded px-1 py-0.5 text-muted-foreground transition-colors hover:text-foreground"
+            className="rounded-sm px-1 py-0.5 text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
           >
             {text(link.label)}
           </button>

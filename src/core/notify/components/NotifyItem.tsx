@@ -1,5 +1,6 @@
 import { cn } from '@ui/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@ui/shad-cn/components/avatar.tsx';
+import { Button } from '@ui/shad-cn/components/button';
 import {
   animate,
   motion,
@@ -8,7 +9,7 @@ import {
   useReducedMotion,
   useTransform,
 } from 'framer-motion';
-import { CheckCheck, Loader2, Trash2, UserRound } from 'lucide-react';
+import { CheckCheck, Trash2, UserRound } from 'lucide-react';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -32,22 +33,20 @@ export interface INotifyItemProps {
   onDelete: (item: INotifyItem) => void;
 }
 
-const pill =
-  'inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-full px-4 text-sm font-bold outline-none transition-[opacity,background-color] focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60';
-
-const actionClass = (variant: INotifyAction['variant']) => {
+/** Notification action → button variant (one black main action, the rest quiet). */
+const actionVariant = (variant: INotifyAction['variant']) => {
   switch (variant) {
     case 'destructive':
-      return cn(pill, 'border border-border/60 text-destructive hover:bg-destructive/10');
+      return 'destructive-outline' as const;
     case 'default':
     case undefined:
     case null:
-      return cn(pill, 'bg-foreground text-background hover:opacity-90');
+      return 'default' as const;
     case 'link':
     case 'ghost':
-      return cn(pill, 'px-3 text-foreground hover:bg-foreground/[0.06]');
+      return 'ghost' as const;
     default:
-      return cn(pill, 'border border-border/60 text-foreground hover:bg-foreground/[0.06]');
+      return 'outline' as const;
   }
 };
 
@@ -155,7 +154,7 @@ export const NotifyItem: React.FC<INotifyItemProps> = ({
           <span
             role="img"
             aria-label={t('unread')}
-            className="absolute top-[22px] left-1.5 size-2 rounded-full bg-foreground"
+            className="absolute top-5.5 left-1.5 size-2 rounded-full bg-foreground"
           />
         )}
 
@@ -197,7 +196,7 @@ export const NotifyItem: React.FC<INotifyItemProps> = ({
               <span
                 className={cn(
                   'block text-body leading-5 break-words text-foreground',
-                  item.seen ? 'font-semibold' : 'font-bold'
+                  item.seen ? 'font-medium' : 'font-bold'
                 )}
               >
                 {heading}
@@ -223,16 +222,16 @@ export const NotifyItem: React.FC<INotifyItemProps> = ({
               {actions.map(action => {
                 const running = busy === action.emit;
                 return (
-                  <button
+                  <Button
                     key={`${action.emit}:${action.label}`}
-                    type="button"
+                    variant={actionVariant(action.variant)}
+                    size="md"
                     disabled={Boolean(busy)}
+                    isLoading={running}
                     onClick={() => onAction(item, action)}
-                    className={actionClass(action.variant)}
                   >
-                    {running && <Loader2 className="size-4 animate-spin" />}
                     {notifyText(t, action.label, item)}
-                  </button>
+                  </Button>
                 );
               })}
             </div>

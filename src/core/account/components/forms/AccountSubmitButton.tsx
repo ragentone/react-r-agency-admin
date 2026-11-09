@@ -1,7 +1,5 @@
-import { cn } from '@ui/lib/utils';
 import { Button } from '@ui/shad-cn/components/button';
 import { useFormikContext } from 'formik';
-import { Loader2 } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -12,6 +10,7 @@ export interface AccountSubmitButtonProps {
   className?: string;
 }
 
+/** Save button of the account forms: 44 px, disabled until the form is changed and valid. */
 export const AccountSubmitButton: React.FC<AccountSubmitButtonProps> = ({
   label,
   submittingLabel,
@@ -26,23 +25,15 @@ export const AccountSubmitButton: React.FC<AccountSubmitButtonProps> = ({
   const isValid = formik?.isValid ?? true;
   const isDisabled = disabled !== undefined ? disabled : !isDirty || isSubmitting || !isValid;
 
-  const displayLabel = label ?? t('form.submit');
-  const displaySubmittingLabel = submittingLabel ?? t('form.submitting');
-
   return (
     <Button
       type="submit"
+      size="lg"
       disabled={isDisabled}
-      className={cn('h-10 rounded-full px-6 text-body font-bold shadow-none', className)}
+      isLoading={isSubmitting}
+      className={className}
     >
-      {isSubmitting ? (
-        <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          {displaySubmittingLabel}
-        </>
-      ) : (
-        <>{displayLabel}</>
-      )}
+      {isSubmitting ? (submittingLabel ?? t('form.submitting')) : (label ?? t('form.submit'))}
     </Button>
   );
 };

@@ -4,6 +4,7 @@ import type { IUserAccount } from '@core/account/types';
 import { useProfileRoute } from '@core/profile/hooks/use.profile.route.ts';
 import { useRouterState } from '@tanstack/react-router';
 import { cn } from '@ui/lib/utils';
+import { Button } from '@ui/shad-cn/components/button';
 import { ArrowUpRight, BadgeCheck } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -47,22 +48,23 @@ export const AccountProfileCard: React.FC<AccountProfileCardProps> = ({
           <AccountAvatarUpload
             account={account}
             onUploadSuccess={onAvatarUpdated}
-            avatarClassName="size-24 border-4 border-background shadow-sm sm:size-32"
+            avatarClassName="size-24 border-4 border-background sm:size-32"
           />
           {/* Navigates to the own profile page → back returns here. */}
           {!fromProfile && (
-            <button
-              type="button"
+            <Button
+              variant="outline"
+              size="md"
               onClick={() => openProfile(account.id)}
-              className="group mb-1 inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full border border-border bg-background px-4 text-body font-bold text-foreground transition-colors hover:bg-foreground/[0.05] active:bg-foreground/10 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+              className="mb-1 shrink-0"
             >
               {t('card.viewProfile', { defaultValue: 'Profil ansehen' })}
-              <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
+              <ArrowUpRight className="size-4" />
+            </Button>
           )}
         </div>
 
-        <h2 className="flex min-w-0 items-center gap-1.5 text-xl leading-6 font-extrabold tracking-tight text-foreground">
+        <h2 className="flex min-w-0 items-center gap-1.5 text-title font-bold text-foreground">
           <span className="truncate">{fullName || account.alias}</span>
           {account.superUser && (
             <BadgeCheck

@@ -25,10 +25,7 @@ export interface AccountSectionsAccordionProps {
 
 /** X-style section heading (same as the profile's "About" headings). */
 const GroupLabel: React.FC<{ id: string; children: React.ReactNode }> = ({ id, children }) => (
-  <h2
-    id={id}
-    className="px-4 pt-4 pb-1 text-title leading-6 font-extrabold tracking-tight text-foreground"
-  >
+  <h2 id={id} className="px-4 pt-4 pb-1 text-title font-bold text-foreground">
     {children}
   </h2>
 );

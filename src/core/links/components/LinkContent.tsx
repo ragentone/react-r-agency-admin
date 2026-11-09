@@ -1,5 +1,14 @@
+import { cn } from '@ui/lib';
+import { Button, buttonVariants } from '@ui/shad-cn/components/button.tsx';
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+} from '@ui/shad-cn/components/empty.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
-import { ExternalLink } from 'lucide-react';
+import { CloudOff, ExternalLink } from 'lucide-react';
 import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -14,15 +23,15 @@ export const LINK_HTML_CLASS = [
   '[&_h1]:mt-6 [&_h1]:mb-2 [&_h1]:text-xl [&_h1]:font-bold [&_h1]:text-foreground',
   '[&_h2]:mt-6 [&_h2]:mb-2 [&_h2]:text-title [&_h2]:font-bold [&_h2]:text-foreground',
   '[&_h3]:mt-5 [&_h3]:mb-1.5 [&_h3]:text-body [&_h3]:font-bold [&_h3]:text-foreground',
-  '[&_h4]:mt-4 [&_h4]:mb-1 [&_h4]:font-semibold',
+  '[&_h4]:mt-4 [&_h4]:mb-1 [&_h4]:font-bold',
   '[&_p]:my-2.5 [&_address]:my-2.5 [&_address]:not-italic',
   '[&_ul]:my-2.5 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:my-2.5 [&_ol]:list-decimal [&_ol]:pl-5',
   '[&_li]:my-1 [&_a]:font-medium [&_a]:text-foreground [&_a]:underline [&_a]:underline-offset-2',
-  '[&_hr]:my-6 [&_hr]:border-border/60 [&_small]:text-caption [&_small]:text-muted-foreground',
-  '[&_blockquote]:my-3 [&_blockquote]:border-l-2 [&_blockquote]:border-border [&_blockquote]:pl-3',
+  '[&_hr]:my-6 [&_hr]:border-border/50 [&_small]:text-caption [&_small]:text-muted-foreground',
+  '[&_blockquote]:my-3 [&_blockquote]:border-l-2 [&_blockquote]:border-border/50 [&_blockquote]:pl-3',
   '[&_table]:my-3 [&_table]:block [&_table]:overflow-x-auto [&_table]:text-caption',
-  '[&_th]:border-b [&_th]:border-border/60 [&_th]:px-2 [&_th]:py-1.5 [&_th]:text-left',
-  '[&_td]:border-b [&_td]:border-border/40 [&_td]:px-2 [&_td]:py-1.5 [&_td]:align-top',
+  '[&_th]:border-b [&_th]:border-border/50 [&_th]:px-2 [&_th]:py-1.5 [&_th]:text-left',
+  '[&_td]:border-b [&_td]:border-border/50 [&_td]:px-2 [&_td]:py-1.5 [&_td]:align-top',
   '[&>*:first-child]:mt-0',
 ].join(' ');
 
@@ -41,18 +50,21 @@ const LinkContentSkeleton: React.FC = () => (
 const LinkContentError: React.FC<{ onRetry?: () => void }> = ({ onRetry }) => {
   const { t } = useTranslation('links');
   return (
-    <div role="alert" className="py-10 text-center">
-      <p className="text-body text-muted-foreground">{t('error.load')}</p>
+    <Empty role="alert" className="py-10">
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <CloudOff aria-hidden="true" />
+        </EmptyMedia>
+        <EmptyDescription>{t('error.load')}</EmptyDescription>
+      </EmptyHeader>
       {onRetry && (
-        <button
-          type="button"
-          onClick={onRetry}
-          className="mt-4 h-10 rounded-full bg-foreground px-4 text-sm font-bold text-background"
-        >
-          {t('retry')}
-        </button>
+        <EmptyContent>
+          <Button size="lg" onClick={onRetry}>
+            {t('retry')}
+          </Button>
+        </EmptyContent>
       )}
-    </div>
+    </Empty>
   );
 };
 
@@ -167,7 +179,7 @@ export const LinkContentView: React.FC<ILinkContentViewProps> = ({ link, close }
           href={content.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 inline-flex h-11 items-center gap-2 rounded-full bg-foreground px-5 text-sm font-bold text-background transition-opacity hover:opacity-85"
+          className={cn(buttonVariants({ size: 'lg' }), 'mt-4')}
         >
           <ExternalLink className="size-4" aria-hidden="true" />
           {t('external.open')}

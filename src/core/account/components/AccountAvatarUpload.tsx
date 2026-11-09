@@ -106,21 +106,18 @@ export const AccountAvatarUpload: React.FC<AccountAvatarUploadProps> = ({
           disabled={disabled || isUploading}
         />
 
-        <div
+        {/* One control: the whole avatar is the button (96 px touch target). */}
+        <button
+          type="button"
           onClick={handleTriggerClick}
+          disabled={disabled || isUploading}
+          aria-busy={isUploading || undefined}
+          aria-label={t('account:avatar.change', { defaultValue: 'Avatar ändern' })}
+          title={t('account:avatar.change', { defaultValue: 'Avatar ändern' })}
           className={cn(
-            'relative cursor-pointer rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+            'relative block cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
             disabled && 'cursor-not-allowed opacity-75'
           )}
-          role="button"
-          tabIndex={disabled ? -1 : 0}
-          onKeyDown={e => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              handleTriggerClick();
-            }
-          }}
-          aria-label={t('account:avatar.change', { defaultValue: 'Avatar ändern' })}
         >
           <Avatar className={cn('size-16 shrink-0 rounded-full bg-background', avatarClassName)}>
             {avatarUrl && <AvatarImage src={avatarUrl} alt={account?.alias || 'Avatar'} />}
@@ -129,35 +126,26 @@ export const AccountAvatarUpload: React.FC<AccountAvatarUploadProps> = ({
             </AvatarFallback>
           </Avatar>
 
-          {/* Hover / Loading Overlay */}
-          <div
+          {/* Darkens on hover, spinner while uploading. */}
+          <span
             className={cn(
               'absolute inset-0 flex items-center justify-center rounded-full bg-black/40 text-white transition-opacity duration-200',
-              isUploading
-                ? 'opacity-100'
-                : 'opacity-0 group-hover:opacity-100 group-focus-within:opacity-100'
+              isUploading ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
             )}
           >
-            {isUploading ? (
-              <Loader2 className="size-6 animate-spin" />
-            ) : (
-              <Camera className="size-6 drop-shadow-sm" />
-            )}
-          </div>
-        </div>
+            {isUploading && <Loader2 className="size-6 animate-spin" />}
+          </span>
 
-        {/* Edit Button Badge */}
-        {!disabled && !isUploading && (
-          <button
-            type="button"
-            onClick={handleTriggerClick}
-            className="absolute right-1 bottom-1 flex size-8 items-center justify-center rounded-full bg-foreground text-background ring-2 ring-background transition-opacity hover:opacity-85"
-            title={t('account:avatar.change', { defaultValue: 'Avatar ändern' })}
-            aria-label={t('account:avatar.change', { defaultValue: 'Avatar ändern' })}
-          >
-            <Camera className="size-4" />
-          </button>
-        )}
+          {/* Camera badge: always visible hint (touch has no hover). */}
+          {!disabled && !isUploading && (
+            <span
+              aria-hidden
+              className="absolute right-1 bottom-1 flex size-8 items-center justify-center rounded-full bg-foreground text-background ring-2 ring-background"
+            >
+              <Camera className="size-4" />
+            </span>
+          )}
+        </button>
       </div>
 
       {/* Image Cropper Dialog */}

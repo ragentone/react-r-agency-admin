@@ -78,7 +78,6 @@ export const AccountForm: AccountFormComponent = Object.assign(
     const { updateAccount } = useAccount(false);
     const graphql = useGraphQl();
     const [submitError, setSubmitError] = useState<string | null>(null);
-    const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
 
     const displayTitle = title ?? t('form.title');
     const displayDescription = description ?? t('form.description');
@@ -119,7 +118,6 @@ export const AccountForm: AccountFormComponent = Object.assign(
       formikHelpers: FormikHelpers<IAccountFormValues>
     ) => {
       setSubmitError(null);
-      setSubmitSuccess(null);
       try {
         if (onSubmit) {
           await onSubmit(values, formikHelpers);
@@ -149,8 +147,6 @@ export const AccountForm: AccountFormComponent = Object.assign(
             throw new Error(t('messages.updateError'));
           }
         }
-
-        setSubmitSuccess(t('messages.updateSuccess'));
         toast.success(t('messages.updateSuccess'));
         onSuccess?.();
       } catch (err: unknown) {
@@ -178,7 +174,6 @@ export const AccountForm: AccountFormComponent = Object.assign(
             {() => (
               <Form className="space-y-4" noValidate>
                 <AccountAlert type="error" message={submitError} />
-                <AccountAlert type="success" message={submitSuccess} />
 
                 {showPersonalFields && <AccountPersonalFields />}
 
@@ -199,7 +194,7 @@ export const AccountForm: AccountFormComponent = Object.assign(
                 )}
 
                 <div className="flex justify-end pt-2">
-                  <AccountSubmitButton className="w-full sm:w-auto shadow-none" />
+                  <AccountSubmitButton className="w-full sm:w-auto" />
                 </div>
               </Form>
             )}

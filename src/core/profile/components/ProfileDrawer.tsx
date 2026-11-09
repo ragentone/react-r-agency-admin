@@ -41,7 +41,7 @@ export const ProfileDrawer: React.FC<IProfileDrawerProps> = ({ userId, onClose }
 
   return (
     <Drawer open={open} onOpenChange={next => !next && onClose()} showSwipeHandle>
-      <DrawerContent className="mx-auto w-full max-w-[640px] [--drawer-height:94dvh] sm:[--drawer-height:88dvh]">
+      <DrawerContent className="mx-auto w-full max-w-150 [--drawer-height:94dvh] sm:[--drawer-height:88dvh]">
         <DrawerTitle className="sr-only">{t('title')}</DrawerTitle>
         <div
           data-slot="profile-drawer"

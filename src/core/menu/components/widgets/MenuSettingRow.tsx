@@ -13,6 +13,7 @@ import { ChevronRight } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 import type { MenuComponentVariant, MenuIcon } from '../../types.ts';
+import { MenuAttentionDot } from '../MenuAttentionDot.tsx';
 
 interface IProps {
   variant: MenuComponentVariant;
@@ -43,20 +44,6 @@ interface IProps {
   /** Highlighted background (e.g. pending update). */
   highlight?: boolean;
 }
-
-/** Blinking red dot (static with reduced motion). */
-const AttentionDot = ({ className }: { className?: string }) => (
-  <span aria-hidden className={cn('pointer-events-none absolute flex size-2.5', className)}>
-    <span
-      className={
-        'absolute inline-flex size-full animate-ping rounded-full bg-[#f4212e] opacity-75 motion-reduce:animate-none'
-      }
-    />
-    <span
-      className={'relative inline-flex size-2.5 rounded-full bg-[#f4212e] ring-2 ring-background'}
-    />
-  </span>
-);
 
 const interactive =
   'cursor-pointer hover:bg-foreground/[0.04] active:bg-foreground/[0.08] [-webkit-tap-highlight-color:transparent] disabled:pointer-events-none disabled:opacity-60';
@@ -103,7 +90,7 @@ const MenuSettingRow = ({
             }
           >
             {icon}
-            {attention && !busy && <AttentionDot className={'top-2 right-2'} />}
+            {attention && !busy && <MenuAttentionDot className={'top-2 right-2'} />}
           </button>
         </TooltipTrigger>
         <TooltipContent side={'right'} sideOffset={6}>
@@ -126,7 +113,7 @@ const MenuSettingRow = ({
         )}
       >
         {icon}
-        {attention && !busy && <AttentionDot className={'-top-0.5 -right-0.5'} />}
+        {attention && !busy && <MenuAttentionDot className={'-top-0.5 -right-0.5'} />}
       </ItemMedia>
       <ItemContent className={'min-w-0 gap-0'}>
         <ItemTitle className={'w-full truncate text-body font-medium'}>{label}</ItemTitle>

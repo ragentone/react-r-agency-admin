@@ -1,4 +1,5 @@
 import { cn } from '@ui/lib/utils';
+import { Button } from '@ui/shad-cn/components/button';
 import { ArrowLeft } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,27 +18,19 @@ export const AccountPageHeader: React.FC<AccountPageHeaderProps> = ({ className,
     <header
       data-slot="account-header"
       className={cn(
-        'sticky top-0 z-20 border-b border-border/50 bg-background/85 backdrop-blur-md',
+        'sticky top-0 z-20 flex h-14 items-center gap-3 border-b border-border/50 bg-background/80 px-2 backdrop-blur',
+        !onBack && 'px-4',
         className
       )}
     >
-      <div className="flex min-h-[53px] items-center gap-6 px-2 py-4 sm:px-3">
-        {onBack && (
-          <button
-            type="button"
-            onClick={onBack}
-            aria-label={t('actions.back')}
-            className="grid size-9 shrink-0 place-items-center rounded-full text-foreground outline-none transition-colors hover:bg-foreground/10 focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <ArrowLeft className="size-5" />
-          </button>
-        )}
-        <div className="min-w-0 flex-1">
-          <h1 className="truncate text-xl leading-6 font-bold tracking-tight text-foreground">
-            {t('title')}
-          </h1>
-          <p className="truncate text-caption leading-4 text-muted-foreground">{t('subtitle')}</p>
-        </div>
+      {onBack && (
+        <Button variant="ghost" size="icon-lg" onClick={onBack} aria-label={t('actions.back')}>
+          <ArrowLeft className="size-5" />
+        </Button>
+      )}
+      <div className="min-w-0 flex-1">
+        <h1 className="truncate text-title font-bold text-foreground">{t('title')}</h1>
+        <p className="truncate text-caption text-muted-foreground">{t('subtitle')}</p>
       </div>
     </header>
   );

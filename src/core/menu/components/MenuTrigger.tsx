@@ -26,7 +26,7 @@ const MenuTrigger = ({ className }: { className?: string }) => {
         aria-haspopup={'dialog'}
         onClick={() => setOpen(true)}
         className={cn(
-          'flex size-10 shrink-0 items-center justify-center rounded-full text-foreground outline-none transition-[background-color,transform] hover:bg-foreground/[0.06] active:scale-95 focus-visible:ring-2 focus-visible:ring-ring/50 [-webkit-tap-highlight-color:transparent]',
+          'flex size-11 shrink-0 items-center justify-center rounded-full text-foreground outline-none transition-[background-color,transform] hover:bg-foreground/[0.06] active:scale-95 focus-visible:ring-2 focus-visible:ring-ring/50 [-webkit-tap-highlight-color:transparent]',
           className
         )}
       >

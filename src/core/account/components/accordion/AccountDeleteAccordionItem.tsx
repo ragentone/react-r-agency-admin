@@ -1,4 +1,5 @@
 import { useSecurityStore } from '@core/security/store.ts';
+import { Button } from '@ui/shad-cn/components/button';
 import { Checkbox } from '@ui/shad-cn/components/checkbox.tsx';
 import { Trash2 } from 'lucide-react';
 import React from 'react';
@@ -30,39 +31,33 @@ export const AccountDeleteAccordionItem: React.FC<AccountDeleteAccordionItemProp
       className={className}
     >
       <div className="space-y-4">
-        <div>
-          <h3 className="text-body font-bold text-foreground">
-            {t('delete.title', { defaultValue: 'Delete Account' })}
-          </h3>
-          <p className="mt-1 text-body leading-5 text-muted-foreground">
-            {ts('delete.itemText', { days: 30 })}
-          </p>
-        </div>
+        <p className="text-body text-muted-foreground">{ts('delete.itemText', { days: 30 })}</p>
 
+        {/* Whole row is the label: tapping anywhere ticks the checkbox (min. 44 px). */}
         <label
           htmlFor="account-delete-confirm"
-          className="flex cursor-pointer items-start gap-3 rounded-xl border border-border/50 p-3 select-none"
+          className="-mx-4 flex min-h-12 cursor-pointer items-center gap-3 border-y border-border/50 px-4 py-3 transition-colors select-none hover:bg-accent/50"
         >
           <Checkbox
             id="account-delete-confirm"
             checked={isConfirmed}
             onCheckedChange={checked => setIsConfirmed(checked === true)}
-            className="mt-0.5"
           />
-          <span className="text-body leading-5 font-medium text-foreground">
+          <span className="text-body font-medium text-foreground">
             {t('delete.confirm', { defaultValue: 'I understand the consequences' })}
           </span>
         </label>
 
-        <button
-          type="button"
+        <Button
+          variant="destructive"
+          size="lg"
           disabled={!isConfirmed}
           onClick={() => useSecurityStore.getState().openDrawer('delete')}
-          className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-full bg-destructive px-5 text-body font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
+          className="w-full sm:w-auto"
         >
           <Trash2 className="size-4" />
           {t('delete.title', { defaultValue: 'Delete Account' })}
-        </button>
+        </Button>
       </div>
     </AccountSection>
   );

@@ -109,10 +109,7 @@ export const ProfileInfo: React.FC<IProfileInfoProps> = ({ profile, params, clas
       aria-labelledby="profile-info-title"
       className={cn('border-b border-border/50', className)}
     >
-      <h2
-        id="profile-info-title"
-        className="px-4 pt-4 pb-1 text-title leading-6 font-extrabold tracking-tight text-foreground"
-      >
+      <h2 id="profile-info-title" className="px-4 pt-4 pb-1 text-title font-bold text-foreground">
         {t('sections.info')}
       </h2>
       <dl className="divide-y divide-border/50">

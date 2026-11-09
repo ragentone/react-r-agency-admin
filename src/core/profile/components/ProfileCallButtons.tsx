@@ -1,14 +1,12 @@
 import { startCall } from '@core/call/call.engine';
 import { primeRingAudio } from '@core/call/ringer';
 import { CmsContainer } from '@core/cms';
+import { Button } from '@ui/shad-cn/components/button';
 import { Phone, Video } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { ICmsProfileButtonsPayload, IUserProfile } from '../types';
-
-const iconButton =
-  'grid size-9 shrink-0 place-items-center rounded-full text-foreground outline-none transition-colors hover:bg-foreground/10 focus-visible:ring-2 focus-visible:ring-ring';
 
 /** Message + voice + video call buttons for a friend's profile (header of the profile drawer). */
 export const ProfileCallButtons: React.FC<{
@@ -29,30 +27,28 @@ export const ProfileCallButtons: React.FC<{
   };
 
   return (
-    <>
-      <CmsContainer<ICmsProfileButtonsPayload>
-        name={'profile-call-buttons'}
-        payload={{ profile, onLeave }}
+    <CmsContainer<ICmsProfileButtonsPayload>
+      name={'profile-call-buttons'}
+      payload={{ profile, onLeave }}
+    >
+      <Button
+        variant="ghost"
+        size="icon-lg"
+        onClick={() => call(false)}
+        aria-label={t('actions.voiceCallWith', { name })}
+        title={t('actions.voiceCallWith', { name })}
       >
-        <button
-          type="button"
-          onClick={() => call(false)}
-          aria-label={t('actions.voiceCallWith', { name })}
-          title={t('actions.voiceCallWith', { name })}
-          className={iconButton}
-        >
-          <Phone className="size-5" />
-        </button>
-        <button
-          type="button"
-          onClick={() => call(true)}
-          aria-label={t('actions.videoCallWith', { name })}
-          title={t('actions.videoCallWith', { name })}
-          className={iconButton}
-        >
-          <Video className="size-5" />
-        </button>
-      </CmsContainer>
-    </>
+        <Phone className="size-5" />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon-lg"
+        onClick={() => call(true)}
+        aria-label={t('actions.videoCallWith', { name })}
+        title={t('actions.videoCallWith', { name })}
+      >
+        <Video className="size-5" />
+      </Button>
+    </CmsContainer>
   );
 };

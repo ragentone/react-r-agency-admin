@@ -15,12 +15,31 @@
   "emptyText": "Try a different term or enable more search areas.",
   "stats_one": "{{count}} result · {{ms}} ms",
   "stats_other": "{{count}} results · {{ms}} ms",
-  "keys": { "navigate": "navigate", "open": "open" },
-  "menu": { "label": "Search", "description": "Find people and posts" },
+  "keys": {
+    "navigate": "navigate",
+    "open": "open",
+    "close": "close"
+  },
+  "menu": {
+    "label": "Search",
+    "description": "Find people and posts"
+  },
   "bundleLabels": {
     "user-search": "People",
     "timeline-search": "Posts",
     "timeline-page-search": "Pages"
   },
-  "groups": { "user": "People", "timeline": "Posts" }
+  "groups": {
+    "user": "People",
+    "timeline": "Posts"
+  },
+  "close": "Close",
+  "loading": "Loading…",
+  "all": "All",
+  "retry": "Try again",
+  "searchEverywhere": "Search everywhere",
+  "newSearch": "New search",
+  "idleTitle": "What are you looking for?",
+  "idleText": "Find people, posts and pages.",
+  "errorTitle": "Something went wrong"
 }

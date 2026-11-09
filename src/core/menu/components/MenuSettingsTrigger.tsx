@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useMenu } from '../hooks';
 import type { IMenuComponentEntry } from '../types.ts';
+import { MenuAttentionDot } from './MenuAttentionDot.tsx';
 import { MenuSettingsDrawer } from './MenuSettingsDrawer.tsx';
 
 /** `dock` = mobile dock, `rail` = icon rail (md–xl), `sidebar` = expanded sidebar (xl). */
@@ -28,20 +29,6 @@ const AttentionProbe = ({
   }, [id, active, onChange]);
   return null;
 };
-
-/** Blinking red dot (static with reduced motion). */
-const AttentionDot = ({ className }: { className?: string }) => (
-  <span aria-hidden className={cn('pointer-events-none absolute flex size-2.5', className)}>
-    <span
-      className={
-        'absolute inline-flex size-full animate-ping rounded-full bg-[#f4212e] opacity-75 motion-reduce:animate-none'
-      }
-    />
-    <span
-      className={'relative inline-flex size-2.5 rounded-full bg-[#f4212e] ring-2 ring-background'}
-    />
-  </span>
-);
 
 interface IProps {
   variant: MenuSettingsTriggerVariant;
@@ -97,7 +84,7 @@ const MenuSettingsTrigger = ({ variant, className }: IProps) => {
       />
       {variant === 'sidebar' && <span className={'truncate text-body font-medium'}>{label}</span>}
       {hasAttention && (
-        <AttentionDot
+        <MenuAttentionDot
           className={cn(
             variant === 'dock' && 'top-1.5 right-1.5',
             variant === 'rail' && 'top-2 right-2',

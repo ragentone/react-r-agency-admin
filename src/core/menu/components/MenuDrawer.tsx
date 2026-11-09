@@ -1,20 +1,18 @@
 import { AppBrand } from '@core/layout/components/AppBrand.tsx';
 import { PluginSlot } from '@core/plugin/PluginSlot.tsx';
-import { MenuComponentSlot } from '@core/menu';
-import { MenuGroup } from '@core/menu';
-import { MenuItemBadge, MenuItemIcon } from '@core/menu';
-import { tilesOf, triggerItemOf } from '@core/menu';
-import { useMenuText } from '@core/menu';
 import { cn } from '@ui/lib';
 import { AppDrawer } from '@ui/patterns';
-import { ChevronRight } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { MENU_DRAWER_SIDE } from '../const.ts';
-import { type IResolvedMenuEntry, type IResolvedMenuSection, useMenu } from '../hooks';
+import { type IResolvedMenuSection, type MenuNode, useMenu } from '../hooks';
 import { openMenuGroup, openMenuSection } from '../store.ts';
-import { MenuRow, menuRowClass } from './MenuRow.tsx';
+import { MenuComponentSlot } from './MenuComponentSlot.tsx';
+import { MenuGroup } from './MenuGroup.tsx';
+import { MenuOpenRow, MenuRow } from './MenuRow.tsx';
+import { tilesOf, triggerItemOf } from './MenuSectionDrawer.tsx';
+import { useMenuText } from './use.menu.text.ts';
 
 /** Width of the mobile menu panel; square on the left (screen edge), rounded on the right. */
 const MENU_PANEL_CLASS = 'w-[min(86vw,22rem)] max-w-none rounded-l-none';
@@ -39,67 +37,49 @@ const MenuDrawer = ({ open, onOpenChange }: IProps) => {
   const text = useMenuText();
   const { sections, footer, ctx } = useMenu();
   const close = () => onOpenChange(false);
+  /** Closes the menu, then opens a section / group panel. */
+  const openPanel = (openTarget: () => void) => () => {
+    close();
+    openTarget();
+  };
 
   const visibleSections = sections.filter(
     section => section.config.display !== 'drawer' || tilesOf(section).length > 0
   );
 
-  const renderGroup = (item: IResolvedMenuEntry) =>
-    item.entry.display === 'drawer' ? (
-      <button
-        type={'button'}
-        aria-haspopup={'dialog'}
-        onClick={() => {
-          close();
-          openMenuGroup(item.entry.id);
-        }}
-        className={menuRowClass(item.active)}
-      >
-        <MenuItemIcon item={item} />
-        <span className={'min-w-0 flex-1 truncate'}>{text(item.entry.label)}</span>
-        <MenuItemBadge item={item} />
-        <ChevronRight className={'size-4 shrink-0 text-muted-foreground'} aria-hidden />
-      </button>
+  const renderNode = (node: MenuNode) => {
+    if (node.type === 'component') {
+      return (
+        <MenuComponentSlot entry={node.component} variant={'drawer'} ctx={ctx} close={close} />
+      );
+    }
+    const item = node.item;
+    if (!item.children?.length) return <MenuRow item={item} ctx={ctx} onAfterSelect={close} />;
+    return item.entry.display === 'drawer' ? (
+      <MenuOpenRow
+        item={item}
+        label={item.entry.label}
+        onClick={openPanel(() => openMenuGroup(item.entry.id))}
+      />
     ) : (
       <MenuGroup item={item} ctx={ctx} variant={'drawer'} onAfterSelect={close} />
     );
-
-  const renderSectionRow = (section: IResolvedMenuSection) => {
-    const item = triggerItemOf(section);
-
-    return (
-      <button
-        type={'button'}
-        aria-haspopup={'dialog'}
-        onClick={() => {
-          close();
-          openMenuSection(section.id);
-        }}
-        className={menuRowClass(item.active)}
-      >
-        <MenuItemIcon item={item} />
-        <span className={'min-w-0 flex-1 truncate'}>{text(section.config.label)}</span>
-        <MenuItemBadge item={item} />
-        <ChevronRight className={'size-4 shrink-0 text-muted-foreground'} aria-hidden />
-      </button>
-    );
   };
 
-  const renderNodes = (section: IResolvedMenuSection) => (
-    <ul className={'flex flex-col'}>
-      {section.nodes.map(node => (
-        <li key={node.type === 'component' ? `c:${node.id}` : node.id}>
-          {node.type === 'component' ? (
-            <MenuComponentSlot entry={node.component} variant={'drawer'} ctx={ctx} close={close} />
-          ) : node.item.children?.length ? (
-            renderGroup(node.item)
-          ) : (
-            <MenuRow item={node.item} ctx={ctx} onAfterSelect={close} />
-          )}
-        </li>
-      ))}
-    </ul>
-  );
+  const renderSection = (section: IResolvedMenuSection) =>
+    section.config.display === 'drawer' ? (
+      <MenuOpenRow
+        item={triggerItemOf(section)}
+        label={section.config.label}
+        onClick={openPanel(() => openMenuSection(section.id))}
+      />
+    ) : (
+      <ul className={'flex flex-col'}>
+        {section.nodes.map(node => (
+          <li key={node.type === 'component' ? `c:${node.id}` : node.id}>{renderNode(node)}</li>
+        ))}
+      </ul>
+    );
 
   return (
     <AppDrawer
@@ -128,31 +108,33 @@ const MenuDrawer = ({ open, onOpenChange }: IProps) => {
         ) : undefined
       }
     >
-      <div
+      <nav
+        aria-label={t('label')}
         className={
           'min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[max(1.5rem,env(safe-area-inset-bottom))]'
         }
       >
         <AppBrand className={'px-4 pt-4 pb-3'} />
-        <PluginSlot name={'menu_before.widget'} scope={'admin'} className={'border-b border-border/50 px-4 py-3'} />
-        {visibleSections.map((section, sectionIndex) => {
-          const separator = sectionIndex > 0 ? 'mt-2 border-t border-border/50 pt-2' : undefined;
-          return section.config.display === 'drawer' ? (
-            <div key={section.id} className={cn('flex flex-col', separator)}>
-              {renderSectionRow(section)}
-            </div>
-          ) : (
-            <section
-              key={section.id}
-              aria-label={text(section.config.label)}
-              className={separator}
-            >
-              {renderNodes(section)}
-            </section>
-          );
-        })}
-        <PluginSlot name={'menu_after.widget'} scope={'admin'} className={'border-t border-border/50 px-4 py-3'} />
-      </div>
+        <PluginSlot
+          name={'menu_before.widget'}
+          scope={'admin'}
+          className={'border-b border-border/50 px-4 py-3'}
+        />
+        {visibleSections.map((section, sectionIndex) => (
+          <section
+            key={section.id}
+            aria-label={text(section.config.label)}
+            className={cn(sectionIndex > 0 && 'mt-2 border-t border-border/50 pt-2')}
+          >
+            {renderSection(section)}
+          </section>
+        ))}
+        <PluginSlot
+          name={'menu_after.widget'}
+          scope={'admin'}
+          className={'border-t border-border/50 px-4 py-3'}
+        />
+      </nav>
     </AppDrawer>
   );
 };

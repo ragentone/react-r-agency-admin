@@ -1,6 +1,7 @@
 export * from './NotifyActivityList';
 export * from './NotifyCenterProvider';
 export * from './NotifyDrawer';
+export * from './NotifyDrawerHeader';
 export * from './NotifyItem';
 export * from './NotifyItemMenu';
 export * from './NotifyList';
