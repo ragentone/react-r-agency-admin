@@ -4,7 +4,7 @@ interface IProps {
   loading: boolean;
 }
 
-/** Header area. Admin plugins render into `header.widget`; without plugins nothing is shown. */
+/** Header area. Plugins render into `header.widget`; without plugins nothing is shown. */
 export const LayoutHeader = ({ loading }: IProps) => {
   const length = usePluginSlot('header.widget').length;
   if (length === 0) return null;

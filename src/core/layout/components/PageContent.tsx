@@ -45,8 +45,10 @@ const PageContent = ({
         role={'route-page-scroll'}
         ref={elementRef}
         className={cn(
-          'relative flex flex-col h-full p-4 sm:border-x sm:border-border/50',
+          'relative flex flex-col h-full p-4 sm:border-x sm:border-border/50 ',
           {
+            'bg-white': true,
+            'dark:bg-transparent': true,
             'overflow-auto': scrollable,
             'overflow-hidden': !scrollable,
           },

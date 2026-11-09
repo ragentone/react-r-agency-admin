@@ -48,6 +48,8 @@ interface IPageHeaderProps {
   buttons?: IButton[];
   logoOnClick?: () => void;
   logoClassName?: string;
+  titleClassName?: string;
+  descriptionClassName?: string;
 }
 
 interface IProps {
@@ -109,8 +111,12 @@ const PageHeader = (props: IPageHeaderProps & IProps) => {
         </ItemMedia>
       )}
       <ItemContent className={'gap-0 select-none'}>
-        {props.title && <ItemTitle>{props.title}</ItemTitle>}
-        {props.description && <ItemDescription>{props.description}</ItemDescription>}
+        {props.title && <ItemTitle className={props.titleClassName}>{props.title}</ItemTitle>}
+        {props.description && (
+          <ItemDescription className={props.descriptionClassName}>
+            {props.description}
+          </ItemDescription>
+        )}
       </ItemContent>
       <ItemActions>
         {props.buttons?.map(button => (

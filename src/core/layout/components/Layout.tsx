@@ -2,9 +2,9 @@ import { useAuth } from '@core/auth/components/use.auth.ts';
 import { MobileDock } from '@core/dock/components';
 import { useEvents } from '@core/event';
 import { LayoutHeader } from '@core/layout';
-import { PluginSlot } from '@core/plugin/PluginSlot.tsx';
 import { MenuSectionDrawerHost, MenuSidebar } from '@core/menu/components';
 import { useMeshState } from '@core/mesh/components/use.mesh.ts';
+import { PluginSlot } from '@core/plugin/PluginSlot.tsx';
 import { Outlet } from '@tanstack/react-router';
 import { cn } from '@ui/lib';
 import { Spinner } from '@ui/shad-cn/components/spinner.tsx';
@@ -40,7 +40,7 @@ const Layout = () => {
 
   return (
     <div
-      className={cn('relative flex flex-col w-full h-full min-h-dvh max-h-dvh overflow-hidden')}
+      className={cn('relative flex w-full h-full min-h-dvh max-h-dvh overflow-hidden')}
       style={{
         height: '100dvh',
         width: '100dvw',
@@ -48,14 +48,22 @@ const Layout = () => {
         maxHeight: '100dvh',
       }}
     >
-      <LayoutHeader loading={!connected || !loaded} />
-      <div className={'relative flex grow w-full min-h-0 overflow-hidden'}>
-        <MenuSidebar />
-        <div className={'relative grow min-w-0 h-full overflow-hidden'}>{renderOutlet()}</div>
+      <MenuSidebar />
+      <div className={'relative flex flex-col grow w-full min-h-0 overflow-hidden'}>
+        <LayoutHeader loading={!connected || !loaded} />
+        <div
+          className={cn('relative grow min-w-0 h-full overflow-hidden', {
+            'bg-gray-50': true,
+            'dark:bg-transparent': true,
+          })}
+        >
+          {renderOutlet()}
+        </div>
+        <PluginSlot name={'footer.widget'} scope={'admin'}>
+          <MobileDock loading={!connected || !loaded} />
+        </PluginSlot>
       </div>
-      <PluginSlot name={'footer.widget'} scope={'admin'} className={'border-t border-border/50 px-4 py-3'} />
       {/* Dock with registered buttons (menu, search, page actions …) – skeleton until loaded. */}
-      <MobileDock loading={!connected || !loaded} />
       {/* Bottom drawer of menu sections with `display: 'drawer'` (apps). */}
       <MenuSectionDrawerHost />
     </div>
