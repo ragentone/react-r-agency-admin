@@ -55,7 +55,6 @@ export const AppFormDrawer: React.FC<IAppFormDrawerProps> = ({
     <AppDrawer
       {...rest}
       locked={locked || busy}
-      autoHeight={true}
       action={
         submitPlacement === 'header' ? (
           <>

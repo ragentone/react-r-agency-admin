@@ -1,5 +1,5 @@
 import { LazyHtmlEditor as HtmlEditor } from '@core/editor/html/lazy.html-editor.tsx';
-import { AppDialog } from '@ui/components/app-dialog';
+import { AppDialog } from '@module/dev-kanban/components/app-dialog';
 import { Button } from '@ui/shad-cn/components/button';
 import { Field, FieldError, FieldLabel } from '@ui/shad-cn/components/field';
 import { Input } from '@ui/shad-cn/components/input';

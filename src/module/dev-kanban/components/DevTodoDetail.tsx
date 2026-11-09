@@ -1,6 +1,6 @@
 import { LazyHtmlEditor as HtmlEditor } from '@core/editor/html/lazy.html-editor.tsx';
-import { AppDialog } from '@ui/components/app-dialog';
-import { kanbanMoreTriggerClassName } from '@ui/components/kanban';
+import { AppDialog } from '@module/dev-kanban/components/app-dialog';
+import { kanbanMoreTriggerClassName } from '@module/dev-kanban/components/kanban';
 import { cn } from '@ui/lib/utils';
 import {
   AlertDialog,

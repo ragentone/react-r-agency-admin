@@ -64,11 +64,7 @@ export const ConfirmPopoverButton: React.FC<IConfirmPopoverButtonProps> = ({
           {children}
         </Button>
       </PopoverTrigger>
-      <PopoverContent
-        side={side}
-        align={align}
-        className="w-72 flex flex-col gap-2 border-border/50 p-4"
-      >
+      <PopoverContent side={side} align={align} className="w-72 flex flex-col gap-2 border-border/50 p-4">
         {title && <p className="text-body font-bold text-foreground">{title}</p>}
         {description && <p className="text-caption text-muted-foreground">{description}</p>}
         <div className="grid grid-cols-2 gap-2">

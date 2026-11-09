@@ -1,4 +1,4 @@
-import { AppDialog } from '@ui/components/app-dialog';
+import { AppDialog } from '@module/dev-kanban/components/app-dialog';
 import { Empty, EmptyDescription, EmptyHeader } from '@ui/shad-cn/components/empty';
 import { ChevronsDown, ChevronsUp, Equal } from 'lucide-react';
 import { useTranslation } from 'react-i18next';

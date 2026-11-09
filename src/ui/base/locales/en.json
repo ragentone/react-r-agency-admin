@@ -19,5 +19,9 @@
   "drawer": {
     "close": "Close",
     "back": "Back"
+  },
+  "confirm": {
+    "ok": "Confirm",
+    "cancel": "Cancel"
   }
 }

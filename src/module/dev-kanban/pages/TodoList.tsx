@@ -1,4 +1,4 @@
-import { Kanban, type KanbanColumnDef } from '@ui/components/kanban';
+import { Kanban, type KanbanColumnDef } from '@module/dev-kanban/components/kanban';
 import { Button } from '@ui/shad-cn/components/button';
 import { Skeleton } from '@ui/shad-cn/components/skeleton';
 import { ChevronsDown, ChevronsUp, Equal } from 'lucide-react';
