@@ -1,5 +1,5 @@
 import { AppFormDrawer } from '@ui/patterns';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { IPluginListItem, PluginScope } from '../types';
@@ -18,10 +18,13 @@ export const PluginScopeDrawer: React.FC<IPluginScopeDrawerProps> = ({ open, onO
   const [scope, setScope] = useState<PluginScope[]>(plugin.scope);
   const [busy, setBusy] = useState(false);
 
-  // Start from the stored scope every time the drawer opens.
-  useEffect(() => {
+  // Start from the stored scope every time the drawer opens (or the stored scope changes).
+  // Adjusting state during render avoids an extra effect-driven render pass.
+  const [synced, setSynced] = useState({ open, storedScope: plugin.scope });
+  if (synced.open !== open || synced.storedScope !== plugin.scope) {
+    setSynced({ open, storedScope: plugin.scope });
     if (open) setScope(plugin.scope);
-  }, [open, plugin.scope]);
+  }
 
   const changed =
     scope.length > 0 &&
