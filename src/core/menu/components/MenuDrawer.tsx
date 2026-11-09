@@ -1,4 +1,5 @@
 import { AppBrand } from '@core/layout/components/AppBrand.tsx';
+import { PluginSlot } from '@core/plugin/PluginSlot.tsx';
 import { MenuComponentSlot } from '@core/menu';
 import { MenuGroup } from '@core/menu';
 import { MenuItemBadge, MenuItemIcon } from '@core/menu';
@@ -133,6 +134,7 @@ const MenuDrawer = ({ open, onOpenChange }: IProps) => {
         }
       >
         <AppBrand className={'px-4 pt-4 pb-3'} />
+        <PluginSlot name={'menu_before.widget'} scope={'admin'} className={'border-b border-border/50 px-4 py-3'} />
         {visibleSections.map((section, sectionIndex) => {
           const separator = sectionIndex > 0 ? 'mt-2 border-t border-border/50 pt-2' : undefined;
           return section.config.display === 'drawer' ? (
@@ -149,6 +151,7 @@ const MenuDrawer = ({ open, onOpenChange }: IProps) => {
             </section>
           );
         })}
+        <PluginSlot name={'menu_after.widget'} scope={'admin'} className={'border-t border-border/50 px-4 py-3'} />
       </div>
     </AppDrawer>
   );

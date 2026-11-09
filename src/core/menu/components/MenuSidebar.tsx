@@ -1,4 +1,5 @@
 import { AppBrand } from '@core/layout/components/AppBrand.tsx';
+import { PluginSlot } from '@core/plugin/PluginSlot.tsx';
 import { cn } from '@ui/lib';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@ui/shad-cn/components/tooltip.tsx';
 import { motion } from 'framer-motion';
@@ -40,6 +41,7 @@ const MenuSidebar = ({ className }: { className?: string }) => {
         textClassName={'hidden xl:flex'}
       />
       <div className={'flex grow flex-col gap-1 overflow-y-auto overflow-x-hidden px-3 py-3'}>
+        <PluginSlot name={'menu_before.widget'} scope={'admin'} className={'flex flex-col gap-1'} />
         {sections.map((section, sectionIndex) => (
           <div key={section.id} className={'flex flex-col gap-1'}>
             {sectionIndex > 0 && <div className={'mx-auto my-2 h-px w-8 bg-border xl:mx-0 xl:w-full xl:bg-border/50'} />}
@@ -129,6 +131,7 @@ const MenuSidebar = ({ className }: { className?: string }) => {
             )}
           </div>
         ))}
+        <PluginSlot name={'menu_after.widget'} scope={'admin'} className={'flex flex-col gap-1'} />
       </div>
       {footer.length > 0 && (
         <div className={'flex flex-col gap-1 border-t border-border/50 px-3 py-2'}>

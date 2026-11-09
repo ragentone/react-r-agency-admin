@@ -32,8 +32,8 @@ interface IPluginListItem {
 
 const endpoint = () => String(import.meta.env.VITE_MESH_SERVER_ENDPOINT ?? '').replace(/\/+$/, '');
 
-/** Same rule as the backend: dot-separated lowercase words, max. 64 characters. New slots need no change here. */
-const SLOT_PATTERN = /^[a-z][a-z0-9]*(\.[a-z][a-z0-9]*)*$/;
+/** Same rule as the backend: dot-separated lowercase words (underscores allowed), max. 64 characters. New slots need no change here. */
+const SLOT_PATTERN = /^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)*$/;
 const isSlot = (value: string): value is PluginSlotName => value.length <= 64 && SLOT_PATTERN.test(value);
 
 /** Public list of the active plugins (`GET /plugin`). Slots with an invalid name are dropped. */
