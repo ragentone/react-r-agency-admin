@@ -72,6 +72,8 @@ export interface IAppDrawerProps {
   direction?: 'up' | 'down' | 'left' | 'right';
   /** `full` only: the height follows the content instead of the fixed drawer height. */
   autoHeight?: boolean;
+  /** Browser / Android back closes the drawer. Default `true`. */
+  backClose?: boolean;
 }
 
 /**
@@ -100,6 +102,7 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
   children,
   direction,
   autoHeight = false,
+  backClose = true,
 }) => {
   const { t } = useTranslation('base');
   const close = closeLabel ?? t('drawer.close');
@@ -189,6 +192,7 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
   return (
     <Drawer
       open={open}
+      backClose={backClose}
       onOpenChange={next => {
         if (!next && locked) return;
         onOpenChange(next);

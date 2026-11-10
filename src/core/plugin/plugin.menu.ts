@@ -17,13 +17,18 @@ const labelFor = (label: IPluginMenuEntry['label'], locale: PluginLocale): strin
   return label[locale] ?? label.en ?? Object.values(label)[0] ?? '';
 };
 
+/** Name of an entry: its page, or its id when it has none. */
+const keyOf = (entry: IPluginMenuEntry) => entry.page ?? entry.id ?? '';
+
 /** Puts one entry into the main menu, with the label for the current language. */
 const publish = (record: IPluginMenuRecord) => {
   MenuManager.register({
-    id: idOf(record.pluginId, record.page),
+    id: idOf(record.pluginId, keyOf(record)),
     label: labelFor(record.label, currentLocale()),
     icon: record.icon ?? PLUGIN_ICONS.Puzzle,
-    to: `/plugin/${record.pluginId}/${record.page}`,
+    // A page entry navigates; an entry without page runs its onClick.
+    to: record.page ? `/plugin/${record.pluginId}/${record.page}` : undefined,
+    onSelect: record.page ? undefined : () => record.onClick?.(),
     audience: record.audience ?? 'all',
     // Any of these roles. The host treats a role check as "logged in" as well.
     roles: record.roles?.length ? record.roles : undefined,
@@ -35,7 +40,7 @@ const publish = (record: IPluginMenuRecord) => {
 /** Adds or replaces a menu entry of a plugin. */
 export const registerPluginMenu = (pluginId: string, entry: IPluginMenuEntry) => {
   const record = { ...entry, pluginId };
-  records.set(idOf(pluginId, entry.page), record);
+  records.set(idOf(pluginId, keyOf(entry)), record);
   publish(record);
 };
 

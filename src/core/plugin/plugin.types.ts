@@ -91,8 +91,12 @@ export type PluginIconName = (typeof PLUGIN_ICON_NAMES)[number];
 
 /** Entry in the main menu. Opens one of the plugin's pages. */
 export interface IPluginMenuEntry {
-  /** Page of this plugin, e.g. `info` → `/plugin/<id>/info`. */
-  page: string;
+  /** Page of this plugin, e.g. `info` → `/plugin/<id>/info`. Optional: without it the entry runs `onClick`. */
+  page?: string;
+  /** Runs when the entry is tapped. Without `page` it needs an `id`. */
+  onClick?: () => void;
+  /** Unique name of an entry without `page`. */
+  id?: string;
   /** Plain text for all languages, or one text per language (English is the fallback). */
   label: string | Partial<Record<PluginLocale, string>>;
   /** Lucide icon, e.g. `api.icons.Info`. Default: `api.icons.Puzzle`. */
@@ -404,6 +408,40 @@ export interface IPluginPieChartProps {
   donut?: boolean;
   height?: number;
   ariaLabel?: string;
+}
+
+/** Props of `ui.AppDrawer`: the host bottom sheet. Back closes it. */
+export interface IPluginAppDrawerProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  title: React.ReactNode;
+  description?: string;
+  size?: 'full' | 'auto' | 'fullscreen';
+  direction?: 'up' | 'down' | 'left' | 'right';
+  onBack?: () => void;
+  backLabel?: string;
+  locked?: boolean;
+  action?: React.ReactNode;
+  subHeader?: React.ReactNode;
+  footer?: React.ReactNode;
+  hideHeader?: boolean;
+  backClose?: boolean;
+  children?: React.ReactNode;
+}
+
+/** Props of `ui.AppDialog`: centered card from tablet on, full screen on phones. Back closes it. */
+export interface IPluginAppDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  title?: React.ReactNode;
+  hideTitle?: boolean;
+  description?: React.ReactNode;
+  footer?: React.ReactNode;
+  size?: 'sm' | 'md' | 'lg';
+  backClose?: boolean;
+  className?: string;
+  bodyClassName?: string;
+  children?: React.ReactNode;
 }
 
 export interface IPluginUi {
@@ -795,6 +833,10 @@ export interface IPluginUi {
   DialogFooter: React.ComponentType<UiDiv>;
   DialogTitle: React.ComponentType<UiDiv>;
   DialogDescription: React.ComponentType<UiParagraph>;
+  /** Host bottom sheet (title bar, body, sticky footer). Back closes it. */
+  AppDrawer: React.ComponentType<IPluginAppDrawerProps>;
+  /** Host dialog card. Back closes it. */
+  AppDialog: React.ComponentType<IPluginAppDialogProps>;
 }
 
 /** What the host hands to a plugin in `register(api)`. */

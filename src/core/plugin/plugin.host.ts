@@ -158,8 +158,8 @@ const buildPluginApi = (
     return addPluginHook(pluginId, name, handler, options);
   }) as IPluginApi['on'],
   registerMenuEntry: (entry: IPluginMenuEntry) => {
-    // A menu entry only makes sense for a page the user may open.
-    if (!allowedPages.includes(entry.page)) return;
+    // An entry opens a page the user may open, or runs its onClick (then it needs an id).
+    if (entry.page ? !allowedPages.includes(entry.page) : !(entry.onClick && entry.id)) return;
     registerPluginMenu(pluginId, entry);
   },
   Link: PluginLink,

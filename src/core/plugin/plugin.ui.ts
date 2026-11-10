@@ -41,6 +41,8 @@ import { AnimatedCalendarStandalone as Calendar } from '@ui/shad-cn/components/c
 import { DatePicker } from '@ui/components/DatePicker';
 import { ConfirmPopoverButton } from '@ui/components/ConfirmPopoverButton';
 import { PluginPageLayout } from '@ui/components/PluginPageLayout';
+import { AppDialog } from '@ui/components/AppDialog';
+import { AppDrawer } from '@ui/patterns';
 import { PluginBarChart } from '@ui/components/PluginBarChart';
 import { PluginAreaChart, PluginLineChart, PluginPieChart } from '@ui/components/PluginCharts';
 import {
@@ -110,4 +112,5 @@ export const pluginUi = {
   PieChart: PluginPieChart,
   Drawer, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription,
   Dialog, DialogTrigger, DialogClose, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription,
+  AppDrawer, AppDialog,
 } as unknown as IPluginUi;
