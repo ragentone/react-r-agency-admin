@@ -68,8 +68,8 @@ const SetScopeMutation = parse(`
 `);
 
 const CreateDraftMutation = parse(`
-  mutation AdminPluginCreateDraft($name: String!, $scope: [String]) {
-    adminPluginCreateDraft(name: $name, scope: $scope) { success error errors plugin }
+  mutation AdminPluginCreateDraft($name: String!, $scope: [String], $scopeProtected: Boolean) {
+    adminPluginCreateDraft(name: $name, scope: $scope, scopeProtected: $scopeProtected) { success error errors plugin }
   }
 `);
 
@@ -212,7 +212,11 @@ export const PluginApi = {
     }
   },
 
-  createDraft: async (input: { name: string; scope: Array<'frontend' | 'admin'> }): Promise<IPluginCreateResult> => {
+  createDraft: async (input: {
+    name: string;
+    scope: Array<'frontend' | 'admin'>;
+    scopeProtected?: boolean;
+  }): Promise<IPluginCreateResult> => {
     try {
       const response = (await client().mutate({
         mutation: CreateDraftMutation as never,

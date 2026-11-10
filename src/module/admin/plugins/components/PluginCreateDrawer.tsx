@@ -1,5 +1,6 @@
 import { AppFormDrawer } from '@ui/patterns';
 import { Alert, AlertDescription, AlertTitle } from '@ui/shad-cn/components/alert.tsx';
+import { Checkbox } from '@ui/shad-cn/components/checkbox.tsx';
 import { Input } from '@ui/shad-cn/components/input.tsx';
 import { Label } from '@ui/shad-cn/components/label.tsx';
 import React, { useId, useState } from 'react';
@@ -28,6 +29,7 @@ export const PluginCreateDrawer: React.FC<IPluginCreateDrawerProps> = ({
   const nameId = useId();
   const [name, setName] = useState('');
   const [scope, setScope] = useState<PluginScope[]>(DEFAULT_SCOPE);
+  const [scopeProtected, setScopeProtected] = useState(false);
   const { busy, result, create, reset } = usePluginCreate(() => undefined);
 
   const valid = name.trim().length > 0 && scope.length > 0;
@@ -37,6 +39,7 @@ export const PluginCreateDrawer: React.FC<IPluginCreateDrawerProps> = ({
     if (!next) {
       setName('');
       setScope(DEFAULT_SCOPE);
+      setScopeProtected(false);
       reset();
     }
     onOpenChange(next);
@@ -45,7 +48,7 @@ export const PluginCreateDrawer: React.FC<IPluginCreateDrawerProps> = ({
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!valid) return;
-    const response = await create({ name: name.trim(), scope });
+    const response = await create({ name: name.trim(), scope, scopeProtected });
     if (response.success) {
       onCreated(response.plugin?.pluginId ?? '');
       close(false);
@@ -87,6 +90,18 @@ export const PluginCreateDrawer: React.FC<IPluginCreateDrawerProps> = ({
           <PluginScopeCheckboxes value={scope} onChange={setScope} disabled={busy} />
           <p className="text-caption text-muted-foreground">{t('plugins.create.scope.hint')}</p>
         </div>
+        <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-border/50 p-4 select-none">
+          <Checkbox
+            checked={scopeProtected}
+            disabled={busy}
+            onCheckedChange={value => setScopeProtected(value === true)}
+            className="mt-0.5"
+          />
+          <span className="flex flex-col gap-1">
+            <span className="text-body leading-5 font-medium">{t('plugins.create.scopeProtected.label')}</span>
+            <span className="text-caption text-muted-foreground">{t('plugins.create.scopeProtected.hint')}</span>
+          </span>
+        </label>
         {result && !result.success && (
           <Alert variant="destructive">
             <AlertTitle>{t(`plugins.create.errors.${errorKey}`)}</AlertTitle>

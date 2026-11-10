@@ -843,6 +843,10 @@
         "exists": "This plugin id already exists.",
         "not_authorized": "Not authorized.",
         "unknown": "Could not create. Please try again."
+      },
+      "scopeProtected": {
+        "label": "Lock scope",
+        "hint": "The scope cannot be changed in the admin afterwards (scopeProtected in plugin.json)."
       }
     },
     "scope": {

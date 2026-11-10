@@ -877,6 +877,10 @@
         "exists": "This plugin id already exists.",
         "not_authorized": "Not authorized.",
         "unknown": "Could not create. Please try again."
+      },
+      "scopeProtected": {
+        "label": "Зафиксировать раздел",
+        "hint": "Раздел нельзя будет изменить в админке (scopeProtected в plugin.json)."
       }
     },
     "scope": {

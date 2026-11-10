@@ -843,6 +843,10 @@
         "exists": "This plugin id already exists.",
         "not_authorized": "Not authorized.",
         "unknown": "Could not create. Please try again."
+      },
+      "scopeProtected": {
+        "label": "Bereich festlegen",
+        "hint": "Sperrt den Bereich. Er lässt sich danach im Admin nicht mehr ändern (scopeProtected in plugin.json)."
       }
     },
     "scope": {
