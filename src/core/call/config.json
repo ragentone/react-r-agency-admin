@@ -1,6 +1,0 @@
-{
-  "active": true,
-  "name": "core-call",
-  "entries": ["core.tsx"],
-  "sortOrder": 6
-}

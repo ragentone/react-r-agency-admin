@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 
 import { PROFILE_CMS_CONTAINER } from '../const';
 import { useProfile } from '../hooks/use.profile';
-import { ProfileCallButtons } from './ProfileCallButtons';
 import { ProfileCard } from './ProfileCard';
 import { ProfileHeader } from './ProfileHeader';
 import { ProfileInfo } from './ProfileInfo';
@@ -31,9 +30,6 @@ export const ProfileView: React.FC<IProfileViewProps> = ({ userId, onBack, varia
   const { t } = useTranslation('profile');
   const { profile, params, relation, error, state, reload } = useProfile(userId);
   const ready = state === 'ready' && profile;
-  // Drawer: call a friend directly from the header (not on the own profile).
-  const canCall =
-    variant === 'drawer' && ready && !params?.isOwen && relation?.status === 'accepted';
 
   return (
     <div
@@ -45,9 +41,6 @@ export const ProfileView: React.FC<IProfileViewProps> = ({ userId, onBack, varia
         variant={variant}
         title={ready ? profile.fullName || profile.alias : null}
         subtitle={ready ? `@${profile.alias}` : state === 'loading' ? t('states.loading') : null}
-        actions={
-          canCall && profile ? <ProfileCallButtons profile={profile} onLeave={onBack} /> : null
-        }
       />
 
       <div className="w-full">

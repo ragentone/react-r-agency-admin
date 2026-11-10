@@ -66,8 +66,3 @@ export interface IProfileCmsPayload {
   profile: IUserProfile | null;
   params: IUserProfileParams | null;
 }
-
-export interface ICmsProfileButtonsPayload {
-  profile?: IUserProfile;
-  onLeave?: () => void;
-}
