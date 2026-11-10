@@ -1,5 +1,5 @@
 import { useRouter, useRouterState } from '@tanstack/react-router';
-import { Drawer, DrawerContent, DrawerTitle } from '@ui/shad-cn/components/drawer.tsx';
+import { AppDrawer } from '@ui/patterns';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -40,19 +40,16 @@ export const ProfileDrawer: React.FC<IProfileDrawerProps> = ({ userId, onClose }
   }, [pathname]);
 
   return (
-    <Drawer open={open} onOpenChange={next => !next && onClose()} showSwipeHandle>
-      <DrawerContent className="mx-auto w-full max-w-150 [--drawer-height:94dvh] sm:[--drawer-height:88dvh]">
-        <DrawerTitle className="sr-only">{t('title')}</DrawerTitle>
-        <div
-          data-slot="profile-drawer"
-          className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[max(2rem,env(safe-area-inset-bottom))]"
-        >
-          {shownId && (
-            <ProfileView key={shownId} userId={shownId} onBack={onClose} variant="drawer" />
-          )}
-        </div>
-      </DrawerContent>
-    </Drawer>
+    <AppDrawer open={open} onOpenChange={next => !next && onClose()} title={t('title')} hideHeader>
+      <div
+        data-slot="profile-drawer"
+        className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[max(2rem,env(safe-area-inset-bottom))]"
+      >
+        {shownId && (
+          <ProfileView key={shownId} userId={shownId} onBack={onClose} variant="drawer" />
+        )}
+      </div>
+    </AppDrawer>
   );
 };
 

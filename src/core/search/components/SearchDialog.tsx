@@ -1,9 +1,4 @@
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerTitle,
-} from '@ui/shad-cn/components/drawer';
+import { AppDrawer } from '@ui/patterns';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -40,18 +35,16 @@ export const SearchDrawer: React.FC<ISearchDrawerProps> = ({ open, onClose, onSe
   }, [open, opened]);
 
   return (
-    <Drawer
+    <AppDrawer
       open={open}
       onOpenChange={next => !next && onClose()}
       onOpenChangeComplete={next => next && setOpened(true)}
-      showSwipeHandle
+      title={t('title')}
+      description={t('placeholder')}
+      hideHeader
     >
-      <DrawerContent className="mx-auto w-full max-w-150 [--drawer-height:92dvh] sm:[--drawer-height:80dvh]">
-        <DrawerTitle className="sr-only">{t('title')}</DrawerTitle>
-        <DrawerDescription className="sr-only">{t('placeholder')}</DrawerDescription>
-        {open && <SearchPanel onClose={onClose} focus={opened} onSelectItem={onSelectItem} />}
-      </DrawerContent>
-    </Drawer>
+      {open && <SearchPanel onClose={onClose} focus={opened} onSelectItem={onSelectItem} />}
+    </AppDrawer>
   );
 };
 

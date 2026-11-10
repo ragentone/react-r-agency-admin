@@ -36,6 +36,8 @@ const APP_DRAWER_FULLSCREEN_SIZE = {
 export interface IAppDrawerProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  /** Fires once the open / close animation finished. */
+  onOpenChangeComplete?: (open: boolean) => void;
   title: React.ReactNode;
   /** Screen-reader description. Default: the title (if it is a string). */
   description?: string;
@@ -83,6 +85,7 @@ export interface IAppDrawerProps {
 export const AppDrawer: React.FC<IAppDrawerProps> = ({
   open,
   onOpenChange,
+  onOpenChangeComplete,
   title,
   description,
   closeLabel,
@@ -112,14 +115,16 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
   // Layout by size and side. Top / bottom: full-width row. Left / right: a column that stays
   // at its side. `fullscreen`: no radius, no border, no inset.
   const isSide = direction === 'left' || direction === 'right';
+  // Bottom drawer (default `down`): flush to the bottom edge, square bottom corners, no bottom border.
+  const isBottom = !isSide && direction !== 'up';
   const layoutClass =
     size === 'fullscreen'
       ? 'h-dvh w-dvw max-h-dvh max-w-none rounded-none border-0 m-0'
       : isSide
         ? 'max-w-none rounded-none'
-        : 'mx-auto w-full max-w-150';
+        : cn('mx-auto w-full max-w-150', isBottom && 'rounded-b-none border-b-0 border-border/50');
   const fullStyle: React.CSSProperties = isSide ? APP_DRAWER_SIDE_SIZE : APP_DRAWER_SIZE;
-  const layoutStyle: React.CSSProperties | undefined =
+  const sizeStyle: React.CSSProperties | undefined =
     size === 'fullscreen'
       ? APP_DRAWER_FULLSCREEN_SIZE
       : size === 'full'
@@ -129,6 +134,9 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
         : isSide
           ? APP_DRAWER_SIDE_WIDTH
           : undefined;
+  const layoutStyle: React.CSSProperties | undefined = isBottom
+    ? ({ ...sizeStyle, '--drawer-inset': '0px' } as React.CSSProperties)
+    : sizeStyle;
 
   const inner = (
     <>
@@ -197,6 +205,7 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
         if (!next && locked) return;
         onOpenChange(next);
       }}
+      onOpenChangeComplete={onOpenChangeComplete}
       showSwipeHandle={showSwipeHandle}
       swipeDirection={direction}
     >
