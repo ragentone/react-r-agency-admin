@@ -165,8 +165,8 @@ Core.menu.register({
 });
 
 // "User" group – everything around the own account. Other modules add entries with
-// `parent: 'user'` (profile, friends, account …). Guests don't see it (no visible children).
-// `display: 'drawer'` → one row in the main menu, profile, friends, account … open in the
+// `parent: 'user'` (profile, account …). Guests don't see it (no visible children).
+// `display: 'drawer'` → one row in the main menu, profile, account … open in the
 // bottom drawer (centered) with the user card on top.
 Core.menu.register({
   id: 'user',

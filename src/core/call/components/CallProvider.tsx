@@ -1,10 +1,8 @@
-import { useFriendsStore } from '@core/friends/store';
 import { type ReactNode, useEffect } from 'react';
 
 import { useAuth } from '../../auth/components/use.auth.ts';
 import { callChannel } from '../api';
 import { callEventHandlers, shutdownCall } from '../call.engine';
-import { useCallStore } from '../store';
 import type { ICallChannelEvents } from '../types';
 import { CallOverlay } from './CallOverlay';
 
@@ -31,17 +29,6 @@ export const CallProvider = ({ children }: { children: ReactNode }) => {
       shutdownCall();
     };
   }, [signedIn]);
-
-  // Incoming call → the friends drawer (modal) would block the call screen.
-  useEffect(
-    () =>
-      useCallStore.subscribe((state, prev) => {
-        if (state.status === 'incoming' && prev.status !== 'incoming') {
-          useFriendsStore.getState().closeDrawer();
-        }
-      }),
-    []
-  );
 
   return (
     <>

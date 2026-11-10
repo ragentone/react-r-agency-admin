@@ -1,6 +1,5 @@
 import { ACCOUNT_FROM_PROFILE_KEY } from '@core/account/const.ts';
 import { CoreVariables } from '@core/core.variables.ts';
-import { FriendButton } from '@core/friends/components/FriendButton';
 import { type DateTimeFormat, formatDateTime, type Locales } from '@core/i18n';
 import { Link, useRouterState } from '@tanstack/react-router';
 import { cn } from '@ui/lib/utils';
@@ -87,15 +86,6 @@ export const ProfileCard: React.FC<IProfileCardProps> = ({
             )}
           </div>
 
-          {!own && signedIn && (
-            <FriendButton
-              userId={profile.userId}
-              name={profile.alias}
-              avatarUrl={profile.avatarUrl}
-              initialRelation={relation}
-              className="mb-1"
-            />
-          )}
           {own && !overAccount && (
             <Link
               to={CoreVariables.routePathAccount as '/'}
@@ -129,7 +119,7 @@ export const ProfileCard: React.FC<IProfileCardProps> = ({
               {t('meta.online')}
             </span>
           )}
-          {/* Signed in: the FriendButton shows the relation – badge only as read-only fallback. */}
+          {/* Relation badge for visitors who are not signed in. */}
           {!own && !signedIn && (
             <ProfileRelationBadge relation={relation} profileUserId={profile.userId} />
           )}

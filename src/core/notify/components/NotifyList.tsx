@@ -1,4 +1,3 @@
-import { useLoadMoreSentinel } from '@core/friends/hooks/use.load.more.sentinel';
 import { Button } from '@ui/shad-cn/components/button';
 import {
   Empty,
@@ -16,6 +15,7 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useNotifyActivityStore } from '../activity';
+import { useLoadMoreSentinel } from '../hooks/use.load.more.sentinel';
 import { useNotifyStore } from '../store';
 import type { INotifyAction, INotifyItem, NotifyFilter } from '../types';
 import { NotifyItem } from './NotifyItem';
