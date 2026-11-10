@@ -1,4 +1,4 @@
-import { Gamepad2, LayoutGrid } from 'lucide-react';
+import { LayoutGrid } from 'lucide-react';
 
 import type { IMenuComponentEntry, IMenuEntry, IMenuManager, IMenuSectionConfig } from './types.ts';
 
@@ -6,7 +6,6 @@ const entries = new Map<string, IMenuEntry>();
 const components = new Map<string, IMenuComponentEntry>();
 const sections: Record<string, IMenuSectionConfig> = {
   main: { label: 'menu:sections.main', sortOrder: 0 },
-  // Apps: one trigger in the menu, the apps open in a bottom drawer.
   apps: {
     label: 'menu:sections.apps',
     description: 'menu:apps.description',
@@ -14,17 +13,10 @@ const sections: Record<string, IMenuSectionConfig> = {
     display: 'drawer',
     sortOrder: 10,
   },
-  // Games: own drawer right below the apps (same pattern as the apps).
-  games: {
-    label: 'menu:sections.games',
-    description: 'menu:games.description',
-    icon: Gamepad2,
-    display: 'drawer',
-    sortOrder: 20,
-  },
-  account: { label: 'menu:sections.account', sortOrder: 30 },
   plugins: { label: 'menu:sections.plugins', sortOrder: 40 },
-  after: { label: 'menu:sections.after', sortOrder: 50 },
+  admin: { label: 'menu:sections.admin', sortOrder: 50 },
+  account: { label: 'menu:sections.account', sortOrder: 60 },
+  after: { label: 'menu:sections.after', sortOrder: 670 },
 };
 const listeners = new Set<() => void>();
 let version = 0;

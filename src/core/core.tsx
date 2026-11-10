@@ -26,7 +26,6 @@ import {
   Link,
   LogIn,
   LogOut,
-  ShieldCheck,
   UserCog,
   UserRound,
 } from 'lucide-react';
@@ -180,27 +179,13 @@ Core.menu.register({
   sortOrder: 900,
 });
 
-// "Administration" group – developer, role management, page builder (modules add their
-// entries with `parent: 'administration'` + `roles`). Part of the user drawer (own heading
-// below the user entries). Hidden when no child is visible.
-Core.menu.register({
-  id: 'administration',
-  label: 'menu:items.administration',
-  description: 'menu:items.administrationDescription',
-  icon: ShieldCheck,
-  parent: 'user',
-  audience: 'user',
-  // Before logout (1000) → logout stays the last row of the drawer.
-  sortOrder: 900,
-});
-
 Core.menu.register({
   id: 'profile',
   label: 'menu:items.profile',
   description: 'menu:items.profileDescription',
   icon: CircleUserRound,
   to: ({ user }) => (user?.id ? getProfilePath(user.id) : undefined),
-  parent: 'user',
+  section: 'account',
   audience: 'user',
   sortOrder: 0,
 });
@@ -211,7 +196,7 @@ Core.menu.register({
   description: 'menu:items.accountDescription',
   icon: UserCog,
   to: CoreVariables.routePathAccount,
-  parent: 'user',
+  section: 'account',
   audience: 'user',
   sortOrder: 20,
 });
@@ -223,7 +208,7 @@ Core.menu.register({
   description: 'menu:items.logoutDescription',
   icon: LogOut,
   onSelect: () => void Core.events.core.emit('auth:logout:request'),
-  parent: 'user',
+  section: 'account',
   audience: 'user',
   sortOrder: 1000,
 });
