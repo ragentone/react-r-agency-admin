@@ -17,6 +17,7 @@ export const PluginDetailScope: React.FC<IPluginDetailScopeProps> = ({ plugin, d
   const { t } = useTranslation('admin');
   const [open, setOpen] = useState(false);
   const labels = plugin.scope.map(item => t(`plugins.create.scope.${item}`)).join(' · ');
+  const locked = plugin.scopeProtected === true;
 
   return (
     <>
@@ -24,9 +25,10 @@ export const PluginDetailScope: React.FC<IPluginDetailScopeProps> = ({ plugin, d
         <ItemContent>
           <ItemTitle>{t('plugins.scope.title')}</ItemTitle>
           <ItemDescription>{labels}</ItemDescription>
+          {locked && <ItemDescription>{t('plugins.scope.locked')}</ItemDescription>}
         </ItemContent>
         <ItemActions>
-          <Button variant="outline" size="sm" disabled={detail.busy} onClick={() => setOpen(true)}>
+          <Button variant="outline" size="sm" disabled={detail.busy || locked} onClick={() => setOpen(true)}>
             {t('plugins.scope.change')}
           </Button>
         </ItemActions>

@@ -705,7 +705,13 @@
     "close": "Close"
   },
   "home": {
-    "newUsers": {"title": "New sign-ups", "empty": "No new sign-ups in the last 7 days", "minor": "Under 16 – no details", "unconfirmed": "Not confirmed", "more": "{{value}} more in the last 7 days"},
+    "newUsers": {
+      "title": "New sign-ups",
+      "empty": "No new sign-ups in the last 7 days",
+      "minor": "Under 16 – no details",
+      "unconfirmed": "Not confirmed",
+      "more": "{{value}} more in the last 7 days"
+    },
     "error": "Could not be loaded.",
     "more": "All",
     "live": {
@@ -850,8 +856,10 @@
       "errors": {
         "not_found": "Plugin not found.",
         "invalid_scope": "Select at least one area.",
-        "unknown": "Could not change the area."
-      }
+        "unknown": "Could not change the area.",
+        "scope_protected": "The area is fixed by the plugin."
+      },
+      "locked": "Fixed by the plugin (scopeProtected). The area cannot be changed here."
     },
     "deploy": {
       "button": "Redeploy {{name}}",
@@ -905,7 +913,8 @@
         "general": "General",
         "config": "Configuration",
         "repositories": "Repositories",
-        "manifest": "Manifest"
+        "manifest": "Manifest",
+        "releases": "Releases"
       },
       "more": "Actions",
       "config": "Configuration"
@@ -1079,6 +1088,30 @@
       },
       "errors": {
         "load": "Repositories could not be loaded."
+      }
+    },
+    "releases": {
+      "title": "Releases",
+      "description": "ZIP files in the dist/ folder of this project. The version in plugin.json cannot be deleted.",
+      "loading": "Loading releases …",
+      "empty": "No releases in the dist/ folder yet.",
+      "loadError": "Releases could not be loaded.",
+      "current": "current",
+      "currentHint": "The version in plugin.json cannot be deleted.",
+      "remove": "Delete",
+      "removeTitle": "Delete release {{version}}?",
+      "removeDescription": "The ZIP file is removed from dist/. This cannot be undone.",
+      "confirm": "Delete permanently",
+      "busy": "Deleting …",
+      "cancel": "Cancel",
+      "success": "Release {{version}} deleted.",
+      "errors": {
+        "current_version": "The version in plugin.json cannot be deleted.",
+        "not_found": "Release not found.",
+        "invalid_version": "Invalid version.",
+        "invalid_plugin_id": "Invalid plugin id.",
+        "project_missing": "Development project is missing.",
+        "unknown": "The release could not be deleted."
       }
     }
   },

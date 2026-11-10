@@ -16,6 +16,8 @@ import type {
   IPluginFileWriteResult,
   IPluginListResult,
   IPluginPurgeResult,
+  IPluginReleaseDeleteResult,
+  IPluginReleasesResult,
   IPluginRemoveResult,
   IPluginStatusResult,
   IPluginUnknownResult,
@@ -44,6 +46,18 @@ const SetStatusMutation = parse(`
 const RemoveMutation = parse(`
   mutation AdminPluginRemove($pluginId: String!) {
     adminPluginRemove(pluginId: $pluginId) { success error }
+  }
+`);
+
+const ReleasesQuery = parse(`
+  query AdminPluginReleases($pluginId: String!) {
+    adminPluginReleases(pluginId: $pluginId) { success error current releases }
+  }
+`);
+
+const ReleaseDeleteMutation = parse(`
+  mutation AdminPluginReleaseDelete($pluginId: String!, $version: String!) {
+    adminPluginReleaseDelete(pluginId: $pluginId, version: $version) { success error version }
   }
 `);
 
@@ -150,6 +164,35 @@ export const PluginApi = {
         fetchPolicy: 'no-cache',
       })) as { data?: { adminPluginList?: IPluginListResult } };
       return response.data?.adminPluginList ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+
+  /** Release ZIPs in `dist/` of a development plugin, newest first. */
+  releases: async (pluginId: string): Promise<IPluginReleasesResult> => {
+    try {
+      const response = (await client().query({
+        query: ReleasesQuery as never,
+        variables: { pluginId },
+        fetchPolicy: 'no-cache',
+      })) as { data?: { adminPluginReleases?: IPluginReleasesResult } };
+      return response.data?.adminPluginReleases ?? { success: false, error: 'unknown' };
+    } catch (error) {
+      console.warn('[admin-plugins]', (error as Error)?.message);
+      return { success: false, error: 'unknown' };
+    }
+  },
+
+  /** Deletes one release ZIP. The version in plugin.json is refused by the backend. */
+  releaseDelete: async (pluginId: string, version: string): Promise<IPluginReleaseDeleteResult> => {
+    try {
+      const response = (await client().mutate({
+        mutation: ReleaseDeleteMutation as never,
+        variables: { pluginId, version },
+      })) as { data?: { adminPluginReleaseDelete?: IPluginReleaseDeleteResult } };
+      return response.data?.adminPluginReleaseDelete ?? { success: false, error: 'unknown' };
     } catch (error) {
       console.warn('[admin-plugins]', (error as Error)?.message);
       return { success: false, error: 'unknown' };

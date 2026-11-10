@@ -12,6 +12,7 @@ import { PluginDetailActivation } from './PluginDetailActivation';
 import { PluginDetailFiles } from './PluginDetailFiles';
 import { PluginDetailHeader } from './PluginDetailHeader';
 import { PluginDetailInfo } from './PluginDetailInfo';
+import { PluginDetailReleases } from './PluginDetailReleases';
 import { PluginDetailScope } from './PluginDetailScope';
 import { PluginFileEditorDialog } from './PluginFileEditorDialog';
 import { PluginManifestView } from './PluginManifestView';
@@ -80,6 +81,9 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
               <TabsTrigger value="files" className="shrink-0">
                 {t('plugins.code.files')}
               </TabsTrigger>
+              <TabsTrigger value="releases" className="shrink-0">
+                {t('plugins.releases.title')}
+              </TabsTrigger>
               <TabsTrigger value="manifest" className="shrink-0">
                 {t('plugins.details.tabs.manifest')}
               </TabsTrigger>
@@ -106,6 +110,12 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
         {plugin.development && (
           <TabsContent value="manifest" className="mt-0 px-4 py-6">
             <PluginManifestView pluginId={plugin.pluginId} />
+          </TabsContent>
+        )}
+
+        {plugin.development && (
+          <TabsContent value="releases" className="mt-0 px-4 py-6">
+            <PluginDetailReleases pluginId={plugin.pluginId} />
           </TabsContent>
         )}
 

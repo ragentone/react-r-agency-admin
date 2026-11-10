@@ -705,7 +705,13 @@
     "close": "Schließen"
   },
   "home": {
-    "newUsers": {"title": "Neue Registrierungen", "empty": "Keine neuen Registrierungen in den letzten 7 Tagen", "minor": "Unter 16 – ohne Angaben", "unconfirmed": "Nicht bestätigt", "more": "{{value}} weitere in den letzten 7 Tagen"},
+    "newUsers": {
+      "title": "Neue Registrierungen",
+      "empty": "Keine neuen Registrierungen in den letzten 7 Tagen",
+      "minor": "Unter 16 – ohne Angaben",
+      "unconfirmed": "Nicht bestätigt",
+      "more": "{{value}} weitere in den letzten 7 Tagen"
+    },
     "error": "Konnte nicht geladen werden.",
     "more": "Alle",
     "live": {
@@ -850,8 +856,10 @@
       "errors": {
         "not_found": "Plugin nicht gefunden.",
         "invalid_scope": "Wähle mindestens einen Bereich.",
-        "unknown": "Bereich konnte nicht geändert werden."
-      }
+        "unknown": "Bereich konnte nicht geändert werden.",
+        "scope_protected": "Der Bereich ist im Plugin festgelegt."
+      },
+      "locked": "Im Plugin festgelegt (scopeProtected). Der Bereich lässt sich hier nicht ändern."
     },
     "deploy": {
       "button": "{{name}} neu deployen",
@@ -905,7 +913,8 @@
         "general": "Allgemein",
         "config": "Konfiguration",
         "repositories": "Repositories",
-        "manifest": "Manifest"
+        "manifest": "Manifest",
+        "releases": "Releases"
       },
       "more": "Aktionen",
       "config": "Konfiguration"
@@ -1079,6 +1088,30 @@
       },
       "errors": {
         "load": "Repositories konnten nicht geladen werden."
+      }
+    },
+    "releases": {
+      "title": "Releases",
+      "description": "ZIP-Dateien im Ordner dist/ dieses Projekts. Die Version aus plugin.json lässt sich nicht löschen.",
+      "loading": "Releases werden geladen …",
+      "empty": "Noch keine Releases im Ordner dist/.",
+      "loadError": "Releases konnten nicht geladen werden.",
+      "current": "aktuell",
+      "currentHint": "Die Version aus plugin.json kann nicht gelöscht werden.",
+      "remove": "Löschen",
+      "removeTitle": "Release {{version}} löschen?",
+      "removeDescription": "Die ZIP-Datei wird aus dist/ entfernt. Das ist endgültig.",
+      "confirm": "Endgültig löschen",
+      "busy": "Wird gelöscht …",
+      "cancel": "Abbrechen",
+      "success": "Release {{version}} gelöscht.",
+      "errors": {
+        "current_version": "Die Version aus plugin.json kann nicht gelöscht werden.",
+        "not_found": "Release nicht gefunden.",
+        "invalid_version": "Ungültige Version.",
+        "invalid_plugin_id": "Ungültige Plugin-Id.",
+        "project_missing": "Entwicklungsprojekt fehlt.",
+        "unknown": "Release konnte nicht gelöscht werden."
       }
     }
   },

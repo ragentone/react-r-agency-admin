@@ -14,6 +14,8 @@ export interface IPluginListItem {
   development: boolean;
   /** Where the plugin runs (frontend, admin or both). */
   scope: PluginScope[];
+  /** `scopeProtected: true` in plugin.json: the scope cannot be changed here. */
+  scopeProtected?: boolean;
 }
 
 export interface IPluginListResult {
@@ -234,4 +236,28 @@ export interface IPluginTablesResult {
   success: boolean;
   error?: string | null;
   tables?: IPluginTableDefinition[] | null;
+}
+
+/** One release ZIP in the `dist/` folder of a development project (`adminPluginReleases`). */
+export interface IPluginRelease {
+  version: string;
+  filename: string;
+  size: number;
+  modifiedAt: string;
+  /** Same version as plugin.json. Cannot be deleted. */
+  current: boolean;
+}
+
+export interface IPluginReleasesResult {
+  success: boolean;
+  error?: string | null;
+  /** Version in plugin.json. */
+  current?: string | null;
+  releases?: IPluginRelease[] | null;
+}
+
+export interface IPluginReleaseDeleteResult {
+  success: boolean;
+  error?: string | null;
+  version?: string | null;
 }
