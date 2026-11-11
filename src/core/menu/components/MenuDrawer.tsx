@@ -10,6 +10,7 @@ import { type IResolvedMenuSection, type MenuNode, useMenu } from '../hooks';
 import { openMenuGroup, openMenuSection } from '../store.ts';
 import { MenuComponentSlot } from './MenuComponentSlot.tsx';
 import { MenuGroup } from './MenuGroup.tsx';
+import { MenuUserInfo } from './MenuUserInfo.tsx';
 import { MenuOpenRow, MenuRow } from './MenuRow.tsx';
 import { tilesOf, triggerItemOf } from './MenuSectionDrawer.tsx';
 import { useMenuText } from './use.menu.text.ts';
@@ -115,6 +116,7 @@ const MenuDrawer = ({ open, onOpenChange }: IProps) => {
         }
       >
         <AppBrand className={'px-4 pt-4 pb-3'} />
+        <MenuUserInfo ctx={ctx} />
         <PluginSlot
           name={'menu_before.widget'}
           scope={'admin'}

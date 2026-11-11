@@ -17,5 +17,6 @@ export * from './MenuSideRow.tsx';
 export * from './MenuTrigger.tsx';
 export * from './MenuUserCard.tsx';
 export * from './MenuUserDockButton.tsx';
+export * from './MenuUserInfo.tsx';
 export * from './use.menu.text.ts';
 export * from './widgets';

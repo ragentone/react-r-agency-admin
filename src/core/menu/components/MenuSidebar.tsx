@@ -7,6 +7,7 @@ import { useMenu, useMenuMinWidth } from '../hooks';
 import type { MenuComponentVariant } from '../types.ts';
 import { MenuComponentSlot } from './MenuComponentSlot.tsx';
 import { MenuSectionTrigger } from './MenuSectionDrawer.tsx';
+import { MenuUserInfo } from './MenuUserInfo.tsx';
 import { MenuSidebarItem } from './MenuSidebarItem.tsx';
 
 const noop = () => undefined;
@@ -34,6 +35,7 @@ const MenuSidebar = ({ className }: { className?: string }) => {
         className={'justify-center px-3 pt-3 pb-1 xl:justify-start xl:px-4'}
         textClassName={'hidden xl:flex'}
       />
+      <MenuUserInfo ctx={ctx} textClassName={'hidden xl:flex'} />
       <div className={'flex grow flex-col gap-1 overflow-x-hidden overflow-y-auto px-3 py-3'}>
         <PluginSlot name={'menu_before.widget'} scope={'admin'} className={'flex flex-col gap-1'} />
         {sections.map((section, sectionIndex) => (
