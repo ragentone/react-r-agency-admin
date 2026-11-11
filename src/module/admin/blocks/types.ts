@@ -191,6 +191,13 @@ export interface ITableBlockData {
   rows: ITableRow[];
 }
 
+/** Code snippet: plain text, copy button. */
+export interface ICodeBlockData {
+  title: string;
+  language: string;
+  code: string;
+}
+
 export interface IDividerBlockData {
   variant: 'line' | 'space';
   size: 'md' | 'sm' | 'lg';
@@ -206,6 +213,7 @@ export interface ISitePageBlockDataMap {
   cta: ICtaBlockData;
   faq: IFaqBlockData;
   quote: IQuoteBlockData;
+  code: ICodeBlockData;
   video: IVideoBlockData;
   divider: IDividerBlockData;
   stats: IStatsBlockData;
@@ -255,6 +263,7 @@ export const SITE_PAGE_BLOCK_TYPES: SitePageBlockType[] = [
   'video',
   'countdown',
   'divider',
+  'code',
 ];
 
 /** Same limits as the backend. */
@@ -346,6 +355,7 @@ const DEFAULTS: { [T in SitePageBlockType]: () => ISitePageBlockDataMap[T] } = {
   quote: () => ({ text: '', author: '', role: '' }),
   video: () => ({ url: '', caption: '' }),
   divider: () => ({ variant: 'line', size: 'md' }),
+  code: () => ({ title: '', language: 'plain', code: '' }),
   stats: () => ({ title: '', items: [emptyStat(), emptyStat(), emptyStat()] }),
   steps: () => ({ title: '', items: [emptyStep(), emptyStep(), emptyStep()] }),
   tabs: () => ({ title: '', items: [emptyTab(), emptyTab()] }),

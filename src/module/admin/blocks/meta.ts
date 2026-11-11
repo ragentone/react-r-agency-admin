@@ -1,6 +1,7 @@
 import { PageBlockManager } from '@core/blocks/manager.ts';
 import {
   CalendarClock,
+  Code2,
   Columns2,
   Footprints,
   Gauge,
@@ -39,6 +40,7 @@ export const BLOCK_ICONS: Record<SitePageBlockType, typeof Type> = {
   tabs: PanelsTopLeft,
   countdown: CalendarClock,
   table: Table2,
+  code: Code2,
 };
 
 /** Icon of a block – app blocks from their registration (puzzle = app not loaded). */
@@ -91,6 +93,8 @@ export const blockSummary = (block: PageBlock): string => {
       return block.data.caption || block.data.url;
     case 'divider':
       return '';
+    case 'code':
+      return block.data.title || block.data.code.split('\n')[0] || '';
     case 'stats':
       return (
         block.data.title ||

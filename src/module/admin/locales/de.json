@@ -315,6 +315,10 @@
       "table": {
         "label": "Tabelle",
         "description": "Daten in Zeilen und Spalten, auch aus Excel"
+      },
+      "code": {
+        "label": "Code",
+        "description": "Code-Ausschnitt mit Kopieren-Knopf"
       }
     },
     "field": {
@@ -548,7 +552,12 @@
       "auto": "Original"
     },
     "imageGone_one": "Ein Bild war zu lange ungespeichert und wurde vom Server entfernt – bitte lade es neu hoch.",
-    "imageGone_other": "{{count}} Bilder waren zu lange ungespeichert und wurden vom Server entfernt – bitte lade sie neu hoch."
+    "imageGone_other": "{{count}} Bilder waren zu lange ungespeichert und wurden vom Server entfernt – bitte lade sie neu hoch.",
+    "code": {
+      "title": "Titel",
+      "language": "Sprache",
+      "code": "Code"
+    }
   },
   "stats": {
     "range": {

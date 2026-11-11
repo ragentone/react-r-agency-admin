@@ -315,6 +315,10 @@
       "table": {
         "label": "Table",
         "description": "Data in rows and columns, also from Excel"
+      },
+      "code": {
+        "label": "Code",
+        "description": "Code snippet with copy button"
       }
     },
     "field": {
@@ -548,7 +552,12 @@
       "auto": "Original"
     },
     "imageGone_one": "An image stayed unsaved for too long and was removed from the server – please upload it again.",
-    "imageGone_other": "{{count}} images stayed unsaved for too long and were removed from the server – please upload them again."
+    "imageGone_other": "{{count}} images stayed unsaved for too long and were removed from the server – please upload them again.",
+    "code": {
+      "title": "Title",
+      "language": "Language",
+      "code": "Code"
+    }
   },
   "stats": {
     "range": {

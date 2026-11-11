@@ -28,6 +28,8 @@ import {
   videoEmbed,
 } from './types';
 
+import { CodeBlockEditor } from './CodeBlockEditor';
+
 type EditorProps<T extends SitePageBlockType> = {
   data: ISitePageBlockDataMap[T];
   onChange: (data: ISitePageBlockDataMap[T]) => void;
@@ -438,6 +440,14 @@ export const BlockEditor: React.FC<{
     case 'video':
       return (
         <VideoEditor {...props} data={block.data} onChange={data => onChange({ ...block, data })} />
+      );
+    case 'code':
+      return (
+        <CodeBlockEditor
+          {...props}
+          data={block.data}
+          onChange={data => onChange({ ...block, data })}
+        />
       );
     case 'divider':
       return (
