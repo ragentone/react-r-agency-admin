@@ -1,4 +1,5 @@
 import { CmsContainer } from '@core/cms';
+import { PluginSlot } from '@core/plugin';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -7,6 +8,7 @@ import { useProfile } from '../hooks/use.profile';
 import { ProfileCard } from './ProfileCard';
 import { ProfileHeader } from './ProfileHeader';
 import { ProfileInfo } from './ProfileInfo';
+import { ProfileMenuButton } from './ProfileMenuButton';
 import {
   ProfileErrorState,
   ProfileLoadingState,
