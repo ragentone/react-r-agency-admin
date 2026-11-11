@@ -26,7 +26,7 @@ import { usePluginPlatform, usePluginUser } from './plugin.user';
 import { registerPluginMenu } from './plugin.menu';
 import { navigatePlugin } from './plugin.navigate';
 import { registerPluginPage } from './plugin.pages';
-import { DEFAULT_SLOT_SORT_ORDER, registerPluginSlot } from './plugin.slots';
+import { DEFAULT_SLOT_SORT_ORDER, isValidSlotName, registerPluginSlot } from './plugin.slots';
 import type {
   IPluginApi,
   IPluginCallResult,
@@ -35,7 +35,6 @@ import type {
   PluginConfigPrimitive,
   PluginHookName,
   PluginLinkComponent,
-  PluginSlotName,
 } from './plugin.types';
 import type { IPluginToastOptions } from './plugin.types';
 import { PLUGIN_HOOK_NAMES } from './plugin.types';
@@ -94,7 +93,6 @@ export const setPluginAppScope = (scope: PluginScope): void => {
 
 const buildPluginApi = (
   pluginId: string,
-  allowedSlots: PluginSlotName[],
   assetBaseUrl: string,
   allowedPages: string[],
   allowedIntervene: string[],
@@ -200,8 +198,8 @@ const buildPluginApi = (
       .map(encodeURIComponent)
       .join('/'),
   registerSlot: (slot, component, options) => {
-    if (!allowedSlots.includes(slot)) {
-      throw new Error(`plugin ${pluginId}: slot "${slot}" not declared in manifest`);
+    if (!isValidSlotName(slot)) {
+      throw new Error(`plugin ${pluginId}: invalid slot name "${slot}"`);
     }
     registerPluginSlot(pluginId, slot, component as PluginSlotComponent, {
       sortOrder: options?.sortOrder ?? DEFAULT_SLOT_SORT_ORDER,
@@ -218,7 +216,6 @@ const buildPluginApi = (
 /** The API a plugin gets: the host methods, limited to the plugin's capabilities. */
 export const createPluginApi = (
   pluginId: string,
-  allowedSlots: PluginSlotName[],
   assetBaseUrl: string,
   allowedPages: string[],
   allowedIntervene: string[],
@@ -227,6 +224,6 @@ export const createPluginApi = (
 ): IPluginApi =>
   withCapabilities(
     pluginId,
-    buildPluginApi(pluginId, allowedSlots, assetBaseUrl, allowedPages, allowedIntervene, publicConfig, events),
+    buildPluginApi(pluginId, assetBaseUrl, allowedPages, allowedIntervene, publicConfig, events),
     events.capabilities
   );

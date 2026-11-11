@@ -40,7 +40,6 @@ export const watchPluginDev = (ref: IPluginRef): void => {
         plugin.register(
           createPluginApi(
             ref.id,
-            ref.slots,
             ref.assetBaseUrl,
             ref.pages,
             ref.intervene,

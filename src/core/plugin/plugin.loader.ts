@@ -32,7 +32,6 @@ export const loadPlugin = async (ref: IPluginRef): Promise<boolean> => {
     plugin.register(
       createPluginApi(
         ref.id,
-        ref.slots,
         ref.assetBaseUrl,
         ref.pages,
         ref.intervene,

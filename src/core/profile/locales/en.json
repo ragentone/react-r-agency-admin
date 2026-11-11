@@ -60,5 +60,9 @@
     "user": "User",
     "standard": "Standard",
     "admin": "Administrator"
+  },
+  "menu": {
+    "open": "More",
+    "title": "More"
   }
 }

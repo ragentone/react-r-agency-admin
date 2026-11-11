@@ -32,6 +32,8 @@ export const ProfileView: React.FC<IProfileViewProps> = ({ userId, onBack, varia
   const { t } = useTranslation('profile');
   const { profile, params, relation, error, state, reload } = useProfile(userId);
   const ready = state === 'ready' && profile;
+  // Context of every profile slot: plugins type what they need themselves.
+  const pluginContext = { userId, profile, params, relation, state };
 
   return (
     <div
@@ -43,17 +45,30 @@ export const ProfileView: React.FC<IProfileViewProps> = ({ userId, onBack, varia
         variant={variant}
         title={ready ? profile.fullName || profile.alias : null}
         subtitle={ready ? `@${profile.alias}` : state === 'loading' ? t('states.loading') : null}
+        actions={
+          ready ? (
+            <>
+              <PluginSlot name="profile.header.actions" className="flex items-center gap-1" context={pluginContext} />
+              <ProfileMenuButton context={pluginContext} />
+            </>
+          ) : null
+        }
       />
 
       <div className="w-full">
         {state === 'loading' && <ProfileLoadingState />}
         {state === 'notFound' && <ProfileNotFoundState />}
         {state === 'private' && <ProfilePrivateState />}
+        {(state === 'private' || state === 'notFound') && (
+          <PluginSlot name="profile.empty.widget" context={pluginContext} />
+        )}
         {state === 'error' && <ProfileErrorState error={error} onRetry={() => void reload()} />}
         {ready && (
           <>
             <ProfileCard profile={profile} params={params} relation={relation} />
+            <PluginSlot name="profile.card.widget" context={pluginContext} />
             <ProfileInfo profile={profile} params={params} />
+            <PluginSlot name="profile.info.widget" context={pluginContext} />
           </>
         )}
       </div>

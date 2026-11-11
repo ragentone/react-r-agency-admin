@@ -23,6 +23,10 @@ const compareSlotEntries = (a: IPluginSlotEntry, b: IPluginSlotEntry) =>
   a.sortOrder - b.sortOrder || a.pluginId.localeCompare(b.pluginId);
 
 /** Registered components per slot. Arrays are replaced on change, never mutated (for useSyncExternalStore). */
+/** Same rule as the backend: dot-separated lowercase words, max. 64 characters. No manifest entry needed. */
+export const isValidSlotName = (name: string): boolean =>
+  name.length <= 64 && /^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)*$/.test(name);
+
 let slots: Partial<Record<PluginSlotName, IPluginSlotEntry[]>> = {};
 const listeners = new Set<() => void>();
 
