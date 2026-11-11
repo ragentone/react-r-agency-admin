@@ -28,6 +28,8 @@ export const PluginDialogHost = () => {
       title={shown?.title ?? ''}
       description={shown?.description}
       size={shown?.size ?? 'md'}
+      backClose={shown?.backClose ?? false}
+      rounded={shown?.rounded ?? false}
       overlay={
         loading.active && (
           <div

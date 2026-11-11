@@ -41,6 +41,8 @@ export interface IAppDialogProps {
   bodyClassName?: string;
   /** Covers the whole dialog, header included (e.g. a loading overlay). Positioned absolute. */
   overlay?: React.ReactNode;
+  /** Rounded corners from tablet on. Default `true`. */
+  rounded?: boolean;
 }
 
 const SIZE_CLASS: Record<AppDialogSize, string> = {
@@ -68,6 +70,7 @@ export const AppDialog: React.FC<IAppDialogProps> = ({
   className,
   bodyClassName,
   overlay,
+  rounded = true,
 }) => {
   const { t } = useTranslation('base');
   return (
@@ -79,8 +82,9 @@ export const AppDialog: React.FC<IAppDialogProps> = ({
           // Phone: full screen, slides in from the bottom. Tablet and up: centered card, no slide.
           'top-0 left-0 flex h-dvh max-h-dvh w-full max-w-none translate-x-0 translate-y-0 flex-col gap-0 rounded-none p-0',
           'data-[state=open]:animate-dialog-sheet-in data-[state=closed]:animate-dialog-sheet-out',
-          'sm:top-1/2 sm:left-1/2 sm:h-auto sm:max-h-[85dvh] sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-2xl',
+          'sm:top-1/2 sm:left-1/2 sm:h-auto sm:max-h-[85dvh] sm:-translate-x-1/2 sm:-translate-y-1/2',
           'sm:data-[state=open]:animate-none sm:data-[state=closed]:animate-none',
+          rounded ? 'sm:rounded-2xl' : 'sm:rounded-none',
           SIZE_CLASS[size],
           className
         )}

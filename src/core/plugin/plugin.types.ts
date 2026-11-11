@@ -218,6 +218,10 @@ export interface IPluginDialogOptions {
   description?: string;
   /** Width from tablet on. On phones the dialog is always full screen. Default: `md`. */
   size?: 'sm' | 'md' | 'lg';
+  /** Browser / Android back closes the dialog. Default: `false`. */
+  backClose?: boolean;
+  /** Rounded corners from tablet on. Default: `false`. */
+  rounded?: boolean;
   /** Passed to the component as props (`close` and `loading` are added by the host). */
   props?: Record<string, unknown>;
 }
