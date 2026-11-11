@@ -4,7 +4,7 @@ import { ProviderComposer } from '@core/components';
 import { Extensions } from '@core/extension';
 import { Layout } from '@core/layout';
 import { LayoutProvider } from '@core/layout';
-import { PluginProvider } from '@core/plugin';
+import { PluginConfirmHost, PluginDialogHost, PluginDrawerHost, PluginProvider } from '@core/plugin';
 import { ProviderManager } from '@core/provider';
 import { createRootRouteWithContext } from '@tanstack/react-router';
 
@@ -32,6 +32,9 @@ export const Route = createRootRouteWithContext<IRouterContext>()({
       >
         <Extensions>
           <Layout />
+          <PluginConfirmHost />
+          <PluginDrawerHost />
+          <PluginDialogHost />
         </Extensions>
       </ProviderComposer>
     </LayoutProvider>

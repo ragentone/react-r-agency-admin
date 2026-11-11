@@ -84,7 +84,8 @@ export const AppDialog: React.FC<IAppDialogProps> = ({
           'data-[state=open]:animate-dialog-sheet-in data-[state=closed]:animate-dialog-sheet-out',
           'sm:top-1/2 sm:left-1/2 sm:h-auto sm:max-h-[85dvh] sm:-translate-x-1/2 sm:-translate-y-1/2',
           'sm:data-[state=open]:animate-none sm:data-[state=closed]:animate-none',
-          rounded ? 'sm:rounded-2xl' : 'sm:rounded-none',
+          // Clip the content to the radius, otherwise border and header lines stick out at the corners.
+          rounded ? 'sm:rounded-2xl sm:overflow-hidden' : 'sm:rounded-none',
           SIZE_CLASS[size],
           className
         )}
