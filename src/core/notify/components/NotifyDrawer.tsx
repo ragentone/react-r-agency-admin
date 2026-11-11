@@ -11,7 +11,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@ui/shad-cn/components/alert-dialog.tsx';
-import { Drawer, DrawerContent } from '@ui/shad-cn/components/drawer.tsx';
+import { AppDrawer } from '@ui/patterns/drawer';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -173,104 +173,109 @@ export const NotifyDrawer: React.FC = () => {
   };
 
   return (
-    <Drawer
+    <AppDrawer
       open={open}
       onOpenChange={next => !next && closeDrawer()}
-      swipeDirection="down"
+      direction="down"
+      title={null}
+      hideHeader
+      size="auto"
       showSwipeHandle
+      contentProps={{
+        className:
+          'h-[88dvh] max-h-[88dvh] rounded-t-3xl rounded-b-none border-x-0 border-b-0 border-t border-border/50 bg-background',
+      }}
     >
-      <DrawerContent className="mx-auto h-[88dvh] max-h-[88dvh] w-full max-w-150 [--drawer-inset:0px] rounded-t-3xl rounded-b-none border-x-0 border-b-0 border-t border-border/50 bg-background">
-        <div className="flex h-full min-h-0 flex-col">
-          <NotifyDrawerHeader
-            filter={filter}
-            unread={unread}
-            total={total}
-            onSelectTab={selectTab}
-            onMarkAll={() => void onMarkAll()}
-            onClear={() => setConfirmClear(true)}
-            onClose={closeDrawer}
-          />
+      <div className="flex h-full min-h-0 flex-col">
+        <NotifyDrawerHeader
+          filter={filter}
+          unread={unread}
+          total={total}
+          onSelectTab={selectTab}
+          onMarkAll={() => void onMarkAll()}
+          onClear={() => setConfirmClear(true)}
+          onClose={closeDrawer}
+        />
 
-          <div
-            ref={scrollRef}
-            id="notify-panel"
-            role="tabpanel"
-            aria-labelledby={`notify-tab-${filter}`}
-            className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[max(1.5rem,env(safe-area-inset-bottom))]"
-          >
-            {open && <NotifyActivityList onAction={onActivityAction} />}
-            {open && <NotifySystemBanner />}
-            {open && (
-              <NotifyList
-                key={filter}
-                filter={filter}
-                onOpen={onOpen}
-                onOpenProfile={setProfileId}
-                onAction={onAction}
-                onDelete={onDelete}
-              />
-            )}
-          </div>
-        </div>
-
-        {/* Nested inside the drawer → stacks on top (base-ui nested drawers). */}
-        <ProfileDrawer userId={profileId} onClose={() => setProfileId(null)} />
-
-        <AlertDialog
-          open={confirmAction !== null}
-          onOpenChange={next => !next && setConfirmAction(null)}
+        <div
+          ref={scrollRef}
+          id="notify-panel"
+          role="tabpanel"
+          aria-labelledby={`notify-tab-${filter}`}
+          className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[max(1.5rem,env(safe-area-inset-bottom))]"
         >
-          <AlertDialogContent className="max-w-sm rounded-3xl">
-            {confirmAction && (
-              <>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>{confirmAction.texts.title}</AlertDialogTitle>
-                  <AlertDialogDescription>{confirmAction.texts.text}</AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter className="gap-2 sm:flex-col sm:space-x-0">
-                  <AlertDialogAction
-                    onClick={() => {
-                      const { item, action } = confirmAction;
-                      setConfirmAction(null);
-                      void runAction(item, action);
-                    }}
-                    className={cn(
-                      'h-11 w-full rounded-full font-bold',
-                      confirmAction.texts.destructive &&
-                        'bg-destructive text-white hover:bg-destructive/90'
-                    )}
-                  >
-                    {confirmAction.texts.action}
-                  </AlertDialogAction>
-                  <AlertDialogCancel className="mt-0 h-11 w-full rounded-full font-bold">
-                    {t('actions.back')}
-                  </AlertDialogCancel>
-                </AlertDialogFooter>
-              </>
-            )}
-          </AlertDialogContent>
-        </AlertDialog>
+          {open && <NotifyActivityList onAction={onActivityAction} />}
+          {open && <NotifySystemBanner />}
+          {open && (
+            <NotifyList
+              key={filter}
+              filter={filter}
+              onOpen={onOpen}
+              onOpenProfile={setProfileId}
+              onAction={onAction}
+              onDelete={onDelete}
+            />
+          )}
+        </div>
+      </div>
 
-        <AlertDialog open={confirmClear} onOpenChange={next => !next && setConfirmClear(false)}>
-          <AlertDialogContent className="max-w-sm rounded-3xl">
-            <AlertDialogHeader>
-              <AlertDialogTitle>{t('confirm.clear.title')}</AlertDialogTitle>
-              <AlertDialogDescription>{t('confirm.clear.text')}</AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter className="gap-2 sm:flex-col sm:space-x-0">
-              <AlertDialogAction
-                onClick={() => void onClear()}
-                className="h-11 w-full rounded-full bg-destructive font-bold text-white hover:bg-destructive/90"
-              >
-                {t('confirm.clear.action')}
-              </AlertDialogAction>
-              <AlertDialogCancel className="mt-0 h-11 w-full rounded-full font-bold">
-                {t('actions.back')}
-              </AlertDialogCancel>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </DrawerContent>
-    </Drawer>
+      {/* Nested inside the drawer → stacks on top (base-ui nested drawers). */}
+      <ProfileDrawer userId={profileId} onClose={() => setProfileId(null)} />
+
+      <AlertDialog
+        open={confirmAction !== null}
+        onOpenChange={next => !next && setConfirmAction(null)}
+      >
+        <AlertDialogContent className="max-w-sm rounded-3xl">
+          {confirmAction && (
+            <>
+              <AlertDialogHeader>
+                <AlertDialogTitle>{confirmAction.texts.title}</AlertDialogTitle>
+                <AlertDialogDescription>{confirmAction.texts.text}</AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter className="gap-2 sm:flex-col sm:space-x-0">
+                <AlertDialogAction
+                  onClick={() => {
+                    const { item, action } = confirmAction;
+                    setConfirmAction(null);
+                    void runAction(item, action);
+                  }}
+                  className={cn(
+                    'h-11 w-full rounded-full font-bold',
+                    confirmAction.texts.destructive &&
+                      'bg-destructive text-white hover:bg-destructive/90'
+                  )}
+                >
+                  {confirmAction.texts.action}
+                </AlertDialogAction>
+                <AlertDialogCancel className="mt-0 h-11 w-full rounded-full font-bold">
+                  {t('actions.back')}
+                </AlertDialogCancel>
+              </AlertDialogFooter>
+            </>
+          )}
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <AlertDialog open={confirmClear} onOpenChange={next => !next && setConfirmClear(false)}>
+        <AlertDialogContent className="max-w-sm rounded-3xl">
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('confirm.clear.title')}</AlertDialogTitle>
+            <AlertDialogDescription>{t('confirm.clear.text')}</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="gap-2 sm:flex-col sm:space-x-0">
+            <AlertDialogAction
+              onClick={() => void onClear()}
+              className="h-11 w-full rounded-full bg-destructive font-bold text-white hover:bg-destructive/90"
+            >
+              {t('confirm.clear.action')}
+            </AlertDialogAction>
+            <AlertDialogCancel className="mt-0 h-11 w-full rounded-full font-bold">
+              {t('actions.back')}
+            </AlertDialogCancel>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </AppDrawer>
   );
 };

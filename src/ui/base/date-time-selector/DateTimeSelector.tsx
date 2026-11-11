@@ -1,11 +1,7 @@
 import { DateTimePicker, formatDateTime } from '@core/editor/datetime';
 import { cn } from '@ui/lib/utils';
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerTitle,
-} from '@ui/shad-cn/components/drawer.tsx';
+import { AppDrawer } from '@ui/patterns/drawer';
+import { DrawerDescription, DrawerTitle } from '@ui/shad-cn/components/drawer.tsx';
 import { Popover, PopoverContent, PopoverTrigger } from '@ui/shad-cn/components/popover.tsx';
 import { useIsMobile } from '@ui/shad-cn/hooks/use-mobile';
 import { CalendarDays, ChevronDown, Clock, X } from 'lucide-react';
@@ -239,44 +235,54 @@ export const DateTimeSelector: React.FC<IDateTimeSelectorProps> = ({
       {sideDrawer ? (
         <>
           {trigger}
-          <Drawer open={open} onOpenChange={next => setOpenState(next)} swipeDirection="right">
-            <DrawerContent className="[--drawer-content-width:26rem]">
-              <div className="flex min-h-0 flex-1 flex-col">
-                <div className="flex items-center gap-3 border-b border-border/50 px-4 py-3">
-                  <DrawerTitle className="min-w-0 flex-1 truncate text-body font-bold text-foreground">
-                    {heading}
-                  </DrawerTitle>
-                  <DrawerDescription className="sr-only">{heading}</DrawerDescription>
-                  <button
-                    type="button"
-                    onClick={() => setOpenState(false)}
-                    aria-label={t('dateTimeSelector.cancel')}
-                    className="grid size-9 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/[0.06] hover:text-foreground"
-                  >
-                    <X className="size-4" />
-                  </button>
-                </div>
-                <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pt-4">
-                  {panel}
-                </div>
+          <AppDrawer
+            open={open}
+            onOpenChange={next => setOpenState(next)}
+            direction="right"
+            title={null}
+            hideHeader
+            size="auto"
+            showSwipeHandle={false}
+            contentProps={{ style: { '--drawer-content-width': '26rem' } as React.CSSProperties }}
+          >
+            <div className="flex min-h-0 flex-1 flex-col">
+              <div className="flex items-center gap-3 border-b border-border/50 px-4 py-3">
+                <DrawerTitle className="min-w-0 flex-1 truncate text-body font-bold text-foreground">
+                  {heading}
+                </DrawerTitle>
+                <DrawerDescription className="sr-only">{heading}</DrawerDescription>
+                <button
+                  type="button"
+                  onClick={() => setOpenState(false)}
+                  aria-label={t('dateTimeSelector.cancel')}
+                  className="grid size-9 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/[0.06] hover:text-foreground"
+                >
+                  <X className="size-4" />
+                </button>
               </div>
-            </DrawerContent>
-          </Drawer>
+              <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pt-4">{panel}</div>
+            </div>
+          </AppDrawer>
         </>
       ) : sheet ? (
         <>
           {trigger}
-          <Drawer open={open} onOpenChange={next => setOpenState(next)} showSwipeHandle>
-            <DrawerContent>
-              <div className="px-4 pt-2 pb-1 text-center">
-                <DrawerTitle className="text-caption font-medium text-muted-foreground">
-                  {heading}
-                </DrawerTitle>
-                <DrawerDescription className="sr-only">{heading}</DrawerDescription>
-              </div>
-              <div className="min-h-0 overflow-y-auto overscroll-contain">{panel}</div>
-            </DrawerContent>
-          </Drawer>
+          <AppDrawer
+            open={open}
+            onOpenChange={next => setOpenState(next)}
+            title={null}
+            hideHeader
+            size="auto"
+            showSwipeHandle
+          >
+            <div className="px-4 pt-2 pb-1 text-center">
+              <DrawerTitle className="text-caption font-medium text-muted-foreground">
+                {heading}
+              </DrawerTitle>
+              <DrawerDescription className="sr-only">{heading}</DrawerDescription>
+            </div>
+            <div className="min-h-0 overflow-y-auto overscroll-contain">{panel}</div>
+          </AppDrawer>
         </>
       ) : (
         <Popover open={open} onOpenChange={setOpenState}>

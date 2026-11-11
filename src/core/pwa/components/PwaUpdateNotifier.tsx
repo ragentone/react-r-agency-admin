@@ -1,9 +1,5 @@
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerTitle,
-} from '@ui/shad-cn/components/drawer.tsx';
+import { AppDrawer } from '@ui/patterns/drawer';
+import { DrawerDescription, DrawerTitle } from '@ui/shad-cn/components/drawer.tsx';
 import { CheckCircle2 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -39,49 +35,55 @@ export const PwaUpdateNotifier = () => {
   }, [open]);
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerContent className="mx-auto w-full max-w-md">
-        <div
-          data-slot="pwa-offline-ready"
-          className="flex flex-col px-5 pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]"
-        >
-          <div className="mx-auto mb-5 h-1 w-10 rounded-full bg-foreground/15" aria-hidden />
+    <AppDrawer
+      open={open}
+      onOpenChange={setOpen}
+      title={null}
+      hideHeader
+      size="auto"
+      showSwipeHandle={false}
+      contentProps={{ className: 'max-w-md' }}
+    >
+      <div
+        data-slot="pwa-offline-ready"
+        className="flex flex-col px-5 pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]"
+      >
+        <div className="mx-auto mb-5 h-1 w-10 rounded-full bg-foreground/15" aria-hidden />
 
-          <div className="flex items-center gap-4">
-            <span className="relative shrink-0">
-              <img
-                src="/android-chrome-192x192.png"
-                alt=""
-                aria-hidden="true"
-                className="size-16 rounded-[18px] shadow-md ring-1 ring-border/50"
-                draggable={false}
-              />
-              <span
-                aria-hidden="true"
-                className="absolute -right-1.5 -bottom-1.5 grid size-7 place-items-center rounded-full bg-foreground text-background ring-2 ring-popover"
-              >
-                <CheckCircle2 className="size-4" />
-              </span>
+        <div className="flex items-center gap-4">
+          <span className="relative shrink-0">
+            <img
+              src="/android-chrome-192x192.png"
+              alt=""
+              aria-hidden="true"
+              className="size-16 rounded-[18px] shadow-md ring-1 ring-border/50"
+              draggable={false}
+            />
+            <span
+              aria-hidden="true"
+              className="absolute -right-1.5 -bottom-1.5 grid size-7 place-items-center rounded-full bg-foreground text-background ring-2 ring-popover"
+            >
+              <CheckCircle2 className="size-4" />
             </span>
-            <div className="min-w-0">
-              <DrawerTitle className="text-title font-extrabold tracking-tight">
-                {t('offlineReady.title')}
-              </DrawerTitle>
-              <DrawerDescription className="mt-0.5 text-caption text-muted-foreground">
-                {t('offlineReady.text')}
-              </DrawerDescription>
-            </div>
+          </span>
+          <div className="min-w-0">
+            <DrawerTitle className="text-title font-extrabold tracking-tight">
+              {t('offlineReady.title')}
+            </DrawerTitle>
+            <DrawerDescription className="mt-0.5 text-caption text-muted-foreground">
+              {t('offlineReady.text')}
+            </DrawerDescription>
           </div>
-
-          <button
-            type="button"
-            onClick={() => setOpen(false)}
-            className="mt-6 h-12 rounded-full bg-foreground text-body font-bold text-background transition-opacity hover:opacity-90"
-          >
-            {t('offlineReady.done')}
-          </button>
         </div>
-      </DrawerContent>
-    </Drawer>
+
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          className="mt-6 h-12 rounded-full bg-foreground text-body font-bold text-background transition-opacity hover:opacity-90"
+        >
+          {t('offlineReady.done')}
+        </button>
+      </div>
+    </AppDrawer>
   );
 };

@@ -1,14 +1,8 @@
-import { Drawer as DrawerPrimitive } from '@base-ui/react/drawer';
 import { cn } from '@ui/lib/utils';
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@ui/shad-cn/components/drawer';
+import { AppDrawer } from '@ui/patterns/drawer';
+import { DrawerHeader, DrawerTitle } from '@ui/shad-cn/components/drawer';
 import { Popover, PopoverContent, PopoverTrigger } from '@ui/shad-cn/components/popover';
-import type { ReactElement, ReactNode } from 'react';
+import { cloneElement, type MouseEvent, type ReactElement, type ReactNode } from 'react';
 
 import { useIsMobile } from './use.media.query';
 
@@ -17,11 +11,16 @@ export interface ResponsivePopoverContext {
   sheet: boolean;
 }
 
+/** Props the trigger must accept (the sheet opens on its click). */
+interface ITriggerProps {
+  onClick?: (event: MouseEvent) => void;
+}
+
 export interface ResponsivePopoverProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  /** The trigger button (must accept ref, onClick and aria props). */
-  trigger: ReactElement;
+  /** The trigger button (must accept onClick and aria props). */
+  trigger: ReactElement<ITriggerProps>;
   /** Title of the bottom sheet (also its accessible name). */
   title: string;
   children: ReactNode | ((context: ResponsivePopoverContext) => ReactNode);
@@ -38,8 +37,11 @@ export interface ResponsivePopoverProps {
   mode?: 'popover' | 'sheet';
 }
 
+/** Attributes of the sheet popup (the html editor checks them for outside clicks). */
+const SHEET_ATTRS = { 'data-html-editor-ui': '' };
+
 /**
- * Popover on larger screens, bottom sheet (Base UI drawer) on phones.
+ * Popover on larger screens, bottom sheet (AppDrawer) on phones.
  * Never returns focus to the trigger, so the editor keeps its selection.
  */
 export function ResponsivePopover({
@@ -77,25 +79,38 @@ export function ResponsivePopover({
     );
   }
 
+  // The sheet opens on the trigger's click (no DrawerTrigger); the trigger keeps its own handler.
+  const sheetTrigger = cloneElement(trigger, {
+    onClick: (event: MouseEvent) => {
+      trigger.props.onClick?.(event);
+      onOpenChange(true);
+    },
+  });
+
   return (
-    <Drawer open={open} onOpenChange={next => onOpenChange(next)} showSwipeHandle>
-      <DrawerTrigger render={trigger} />
-      {/* Keeps focused fields visible above the on-screen keyboard. */}
-      <DrawerPrimitive.VirtualKeyboardProvider>
-        <DrawerContent data-html-editor-ui="" initialFocus={sheetAutoFocus} finalFocus={false}>
-          <DrawerHeader className="pt-2 pb-1">
-            <DrawerTitle className="text-sm">{title}</DrawerTitle>
-          </DrawerHeader>
-          <div
-            className={cn(
-              'min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pt-2 pb-[max(1rem,env(safe-area-inset-bottom))]',
-              sheetClassName
-            )}
-          >
-            {content}
-          </div>
-        </DrawerContent>
-      </DrawerPrimitive.VirtualKeyboardProvider>
-    </Drawer>
+    <>
+      {sheetTrigger}
+      <AppDrawer
+        open={open}
+        onOpenChange={next => onOpenChange(next)}
+        title={null}
+        hideHeader
+        size="auto"
+        showSwipeHandle
+        contentProps={{ ...SHEET_ATTRS, initialFocus: sheetAutoFocus, finalFocus: false }}
+      >
+        <DrawerHeader className="pt-2 pb-1">
+          <DrawerTitle className="text-sm">{title}</DrawerTitle>
+        </DrawerHeader>
+        <div
+          className={cn(
+            'min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pt-2 pb-[max(1rem,env(safe-area-inset-bottom))]',
+            sheetClassName
+          )}
+        >
+          {content}
+        </div>
+      </AppDrawer>
+    </>
   );
 }
