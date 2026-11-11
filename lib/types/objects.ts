@@ -202,6 +202,23 @@ export interface IAdminPluginPurgeDataReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminPluginReleaseDeleteReturn` */
+export interface IAdminPluginReleaseDeleteReturn {
+  error: Maybe<string>;
+  errors: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+  version: Maybe<string>;
+}
+
+/** GraphQL: `adminPluginReleasesReturn` */
+export interface IAdminPluginReleasesReturn {
+  current: Maybe<string>;
+  error: Maybe<string>;
+  errors: Maybe<ScalarJSON>;
+  releases: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminPluginRemoveReturn` */
 export interface IAdminPluginRemoveReturn {
   error: Maybe<string>;
@@ -928,33 +945,6 @@ export interface IDeveloperTestSourceReturn {
   success: Maybe<boolean>;
 }
 
-/** GraphQL: `developerTodoCreateReturn` */
-export interface IDeveloperTodoCreateReturn {
-  error: Maybe<string>;
-  success: Maybe<boolean>;
-  todo: Maybe<ScalarJSON>;
-}
-
-/** GraphQL: `developerTodoDeleteReturn` */
-export interface IDeveloperTodoDeleteReturn {
-  error: Maybe<string>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `developerTodoListReturn` */
-export interface IDeveloperTodoListReturn {
-  error: Maybe<string>;
-  success: Maybe<boolean>;
-  todos: Maybe<ScalarJSON>;
-}
-
-/** GraphQL: `developerTodoUpdateReturn` */
-export interface IDeveloperTodoUpdateReturn {
-  error: Maybe<string>;
-  success: Maybe<boolean>;
-  todo: Maybe<ScalarJSON>;
-}
-
 /** GraphQL: `getLocationByCoords` */
 export interface IGetLocationByCoords {
   address: Maybe<IGetLocationByCoordsAddress>;
@@ -1103,6 +1093,7 @@ export interface IMutation {
   adminPluginFileWrite: Maybe<IAdminPluginFileWriteReturn>;
   adminPluginInstallDev: Maybe<IAdminPluginInstallDevReturn>;
   adminPluginPurgeData: Maybe<IAdminPluginPurgeDataReturn>;
+  adminPluginReleaseDelete: Maybe<IAdminPluginReleaseDeleteReturn>;
   adminPluginRemove: Maybe<IAdminPluginRemoveReturn>;
   adminPluginRemoveUnknown: Maybe<IAdminPluginRemoveUnknownReturn>;
   adminPluginSetScope: Maybe<IAdminPluginSetScopeReturn>;
@@ -1154,9 +1145,6 @@ export interface IMutation {
   deleteAllDummyUsers: Maybe<IDeleteAllDummyUsersReturn>;
   deleteMedia: Maybe<IDeleteMediaReturn>;
   developerTest: Maybe<IDeveloperTestReturn>;
-  developerTodoCreate: Maybe<IDeveloperTodoCreateReturn>;
-  developerTodoDelete: Maybe<IDeveloperTodoDeleteReturn>;
-  developerTodoUpdate: Maybe<IDeveloperTodoUpdateReturn>;
   googleAuthAfter: Maybe<IGoogleAuthAfterReturn>;
   linkCreate: Maybe<ILinkCreateReturn>;
   linkParse: Maybe<ILinkParseReturn>;
@@ -1399,6 +1387,7 @@ export interface IQuery {
   adminPluginFileRead: Maybe<IAdminPluginFileReadReturn>;
   adminPluginFiles: Maybe<IAdminPluginFilesReturn>;
   adminPluginList: Maybe<IAdminPluginListReturn>;
+  adminPluginReleases: Maybe<IAdminPluginReleasesReturn>;
   adminPluginTables: Maybe<IAdminPluginTablesReturn>;
   adminPluginUnknown: Maybe<IAdminPluginUnknownReturn>;
   adminRoleList: Maybe<IAdminRoleListReturn>;
@@ -1428,7 +1417,6 @@ export interface IQuery {
   currencyGet: Maybe<ICurrencyGetReturn>;
   debugReportList: Maybe<IDebugReportListReturn>;
   developerTestSource: Maybe<IDeveloperTestSourceReturn>;
-  developerTodoList: Maybe<IDeveloperTodoListReturn>;
   getLocationByCoords: Maybe<IGetLocationByCoords>;
   getLocationByIp: Maybe<IGetLocationByIp>;
   holidays: Maybe<IHolidays>;

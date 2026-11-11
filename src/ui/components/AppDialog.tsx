@@ -39,6 +39,8 @@ export interface IAppDialogProps {
   className?: string;
   /** Extra classes for the scrollable body. */
   bodyClassName?: string;
+  /** Covers the whole dialog, header included (e.g. a loading overlay). Positioned absolute. */
+  overlay?: React.ReactNode;
 }
 
 const SIZE_CLASS: Record<AppDialogSize, string> = {
@@ -65,6 +67,7 @@ export const AppDialog: React.FC<IAppDialogProps> = ({
   backClose = true,
   className,
   bodyClassName,
+  overlay,
 }) => {
   const { t } = useTranslation('base');
   return (
@@ -110,6 +113,7 @@ export const AppDialog: React.FC<IAppDialogProps> = ({
         {footer && (
           <DialogFooter className="shrink-0 border-t border-border/50 p-4">{footer}</DialogFooter>
         )}
+        {overlay}
       </DialogContent>
     </Dialog>
   );

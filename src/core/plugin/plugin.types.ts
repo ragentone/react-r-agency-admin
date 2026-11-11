@@ -201,6 +201,27 @@ export interface IPluginDrawerOptions {
   props?: Record<string, unknown>;
 }
 
+/** Props the host adds to every dialog component (`api.openDialog`), on top of the options' `props`. */
+export interface IPluginDialogInjectedProps {
+  /** Closes the dialog. Does nothing visible while the user is blocked by the loading overlay. */
+  close: () => void;
+  /** Shows a fullscreen loading overlay in the dialog (`true`), or hides it (`false`). Text is optional. */
+  loading: (state: boolean, text?: string) => void;
+}
+
+/** A plugin component shown in the host dialog (`api.openDialog`). */
+export type IPluginDialogComponent = React.ComponentType<IPluginDialogInjectedProps & Record<string, unknown>>;
+
+/** Options for `api.openDialog`. */
+export interface IPluginDialogOptions {
+  title: string;
+  description?: string;
+  /** Width from tablet on. On phones the dialog is always full screen. Default: `md`. */
+  size?: 'sm' | 'md' | 'lg';
+  /** Passed to the component as props (`close` and `loading` are added by the host). */
+  props?: Record<string, unknown>;
+}
+
 /** Who sent an event (`api.subscribe`). */
 export interface IPluginEventMeta {
   /** Plugin id of the sender. */
@@ -889,6 +910,11 @@ export interface IPluginApi {
    */
   openDrawer(component: IPluginDrawerComponent, options: IPluginDrawerOptions): void;
   /**
+   * Opens a dialog from the host (full screen on phones, centered card from tablet). The component
+   * gets its `props`, `close()` and `loading(state, text?)`. Only one dialog at a time; a new call replaces it.
+   */
+  openDialog(component: IPluginDialogComponent, options: IPluginDialogOptions): void;
+  /**
    * Sends an event to plugins that listen for it. Only names from `emits` in plugin.json, with this
    * plugin's id as prefix (e.g. `demo.orderPlaced`). Delivery is asynchronous.
    */
@@ -1034,7 +1060,7 @@ export interface IPluginDevRef {
 export type PluginConfigPrimitive = string | number | boolean;
 
 /** Host API areas a plugin may use (from `capabilities` in plugin.json). */
-export const PLUGIN_CAPABILITIES = ['drawer', 'confirm', 'navigate', 'toast', 'user'] as const;
+export const PLUGIN_CAPABILITIES = ['drawer', 'dialog', 'confirm', 'navigate', 'toast', 'user'] as const;
 export type PluginCapability = (typeof PLUGIN_CAPABILITIES)[number];
 
 /** What the host grants a plugin, read from plugin.json. `capabilities: null` = no list (everything). */

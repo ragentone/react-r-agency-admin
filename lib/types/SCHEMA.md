@@ -8,8 +8,8 @@
 | Bereich               | Anzahl |
 | --------------------- | -----: |
 | [Query](#query)       |     97 |
-| [Mutation](#mutation) |    141 |
-| Object-Types          |    293 |
+| [Mutation](#mutation) |    139 |
+| Object-Types          |    291 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -91,6 +91,13 @@ Query  ‹IQuery›
 │   ├── error: String
 │   ├── errors: JSON
 │   ├── plugins: JSON
+│   └── success: Boolean
+├── adminPluginReleases: adminPluginReleasesReturn  ‹IAdminPluginReleasesReturn›
+│   ├── $pluginId: String!
+│   ├── current: String
+│   ├── error: String
+│   ├── errors: JSON
+│   ├── releases: JSON
 │   └── success: Boolean
 ├── adminPluginTables: adminPluginTablesReturn  ‹IAdminPluginTablesReturn›
 │   ├── $pluginId: String!
@@ -281,10 +288,6 @@ Query  ‹IQuery›
 ├── developerTestSource: developerTestSourceReturn  ‹IDeveloperTestSourceReturn›
 │   ├── news: JSON
 │   └── success: Boolean
-├── developerTodoList: developerTodoListReturn  ‹IDeveloperTodoListReturn›
-│   ├── error: String
-│   ├── success: Boolean
-│   └── todos: JSON
 ├── getLocationByCoords: getLocationByCoords  ‹IGetLocationByCoords›
 │   ├── $lat: String!
 │   ├── $lon: String!
@@ -940,6 +943,7 @@ Mutation  ‹IMutation›
 ├── adminPluginCreateDraft: adminPluginCreateDraftReturn  ‹IAdminPluginCreateDraftReturn›
 │   ├── $name: String!
 │   ├── $scope: [String]
+│   ├── $scopeProtected: Boolean
 │   ├── $slots: [String]
 │   ├── error: String
 │   ├── errors: JSON
@@ -970,6 +974,13 @@ Mutation  ‹IMutation›
 │   ├── error: String
 │   ├── errors: JSON
 │   └── success: Boolean
+├── adminPluginReleaseDelete: adminPluginReleaseDeleteReturn  ‹IAdminPluginReleaseDeleteReturn›
+│   ├── $pluginId: String!
+│   ├── $version: String!
+│   ├── error: String
+│   ├── errors: JSON
+│   ├── success: Boolean
+│   └── version: String
 ├── adminPluginRemove: adminPluginRemoveReturn  ‹IAdminPluginRemoveReturn›
 │   ├── $pluginId: String!
 │   ├── error: String
@@ -1358,21 +1369,6 @@ Mutation  ‹IMutation›
 ├── developerTest: developerTestReturn  ‹IDeveloperTestReturn›
 │   ├── $delay: Int
 │   └── success: Boolean
-├── developerTodoCreate: developerTodoCreateReturn  ‹IDeveloperTodoCreateReturn›
-│   ├── $values: JSON!
-│   ├── error: String
-│   ├── success: Boolean
-│   └── todo: JSON
-├── developerTodoDelete: developerTodoDeleteReturn  ‹IDeveloperTodoDeleteReturn›
-│   ├── $id: ID!
-│   ├── error: String
-│   └── success: Boolean
-├── developerTodoUpdate: developerTodoUpdateReturn  ‹IDeveloperTodoUpdateReturn›
-│   ├── $id: ID!
-│   ├── $values: JSON!
-│   ├── error: String
-│   ├── success: Boolean
-│   └── todo: JSON
 ├── googleAuthAfter: googleAuthAfterReturn  ‹IGoogleAuthAfterReturn›
 │   ├── $accessToken: String!
 │   ├── $idToken: String!
@@ -1986,6 +1982,8 @@ Inputs
 | `adminPluginInstallDevReturn`            | Object | `IAdminPluginInstallDevReturn`            | `objects.ts` |                                                                                  |
 | `adminPluginListReturn`                  | Object | `IAdminPluginListReturn`                  | `objects.ts` |                                                                                  |
 | `adminPluginPurgeDataReturn`             | Object | `IAdminPluginPurgeDataReturn`             | `objects.ts` |                                                                                  |
+| `adminPluginReleaseDeleteReturn`         | Object | `IAdminPluginReleaseDeleteReturn`         | `objects.ts` |                                                                                  |
+| `adminPluginReleasesReturn`              | Object | `IAdminPluginReleasesReturn`              | `objects.ts` |                                                                                  |
 | `adminPluginRemoveReturn`                | Object | `IAdminPluginRemoveReturn`                | `objects.ts` |                                                                                  |
 | `adminPluginRemoveUnknownReturn`         | Object | `IAdminPluginRemoveUnknownReturn`         | `objects.ts` |                                                                                  |
 | `adminPluginSetScopeReturn`              | Object | `IAdminPluginSetScopeReturn`              | `objects.ts` |                                                                                  |
@@ -2080,10 +2078,6 @@ Inputs
 | `deleteMediaReturn`                      | Object | `IDeleteMediaReturn`                      | `objects.ts` |                                                                                  |
 | `developerTestReturn`                    | Object | `IDeveloperTestReturn`                    | `objects.ts` |                                                                                  |
 | `developerTestSourceReturn`              | Object | `IDeveloperTestSourceReturn`              | `objects.ts` |                                                                                  |
-| `developerTodoCreateReturn`              | Object | `IDeveloperTodoCreateReturn`              | `objects.ts` |                                                                                  |
-| `developerTodoDeleteReturn`              | Object | `IDeveloperTodoDeleteReturn`              | `objects.ts` |                                                                                  |
-| `developerTodoListReturn`                | Object | `IDeveloperTodoListReturn`                | `objects.ts` |                                                                                  |
-| `developerTodoUpdateReturn`              | Object | `IDeveloperTodoUpdateReturn`              | `objects.ts` |                                                                                  |
 | `Email`                                  | Scalar | `ScalarEmail`                             | `scalars.ts` |                                                                                  |
 | `findOptions`                            | Input  | `IFindOptions`                            | `inputs.ts`  |                                                                                  |
 | `Float`                                  | Scalar | –                                         | built-in     | The `Float` scalar type represents signed double-precision fractional values as… |

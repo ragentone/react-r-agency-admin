@@ -121,6 +121,7 @@ export interface IMutationAdminPluginConfigSetArgs {
 export interface IMutationAdminPluginCreateDraftArgs {
   name: string;
   scope?: InputMaybe<Array<InputMaybe<string>>>;
+  scopeProtected?: InputMaybe<boolean>;
   slots?: InputMaybe<Array<InputMaybe<string>>>;
 }
 
@@ -145,6 +146,12 @@ export interface IMutationAdminPluginInstallDevArgs {
 /** Arguments of `Mutation.adminPluginPurgeData` */
 export interface IMutationAdminPluginPurgeDataArgs {
   pluginId: string;
+}
+
+/** Arguments of `Mutation.adminPluginReleaseDelete` */
+export interface IMutationAdminPluginReleaseDeleteArgs {
+  pluginId: string;
+  version: string;
 }
 
 /** Arguments of `Mutation.adminPluginRemove` */
@@ -362,22 +369,6 @@ export interface IMutationDeleteMediaArgs {
 /** Arguments of `Mutation.developerTest` */
 export interface IMutationDeveloperTestArgs {
   delay?: InputMaybe<number>;
-}
-
-/** Arguments of `Mutation.developerTodoCreate` */
-export interface IMutationDeveloperTodoCreateArgs {
-  values: ScalarJSON;
-}
-
-/** Arguments of `Mutation.developerTodoDelete` */
-export interface IMutationDeveloperTodoDeleteArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Mutation.developerTodoUpdate` */
-export interface IMutationDeveloperTodoUpdateArgs {
-  id: ScalarID;
-  values: ScalarJSON;
 }
 
 /** Arguments of `Mutation.googleAuthAfter` */
@@ -821,6 +812,11 @@ export interface IQueryAdminPluginFilesArgs {
 /** Arguments of `Query.adminPluginList` */
 export interface IQueryAdminPluginListArgs {
   search?: InputMaybe<string>;
+}
+
+/** Arguments of `Query.adminPluginReleases` */
+export interface IQueryAdminPluginReleasesArgs {
+  pluginId: string;
 }
 
 /** Arguments of `Query.adminPluginTables` */
