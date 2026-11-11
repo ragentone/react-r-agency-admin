@@ -91,7 +91,9 @@ export const AppDialog: React.FC<IAppDialogProps> = ({
           'data-[state=open]:animate-dialog-sheet-in data-[state=closed]:animate-dialog-sheet-out',
           'sm:top-1/2 sm:left-1/2 sm:h-auto sm:max-h-[85dvh] sm:-translate-x-1/2 sm:-translate-y-1/2',
           'sm:data-[state=open]:animate-none sm:data-[state=closed]:animate-none',
-          size === 'fullscreen' ? 'sm:top-0 sm:left-0 sm:h-dvh sm:max-h-dvh sm:translate-x-0 sm:translate-y-0' : '',
+          size === 'fullscreen'
+            ? 'sm:top-0 sm:left-0 sm:h-dvh sm:max-h-dvh sm:translate-x-0 sm:translate-y-0'
+            : '',
           // Clip the content to the radius, otherwise border and header lines stick out at the corners.
           rounded && size !== 'fullscreen'
             ? 'sm:rounded-2xl sm:overflow-hidden'
@@ -100,7 +102,11 @@ export const AppDialog: React.FC<IAppDialogProps> = ({
           className
         )}
       >
-        <div className="flex shrink-0 items-center gap-2 border-b border-border/50 pl-4 pr-2 py-2">
+        <div
+          className={cn('flex shrink-0 items-center gap-2 border-b border-border/50 pr-2 py-2', [
+            headerStart ? 'pl-2' : 'pl-4',
+          ])}
+        >
           {headerStart}
           <DialogHeader className="min-w-0 flex-1 space-y-0.5 text-left">
             {title && (
