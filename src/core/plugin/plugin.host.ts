@@ -1,4 +1,4 @@
-import type { PluginScope } from './plugin.types';
+import type { PluginScope, PluginSlotComponent } from './plugin.types';
 import { useAuthTokenStore } from '@core/auth/auth.token.store.tsx';
 import { Link } from '@tanstack/react-router';
 import { getMeshClient } from 'r-agency-mesh-client-v1/release';
@@ -203,7 +203,7 @@ const buildPluginApi = (
     if (!allowedSlots.includes(slot)) {
       throw new Error(`plugin ${pluginId}: slot "${slot}" not declared in manifest`);
     }
-    registerPluginSlot(pluginId, slot, component, {
+    registerPluginSlot(pluginId, slot, component as PluginSlotComponent, {
       sortOrder: options?.sortOrder ?? DEFAULT_SLOT_SORT_ORDER,
       disabled: options?.disabled === true,
     });

@@ -16,6 +16,8 @@ interface IPluginSlotProps {
    * (or the wait times out), then shown in the same frame as the plugin components, so nothing moves.
    */
   children?: React.ReactNode;
+  /** Passed to every plugin component of the slot as `context`. The plugin types it itself. */
+  context?: unknown;
 }
 
 /**
@@ -46,7 +48,13 @@ const Reveal: React.FC<{ children: React.ReactNode }> = ({ children }) => {
  * With `children`, the plugin components and the children appear together, without a height
  * animation, so the content below does not move. Without children, the components open in with `Reveal`.
  */
-export const PluginSlot: React.FC<IPluginSlotProps> = ({ name, className, scope = 'frontend', children }) => {
+export const PluginSlot: React.FC<IPluginSlotProps> = ({
+  name,
+  className,
+  scope = 'frontend',
+  children,
+  context,
+}) => {
   const entries = usePluginSlot(name);
   const ready = usePluginsReady(scope);
   if (!ready) return null;
@@ -57,7 +65,7 @@ export const PluginSlot: React.FC<IPluginSlotProps> = ({ name, className, scope 
       <div data-slot="plugin-slot" data-name={name} className={className}>
         {entries.map(({ pluginId, component: Component }) => (
           <PluginBoundary key={pluginId} pluginId={pluginId} slot={name}>
-            <Component pluginId={pluginId} />
+            <Component pluginId={pluginId} context={context} />
           </PluginBoundary>
         ))}
       </div>

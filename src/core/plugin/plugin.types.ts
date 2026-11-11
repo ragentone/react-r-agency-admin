@@ -17,7 +17,14 @@ export type PluginScope = 'frontend' | 'admin';
 export type PluginLocale = 'de' | 'en' | 'ru';
 
 /** Component a plugin registers for a slot. Gets the plugin id as prop. */
-export type PluginSlotComponent = React.ComponentType<{ pluginId: string }>;
+/** Props of a slot component: the plugin id and the `context` the slot was given (`PluginSlot context`). */
+export interface IPluginSlotProps<TContext = unknown> {
+  pluginId: string;
+  context?: TContext;
+}
+
+/** Component a plugin registers for a slot. The plugin types its own `context` via `registerSlot<TContext>`. */
+export type PluginSlotComponent<TContext = unknown> = React.ComponentType<IPluginSlotProps<TContext>>;
 
 /** Options for `api.registerSlot`. */
 export interface IPluginSlotOptions {
@@ -890,7 +897,11 @@ export interface IPluginApi {
   /** URL of a file in the plugin's `assets/` folder (images only). */
   assetUrl(path: string): string;
   /** Registers a component for a slot. Slots not listed in the manifest are rejected. */
-  registerSlot(slot: PluginSlotName, component: PluginSlotComponent, options?: IPluginSlotOptions): void;
+  registerSlot<TContext = unknown>(
+    slot: PluginSlotName,
+    component: PluginSlotComponent<TContext>,
+    options?: IPluginSlotOptions
+  ): void;
   /**
    * Page under `/plugin/<id>/<path>`. The path must be declared under `pages` in plugin.json.
    * A page the current user may not open is skipped.
