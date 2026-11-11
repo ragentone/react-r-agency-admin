@@ -48,8 +48,8 @@ export const PluginDialogHost = () => {
             aria-live="polite"
             className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-background/80 backdrop-blur-sm"
           >
-            <Spinner className="size-6" />
-            {loading.text && <p className="text-body text-muted-foreground">{loading.text}</p>}
+            <Spinner className="size-10" />
+            {loading.text && <p className="text-body animate-pulse text-muted-foreground">{loading.text}</p>}
           </div>
         )
       }
