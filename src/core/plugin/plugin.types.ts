@@ -924,6 +924,8 @@ export interface IPluginApi {
    * gets its `props`, `close()` and `loading(state, text?)`. Only one dialog at a time; a new call replaces it.
    */
   openDialog(component: IPluginDialogComponent, options: IPluginDialogOptions): void;
+  /** Shows a fullscreen loading overlay over the whole app (`true`), or hides it (`false`). Text is optional. */
+  loading(state: boolean, text?: string): void;
   /**
    * Sends an event to plugins that listen for it. Only names from `emits` in plugin.json, with this
    * plugin's id as prefix (e.g. `demo.orderPlaced`). Delivery is asynchronous.
@@ -1070,7 +1072,7 @@ export interface IPluginDevRef {
 export type PluginConfigPrimitive = string | number | boolean;
 
 /** Host API areas a plugin may use (from `capabilities` in plugin.json). */
-export const PLUGIN_CAPABILITIES = ['drawer', 'dialog', 'confirm', 'navigate', 'toast', 'user'] as const;
+export const PLUGIN_CAPABILITIES = ['drawer', 'dialog', 'loading', 'confirm', 'navigate', 'toast', 'user'] as const;
 export type PluginCapability = (typeof PLUGIN_CAPABILITIES)[number];
 
 /** What the host grants a plugin, read from plugin.json. `capabilities: null` = no list (everything). */

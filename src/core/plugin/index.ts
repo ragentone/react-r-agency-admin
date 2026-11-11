@@ -8,6 +8,7 @@ export * from './plugin.types';
 export { PluginBoundary } from './PluginBoundary';
 export { PluginConfirmHost } from './PluginConfirmHost';
 export { PluginDialogHost } from './PluginDialogHost';
+export { PluginLoadingHost } from './PluginLoadingHost';
 export { PluginDrawerHost } from './PluginDrawerHost';
 export { PluginProvider } from './PluginProvider';
 export { PluginSlot } from './PluginSlot';

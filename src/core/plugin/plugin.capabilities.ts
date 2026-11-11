@@ -8,6 +8,7 @@ import type { IPluginApi, PluginCapability } from './plugin.types';
 const CAPABILITY_METHODS: Record<PluginCapability, (keyof IPluginApi)[]> = {
   drawer: ['openDrawer'],
   dialog: ['openDialog'],
+  loading: ['loading'],
   confirm: ['confirm'],
   navigate: ['navigate'],
   toast: ['toast'],

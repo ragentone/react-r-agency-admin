@@ -7,6 +7,7 @@ import { toast as sonnerToast } from 'sonner';
 
 import { usePluginConfirmStore } from './plugin.confirm';
 import { openPluginDialog } from './plugin.dialog';
+import { setPluginLoading } from './plugin.loading';
 import { openPluginDrawer } from './plugin.drawer';
 import { emitPluginEvent, registerPluginRequestHandler, requestPluginEvent, subscribePluginEvent } from './plugin.events';
 import { addPluginDisposer } from './plugin.dispose';
@@ -125,6 +126,7 @@ const buildPluginApi = (
   confirm: options => usePluginConfirmStore.getState().ask(options),
   openDrawer: (component, options) => openPluginDrawer(pluginId, component, options),
   openDialog: (component, options) => openPluginDialog(pluginId, component, options),
+  loading: (state, text) => setPluginLoading(state, text),
   emit: (name, payload) => {
     // Only own events, declared in `emits`. Anything else is dropped with a warning.
     if (!name.startsWith(`${pluginId}.`) || !events.emits.includes(name)) {
