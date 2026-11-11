@@ -4,6 +4,7 @@ import { useRef } from 'react';
 
 import { PluginBoundary } from './PluginBoundary';
 import { usePluginDialogStore } from './plugin.dialog';
+import { LOADING_BACKDROP_CLASS, type IPluginLoadingOptions } from './plugin.loading';
 import type { IPluginDialogComponent } from './plugin.types';
 
 /** Renders the dialog of `api.openDialog`. Mounted once in the app root. */
@@ -18,11 +19,14 @@ export const PluginDialogHost = () => {
   if (request) lastRequest.current = request;
   const shown = request ?? lastRequest.current;
 
+  // The plugin calls `loading(state, { text, backdrop })`.
+  const loadingFn = (state: boolean, options?: IPluginLoadingOptions) => setLoading(state, options);
+
   // Renders one plugin part (body, header slot, footer) with the same props. A part that throws hides itself.
   const part = (Part: IPluginDialogComponent | undefined) =>
     Part && shown ? (
       <PluginBoundary pluginId={shown.pluginId}>
-        <Part {...shown.props} close={close} loading={setLoading} />
+        <Part {...shown.props} close={close} loading={loadingFn} />
       </PluginBoundary>
     ) : undefined;
 
@@ -46,10 +50,12 @@ export const PluginDialogHost = () => {
           <div
             role="status"
             aria-live="polite"
-            className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-background/80 backdrop-blur-sm"
+            className={`absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 ${LOADING_BACKDROP_CLASS[loading.backdrop ?? 'blur']}`}
           >
             <Spinner className="size-10" />
-            {loading.text && <p className="text-body animate-pulse text-muted-foreground">{loading.text}</p>}
+            {loading.text && (
+              <p className="text-body animate-pulse">{loading.text}</p>
+            )}
           </div>
         )
       }

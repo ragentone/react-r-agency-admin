@@ -206,7 +206,7 @@ export interface IPluginDialogInjectedProps {
   /** Closes the dialog. Does nothing visible while the user is blocked by the loading overlay. */
   close: () => void;
   /** Shows a fullscreen loading overlay in the dialog (`true`), or hides it (`false`). Text is optional. */
-  loading: (state: boolean, text?: string) => void;
+  loading: (state: boolean, options?: { text?: string; backdrop?: 'blur' | 'dim' }) => void;
 }
 
 /** A plugin component shown in the host dialog (`api.openDialog`). */
@@ -925,7 +925,8 @@ export interface IPluginApi {
    */
   openDialog(component: IPluginDialogComponent, options: IPluginDialogOptions): void;
   /** Shows a fullscreen loading overlay over the whole app (`true`), or hides it (`false`). Text is optional. */
-  loading(state: boolean, text?: string): void;
+  /** Options: `text` (optional message), `backdrop` (`blur` default, or `dim` darkened). */
+  loading(state: boolean, options?: { text?: string; backdrop?: 'blur' | 'dim' }): void;
   /**
    * Sends an event to plugins that listen for it. Only names from `emits` in plugin.json, with this
    * plugin's id as prefix (e.g. `demo.orderPlaced`). Delivery is asynchronous.

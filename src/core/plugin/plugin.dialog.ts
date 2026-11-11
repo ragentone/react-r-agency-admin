@@ -1,5 +1,6 @@
 import { create } from 'zustand/react';
 
+import type { IPluginLoadingOptions, PluginLoadingBackdrop } from './plugin.loading';
 import type { IPluginDialogComponent, IPluginDialogOptions } from './plugin.types';
 
 export interface IPluginDialogRequest extends IPluginDialogOptions {
@@ -11,10 +12,10 @@ interface IPluginDialogStore {
   /** The open dialog, or `undefined` when none is shown. */
   request: IPluginDialogRequest | undefined;
   /** Fullscreen loading overlay of the open dialog. */
-  loading: { active: boolean; text?: string };
+  loading: { active: boolean; text?: string; backdrop?: PluginLoadingBackdrop };
   open: (request: IPluginDialogRequest) => void;
   close: () => void;
-  setLoading: (active: boolean, text?: string) => void;
+  setLoading: (active: boolean, options?: IPluginLoadingOptions) => void;
 }
 
 /** Host-wide dialog of plugins (`api.openDialog`). Only one is open at a time. */
@@ -23,7 +24,8 @@ export const usePluginDialogStore = create<IPluginDialogStore>()(set => ({
   loading: { active: false },
   open: request => set({ request, loading: { active: false } }),
   close: () => set({ request: undefined, loading: { active: false } }),
-  setLoading: (active, text) => set({ loading: { active, text } }),
+  setLoading: (active, options) =>
+    set({ loading: { active, text: options?.text, backdrop: options?.backdrop } }),
 }));
 
 export const openPluginDialog = (

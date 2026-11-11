@@ -126,7 +126,7 @@ const buildPluginApi = (
   confirm: options => usePluginConfirmStore.getState().ask(options),
   openDrawer: (component, options) => openPluginDrawer(pluginId, component, options),
   openDialog: (component, options) => openPluginDialog(pluginId, component, options),
-  loading: (state, text) => setPluginLoading(state, text),
+  loading: (state, options) => setPluginLoading(state, options),
   emit: (name, payload) => {
     // Only own events, declared in `emits`. Anything else is dropped with a warning.
     if (!name.startsWith(`${pluginId}.`) || !events.emits.includes(name)) {
