@@ -8,7 +8,8 @@ import type { IPluginUserState, PluginClientPlatform } from './plugin.user';
  */
 export const PLUGIN_SLOT_NAMES = ['home.widget', 'header.widget', 'menu_before.widget', 'menu_after.widget', 'footer_before.widget', 'footer_after.widget', 'page_before.widget', 'page_after.widget', 'profile.header.actions', 'profile.menu', 'profile.card.widget', 'profile.info.widget', 'profile.empty.widget'] as const;
 
-export type PluginSlotName = (typeof PLUGIN_SLOT_NAMES)[number] | string;
+// `(string & {})` keeps the known names as autocomplete while still accepting any other name.
+export type PluginSlotName = (typeof PLUGIN_SLOT_NAMES)[number] | (string & {});
 
 /** Which app a plugin runs in. Missing in the manifest = `frontend`. Matches `x-mesh-app-scope` on the request. */
 export type PluginScope = 'frontend' | 'admin';
