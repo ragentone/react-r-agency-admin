@@ -1436,6 +1436,7 @@ export interface IQuery {
   searchConfig: Maybe<ISearchConfig>;
   seoConfig: Maybe<ISeoConfigReturn>;
   singleSearch: Maybe<ISingleSearch>;
+  sitePageDisplayMode: Maybe<ISitePageDisplayModeReturn>;
   sitePageGet: Maybe<ISitePageGetReturn>;
   sitePageMenu: Maybe<ISitePageMenuReturn>;
   storageRead: Maybe<IStorageReadReturn>;
@@ -1586,6 +1587,12 @@ export interface ISingleSearch {
   records: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
   total: Maybe<number>;
+}
+
+/** GraphQL: `sitePageDisplayModeReturn` */
+export interface ISitePageDisplayModeReturn {
+  displayMode: Maybe<string>;
+  success: Maybe<boolean>;
 }
 
 /** GraphQL: `sitePageGetReturn` */

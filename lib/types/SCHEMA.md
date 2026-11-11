@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |     97 |
+| [Query](#query)       |     98 |
 | [Mutation](#mutation) |    139 |
-| Object-Types          |    291 |
+| Object-Types          |    292 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -445,6 +445,10 @@ Query  ‹IQuery›
 │   ├── records: JSON
 │   ├── success: Boolean
 │   └── total: Int
+├── sitePageDisplayMode: sitePageDisplayModeReturn  ‹ISitePageDisplayModeReturn›
+│   ├── $slug: String!
+│   ├── displayMode: String
+│   └── success: Boolean
 ├── sitePageGet: sitePageGetReturn  ‹ISitePageGetReturn›
 │   ├── $slug: String!
 │   ├── page: JSON
@@ -2143,6 +2147,7 @@ Inputs
 | `sendMailReturn`                         | Object | `ISendMailReturn`                         | `objects.ts` |                                                                                  |
 | `seoConfigReturn`                        | Object | `ISeoConfigReturn`                        | `objects.ts` |                                                                                  |
 | `singleSearch`                           | Object | `ISingleSearch`                           | `objects.ts` |                                                                                  |
+| `sitePageDisplayModeReturn`              | Object | `ISitePageDisplayModeReturn`              | `objects.ts` |                                                                                  |
 | `sitePageGetReturn`                      | Object | `ISitePageGetReturn`                      | `objects.ts` |                                                                                  |
 | `sitePageMenuReturn`                     | Object | `ISitePageMenuReturn`                     | `objects.ts` |                                                                                  |
 | `statsTrackReturn`                       | Object | `IStatsTrackReturn`                       | `objects.ts` |                                                                                  |

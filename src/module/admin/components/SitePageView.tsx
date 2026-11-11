@@ -192,6 +192,7 @@ export const SitePageView: React.FC<
   // A banner at the top replaces the default title header (its title becomes the h1).
   const heroFirst = firstBlock?.type === 'hero';
   const heroTitle = heroFirst && 'title' in firstBlock.data && Boolean(firstBlock.data.title);
+  const created = t('sitePage.created', { date: formatDate(page.createdAt, i18n.language) });
   const updated = t('sitePage.updated', { date: formatDate(page.updatedAt, i18n.language) });
   return (
     <article className="pb-[max(3rem,env(safe-area-inset-bottom))]">
@@ -237,7 +238,8 @@ export const SitePageView: React.FC<
       )}
       <div className={SITE_PAGE_COLUMN}>
         <p className="mt-12 border-t border-border/50 pt-4 text-caption text-muted-foreground tabular-nums">
-          {updated}
+          <span className="block">{created}</span>
+          <span className="block">{updated}</span>
         </p>
       </div>
 

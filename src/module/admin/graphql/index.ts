@@ -158,3 +158,13 @@ export const AdminPageImageUploadMutation = parse(`
     }
   }
 `);
+
+/** Display mode only (`route` / `fullscreen`) – read before the page is rendered. */
+export const SitePageDisplayModeQuery = parse(`
+  query SitePageDisplayMode($slug: String!) {
+    sitePageDisplayMode(slug: $slug) {
+      success
+      displayMode
+    }
+  }
+`);

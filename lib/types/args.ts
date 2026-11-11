@@ -982,6 +982,11 @@ export interface IQuerySingleSearchArgs {
   query?: InputMaybe<string>;
 }
 
+/** Arguments of `Query.sitePageDisplayMode` */
+export interface IQuerySitePageDisplayModeArgs {
+  slug: string;
+}
+
 /** Arguments of `Query.sitePageGet` */
 export interface IQuerySitePageGetArgs {
   slug: string;
