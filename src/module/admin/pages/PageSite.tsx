@@ -5,7 +5,7 @@ import React from 'react';
 import { SitePageView } from '../components/SitePageView';
 
 /**
- * `/p/$slug`: public dynamic page (created in the admin area). Full page width – the blocks
+ * `/site/$slug`: public dynamic page (created in the admin area). Full page width – the blocks
  * keep their own reading column, banners span edge to edge.
  */
 export const PageSite: React.FC = () => {

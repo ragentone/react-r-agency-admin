@@ -28,7 +28,7 @@ const firstBlockImage = (blocks: unknown[]): string | undefined => {
 };
 
 /**
- * Public view of a dynamic page (`/p/$slug`). Drafts are only delivered to admins.
+ * Public view of a dynamic page (`/site/$slug`). Drafts are only delivered to admins.
  * Admins edit the page right here: "Edit" opens the editor drawer on top of the page.
  */
 export const SitePageView: React.FC<{ slug: string }> = ({ slug }) => {

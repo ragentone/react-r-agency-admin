@@ -1,6 +1,6 @@
 # Page blocks (`Core.blocks`)
 
-Dynamic pages (admin → **Seiten verwalten**, public at `/p/<slug>`) are built from blocks.
+Dynamic pages (admin → **Seiten verwalten**, public at `/site/<slug>`) are built from blocks.
 Besides the built-in blocks (banner, text, image, cards …) every app can add its own.
 
 An app block has two halves with the **same type name** `<app>:<name>`:

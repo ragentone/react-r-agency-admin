@@ -33,7 +33,7 @@ export const protectedRolesFor = (self: boolean): string[] =>
   self ? [ROLE_ADMIN, ROLE_DEFAULT] : [ROLE_DEFAULT];
 
 /** Public route of a dynamic page – same slug rule as the backend (runtime apps/site-page). */
-export const SITE_PAGE_ROUTE = '/p/$slug';
+export const SITE_PAGE_ROUTE = '/site/$slug';
 export const sitePagePath = (slug: string) =>
   SITE_PAGE_ROUTE.replace('$slug', encodeURIComponent(slug));
 

@@ -322,7 +322,7 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
             </label>
             <div className="flex h-12 items-center overflow-hidden rounded-xl border border-input focus-within:ring-1 focus-within:ring-ring">
               <span className="shrink-0 pl-3 text-base text-muted-foreground select-none sm:text-body">
-                /p/
+                /site/
               </span>
               <input
                 id="admin-page-slug"

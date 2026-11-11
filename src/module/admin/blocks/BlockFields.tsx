@@ -88,7 +88,7 @@ export const TextAreaField: React.FC<
   );
 };
 
-/** Link target: `/p/…`, `https://…`, `mailto:…`, `tel:…`. */
+/** Link target: `/site/…`, `https://…`, `mailto:…`, `tel:…`. */
 export const UrlField: React.FC<
   IFieldProps & { value: string; onChange: (value: string) => void }
 > = ({ label, value, onChange, disabled }) => {
