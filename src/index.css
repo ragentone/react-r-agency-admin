@@ -47,6 +47,26 @@
       transform: translateX(100%);
     }
   }
+
+  /* Dialog auf dem Handy: fährt von unten ein und verschwindet nach unten. */
+  --animate-dialog-sheet-in: dialog-sheet-in 220ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-dialog-sheet-out: dialog-sheet-out 160ms ease-in forwards;
+  @keyframes dialog-sheet-in {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  @keyframes dialog-sheet-out {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100%);
+    }
+  }
 }
 
 @theme inline {

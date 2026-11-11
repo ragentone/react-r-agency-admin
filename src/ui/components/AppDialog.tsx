@@ -71,10 +71,13 @@ export const AppDialog: React.FC<IAppDialogProps> = ({
     <Dialog open={open} onOpenChange={onOpenChange} backClose={backClose}>
       <DialogContent
         showCloseButton={false}
+        overlayClassName="bg-black/50"
         className={cn(
-          // Phone: full screen. Tablet and up: centered card with a height limit.
+          // Phone: full screen, slides in from the bottom. Tablet and up: centered card, no slide.
           'top-0 left-0 flex h-dvh max-h-dvh w-full max-w-none translate-x-0 translate-y-0 flex-col gap-0 rounded-none p-0',
+          'data-[state=open]:animate-dialog-sheet-in data-[state=closed]:animate-dialog-sheet-out',
           'sm:top-1/2 sm:left-1/2 sm:h-auto sm:max-h-[85dvh] sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-2xl',
+          'sm:data-[state=open]:animate-none sm:data-[state=closed]:animate-none',
           SIZE_CLASS[size],
           className
         )}
