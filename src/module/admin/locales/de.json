@@ -948,7 +948,20 @@
         "project_missing": "No development project found.",
         "unknown": "That did not work. Please try again."
       },
-      "backToFiles": "Zurück zu den Dateien"
+      "backToFiles": "Zurück zu den Dateien",
+      "env": {
+        "key": "Schlüssel",
+        "value": "Wert",
+        "add": "Variable hinzufügen",
+        "remove": "Entfernen",
+        "empty": "Noch keine Variablen.",
+        "cancel": "Abbrechen",
+        "errors": {
+          "keyRequired": "Schlüssel fehlt.",
+          "keyInvalid": "Nur Buchstaben, Ziffern und _, erstes Zeichen kein Ziffer.",
+          "keyDuplicate": "Ein Schlüssel kommt doppelt vor."
+        }
+      }
     },
     "install": {
       "started": "npm install für {{name}} läuft im Hintergrund. Das Ergebnis erscheint als Hinweis.",

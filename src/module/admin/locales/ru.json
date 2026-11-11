@@ -982,7 +982,20 @@
         "project_missing": "No development project found.",
         "unknown": "That did not work. Please try again."
       },
-      "backToFiles": "Назад к файлам"
+      "backToFiles": "Назад к файлам",
+      "env": {
+        "key": "Ключ",
+        "value": "Значение",
+        "add": "Добавить переменную",
+        "remove": "Удалить",
+        "empty": "Пока нет переменных.",
+        "cancel": "Отмена",
+        "errors": {
+          "keyRequired": "Не указан ключ.",
+          "keyInvalid": "Только буквы, цифры и _, не начиная с цифры.",
+          "keyDuplicate": "Ключ повторяется."
+        }
+      }
     },
     "install": {
       "started": "npm install для {{name}} выполняется в фоне. Результат появится в уведомлении.",

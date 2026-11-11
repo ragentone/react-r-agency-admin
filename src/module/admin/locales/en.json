@@ -948,7 +948,20 @@
         "project_missing": "No development project found.",
         "unknown": "That did not work. Please try again."
       },
-      "backToFiles": "Back to the files"
+      "backToFiles": "Back to the files",
+      "env": {
+        "key": "Key",
+        "value": "Value",
+        "add": "Add variable",
+        "remove": "Remove",
+        "empty": "No variables yet.",
+        "cancel": "Cancel",
+        "errors": {
+          "keyRequired": "Key is missing.",
+          "keyInvalid": "Only letters, digits and _, not starting with a digit.",
+          "keyDuplicate": "A key appears twice."
+        }
+      }
     },
     "install": {
       "started": "npm install for {{name}} is running in the background. The result appears as a notice.",

@@ -15,6 +15,8 @@ import { PluginDetailInfo } from './PluginDetailInfo';
 import { PluginDetailReleases } from './PluginDetailReleases';
 import { PluginDetailScope } from './PluginDetailScope';
 import { PluginFileEditorDialog } from './PluginFileEditorDialog';
+import { PluginEnvDialog } from './PluginEnvDialog';
+import { isEnvPath } from '../env.format';
 import { PluginManifestView } from './PluginManifestView';
 import { PluginPurgeDrawer } from './PluginPurgeDrawer';
 import { PluginRemoveDrawer } from './PluginRemoveDrawer';
@@ -141,9 +143,18 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
           <PluginFileEditorDialog
             pluginId={plugin.pluginId}
             pluginName={plugin.name}
-            path={editPath}
+            path={editPath !== null && !isEnvPath(editPath) ? editPath : null}
             onClose={() => setEditPath(null)}
           />
+          {editPath !== null && isEnvPath(editPath) && (
+            <PluginEnvDialog
+              key={editPath}
+              pluginId={plugin.pluginId}
+              pluginName={plugin.name}
+              path={editPath}
+              onClose={() => setEditPath(null)}
+            />
+          )}
         </>
       )}
 
