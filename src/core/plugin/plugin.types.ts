@@ -216,8 +216,14 @@ export type IPluginDialogComponent = React.ComponentType<IPluginDialogInjectedPr
 export interface IPluginDialogOptions {
   title: string;
   description?: string;
-  /** Width from tablet on. On phones the dialog is always full screen. Default: `md`. */
-  size?: 'sm' | 'md' | 'lg';
+  /** Width from tablet on. On phones the dialog is always full screen. Default: `md`. `fullscreen` covers the whole screen, also from tablet on (ignores `rounded`). */
+  size?: 'sm' | 'md' | 'lg' | 'fullscreen';
+  /** Fixed area at the bottom. Gets the same props as the dialog (`props`, `close`, `loading`). */
+  footer?: IPluginDialogComponent;
+  /** Left of the title in the header (same props as the dialog). */
+  headerStart?: IPluginDialogComponent;
+  /** Right of the title, before the close button (same props as the dialog). */
+  headerEnd?: IPluginDialogComponent;
   /** Browser / Android back closes the dialog. Default: `false`. */
   backClose?: boolean;
   /** Rounded corners from tablet on. Default: `false`. */

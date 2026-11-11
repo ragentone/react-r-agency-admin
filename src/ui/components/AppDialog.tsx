@@ -13,7 +13,7 @@ import { X } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-export type AppDialogSize = 'sm' | 'md' | 'lg';
+export type AppDialogSize = 'sm' | 'md' | 'lg' | 'fullscreen';
 
 export interface IAppDialogProps {
   open: boolean;
@@ -28,6 +28,10 @@ export interface IAppDialogProps {
   children?: React.ReactNode;
   /** Fixed area at the bottom (buttons). */
   footer?: React.ReactNode;
+  /** Left of the title in the header. */
+  headerStart?: React.ReactNode;
+  /** Right of the title, before the close button. */
+  headerEnd?: React.ReactNode;
   /** Width from tablet on. On phones the dialog always fills the screen. */
   size?: AppDialogSize;
   /**
@@ -49,6 +53,7 @@ const SIZE_CLASS: Record<AppDialogSize, string> = {
   sm: 'sm:max-w-sm',
   md: 'sm:max-w-lg',
   lg: 'sm:max-w-2xl',
+  fullscreen: 'sm:max-w-none',
 };
 
 /**
@@ -65,6 +70,8 @@ export const AppDialog: React.FC<IAppDialogProps> = ({
   description,
   children,
   footer,
+  headerStart,
+  headerEnd,
   size = 'md',
   backClose = true,
   className,
@@ -84,13 +91,17 @@ export const AppDialog: React.FC<IAppDialogProps> = ({
           'data-[state=open]:animate-dialog-sheet-in data-[state=closed]:animate-dialog-sheet-out',
           'sm:top-1/2 sm:left-1/2 sm:h-auto sm:max-h-[85dvh] sm:-translate-x-1/2 sm:-translate-y-1/2',
           'sm:data-[state=open]:animate-none sm:data-[state=closed]:animate-none',
+          size === 'fullscreen' ? 'sm:top-0 sm:left-0 sm:h-dvh sm:max-h-dvh sm:translate-x-0 sm:translate-y-0' : '',
           // Clip the content to the radius, otherwise border and header lines stick out at the corners.
-          rounded ? 'sm:rounded-2xl sm:overflow-hidden' : 'sm:rounded-none',
+          rounded && size !== 'fullscreen'
+            ? 'sm:rounded-2xl sm:overflow-hidden'
+            : 'sm:rounded-none',
           SIZE_CLASS[size],
           className
         )}
       >
         <div className="flex shrink-0 items-center gap-2 border-b border-border/50 pl-4 pr-2 py-2">
+          {headerStart}
           <DialogHeader className="min-w-0 flex-1 space-y-0.5 text-left">
             {title && (
               <DialogTitle className={cn('truncate text-body font-bold', hideTitle && 'sr-only')}>
@@ -101,6 +112,7 @@ export const AppDialog: React.FC<IAppDialogProps> = ({
               {description ?? title}
             </DialogDescription>
           </DialogHeader>
+          {headerEnd}
           <DialogClose asChild>
             <Button
               variant="ghost"

@@ -4,6 +4,7 @@ import { useRef } from 'react';
 
 import { PluginBoundary } from './PluginBoundary';
 import { usePluginDialogStore } from './plugin.dialog';
+import type { IPluginDialogComponent } from './plugin.types';
 
 /** Renders the dialog of `api.openDialog`. Mounted once in the app root. */
 export const PluginDialogHost = () => {
@@ -16,7 +17,14 @@ export const PluginDialogHost = () => {
   const lastRequest = useRef(request);
   if (request) lastRequest.current = request;
   const shown = request ?? lastRequest.current;
-  const Component = shown?.component;
+
+  // Renders one plugin part (body, header slot, footer) with the same props. A part that throws hides itself.
+  const part = (Part: IPluginDialogComponent | undefined) =>
+    Part && shown ? (
+      <PluginBoundary pluginId={shown.pluginId}>
+        <Part {...shown.props} close={close} loading={setLoading} />
+      </PluginBoundary>
+    ) : undefined;
 
   return (
     <AppDialog
@@ -30,6 +38,9 @@ export const PluginDialogHost = () => {
       size={shown?.size ?? 'md'}
       backClose={shown?.backClose ?? false}
       rounded={shown?.rounded ?? false}
+      headerStart={part(shown?.headerStart)}
+      headerEnd={part(shown?.headerEnd)}
+      footer={part(shown?.footer)}
       overlay={
         loading.active && (
           <div
@@ -43,12 +54,7 @@ export const PluginDialogHost = () => {
         )
       }
     >
-      {shown && Component && (
-        // A plugin component that throws hides itself; the app keeps working.
-        <PluginBoundary pluginId={shown.pluginId}>
-          <Component {...shown.props} close={close} loading={setLoading} />
-        </PluginBoundary>
-      )}
+      {part(shown?.component)}
     </AppDialog>
   );
 };
