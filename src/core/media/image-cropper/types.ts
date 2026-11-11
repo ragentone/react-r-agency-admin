@@ -50,6 +50,7 @@ export interface ImageCropperProps {
   onCropChange?: (areaPercentages: CropperArea, areaPixels: CropperArea) => void;
   onCropComplete?: (result: CroppedImageResult) => void;
   onCancel?: () => void;
+  onError?: (error: unknown) => void;
   disabled?: boolean;
   applyLabel?: string;
   cancelLabel?: string;

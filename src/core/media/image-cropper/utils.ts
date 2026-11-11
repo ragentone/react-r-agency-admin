@@ -35,8 +35,14 @@ export const rotateSize = (
   };
 };
 
+/** Longest output side in px – keeps canvas memory within iOS Safari limits. */
+export const MAX_OUTPUT_SIZE = 2048;
+
 /**
- * Extracts and crops an image using canvas
+ * Extracts and crops an image using canvas.
+ * The rotated/flipped source is drawn directly into the (optionally downscaled)
+ * crop area. No full-size intermediate canvas is created – large phone photos
+ * otherwise exceed the mobile canvas memory limit and the export silently fails.
  */
 export async function getCroppedImg(
   imageSrc: string,
@@ -45,67 +51,45 @@ export async function getCroppedImg(
   flip = { horizontal: false, vertical: false },
   outputMimeType = 'image/jpeg',
   outputQuality = 0.92,
-  fileName = 'cropped-image.jpg'
+  fileName = 'cropped-image.jpg',
+  maxOutputSize = MAX_OUTPUT_SIZE
 ): Promise<CroppedImageResult> {
   const image = await createImage(imageSrc);
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
 
+  const cropW = Math.max(1, Math.round(pixelCrop.width));
+  const cropH = Math.max(1, Math.round(pixelCrop.height));
+  const scale = Math.min(1, maxOutputSize / Math.max(cropW, cropH));
+
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.max(1, Math.round(cropW * scale));
+  canvas.height = Math.max(1, Math.round(cropH * scale));
+
+  const ctx = canvas.getContext('2d');
   if (!ctx) {
     throw new Error('Canvas 2D context is not available');
   }
 
-  const rotRad = getRadianAngle(rotation);
-
-  // calculate bounding box of the rotated image
+  // bounding box of the rotated image, centre of rotation = centre of bbox
   const { width: bBoxWidth, height: bBoxHeight } = rotateSize(image.width, image.height, rotation);
 
-  // set canvas size to match the bounding boxes
-  canvas.width = bBoxWidth;
-  canvas.height = bBoxHeight;
-
-  // translate canvas context to a central location to allow rotating and flipping around the center
+  ctx.imageSmoothingQuality = 'high';
+  ctx.scale(scale, scale);
+  ctx.translate(-pixelCrop.x, -pixelCrop.y);
   ctx.translate(bBoxWidth / 2, bBoxHeight / 2);
-  ctx.rotate(rotRad);
+  ctx.rotate(getRadianAngle(rotation));
   ctx.scale(flip.horizontal ? -1 : 1, flip.vertical ? -1 : 1);
   ctx.translate(-image.width / 2, -image.height / 2);
-
-  // draw rotated image
   ctx.drawImage(image, 0, 0);
 
-  const croppedCanvas = document.createElement('canvas');
-  const croppedCtx = croppedCanvas.getContext('2d');
-
-  if (!croppedCtx) {
-    throw new Error('Cropped canvas 2D context is not available');
-  }
-
-  // Set the size of the cropped canvas
-  croppedCanvas.width = Math.round(pixelCrop.width);
-  croppedCanvas.height = Math.round(pixelCrop.height);
-
-  // Draw the cropped image onto the new canvas
-  croppedCtx.drawImage(
-    canvas,
-    pixelCrop.x,
-    pixelCrop.y,
-    pixelCrop.width,
-    pixelCrop.height,
-    0,
-    0,
-    pixelCrop.width,
-    pixelCrop.height
-  );
-
   return new Promise((resolve, reject) => {
-    croppedCanvas.toBlob(
+    canvas.toBlob(
       blob => {
         if (!blob) {
           reject(new Error('Canvas is empty'));
           return;
         }
 
-        const dataUrl = croppedCanvas.toDataURL(outputMimeType, outputQuality);
+        const dataUrl = canvas.toDataURL(outputMimeType, outputQuality);
         const file = new File([blob], fileName, { type: outputMimeType });
 
         resolve({
@@ -113,8 +97,8 @@ export async function getCroppedImg(
           dataUrl,
           file,
           area: pixelCrop,
-          width: croppedCanvas.width,
-          height: croppedCanvas.height,
+          width: canvas.width,
+          height: canvas.height,
         });
       },
       outputMimeType,

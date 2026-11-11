@@ -21,8 +21,9 @@ import {
   ZoomIn,
   ZoomOut,
 } from 'lucide-react';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
 
 import type { AspectRatioOption, CropperArea, CropperShape, ImageCropperProps } from './types';
 import { getCroppedImg } from './utils';
@@ -58,26 +59,26 @@ export const ImageCropper: React.FC<ImageCropperProps> = ({
   onCropChange,
   onCropComplete,
   onCancel,
+  onError,
   disabled = false,
   applyLabel,
   cancelLabel,
 }) => {
   const { t } = useTranslation('media');
 
-  const imageSrc = useMemo(() => {
-    if (typeof image === 'string') {
-      return image;
-    }
-    return URL.createObjectURL(image);
+  const [objectUrl, setObjectUrl] = useState<string | null>(null);
+
+  // Create + revoke the object URL in one effect: revoked exactly once per image, StrictMode-safe.
+  useEffect(() => {
+    if (typeof image === 'string') return;
+    const url = URL.createObjectURL(image);
+    // Syncs an external resource (object URL) into state; revoked in cleanup.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setObjectUrl(url);
+    return () => URL.revokeObjectURL(url);
   }, [image]);
 
-  useEffect(() => {
-    return () => {
-      if (typeof image !== 'string' && imageSrc) {
-        URL.revokeObjectURL(imageSrc);
-      }
-    };
-  }, [image, imageSrc]);
+  const imageSrc = typeof image === 'string' ? image : objectUrl;
 
   const [aspectRatio, setAspectRatio] = useState<number | null>(initialAspectRatio);
   const [shape, setShape] = useState<CropperShape>(initialShape);
@@ -154,7 +155,7 @@ export const ImageCropper: React.FC<ImageCropperProps> = ({
   ]);
 
   const handleApply = useCallback(async () => {
-    if (!croppedAreaPixels || isProcessing) return;
+    if (!imageSrc || !croppedAreaPixels || isProcessing) return;
 
     try {
       setIsProcessing(true);
@@ -170,6 +171,10 @@ export const ImageCropper: React.FC<ImageCropperProps> = ({
       onCropComplete?.(result);
     } catch (error) {
       console.error('Error cropping image:', error);
+      onError?.(error);
+      toast.error(
+        t('cropError', { defaultValue: 'Zuschneiden fehlgeschlagen. Bitte erneut versuchen.' })
+      );
     } finally {
       setIsProcessing(false);
     }
@@ -183,6 +188,8 @@ export const ImageCropper: React.FC<ImageCropperProps> = ({
     outputQuality,
     fileName,
     onCropComplete,
+    onError,
+    t,
   ]);
 
   /** Round icon button (touch target 40px), `active` for toggles. */
@@ -193,6 +200,8 @@ export const ImageCropper: React.FC<ImageCropperProps> = ({
       'disabled:pointer-events-none disabled:opacity-40',
       active && 'bg-foreground text-background hover:bg-foreground/90'
     );
+
+  if (!imageSrc) return null;
 
   return (
     <div
@@ -412,7 +421,7 @@ export const ImageCropper: React.FC<ImageCropperProps> = ({
                   <button
                     type="button"
                     onClick={handleApply}
-                    disabled={disabled || isProcessing}
+                    disabled={disabled || isProcessing || !croppedAreaPixels}
                     className={cn(
                       'inline-flex h-11 items-center justify-center gap-1.5 rounded-full bg-foreground px-5 text-body font-bold text-background transition-opacity sm:h-10',
                       'hover:opacity-85 active:opacity-75 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none disabled:opacity-40',
