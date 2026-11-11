@@ -37,6 +37,8 @@ export type AdminRoleUpdate =
 
 /** Who may see a page (backend `SITE_PAGE_VISIBILITIES`). */
 export type SitePageVisibility = 'all' | 'authenticated';
+/** `route` = inside the app layout (menu stays visible), `fullscreen` = whole screen. */
+export type SitePageDisplayMode = 'route' | 'fullscreen';
 
 /** Dynamic page as sent by the backend (`ISitePageData`). */
 export interface ISitePage {
@@ -60,6 +62,8 @@ export interface ISitePage {
   visibility: SitePageVisibility;
   /** `authenticated`: one of these roles is required (empty = every signed-in user). */
   roles: string[];
+  /** How the page opens: inside the layout (`route`) or fullscreen. */
+  displayMode: SitePageDisplayMode;
   createdBy: string;
   updatedBy: string | null;
   createdAt: string;
@@ -78,6 +82,7 @@ export interface ISitePageValues {
   menuOrder: number;
   visibility: SitePageVisibility;
   roles: string[];
+  displayMode: SitePageDisplayMode;
 }
 
 /** Entry of the "Pages" group in the main menu (`sitePageMenu`). */

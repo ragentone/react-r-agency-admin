@@ -197,7 +197,14 @@
       "confirm": "Discard",
       "keep": "Keep editing"
     },
-    "noindexBadge": "Hidden from search"
+    "noindexBadge": "Hidden from search",
+    "displayMode": {
+      "title": "Display",
+      "route": "In layout",
+      "routeHint": "The page stays inside the layout, the menu stays visible.",
+      "fullscreen": "Fullscreen",
+      "fullscreenHint": "The page covers the whole screen."
+    }
   },
   "sitePage": {
     "missingTitle": "Page not found",

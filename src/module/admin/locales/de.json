@@ -197,7 +197,14 @@
       "confirm": "Verwerfen",
       "keep": "Weiter bearbeiten"
     },
-    "noindexBadge": "Nicht in Suche"
+    "noindexBadge": "Nicht in Suche",
+    "displayMode": {
+      "title": "Anzeige",
+      "route": "Im Layout",
+      "routeHint": "Die Seite bleibt im Layout, das Menü bleibt sichtbar.",
+      "fullscreen": "Vollbild",
+      "fullscreenHint": "Die Seite füllt den ganzen Bildschirm."
+    }
   },
   "sitePage": {
     "missingTitle": "Seite nicht gefunden",

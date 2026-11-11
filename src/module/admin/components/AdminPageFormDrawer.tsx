@@ -32,6 +32,7 @@ import {
 import type { ISitePage, ISitePageValues } from '../types';
 import { cleanSlugInput, slugify } from '../utils';
 import { PageAccessField } from './PageAccessField';
+import { PageDisplayModeField } from './PageDisplayModeField';
 
 const EMPTY: ISitePageValues = {
   title: '',
@@ -44,6 +45,7 @@ const EMPTY: ISitePageValues = {
   seoIndex: true,
   menuOrder: 0,
   visibility: 'all',
+  displayMode: 'route',
   roles: [],
 };
 
@@ -113,6 +115,7 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
           seoIndex: page.seoIndex ?? true,
           menuOrder: page.menuOrder ?? 0,
           visibility: page.visibility ?? 'all',
+          displayMode: page.displayMode ?? 'route',
           roles: page.roles ?? [],
         }
       : EMPTY;
@@ -214,6 +217,7 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
       seoIndex: values.seoIndex,
       menuOrder: values.menuOrder,
       visibility: values.visibility,
+      displayMode: values.displayMode,
       roles: values.visibility === 'authenticated' ? values.roles : [],
     });
     if (error) {
@@ -394,6 +398,15 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
               setValues(prev => ({ ...prev, visibility, roles }));
               setTouched(true);
               setServerError(null);
+            }}
+            disabled={saving}
+          />
+
+          <PageDisplayModeField
+            value={values.displayMode}
+            onChange={displayMode => {
+              setValues(prev => ({ ...prev, displayMode }));
+              setTouched(true);
             }}
             disabled={saving}
           />

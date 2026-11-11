@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 
 import { SITE_PAGE_COLUMN, SitePageBlocks } from '../blocks';
 import { sitePagePath } from '../const';
-import { useAdminAccess, useAdminPages, useSitePage } from '../hooks';
+import { type useSitePage, useAdminAccess, useAdminPages } from '../hooks';
 import type { ISitePage, ISitePageValues } from '../types';
 import { formatDate } from '../utils';
 import { AdminPageFormDrawer } from './AdminPageFormDrawer';
@@ -31,9 +31,10 @@ const firstBlockImage = (blocks: unknown[]): string | undefined => {
  * Public view of a dynamic page (`/site/$slug`). Drafts are only delivered to admins.
  * Admins edit the page right here: "Edit" opens the editor drawer on top of the page.
  */
-export const SitePageView: React.FC<{ slug: string }> = ({ slug }) => {
+export const SitePageView: React.FC<
+  { slug: string } & Pick<ReturnType<typeof useSitePage>, 'state' | 'retry' | 'replace'>
+> = ({ slug, state, retry, replace }) => {
   const { t, i18n } = useTranslation('admin');
-  const { state, retry, replace } = useSitePage(slug);
   const admin = useAdminAccess();
   const navigate = useNavigate();
   const router = useRouter();
