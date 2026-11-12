@@ -20,14 +20,16 @@ import { SystemDeployButton } from './SystemDeployButton';
 
 /** Live-only deploy button of a line; the server says whether it may deploy. */
 const deployOf = (history: ISystemDeployHistory, app: SystemDeployApp) => {
+  // The runtime restarts the server, so it waits while a frontend or admin build runs.
+  const buildRunning = history.frontendRunning === true || history.adminRunning === true;
   if (app === 'runtime' && history.runtimeDeployable) {
-    return { kind: 'runtime' as const, running: history.runtimeRunning === true, start: SystemApi.runtimeDeploy };
+    return { kind: 'runtime' as const, running: history.runtimeRunning === true, blocked: buildRunning, start: SystemApi.runtimeDeploy };
   }
   if (app === 'frontend' && history.frontendDeployable) {
-    return { kind: 'frontend' as const, running: history.frontendRunning === true, start: () => SystemApi.buildDeploy('frontend') };
+    return { kind: 'frontend' as const, running: history.frontendRunning === true, blocked: false, start: () => SystemApi.buildDeploy('frontend') };
   }
   if (app === 'admin' && history.adminDeployable) {
-    return { kind: 'admin' as const, running: history.adminRunning === true, start: () => SystemApi.buildDeploy('admin') };
+    return { kind: 'admin' as const, running: history.adminRunning === true, blocked: false, start: () => SystemApi.buildDeploy('admin') };
   }
   return null;
 };
@@ -49,7 +51,9 @@ export const SystemDeploysTab: React.FC = () => {
   const { data, loading, error, reload } = useStatsQuery(
     () => SystemApi.deploys(),
     result => result.history,
-    'deploys'
+    'deploys',
+    // Deploy flags (running / deployable) change without a click here: refresh while the tab is open.
+    10_000
   );
   if (loading) return <StatsSkeleton tiles={1} />;
   if (error && !data) return <StatsError onRetry={() => void reload()} />;
@@ -89,6 +93,7 @@ export const SystemDeploysTab: React.FC = () => {
                       <SystemDeployButton
                         kind={deploy.kind}
                         running={deploy.running}
+                        blocked={deploy.blocked}
                         start={deploy.start}
                         onStarted={() => void reload()}
                       />

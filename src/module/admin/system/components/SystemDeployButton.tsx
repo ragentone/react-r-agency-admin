@@ -19,9 +19,11 @@ export type SystemDeployKind = 'runtime' | 'frontend' | 'admin';
 export const SystemDeployButton: React.FC<{
   kind: SystemDeployKind;
   running: boolean;
+  /** Another deploy is running, so this one must wait (button disabled, label unchanged). */
+  blocked?: boolean;
   start: () => Promise<{ success: boolean; error?: string }>;
   onStarted: () => void;
-}> = ({ kind, running, start, onStarted }) => {
+}> = ({ kind, running, blocked = false, start, onStarted }) => {
   const { t } = useTranslation('admin');
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -50,7 +52,7 @@ export const SystemDeployButton: React.FC<{
         variant="outline"
         size="sm"
         className="rounded-full font-bold"
-        disabled={running || busy}
+        disabled={running || busy || blocked}
         onClick={() => setOpen(true)}
       >
         {running

@@ -741,12 +741,12 @@
           "confirmText": "Holt origin/main per git reset --hard (lokale Änderungen auf dem Server gehen verloren), macht ein Datenbank-Backup, baut neu und startet den Server neu. Die Seite ist währenddessen nicht erreichbar."
         },
         "frontend": {
-          "button": "Frontend neu bauen",
+          "button": "Deploy",
           "confirmTitle": "Frontend neu bauen?",
           "confirmText": "Holt origin/main per git reset --hard, baut das Frontend auf dem Server und tauscht es live. Bis dahin läuft die bisherige Version weiter. Offene Tabs bekommen danach den Update-Hinweis."
         },
         "admin": {
-          "button": "Admin neu bauen",
+          "button": "Deploy",
           "confirmTitle": "Admin neu bauen?",
           "confirmText": "Holt origin/main per git reset --hard, baut die Admin-App auf dem Server und tauscht sie live. Bis dahin läuft die bisherige Version weiter."
         }

@@ -741,12 +741,12 @@
           "confirmText": "Fetches origin/main via git reset --hard (local changes on the server are lost), makes a database backup, rebuilds and restarts the server. The site is unavailable meanwhile."
         },
         "frontend": {
-          "button": "Rebuild frontend",
+          "button": "Deploy",
           "confirmTitle": "Rebuild frontend?",
           "confirmText": "Fetches origin/main via git reset --hard, builds the frontend on the server and swaps it live. The current version keeps running until then. Open tabs get the update notice afterwards."
         },
         "admin": {
-          "button": "Rebuild admin",
+          "button": "Deploy",
           "confirmTitle": "Rebuild admin?",
           "confirmText": "Fetches origin/main via git reset --hard, builds the admin app on the server and swaps it live. The current version keeps running until then."
         }
