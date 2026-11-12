@@ -757,7 +757,8 @@
         "running": "Läuft …",
         "done": "Fertig",
         "empty": "Noch keine Ausgabe."
-      }
+      },
+      "actionsAria": "Aktionen für {{scope}}"
     }
   },
   "rolePicker": {

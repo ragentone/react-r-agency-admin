@@ -1,4 +1,3 @@
-import { Button } from '@ui/shad-cn/components/button.tsx';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,6 +8,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@ui/shad-cn/components/alert-dialog.tsx';
+import { Button } from '@ui/shad-cn/components/button.tsx';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';

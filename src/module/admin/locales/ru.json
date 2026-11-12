@@ -781,7 +781,8 @@
         "running": "Идёт …",
         "done": "Завершено",
         "empty": "Пока нет вывода."
-      }
+      },
+      "actionsAria": "Действия: {{scope}}"
     }
   },
   "rolePicker": {

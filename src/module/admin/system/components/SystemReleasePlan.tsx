@@ -8,8 +8,8 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { SystemApi } from '../api';
-import { SystemBuildPathField } from './SystemBuildPathField';
 import type { ISystemRelease, SystemDeployApp, SystemReleaseBump } from '../types';
+import { SystemBuildPathField } from './SystemBuildPathField';
 
 const BUMPS: SystemReleaseBump[] = ['patch', 'minor', 'major'];
 /** Same limit as the runtime (`RELEASE_NOTES_MAX_LINES`). */

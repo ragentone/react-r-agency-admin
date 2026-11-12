@@ -46,7 +46,7 @@ export const HomeAttention: React.FC<{
   const failed = queries.every(query => query.error);
 
   const items: IItem[] = [];
-  const toSystem = (tab: 'version' | 'storage') => () => rememberSystemTab(tab);
+  const toSystem = (tab: 'deployments' | 'storage') => () => rememberSystemTab(tab);
 
   const history = deploys.data;
   if (history) {
@@ -61,7 +61,7 @@ export const HomeAttention: React.FC<{
           version: history.release.options[history.release.plan.bump],
         }),
         to: ADMIN_SYSTEM_ROUTE,
-        onNavigate: toSystem('version'),
+        onNavigate: toSystem('deployments'),
       });
     }
   }

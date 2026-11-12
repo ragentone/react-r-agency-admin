@@ -35,7 +35,7 @@ export const HomeSystem: React.FC<{
       title={t('home.system.title')}
       to={ADMIN_SYSTEM_ROUTE}
       linkLabel={t('home.more')}
-      onNavigate={() => rememberSystemTab('version')}
+      onNavigate={() => rememberSystemTab('deployments')}
       className={className}
     >
       <dl className="flex flex-col gap-4">
