@@ -54,8 +54,8 @@ export const SystemDeploysTab: React.FC = () => {
     () => SystemApi.deploys(),
     result => result.history,
     'deploys',
-    // Deploy flags (running / deployable) change without a click here: refresh while the tab is open.
-    10_000
+    // Versions, running builds and deployable flags change without a click: live while the tab is visible.
+    3_000
   );
   if (loading) return <StatsSkeleton tiles={1} />;
   if (error && !data) return <StatsError onRetry={() => void reload()} />;
