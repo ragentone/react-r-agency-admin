@@ -24,7 +24,20 @@ PREV="dist-prev"
 
 rm -rf node_modules
 rm -rf "$NEXT" "$PREV"
-nvm use
+# Node from .nvmrc (22). A non-interactive shell does not load nvm by itself, so load it here.
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+if [ ! -s "$NVM_DIR/nvm.sh" ]; then
+  echo "nvm not found in $NVM_DIR – live site unchanged"
+  exit 1
+fi
+. "$NVM_DIR/nvm.sh"
+nvm use >/dev/null 2>&1 || nvm install || { echo "nvm: node version from .nvmrc not available – live site unchanged"; exit 1; }
+NODE_MAJOR=$(node -p 'process.versions.node.split(".")[0]')
+if [ "$NODE_MAJOR" -lt 22 ]; then
+  echo "node $(node -v) is too old (22 needed) – live site unchanged"
+  exit 1
+fi
+echo "using node $(node -v)"
 if ! npm install; then
   echo "npm install failed – live site unchanged"
   exit 1
