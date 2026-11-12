@@ -213,6 +213,7 @@ export interface IMutationAdminSeoSettingsSaveArgs {
 
 /** Arguments of `Mutation.adminSystemReleasePlan` */
 export interface IMutationAdminSystemReleasePlanArgs {
+  app?: InputMaybe<string>;
   bump?: InputMaybe<string>;
   notes?: InputMaybe<string>;
   required?: InputMaybe<boolean>;

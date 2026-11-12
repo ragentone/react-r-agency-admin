@@ -584,7 +584,7 @@
     "subtitle": "Version, Deploys und Server-Speicher",
     "tabsLabel": "Bereiche des Systems",
     "tabs": {
-      "version": "Version",
+      "deployments": "Deployments",
       "storage": "Speicher",
       "database": "Datenbank"
     },
@@ -705,6 +705,24 @@
       "rows": "{{count}} Zeilen",
       "missing": "Fehlt in DB",
       "empty": "Keine Entities gefunden."
+    },
+    "deployments": {
+      "scope": {
+        "frontend": "Frontend",
+        "admin": "Admin"
+      },
+      "columns": {
+        "scope": "Bereich",
+        "version": "Version",
+        "last": "Letztes Deployment",
+        "actions": "Aktion"
+      },
+      "edit": "Bearbeiten",
+      "editAria": "{{scope}} bearbeiten",
+      "dialog": {
+        "title": "Deployment: {{scope}}",
+        "description": "Version und Notizen der nächsten Veröffentlichung."
+      }
     }
   },
   "rolePicker": {

@@ -584,7 +584,7 @@
     "subtitle": "Version, deploys and server storage",
     "tabsLabel": "System sections",
     "tabs": {
-      "version": "Version",
+      "deployments": "Deployments",
       "storage": "Storage",
       "database": "Database"
     },
@@ -705,6 +705,24 @@
       "rows": "{{count}} rows",
       "missing": "Missing in DB",
       "empty": "No entities found."
+    },
+    "deployments": {
+      "scope": {
+        "frontend": "Frontend",
+        "admin": "Admin"
+      },
+      "columns": {
+        "scope": "Scope",
+        "version": "Version",
+        "last": "Last deployment",
+        "actions": "Action"
+      },
+      "edit": "Edit",
+      "editAria": "Edit {{scope}}",
+      "dialog": {
+        "title": "Deployment: {{scope}}",
+        "description": "Version and notes of the next release."
+      }
     }
   },
   "rolePicker": {

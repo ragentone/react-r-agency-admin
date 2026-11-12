@@ -1,6 +1,9 @@
-export type SystemTab = 'version' | 'storage' | 'database';
+export type SystemTab = 'deployments' | 'storage' | 'database';
 
 export type SystemReleaseBump = 'patch' | 'minor' | 'major';
+
+/** Release line: the site (`frontend`) or the admin app. */
+export type SystemDeployApp = 'frontend' | 'admin';
 
 /** The live frontend build – the only version that is stored and shown (runtime `system.deploy.service`). */
 export interface ISystemVersion {
@@ -26,9 +29,11 @@ export interface ISystemRelease {
 }
 
 export interface ISystemDeployHistory {
-  /** The live build (`null` = none yet). */
+  /** The live frontend build (`null` = none yet). */
   current: ISystemVersion | null;
   release: ISystemRelease;
+  /** The live admin build with its own plan. */
+  admin: { current: ISystemVersion | null; release: ISystemRelease };
 }
 
 /** One measurement of the server disk (bytes, runtime `shared/system/system.storage.ts`). */

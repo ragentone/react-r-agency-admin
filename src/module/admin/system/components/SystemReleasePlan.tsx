@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { SystemApi } from '../api';
-import type { ISystemRelease, SystemReleaseBump } from '../types';
+import type { ISystemRelease, SystemDeployApp, SystemReleaseBump } from '../types';
 
 const BUMPS: SystemReleaseBump[] = ['patch', 'minor', 'major'];
 /** Same limit as the runtime (`RELEASE_NOTES_MAX_LINES`). */
@@ -24,10 +24,11 @@ const linesOf = (text: string) =>
  * "Next version": patch / minor / major (with the number each gives), "what's new" and
  * "force update" for the next production build. Saved explicitly, used up by the build.
  */
-export const SystemReleasePlan: React.FC<{ release: ISystemRelease; onSaved: () => void }> = ({
-  release,
-  onSaved,
-}) => {
+export const SystemReleasePlan: React.FC<{
+  app: SystemDeployApp;
+  release: ISystemRelease;
+  onSaved: () => void;
+}> = ({ app, release, onSaved }) => {
   const { t } = useTranslation('admin');
   const notesId = useId();
   const requiredId = useId();
@@ -59,6 +60,7 @@ export const SystemReleasePlan: React.FC<{ release: ISystemRelease; onSaved: () 
       bump: draft.bump,
       notes: lines.join('\n'),
       required: draft.required,
+      app,
     });
     setBusy(false);
     if (!result.success) {

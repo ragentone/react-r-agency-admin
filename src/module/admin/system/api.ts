@@ -8,6 +8,7 @@ import type {
   ISystemDeployHistory,
   ISystemRelease,
   ISystemStorage,
+  SystemDeployApp,
   SystemReleaseBump,
 } from './types';
 
@@ -33,8 +34,13 @@ const DbEntitiesQuery = parse(`
   }
 `);
 const ReleasePlanMutation = parse(`
-  mutation AdminSystemReleasePlan($bump: String, $notes: String, $required: Boolean) {
-    adminSystemReleasePlan(bump: $bump, notes: $notes, required: $required) {
+  mutation AdminSystemReleasePlan(
+    $bump: String
+    $notes: String
+    $required: Boolean
+    $app: String
+  ) {
+    adminSystemReleasePlan(bump: $bump, notes: $notes, required: $required, app: $app) {
       success error release
     }
   }
@@ -76,6 +82,7 @@ export const SystemApi = {
     bump: SystemReleaseBump;
     notes: string;
     required: boolean;
+    app: SystemDeployApp;
   }): Promise<IStatsResult & { release?: ISystemRelease }> => {
     try {
       const response = (await client().mutate({

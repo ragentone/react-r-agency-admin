@@ -1051,6 +1051,7 @@ Mutation  ‹IMutation›
 │   ├── sitemap: JSON
 │   └── success: Boolean
 ├── adminSystemReleasePlan: adminSystemReleasePlanReturn  ‹IAdminSystemReleasePlanReturn›
+│   ├── $app: String
 │   ├── $bump: String
 │   ├── $notes: String
 │   ├── $required: Boolean

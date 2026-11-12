@@ -606,7 +606,7 @@
     "subtitle": "Версия, деплои и место на сервере",
     "tabsLabel": "Разделы системы",
     "tabs": {
-      "version": "Версия",
+      "deployments": "Деплойменты",
       "storage": "Хранилище",
       "database": "База данных"
     },
@@ -729,6 +729,24 @@
       "rows": "{{count}} строк",
       "missing": "Нет в БД",
       "empty": "Сущности не найдены."
+    },
+    "deployments": {
+      "scope": {
+        "frontend": "Фронтенд",
+        "admin": "Админ"
+      },
+      "columns": {
+        "scope": "Раздел",
+        "version": "Версия",
+        "last": "Последний деплой",
+        "actions": "Действие"
+      },
+      "edit": "Изменить",
+      "editAria": "Изменить: {{scope}}",
+      "dialog": {
+        "title": "Деплой: {{scope}}",
+        "description": "Версия и заметки следующего релиза."
+      }
     }
   },
   "rolePicker": {

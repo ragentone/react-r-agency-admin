@@ -9,19 +9,19 @@ import { SystemDatabaseTab } from './SystemDatabaseTab';
 import { SystemDeploysTab } from './SystemDeploysTab';
 import { SystemStorageTab } from './SystemStorageTab';
 
-const TABS: SystemTab[] = ['version', 'storage', 'database'];
+const TABS: SystemTab[] = ['deployments', 'storage', 'database'];
 const STORE_KEY = ADMIN_SYSTEM_VIEW_KEY;
 
 const restore = (): SystemTab => {
   try {
     const value = localStorage.getItem(STORE_KEY) as SystemTab | null;
-    return value && TABS.includes(value) ? value : 'version';
+    return value && TABS.includes(value) ? value : 'deployments';
   } catch {
-    return 'version';
+    return 'deployments';
   }
 };
 
-/** `/admin/system`: version + deploys, server storage. */
+/** `/admin/system`: deployments, server storage, database. */
 export const SystemArea: React.FC = () => {
   const { t } = useTranslation('admin');
   const [tab, setTab] = useState(restore);
@@ -62,7 +62,7 @@ export const SystemArea: React.FC = () => {
             </TabsTrigger>
           ))}
         </TabsList>
-        <TabsContent value="version" className="mt-0 pb-10">
+        <TabsContent value="deployments" className="mt-0 pb-10">
           <SystemDeploysTab />
         </TabsContent>
         <TabsContent value="storage" className="mt-0 pb-10">
