@@ -16,6 +16,21 @@ import { formatAgo } from '../../stats/utils';
 import { SystemApi } from '../api';
 import type { ISystemDeployHistory, ISystemRelease, ISystemVersion, SystemDeployApp } from '../types';
 import { SystemDeploymentDialog } from './SystemDeploymentDialog';
+import { SystemDeployButton } from './SystemDeployButton';
+
+/** Live-only deploy button of a line; the server says whether it may deploy. */
+const deployOf = (history: ISystemDeployHistory, app: SystemDeployApp) => {
+  if (app === 'runtime' && history.runtimeDeployable) {
+    return { kind: 'runtime' as const, running: history.runtimeRunning === true, start: SystemApi.runtimeDeploy };
+  }
+  if (app === 'frontend' && history.frontendDeployable) {
+    return { kind: 'frontend' as const, running: history.frontendRunning === true, start: () => SystemApi.buildDeploy('frontend') };
+  }
+  if (app === 'admin' && history.adminDeployable) {
+    return { kind: 'admin' as const, running: history.adminRunning === true, start: () => SystemApi.buildDeploy('admin') };
+  }
+  return null;
+};
 
 const APPS: SystemDeployApp[] = ['frontend', 'admin', 'runtime'];
 
@@ -58,6 +73,7 @@ export const SystemDeploysTab: React.FC = () => {
         <TableBody>
           {APPS.map(app => {
             const { current } = lineOf(data, app);
+            const deploy = deployOf(data, app);
             return (
               <TableRow key={app}>
                 <TableCell className="font-semibold">
@@ -68,6 +84,16 @@ export const SystemDeploysTab: React.FC = () => {
                   {current ? formatAgo(current.finishedAt, locale) : '–'}
                 </TableCell>
                 <TableCell className="text-right">
+                  {deploy && (
+                    <span className="mr-2 inline-block">
+                      <SystemDeployButton
+                        kind={deploy.kind}
+                        running={deploy.running}
+                        start={deploy.start}
+                        onStarted={() => void reload()}
+                      />
+                    </span>
+                  )}
                   <Button
                     variant="outline"
                     size="sm"

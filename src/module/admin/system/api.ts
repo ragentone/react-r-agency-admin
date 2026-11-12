@@ -33,14 +33,31 @@ const DbEntitiesQuery = parse(`
     adminDbUsageEntities { success error entities }
   }
 `);
+const RuntimeDeployMutation = parse(`
+  mutation AdminSystemRuntimeDeploy {
+    adminSystemRuntimeDeploy { success error started }
+  }
+`);
+const BuildDeployMutation = parse(`
+  mutation AdminSystemBuildDeploy($app: String) {
+    adminSystemBuildDeploy(app: $app) { success error started }
+  }
+`);
 const ReleasePlanMutation = parse(`
   mutation AdminSystemReleasePlan(
     $bump: String
     $notes: String
     $required: Boolean
     $app: String
+    $buildPath: String
   ) {
-    adminSystemReleasePlan(bump: $bump, notes: $notes, required: $required, app: $app) {
+    adminSystemReleasePlan(
+      bump: $bump
+      notes: $notes
+      required: $required
+      app: $app
+      buildPath: $buildPath
+    ) {
       success error release
     }
   }
@@ -78,11 +95,34 @@ export const SystemApi = {
     query<IStatsResult & { storage?: ISystemStorage }>(StorageQuery, 'adminSystemStorage', {
       refresh,
     }),
+  runtimeDeploy: async (): Promise<IStatsResult & { started?: boolean }> => {
+    try {
+      const response = (await client().mutate({
+        mutation: RuntimeDeployMutation as never,
+      })) as { data?: { adminSystemRuntimeDeploy?: IStatsResult & { started?: boolean } } };
+      return response.data?.adminSystemRuntimeDeploy ?? { success: false, error: 'unknown' };
+    } catch {
+      return { success: false, error: 'unknown' };
+    }
+  },
+  /** Starts the build (`shell/build.sh`) of the frontend or the admin app on the live server. */
+  buildDeploy: async (app: 'frontend' | 'admin'): Promise<IStatsResult & { started?: boolean }> => {
+    try {
+      const response = (await client().mutate({
+        mutation: BuildDeployMutation as never,
+        variables: { app },
+      })) as { data?: { adminSystemBuildDeploy?: IStatsResult & { started?: boolean } } };
+      return response.data?.adminSystemBuildDeploy ?? { success: false, error: 'unknown' };
+    } catch {
+      return { success: false, error: 'unknown' };
+    }
+  },
   releasePlan: async (plan: {
     bump: SystemReleaseBump;
     notes: string;
     required: boolean;
     app: SystemDeployApp;
+    buildPath: string;
   }): Promise<IStatsResult & { release?: ISystemRelease }> => {
     try {
       const response = (await client().mutate({

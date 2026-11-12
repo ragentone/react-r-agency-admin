@@ -23,7 +23,7 @@ export interface ISystemRelease {
   /** Live version (`null` = none yet → the next build becomes 1.0.0). */
   current: string | null;
   /** Plan of the next build (used up by it, then back to patch). */
-  plan: { bump: SystemReleaseBump; notes: string[]; required: boolean };
+  plan: { bump: SystemReleaseBump; notes: string[]; required: boolean; buildPath: string | null };
   /** What each bump would give. */
   options: Record<SystemReleaseBump, string>;
 }
@@ -36,6 +36,18 @@ export interface ISystemDeployHistory {
   admin: { current: ISystemVersion | null; release: ISystemRelease };
   /** The runtime server (deploys recorded by the CLI) with its own plan. */
   runtime: { current: ISystemVersion | null; release: ISystemRelease };
+  /** A runtime deploy from the admin is running (lock file on the server). */
+  runtimeRunning?: boolean;
+  /** Live server (production mode) only: the deploy button is shown just there. */
+  runtimeDeployable?: boolean;
+  /** A frontend build from the admin is running (lock file on the server). */
+  frontendRunning?: boolean;
+  /** Live server with the frontend folder present. */
+  frontendDeployable?: boolean;
+  /** An admin build from the admin is running (lock file on the server). */
+  adminRunning?: boolean;
+  /** Live server with the admin app folder present. */
+  adminDeployable?: boolean;
 }
 
 /** One measurement of the server disk (bytes, runtime `shared/system/system.storage.ts`). */

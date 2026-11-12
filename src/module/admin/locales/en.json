@@ -643,7 +643,12 @@
         "save": "Save for next deploy",
         "saved": "Saved – applies to the next deploy",
         "saveError": "Could not be saved",
-        "reset": "Reset"
+        "reset": "Reset",
+        "buildPath": {
+          "label": "Build path",
+          "placeholder": "../dev-r.agency.org",
+          "hint": "Folder of the frontend project on the live server. Absolute or relative to the runtime folder (e.g. ../dev-r.agency.org). Empty = frontend deploy off."
+        }
       }
     },
     "database": {
@@ -723,6 +728,28 @@
       "dialog": {
         "title": "Deployment: {{scope}}",
         "description": "Version and notes of the next release."
+      },
+      "deploy": {
+        "running": "Deploy running …",
+        "started": "Started – the process is running on the server.",
+        "error": "Could not be started.",
+        "confirm": "Start",
+        "cancel": "Cancel",
+        "runtime": {
+          "button": "Deploy",
+          "confirmTitle": "Deploy runtime?",
+          "confirmText": "Fetches origin/main via git reset --hard (local changes on the server are lost), makes a database backup, rebuilds and restarts the server. The site is unavailable meanwhile."
+        },
+        "frontend": {
+          "button": "Rebuild frontend",
+          "confirmTitle": "Rebuild frontend?",
+          "confirmText": "Fetches origin/main via git reset --hard, builds the frontend on the server and swaps it live. The current version keeps running until then. Open tabs get the update notice afterwards."
+        },
+        "admin": {
+          "button": "Rebuild admin",
+          "confirmTitle": "Rebuild admin?",
+          "confirmText": "Fetches origin/main via git reset --hard, builds the admin app on the server and swaps it live. The current version keeps running until then."
+        }
       }
     }
   },

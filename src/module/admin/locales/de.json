@@ -643,7 +643,12 @@
         "save": "Für nächsten Deploy speichern",
         "saved": "Gespeichert – gilt für den nächsten Deploy",
         "saveError": "Konnte nicht gespeichert werden",
-        "reset": "Zurücksetzen"
+        "reset": "Zurücksetzen",
+        "buildPath": {
+          "label": "Build-Pfad",
+          "placeholder": "../dev-r.agency.org",
+          "hint": "Ordner des Frontend-Projekts auf dem Live-Server. Absolut oder relativ zum Runtime-Ordner (z. B. ../dev-r.agency.org). Leer = Frontend-Deploy aus."
+        }
       }
     },
     "database": {
@@ -723,6 +728,28 @@
       "dialog": {
         "title": "Deployment: {{scope}}",
         "description": "Version und Notizen der nächsten Veröffentlichung."
+      },
+      "deploy": {
+        "running": "Deploy läuft …",
+        "started": "Gestartet – der Vorgang läuft auf dem Server.",
+        "error": "Konnte nicht gestartet werden.",
+        "confirm": "Starten",
+        "cancel": "Abbrechen",
+        "runtime": {
+          "button": "Deploy",
+          "confirmTitle": "Runtime deployen?",
+          "confirmText": "Holt origin/main per git reset --hard (lokale Änderungen auf dem Server gehen verloren), macht ein Datenbank-Backup, baut neu und startet den Server neu. Die Seite ist währenddessen nicht erreichbar."
+        },
+        "frontend": {
+          "button": "Frontend neu bauen",
+          "confirmTitle": "Frontend neu bauen?",
+          "confirmText": "Holt origin/main per git reset --hard, baut das Frontend auf dem Server und tauscht es live. Bis dahin läuft die bisherige Version weiter. Offene Tabs bekommen danach den Update-Hinweis."
+        },
+        "admin": {
+          "button": "Admin neu bauen",
+          "confirmTitle": "Admin neu bauen?",
+          "confirmText": "Holt origin/main per git reset --hard, baut die Admin-App auf dem Server und tauscht sie live. Bis dahin läuft die bisherige Version weiter."
+        }
       }
     }
   },

@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { SystemApi } from '../api';
+import { SystemBuildPathField } from './SystemBuildPathField';
 import type { ISystemRelease, SystemDeployApp, SystemReleaseBump } from '../types';
 
 const BUMPS: SystemReleaseBump[] = ['patch', 'minor', 'major'];
@@ -36,6 +37,7 @@ export const SystemReleasePlan: React.FC<{
     bump: release.plan.bump,
     notes: release.plan.notes.join('\n'),
     required: release.plan.required,
+    buildPath: release.plan.buildPath ?? '',
   };
   const [draft, setDraft] = useState(saved);
   const [busy, setBusy] = useState(false);
@@ -52,7 +54,8 @@ export const SystemReleasePlan: React.FC<{
   const dirty =
     draft.bump !== saved.bump ||
     draft.required !== saved.required ||
-    lines.join('\n') !== linesOf(saved.notes).join('\n');
+    lines.join('\n') !== linesOf(saved.notes).join('\n') ||
+    draft.buildPath.trim() !== saved.buildPath.trim();
 
   const save = async () => {
     setBusy(true);
@@ -61,6 +64,7 @@ export const SystemReleasePlan: React.FC<{
       notes: lines.join('\n'),
       required: draft.required,
       app,
+      buildPath: draft.buildPath.trim(),
     });
     setBusy(false);
     if (!result.success) {
@@ -157,6 +161,14 @@ export const SystemReleasePlan: React.FC<{
           disabled={busy}
         />
       </label>
+
+      {app !== 'runtime' && (
+        <SystemBuildPathField
+          value={draft.buildPath}
+          onChange={buildPath => setDraft(d => ({ ...d, buildPath }))}
+          disabled={busy}
+        />
+      )}
 
       <div className="mt-4 flex gap-2">
         {dirty && (
