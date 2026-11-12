@@ -82,6 +82,7 @@ const DropSqlDrawer: React.FC<Props & { open: boolean; onOpenChange: (open: bool
       open={open}
       onOpenChange={onOpenChange}
       title={t('system.database.sql.title')}
+      autoHeight={true}
       footer={
         <Button size="xl" fullWidth onClick={() => void copy()}>
           <Copy className="size-4" />
