@@ -750,6 +750,13 @@
           "confirmTitle": "Admin neu bauen?",
           "confirmText": "Holt origin/main per git reset --hard, baut die Admin-App auf dem Server und tauscht sie live. Bis dahin läuft die bisherige Version weiter."
         }
+      },
+      "log": {
+        "button": "Log",
+        "title": "Log: {{scope}}",
+        "running": "Läuft …",
+        "done": "Fertig",
+        "empty": "Noch keine Ausgabe."
       }
     }
   },

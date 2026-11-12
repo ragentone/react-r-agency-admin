@@ -750,6 +750,13 @@
           "confirmTitle": "Rebuild admin?",
           "confirmText": "Fetches origin/main via git reset --hard, builds the admin app on the server and swaps it live. The current version keeps running until then."
         }
+      },
+      "log": {
+        "button": "Log",
+        "title": "Log: {{scope}}",
+        "running": "Running …",
+        "done": "Finished",
+        "empty": "No output yet."
       }
     }
   },

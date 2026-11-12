@@ -38,6 +38,13 @@ const RuntimeDeployMutation = parse(`
     adminSystemRuntimeDeploy { success error started }
   }
 `);
+const BuildLogQuery = parse(`
+  query AdminSystemBuildLog($app: String, $offset: Int, $id: String) {
+    adminSystemBuildLog(app: $app, offset: $offset, id: $id) {
+      success error text offset id reset running
+    }
+  }
+`);
 const BuildDeployMutation = parse(`
   mutation AdminSystemBuildDeploy($app: String) {
     adminSystemBuildDeploy(app: $app) { success error started }
@@ -105,6 +112,17 @@ export const SystemApi = {
       return { success: false, error: 'unknown' };
     }
   },
+  /** New output of a build since `offset` (same file `id`). */
+  buildLog: (app: 'frontend' | 'admin', offset: number, id: string | null) =>
+    query<
+      IStatsResult & {
+        text?: string;
+        offset?: number;
+        id?: string;
+        reset?: boolean;
+        running?: boolean;
+      }
+    >(BuildLogQuery, 'adminSystemBuildLog', { app, offset, id }),
   /** Starts the build (`shell/build.sh`) of the frontend or the admin app on the live server. */
   buildDeploy: async (app: 'frontend' | 'admin'): Promise<IStatsResult & { started?: boolean }> => {
     try {

@@ -16,6 +16,7 @@ import { formatAgo } from '../../stats/utils';
 import { SystemApi } from '../api';
 import type { ISystemDeployHistory, ISystemRelease, ISystemVersion, SystemDeployApp } from '../types';
 import { SystemDeploymentDialog } from './SystemDeploymentDialog';
+import { SystemBuildLog } from './SystemBuildLog';
 import { SystemDeployButton } from './SystemDeployButton';
 
 /** Live-only deploy button of a line; the server says whether it may deploy. */
@@ -48,6 +49,7 @@ export const SystemDeploysTab: React.FC = () => {
   const { t, i18n } = useTranslation('admin');
   const locale = i18n.language;
   const [editing, setEditing] = useState<SystemDeployApp | null>(null);
+  const [logging, setLogging] = useState<'frontend' | 'admin' | null>(null);
   const { data, loading, error, reload } = useStatsQuery(
     () => SystemApi.deploys(),
     result => result.history,
@@ -99,6 +101,16 @@ export const SystemDeploysTab: React.FC = () => {
                       />
                     </span>
                   )}
+                  {app !== 'runtime' && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="mr-2 rounded-full font-bold"
+                      onClick={() => setLogging(app)}
+                    >
+                      {t('system.deployments.log.button')}
+                    </Button>
+                  )}
                   <Button
                     variant="outline"
                     size="sm"
@@ -116,6 +128,14 @@ export const SystemDeploysTab: React.FC = () => {
           })}
         </TableBody>
       </Table>
+
+      {logging && (
+        <SystemBuildLog
+          app={logging}
+          scope={t(`system.deployments.scope.${logging}`)}
+          onClose={() => setLogging(null)}
+        />
+      )}
 
       {editing && (
         <SystemDeploymentDialog
