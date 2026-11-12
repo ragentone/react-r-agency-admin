@@ -733,7 +733,8 @@
     "deployments": {
       "scope": {
         "frontend": "Фронтенд",
-        "admin": "Админ"
+        "admin": "Админ",
+        "runtime": "Рантайм"
       },
       "columns": {
         "scope": "Раздел",

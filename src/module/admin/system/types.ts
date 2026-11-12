@@ -2,8 +2,8 @@ export type SystemTab = 'deployments' | 'storage' | 'database';
 
 export type SystemReleaseBump = 'patch' | 'minor' | 'major';
 
-/** Release line: the site (`frontend`) or the admin app. */
-export type SystemDeployApp = 'frontend' | 'admin';
+/** Release line: the site (`frontend`), the admin app or the runtime server. */
+export type SystemDeployApp = 'frontend' | 'admin' | 'runtime';
 
 /** The live frontend build – the only version that is stored and shown (runtime `system.deploy.service`). */
 export interface ISystemVersion {
@@ -34,6 +34,8 @@ export interface ISystemDeployHistory {
   release: ISystemRelease;
   /** The live admin build with its own plan. */
   admin: { current: ISystemVersion | null; release: ISystemRelease };
+  /** The runtime server (deploys recorded by the CLI) with its own plan. */
+  runtime: { current: ISystemVersion | null; release: ISystemRelease };
 }
 
 /** One measurement of the server disk (bytes, runtime `shared/system/system.storage.ts`). */

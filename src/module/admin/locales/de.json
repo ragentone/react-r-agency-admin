@@ -709,7 +709,8 @@
     "deployments": {
       "scope": {
         "frontend": "Frontend",
-        "admin": "Admin"
+        "admin": "Admin",
+        "runtime": "Runtime"
       },
       "columns": {
         "scope": "Bereich",

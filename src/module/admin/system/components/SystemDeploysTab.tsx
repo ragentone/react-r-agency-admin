@@ -17,14 +17,14 @@ import { SystemApi } from '../api';
 import type { ISystemDeployHistory, ISystemRelease, ISystemVersion, SystemDeployApp } from '../types';
 import { SystemDeploymentDialog } from './SystemDeploymentDialog';
 
-const APPS: SystemDeployApp[] = ['frontend', 'admin'];
+const APPS: SystemDeployApp[] = ['frontend', 'admin', 'runtime'];
 
 /** Frontend and admin line: live version and plan of the release line. */
 const lineOf = (
   history: ISystemDeployHistory,
   app: SystemDeployApp
 ): { current: ISystemVersion | null; release: ISystemRelease } =>
-  app === 'admin' ? history.admin : history;
+  app === 'admin' ? history.admin : app === 'runtime' ? history.runtime : history;
 
 /** Tab "Deployments": one row per release line (site, admin). Edit opens the plan. */
 export const SystemDeploysTab: React.FC = () => {
