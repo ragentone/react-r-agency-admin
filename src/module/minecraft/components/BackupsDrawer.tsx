@@ -16,9 +16,11 @@ import { toast } from 'sonner';
 import { AdminMinecraftApi } from '../api';
 import { formatSize } from '../format-size';
 import { useBackupDownload } from '../hooks/use-backup-download';
+import { useBackupSettings } from '../hooks/use-backup-settings';
 import { useMinecraftBackups } from '../hooks/use-minecraft-backups';
 import { BackupConfirmDialog } from './BackupConfirmDialog';
 import { BackupRowMenu } from './BackupRowMenu';
+import { BackupScheduleRow } from './BackupScheduleRow';
 
 /** Backups eines Servers: erstellen, wiederherstellen (nur gestoppt), löschen. */
 export const BackupsDrawer: React.FC<{
@@ -31,6 +33,7 @@ export const BackupsDrawer: React.FC<{
   const { t } = useTranslation('minecraft');
   const { backups, reload } = useMinecraftBackups(serverId, open);
   const { download, downloading } = useBackupDownload(serverId);
+  const schedule = useBackupSettings(open);
   const [creating, setCreating] = useState(false);
   const [confirm, setConfirm] = useState<{ mode: 'restore' | 'delete'; file: string } | null>(null);
 
@@ -71,6 +74,7 @@ export const BackupsDrawer: React.FC<{
           onClose={() => setConfirm(null)}
         />
       )}
+      <BackupScheduleRow settings={schedule.settings} onSave={schedule.save} />
       {backups && backups.length === 0 && (
         <Empty className="px-4 py-12">
           <EmptyHeader>

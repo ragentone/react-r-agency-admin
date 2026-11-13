@@ -3,6 +3,7 @@ import { getMeshClient } from 'r-agency-mesh-client-v1/release';
 
 import type {
   IMinecraftBackupInfo,
+  IMinecraftBackupSettings,
   IMinecraftConsoleLine,
   IMinecraftPass,
   IMinecraftServerEntry,
@@ -45,6 +46,12 @@ const doc = {
   ),
   restoreBackup: parse(
     `mutation AdminMinecraftRestoreBackup($serverId: String!, $file: String!) { adminMinecraftRestoreBackup(serverId: $serverId, file: $file) { success error } }`
+  ),
+  backupSettings: parse(
+    `query AdminMinecraftBackupSettings { adminMinecraftBackupSettings { success error settings } }`
+  ),
+  backupSettingsSave: parse(
+    `mutation AdminMinecraftBackupSettingsSave($settings: JSON!) { adminMinecraftBackupSettingsSave(settings: $settings) { success error settings } }`
   ),
   backupLink: parse(
     `mutation AdminMinecraftBackupLink($serverId: String!, $file: String!) { adminMinecraftBackupLink(serverId: $serverId, file: $file) { success error token } }`
@@ -136,6 +143,17 @@ export const AdminMinecraftApi = {
     ),
   restoreBackup: (serverId: string, file: string) =>
     write<IMinecraftResult>(doc.restoreBackup, 'adminMinecraftRestoreBackup', { serverId, file }),
+  backupSettings: () =>
+    run<IMinecraftResult & { settings?: IMinecraftBackupSettings }>(
+      () => client().query({ query: doc.backupSettings as never, fetchPolicy: 'no-cache' }),
+      'adminMinecraftBackupSettings'
+    ),
+  saveBackupSettings: (settings: IMinecraftBackupSettings) =>
+    write<IMinecraftResult & { settings?: IMinecraftBackupSettings }>(
+      doc.backupSettingsSave,
+      'adminMinecraftBackupSettingsSave',
+      { settings }
+    ),
   backupLink: (serverId: string, file: string) =>
     write<IMinecraftResult & { token?: string }>(doc.backupLink, 'adminMinecraftBackupLink', {
       serverId,

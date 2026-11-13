@@ -192,5 +192,19 @@
       "paused": "Paused",
       "blocked": "Blocked"
     }
+  },
+  "schedule": {
+    "title": "Backup schedule",
+    "text": "Applies to all servers.",
+    "enabled": "Daily auto backup",
+    "hour": "Time (hour)",
+    "hourHint": "0–23, server time. The backup starts shortly after the full hour (at :07).",
+    "keep": "Backups to keep",
+    "keepHint": "1–30 per server, older ones are deleted.",
+    "summary": "Daily at {{time}} (server time), the latest {{keep}} per server are kept.",
+    "off": "Auto backup is off.",
+    "change": "Change",
+    "done": "Schedule saved.",
+    "error": "Could not save the schedule."
   }
 }

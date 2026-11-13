@@ -74,3 +74,12 @@ export interface IMinecraftPass {
   lastSeenAt: string | null;
   createdAt: string;
 }
+
+/** Auto-Backup-Zeitplan (gilt für alle Server, Serverzeit). */
+export interface IMinecraftBackupSettings {
+  enabled: boolean;
+  /** 0–23 */
+  hour: number;
+  /** 1–30 Backups je Server */
+  keep: number;
+}
