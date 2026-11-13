@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { watchPluginDev } from './plugin.hot';
 import { loadPlugins } from './plugin.loader';
+import { unregisterPlugin } from './plugin.slots';
 import {
   type IPluginRef,
   type PluginCapability,
@@ -74,6 +75,8 @@ export const fetchActivePlugins = async (scope: PluginScope = 'frontend'): Promi
 const started: Partial<Record<PluginScope, Promise<number>>> = {};
 /** Set once the plugins of a scope are loaded. Read synchronously, so a remount does not wait again. */
 const loadedScopes: Partial<Record<PluginScope, boolean>> = {};
+/** Plugin ids of each scope that were registered, so a reload can remove them first. */
+const loadedIds: Partial<Record<PluginScope, string[]>> = {};
 
 /**
  * Loads the active plugins once per page load. Later calls get the same promise, so it is
@@ -82,6 +85,7 @@ const loadedScopes: Partial<Record<PluginScope, boolean>> = {};
 export const loadActivePlugins = (scope: PluginScope = 'frontend'): Promise<number> => {
   if (!started[scope]) {
     started[scope] = fetchActivePlugins(scope).then(async refs => {
+      loadedIds[scope] = refs.map(ref => ref.id);
       const loaded = await loadPlugins(refs);
       // Dev plugins (outside production only) reload on every new dev build.
       refs.forEach(ref => ref.dev && watchPluginDev(ref));
@@ -90,6 +94,18 @@ export const loadActivePlugins = (scope: PluginScope = 'frontend'): Promise<numb
     });
   }
   return started[scope];
+};
+
+/**
+ * Throws the plugins of a scope away and loads them again. Call it when the login state changes:
+ * the backend decides by the roles (token) which plugins come back, and menu entries, pages
+ * and slots of the old state must not stay.
+ */
+export const reloadActivePlugins = (scope: PluginScope = 'frontend'): Promise<number> => {
+  (loadedIds[scope] ?? []).forEach(unregisterPlugin);
+  loadedIds[scope] = [];
+  delete started[scope];
+  return loadActivePlugins(scope);
 };
 
 /** `true` once the active plugins are loaded. Wait for it before looking up a plugin page. */
