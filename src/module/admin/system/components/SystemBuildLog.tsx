@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { SystemApi } from '../api';
+import { cn } from '@ui/lib';
 
 const POLL_MS = 2000;
 const MAX_CHARS = 200_000;
@@ -74,7 +75,9 @@ export const SystemBuildLog: React.FC<{
     >
       <pre
         ref={box}
-        className="min-h-0 flex-1 overflow-auto bg-muted p-4 font-mono text-xs leading-relaxed break-all whitespace-pre-wrap text-foreground"
+        className={cn(
+          'min-h-0 flex-1 overflow-auto bg-black p-4 font-mono text-xs leading-relaxed break-all whitespace-pre-wrap text-white'
+        )}
       >
         {text || t('system.deployments.log.empty')}
       </pre>
