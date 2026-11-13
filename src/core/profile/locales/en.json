@@ -61,11 +61,6 @@
     "standard": "Standard",
     "admin": "Administrator"
   },
-  "admin": {
-    "label": "Admin – learn more",
-    "title": "Admin",
-    "text": "This account belongs to the team and looks after the platform."
-  },
   "menu": {
     "open": "More",
     "title": "More"

@@ -22,6 +22,7 @@ export const PageProfile: React.FC = () => {
   }, [router]);
 
   return (
+    // Same 600px column as the account; phones edge to edge (no page padding).
     <RoutePage width={720} scrollable={true} classes={{ scroll: 'p-0 overscroll-contain' }}>
       {() => (userId ? <ProfileView key={userId} userId={userId} onBack={back} /> : null)}
     </RoutePage>

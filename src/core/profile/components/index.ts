@@ -1,4 +1,3 @@
-export * from './ProfileAdminBadge';
 export * from './ProfileCard';
 export * from './ProfileDescription';
 export * from './ProfileDialog';

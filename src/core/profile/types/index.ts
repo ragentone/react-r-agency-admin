@@ -31,8 +31,6 @@ export interface IUserProfile {
   online?: boolean | null;
   createdAt?: string | null;
   userType?: string | null;
-  /** Team member (`admin:user`) → badge next to the name. */
-  isAdmin?: boolean | null;
   gender?: string | null;
   birthday?: string | null;
   lastLogin?: string | null;
@@ -67,9 +65,4 @@ export interface IProfileCmsPayload {
   userId: string | null;
   profile: IUserProfile | null;
   params: IUserProfileParams | null;
-}
-
-export interface ICmsProfileButtonsPayload {
-  profile?: IUserProfile;
-  onLeave?: () => void;
 }
