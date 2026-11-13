@@ -13,8 +13,15 @@ export function useMinecraftBackups(serverId: string, enabled: boolean) {
   }, [serverId]);
 
   useEffect(() => {
-    if (enabled) void reload();
-  }, [enabled, reload]);
+    if (!enabled) return undefined;
+    let alive = true;
+    void AdminMinecraftApi.backups(serverId).then(result => {
+      if (alive) setBackups(result.success ? (result.backups ?? []) : []);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [enabled, serverId]);
 
   return { backups, reload };
 }
