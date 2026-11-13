@@ -44,7 +44,8 @@
       "running": "Der Server muss zuerst gestoppt werden.",
       "no_free_port": "Kein freier Port gefunden (alle geprüften UDP-Ports sind belegt).",
       "conflict": "Name oder Port wurde gerade vergeben, bitte erneut versuchen.",
-      "folder_delete_failed": "Der Ordner konnte nicht gelöscht werden. Der Server ist entfernt, Ordner von Hand löschen."
+      "folder_delete_failed": "Der Ordner konnte nicht gelöscht werden. Der Server ist entfernt, Ordner von Hand löschen.",
+      "low_memory": "Zu wenig freier Arbeitsspeicher, um den Server zu starten."
     },
     "edit": "Bearbeiten",
     "delete": "Löschen",

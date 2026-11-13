@@ -44,7 +44,8 @@
       "running": "Stop the server first.",
       "no_free_port": "No free port found (all checked UDP ports are in use).",
       "conflict": "Name or port was just taken, please try again.",
-      "folder_delete_failed": "The folder could not be deleted. The server is removed, delete the folder manually."
+      "folder_delete_failed": "The folder could not be deleted. The server is removed, delete the folder manually.",
+      "low_memory": "Not enough free memory to start the server."
     },
     "edit": "Edit",
     "delete": "Delete",
