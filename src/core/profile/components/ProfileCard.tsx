@@ -1,5 +1,6 @@
 import { ACCOUNT_FROM_PROFILE_KEY } from '@core/account/const.ts';
 import { CoreVariables } from '@core/core.variables.ts';
+import { FriendButton } from '@core/friends/components/FriendButton';
 import { type DateTimeFormat, formatDateTime, type Locales } from '@core/i18n';
 import { Link, useRouterState } from '@tanstack/react-router';
 import { cn } from '@ui/lib/utils';
@@ -11,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useAuth } from '../../auth/components/use.auth.ts';
 import type { IUserProfile, IUserProfileParams, IUserProfileRelation } from '../types';
+import { ProfileAdminBadge } from './ProfileAdminBadge.tsx';
 import { ProfileDescription } from './ProfileDescription.tsx';
 import { ProfileRelationBadge } from './ProfileRelationBadge.tsx';
 
@@ -86,6 +88,15 @@ export const ProfileCard: React.FC<IProfileCardProps> = ({
             )}
           </div>
 
+          {!own && signedIn && (
+            <FriendButton
+              userId={profile.userId}
+              name={profile.alias}
+              avatarUrl={profile.avatarUrl}
+              initialRelation={relation}
+              className="mb-1"
+            />
+          )}
           {own && !overAccount && (
             <Link
               to={CoreVariables.routePathAccount as '/'}
@@ -98,7 +109,10 @@ export const ProfileCard: React.FC<IProfileCardProps> = ({
           )}
         </div>
 
-        <h2 className="truncate text-title font-bold text-foreground">{name}</h2>
+        <div className="flex min-w-0 items-center gap-1">
+          <h2 className="min-w-0 truncate text-title font-bold text-foreground">{name}</h2>
+          {profile.isAdmin && <ProfileAdminBadge />}
+        </div>
         <p className="truncate text-body leading-5 text-muted-foreground">@{profile.alias}</p>
 
         <div className="mt-3 flex flex-wrap gap-1.5">
@@ -119,7 +133,7 @@ export const ProfileCard: React.FC<IProfileCardProps> = ({
               {t('meta.online')}
             </span>
           )}
-          {/* Relation badge for visitors who are not signed in. */}
+          {/* Signed in: the FriendButton shows the relation – badge only as read-only fallback. */}
           {!own && !signedIn && (
             <ProfileRelationBadge relation={relation} profileUserId={profile.userId} />
           )}

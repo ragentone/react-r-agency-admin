@@ -61,6 +61,11 @@
     "standard": "Standard",
     "admin": "Administrator"
   },
+  "admin": {
+    "label": "Admin – mehr erfahren",
+    "title": "Admin",
+    "text": "Dieses Konto gehört zum Team und betreut die Plattform."
+  },
   "menu": {
     "open": "Mehr",
     "title": "Mehr"

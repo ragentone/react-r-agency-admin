@@ -14,6 +14,7 @@ export const UserLoadProfileQuery = graphql(`
         online
         createdAt
         userType
+        isAdmin
         gender
         birthday
         lastLogin
