@@ -9,6 +9,7 @@ import {
 import {
   Archive,
   EllipsisVertical,
+  ListChecks,
   Megaphone,
   Pencil,
   SlidersHorizontal,
@@ -21,18 +22,22 @@ import { useTranslation } from 'react-i18next';
 /** Menü im Kartenkopf: Nachricht an alle, Terminal, Bearbeiten, Löschen. */
 export const MinecraftCardMenu: React.FC<{
   canBroadcast: boolean;
+  canGamerules: boolean;
   canDelete: boolean;
   onBackups: () => void;
   onWorld: () => void;
+  onGamerules: () => void;
   onBroadcast: () => void;
   onTerminal: () => void;
   onEdit: () => void;
   onDelete: () => void;
 }> = ({
   canBroadcast,
+  canGamerules,
   canDelete,
   onBackups,
   onWorld,
+  onGamerules,
   onBroadcast,
   onTerminal,
   onEdit,
@@ -58,6 +63,10 @@ export const MinecraftCardMenu: React.FC<{
         <DropdownMenuItem onSelect={onBackups}>
           <Archive />
           {t('action.backups')}
+        </DropdownMenuItem>
+        <DropdownMenuItem disabled={!canGamerules} onSelect={onGamerules}>
+          <ListChecks />
+          {t('action.gamerules')}
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={onWorld}>
           <SlidersHorizontal />

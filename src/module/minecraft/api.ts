@@ -6,6 +6,7 @@ import type {
   IMinecraftBackupSettings,
   IMinecraftBdsStatus,
   IMinecraftConsoleLine,
+  IMinecraftGamerules,
   IMinecraftPass,
   IMinecraftServerEntry,
   IMinecraftServerInput,
@@ -81,6 +82,12 @@ const doc = {
   ),
   bdsInstall: parse(
     `mutation AdminMinecraftBdsInstall { adminMinecraftBdsInstall { success error } }`
+  ),
+  gameruleList: parse(
+    `query AdminMinecraftGameruleList($serverId: String!) { adminMinecraftGameruleList(serverId: $serverId) { success error rules } }`
+  ),
+  gameruleSet: parse(
+    `mutation AdminMinecraftGameruleSet($serverId: String!, $name: String!, $value: Boolean!) { adminMinecraftGameruleSet(serverId: $serverId, name: $name, value: $value) { success error } }`
   ),
   restart: parse(
     `mutation AdminMinecraftRestart($serverId: String!) { adminMinecraftRestart(serverId: $serverId) { success error } }`
@@ -207,6 +214,22 @@ export const AdminMinecraftApi = {
       'adminMinecraftBdsStatus'
     ),
   bdsInstall: () => write<IMinecraftResult>(doc.bdsInstall, 'adminMinecraftBdsInstall'),
+  gamerules: (serverId: string) =>
+    run<IMinecraftResult & { rules?: IMinecraftGamerules }>(
+      () =>
+        client().query({
+          query: doc.gameruleList as never,
+          variables: { serverId },
+          fetchPolicy: 'no-cache',
+        }),
+      'adminMinecraftGameruleList'
+    ),
+  setGamerule: (serverId: string, name: string, value: boolean) =>
+    write<IMinecraftResult>(doc.gameruleSet, 'adminMinecraftGameruleSet', {
+      serverId,
+      name,
+      value,
+    }),
   passes: () =>
     read<IMinecraftResult & { passes?: IMinecraftPass[] }>(doc.passes, 'adminMinecraftPasses'),
   blockPass: (id: string, blocked: boolean) =>

@@ -109,3 +109,23 @@ export interface IMinecraftBdsStatus {
   error: string | null;
   latest: string | null;
 }
+
+export const MINECRAFT_GAMERULES = [
+  'keepInventory',
+  'doDaylightCycle',
+  'doWeatherCycle',
+  'doMobSpawning',
+  'mobGriefing',
+  'pvp',
+  'showCoordinates',
+  'naturalRegeneration',
+  'doInsomnia',
+  'fallDamage',
+  'fireDamage',
+  'tntExplodes',
+] as const;
+
+export type MinecraftGamerule = (typeof MINECRAFT_GAMERULES)[number];
+
+/** `null` = der Server hat den Wert nicht (erkennbar) geantwortet. */
+export type IMinecraftGamerules = Partial<Record<MinecraftGamerule, boolean | null>>;

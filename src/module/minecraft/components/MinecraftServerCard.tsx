@@ -1,9 +1,6 @@
 import { cn } from '@ui/lib';
 import { Badge } from '@ui/shad-cn/components/badge.tsx';
-import { Button } from '@ui/shad-cn/components/button.tsx';
 import { Card, CardContent } from '@ui/shad-cn/components/card.tsx';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@ui/shad-cn/components/tooltip.tsx';
-import { Play, RotateCcw, Square } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -12,13 +9,15 @@ import { AdminMinecraftApi } from '../api';
 import type { IMinecraftRunState, IMinecraftServerEntry } from '../types';
 import { BackupsDrawer } from './BackupsDrawer';
 import { BroadcastDialog } from './BroadcastDialog';
+import { GamerulesDialog } from './GamerulesDialog';
 import { KickPlayerDialog } from './KickPlayerDialog';
+import { type CardAction, MinecraftCardActions } from './MinecraftCardActions';
 import { MinecraftCardMenu } from './MinecraftCardMenu';
 import { MinecraftServerInfo } from './MinecraftServerInfo';
 import { MinecraftTerminal } from './MinecraftTerminal';
 import { WorldSettingsDialog } from './WorldSettingsDialog';
 
-type Action = 'start' | 'stop' | 'restart';
+type Action = CardAction;
 
 const BADGE_VARIANT: Record<
   IMinecraftRunState,
@@ -46,6 +45,7 @@ export const MinecraftServerCard: React.FC<{
   const [broadcasting, setBroadcasting] = useState(false);
   const [backupsOpen, setBackupsOpen] = useState(false);
   const [worldOpen, setWorldOpen] = useState(false);
+  const [rulesOpen, setRulesOpen] = useState(false);
 
   const run = async (
     action: Action,
@@ -66,7 +66,6 @@ export const MinecraftServerCard: React.FC<{
 
   const state = status.state;
   const canStart = state === 'stopped' || state === 'crashed';
-  const canStop = state === 'running' || state === 'starting';
 
   return (
     <Card className="relative rounded-xl border-border/50 shadow-none">
@@ -87,6 +86,13 @@ export const MinecraftServerCard: React.FC<{
           serverId={server.id}
           name={server.name}
           onClose={() => setBroadcasting(false)}
+        />
+      )}
+      {rulesOpen && (
+        <GamerulesDialog
+          serverId={server.id}
+          name={server.name}
+          onClose={() => setRulesOpen(false)}
         />
       )}
       {worldOpen && (
@@ -130,9 +136,11 @@ export const MinecraftServerCard: React.FC<{
           </div>
           <MinecraftCardMenu
             canBroadcast={state === 'running'}
+            canGamerules={state === 'running'}
             canDelete={canStart}
             onBackups={() => setBackupsOpen(true)}
             onWorld={() => setWorldOpen(true)}
+            onGamerules={() => setRulesOpen(true)}
             onBroadcast={() => setBroadcasting(true)}
             onTerminal={() => setTerminalOpen(true)}
             onEdit={onEdit}
@@ -142,55 +150,11 @@ export const MinecraftServerCard: React.FC<{
 
         <MinecraftServerInfo entry={entry} onKick={setKicking} />
 
-        <div className="flex gap-2">
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="default"
-                size="icon-lg"
-                aria-label={t('action.start')}
-                disabled={!canStart || busy !== null}
-                isLoading={busy === 'start' || state === 'starting' || state === 'stopping'}
-                onClick={() => void run('start', () => AdminMinecraftApi.start(server.id))}
-              >
-                <Play />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{t('action.start')}</TooltipContent>
-          </Tooltip>
-
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon-lg"
-                aria-label={t('action.restart')}
-                disabled={!canStop || busy !== null}
-                isLoading={busy === 'restart'}
-                onClick={() => void run('restart', () => AdminMinecraftApi.restart(server.id))}
-              >
-                <RotateCcw />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{t('action.restart')}</TooltipContent>
-          </Tooltip>
-
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="destructive"
-                size="icon-lg"
-                aria-label={t('action.stop')}
-                disabled={!canStop || busy !== null}
-                isLoading={busy === 'stop'}
-                onClick={() => void run('stop', () => AdminMinecraftApi.stop(server.id))}
-              >
-                <Square />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{t('action.stop')}</TooltipContent>
-          </Tooltip>
-        </div>
+        <MinecraftCardActions
+          state={state}
+          busy={busy}
+          onRun={action => void run(action, () => AdminMinecraftApi[action](server.id))}
+        />
       </CardContent>
     </Card>
   );

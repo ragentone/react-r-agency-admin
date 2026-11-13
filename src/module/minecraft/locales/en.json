@@ -56,7 +56,8 @@
     "broadcast": "Send message",
     "backup": "Create backup",
     "backups": "Backups",
-    "world": "World settings"
+    "world": "World settings",
+    "gamerules": "Game rules"
   },
   "gamemode": {
     "survival": "Survival",
@@ -266,6 +267,26 @@
       "wrong_platform": "The archive does not contain a Linux program.",
       "install_failed": "Installation failed (see runtime log).",
       "download_timeout": "Download stalled (no data for 60 s) and was cancelled."
+    }
+  },
+  "gamerule": {
+    "title": "Game rules: {{name}}",
+    "text": "Applies immediately and stays saved in the world.",
+    "loading": "Querying game rules",
+    "unknown": "Value not recognized from server",
+    "rule": {
+      "keepInventory": "Keep inventory",
+      "doDaylightCycle": "Day-night cycle",
+      "doWeatherCycle": "Weather cycle",
+      "doMobSpawning": "Mobs spawn",
+      "mobGriefing": "Mobs destroy blocks",
+      "pvp": "Players can fight each other",
+      "showCoordinates": "Show coordinates",
+      "naturalRegeneration": "Natural regeneration",
+      "doInsomnia": "Phantoms spawn",
+      "fallDamage": "Fall damage",
+      "fireDamage": "Fire damage",
+      "tntExplodes": "TNT explodes"
     }
   }
 }

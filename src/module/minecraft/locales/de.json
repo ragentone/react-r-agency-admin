@@ -56,7 +56,8 @@
     "broadcast": "Nachricht senden",
     "backup": "Backup erstellen",
     "backups": "Backups",
-    "world": "Welt-Einstellungen"
+    "world": "Welt-Einstellungen",
+    "gamerules": "Spielregeln"
   },
   "gamemode": {
     "survival": "Survival",
@@ -266,6 +267,26 @@
       "wrong_platform": "Das Archiv enthält kein Linux-Programm.",
       "install_failed": "Installation fehlgeschlagen (siehe Runtime-Log).",
       "download_timeout": "Download hängt (60 s keine Daten) und wurde abgebrochen."
+    }
+  },
+  "gamerule": {
+    "title": "Spielregeln: {{name}}",
+    "text": "Gilt sofort und bleibt in der Welt gespeichert.",
+    "loading": "Spielregeln werden abgefragt",
+    "unknown": "Wert vom Server nicht erkannt",
+    "rule": {
+      "keepInventory": "Inventar behalten",
+      "doDaylightCycle": "Tag-Nacht-Wechsel",
+      "doWeatherCycle": "Wetterwechsel",
+      "doMobSpawning": "Monster und Tiere erscheinen",
+      "mobGriefing": "Monster zerstören Blöcke",
+      "pvp": "Spieler können sich bekämpfen",
+      "showCoordinates": "Koordinaten anzeigen",
+      "naturalRegeneration": "Natürliche Heilung",
+      "doInsomnia": "Phantome erscheinen",
+      "fallDamage": "Fallschaden",
+      "fireDamage": "Feuerschaden",
+      "tntExplodes": "TNT explodiert"
     }
   }
 }
