@@ -264,7 +264,8 @@
       "download_failed": "Download fehlgeschlagen.",
       "bad_archive": "Das Archiv ist ungültig oder zu groß.",
       "wrong_platform": "Das Archiv enthält kein Linux-Programm.",
-      "install_failed": "Installation fehlgeschlagen (siehe Runtime-Log)."
+      "install_failed": "Installation fehlgeschlagen (siehe Runtime-Log).",
+      "download_timeout": "Download hängt (60 s keine Daten) und wurde abgebrochen."
     }
   }
 }

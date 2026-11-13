@@ -105,6 +105,7 @@ export interface IMinecraftBdsStatus {
   version: string | null;
   dir: string;
   phase: 'idle' | 'downloading' | 'installing' | 'done' | 'error';
+  progress: { received: number; total: number | null } | null;
   error: string | null;
   latest: string | null;
 }

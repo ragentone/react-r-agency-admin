@@ -6,10 +6,14 @@ import { useTranslation } from 'react-i18next';
 
 import { useBds } from '../hooks/use-bds';
 
+const mb = (bytes: number) => (bytes / 1024 / 1024).toFixed(1);
+const progressText = (p: { received: number; total: number | null }) =>
+  p.total ? `${mb(p.received)} / ${mb(p.total)} MB` : `${mb(p.received)} MB`;
+
 /** BDS (Bedrock Dedicated Server) installieren/aktualisieren, nur im nativen Modus nötig. */
 export const BdsDialog: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const { t } = useTranslation('minecraft');
-  const { status, failed, starting, startError, install } = useBds(true);
+  const { status, failed, starting, startError, install } = useBds();
   const working = status?.phase === 'downloading' || status?.phase === 'installing';
   const upToDate = !!status?.installed && !!status.latest && status.version === status.latest;
   const code = startError ?? (status?.phase === 'error' ? status.error : null);
@@ -58,6 +62,9 @@ export const BdsDialog: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       {working && (
         <p role="status" className="text-caption text-muted-foreground">
           {t(`bds.phase.${status?.phase}`)}
+          {status?.phase === 'downloading' &&
+            status.progress &&
+            ` ${progressText(status.progress)}`}
         </p>
       )}
       {status?.phase === 'done' && !code && (

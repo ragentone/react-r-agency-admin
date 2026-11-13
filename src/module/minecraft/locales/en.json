@@ -264,7 +264,8 @@
       "download_failed": "Download failed.",
       "bad_archive": "The archive is invalid or too large.",
       "wrong_platform": "The archive does not contain a Linux program.",
-      "install_failed": "Installation failed (see runtime log)."
+      "install_failed": "Installation failed (see runtime log).",
+      "download_timeout": "Download stalled (no data for 60 s) and was cancelled."
     }
   }
 }
