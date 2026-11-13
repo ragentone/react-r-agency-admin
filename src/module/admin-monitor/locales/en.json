@@ -1,0 +1,49 @@
+{
+  "title": "Server monitor",
+  "subtitle": "Live server utilisation",
+  "waiting": "No measurements yet. The server samples every 5 seconds.",
+  "error": "Could not load measurements.",
+  "retry": "Try again",
+  "range": {
+    "5": "5 min",
+    "15": "15 min",
+    "60": "1 h"
+  },
+  "tiles": {
+    "cpu": "CPU",
+    "load": "Load {{load}} · {{cores}} cores",
+    "memory": "Memory",
+    "process": "Server process",
+    "heap": "Heap {{heap}}",
+    "loop": "Event loop",
+    "loopHint": "Delay (p99)"
+  },
+  "charts": {
+    "cpu": "CPU usage",
+    "cpuText": "Whole system and server process",
+    "system": "System",
+    "process": "Process",
+    "memory": "Memory",
+    "memoryText": "Used memory of the system",
+    "loop": "Event loop delay",
+    "loopText": "High values: the server responds slowly",
+    "processText": "Memory of the server process"
+  },
+  "disks": {
+    "title": "Disk",
+    "usage": "{{used}} of {{total}}"
+  },
+  "host": {
+    "title": "System",
+    "name": "Host",
+    "os": "Operating system",
+    "cpu": "Processor",
+    "load": "Load (1/5/15 min)",
+    "uptime": "System uptime",
+    "process": "Process"
+  },
+  "menu": {
+    "label": "Server monitor",
+    "description": "CPU, memory and disk"
+  }
+}

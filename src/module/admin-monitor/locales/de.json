@@ -1,0 +1,49 @@
+{
+  "title": "Server-Monitor",
+  "subtitle": "Auslastung des Servers in Echtzeit",
+  "waiting": "Noch keine Messwerte. Der Server sammelt alle 5 Sekunden.",
+  "error": "Messwerte konnten nicht geladen werden.",
+  "retry": "Erneut versuchen",
+  "range": {
+    "5": "5 Min.",
+    "15": "15 Min.",
+    "60": "1 Std."
+  },
+  "tiles": {
+    "cpu": "CPU",
+    "load": "Last {{load}} · {{cores}} Kerne",
+    "memory": "Arbeitsspeicher",
+    "process": "Server-Prozess",
+    "heap": "Heap {{heap}}",
+    "loop": "Event Loop",
+    "loopHint": "Verzögerung (p99)"
+  },
+  "charts": {
+    "cpu": "CPU-Auslastung",
+    "cpuText": "Gesamtes System und Server-Prozess",
+    "system": "System",
+    "process": "Prozess",
+    "memory": "Arbeitsspeicher",
+    "memoryText": "Belegter Speicher des Systems",
+    "loop": "Event-Loop-Verzögerung",
+    "loopText": "Hohe Werte: der Server reagiert träge",
+    "processText": "Speicher des Server-Prozesses"
+  },
+  "disks": {
+    "title": "Festplatte",
+    "usage": "{{used}} von {{total}}"
+  },
+  "host": {
+    "title": "System",
+    "name": "Host",
+    "os": "Betriebssystem",
+    "cpu": "Prozessor",
+    "load": "Last (1/5/15 Min.)",
+    "uptime": "System-Laufzeit",
+    "process": "Prozess"
+  },
+  "menu": {
+    "label": "Server-Monitor",
+    "description": "CPU, Speicher und Festplatte"
+  }
+}
