@@ -16,6 +16,7 @@ import { KickPlayerDialog } from './KickPlayerDialog';
 import { MinecraftCardMenu } from './MinecraftCardMenu';
 import { MinecraftServerInfo } from './MinecraftServerInfo';
 import { MinecraftTerminal } from './MinecraftTerminal';
+import { WorldSettingsDialog } from './WorldSettingsDialog';
 
 type Action = 'start' | 'stop' | 'restart';
 
@@ -44,6 +45,7 @@ export const MinecraftServerCard: React.FC<{
   const [kicking, setKicking] = useState<string | null>(null);
   const [broadcasting, setBroadcasting] = useState(false);
   const [backupsOpen, setBackupsOpen] = useState(false);
+  const [worldOpen, setWorldOpen] = useState(false);
 
   const run = async (
     action: Action,
@@ -87,6 +89,13 @@ export const MinecraftServerCard: React.FC<{
           onClose={() => setBroadcasting(false)}
         />
       )}
+      {worldOpen && (
+        <WorldSettingsDialog
+          serverId={server.id}
+          name={server.name}
+          onClose={() => setWorldOpen(false)}
+        />
+      )}
       <BackupsDrawer
         serverId={server.id}
         name={server.name}
@@ -123,6 +132,7 @@ export const MinecraftServerCard: React.FC<{
             canBroadcast={state === 'running'}
             canDelete={canStart}
             onBackups={() => setBackupsOpen(true)}
+            onWorld={() => setWorldOpen(true)}
             onBroadcast={() => setBroadcasting(true)}
             onTerminal={() => setTerminalOpen(true)}
             onEdit={onEdit}

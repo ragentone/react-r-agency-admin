@@ -45,14 +45,16 @@
       "no_free_port": "Kein freier Port gefunden (alle geprüften UDP-Ports sind belegt).",
       "conflict": "Name oder Port wurde gerade vergeben, bitte erneut versuchen.",
       "folder_delete_failed": "Der Ordner konnte nicht gelöscht werden. Der Server ist entfernt, Ordner von Hand löschen.",
-      "low_memory": "Zu wenig freier Arbeitsspeicher, um den Server zu starten."
+      "low_memory": "Zu wenig freier Arbeitsspeicher, um den Server zu starten.",
+      "read_failed": "Einstellungen konnten nicht gelesen werden."
     },
     "edit": "Bearbeiten",
     "delete": "Löschen",
     "terminal": "Terminal",
     "broadcast": "Nachricht senden",
     "backup": "Backup erstellen",
-    "backups": "Backups"
+    "backups": "Backups",
+    "world": "Welt-Einstellungen"
   },
   "gamemode": {
     "survival": "Survival",
@@ -207,5 +209,29 @@
     "change": "Ändern",
     "done": "Zeitplan gespeichert.",
     "error": "Zeitplan konnte nicht gespeichert werden."
+  },
+  "world": {
+    "title": "Welt: {{name}}",
+    "text": "Gilt ab dem nächsten Start des Servers.",
+    "loading": "Einstellungen werden geladen",
+    "difficulty": "Schwierigkeit",
+    "difficultyOption": {
+      "peaceful": "Friedlich",
+      "easy": "Leicht",
+      "normal": "Normal",
+      "hard": "Schwer"
+    },
+    "permission": "Rechte neuer Spieler",
+    "permissionOption": {
+      "visitor": "Besucher (nur schauen)",
+      "member": "Mitglied",
+      "operator": "Operator (alle Befehle)"
+    },
+    "view": "Sichtweite (Chunks)",
+    "viewHint": "5–32. Kleiner spart RAM und Bandbreite.",
+    "tick": "Simulationsradius (Chunks)",
+    "tickHint": "4–12. Bereich um Spieler, in dem die Welt berechnet wird.",
+    "cheats": "Cheats erlauben",
+    "done": "Welt-Einstellungen gespeichert."
   }
 }

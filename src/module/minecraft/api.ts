@@ -8,6 +8,7 @@ import type {
   IMinecraftPass,
   IMinecraftServerEntry,
   IMinecraftServerInput,
+  IMinecraftWorldSettings,
 } from './types';
 
 /* Parsed here instead of codegen `graphql()` (Muster admin-monitor/api.ts). */
@@ -67,6 +68,12 @@ const doc = {
   ),
   broadcast: parse(
     `mutation AdminMinecraftBroadcast($serverId: String!, $message: String!, $mode: String) { adminMinecraftBroadcast(serverId: $serverId, message: $message, mode: $mode) { success error } }`
+  ),
+  worldGet: parse(
+    `query AdminMinecraftWorldGet($serverId: String!) { adminMinecraftWorldGet(serverId: $serverId) { success error settings } }`
+  ),
+  worldSave: parse(
+    `mutation AdminMinecraftWorldSave($serverId: String!, $settings: JSON!) { adminMinecraftWorldSave(serverId: $serverId, settings: $settings) { success error settings restartRequired } }`
   ),
   restart: parse(
     `mutation AdminMinecraftRestart($serverId: String!) { adminMinecraftRestart(serverId: $serverId) { success error } }`
@@ -171,6 +178,22 @@ export const AdminMinecraftApi = {
     write<IMinecraftResult>(doc.broadcast, 'adminMinecraftBroadcast', { serverId, message, mode }),
   restart: (serverId: string) =>
     write<IMinecraftResult>(doc.restart, 'adminMinecraftRestart', { serverId }),
+  worldSettings: (serverId: string) =>
+    run<IMinecraftResult & { settings?: IMinecraftWorldSettings }>(
+      () =>
+        client().query({
+          query: doc.worldGet as never,
+          variables: { serverId },
+          fetchPolicy: 'no-cache',
+        }),
+      'adminMinecraftWorldGet'
+    ),
+  saveWorldSettings: (serverId: string, settings: IMinecraftWorldSettings) =>
+    write<IMinecraftResult & { restartRequired?: boolean }>(
+      doc.worldSave,
+      'adminMinecraftWorldSave',
+      { serverId, settings }
+    ),
   passes: () =>
     read<IMinecraftResult & { passes?: IMinecraftPass[] }>(doc.passes, 'adminMinecraftPasses'),
   blockPass: (id: string, blocked: boolean) =>

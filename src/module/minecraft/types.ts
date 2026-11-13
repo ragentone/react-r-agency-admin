@@ -83,3 +83,17 @@ export interface IMinecraftBackupSettings {
   /** 1–30 Backups je Server */
   keep: number;
 }
+
+export const MINECRAFT_DIFFICULTIES = ['peaceful', 'easy', 'normal', 'hard'] as const;
+export const MINECRAFT_PERMISSIONS = ['visitor', 'member', 'operator'] as const;
+
+/** Einstellungen der Spielwelt (`server.properties`), je Server; gelten ab dem nächsten Start. */
+export interface IMinecraftWorldSettings {
+  difficulty: (typeof MINECRAFT_DIFFICULTIES)[number];
+  /** 5–32 Chunks */
+  viewDistance: number;
+  /** 4–12 Chunks */
+  tickDistance: number;
+  permission: (typeof MINECRAFT_PERMISSIONS)[number];
+  cheats: boolean;
+}

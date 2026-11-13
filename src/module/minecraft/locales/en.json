@@ -45,14 +45,16 @@
       "no_free_port": "No free port found (all checked UDP ports are in use).",
       "conflict": "Name or port was just taken, please try again.",
       "folder_delete_failed": "The folder could not be deleted. The server is removed, delete the folder manually.",
-      "low_memory": "Not enough free memory to start the server."
+      "low_memory": "Not enough free memory to start the server.",
+      "read_failed": "Settings could not be read."
     },
     "edit": "Edit",
     "delete": "Delete",
     "terminal": "Terminal",
     "broadcast": "Send message",
     "backup": "Create backup",
-    "backups": "Backups"
+    "backups": "Backups",
+    "world": "World settings"
   },
   "gamemode": {
     "survival": "Survival",
@@ -207,5 +209,29 @@
     "change": "Change",
     "done": "Schedule saved.",
     "error": "Could not save the schedule."
+  },
+  "world": {
+    "title": "World: {{name}}",
+    "text": "Applies from the next server start.",
+    "loading": "Loading settings",
+    "difficulty": "Difficulty",
+    "difficultyOption": {
+      "peaceful": "Peaceful",
+      "easy": "Easy",
+      "normal": "Normal",
+      "hard": "Hard"
+    },
+    "permission": "Permission of new players",
+    "permissionOption": {
+      "visitor": "Visitor (look only)",
+      "member": "Member",
+      "operator": "Operator (all commands)"
+    },
+    "view": "View distance (chunks)",
+    "viewHint": "5–32. Lower saves RAM and bandwidth.",
+    "tick": "Simulation distance (chunks)",
+    "tickHint": "4–12. Area around players where the world is simulated.",
+    "cheats": "Allow cheats",
+    "done": "World settings saved."
   }
 }
