@@ -1,0 +1,55 @@
+{
+  "title": "Cron jobs",
+  "subtitle": "Scheduled tasks of the server",
+  "menu": {
+    "label": "Cron jobs",
+    "description": "View and start scheduled tasks"
+  },
+  "retry": "Try again",
+  "search": "Search job",
+  "filter": {
+    "all": "All",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "status": {
+    "running": "Running",
+    "scheduled": "Scheduled",
+    "inactive": "Inactive"
+  },
+  "next": "Next run: {{time}}",
+  "noNext": "No run planned",
+  "empty": {
+    "title": "No cron jobs",
+    "text": "No job is registered on the server.",
+    "filtered": "Nothing found",
+    "filteredText": "Adjust the search or filter."
+  },
+  "drawer": {
+    "description": "State, schedule and manual runs of this job.",
+    "status": "Status",
+    "expression": "Schedule (cron)",
+    "next": "Next run",
+    "runningHint": "The job is running right now.",
+    "inactiveHint": "The job is inactive and cannot be started."
+  },
+  "run": {
+    "action": "Run now",
+    "done": "{{name}} was executed.",
+    "failed": "{{name}} failed."
+  },
+  "runs": {
+    "title": "Manual runs",
+    "empty": "No manual run since the restart.",
+    "ok": "OK",
+    "failed": "Failed"
+  },
+  "error": {
+    "load": "Jobs could not be loaded.",
+    "unknown": "Unknown error.",
+    "not_authorized": "Not authorized.",
+    "not_found": "Job not found.",
+    "running": "The job is already running.",
+    "inactive": "The job is inactive."
+  }
+}

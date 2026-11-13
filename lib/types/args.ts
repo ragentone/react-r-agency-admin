@@ -69,6 +69,11 @@ export interface IMutationAdminAddUserRoleArgs {
   userRole: string;
 }
 
+/** Arguments of `Mutation.adminCronRun` */
+export interface IMutationAdminCronRunArgs {
+  name: string;
+}
+
 /** Arguments of `Mutation.adminMinecraftBackup` */
 export interface IMutationAdminMinecraftBackupArgs {
   serverId: string;
@@ -447,11 +452,6 @@ export interface IMutationCreateAuthTokenArgs {
 /** Arguments of `Mutation.createDummyUsers` */
 export interface IMutationCreateDummyUsersArgs {
   count?: InputMaybe<number>;
-}
-
-/** Arguments of `Mutation.cronExecute` */
-export interface IMutationCronExecuteArgs {
-  name: string;
 }
 
 /** Arguments of `Mutation.debugClientReport` */
@@ -885,6 +885,11 @@ export interface IQueryDbResourceReadArgs {
   filters?: InputMaybe<ScalarJSON>;
   order?: InputMaybe<ScalarJSON>;
   pagination?: InputMaybe<IDbPagination>;
+}
+
+/** Arguments of `Query.adminCronRuns` */
+export interface IQueryAdminCronRunsArgs {
+  name?: InputMaybe<string>;
 }
 
 /** Arguments of `Query.adminMinecraftBackups` */

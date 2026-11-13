@@ -42,6 +42,15 @@ Query  ‹IQuery›
 │       │   └── showFullName: Boolean
 │       ├── superUser: Boolean
 │       └── userType: String!
+├── adminCronList: adminCronListReturn  ‹IAdminCronListReturn›
+│   ├── error: String
+│   ├── list: JSON
+│   └── success: Boolean
+├── adminCronRuns: adminCronRunsReturn  ‹IAdminCronRunsReturn›
+│   ├── $name: String
+│   ├── error: String
+│   ├── list: JSON
+│   └── success: Boolean
 ├── adminDbUsageEntities: adminDbUsageEntitiesReturn  ‹IAdminDbUsageEntitiesReturn›
 │   ├── entities: JSON
 │   ├── error: String
@@ -301,12 +310,6 @@ Query  ‹IQuery›
 ├── clientWriteData: clientWriteDataReturn  ‹IClientWriteDataReturn›
 │   ├── $data: JSON!
 │   ├── $dataKey: String!
-│   └── success: Boolean
-├── cronJobList: cronJobListReturn  ‹ICronJobListReturn›
-│   ├── list: JSON
-│   └── success: Boolean
-├── cronRunnerList: cronRunnerListReturn  ‹ICronRunnerListReturn›
-│   ├── list: JSON
 │   └── success: Boolean
 ├── currencyGet: currencyGetReturn  ‹ICurrencyGetReturn›
 │   ├── $params: currencyParams!  ‹ICurrencyParams›
@@ -955,6 +958,11 @@ Mutation  ‹IMutation›
 │   ├── $userId: ID!
 │   ├── $userRole: String!
 │   └── success: Boolean
+├── adminCronRun: adminCronRunReturn  ‹IAdminCronRunReturn›
+│   ├── $name: String!
+│   ├── error: String
+│   ├── run: JSON
+│   └── success: Boolean
 ├── adminMinecraftBackup: adminMinecraftBackupReturn  ‹IAdminMinecraftBackupReturn›
 │   ├── $serverId: String!
 │   ├── error: String
@@ -1491,11 +1499,6 @@ Mutation  ‹IMutation›
 │   └── success: Boolean
 ├── createDummyUsers: createDummyUsersReturn  ‹ICreateDummyUsersReturn›
 │   ├── $count: Int
-│   └── success: Boolean
-├── cronExecute: cronExecuteReturn  ‹ICronExecuteReturn›
-│   ├── $name: String!
-│   ├── id: String
-│   ├── result: JSON
 │   └── success: Boolean
 ├── DbResourceCreate: dbResourceCreateResult  ‹IDbResourceCreateResult›
 │   ├── $alias: String!
@@ -2119,6 +2122,9 @@ Inputs
 | `accountUpdateData`                      | Input  | `IAccountUpdateData`                      | `inputs.ts`  |                                                                                  |
 | `adminAddRoleReturn`                     | Object | `IAdminAddRoleReturn`                     | `objects.ts` |                                                                                  |
 | `adminAddUserRoleReturn`                 | Object | `IAdminAddUserRoleReturn`                 | `objects.ts` |                                                                                  |
+| `adminCronListReturn`                    | Object | `IAdminCronListReturn`                    | `objects.ts` |                                                                                  |
+| `adminCronRunReturn`                     | Object | `IAdminCronRunReturn`                     | `objects.ts` |                                                                                  |
+| `adminCronRunsReturn`                    | Object | `IAdminCronRunsReturn`                    | `objects.ts` |                                                                                  |
 | `adminDbUsageEntitiesReturn`             | Object | `IAdminDbUsageEntitiesReturn`             | `objects.ts` |                                                                                  |
 | `adminDbUsageReportReturn`               | Object | `IAdminDbUsageReportReturn`               | `objects.ts` |                                                                                  |
 | `adminMinecraftBackupReturn`             | Object | `IAdminMinecraftBackupReturn`             | `objects.ts` |                                                                                  |
@@ -2243,9 +2249,6 @@ Inputs
 | `configImportReturn`                     | Object | `IConfigImportReturn`                     | `objects.ts` |                                                                                  |
 | `createAuthTokenReturn`                  | Object | `ICreateAuthTokenReturn`                  | `objects.ts` |                                                                                  |
 | `createDummyUsersReturn`                 | Object | `ICreateDummyUsersReturn`                 | `objects.ts` |                                                                                  |
-| `cronExecuteReturn`                      | Object | `ICronExecuteReturn`                      | `objects.ts` |                                                                                  |
-| `cronJobListReturn`                      | Object | `ICronJobListReturn`                      | `objects.ts` |                                                                                  |
-| `cronRunnerListReturn`                   | Object | `ICronRunnerListReturn`                   | `objects.ts` |                                                                                  |
 | `currencyGetReturn`                      | Object | `ICurrencyGetReturn`                      | `objects.ts` |                                                                                  |
 | `currencyParams`                         | Input  | `ICurrencyParams`                         | `inputs.ts`  |                                                                                  |
 | `DateTime`                               | Scalar | `ScalarDateTime`                          | `scalars.ts` |                                                                                  |

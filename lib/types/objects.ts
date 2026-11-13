@@ -35,6 +35,27 @@ export interface IAdminAddUserRoleReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminCronListReturn` */
+export interface IAdminCronListReturn {
+  error: Maybe<string>;
+  list: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminCronRunReturn` */
+export interface IAdminCronRunReturn {
+  error: Maybe<string>;
+  run: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminCronRunsReturn` */
+export interface IAdminCronRunsReturn {
+  error: Maybe<string>;
+  list: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminDbUsageEntitiesReturn` */
 export interface IAdminDbUsageEntitiesReturn {
   entities: Maybe<ScalarJSON>;
@@ -1043,25 +1064,6 @@ export interface ICreateDummyUsersReturn {
   success: Maybe<boolean>;
 }
 
-/** GraphQL: `cronExecuteReturn` */
-export interface ICronExecuteReturn {
-  id: Maybe<string>;
-  result: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `cronJobListReturn` */
-export interface ICronJobListReturn {
-  list: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `cronRunnerListReturn` */
-export interface ICronRunnerListReturn {
-  list: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
 /** GraphQL: `currencyGetReturn` */
 export interface ICurrencyGetReturn {
   amount: Maybe<string>;
@@ -1274,6 +1276,7 @@ export interface IMutation {
   accountSelfUpdateSettings: Maybe<IAccountSelfUpdateSettingsReturn>;
   adminAddRole: Maybe<IAdminAddRoleReturn>;
   adminAddUserRole: Maybe<IAdminAddUserRoleReturn>;
+  adminCronRun: Maybe<IAdminCronRunReturn>;
   adminMinecraftBackup: Maybe<IAdminMinecraftBackupReturn>;
   adminMinecraftBlockPass: Maybe<IAdminMinecraftBlockPassReturn>;
   adminMinecraftBroadcast: Maybe<IAdminMinecraftBroadcastReturn>;
@@ -1352,7 +1355,6 @@ export interface IMutation {
   configImport: Maybe<IConfigImportReturn>;
   createAuthToken: Maybe<ICreateAuthTokenReturn>;
   createDummyUsers: Maybe<ICreateDummyUsersReturn>;
-  cronExecute: Maybe<ICronExecuteReturn>;
   debugClientReport: Maybe<IDebugClientReportReturn>;
   debugReportDelete: Maybe<IDebugReportDeleteReturn>;
   deleteAllDummyUsers: Maybe<IDeleteAllDummyUsersReturn>;
@@ -1591,6 +1593,8 @@ export interface IMyEventsMemberSetRoleReturn {
 export interface IQuery {
   DbResourceRead: Maybe<IDbResourceReadResult>;
   accountSelfLoad: Maybe<IAccountSelfLoad>;
+  adminCronList: Maybe<IAdminCronListReturn>;
+  adminCronRuns: Maybe<IAdminCronRunsReturn>;
   adminDbUsageEntities: Maybe<IAdminDbUsageEntitiesReturn>;
   adminDbUsageReport: Maybe<IAdminDbUsageReportReturn>;
   adminMinecraftBackups: Maybe<IAdminMinecraftBackupsReturn>;
@@ -1635,8 +1639,6 @@ export interface IQuery {
   clientReadData: Maybe<IClientReadDataReturn>;
   clientStatus: Maybe<IClientStatusReturn>;
   clientWriteData: Maybe<IClientWriteDataReturn>;
-  cronJobList: Maybe<ICronJobListReturn>;
-  cronRunnerList: Maybe<ICronRunnerListReturn>;
   currencyGet: Maybe<ICurrencyGetReturn>;
   debugReportList: Maybe<IDebugReportListReturn>;
   developerTestSource: Maybe<IDeveloperTestSourceReturn>;

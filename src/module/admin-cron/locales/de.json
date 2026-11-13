@@ -1,0 +1,55 @@
+{
+  "title": "Cron-Jobs",
+  "subtitle": "Geplante Aufgaben des Servers",
+  "menu": {
+    "label": "Cron-Jobs",
+    "description": "Geplante Aufgaben ansehen und starten"
+  },
+  "retry": "Erneut versuchen",
+  "search": "Job suchen",
+  "filter": {
+    "all": "Alle",
+    "active": "Aktiv",
+    "inactive": "Inaktiv"
+  },
+  "status": {
+    "running": "Läuft",
+    "scheduled": "Geplant",
+    "inactive": "Inaktiv"
+  },
+  "next": "Nächster Lauf: {{time}}",
+  "noNext": "Kein Lauf geplant",
+  "empty": {
+    "title": "Keine Cron-Jobs",
+    "text": "Auf dem Server ist kein Job registriert.",
+    "filtered": "Nichts gefunden",
+    "filteredText": "Passe Suche oder Filter an."
+  },
+  "drawer": {
+    "description": "Status, Zeitplan und manuelle Läufe dieses Jobs.",
+    "status": "Status",
+    "expression": "Zeitplan (Cron)",
+    "next": "Nächster Lauf",
+    "runningHint": "Der Job läuft gerade.",
+    "inactiveHint": "Der Job ist inaktiv und kann nicht gestartet werden."
+  },
+  "run": {
+    "action": "Jetzt ausführen",
+    "done": "{{name}} wurde ausgeführt.",
+    "failed": "{{name}} ist fehlgeschlagen."
+  },
+  "runs": {
+    "title": "Manuelle Läufe",
+    "empty": "Seit dem Neustart noch kein manueller Lauf.",
+    "ok": "OK",
+    "failed": "Fehlgeschlagen"
+  },
+  "error": {
+    "load": "Jobs konnten nicht geladen werden.",
+    "unknown": "Unbekannter Fehler.",
+    "not_authorized": "Keine Berechtigung.",
+    "not_found": "Job nicht gefunden.",
+    "running": "Der Job läuft bereits.",
+    "inactive": "Der Job ist inaktiv."
+  }
+}
