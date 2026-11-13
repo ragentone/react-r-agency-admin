@@ -6,7 +6,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@ui/shad-cn/components/dropdown-menu.tsx';
-import { EllipsisVertical, Megaphone, Pencil, Terminal, Trash2 } from 'lucide-react';
+import { Archive, EllipsisVertical, Megaphone, Pencil, Terminal, Trash2 } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -14,11 +14,12 @@ import { useTranslation } from 'react-i18next';
 export const MinecraftCardMenu: React.FC<{
   canBroadcast: boolean;
   canDelete: boolean;
+  onBackups: () => void;
   onBroadcast: () => void;
   onTerminal: () => void;
   onEdit: () => void;
   onDelete: () => void;
-}> = ({ canBroadcast, canDelete, onBroadcast, onTerminal, onEdit, onDelete }) => {
+}> = ({ canBroadcast, canDelete, onBackups, onBroadcast, onTerminal, onEdit, onDelete }) => {
   const { t } = useTranslation('minecraft');
   return (
     <DropdownMenu>
@@ -35,6 +36,10 @@ export const MinecraftCardMenu: React.FC<{
         <DropdownMenuItem disabled={!canBroadcast} onSelect={onBroadcast}>
           <Megaphone />
           {t('action.broadcast')}
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={onBackups}>
+          <Archive />
+          {t('action.backups')}
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={onEdit}>
           <Pencil />

@@ -49,7 +49,9 @@
     "edit": "Bearbeiten",
     "delete": "Löschen",
     "terminal": "Terminal",
-    "broadcast": "Nachricht senden"
+    "broadcast": "Nachricht senden",
+    "backup": "Backup erstellen",
+    "backups": "Backups"
   },
   "gamemode": {
     "survival": "Survival",
@@ -137,5 +139,31 @@
     "placeholder": "Nachricht",
     "asTitle": "Als Titel einblenden (besser auf der PS5)",
     "done": "Nachricht gesendet."
+  },
+  "backup": {
+    "busy": "Backup läuft …",
+    "done": "Backup erstellt: {{file}} ({{size}} MB)",
+    "error": {
+      "not_found": "Server nicht gefunden.",
+      "not_configured": "MINECRAFT_BASE_DIR ist nicht konfiguriert.",
+      "busy": "Für diesen Server läuft schon ein Backup.",
+      "hold_failed": "Der Server hat keinen gesicherten Stand gemeldet. Es wurde kein Backup angelegt.",
+      "backup_failed": "Backup fehlgeschlagen.",
+      "running": "Der Server muss dafür gestoppt sein.",
+      "restore_failed": "Wiederherstellen fehlgeschlagen. Die Welt wurde nicht verändert, falls das Backup nicht entpackt werden konnte.",
+      "invalid_input": "Ungültiger Dateiname."
+    },
+    "title": "Backups: {{name}}",
+    "description": "Welt-Backups erstellen, wiederherstellen und löschen",
+    "empty": "Noch keine Backups.",
+    "stopFirst": "Zum Wiederherstellen muss der Server gestoppt sein.",
+    "restoreTitle": "Backup wiederherstellen?",
+    "restoreText": "Die aktuelle Welt wird durch {{file}} ersetzt. Die bisherige Welt bleibt als worlds.before-restore im Server-Ordner (nur diese eine Stufe).",
+    "restoreConfirm": "Wiederherstellen",
+    "restoreDone": "Welt wiederhergestellt.",
+    "deleteTitle": "Backup löschen?",
+    "deleteText": "{{file}} wird endgültig gelöscht.",
+    "deleteConfirm": "Löschen",
+    "deleteDone": "Backup gelöscht."
   }
 }

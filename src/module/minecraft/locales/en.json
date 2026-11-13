@@ -49,7 +49,9 @@
     "edit": "Edit",
     "delete": "Delete",
     "terminal": "Terminal",
-    "broadcast": "Send message"
+    "broadcast": "Send message",
+    "backup": "Create backup",
+    "backups": "Backups"
   },
   "gamemode": {
     "survival": "Survival",
@@ -137,5 +139,31 @@
     "placeholder": "Message",
     "asTitle": "Show as title (better on PS5)",
     "done": "Message sent."
+  },
+  "backup": {
+    "busy": "Backup running …",
+    "done": "Backup created: {{file}} ({{size}} MB)",
+    "error": {
+      "not_found": "Server not found.",
+      "not_configured": "MINECRAFT_BASE_DIR is not configured.",
+      "busy": "A backup is already running for this server.",
+      "hold_failed": "The server did not report a safe state. No backup was created.",
+      "backup_failed": "Backup failed.",
+      "running": "The server must be stopped.",
+      "restore_failed": "Restore failed. The world is unchanged if the backup could not be extracted.",
+      "invalid_input": "Invalid file name."
+    },
+    "title": "Backups: {{name}}",
+    "description": "Create, restore and delete world backups",
+    "empty": "No backups yet.",
+    "stopFirst": "The server must be stopped to restore.",
+    "restoreTitle": "Restore backup?",
+    "restoreText": "The current world is replaced by {{file}}. The previous world stays in the server folder as worlds.before-restore (one level only).",
+    "restoreConfirm": "Restore",
+    "restoreDone": "World restored.",
+    "deleteTitle": "Delete backup?",
+    "deleteText": "{{file}} will be deleted permanently.",
+    "deleteConfirm": "Delete",
+    "deleteDone": "Backup deleted."
   }
 }

@@ -1,7 +1,7 @@
 import { parse } from 'graphql';
 import { getMeshClient } from 'r-agency-mesh-client-v1/release';
 
-import type { IMinecraftConsoleLine, IMinecraftServerEntry, IMinecraftServerInput } from './types';
+import type { IMinecraftBackupInfo, IMinecraftConsoleLine, IMinecraftServerEntry, IMinecraftServerInput } from './types';
 
 /* Parsed here instead of codegen `graphql()` (Muster admin-monitor/api.ts). */
 const doc = {
@@ -26,6 +26,18 @@ const doc = {
   ),
   sendCommand: parse(
     `mutation AdminMinecraftSendCommand($serverId: String!, $command: String!) { adminMinecraftSendCommand(serverId: $serverId, command: $command) { success error } }`
+  ),
+  backups: parse(
+    `query AdminMinecraftBackups($serverId: String!) { adminMinecraftBackups(serverId: $serverId) { success error backups } }`
+  ),
+  restoreBackup: parse(
+    `mutation AdminMinecraftRestoreBackup($serverId: String!, $file: String!) { adminMinecraftRestoreBackup(serverId: $serverId, file: $file) { success error } }`
+  ),
+  deleteBackup: parse(
+    `mutation AdminMinecraftDeleteBackup($serverId: String!, $file: String!) { adminMinecraftDeleteBackup(serverId: $serverId, file: $file) { success error } }`
+  ),
+  backup: parse(
+    `mutation AdminMinecraftBackup($serverId: String!) { adminMinecraftBackup(serverId: $serverId) { success error file size } }`
   ),
   kick: parse(
     `mutation AdminMinecraftKickPlayer($serverId: String!, $name: String!, $reason: String) { adminMinecraftKickPlayer(serverId: $serverId, name: $name, reason: $reason) { success error } }`
@@ -96,6 +108,20 @@ export const AdminMinecraftApi = {
     ),
   sendCommand: (serverId: string, command: string) =>
     write<IMinecraftResult>(doc.sendCommand, 'adminMinecraftSendCommand', { serverId, command }),
+  backups: (serverId: string) =>
+    run<IMinecraftResult & { backups?: IMinecraftBackupInfo[] }>(
+      () =>
+        client().query({ query: doc.backups as never, variables: { serverId }, fetchPolicy: 'no-cache' }),
+      'adminMinecraftBackups'
+    ),
+  restoreBackup: (serverId: string, file: string) =>
+    write<IMinecraftResult>(doc.restoreBackup, 'adminMinecraftRestoreBackup', { serverId, file }),
+  deleteBackup: (serverId: string, file: string) =>
+    write<IMinecraftResult>(doc.deleteBackup, 'adminMinecraftDeleteBackup', { serverId, file }),
+  backup: (serverId: string) =>
+    write<IMinecraftResult & { file?: string; size?: number }>(doc.backup, 'adminMinecraftBackup', {
+      serverId,
+    }),
   kickPlayer: (serverId: string, name: string, reason: string) =>
     write<IMinecraftResult>(doc.kick, 'adminMinecraftKickPlayer', { serverId, name, reason }),
   broadcast: (serverId: string, message: string, mode: 'chat' | 'title') =>

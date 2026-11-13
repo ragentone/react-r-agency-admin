@@ -51,6 +51,12 @@ export interface IMinecraftServerInput {
   autostart: boolean;
 }
 
+export interface IMinecraftBackupInfo {
+  file: string;
+  size: number;
+  createdAt: string;
+}
+
 export interface IMinecraftConsoleLine {
   seq: number;
   ts: string;

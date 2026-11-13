@@ -10,6 +10,7 @@ import { toast } from 'sonner';
 
 import { AdminMinecraftApi } from '../api';
 import type { IMinecraftRunState, IMinecraftServerEntry } from '../types';
+import { BackupsDrawer } from './BackupsDrawer';
 import { BroadcastDialog } from './BroadcastDialog';
 import { KickPlayerDialog } from './KickPlayerDialog';
 import { MinecraftCardMenu } from './MinecraftCardMenu';
@@ -42,6 +43,7 @@ export const MinecraftServerCard: React.FC<{
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [kicking, setKicking] = useState<string | null>(null);
   const [broadcasting, setBroadcasting] = useState(false);
+  const [backupsOpen, setBackupsOpen] = useState(false);
 
   const run = async (
     action: Action,
@@ -85,6 +87,13 @@ export const MinecraftServerCard: React.FC<{
           onClose={() => setBroadcasting(false)}
         />
       )}
+      <BackupsDrawer
+        serverId={server.id}
+        name={server.name}
+        open={backupsOpen}
+        stopped={canStart}
+        onOpenChange={setBackupsOpen}
+      />
       <MinecraftTerminal
         serverId={server.id}
         name={server.name}
@@ -113,6 +122,7 @@ export const MinecraftServerCard: React.FC<{
           <MinecraftCardMenu
             canBroadcast={state === 'running'}
             canDelete={canStart}
+            onBackups={() => setBackupsOpen(true)}
             onBroadcast={() => setBroadcasting(true)}
             onTerminal={() => setTerminalOpen(true)}
             onEdit={onEdit}
