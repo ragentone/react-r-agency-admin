@@ -36,13 +36,6 @@ export const SystemArea: React.FC = () => {
 
   return (
     <div data-slot="admin-system" className="mx-auto flex min-h-dvh w-full flex-col bg-background">
-      <header className="px-4 pt-3 pb-3">
-        <h1 className="truncate text-xl font-bold tracking-tight text-foreground">
-          {t('system.title')}
-        </h1>
-        <p className="text-caption text-muted-foreground">{t('system.subtitle')}</p>
-      </header>
-
       <Tabs value={tab} onValueChange={change} className="flex flex-1 flex-col">
         <TabsList
           aria-label={t('system.tabsLabel')}

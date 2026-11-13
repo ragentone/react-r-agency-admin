@@ -82,7 +82,10 @@ export const useSearchPanel = ({ focus, onSelectItem }: IUseSearchPanelOptions) 
     if (!isSearchItemActionable(item)) return;
     recent.add(term);
     // Handlers open drawers on top of the search – it stays open underneath (back returns here).
-    window.setTimeout(() => executeSearchItem(item, { router }), 60);
+    window.setTimeout(
+      () => executeSearchItem(item, { router, closeSearch: SearchManager.close }),
+      60
+    );
   };
 
   // Kept term: select it, so typing replaces it and Enter/arrows still work.

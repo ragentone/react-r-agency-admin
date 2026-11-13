@@ -41,6 +41,8 @@ export interface ISearchResult {
 
 export interface ISearchHandlerContext {
   router: ReturnType<typeof useRouter>;
+  /** Closes the search dialog before a handler opens something on top. */
+  closeSearch: () => void;
 }
 
 /** What happens when a hit with this `emit` is selected. */

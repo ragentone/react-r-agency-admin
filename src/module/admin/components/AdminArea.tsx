@@ -18,39 +18,35 @@ export const AdminArea: React.FC = () => {
 
   return (
     <div data-slot="admin" className="mx-auto flex min-h-dvh w-full flex-col bg-background">
-      <header className="border-b border-border/50">
-        <div className="px-4 pt-3">
-          <h1 className="truncate text-xl font-bold tracking-tight text-foreground">
-            {t('title')}
-          </h1>
-          <p className="text-caption text-muted-foreground">{t('subtitle')}</p>
-        </div>
-        <div role="tablist" aria-label={t('title')} className="mt-1 grid grid-cols-2 px-2">
-          {TABS.map(value => (
-            <button
-              key={value}
-              id={`admin-tab-${value}`}
-              type="button"
-              role="tab"
-              aria-selected={tab === value}
-              aria-controls={`admin-panel-${value}`}
-              onClick={() => setTab(value)}
-              className={cn(
-                'relative h-11 text-body font-semibold transition-colors',
-                tab === value ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
-              )}
-            >
-              {t(`tabs.${value}`)}
-              {tab === value && (
-                <span
-                  aria-hidden="true"
-                  className="absolute bottom-0 left-1/2 h-1 w-14 -translate-x-1/2 rounded-full bg-foreground"
-                />
-              )}
-            </button>
-          ))}
-        </div>
-      </header>
+      <div
+        role="tablist"
+        aria-label={t('title')}
+        className="grid grid-cols-2 border-b border-border/50 px-2"
+      >
+        {TABS.map(value => (
+          <button
+            key={value}
+            id={`admin-tab-${value}`}
+            type="button"
+            role="tab"
+            aria-selected={tab === value}
+            aria-controls={`admin-panel-${value}`}
+            onClick={() => setTab(value)}
+            className={cn(
+              'relative h-11 text-body font-semibold transition-colors',
+              tab === value ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
+            )}
+          >
+            {t(`tabs.${value}`)}
+            {tab === value && (
+              <span
+                aria-hidden="true"
+                className="absolute bottom-0 left-1/2 h-1 w-14 -translate-x-1/2 rounded-full bg-foreground"
+              />
+            )}
+          </button>
+        ))}
+      </div>
 
       <div
         id={`admin-panel-${tab}`}

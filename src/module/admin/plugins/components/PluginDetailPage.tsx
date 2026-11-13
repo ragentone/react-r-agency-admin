@@ -5,7 +5,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { usePluginList } from '../hooks/use-plugin-list';
-import { PluginDetailHeader } from './PluginDetailHeader';
+import { PluginDetailFrame } from './PluginDetailFrame';
 import { PluginDetailView } from './PluginDetailView';
 
 /**
@@ -19,20 +19,23 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
 
   if (loading && plugin === null) {
     return (
-      <div className="flex flex-col gap-3 px-4 py-4" aria-busy="true">
-        <Skeleton className="h-10 w-2/3" />
-        <Skeleton className="h-32 w-full" />
-      </div>
+      <PluginDetailFrame>
+        <div className="flex flex-col gap-3 px-4 py-4" aria-busy="true">
+          <Skeleton className="h-10 w-2/3" />
+          <Skeleton className="h-32 w-full" />
+        </div>
+      </PluginDetailFrame>
     );
   }
 
   if (plugin === null || error) {
     return (
-      <div className="flex flex-col">
-        <PluginDetailHeader />
+      <PluginDetailFrame>
         <Empty>
           <EmptyHeader>
-            <EmptyTitle>{error ? t('plugins.error.title') : t('plugins.details.notFound')}</EmptyTitle>
+            <EmptyTitle>
+              {error ? t('plugins.error.title') : t('plugins.details.notFound')}
+            </EmptyTitle>
           </EmptyHeader>
           <EmptyContent>
             {error && (
@@ -42,7 +45,7 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
             )}
           </EmptyContent>
         </Empty>
-      </div>
+      </PluginDetailFrame>
     );
   }
 

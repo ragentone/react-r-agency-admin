@@ -11,10 +11,15 @@ import { PluginDetailPage } from '../plugins/components/PluginDetailPage';
 export const PageAdminPluginDetail: React.FC = () => {
   const { pluginId } = useParams({ strict: false }) as { pluginId?: string };
   return (
-    <RoutePage width={720} scrollable={true} classes={{ scroll: 'p-0' }}>
-      <RoleGate roles={ADMIN_ROLES} fallback={<AdminNoAccess />}>
-        <PluginDetailPage pluginId={pluginId ?? ''} />
-      </RoleGate>
-    </RoutePage>
+    <RoleGate
+      roles={ADMIN_ROLES}
+      fallback={
+        <RoutePage width={720} scrollable={true} classes={{ scroll: 'p-0' }}>
+          <AdminNoAccess />
+        </RoutePage>
+      }
+    >
+      <PluginDetailPage pluginId={pluginId ?? ''} />
+    </RoleGate>
   );
 };

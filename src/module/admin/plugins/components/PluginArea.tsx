@@ -1,6 +1,4 @@
-import { Button } from '@ui/shad-cn/components/button.tsx';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/shad-cn/components/tabs.tsx';
-import { Plus, Upload } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -14,14 +12,24 @@ import { PluginUnknownList } from './PluginUnknownList';
 import { PluginUnknownRemoveDrawer } from './PluginUnknownRemoveDrawer';
 import { PluginUploadDrawer } from './PluginUploadDrawer';
 
+interface IPluginAreaProps {
+  uploadOpen: boolean;
+  setUploadOpen: (open: boolean) => void;
+  createOpen: boolean;
+  setCreateOpen: (open: boolean) => void;
+}
+
 /** `/admin/plugins`: installed plugins, folders without registry entry (tab "Development"), creating and uploading. */
-export const PluginArea: React.FC = () => {
+export const PluginArea: React.FC<IPluginAreaProps> = ({
+  uploadOpen,
+  setUploadOpen,
+  createOpen,
+  setCreateOpen,
+}) => {
   const { t } = useTranslation('admin');
   const installed = usePluginList();
   const unknown = usePluginUnknown(() => void installed.reload());
   const [tab, setTab] = useState('installed');
-  const [uploadOpen, setUploadOpen] = useState(false);
-  const [createOpen, setCreateOpen] = useState(false);
   const [removeTarget, setRemoveTarget] = useState<IPluginUnknownItem | null>(null);
 
   const failure = (code?: string | null) =>
@@ -45,23 +53,6 @@ export const PluginArea: React.FC = () => {
 
   return (
     <div data-slot="admin-plugins" className="flex min-h-dvh w-full flex-col bg-background">
-      <header className="sticky top-0 z-10 flex h-14 items-center gap-2 border-b border-border/50 bg-background/80 px-4 backdrop-blur">
-        <h1 className="min-w-0 flex-1 truncate text-title font-bold text-foreground">
-          {t('plugins.title')}
-        </h1>
-        <Button
-          variant="outline"
-          size="icon-lg"
-          aria-label={t('plugins.actions.upload')}
-          onClick={() => setUploadOpen(true)}
-        >
-          <Upload className="size-5" />
-        </Button>
-        <Button size="icon-lg" aria-label={t('plugins.actions.create')} onClick={() => setCreateOpen(true)}>
-          <Plus className="size-5" />
-        </Button>
-      </header>
-
       <Tabs value={tab} onValueChange={setTab} className="flex flex-col">
         <div className="px-2 pt-3 mb-2">
           <TabsList className="grid w-full grid-cols-2">

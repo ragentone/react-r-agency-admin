@@ -19,7 +19,7 @@ import {
   ItemTitle,
 } from '@ui/shad-cn/components/item.tsx';
 import { LucideLayoutGrid } from 'lucide-react';
-import { type FunctionComponent, useState } from 'react';
+import { type FunctionComponent, type ReactNode, useState } from 'react';
 
 interface IMenuItem {
   label?: string;
@@ -50,6 +50,10 @@ interface IPageHeaderProps {
   logoClassName?: string;
   titleClassName?: string;
   descriptionClassName?: string;
+  /** Left of the title, e.g. a back button. */
+  leading?: ReactNode;
+  /** Right edge after the buttons, e.g. a dropdown with page actions. */
+  actions?: ReactNode;
 }
 
 interface IProps {
@@ -110,6 +114,7 @@ const PageHeader = (props: IPageHeaderProps & IProps) => {
           />
         </ItemMedia>
       )}
+      {props.leading}
       <ItemContent className={'gap-0 select-none'}>
         {props.title && <ItemTitle className={props.titleClassName}>{props.title}</ItemTitle>}
         {props.description && (
@@ -150,6 +155,7 @@ const PageHeader = (props: IPageHeaderProps & IProps) => {
             </DropdownMenuContent>
           </DropdownMenu>
         )}
+        {props.actions}
       </ItemActions>
     </Item>
   );

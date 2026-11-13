@@ -77,7 +77,7 @@ export const SearchPanel: React.FC<ISearchPanelProps> = ({
     <div
       data-slot="search-panel"
       onKeyDown={panel.onKeyDown}
-      className="flex h-full min-h-0 flex-col overflow-hidden"
+      className="flex h-full min-h-0 flex-col overflow-hidden pt-2"
     >
       <SearchInput
         inputRef={inputRef}

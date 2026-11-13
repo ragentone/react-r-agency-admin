@@ -18,7 +18,9 @@ export const APP_DRAWER_SIZE = {
 } as React.CSSProperties;
 
 /** Side drawers (left / right): column width on any screen, full height for `full`. */
-const APP_DRAWER_SIDE_WIDTH = { '--drawer-content-width': 'min(88dvw, 28rem)' } as React.CSSProperties;
+const APP_DRAWER_SIDE_WIDTH = {
+  '--drawer-content-width': 'min(88dvw, 28rem)',
+} as React.CSSProperties;
 const APP_DRAWER_SIDE_SIZE = {
   ...APP_DRAWER_SIDE_WIDTH,
   '--drawer-height': '100dvh',
@@ -63,6 +65,8 @@ export interface IAppDrawerProps {
   hideHeader?: boolean;
   /** Grip bar at the drawer edge (default: shown). */
   showSwipeHandle?: boolean;
+  /** Hides the grip bar via CSS only (stays mounted, swipe to close keeps working). Default `false`. */
+  hideSwipeHandle?: boolean;
   /** Changes → the body is new (scroll position starts at the top). */
   bodyKey?: React.Key;
   bodyClassName?: string;
@@ -98,6 +102,7 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
   size = 'full',
   hideHeader,
   showSwipeHandle = true,
+  hideSwipeHandle = true,
   bodyKey,
   bodyClassName,
   contentProps,
@@ -117,12 +122,28 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
   const isSide = direction === 'left' || direction === 'right';
   // Bottom drawer (default `down`): flush to the bottom edge, square bottom corners, no bottom border.
   const isBottom = !isSide && direction !== 'up';
+  // Top drawer (`up`): flush to the top edge, square top corners, no top border.
+  const isTop = direction === 'up';
+  const isLeft = direction === 'left';
+  const isRight = direction === 'right';
+
+  // fullscreen
   const layoutClass =
     size === 'fullscreen'
       ? 'h-dvh w-dvw max-h-dvh max-w-none rounded-none border-0 m-0'
       : isSide
-        ? 'max-w-none rounded-none'
-        : cn('mx-auto w-full max-w-150', isBottom && 'rounded-b-none border-b-0 border-border/50');
+        ? cn('max-w-none rounded-none', {
+            'rounded-r-[min(var(--radius-4xl),24px)]': isLeft,
+            'rounded-l-[min(var(--radius-4xl),24px)]': isRight,
+            'm-0 border-0 border-r border-border/50': isLeft,
+            'm-0 border-0 border-l border-border/50': isRight,
+          })
+        : cn('mx-auto w-full max-w-150', {
+            'rounded-b-none border-b-0 border-border/50': isBottom,
+            'rounded-t-none border-t-0 border-border/50': isTop,
+            'h-dvh': isSide,
+          });
+
   const fullStyle: React.CSSProperties = isSide ? APP_DRAWER_SIDE_SIZE : APP_DRAWER_SIZE;
   const sizeStyle: React.CSSProperties | undefined =
     size === 'fullscreen'
@@ -134,16 +155,25 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
         : isSide
           ? APP_DRAWER_SIDE_WIDTH
           : undefined;
-  const layoutStyle: React.CSSProperties | undefined = isBottom
-    ? ({ ...sizeStyle, '--drawer-inset': '0px' } as React.CSSProperties)
-    : sizeStyle;
+  const layoutStyle: React.CSSProperties | undefined =
+    isBottom || isTop || isSide
+      ? ({ ...sizeStyle, '--drawer-inset': '0px' } as React.CSSProperties)
+      : sizeStyle;
 
   const inner = (
     <>
       {hideHeader ? (
         title != null && <DrawerTitle className="sr-only">{title}</DrawerTitle>
       ) : (
-        <div className="flex min-h-13 shrink-0 items-center gap-2 border-b border-border/50 px-3 pb-2">
+        <div
+          className={cn(
+            'flex min-h-13 shrink-0 items-center gap-2 border-b border-border/50 px-3',
+            {
+              'pb-2': isBottom && !hideSwipeHandle,
+              'bg-gray-50 dark:bg-transparent': true,
+            }
+          )}
+        >
           {onBack && (
             <Button
               variant="ghost"
@@ -189,11 +219,16 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
           {children}
         </div>
       )}
-      {footer && (
-        <div className="shrink-0 border-t border-border/50 bg-background px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-          {footer}
-        </div>
-      )}
+      <div
+        className={cn(
+          'shrink-0 border-t border-border/50 bg-background px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]',
+          {
+            'bg-gray-50 dark:bg-transparent': true,
+          }
+        )}
+      >
+        {footer}
+      </div>
     </>
   );
 
@@ -212,7 +247,11 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
       <DrawerPrimitive.VirtualKeyboardProvider>
         <DrawerContent
           {...contentProps}
-          className={cn(layoutClass, contentProps?.className)}
+          className={cn(
+            layoutClass,
+            hideSwipeHandle && '[&_[data-slot=drawer-swipe-handle]]:hidden',
+            contentProps?.className
+          )}
           style={{ ...layoutStyle, ...contentProps?.style }}
         >
           {sr && <DrawerDescription className="sr-only">{sr}</DrawerDescription>}

@@ -1,6 +1,5 @@
 import { AppDrawer } from '@ui/patterns';
 import React, { useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { scrollToMatch } from '../highlight';
 import { useActiveSection } from '../hooks/use.active.section';
@@ -15,7 +14,6 @@ import { AdminDocView } from './AdminDocView';
 
 /** `/admin/docs`: the runtime Markdown docs as a list; a tap opens one in the fullscreen drawer. */
 export const AdminDocsArea: React.FC = () => {
-  const { t } = useTranslation('admin');
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
   const [query, setQuery] = useState('');
@@ -49,12 +47,6 @@ export const AdminDocsArea: React.FC = () => {
 
   return (
     <div data-slot="admin-docs" className="mx-auto flex min-h-dvh w-full flex-col bg-background">
-      <header className="px-4 pt-3 pb-3">
-        <h1 className="truncate text-xl font-bold tracking-tight text-foreground">
-          {t('docs.title')}
-        </h1>
-        <p className="text-caption text-muted-foreground">{t('docs.subtitle')}</p>
-      </header>
       <AdminDocsList
         docs={docs}
         loading={loading}
