@@ -26,9 +26,9 @@ export const AdminDocsList: React.FC<IAdminDocsListProps> = ({
 
   if (loading && docs.length === 0) {
     return (
-      <div className="flex flex-col gap-2 px-4">
+      <div className="flex flex-col gap-2 p-4">
         {[0, 1, 2].map(index => (
-          <Skeleton key={index} className="h-14 w-full rounded-xl" />
+          <Skeleton key={index} className="h-14 w-full rounded-lg" />
         ))}
       </div>
     );
@@ -48,16 +48,18 @@ export const AdminDocsList: React.FC<IAdminDocsListProps> = ({
   }
 
   return (
-    <ul className="divide-y divide-border/50 border-y border-border/50">
+    <ul className="divide-y divide-border/50">
       {docs.map(doc => (
         <li key={doc.slug}>
           <Button
             variant="ghost"
-            className="h-auto w-full justify-start gap-3 rounded-none px-4 py-3 text-left"
+            className="h-auto w-full justify-start gap-3 rounded-none px-4 py-3 text-left hover:bg-muted/50"
             onClick={() => onOpen(doc.slug)}
           >
             <span className="min-w-0 flex-1">
-              <span className="block truncate text-body font-bold text-foreground">{doc.title}</span>
+              <span className="block truncate text-body font-bold text-foreground">
+                {doc.title}
+              </span>
               <span className="block truncate text-caption text-muted-foreground">
                 {doc.slug}.md
               </span>

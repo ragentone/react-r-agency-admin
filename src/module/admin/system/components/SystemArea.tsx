@@ -1,9 +1,11 @@
-import { cn } from '@ui/lib/utils';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/shad-cn/components/tabs.tsx';
+import { Tabs, TabsContent } from '@ui/shad-cn/components/tabs.tsx';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ADMIN_SYSTEM_VIEW_KEY } from '../../const';
+import { AdminPage } from '../../ui/AdminPage';
+import { AdminPanel } from '../../ui/AdminPanel';
+import { AdminTabsBar } from '../../ui/AdminTabsBar';
 import type { SystemTab } from '../types';
 import { SystemDatabaseTab } from './SystemDatabaseTab';
 import { SystemDeploysTab } from './SystemDeploysTab';
@@ -35,36 +37,24 @@ export const SystemArea: React.FC = () => {
   };
 
   return (
-    <div data-slot="admin-system" className="mx-auto flex min-h-dvh w-full flex-col bg-background">
-      <Tabs value={tab} onValueChange={change} className="flex flex-1 flex-col">
-        <TabsList
-          aria-label={t('system.tabsLabel')}
-          className="sticky top-0 z-10 flex h-auto w-full justify-start overflow-x-auto rounded-none border-b border-border/50 bg-background/90 p-0 text-muted-foreground backdrop-blur [scrollbar-width:none]"
-        >
-          {TABS.map(item => (
-            <TabsTrigger
-              key={item}
-              value={item}
-              className={cn(
-                'relative min-h-12 flex-1 shrink-0 rounded-none px-4 text-body font-semibold shadow-none',
-                'data-[state=active]:bg-transparent data-[state=active]:font-bold data-[state=active]:text-foreground data-[state=active]:shadow-none',
-                'after:absolute after:bottom-0 after:left-1/2 after:h-1 after:w-12 after:-translate-x-1/2 after:rounded-full after:bg-foreground after:opacity-0 data-[state=active]:after:opacity-100'
-              )}
-            >
-              {t(`system.tabs.${item}`)}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-        <TabsContent value="deployments" className="mt-0 pb-10">
-          <SystemDeploysTab />
-        </TabsContent>
-        <TabsContent value="storage" className="mt-0 pb-10">
-          <SystemStorageTab />
-        </TabsContent>
-        <TabsContent value="database" className="mt-0 pb-10">
-          <SystemDatabaseTab />
-        </TabsContent>
+    <AdminPage slot="admin-system">
+      <Tabs value={tab} onValueChange={change} className="flex flex-col gap-4">
+        <AdminTabsBar
+          label={t('system.tabsLabel')}
+          tabs={TABS.map(item => ({ value: item, label: t(`system.tabs.${item}`) }))}
+        />
+        <AdminPanel flush={true}>
+          <TabsContent value="deployments" className="mt-0 pb-4">
+            <SystemDeploysTab />
+          </TabsContent>
+          <TabsContent value="storage" className="mt-0 pb-4">
+            <SystemStorageTab />
+          </TabsContent>
+          <TabsContent value="database" className="mt-0 pb-4">
+            <SystemDatabaseTab />
+          </TabsContent>
+        </AdminPanel>
       </Tabs>
-    </div>
+    </AdminPage>
   );
 };

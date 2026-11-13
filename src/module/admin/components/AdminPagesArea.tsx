@@ -1,12 +1,14 @@
 import React from 'react';
 
+import { AdminPage } from '../ui/AdminPage';
+import { AdminPanel } from '../ui/AdminPanel';
 import { AdminPagesView } from './AdminPagesView';
 
 /** `/admin/pages`: dynamic pages (list, create, edit, delete) – separate from user management. */
 export const AdminPagesArea: React.FC = () => (
-  <div data-slot="admin-pages" className="mx-auto flex min-h-dvh w-full flex-col bg-background">
-    <div className="flex-1">
+  <AdminPage slot="admin-pages">
+    <AdminPanel flush={true}>
       <AdminPagesView />
-    </div>
-  </div>
+    </AdminPanel>
+  </AdminPage>
 );

@@ -32,7 +32,12 @@
     "more": "Load more ({{count}})",
     "open": "Edit roles of {{user}}",
     "idleTitle": "Search users",
-    "idle": "Type at least {{count}} characters – name, e-mail or ID."
+    "idle": "Type at least {{count}} characters – name, e-mail or ID.",
+    "col": {
+      "user": "User",
+      "roles": "Roles",
+      "status": "Status"
+    }
   },
   "self": {
     "hint": "You can add, change and remove your own roles. admin:user and default:user are protected so you can't lock yourself out."
@@ -204,6 +209,11 @@
       "routeHint": "The page stays inside the layout, the menu stays visible.",
       "fullscreen": "Fullscreen",
       "fullscreenHint": "The page covers the whole screen."
+    },
+    "col": {
+      "title": "Page",
+      "status": "Status",
+      "updated": "Updated"
     }
   },
   "sitePage": {
@@ -781,7 +791,13 @@
       "empty": "No new sign-ups in the last 7 days",
       "minor": "Under 16 – no details",
       "unconfirmed": "Not confirmed",
-      "more": "{{value}} more in the last 7 days"
+      "more": "{{value}} more in the last 7 days",
+      "col": {
+        "user": "User",
+        "email": "Email",
+        "status": "Status",
+        "date": "Registered"
+      }
     },
     "error": "Could not be loaded.",
     "more": "All",
@@ -824,7 +840,9 @@
       "hint": "Enter alias, e-mail or ID (from {{count}} characters)",
       "loading": "Searching …",
       "results": "Users"
-    }
+    },
+    "title": "Dashboard",
+    "subtitle": "Overview of users, system and open tasks"
   },
   "plugins": {
     "title": "Plugins",

@@ -86,8 +86,8 @@ export const HomeAttention: React.FC<{
   if (loading && !items.length) {
     body = (
       <div className="space-y-2" aria-busy="true">
-        <Skeleton className="h-16 rounded-2xl" />
-        <Skeleton className="h-16 rounded-2xl" />
+        <Skeleton className="h-14 rounded-lg" />
+        <Skeleton className="h-14 rounded-lg" />
       </div>
     );
   } else if (failed) {
@@ -100,9 +100,9 @@ export const HomeAttention: React.FC<{
     );
   } else if (items.length) {
     body = (
-      <ul className="overflow-hidden rounded-2xl border border-border/60">
+      <ul className="-m-4 divide-y divide-border/50">
         {items.map(item => (
-          <li key={item.id} className="border-b border-border/50 last:border-b-0">
+          <li key={item.id}>
             <Link
               to={item.to}
               onClick={item.onNavigate}
@@ -110,10 +110,10 @@ export const HomeAttention: React.FC<{
             >
               <span
                 className={cn(
-                  'grid size-10 shrink-0 place-items-center rounded-full [&>svg]:size-5',
+                  'grid size-9 shrink-0 place-items-center rounded-lg [&>svg]:size-4',
                   item.tone === 'alert'
                     ? 'bg-foreground text-background'
-                    : 'bg-foreground/[0.07] text-foreground'
+                    : 'bg-muted text-foreground'
                 )}
                 aria-hidden="true"
               >
@@ -133,9 +133,9 @@ export const HomeAttention: React.FC<{
     );
   } else {
     body = (
-      <div className="flex items-center gap-3 rounded-2xl border border-border/60 px-4 py-3">
-        <span className="grid size-10 shrink-0 place-items-center rounded-full bg-foreground/[0.07]">
-          <CircleCheck className="size-5" aria-hidden="true" />
+      <div className="flex items-center gap-3">
+        <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-muted">
+          <CircleCheck className="size-4" aria-hidden="true" />
         </span>
         <span className="min-w-0">
           <span className="block text-body font-bold">{t('home.attention.quiet')}</span>
@@ -153,7 +153,7 @@ export const HomeAttention: React.FC<{
       aside={
         alerts > 0 ? (
           <Badge
-            className="rounded-full px-2 tabular-nums"
+            className="rounded-md px-1.5 tabular-nums"
             aria-label={t('home.attention.count', { count: alerts })}
           >
             {alerts}

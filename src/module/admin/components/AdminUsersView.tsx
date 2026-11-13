@@ -10,6 +10,7 @@ import { useAdminUsers } from '../hooks';
 import type { AdminRoleUpdate, IAdminRoleResult, IAdminUser } from '../types';
 import { AdminUserDrawer } from './AdminUserDrawer';
 import { AdminUserItem } from './AdminUserItem';
+import { AdminUsersTable } from './AdminUsersTable';
 
 export interface IAdminUsersViewProps {
   saving: boolean;
@@ -53,7 +54,7 @@ export const AdminUsersView: React.FC<IAdminUsersViewProps> = ({ saving, onUpdat
   if (!searching) {
     body = (
       <div className="mx-auto flex max-w-sm flex-col items-center px-8 py-16 text-center">
-        <span className="grid size-12 place-items-center rounded-full bg-foreground/[0.07]">
+        <span className="grid size-12 place-items-center rounded-xl bg-muted">
           <UserSearch className="size-5" aria-hidden="true" />
         </span>
         <h2 className="mt-4 text-title font-bold">{t('users.idleTitle')}</h2>
@@ -84,7 +85,7 @@ export const AdminUsersView: React.FC<IAdminUsersViewProps> = ({ saving, onUpdat
         <button
           type="button"
           onClick={() => void search(debounced)}
-          className="mt-4 h-11 rounded-full bg-foreground px-5 text-sm font-bold text-background"
+          className="mt-4 h-10 rounded-lg bg-foreground px-4 text-sm font-semibold text-background"
         >
           {t('retry')}
         </button>
@@ -93,7 +94,7 @@ export const AdminUsersView: React.FC<IAdminUsersViewProps> = ({ saving, onUpdat
   } else if (users.length === 0) {
     body = (
       <div className="mx-auto flex max-w-sm flex-col items-center px-8 py-16 text-center">
-        <span className="grid size-12 place-items-center rounded-full bg-foreground/[0.07]">
+        <span className="grid size-12 place-items-center rounded-xl bg-muted">
           <UsersRound className="size-5" aria-hidden="true" />
         </span>
         <p className="mt-4 text-body text-muted-foreground">
@@ -104,18 +105,19 @@ export const AdminUsersView: React.FC<IAdminUsersViewProps> = ({ saving, onUpdat
   } else {
     body = (
       <>
-        <ul className="divide-y divide-border/50" aria-busy={loading}>
+        <ul className="divide-y divide-border/50 md:hidden" aria-busy={loading}>
           {users.map(user => (
             <AdminUserItem key={user.id} user={user} onOpen={open} />
           ))}
         </ul>
+        <AdminUsersTable users={users} onOpen={open} />
         {hasMore && (
-          <div className="px-4 py-4">
+          <div className="border-t border-border/50 p-3">
             <button
               type="button"
               onClick={() => void loadMore()}
               disabled={loading}
-              className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-border/70 text-sm font-bold transition-colors hover:bg-foreground/[0.04] disabled:opacity-50"
+              className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border border-border/50 text-sm font-semibold transition-colors hover:bg-muted disabled:opacity-50"
             >
               {loading && <Loader2 className="size-4 animate-spin" aria-hidden="true" />}
               {t('users.more', { count: total - users.length })}
@@ -128,7 +130,7 @@ export const AdminUsersView: React.FC<IAdminUsersViewProps> = ({ saving, onUpdat
 
   return (
     <>
-      <div className="sticky top-0 z-10 space-y-1 bg-background/85 px-3 pt-3 pb-2 backdrop-blur-md">
+      <div className="space-y-1 border-b border-border/50 p-3">
         <div className="relative">
           <Search
             className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-muted-foreground"
@@ -144,7 +146,7 @@ export const AdminUsersView: React.FC<IAdminUsersViewProps> = ({ saving, onUpdat
             autoCorrect="off"
             spellCheck={false}
             enterKeyHint="search"
-            className="h-11 rounded-full pr-10 pl-10 text-base sm:text-body"
+            className="h-10 rounded-lg pr-10 pl-10 text-base sm:text-body"
           />
           {loading && loaded && (
             <Loader2

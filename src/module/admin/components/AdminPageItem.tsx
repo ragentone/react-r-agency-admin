@@ -44,9 +44,9 @@ export const AdminPageItem: React.FC<{ page: ISitePage; onOpen: (page: ISitePage
         type="button"
         onClick={() => onOpen(page)}
         aria-label={t('pages.open', { title: page.title })}
-        className="flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-foreground/[0.03] active:bg-foreground/[0.06]"
+        className="flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50 active:bg-muted"
       >
-        <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-foreground/[0.07]">
+        <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-muted">
           <FileText className="size-5" aria-hidden="true" />
         </span>
         <span className="min-w-0 flex-1">

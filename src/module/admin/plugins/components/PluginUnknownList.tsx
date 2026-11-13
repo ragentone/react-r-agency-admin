@@ -40,7 +40,7 @@ const UnknownRow: React.FC<IUnknownRowProps> = ({ plugin, busy, onInstall, onRem
     : null;
 
   return (
-    <li className="border-b border-border">
+    <li className="border-b border-border/50 last:border-b-0">
       <Item size="sm">
         <ItemMedia variant="icon">
           <FolderOpen aria-hidden="true" />
@@ -113,7 +113,13 @@ export const PluginUnknownList: React.FC<IPluginUnknownListProps> = ({
   return (
     <ul className="flex flex-col">
       {plugins.map(plugin => (
-        <UnknownRow key={plugin.pluginId} plugin={plugin} busy={busy} onInstall={onInstall} onRemove={onRemove} />
+        <UnknownRow
+          key={plugin.pluginId}
+          plugin={plugin}
+          busy={busy}
+          onInstall={onInstall}
+          onRemove={onRemove}
+        />
       ))}
     </ul>
   );

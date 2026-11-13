@@ -40,8 +40,8 @@ export const HomeSystem: React.FC<{
     >
       <dl className="flex flex-col gap-4">
         <div className="flex items-start gap-3">
-          <dt className="grid size-10 shrink-0 place-items-center rounded-full bg-foreground/[0.07]">
-            <Rocket className="size-5" aria-hidden="true" />
+          <dt className="grid size-9 shrink-0 place-items-center rounded-lg bg-muted">
+            <Rocket className="size-4" aria-hidden="true" />
             <span className="sr-only">{t('home.system.version')}</span>
           </dt>
           <dd className="min-w-0 flex-1">
@@ -71,8 +71,8 @@ export const HomeSystem: React.FC<{
         </div>
 
         <div className="flex items-start gap-3">
-          <dt className="grid size-10 shrink-0 place-items-center rounded-full bg-foreground/[0.07]">
-            <HardDrive className="size-5" aria-hidden="true" />
+          <dt className="grid size-9 shrink-0 place-items-center rounded-lg bg-muted">
+            <HardDrive className="size-4" aria-hidden="true" />
             <span className="sr-only">{t('home.system.storage')}</span>
           </dt>
           <dd className="min-w-0 flex-1">
@@ -96,7 +96,7 @@ export const HomeSystem: React.FC<{
                 </span>
                 <Progress
                   value={disk.percent}
-                  className="mt-2 h-2 bg-foreground/[0.08]"
+                  className="mt-2 h-2 bg-muted"
                   role="progressbar"
                   aria-valuemin={0}
                   aria-valuemax={100}

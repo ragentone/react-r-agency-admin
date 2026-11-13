@@ -20,7 +20,7 @@ export const PluginDetailPage: React.FC<{ pluginId: string }> = ({ pluginId }) =
   if (loading && plugin === null) {
     return (
       <PluginDetailFrame>
-        <div className="flex flex-col gap-3 px-4 py-4" aria-busy="true">
+        <div className="flex flex-col gap-3 p-4 md:p-6" aria-busy="true">
           <Skeleton className="h-10 w-2/3" />
           <Skeleton className="h-32 w-full" />
         </div>

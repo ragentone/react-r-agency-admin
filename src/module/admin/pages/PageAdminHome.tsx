@@ -2,6 +2,7 @@ import { PageIndex } from '@core/pages/default/PageIndex.tsx';
 import { PluginSlot } from '@core/plugin';
 import { RoutePage } from '@router/components';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { HomeAttention } from '../home/components/HomeAttention';
 import { HomeKpis } from '../home/components/HomeKpis';
@@ -13,22 +14,25 @@ import { useAdminAccess } from '../hooks';
 import { StatsUserDrawer } from '../stats/components/StatsUserDrawer';
 import { useStatsQuery } from '../stats/hooks/use.stats.query';
 import { SystemApi } from '../system/api';
+import { ADMIN_SCROLL, ADMIN_WIDTH, AdminHeading, AdminPage } from '../ui/AdminPage';
 
 /**
- * Start page of the admin instance. Admins get a dashboard (mobile first, one column, from
- * `md` two columns at the bottom); everybody else sees the normal core start page.
+ * Start page of the admin instance. Admins get a dashboard (mobile first: one column, from `lg`
+ * a main column with the key figures and a side column with live + system); everybody else
+ * sees the normal core start page.
  */
 export const PageAdminHome: React.FC = () => {
   const admin = useAdminAccess();
   if (!admin) return <PageIndex />;
   return (
-    <RoutePage width={900} scrollable={true} classes={{ scroll: 'p-0' }}>
+    <RoutePage width={ADMIN_WIDTH.wide} scrollable={true} classes={{ scroll: ADMIN_SCROLL }}>
       <AdminHome />
     </RoutePage>
   );
 };
 
 const AdminHome: React.FC = () => {
+  const { t } = useTranslation('admin');
   const [userId, setUserId] = useState<string | null>(null);
   // Used by "needs attention" and "system" – loaded once.
   const deploys = useStatsQuery(
@@ -44,30 +48,27 @@ const AdminHome: React.FC = () => {
   );
 
   return (
-    <div data-slot="admin-home" className="flex min-h-dvh w-full flex-col bg-background pb-10">
-      <PluginSlot name="home.widget" scope="admin" className="border-b border-border/50 p-4 mb-4" />
-      <div className={'px-4 pt-4'}>
-        <HomeUserSearch onUser={setUserId} />
-      </div>
+    <AdminPage slot="admin-home">
+      <AdminHeading
+        title={t('home.title')}
+        description={t('home.subtitle')}
+        actions={<HomeUserSearch onUser={setUserId} />}
+      />
+      <PluginSlot name="home.widget" scope="admin" />
       <HomeAttention deploys={deploys} storage={storage} />
 
-      <div className="border-t border-border/50 px-4 py-4">
-        <HomeLive />
+      <div className="grid gap-4 md:gap-6 lg:grid-cols-3">
+        <div className="flex flex-col gap-4 md:gap-6 lg:col-span-2">
+          <HomeKpis />
+        </div>
+        <div className="flex flex-col gap-4 md:gap-6">
+          <HomeLive />
+          <HomeSystem deploys={deploys} storage={storage} />
+        </div>
       </div>
 
-      <div className="border-t border-border/50">
-        <HomeKpis />
-      </div>
-
-      <div className="border-t border-border/50">
-        <HomeNewUsers onUser={setUserId} />
-      </div>
-
-      <div className="border-t border-border/50">
-        <HomeSystem deploys={deploys} storage={storage} />
-      </div>
-
+      <HomeNewUsers onUser={setUserId} />
       <StatsUserDrawer userId={userId} onClose={() => setUserId(null)} />
-    </div>
+    </AdminPage>
   );
 };

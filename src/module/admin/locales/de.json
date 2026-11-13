@@ -32,7 +32,12 @@
     "more": "Weitere laden ({{count}})",
     "open": "Rollen von {{user}} bearbeiten",
     "idleTitle": "Benutzer suchen",
-    "idle": "Gib mindestens {{count}} Zeichen ein – Name, E-Mail oder ID."
+    "idle": "Gib mindestens {{count}} Zeichen ein – Name, E-Mail oder ID.",
+    "col": {
+      "user": "Benutzer",
+      "roles": "Rollen",
+      "status": "Status"
+    }
   },
   "self": {
     "hint": "Du kannst dir selbst Rollen geben, ändern und entfernen. admin:user und default:user sind geschützt, damit du dich nicht aussperrst."
@@ -204,6 +209,11 @@
       "routeHint": "Die Seite bleibt im Layout, das Menü bleibt sichtbar.",
       "fullscreen": "Vollbild",
       "fullscreenHint": "Die Seite füllt den ganzen Bildschirm."
+    },
+    "col": {
+      "title": "Seite",
+      "status": "Status",
+      "updated": "Geändert"
     }
   },
   "sitePage": {
@@ -781,7 +791,13 @@
       "empty": "Keine neuen Registrierungen in den letzten 7 Tagen",
       "minor": "Unter 16 – ohne Angaben",
       "unconfirmed": "Nicht bestätigt",
-      "more": "{{value}} weitere in den letzten 7 Tagen"
+      "more": "{{value}} weitere in den letzten 7 Tagen",
+      "col": {
+        "user": "Benutzer",
+        "email": "E-Mail",
+        "status": "Status",
+        "date": "Registriert"
+      }
     },
     "error": "Konnte nicht geladen werden.",
     "more": "Alle",
@@ -824,7 +840,9 @@
       "hint": "Alias, E-Mail oder ID eingeben (ab {{count}} Zeichen)",
       "loading": "Wird gesucht …",
       "results": "Benutzer"
-    }
+    },
+    "title": "Dashboard",
+    "subtitle": "Überblick über Nutzer, System und offene Aufgaben"
   },
   "plugins": {
     "title": "Plugins",

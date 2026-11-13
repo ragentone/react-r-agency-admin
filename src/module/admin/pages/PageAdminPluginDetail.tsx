@@ -6,6 +6,7 @@ import React from 'react';
 
 import { ADMIN_ROLES } from '../const';
 import { PluginDetailPage } from '../plugins/components/PluginDetailPage';
+import { ADMIN_SCROLL, ADMIN_WIDTH } from '../ui/AdminPage';
 
 /** `/admin/plugins/:pluginId`: one plugin with all its actions (own chunk). */
 export const PageAdminPluginDetail: React.FC = () => {
@@ -14,7 +15,7 @@ export const PageAdminPluginDetail: React.FC = () => {
     <RoleGate
       roles={ADMIN_ROLES}
       fallback={
-        <RoutePage width={720} scrollable={true} classes={{ scroll: 'p-0' }}>
+        <RoutePage width={ADMIN_WIDTH.narrow} scrollable={true} classes={{ scroll: ADMIN_SCROLL }}>
           <AdminNoAccess />
         </RoutePage>
       }

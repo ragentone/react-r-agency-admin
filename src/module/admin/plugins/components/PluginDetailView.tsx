@@ -2,6 +2,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/shad-cn/components
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { AdminPage } from '../../ui/AdminPage';
+import { AdminPanel } from '../../ui/AdminPanel';
 import { isEnvPath } from '../env.format';
 import { usePluginDetail } from '../hooks/use-plugin-detail';
 import type { IPluginListItem } from '../types';
@@ -56,19 +58,21 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
         />
       }
     >
-      <div className="flex w-full flex-col bg-background">
-        <div className="px-4 pt-4 flex flex-col gap-2">
-          <PluginDetailActivation plugin={plugin} detail={detail} />
-          <PluginDetailScope plugin={plugin} detail={detail} />
-        </div>
+      <AdminPage slot="admin-plugin">
+        <AdminPanel>
+          <div className="flex flex-col gap-2">
+            <PluginDetailActivation plugin={plugin} detail={detail} />
+            <PluginDetailScope plugin={plugin} detail={detail} />
+          </div>
+        </AdminPanel>
 
         <Tabs
           value={plugin.development ? tab : 'general'}
           onValueChange={setTab}
-          className="flex flex-col"
+          className="flex flex-col gap-4"
         >
           {plugin.development && (
-            <div className="px-4 pt-3">
+            <div>
               <TabsList className="flex w-full justify-start overflow-x-auto scrollbar-none">
                 <TabsTrigger value="general" className="shrink-0">
                   {t('plugins.details.tabs.general')}
@@ -92,39 +96,41 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
             </div>
           )}
 
-          <TabsContent value="general" className="mt-0">
-            <PluginDetailInfo plugin={plugin} />
-          </TabsContent>
-
-          {plugin.development && (
-            <TabsContent value="config" className="mt-0 px-4 py-6">
-              <PluginConfigFieldsTable pluginId={plugin.pluginId} />
+          <AdminPanel flush={true}>
+            <TabsContent value="general" className="mt-0">
+              <PluginDetailInfo plugin={plugin} />
             </TabsContent>
-          )}
 
-          {plugin.development && (
-            <TabsContent value="repositories" className="mt-0 px-4 py-6">
-              <PluginRepositoriesTree pluginId={plugin.pluginId} />
-            </TabsContent>
-          )}
+            {plugin.development && (
+              <TabsContent value="config" className="mt-0 px-4 py-6">
+                <PluginConfigFieldsTable pluginId={plugin.pluginId} />
+              </TabsContent>
+            )}
 
-          {plugin.development && (
-            <TabsContent value="manifest" className="mt-0 px-4 py-6">
-              <PluginManifestView pluginId={plugin.pluginId} />
-            </TabsContent>
-          )}
+            {plugin.development && (
+              <TabsContent value="repositories" className="mt-0 px-4 py-6">
+                <PluginRepositoriesTree pluginId={plugin.pluginId} />
+              </TabsContent>
+            )}
 
-          {plugin.development && (
-            <TabsContent value="releases" className="mt-0 px-4 py-6">
-              <PluginDetailReleases pluginId={plugin.pluginId} />
-            </TabsContent>
-          )}
+            {plugin.development && (
+              <TabsContent value="manifest" className="mt-0 px-4 py-6">
+                <PluginManifestView pluginId={plugin.pluginId} />
+              </TabsContent>
+            )}
 
-          {plugin.development && (
-            <TabsContent value="files" className="mt-0 px-4 py-6">
-              <PluginDetailFiles pluginId={plugin.pluginId} onOpenFile={setEditPath} />
-            </TabsContent>
-          )}
+            {plugin.development && (
+              <TabsContent value="releases" className="mt-0 px-4 py-6">
+                <PluginDetailReleases pluginId={plugin.pluginId} />
+              </TabsContent>
+            )}
+
+            {plugin.development && (
+              <TabsContent value="files" className="mt-0 px-4 py-6">
+                <PluginDetailFiles pluginId={plugin.pluginId} onOpenFile={setEditPath} />
+              </TabsContent>
+            )}
+          </AdminPanel>
         </Tabs>
 
         {plugin.development && (
@@ -172,7 +178,7 @@ export const PluginDetailView: React.FC<IPluginDetailViewProps> = ({ plugin, rel
           onOpenChange={open => !open && setPurgeOpen(false)}
           onConfirm={() => void detail.purge().then(ok => ok && setPurgeOpen(false))}
         />
-      </div>
+      </AdminPage>
     </PluginDetailFrame>
   );
 };

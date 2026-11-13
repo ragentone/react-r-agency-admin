@@ -1,4 +1,4 @@
-import { changePercent, StatTile } from '@ui/patterns/chart';
+import { changePercent } from '@ui/patterns/chart';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { Bot, Eye, KeyRound, UserCheck, UserPlus, Users } from 'lucide-react';
 import React from 'react';
@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { StatsApi } from '../../stats/api';
 import { useStatsQuery } from '../../stats/hooks/use.stats.query';
 import { formatNumber } from '../../stats/utils';
+import { AdminKpi } from '../../ui/AdminKpi';
 import { HomeError, HomeSection } from './HomeSection';
 
 const RANGE = 7;
@@ -40,9 +41,9 @@ export const HomeKpis: React.FC = () => {
   let body: React.ReactNode;
   if (overview.loading || security.loading) {
     body = (
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
         {[0, 1, 2, 3, 4, 5].map(index => (
-          <Skeleton key={index} className="h-32 rounded-2xl" />
+          <Skeleton key={index} className="h-36 rounded-xl" />
         ))}
       </div>
     );
@@ -118,9 +119,9 @@ export const HomeKpis: React.FC = () => {
     ];
 
     body = (
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
         {tiles.map(tile => (
-          <StatTile
+          <AdminKpi
             key={tile.key}
             icon={tile.icon}
             label={tile.label}
@@ -135,5 +136,9 @@ export const HomeKpis: React.FC = () => {
     );
   }
 
-  return <HomeSection title={t('home.kpi.title')}>{body}</HomeSection>;
+  return (
+    <HomeSection bare={true} title={t('home.kpi.title')}>
+      {body}
+    </HomeSection>
+  );
 };

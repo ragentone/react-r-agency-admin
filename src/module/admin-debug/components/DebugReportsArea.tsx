@@ -1,10 +1,14 @@
 import React from 'react';
 
+import { AdminPage } from '../../admin/ui/AdminPage';
+import { AdminPanel } from '../../admin/ui/AdminPanel';
 import { DebugReportsTable } from './DebugReportsTable';
 
 /** `/admin/debug`: client debug reports from frontend and app. */
 export const DebugReportsArea: React.FC = () => (
-  <div data-slot="admin-debug" className="mx-auto flex min-h-dvh w-full flex-col bg-background">
-    <DebugReportsTable />
-  </div>
+  <AdminPage slot="admin-debug">
+    <AdminPanel flush={true}>
+      <DebugReportsTable />
+    </AdminPanel>
+  </AdminPage>
 );

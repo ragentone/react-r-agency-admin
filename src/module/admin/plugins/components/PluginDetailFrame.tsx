@@ -6,6 +6,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ADMIN_PLUGINS_ROUTE } from '../../const';
+import { ADMIN_SCROLL, ADMIN_WIDTH } from '../../ui/AdminPage';
 
 interface IPluginDetailFrameProps {
   name?: string;
@@ -26,9 +27,9 @@ export const PluginDetailFrame: React.FC<IPluginDetailFrameProps> = ({
 
   return (
     <RoutePage
-      width={720}
+      width={ADMIN_WIDTH.narrow}
       scrollable={true}
-      classes={{ scroll: 'p-0' }}
+      classes={{ scroll: ADMIN_SCROLL }}
       header={{
         title: name ?? '',
         description: pluginId,

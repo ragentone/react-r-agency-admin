@@ -1,10 +1,12 @@
-import { cn } from '@ui/lib/utils';
 import { Button } from '@ui/shad-cn/components/button.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/shad-cn/components/tabs.tsx';
+import { Tabs, TabsContent } from '@ui/shad-cn/components/tabs.tsx';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { AdminPage } from '../../admin/ui/AdminPage';
+import { AdminPanel } from '../../admin/ui/AdminPanel';
+import { AdminTabsBar } from '../../admin/ui/AdminTabsBar';
 import type { SeoTab } from '../types';
 import { useSeoAdmin } from '../use.seo.admin';
 import { SeoRoutesTab } from './SeoRoutesTab';
@@ -86,33 +88,18 @@ export const SeoArea: React.FC = () => {
   }
 
   return (
-    <div data-slot="admin-seo" className="mx-auto flex min-h-dvh w-full flex-col bg-background">
-      <Tabs value={tab} onValueChange={change} className="flex flex-1 flex-col">
-        <TabsList
-          aria-label={t('tabsLabel')}
-          className="sticky top-0 z-10 flex h-auto w-full justify-start overflow-x-auto rounded-none border-b border-border/50 bg-background/90 p-0 text-muted-foreground backdrop-blur [scrollbar-width:none]"
-        >
-          {TABS.map(item => (
-            <TabsTrigger
-              key={item}
-              value={item}
-              className={cn(
-                'relative min-h-12 flex-1 shrink-0 rounded-none px-4 text-body font-semibold shadow-none',
-                'data-[state=active]:bg-transparent data-[state=active]:font-bold data-[state=active]:text-foreground data-[state=active]:shadow-none',
-                'after:absolute after:bottom-0 after:left-1/2 after:h-1 after:w-12 after:-translate-x-1/2 after:rounded-full after:bg-foreground after:opacity-0 data-[state=active]:after:opacity-100'
-              )}
-            >
-              {t(`tabs.${item}`)}
-              {item === 'routes' && data && (
-                <span className="ml-1.5 text-caption font-normal tabular-nums opacity-70">
-                  {data.routes.length}
-                </span>
-              )}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-        {content}
+    <AdminPage slot="admin-seo">
+      <Tabs value={tab} onValueChange={change} className="flex flex-col gap-4">
+        <AdminTabsBar
+          label={t('tabsLabel')}
+          tabs={TABS.map(item => ({
+            value: item,
+            label: t(`tabs.${item}`),
+            count: item === 'routes' ? data?.routes.length : undefined,
+          }))}
+        />
+        <AdminPanel flush={true}>{content}</AdminPanel>
       </Tabs>
-    </div>
+    </AdminPage>
   );
 };

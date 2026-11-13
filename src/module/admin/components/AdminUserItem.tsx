@@ -22,7 +22,7 @@ export const AdminUserItem: React.FC<{ user: IAdminUser; onOpen: (user: IAdminUs
         type="button"
         onClick={() => onOpen(user)}
         aria-label={t('users.open', { user: user.alias })}
-        className="flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-foreground/[0.03] active:bg-foreground/[0.06]"
+        className="flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50 active:bg-muted"
       >
         <AdminAvatar user={user} />
         <span className="min-w-0 flex-1">

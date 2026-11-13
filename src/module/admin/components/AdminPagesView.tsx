@@ -9,6 +9,7 @@ import { useAdminPages } from '../hooks';
 import type { ISitePage, ISitePageValues } from '../types';
 import { AdminPageFormDrawer } from './AdminPageFormDrawer';
 import { AdminPageItem } from './AdminPageItem';
+import { AdminPagesTable } from './AdminPagesTable';
 
 type Filter = 'all' | 'published' | 'draft';
 const FILTERS: Filter[] = ['all', 'published', 'draft'];
@@ -117,7 +118,7 @@ export const AdminPagesView: React.FC = () => {
         <button
           type="button"
           onClick={() => void load()}
-          className="mt-4 h-11 rounded-full bg-foreground px-5 text-sm font-bold text-background"
+          className="mt-4 h-10 rounded-lg bg-foreground px-4 text-sm font-semibold text-background"
         >
           {t('retry')}
         </button>
@@ -126,7 +127,7 @@ export const AdminPagesView: React.FC = () => {
   } else if (pages.length === 0) {
     body = (
       <div className="mx-auto flex max-w-sm flex-col items-center px-8 py-16 text-center">
-        <span className="grid size-12 place-items-center rounded-full bg-foreground/[0.07]">
+        <span className="grid size-12 place-items-center rounded-xl bg-muted">
           <FilePlus2 className="size-5" aria-hidden="true" />
         </span>
         <h2 className="mt-4 text-title font-bold">{t('pages.emptyTitle')}</h2>
@@ -134,7 +135,7 @@ export const AdminPagesView: React.FC = () => {
         <button
           type="button"
           onClick={openCreate}
-          className="mt-5 inline-flex h-11 items-center gap-2 rounded-full bg-foreground px-5 text-sm font-bold text-background"
+          className="mt-5 inline-flex h-10 items-center gap-2 rounded-lg bg-foreground px-4 text-sm font-semibold text-background"
         >
           <Plus className="size-4" aria-hidden="true" />
           {t('pages.create')}
@@ -144,7 +145,7 @@ export const AdminPagesView: React.FC = () => {
   } else if (visible.length === 0) {
     body = (
       <div className="mx-auto flex max-w-sm flex-col items-center px-8 py-16 text-center">
-        <span className="grid size-12 place-items-center rounded-full bg-foreground/[0.07]">
+        <span className="grid size-12 place-items-center rounded-xl bg-muted">
           <FileText className="size-5" aria-hidden="true" />
         </span>
         <p className="mt-4 text-body text-muted-foreground">{t('pages.noResults')}</p>
@@ -152,17 +153,20 @@ export const AdminPagesView: React.FC = () => {
     );
   } else {
     body = (
-      <ul className="divide-y divide-border/50" aria-busy={loading}>
-        {visible.map(page => (
-          <AdminPageItem key={page.id} page={page} onOpen={item => void openEdit(item)} />
-        ))}
-      </ul>
+      <>
+        <ul className="divide-y divide-border/50 md:hidden" aria-busy={loading}>
+          {visible.map(page => (
+            <AdminPageItem key={page.id} page={page} onOpen={item => void openEdit(item)} />
+          ))}
+        </ul>
+        <AdminPagesTable pages={visible} onOpen={item => void openEdit(item)} />
+      </>
     );
   }
 
   return (
     <>
-      <div className="sticky top-0 z-10 space-y-2 bg-background/85 px-3 pt-3 pb-2 backdrop-blur-md">
+      <div className="space-y-2 border-b border-border/50 p-3">
         <div className="flex items-center gap-2">
           <div className="relative min-w-0 flex-1">
             <Search
@@ -179,14 +183,14 @@ export const AdminPagesView: React.FC = () => {
               autoCorrect="off"
               spellCheck={false}
               enterKeyHint="search"
-              className="h-11 rounded-full pr-4 pl-10 text-base sm:text-body"
+              className="h-10 rounded-lg pr-4 pl-10 text-base sm:text-body"
             />
           </div>
           <button
             type="button"
             onClick={openCreate}
             aria-label={t('pages.create')}
-            className="inline-flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-full bg-foreground px-4 text-sm font-bold text-background transition-opacity hover:opacity-85"
+            className="inline-flex h-10 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-foreground px-4 text-sm font-semibold text-background transition-opacity hover:opacity-85"
           >
             <Plus className="size-4" aria-hidden="true" />
             <span className="hidden min-[400px]:inline">{t('pages.new')}</span>
@@ -207,8 +211,8 @@ export const AdminPagesView: React.FC = () => {
                 onClick={() => setFilter(value)}
                 className={
                   filter === value
-                    ? 'h-8 shrink-0 rounded-full bg-foreground px-3 text-caption font-bold text-background'
-                    : 'h-8 shrink-0 rounded-full border border-border/70 px-3 text-caption font-semibold text-muted-foreground hover:text-foreground'
+                    ? 'h-8 shrink-0 rounded-lg bg-foreground px-3 text-caption font-bold text-background'
+                    : 'h-8 shrink-0 rounded-lg border border-border/50 px-3 text-caption font-semibold text-muted-foreground hover:bg-muted hover:text-foreground'
                 }
               >
                 {t(`pages.filter.${value}`)}{' '}

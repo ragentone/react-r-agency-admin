@@ -6,15 +6,16 @@ import { useTranslation } from 'react-i18next';
 import { AdminArea } from '../components/AdminArea';
 import { AdminNoAccess } from '../components/AdminNoAccess';
 import { ADMIN_ROLES } from '../const';
+import { ADMIN_SCROLL, ADMIN_WIDTH } from '../ui/AdminPage';
 
 /** `/admin`: user search + roles, own roles. */
 export const PageAdmin: React.FC = () => {
   const { t } = useTranslation('admin');
   return (
     <RoutePage
-      width={620}
+      width={ADMIN_WIDTH.base}
       scrollable={true}
-      classes={{ scroll: 'p-0' }}
+      classes={{ scroll: ADMIN_SCROLL }}
       header={{ title: t('title'), description: t('subtitle') }}
     >
       <RoleGate roles={ADMIN_ROLES} fallback={<AdminNoAccess />}>

@@ -1,6 +1,8 @@
 import { AppDrawer } from '@ui/patterns';
 import React, { useMemo, useState } from 'react';
 
+import { AdminPage } from '../../ui/AdminPage';
+import { AdminPanel } from '../../ui/AdminPanel';
 import { scrollToMatch } from '../highlight';
 import { useActiveSection } from '../hooks/use.active.section';
 import { useAdminDocs } from '../hooks/use.admin.docs';
@@ -46,14 +48,16 @@ export const AdminDocsArea: React.FC = () => {
   };
 
   return (
-    <div data-slot="admin-docs" className="mx-auto flex min-h-dvh w-full flex-col bg-background">
-      <AdminDocsList
-        docs={docs}
-        loading={loading}
-        error={error}
-        onOpen={openDoc}
-        onRetry={reload}
-      />
+    <AdminPage slot="admin-docs">
+      <AdminPanel flush={true}>
+        <AdminDocsList
+          docs={docs}
+          loading={loading}
+          error={error}
+          onOpen={openDoc}
+          onRetry={reload}
+        />
+      </AdminPanel>
       <AppDrawer
         open={open && active !== undefined}
         onOpenChange={close}
@@ -83,6 +87,6 @@ export const AdminDocsArea: React.FC = () => {
       >
         {active && <AdminDocView html={search.html} articleRef={search.articleRef} />}
       </AppDrawer>
-    </div>
+    </AdminPage>
   );
 };

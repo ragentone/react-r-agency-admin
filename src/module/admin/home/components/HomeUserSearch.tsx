@@ -75,11 +75,11 @@ export const HomeUserSearch: React.FC<{ onUser: (userId: string) => void }> = ({
         variant="outline"
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
-        className="h-11 w-full justify-start gap-3 rounded-full border-border/70 bg-foreground/[0.03] px-4 font-normal text-muted-foreground shadow-none hover:bg-foreground/[0.06]"
+        className="h-11 w-full justify-start gap-3 rounded-lg border-border/50 bg-card px-3 font-normal text-muted-foreground shadow-none hover:bg-muted"
       >
         <Search className="size-4" aria-hidden="true" />
         <span className="flex-1 truncate text-left text-body">{t('home.search.placeholder')}</span>
-        <kbd className="hidden rounded-md border border-border/70 px-1.5 py-0.5 font-sans text-micro font-semibold md:inline">
+        <kbd className="hidden rounded-md border border-border/50 bg-muted px-1.5 py-0.5 font-sans text-micro font-semibold md:inline">
           {isMac() ? '⌘K' : 'Ctrl K'}
         </kbd>
       </Button>

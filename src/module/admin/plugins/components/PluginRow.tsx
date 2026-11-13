@@ -1,5 +1,4 @@
 import { Link } from '@tanstack/react-router';
-import { cn } from '@ui/lib';
 import {
   Item,
   ItemContent,
@@ -24,12 +23,12 @@ export const PluginRow: React.FC<IPluginRowProps> = ({ plugin }) => {
   const { t } = useTranslation('admin');
 
   return (
-    <li className="px-2 mb-2">
-      <Item asChild size="sm" variant={'outline'} className={cn({})}>
+    <li className="border-b border-border/50 last:border-b-0">
+      <Item asChild size="sm" className="rounded-none px-4 py-3">
         <Link
           to={adminPluginPath(plugin.pluginId)}
           aria-label={t('plugins.details.open', { name: plugin.name })}
-          className="min-h-14 transition-colors hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+          className="min-h-14 transition-colors hover:bg-muted/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
           <ItemMedia>{plugin.status === 'active' ? <Zap /> : <ZapOff />}</ItemMedia>
           <ItemContent className={'gap-0'}>

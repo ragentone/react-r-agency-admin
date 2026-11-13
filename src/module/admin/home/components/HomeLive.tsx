@@ -19,15 +19,15 @@ export const HomeLive: React.FC = () => {
     30_000
   );
 
-  if (loading) return <Skeleton className="h-36 rounded-2xl" />;
+  if (loading) return <Skeleton className="h-40 rounded-xl" />;
   if (error || !data) {
     return <HomeError text={t('home.error')} retry={t('retry')} onRetry={() => void reload()} />;
   }
 
   return (
-    <Card className="rounded-2xl border-border/60 shadow-none">
-      <CardContent className="flex flex-col gap-2 p-4">
-        <span className="flex items-center gap-2 text-caption font-semibold text-muted-foreground">
+    <Card className="rounded-xl border-border/50 shadow-none">
+      <CardContent className="flex flex-col gap-3 p-4">
+        <span className="flex items-center gap-2 text-caption font-medium text-muted-foreground">
           <span className="relative flex size-2.5" aria-hidden="true">
             {data.online > 0 && (
               <span className="absolute inline-flex size-full rounded-full bg-foreground opacity-60 motion-safe:animate-ping" />
@@ -37,7 +37,7 @@ export const HomeLive: React.FC = () => {
           {t('home.live.title')}
         </span>
         <span className="flex flex-col">
-          <span className="text-display font-black tabular-nums">
+          <span className="text-display font-bold tabular-nums">
             {formatNumber(data.online, i18n.language)}
           </span>
           <span className="text-caption text-muted-foreground">

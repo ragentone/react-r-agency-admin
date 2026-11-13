@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { ADMIN_ROLES } from '../const';
 import { useAdminAccess } from '../hooks';
 import { PluginArea } from '../plugins/components/PluginArea';
+import { ADMIN_SCROLL, ADMIN_WIDTH } from '../ui/AdminPage';
 
 /** `/admin/plugins`: installed plugins and plugin ZIP upload (own chunk). */
 export const PageAdminPlugins: React.FC = () => {
@@ -19,9 +20,9 @@ export const PageAdminPlugins: React.FC = () => {
 
   return (
     <RoutePage
-      width={680}
+      width={ADMIN_WIDTH.base}
       scrollable={true}
-      classes={{ scroll: 'p-0' }}
+      classes={{ scroll: ADMIN_SCROLL }}
       header={{
         title: t('plugins.title'),
         // Buttons only for admins: the dialogs they open live in the area that non-admins never see.

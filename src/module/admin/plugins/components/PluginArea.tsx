@@ -1,8 +1,11 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@ui/shad-cn/components/tabs.tsx';
+import { Tabs, TabsContent } from '@ui/shad-cn/components/tabs.tsx';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
+import { AdminPage } from '../../ui/AdminPage';
+import { AdminPanel } from '../../ui/AdminPanel';
+import { AdminTabsBar } from '../../ui/AdminTabsBar';
 import { usePluginList } from '../hooks/use-plugin-list';
 import { usePluginUnknown } from '../hooks/use-plugin-unknown';
 import type { IPluginUnknownItem } from '../types';
@@ -52,41 +55,43 @@ export const PluginArea: React.FC<IPluginAreaProps> = ({
   };
 
   return (
-    <div data-slot="admin-plugins" className="flex min-h-dvh w-full flex-col bg-background">
-      <Tabs value={tab} onValueChange={setTab} className="flex flex-col">
-        <div className="px-2 pt-3 mb-2">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="installed">{t('plugins.tabs.installed')}</TabsTrigger>
-            <TabsTrigger value="development">
-              {t('plugins.tabs.unknown')}
-              {unknown.plugins.length > 0 && (
-                <span className="ml-1.5 tabular-nums">({unknown.plugins.length})</span>
-              )}
-            </TabsTrigger>
-          </TabsList>
-        </div>
+    <AdminPage slot="admin-plugins">
+      <Tabs value={tab} onValueChange={setTab} className="flex flex-col gap-4">
+        <AdminTabsBar
+          label={t('plugins.title')}
+          tabs={[
+            { value: 'installed', label: t('plugins.tabs.installed') },
+            {
+              value: 'development',
+              label: t('plugins.tabs.unknown'),
+              count: unknown.plugins.length,
+            },
+          ]}
+        />
 
-        <TabsContent value="installed" className="mt-0">
-          <PluginList
-            loading={installed.loading}
-            error={installed.error}
-            plugins={installed.plugins}
-            onRetry={() => void installed.reload()}
-            onCreate={() => setCreateOpen(true)}
-          />
-        </TabsContent>
+        <AdminPanel flush={true}>
+          <TabsContent value="installed" className="mt-0">
+            <PluginList
+              loading={installed.loading}
+              error={installed.error}
+              plugins={installed.plugins}
+              onRetry={() => void installed.reload()}
+              onCreate={() => setCreateOpen(true)}
+            />
+          </TabsContent>
 
-        <TabsContent value="development" className="mt-0">
-          <PluginUnknownList
-            loading={unknown.loading}
-            error={unknown.error}
-            plugins={unknown.plugins}
-            busy={unknown.busy}
-            onRetry={() => void unknown.reload()}
-            onInstall={plugin => void adopt(plugin)}
-            onRemove={setRemoveTarget}
-          />
-        </TabsContent>
+          <TabsContent value="development" className="mt-0">
+            <PluginUnknownList
+              loading={unknown.loading}
+              error={unknown.error}
+              plugins={unknown.plugins}
+              busy={unknown.busy}
+              onRetry={() => void unknown.reload()}
+              onInstall={plugin => void adopt(plugin)}
+              onRemove={setRemoveTarget}
+            />
+          </TabsContent>
+        </AdminPanel>
       </Tabs>
 
       <PluginCreateDrawer
@@ -111,6 +116,6 @@ export const PluginArea: React.FC<IPluginAreaProps> = ({
         onOpenChange={open => !open && setRemoveTarget(null)}
         onConfirm={plugin => void confirmRemove(plugin)}
       />
-    </div>
+    </AdminPage>
   );
 };
