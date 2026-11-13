@@ -1,28 +1,37 @@
-import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
+import { Tabs, TabsContent } from '@ui/shad-cn/components/tabs.tsx';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { HomeError } from '../../admin/home/components/HomeSection';
 import { AdminPage } from '../../admin/ui/AdminPage';
-import { ADMIN_MONITOR_RANGES } from '../const';
-import { useMonitor } from '../hooks/use-monitor';
-import { MonitorRange } from './MonitorRange';
-import { MonitorSystem } from './system/MonitorSystem';
+import { AdminTabsBar } from '../../admin/ui/AdminTabsBar';
+import { MonitorAlertsArea } from './alerts/MonitorAlertsArea';
+import { MonitorAppArea } from './app/MonitorAppArea';
+import { MonitorHistoryArea } from './history/MonitorHistoryArea';
+import { MonitorSystemArea } from './system/MonitorSystemArea';
 
-/** Composes the monitor page: range switch, then the "System" tab's content. */
+const TABS = ['system', 'app', 'alerts', 'history'] as const;
+
+/** Composes the monitor page: tabs "System | App | Alerts | History". */
 export const MonitorArea: React.FC = () => {
   const { t } = useTranslation('admin-monitor');
-  const [minutes, setMinutes] = useState<number>(ADMIN_MONITOR_RANGES[0]);
-  const { data, loading, error, reload } = useMonitor(minutes);
+  const [tab, setTab] = useState<string>(TABS[0]);
 
   return (
     <AdminPage>
-      <MonitorRange value={minutes} onChange={setMinutes} />
-      {loading && <Skeleton className="h-72 rounded-xl" />}
-      {error && !data && (
-        <HomeError text={t('error')} retry={t('retry')} onRetry={() => void reload()} />
-      )}
-      {data && <MonitorSystem snapshot={data} />}
+      <Tabs value={tab} onValueChange={setTab} className="flex flex-col gap-4">
+        <AdminTabsBar
+          label={t('title')}
+          tabs={TABS.map(value => ({ value, label: t(`tabs.${value}`) }))}
+        />
+        {TABS.map(value => (
+          <TabsContent key={value} value={value} className="mt-0">
+            {value === 'system' && <MonitorSystemArea />}
+            {value === 'app' && <MonitorAppArea />}
+            {value === 'alerts' && <MonitorAlertsArea />}
+            {value === 'history' && <MonitorHistoryArea />}
+          </TabsContent>
+        ))}
+      </Tabs>
     </AdminPage>
   );
 };

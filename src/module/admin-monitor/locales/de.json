@@ -16,7 +16,10 @@
     "process": "Server-Prozess",
     "heap": "Heap {{heap}}",
     "loop": "Event Loop",
-    "loopHint": "Verzögerung (p99)"
+    "loopHint": "Verzögerung (p99)",
+    "swap": "Swap",
+    "noSwap": "Kein Swap",
+    "network": "Netzwerk"
   },
   "charts": {
     "cpu": "CPU-Auslastung",
@@ -27,7 +30,11 @@
     "memoryText": "Belegter Speicher des Systems",
     "loop": "Event-Loop-Verzögerung",
     "loopText": "Hohe Werte: der Server reagiert träge",
-    "processText": "Speicher des Server-Prozesses"
+    "processText": "Speicher des Server-Prozesses",
+    "network": "Netzwerk",
+    "networkText": "Durchsatz aller Interfaces",
+    "down": "Empfang",
+    "up": "Senden"
   },
   "disks": {
     "title": "Festplatte",
@@ -83,5 +90,129 @@
     "error": {
       "unknown": "Prozess konnte nicht beendet werden."
     }
+  },
+  "tabs": {
+    "system": "System",
+    "app": "App",
+    "alerts": "Alerts",
+    "history": "Historie"
+  },
+  "historyRange": {
+    "24": "24 Std.",
+    "72": "3 Tage",
+    "168": "7 Tage"
+  },
+  "metric": {
+    "cpu": "CPU",
+    "mem": "Arbeitsspeicher",
+    "swap": "Swap",
+    "disk": "Festplatte",
+    "loop": "Event Loop",
+    "db": "Datenbank"
+  },
+  "ws": {
+    "connected": "Verbunden",
+    "peak": "Höchststand {{peak}}",
+    "opened": "Geöffnet",
+    "closed": "Geschlossen {{closed}}",
+    "avgSession": "Ø Sitzungsdauer",
+    "messages": "Nachrichten/Min.",
+    "messagesHint": "Letzte 30 Minuten"
+  },
+  "graphql": {
+    "total": "Anfragen",
+    "errors": "Fehler",
+    "opsTitle": "Langsamste Operationen",
+    "opsText": "Sortiert nach p95-Dauer",
+    "opsEmpty": "Keine Operationen erfasst.",
+    "col": {
+      "name": "Operation",
+      "count": "Anzahl",
+      "errors": "Fehler",
+      "avg": "Ø",
+      "p95": "p95",
+      "max": "Max."
+    }
+  },
+  "cron": {
+    "title": "Geplante Aufgaben",
+    "text": "Cron-Jobs der Anwendung",
+    "empty": "Keine Cron-Jobs registriert.",
+    "inactive": "Inaktiv",
+    "status": {
+      "running": "Läuft",
+      "pending": "Wartet"
+    }
+  },
+  "plugins": {
+    "title": "Plugins",
+    "text": "Installierte Plugins",
+    "empty": "Keine Plugins installiert."
+  },
+  "db": {
+    "latency": "Latenz",
+    "connected": "Verbunden",
+    "disconnected": "Nicht verbunden",
+    "threads": "Threads",
+    "running": "Laufend {{running}}",
+    "questions": "Abfragen",
+    "slowQueries": "{{count}} langsam",
+    "uptime": "Laufzeit",
+    "tablesTitle": "Tabellen",
+    "tablesText": "Größte Tabellen der Datenbank",
+    "tablesEmpty": "Keine Tabellen verfügbar.",
+    "longRunningTitle": "Langlaufende Abfragen",
+    "longRunningText": "Abfragen über der Schwelle",
+    "col": {
+      "table": "Tabelle",
+      "rows": "Zeilen",
+      "size": "Größe"
+    }
+  },
+  "mesh": {
+    "title": "Build",
+    "version": "Version",
+    "node": "Node",
+    "env": "Umgebung",
+    "startedAt": "Gestartet"
+  },
+  "alerts": {
+    "activeTitle": "Offene Alerts",
+    "activeText": "Aktuell verletzte Schwellwerte",
+    "activeEmpty": "Keine offenen Alerts.",
+    "level": {
+      "ok": "OK",
+      "warn": "Warnung",
+      "crit": "Kritisch"
+    },
+    "logTitle": "Alert-Verlauf",
+    "logText": "Letzte Änderungen, neueste zuerst",
+    "logEmpty": "Noch keine Einträge."
+  },
+  "thresholds": {
+    "title": "Schwellwerte",
+    "text": "Grenzwerte für Warnungen und kritische Alerts",
+    "save": "Speichern",
+    "saved": "Schwellwerte gespeichert.",
+    "error": "Speichern fehlgeschlagen.",
+    "warn": "Warnung",
+    "crit": "Kritisch",
+    "minutes": "Dauer (Min.)"
+  },
+  "history": {
+    "avg": "Ø",
+    "max": "Max.",
+    "cpuText": "Stündlicher Durchschnitt und Höchstwert",
+    "memoryText": "Stündlicher Durchschnitt und Höchstwert",
+    "loopText": "Höchste Verzögerung pro Stunde",
+    "networkText": "Durchsatz pro Stunde",
+    "requestsTitle": "Anfragen",
+    "requestsText": "GraphQL-Anfragen und Fehler pro Stunde",
+    "requests": "Anfragen",
+    "errors": "Fehler",
+    "diskTitle": "Freier Speicher",
+    "diskText": "Verlauf der freien Festplattenkapazität",
+    "diskFree": "Frei",
+    "diskForecast": "Bei diesem Trend ist die Festplatte in {{days}} Tagen voll."
   }
 }

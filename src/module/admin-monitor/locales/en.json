@@ -16,7 +16,10 @@
     "process": "Server process",
     "heap": "Heap {{heap}}",
     "loop": "Event loop",
-    "loopHint": "Delay (p99)"
+    "loopHint": "Delay (p99)",
+    "swap": "Swap",
+    "noSwap": "No swap",
+    "network": "Network"
   },
   "charts": {
     "cpu": "CPU usage",
@@ -27,7 +30,11 @@
     "memoryText": "Used memory of the system",
     "loop": "Event loop delay",
     "loopText": "High values: the server responds slowly",
-    "processText": "Memory of the server process"
+    "processText": "Memory of the server process",
+    "network": "Network",
+    "networkText": "Throughput of all interfaces",
+    "down": "Down",
+    "up": "Up"
   },
   "disks": {
     "title": "Disk",
@@ -83,5 +90,129 @@
     "error": {
       "unknown": "Could not stop the process."
     }
+  },
+  "tabs": {
+    "system": "System",
+    "app": "App",
+    "alerts": "Alerts",
+    "history": "History"
+  },
+  "historyRange": {
+    "24": "24 h",
+    "72": "3 days",
+    "168": "7 days"
+  },
+  "metric": {
+    "cpu": "CPU",
+    "mem": "Memory",
+    "swap": "Swap",
+    "disk": "Disk",
+    "loop": "Event loop",
+    "db": "Database"
+  },
+  "ws": {
+    "connected": "Connected",
+    "peak": "Peak {{peak}}",
+    "opened": "Opened",
+    "closed": "Closed {{closed}}",
+    "avgSession": "Avg. session",
+    "messages": "Messages/min",
+    "messagesHint": "Last 30 minutes"
+  },
+  "graphql": {
+    "total": "Requests",
+    "errors": "Errors",
+    "opsTitle": "Slowest operations",
+    "opsText": "Sorted by p95 duration",
+    "opsEmpty": "No operations recorded yet.",
+    "col": {
+      "name": "Operation",
+      "count": "Count",
+      "errors": "Errors",
+      "avg": "Avg",
+      "p95": "p95",
+      "max": "Max"
+    }
+  },
+  "cron": {
+    "title": "Scheduled jobs",
+    "text": "Cron jobs of the application",
+    "empty": "No cron jobs registered.",
+    "inactive": "Inactive",
+    "status": {
+      "running": "Running",
+      "pending": "Pending"
+    }
+  },
+  "plugins": {
+    "title": "Plugins",
+    "text": "Installed plugins",
+    "empty": "No plugins installed."
+  },
+  "db": {
+    "latency": "Latency",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "threads": "Threads",
+    "running": "Running {{running}}",
+    "questions": "Questions",
+    "slowQueries": "{{count}} slow",
+    "uptime": "Uptime",
+    "tablesTitle": "Tables",
+    "tablesText": "Biggest tables of the database",
+    "tablesEmpty": "No tables available.",
+    "longRunningTitle": "Long-running queries",
+    "longRunningText": "Queries above the threshold",
+    "col": {
+      "table": "Table",
+      "rows": "Rows",
+      "size": "Size"
+    }
+  },
+  "mesh": {
+    "title": "Build",
+    "version": "Version",
+    "node": "Node",
+    "env": "Environment",
+    "startedAt": "Started"
+  },
+  "alerts": {
+    "activeTitle": "Open alerts",
+    "activeText": "Thresholds currently exceeded",
+    "activeEmpty": "No open alerts.",
+    "level": {
+      "ok": "OK",
+      "warn": "Warning",
+      "crit": "Critical"
+    },
+    "logTitle": "Alert log",
+    "logText": "Recent changes, newest first",
+    "logEmpty": "No entries yet."
+  },
+  "thresholds": {
+    "title": "Thresholds",
+    "text": "Limits for warnings and critical alerts",
+    "save": "Save",
+    "saved": "Thresholds saved.",
+    "error": "Could not save.",
+    "warn": "Warn",
+    "crit": "Critical",
+    "minutes": "Duration (min)"
+  },
+  "history": {
+    "avg": "Avg",
+    "max": "Max",
+    "cpuText": "Hourly average and peak",
+    "memoryText": "Hourly average and peak",
+    "loopText": "Highest delay per hour",
+    "networkText": "Throughput per hour",
+    "requestsTitle": "Requests",
+    "requestsText": "GraphQL requests and errors per hour",
+    "requests": "Requests",
+    "errors": "Errors",
+    "diskTitle": "Free space",
+    "diskText": "History of free disk space",
+    "diskFree": "Free",
+    "diskForecast": "At this rate, the disk will be full in {{days}} days."
   }
 }
