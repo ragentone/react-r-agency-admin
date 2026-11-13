@@ -1,5 +1,5 @@
 import { Button } from '@ui/shad-cn/components/button.tsx';
-import { Plus } from 'lucide-react';
+import { Plus, Users } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -7,6 +7,7 @@ import { useMinecraftServers } from '../hooks/use-minecraft-servers';
 import type { IMinecraftServer } from '../types';
 import { DeleteServerDialog } from './DeleteServerDialog';
 import { MinecraftServerCard } from './MinecraftServerCard';
+import { PassesDrawer } from './PassesDrawer';
 import { ServerFormDialog } from './ServerFormDialog';
 
 /** Liste aller Server (eine Karte je Server) mit Plus-Button zum Anlegen. */
@@ -16,14 +17,25 @@ export const MinecraftServerList: React.FC = () => {
   const [creating, setCreating] = useState(false);
   const [editing, setEditing] = useState<IMinecraftServer | null>(null);
   const [deleting, setDeleting] = useState<IMinecraftServer | null>(null);
+  const [passes, setPasses] = useState(false);
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-3">
         <h3 className="text-title font-bold">{t('list.title')}</h3>
-        <Button size="icon-lg" aria-label={t('form.createTitle')} onClick={() => setCreating(true)}>
-          <Plus />
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="icon-lg"
+            aria-label={t('pass.title')}
+            onClick={() => setPasses(true)}
+          >
+            <Users />
+          </Button>
+          <Button size="icon-lg" aria-label={t('form.createTitle')} onClick={() => setCreating(true)}>
+            <Plus />
+          </Button>
+        </div>
       </div>
       {error && <p className="text-caption text-destructive">{t('list.error')}</p>}
       {entries?.length === 0 && (
@@ -38,6 +50,7 @@ export const MinecraftServerList: React.FC = () => {
           onDelete={() => setDeleting(entry.server)}
         />
       ))}
+      <PassesDrawer open={passes} onOpenChange={setPasses} />
       {creating && <ServerFormDialog onSaved={reload} onClose={() => setCreating(false)} />}
       {editing && (
         <ServerFormDialog server={editing} onSaved={reload} onClose={() => setEditing(null)} />

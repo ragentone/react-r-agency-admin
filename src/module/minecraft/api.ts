@@ -1,10 +1,23 @@
 import { parse } from 'graphql';
 import { getMeshClient } from 'r-agency-mesh-client-v1/release';
 
-import type { IMinecraftBackupInfo, IMinecraftConsoleLine, IMinecraftServerEntry, IMinecraftServerInput } from './types';
+import type {
+  IMinecraftBackupInfo,
+  IMinecraftConsoleLine,
+  IMinecraftPass,
+  IMinecraftServerEntry,
+  IMinecraftServerInput,
+} from './types';
 
 /* Parsed here instead of codegen `graphql()` (Muster admin-monitor/api.ts). */
 const doc = {
+  passes: parse(`query AdminMinecraftPasses { adminMinecraftPasses { success error passes } }`),
+  blockPass: parse(
+    `mutation AdminMinecraftBlockPass($id: String!, $blocked: Boolean) { adminMinecraftBlockPass(id: $id, blocked: $blocked) { success error } }`
+  ),
+  deletePass: parse(
+    `mutation AdminMinecraftDeletePass($id: String!) { adminMinecraftDeletePass(id: $id) { success error } }`
+  ),
   servers: parse(`query AdminMinecraftServers { adminMinecraftServers { success error servers } }`),
   create: parse(
     `mutation AdminMinecraftCreateServer($name: String!, $gamemode: String!, $maxPlayers: Int, $autostart: Boolean) { adminMinecraftCreateServer(name: $name, gamemode: $gamemode, maxPlayers: $maxPlayers, autostart: $autostart) { success error } }`
@@ -128,4 +141,10 @@ export const AdminMinecraftApi = {
     write<IMinecraftResult>(doc.broadcast, 'adminMinecraftBroadcast', { serverId, message, mode }),
   restart: (serverId: string) =>
     write<IMinecraftResult>(doc.restart, 'adminMinecraftRestart', { serverId }),
+  passes: () =>
+    read<IMinecraftResult & { passes?: IMinecraftPass[] }>(doc.passes, 'adminMinecraftPasses'),
+  blockPass: (id: string, blocked: boolean) =>
+    write<IMinecraftResult>(doc.blockPass, 'adminMinecraftBlockPass', { id, blocked }),
+  deletePass: (id: string) =>
+    write<IMinecraftResult>(doc.deletePass, 'adminMinecraftDeletePass', { id }),
 };

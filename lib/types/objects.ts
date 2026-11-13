@@ -50,8 +50,88 @@ export interface IAdminDbUsageReportReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminMinecraftBackupReturn` */
+export interface IAdminMinecraftBackupReturn {
+  error: Maybe<string>;
+  file: Maybe<string>;
+  size: Maybe<number>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftBackupsReturn` */
+export interface IAdminMinecraftBackupsReturn {
+  backups: Maybe<ScalarJSON>;
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftBlockPassReturn` */
+export interface IAdminMinecraftBlockPassReturn {
+  entry: Maybe<ScalarJSON>;
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftBroadcastReturn` */
+export interface IAdminMinecraftBroadcastReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftConsoleHistoryReturn` */
+export interface IAdminMinecraftConsoleHistoryReturn {
+  error: Maybe<string>;
+  last: Maybe<number>;
+  lines: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftCreateServerReturn` */
+export interface IAdminMinecraftCreateServerReturn {
+  error: Maybe<string>;
+  server: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftDeleteBackupReturn` */
+export interface IAdminMinecraftDeleteBackupReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftDeletePassReturn` */
+export interface IAdminMinecraftDeletePassReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftDeleteServerReturn` */
+export interface IAdminMinecraftDeleteServerReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftKickPlayerReturn` */
+export interface IAdminMinecraftKickPlayerReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftPassesReturn` */
+export interface IAdminMinecraftPassesReturn {
+  error: Maybe<string>;
+  passes: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminMinecraftRestartReturn` */
 export interface IAdminMinecraftRestartReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftRestoreBackupReturn` */
+export interface IAdminMinecraftRestoreBackupReturn {
   error: Maybe<string>;
   success: Maybe<boolean>;
 }
@@ -59,6 +139,13 @@ export interface IAdminMinecraftRestartReturn {
 /** GraphQL: `adminMinecraftSendCommandReturn` */
 export interface IAdminMinecraftSendCommandReturn {
   error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftServersReturn` */
+export interface IAdminMinecraftServersReturn {
+  error: Maybe<string>;
+  servers: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
 }
 
@@ -78,6 +165,14 @@ export interface IAdminMinecraftStatusReturn {
 /** GraphQL: `adminMinecraftStopReturn` */
 export interface IAdminMinecraftStopReturn {
   error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftUpdateServerReturn` */
+export interface IAdminMinecraftUpdateServerReturn {
+  error: Maybe<string>;
+  restartRequired: Maybe<boolean>;
+  server: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
 }
 
@@ -1179,10 +1274,20 @@ export interface IMutation {
   accountSelfUpdateSettings: Maybe<IAccountSelfUpdateSettingsReturn>;
   adminAddRole: Maybe<IAdminAddRoleReturn>;
   adminAddUserRole: Maybe<IAdminAddUserRoleReturn>;
+  adminMinecraftBackup: Maybe<IAdminMinecraftBackupReturn>;
+  adminMinecraftBlockPass: Maybe<IAdminMinecraftBlockPassReturn>;
+  adminMinecraftBroadcast: Maybe<IAdminMinecraftBroadcastReturn>;
+  adminMinecraftCreateServer: Maybe<IAdminMinecraftCreateServerReturn>;
+  adminMinecraftDeleteBackup: Maybe<IAdminMinecraftDeleteBackupReturn>;
+  adminMinecraftDeletePass: Maybe<IAdminMinecraftDeletePassReturn>;
+  adminMinecraftDeleteServer: Maybe<IAdminMinecraftDeleteServerReturn>;
+  adminMinecraftKickPlayer: Maybe<IAdminMinecraftKickPlayerReturn>;
   adminMinecraftRestart: Maybe<IAdminMinecraftRestartReturn>;
+  adminMinecraftRestoreBackup: Maybe<IAdminMinecraftRestoreBackupReturn>;
   adminMinecraftSendCommand: Maybe<IAdminMinecraftSendCommandReturn>;
   adminMinecraftStart: Maybe<IAdminMinecraftStartReturn>;
   adminMinecraftStop: Maybe<IAdminMinecraftStopReturn>;
+  adminMinecraftUpdateServer: Maybe<IAdminMinecraftUpdateServerReturn>;
   adminMonitorKill: Maybe<IAdminMonitorKillReturn>;
   adminMonitorThresholdsSave: Maybe<IAdminMonitorThresholdsSaveReturn>;
   adminPageCreate: Maybe<IAdminPageCreateReturn>;
@@ -1488,6 +1593,10 @@ export interface IQuery {
   accountSelfLoad: Maybe<IAccountSelfLoad>;
   adminDbUsageEntities: Maybe<IAdminDbUsageEntitiesReturn>;
   adminDbUsageReport: Maybe<IAdminDbUsageReportReturn>;
+  adminMinecraftBackups: Maybe<IAdminMinecraftBackupsReturn>;
+  adminMinecraftConsoleHistory: Maybe<IAdminMinecraftConsoleHistoryReturn>;
+  adminMinecraftPasses: Maybe<IAdminMinecraftPassesReturn>;
+  adminMinecraftServers: Maybe<IAdminMinecraftServersReturn>;
   adminMinecraftStatus: Maybe<IAdminMinecraftStatusReturn>;
   adminMonitorAlerts: Maybe<IAdminMonitorAlertsReturn>;
   adminMonitorApp: Maybe<IAdminMonitorAppReturn>;

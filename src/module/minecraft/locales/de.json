@@ -142,7 +142,7 @@
   },
   "backup": {
     "busy": "Backup läuft …",
-    "done": "Backup erstellt: {{file}} ({{size}} MB)",
+    "done": "Backup erstellt: {{file}} ({{size}})",
     "error": {
       "not_found": "Server nicht gefunden.",
       "not_configured": "MINECRAFT_BASE_DIR ist nicht konfiguriert.",
@@ -155,7 +155,7 @@
     },
     "title": "Backups: {{name}}",
     "description": "Welt-Backups erstellen, wiederherstellen und löschen",
-    "empty": "Noch keine Backups.",
+    "empty": "Noch keine Backups",
     "stopFirst": "Zum Wiederherstellen muss der Server gestoppt sein.",
     "restoreTitle": "Backup wiederherstellen?",
     "restoreText": "Die aktuelle Welt wird durch {{file}} ersetzt. Die bisherige Welt bleibt als worlds.before-restore im Server-Ordner (nur diese eine Stufe).",
@@ -164,6 +164,25 @@
     "deleteTitle": "Backup löschen?",
     "deleteText": "{{file}} wird endgültig gelöscht.",
     "deleteConfirm": "Löschen",
-    "deleteDone": "Backup gelöscht."
+    "deleteDone": "Backup gelöscht.",
+    "emptyText": "Sichere die Welt dieses Servers, um sie später wiederherstellen zu können."
+  },
+  "pass": {
+    "title": "Spielerpass",
+    "description": "Gamertags, die auf allen Servern beitreten dürfen",
+    "empty": "Noch keine Einträge",
+    "emptyText": "Nutzer tragen Gamertags im Account-Bereich ein.",
+    "never": "noch nie online",
+    "block": "Auf allen Servern sperren",
+    "unblock": "Entsperren",
+    "delete": "Löschen",
+    "deleteTitle": "Eintrag löschen?",
+    "deleteText": "{{name}} wird auf allen Servern entfernt und, falls online, gekickt.",
+    "deleteDone": "Eintrag gelöscht.",
+    "status": {
+      "active": "Aktiv",
+      "paused": "Pausiert",
+      "blocked": "Gesperrt"
+    }
   }
 }

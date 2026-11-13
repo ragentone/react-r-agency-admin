@@ -1,11 +1,20 @@
 import { AppDrawer } from '@ui/patterns';
 import { Button } from '@ui/shad-cn/components/button.tsx';
-import { ArchiveRestore, Plus, Trash2 } from 'lucide-react';
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@ui/shad-cn/components/empty.tsx';
+import { Archive, ArchiveRestore, Plus, Trash2 } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { AdminMinecraftApi } from '../api';
+import { formatSize } from '../format-size';
 import { useMinecraftBackups } from '../hooks/use-minecraft-backups';
 import { BackupConfirmDialog } from './BackupConfirmDialog';
 
@@ -27,7 +36,7 @@ export const BackupsDrawer: React.FC<{
     const result = await AdminMinecraftApi.backup(serverId);
     setCreating(false);
     if (result.success) {
-      toast.success(t('backup.done', { file: result.file, size: ((result.size ?? 0) / 1e6).toFixed(1) }));
+      toast.success(t('backup.done', { file: result.file, size: formatSize(result.size ?? 0) }));
       void reload();
     } else {
       toast.error(
@@ -43,6 +52,7 @@ export const BackupsDrawer: React.FC<{
       title={t('backup.title', { name })}
       description={t('backup.description')}
       locked={creating}
+      contentProps={{ className: 'max-w-5xl' }}
       action={
         <Button size="sm" isLoading={creating} onClick={() => void create()}>
           <Plus />
@@ -59,7 +69,21 @@ export const BackupsDrawer: React.FC<{
         />
       )}
       {backups && backups.length === 0 && (
-        <p className="text-caption text-muted-foreground">{t('backup.empty')}</p>
+        <Empty className="px-4 py-12">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <Archive />
+            </EmptyMedia>
+            <EmptyTitle>{t('backup.empty')}</EmptyTitle>
+            <EmptyDescription>{t('backup.emptyText')}</EmptyDescription>
+          </EmptyHeader>
+          <EmptyContent>
+            <Button isLoading={creating} onClick={() => void create()}>
+              <Plus />
+              {t('action.backup')}
+            </Button>
+          </EmptyContent>
+        </Empty>
       )}
       {!stopped && backups && backups.length > 0 && (
         <p className="pb-2 text-caption text-muted-foreground">{t('backup.stopFirst')}</p>
@@ -73,7 +97,7 @@ export const BackupsDrawer: React.FC<{
             <div className="min-w-0 flex-1">
               <p className="text-body font-medium">{new Date(item.createdAt).toLocaleString()}</p>
               <p className="text-caption text-muted-foreground">
-                {(item.size / 1e6).toFixed(1)} MB
+                {formatSize(item.size)}
               </p>
             </div>
             <Button

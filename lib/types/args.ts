@@ -69,9 +69,90 @@ export interface IMutationAdminAddUserRoleArgs {
   userRole: string;
 }
 
+/** Arguments of `Mutation.adminMinecraftBackup` */
+export interface IMutationAdminMinecraftBackupArgs {
+  serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftBlockPass` */
+export interface IMutationAdminMinecraftBlockPassArgs {
+  blocked?: InputMaybe<boolean>;
+  id: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftBroadcast` */
+export interface IMutationAdminMinecraftBroadcastArgs {
+  message: string;
+  mode?: InputMaybe<string>;
+  serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftCreateServer` */
+export interface IMutationAdminMinecraftCreateServerArgs {
+  autostart?: InputMaybe<boolean>;
+  gamemode: string;
+  maxPlayers?: InputMaybe<number>;
+  name: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftDeleteBackup` */
+export interface IMutationAdminMinecraftDeleteBackupArgs {
+  file: string;
+  serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftDeletePass` */
+export interface IMutationAdminMinecraftDeletePassArgs {
+  id: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftDeleteServer` */
+export interface IMutationAdminMinecraftDeleteServerArgs {
+  deleteFiles?: InputMaybe<boolean>;
+  serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftKickPlayer` */
+export interface IMutationAdminMinecraftKickPlayerArgs {
+  name: string;
+  reason?: InputMaybe<string>;
+  serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftRestart` */
+export interface IMutationAdminMinecraftRestartArgs {
+  serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftRestoreBackup` */
+export interface IMutationAdminMinecraftRestoreBackupArgs {
+  file: string;
+  serverId: string;
+}
+
 /** Arguments of `Mutation.adminMinecraftSendCommand` */
 export interface IMutationAdminMinecraftSendCommandArgs {
   command: string;
+  serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftStart` */
+export interface IMutationAdminMinecraftStartArgs {
+  serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftStop` */
+export interface IMutationAdminMinecraftStopArgs {
+  serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftUpdateServer` */
+export interface IMutationAdminMinecraftUpdateServerArgs {
+  autostart?: InputMaybe<boolean>;
+  gamemode: string;
+  maxPlayers?: InputMaybe<number>;
+  name: string;
+  serverId: string;
 }
 
 /** Arguments of `Mutation.adminMonitorKill` */
@@ -804,6 +885,22 @@ export interface IQueryDbResourceReadArgs {
   filters?: InputMaybe<ScalarJSON>;
   order?: InputMaybe<ScalarJSON>;
   pagination?: InputMaybe<IDbPagination>;
+}
+
+/** Arguments of `Query.adminMinecraftBackups` */
+export interface IQueryAdminMinecraftBackupsArgs {
+  serverId: string;
+}
+
+/** Arguments of `Query.adminMinecraftConsoleHistory` */
+export interface IQueryAdminMinecraftConsoleHistoryArgs {
+  after?: InputMaybe<number>;
+  serverId: string;
+}
+
+/** Arguments of `Query.adminMinecraftStatus` */
+export interface IQueryAdminMinecraftStatusArgs {
+  serverId: string;
 }
 
 /** Arguments of `Query.adminMonitorHistory` */

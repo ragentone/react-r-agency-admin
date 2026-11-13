@@ -63,3 +63,14 @@ export interface IMinecraftConsoleLine {
   kind: 'out' | 'in' | 'err';
   text: string;
 }
+
+/** Spielerpass-Eintrag (Admin-Sicht). */
+export interface IMinecraftPass {
+  id: string;
+  alias: string;
+  gamertag: string;
+  status: 'active' | 'paused' | 'blocked';
+  xuid: string | null;
+  lastSeenAt: string | null;
+  createdAt: string;
+}

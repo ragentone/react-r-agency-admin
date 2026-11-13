@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |    104 |
-| [Mutation](#mutation) |    147 |
-| Object-Types          |    306 |
+| [Query](#query)       |    108 |
+| [Mutation](#mutation) |    157 |
+| Object-Types          |    320 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -51,7 +51,28 @@ Query  ‹IQuery›
 │   ├── error: String
 │   ├── report: JSON
 │   └── success: Boolean
+├── adminMinecraftBackups: adminMinecraftBackupsReturn  ‹IAdminMinecraftBackupsReturn›
+│   ├── $serverId: String!
+│   ├── backups: JSON
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftConsoleHistory: adminMinecraftConsoleHistoryReturn  ‹IAdminMinecraftConsoleHistoryReturn›
+│   ├── $after: Int
+│   ├── $serverId: String!
+│   ├── error: String
+│   ├── last: Int
+│   ├── lines: JSON
+│   └── success: Boolean
+├── adminMinecraftPasses: adminMinecraftPassesReturn  ‹IAdminMinecraftPassesReturn›
+│   ├── error: String
+│   ├── passes: JSON
+│   └── success: Boolean
+├── adminMinecraftServers: adminMinecraftServersReturn  ‹IAdminMinecraftServersReturn›
+│   ├── error: String
+│   ├── servers: JSON
+│   └── success: Boolean
 ├── adminMinecraftStatus: adminMinecraftStatusReturn  ‹IAdminMinecraftStatusReturn›
+│   ├── $serverId: String!
 │   ├── error: String
 │   ├── status: JSON
 │   └── success: Boolean
@@ -934,18 +955,83 @@ Mutation  ‹IMutation›
 │   ├── $userId: ID!
 │   ├── $userRole: String!
 │   └── success: Boolean
+├── adminMinecraftBackup: adminMinecraftBackupReturn  ‹IAdminMinecraftBackupReturn›
+│   ├── $serverId: String!
+│   ├── error: String
+│   ├── file: String
+│   ├── size: Int
+│   └── success: Boolean
+├── adminMinecraftBlockPass: adminMinecraftBlockPassReturn  ‹IAdminMinecraftBlockPassReturn›
+│   ├── $blocked: Boolean
+│   ├── $id: String!
+│   ├── entry: JSON
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftBroadcast: adminMinecraftBroadcastReturn  ‹IAdminMinecraftBroadcastReturn›
+│   ├── $message: String!
+│   ├── $mode: String
+│   ├── $serverId: String!
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftCreateServer: adminMinecraftCreateServerReturn  ‹IAdminMinecraftCreateServerReturn›
+│   ├── $autostart: Boolean
+│   ├── $gamemode: String!
+│   ├── $maxPlayers: Int
+│   ├── $name: String!
+│   ├── error: String
+│   ├── server: JSON
+│   └── success: Boolean
+├── adminMinecraftDeleteBackup: adminMinecraftDeleteBackupReturn  ‹IAdminMinecraftDeleteBackupReturn›
+│   ├── $file: String!
+│   ├── $serverId: String!
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftDeletePass: adminMinecraftDeletePassReturn  ‹IAdminMinecraftDeletePassReturn›
+│   ├── $id: String!
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftDeleteServer: adminMinecraftDeleteServerReturn  ‹IAdminMinecraftDeleteServerReturn›
+│   ├── $deleteFiles: Boolean
+│   ├── $serverId: String!
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftKickPlayer: adminMinecraftKickPlayerReturn  ‹IAdminMinecraftKickPlayerReturn›
+│   ├── $name: String!
+│   ├── $reason: String
+│   ├── $serverId: String!
+│   ├── error: String
+│   └── success: Boolean
 ├── adminMinecraftRestart: adminMinecraftRestartReturn  ‹IAdminMinecraftRestartReturn›
+│   ├── $serverId: String!
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftRestoreBackup: adminMinecraftRestoreBackupReturn  ‹IAdminMinecraftRestoreBackupReturn›
+│   ├── $file: String!
+│   ├── $serverId: String!
 │   ├── error: String
 │   └── success: Boolean
 ├── adminMinecraftSendCommand: adminMinecraftSendCommandReturn  ‹IAdminMinecraftSendCommandReturn›
 │   ├── $command: String!
+│   ├── $serverId: String!
 │   ├── error: String
 │   └── success: Boolean
 ├── adminMinecraftStart: adminMinecraftStartReturn  ‹IAdminMinecraftStartReturn›
+│   ├── $serverId: String!
 │   ├── error: String
 │   └── success: Boolean
 ├── adminMinecraftStop: adminMinecraftStopReturn  ‹IAdminMinecraftStopReturn›
+│   ├── $serverId: String!
 │   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftUpdateServer: adminMinecraftUpdateServerReturn  ‹IAdminMinecraftUpdateServerReturn›
+│   ├── $autostart: Boolean
+│   ├── $gamemode: String!
+│   ├── $maxPlayers: Int
+│   ├── $name: String!
+│   ├── $serverId: String!
+│   ├── error: String
+│   ├── restartRequired: Boolean
+│   ├── server: JSON
 │   └── success: Boolean
 ├── adminMonitorKill: adminMonitorKillReturn  ‹IAdminMonitorKillReturn›
 │   ├── $pid: Int!
@@ -2035,11 +2121,25 @@ Inputs
 | `adminAddUserRoleReturn`                 | Object | `IAdminAddUserRoleReturn`                 | `objects.ts` |                                                                                  |
 | `adminDbUsageEntitiesReturn`             | Object | `IAdminDbUsageEntitiesReturn`             | `objects.ts` |                                                                                  |
 | `adminDbUsageReportReturn`               | Object | `IAdminDbUsageReportReturn`               | `objects.ts` |                                                                                  |
+| `adminMinecraftBackupReturn`             | Object | `IAdminMinecraftBackupReturn`             | `objects.ts` |                                                                                  |
+| `adminMinecraftBackupsReturn`            | Object | `IAdminMinecraftBackupsReturn`            | `objects.ts` |                                                                                  |
+| `adminMinecraftBlockPassReturn`          | Object | `IAdminMinecraftBlockPassReturn`          | `objects.ts` |                                                                                  |
+| `adminMinecraftBroadcastReturn`          | Object | `IAdminMinecraftBroadcastReturn`          | `objects.ts` |                                                                                  |
+| `adminMinecraftConsoleHistoryReturn`     | Object | `IAdminMinecraftConsoleHistoryReturn`     | `objects.ts` |                                                                                  |
+| `adminMinecraftCreateServerReturn`       | Object | `IAdminMinecraftCreateServerReturn`       | `objects.ts` |                                                                                  |
+| `adminMinecraftDeleteBackupReturn`       | Object | `IAdminMinecraftDeleteBackupReturn`       | `objects.ts` |                                                                                  |
+| `adminMinecraftDeletePassReturn`         | Object | `IAdminMinecraftDeletePassReturn`         | `objects.ts` |                                                                                  |
+| `adminMinecraftDeleteServerReturn`       | Object | `IAdminMinecraftDeleteServerReturn`       | `objects.ts` |                                                                                  |
+| `adminMinecraftKickPlayerReturn`         | Object | `IAdminMinecraftKickPlayerReturn`         | `objects.ts` |                                                                                  |
+| `adminMinecraftPassesReturn`             | Object | `IAdminMinecraftPassesReturn`             | `objects.ts` |                                                                                  |
 | `adminMinecraftRestartReturn`            | Object | `IAdminMinecraftRestartReturn`            | `objects.ts` |                                                                                  |
+| `adminMinecraftRestoreBackupReturn`      | Object | `IAdminMinecraftRestoreBackupReturn`      | `objects.ts` |                                                                                  |
 | `adminMinecraftSendCommandReturn`        | Object | `IAdminMinecraftSendCommandReturn`        | `objects.ts` |                                                                                  |
+| `adminMinecraftServersReturn`            | Object | `IAdminMinecraftServersReturn`            | `objects.ts` |                                                                                  |
 | `adminMinecraftStartReturn`              | Object | `IAdminMinecraftStartReturn`              | `objects.ts` |                                                                                  |
 | `adminMinecraftStatusReturn`             | Object | `IAdminMinecraftStatusReturn`             | `objects.ts` |                                                                                  |
 | `adminMinecraftStopReturn`               | Object | `IAdminMinecraftStopReturn`               | `objects.ts` |                                                                                  |
+| `adminMinecraftUpdateServerReturn`       | Object | `IAdminMinecraftUpdateServerReturn`       | `objects.ts` |                                                                                  |
 | `adminMonitorAlertsReturn`               | Object | `IAdminMonitorAlertsReturn`               | `objects.ts` |                                                                                  |
 | `adminMonitorAppReturn`                  | Object | `IAdminMonitorAppReturn`                  | `objects.ts` |                                                                                  |
 | `adminMonitorHistoryReturn`              | Object | `IAdminMonitorHistoryReturn`              | `objects.ts` |                                                                                  |

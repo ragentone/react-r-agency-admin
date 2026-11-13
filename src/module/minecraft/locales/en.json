@@ -142,7 +142,7 @@
   },
   "backup": {
     "busy": "Backup running …",
-    "done": "Backup created: {{file}} ({{size}} MB)",
+    "done": "Backup created: {{file}} ({{size}})",
     "error": {
       "not_found": "Server not found.",
       "not_configured": "MINECRAFT_BASE_DIR is not configured.",
@@ -155,7 +155,7 @@
     },
     "title": "Backups: {{name}}",
     "description": "Create, restore and delete world backups",
-    "empty": "No backups yet.",
+    "empty": "No backups yet",
     "stopFirst": "The server must be stopped to restore.",
     "restoreTitle": "Restore backup?",
     "restoreText": "The current world is replaced by {{file}}. The previous world stays in the server folder as worlds.before-restore (one level only).",
@@ -164,6 +164,25 @@
     "deleteTitle": "Delete backup?",
     "deleteText": "{{file}} will be deleted permanently.",
     "deleteConfirm": "Delete",
-    "deleteDone": "Backup deleted."
+    "deleteDone": "Backup deleted.",
+    "emptyText": "Back up this server's world so you can restore it later."
+  },
+  "pass": {
+    "title": "Player pass",
+    "description": "Gamertags allowed to join all servers",
+    "empty": "No entries yet",
+    "emptyText": "Users add gamertags in the account area.",
+    "never": "never online",
+    "block": "Block on all servers",
+    "unblock": "Unblock",
+    "delete": "Delete",
+    "deleteTitle": "Delete entry?",
+    "deleteText": "{{name}} is removed from all servers and kicked if online.",
+    "deleteDone": "Entry deleted.",
+    "status": {
+      "active": "Active",
+      "paused": "Paused",
+      "blocked": "Blocked"
+    }
   }
 }

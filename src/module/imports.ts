@@ -4,6 +4,6 @@
 import "./seo/module.tsx"
 import "./minecraft/module.tsx"
 import "./cli-auth/module.tsx"
-import "./admin-debug/module.tsx"
-import "./admin-monitor/module.tsx"
 import "./admin/module.tsx"
+import "./admin-monitor/module.tsx"
+import "./admin-debug/module.tsx"
