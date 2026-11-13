@@ -42,8 +42,6 @@ export const SearchDrawer: React.FC<ISearchDrawerProps> = ({ open, onClose, onSe
       title={t('title')}
       description={t('placeholder')}
       hideHeader
-      direction={'up'}
-      subHeader={<div></div>}
     >
       {open && <SearchPanel onClose={onClose} focus={opened} onSelectItem={onSelectItem} />}
     </AppDrawer>
