@@ -50,6 +50,37 @@ export interface IAdminDbUsageReportReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminMinecraftRestartReturn` */
+export interface IAdminMinecraftRestartReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftSendCommandReturn` */
+export interface IAdminMinecraftSendCommandReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftStartReturn` */
+export interface IAdminMinecraftStartReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftStatusReturn` */
+export interface IAdminMinecraftStatusReturn {
+  error: Maybe<string>;
+  status: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftStopReturn` */
+export interface IAdminMinecraftStopReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminMonitorAlertsReturn` */
 export interface IAdminMonitorAlertsReturn {
   alerts: Maybe<ScalarJSON>;
@@ -1148,6 +1179,10 @@ export interface IMutation {
   accountSelfUpdateSettings: Maybe<IAccountSelfUpdateSettingsReturn>;
   adminAddRole: Maybe<IAdminAddRoleReturn>;
   adminAddUserRole: Maybe<IAdminAddUserRoleReturn>;
+  adminMinecraftRestart: Maybe<IAdminMinecraftRestartReturn>;
+  adminMinecraftSendCommand: Maybe<IAdminMinecraftSendCommandReturn>;
+  adminMinecraftStart: Maybe<IAdminMinecraftStartReturn>;
+  adminMinecraftStop: Maybe<IAdminMinecraftStopReturn>;
   adminMonitorKill: Maybe<IAdminMonitorKillReturn>;
   adminMonitorThresholdsSave: Maybe<IAdminMonitorThresholdsSaveReturn>;
   adminPageCreate: Maybe<IAdminPageCreateReturn>;
@@ -1453,6 +1488,7 @@ export interface IQuery {
   accountSelfLoad: Maybe<IAccountSelfLoad>;
   adminDbUsageEntities: Maybe<IAdminDbUsageEntitiesReturn>;
   adminDbUsageReport: Maybe<IAdminDbUsageReportReturn>;
+  adminMinecraftStatus: Maybe<IAdminMinecraftStatusReturn>;
   adminMonitorAlerts: Maybe<IAdminMonitorAlertsReturn>;
   adminMonitorApp: Maybe<IAdminMonitorAppReturn>;
   adminMonitorHistory: Maybe<IAdminMonitorHistoryReturn>;

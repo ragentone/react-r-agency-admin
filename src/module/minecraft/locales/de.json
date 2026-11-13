@@ -1,0 +1,81 @@
+{
+  "title": "Minecraft-Server",
+  "subtitle": "Bedrock-Server für PS5 und Android verwalten",
+  "menu": {
+    "label": "Minecraft",
+    "description": "Bedrock-Server starten, stoppen, überwachen"
+  },
+  "card": {
+    "pid": "Prozess-ID",
+    "startedAt": "Gestartet am",
+    "lastError": "Letzter Fehler",
+    "restartAttempts": "Neustart-Versuche",
+    "port": "Port {{port}}"
+  },
+  "state": {
+    "running": "läuft",
+    "starting": "startet",
+    "stopping": "stoppt",
+    "stopped": "gestoppt",
+    "crashed": "abgestürzt"
+  },
+  "action": {
+    "start": "Starten",
+    "stop": "Stoppen",
+    "restart": "Neu starten",
+    "startDone": "Server wird gestartet.",
+    "stopDone": "Server wird gestoppt.",
+    "restartDone": "Server wird neu gestartet.",
+    "error": {
+      "already_running": "Der Server läuft bereits.",
+      "not_running": "Der Server läuft nicht.",
+      "not_configured": "MINECRAFT_BASE_DIR ist nicht konfiguriert.",
+      "spawn_failed": "Der Server-Prozess konnte nicht gestartet werden.",
+      "unknown": "Unbekannter Fehler.",
+      "invalid_input": "Ungültige Eingabe.",
+      "limit_reached": "Maximale Anzahl Server erreicht.",
+      "folder_exists": "Der Server-Ordner existiert bereits.",
+      "create_failed": "Server konnte nicht angelegt werden.",
+      "not_found": "Server nicht gefunden.",
+      "update_failed": "Änderung konnte nicht gespeichert werden.",
+      "running": "Der Server muss zuerst gestoppt werden.",
+      "no_free_port": "Kein freier Port gefunden (alle geprüften UDP-Ports sind belegt).",
+      "conflict": "Name oder Port wurde gerade vergeben, bitte erneut versuchen."
+    },
+    "edit": "Bearbeiten",
+    "delete": "Löschen"
+  },
+  "gamemode": {
+    "survival": "Survival",
+    "creative": "Creative",
+    "adventure": "Adventure"
+  },
+  "list": {
+    "title": "Server",
+    "empty": "Noch kein Server angelegt.",
+    "error": "Server konnten nicht geladen werden."
+  },
+  "form": {
+    "createTitle": "Server anlegen",
+    "createText": "Ports werden automatisch vergeben.",
+    "name": "Name",
+    "gamemode": "Spielmodus",
+    "maxPlayers": "Max. Spieler",
+    "cancel": "Abbrechen",
+    "create": "Anlegen",
+    "created": "Server angelegt.",
+    "editTitle": "Server bearbeiten",
+    "editText": "Name, Spielmodus und Spieleranzahl ändern. Ports und Ordner bleiben.",
+    "save": "Speichern",
+    "saved": "Gespeichert.",
+    "autostart": "Mit der Runtime starten",
+    "restartHint": "Änderungen gelten nach einem Neustart des Servers."
+  },
+  "delete": {
+    "title": "„{{name}}“ löschen?",
+    "text": "Der Server wird entfernt und kann nicht mehr gestartet werden.",
+    "worldKept": "Die Welt bleibt unter {{folder}} auf der Platte erhalten und wird nicht gelöscht.",
+    "confirm": "Löschen",
+    "done": "Server gelöscht."
+  }
+}

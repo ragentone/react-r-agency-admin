@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |    103 |
-| [Mutation](#mutation) |    143 |
-| Object-Types          |    301 |
+| [Query](#query)       |    104 |
+| [Mutation](#mutation) |    147 |
+| Object-Types          |    306 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -50,6 +50,10 @@ Query  ‹IQuery›
 ├── adminDbUsageReport: adminDbUsageReportReturn  ‹IAdminDbUsageReportReturn›
 │   ├── error: String
 │   ├── report: JSON
+│   └── success: Boolean
+├── adminMinecraftStatus: adminMinecraftStatusReturn  ‹IAdminMinecraftStatusReturn›
+│   ├── error: String
+│   ├── status: JSON
 │   └── success: Boolean
 ├── adminMonitorAlerts: adminMonitorAlertsReturn  ‹IAdminMonitorAlertsReturn›
 │   ├── alerts: JSON
@@ -929,6 +933,19 @@ Mutation  ‹IMutation›
 │   ├── $state: Boolean!
 │   ├── $userId: ID!
 │   ├── $userRole: String!
+│   └── success: Boolean
+├── adminMinecraftRestart: adminMinecraftRestartReturn  ‹IAdminMinecraftRestartReturn›
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftSendCommand: adminMinecraftSendCommandReturn  ‹IAdminMinecraftSendCommandReturn›
+│   ├── $command: String!
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftStart: adminMinecraftStartReturn  ‹IAdminMinecraftStartReturn›
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftStop: adminMinecraftStopReturn  ‹IAdminMinecraftStopReturn›
+│   ├── error: String
 │   └── success: Boolean
 ├── adminMonitorKill: adminMonitorKillReturn  ‹IAdminMonitorKillReturn›
 │   ├── $pid: Int!
@@ -2018,6 +2035,11 @@ Inputs
 | `adminAddUserRoleReturn`                 | Object | `IAdminAddUserRoleReturn`                 | `objects.ts` |                                                                                  |
 | `adminDbUsageEntitiesReturn`             | Object | `IAdminDbUsageEntitiesReturn`             | `objects.ts` |                                                                                  |
 | `adminDbUsageReportReturn`               | Object | `IAdminDbUsageReportReturn`               | `objects.ts` |                                                                                  |
+| `adminMinecraftRestartReturn`            | Object | `IAdminMinecraftRestartReturn`            | `objects.ts` |                                                                                  |
+| `adminMinecraftSendCommandReturn`        | Object | `IAdminMinecraftSendCommandReturn`        | `objects.ts` |                                                                                  |
+| `adminMinecraftStartReturn`              | Object | `IAdminMinecraftStartReturn`              | `objects.ts` |                                                                                  |
+| `adminMinecraftStatusReturn`             | Object | `IAdminMinecraftStatusReturn`             | `objects.ts` |                                                                                  |
+| `adminMinecraftStopReturn`               | Object | `IAdminMinecraftStopReturn`               | `objects.ts` |                                                                                  |
 | `adminMonitorAlertsReturn`               | Object | `IAdminMonitorAlertsReturn`               | `objects.ts` |                                                                                  |
 | `adminMonitorAppReturn`                  | Object | `IAdminMonitorAppReturn`                  | `objects.ts` |                                                                                  |
 | `adminMonitorHistoryReturn`              | Object | `IAdminMonitorHistoryReturn`              | `objects.ts` |                                                                                  |

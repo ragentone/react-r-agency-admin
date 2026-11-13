@@ -69,6 +69,11 @@ export interface IMutationAdminAddUserRoleArgs {
   userRole: string;
 }
 
+/** Arguments of `Mutation.adminMinecraftSendCommand` */
+export interface IMutationAdminMinecraftSendCommandArgs {
+  command: string;
+}
+
 /** Arguments of `Mutation.adminMonitorKill` */
 export interface IMutationAdminMonitorKillArgs {
   pid: number;

@@ -1,0 +1,81 @@
+{
+  "title": "Minecraft Server",
+  "subtitle": "Manage the Bedrock server for PS5 and Android",
+  "menu": {
+    "label": "Minecraft",
+    "description": "Start, stop and monitor the Bedrock server"
+  },
+  "card": {
+    "pid": "Process ID",
+    "startedAt": "Started at",
+    "lastError": "Last error",
+    "restartAttempts": "Restart attempts",
+    "port": "Port {{port}}"
+  },
+  "state": {
+    "running": "running",
+    "starting": "starting",
+    "stopping": "stopping",
+    "stopped": "stopped",
+    "crashed": "crashed"
+  },
+  "action": {
+    "start": "Start",
+    "stop": "Stop",
+    "restart": "Restart",
+    "startDone": "Server is starting.",
+    "stopDone": "Server is stopping.",
+    "restartDone": "Server is restarting.",
+    "error": {
+      "already_running": "The server is already running.",
+      "not_running": "The server is not running.",
+      "not_configured": "MINECRAFT_BASE_DIR is not configured.",
+      "spawn_failed": "Could not start the server process.",
+      "unknown": "Unknown error.",
+      "invalid_input": "Invalid input.",
+      "limit_reached": "Maximum number of servers reached.",
+      "folder_exists": "The server folder already exists.",
+      "create_failed": "Could not create the server.",
+      "not_found": "Server not found.",
+      "update_failed": "Could not save the changes.",
+      "running": "Stop the server first.",
+      "no_free_port": "No free port found (all checked UDP ports are in use).",
+      "conflict": "Name or port was just taken, please try again."
+    },
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "gamemode": {
+    "survival": "Survival",
+    "creative": "Creative",
+    "adventure": "Adventure"
+  },
+  "list": {
+    "title": "Servers",
+    "empty": "No server created yet.",
+    "error": "Could not load servers."
+  },
+  "form": {
+    "createTitle": "Create server",
+    "createText": "Ports are assigned automatically.",
+    "name": "Name",
+    "gamemode": "Game mode",
+    "maxPlayers": "Max players",
+    "cancel": "Cancel",
+    "create": "Create",
+    "created": "Server created.",
+    "editTitle": "Edit server",
+    "editText": "Change name, game mode and player limit. Ports and folder stay.",
+    "save": "Save",
+    "saved": "Saved.",
+    "autostart": "Start with the runtime",
+    "restartHint": "Changes apply after the server restarts."
+  },
+  "delete": {
+    "title": "Delete “{{name}}”?",
+    "text": "The server is removed and can no longer be started.",
+    "worldKept": "The world stays on disk under {{folder}} and is not deleted.",
+    "confirm": "Delete",
+    "done": "Server deleted."
+  }
+}
