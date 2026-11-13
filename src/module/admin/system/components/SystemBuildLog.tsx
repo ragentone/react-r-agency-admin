@@ -1,9 +1,9 @@
+import { cn } from '@ui/lib';
 import { AppDrawer } from '@ui/patterns';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { SystemApi } from '../api';
-import { cn } from '@ui/lib';
 
 const POLL_MS = 2000;
 const MAX_CHARS = 200_000;
