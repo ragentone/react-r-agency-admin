@@ -2,8 +2,8 @@ import { Card, CardContent } from '@ui/shad-cn/components/card.tsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import type { IMonitorHost } from '../types';
-import { formatDuration } from '../utils';
+import type { IMonitorHost } from '../../types';
+import { formatDuration } from '../../utils';
 
 /** Static facts about the machine and the Node process. */
 export const MonitorHost: React.FC<{ host: IMonitorHost }> = ({ host }) => {

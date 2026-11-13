@@ -55,5 +55,33 @@
     "less": "Show less",
     "empty": "Process list is not available on this system.",
     "cores": "{{pid}} · {{cpu}} % CPU · {{mem}}"
+  },
+  "cores": {
+    "title": "CPU cores",
+    "text": "Load of every individual core",
+    "core": "Core {{n}}"
+  },
+  "node": {
+    "title": "Node process",
+    "text": "V8 heap, garbage collection and open handles",
+    "heap": "Heap",
+    "total": "Heap total",
+    "external": "External",
+    "gc": "Garbage collection",
+    "gcValue": "{{count}}x · {{ms}} ms",
+    "handles": "Open handles"
+  },
+  "kill": {
+    "description": "Stop process",
+    "pid": "PID",
+    "usage": "Usage",
+    "command": "Command",
+    "hint": "SIGTERM asks the process to exit. SIGKILL stops it immediately.",
+    "terminate": "Terminate (SIGTERM)",
+    "force": "Force (SIGKILL)",
+    "done": "{{name}} was stopped.",
+    "error": {
+      "unknown": "Could not stop the process."
+    }
   }
 }

@@ -50,6 +50,47 @@ export interface IAdminDbUsageReportReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminMonitorAlertsReturn` */
+export interface IAdminMonitorAlertsReturn {
+  alerts: Maybe<ScalarJSON>;
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMonitorAppReturn` */
+export interface IAdminMonitorAppReturn {
+  app: Maybe<ScalarJSON>;
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMonitorHistoryReturn` */
+export interface IAdminMonitorHistoryReturn {
+  error: Maybe<string>;
+  history: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMonitorKillReturn` */
+export interface IAdminMonitorKillReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMonitorSnapshotReturn` */
+export interface IAdminMonitorSnapshotReturn {
+  error: Maybe<string>;
+  snapshot: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMonitorThresholdsSaveReturn` */
+export interface IAdminMonitorThresholdsSaveReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+  thresholds: Maybe<ScalarJSON>;
+}
+
 /** GraphQL: `adminPageCreateReturn` */
 export interface IAdminPageCreateReturn {
   page: Maybe<ScalarJSON>;
@@ -366,6 +407,26 @@ export interface IAdminStatsSecurityReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminSystemBuildDeployReturn` */
+export interface IAdminSystemBuildDeployReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  started: Maybe<boolean>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminSystemBuildLogReturn` */
+export interface IAdminSystemBuildLogReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  id: Maybe<string>;
+  offset: Maybe<number>;
+  reset: Maybe<boolean>;
+  running: Maybe<boolean>;
+  success: Maybe<boolean>;
+  text: Maybe<string>;
+}
+
 /** GraphQL: `adminSystemDeploysReturn` */
 export interface IAdminSystemDeploysReturn {
   error: Maybe<string>;
@@ -387,6 +448,14 @@ export interface IAdminSystemReleasePlanReturn {
   error: Maybe<string>;
   field: Maybe<string>;
   release: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminSystemRuntimeDeployReturn` */
+export interface IAdminSystemRuntimeDeployReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  started: Maybe<boolean>;
   success: Maybe<boolean>;
 }
 
@@ -1079,6 +1148,8 @@ export interface IMutation {
   accountSelfUpdateSettings: Maybe<IAccountSelfUpdateSettingsReturn>;
   adminAddRole: Maybe<IAdminAddRoleReturn>;
   adminAddUserRole: Maybe<IAdminAddUserRoleReturn>;
+  adminMonitorKill: Maybe<IAdminMonitorKillReturn>;
+  adminMonitorThresholdsSave: Maybe<IAdminMonitorThresholdsSaveReturn>;
   adminPageCreate: Maybe<IAdminPageCreateReturn>;
   adminPageDelete: Maybe<IAdminPageDeleteReturn>;
   adminPageImageDiscard: Maybe<IAdminPageImageDiscardReturn>;
@@ -1105,7 +1176,9 @@ export interface IMutation {
   adminSeoRouteSave: Maybe<IAdminSeoRouteSaveReturn>;
   adminSeoSettingsSave: Maybe<IAdminSeoSettingsSaveReturn>;
   adminSeoSitemap: Maybe<IAdminSeoSitemapReturn>;
+  adminSystemBuildDeploy: Maybe<IAdminSystemBuildDeployReturn>;
   adminSystemReleasePlan: Maybe<IAdminSystemReleasePlanReturn>;
+  adminSystemRuntimeDeploy: Maybe<IAdminSystemRuntimeDeployReturn>;
   authAdminBan: Maybe<IAuthAdminBanReturn>;
   authAdminUnban: Maybe<IAuthAdminUnbanReturn>;
   authCodeSend: Maybe<IAuthCodeSendReturn>;
@@ -1380,6 +1453,10 @@ export interface IQuery {
   accountSelfLoad: Maybe<IAccountSelfLoad>;
   adminDbUsageEntities: Maybe<IAdminDbUsageEntitiesReturn>;
   adminDbUsageReport: Maybe<IAdminDbUsageReportReturn>;
+  adminMonitorAlerts: Maybe<IAdminMonitorAlertsReturn>;
+  adminMonitorApp: Maybe<IAdminMonitorAppReturn>;
+  adminMonitorHistory: Maybe<IAdminMonitorHistoryReturn>;
+  adminMonitorSnapshot: Maybe<IAdminMonitorSnapshotReturn>;
   adminPageGet: Maybe<IAdminPageGetReturn>;
   adminPageList: Maybe<IAdminPageListReturn>;
   adminPluginConfigGet: Maybe<IAdminPluginConfigGetReturn>;
@@ -1396,6 +1473,7 @@ export interface IQuery {
   adminStatsNewUsers: Maybe<IAdminStatsNewUsersReturn>;
   adminStatsOverview: Maybe<IAdminStatsOverviewReturn>;
   adminStatsSecurity: Maybe<IAdminStatsSecurityReturn>;
+  adminSystemBuildLog: Maybe<IAdminSystemBuildLogReturn>;
   adminSystemDeploys: Maybe<IAdminSystemDeploysReturn>;
   adminSystemDocsList: Maybe<IAdminSystemDocsListReturn>;
   adminSystemStorage: Maybe<IAdminSystemStorageReturn>;

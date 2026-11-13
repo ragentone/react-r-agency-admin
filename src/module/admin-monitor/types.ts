@@ -4,10 +4,18 @@ export interface IMonitorSample {
   cpu: number;
   memUsed: number;
   memTotal: number;
+  memCached: number;
+  swapUsed: number;
+  swapTotal: number;
   rss: number;
   heapUsed: number;
   procCpu: number;
   loopMs: number;
+  netRx: number;
+  netTx: number;
+  gcMs: number;
+  handles: number;
+  cores: number[];
 }
 
 export interface IMonitorDisk {
@@ -44,4 +52,17 @@ export interface IMonitorSnapshot {
   current: IMonitorSample | null;
   history: IMonitorSample[];
   processes: IMonitorProcess[];
+  heap: IMonitorHeap;
+  status: MonitorStatus;
+}
+
+export type MonitorStatus = 'ok' | 'warn' | 'crit';
+
+export interface IMonitorHeap {
+  total: number;
+  used: number;
+  limit: number;
+  external: number;
+  gcCount: number;
+  gcTotalMs: number;
 }

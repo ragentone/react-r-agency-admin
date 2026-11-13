@@ -55,5 +55,33 @@
     "less": "Weniger anzeigen",
     "empty": "Prozessliste auf diesem System nicht verfügbar.",
     "cores": "{{pid}} · {{cpu}} % CPU · {{mem}}"
+  },
+  "cores": {
+    "title": "CPU-Kerne",
+    "text": "Auslastung jedes einzelnen Kerns",
+    "core": "Kern {{n}}"
+  },
+  "node": {
+    "title": "Node-Prozess",
+    "text": "V8-Heap, Garbage Collection und offene Handles",
+    "heap": "Heap",
+    "total": "Heap gesamt",
+    "external": "Extern",
+    "gc": "Garbage Collection",
+    "gcValue": "{{count}}x · {{ms}} ms",
+    "handles": "Offene Handles"
+  },
+  "kill": {
+    "description": "Prozess beenden",
+    "pid": "PID",
+    "usage": "Auslastung",
+    "command": "Befehl",
+    "hint": "SIGTERM bittet den Prozess, sich zu beenden. SIGKILL beendet ihn sofort.",
+    "terminate": "Beenden (SIGTERM)",
+    "force": "Erzwingen (SIGKILL)",
+    "done": "{{name}} wurde beendet.",
+    "error": {
+      "unknown": "Prozess konnte nicht beendet werden."
+    }
   }
 }

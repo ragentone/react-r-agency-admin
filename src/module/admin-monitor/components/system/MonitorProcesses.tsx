@@ -5,8 +5,9 @@ import { Tabs, TabsList, TabsTrigger } from '@ui/shad-cn/components/tabs.tsx';
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import type { IMonitorProcess } from '../types';
-import { formatBytes } from '../utils';
+import type { IMonitorProcess } from '../../types';
+import { formatBytes } from '../../utils';
+import { MonitorKillDrawer } from './MonitorKillDrawer';
 
 type SortKey = 'cpu' | 'mem';
 const SHORT = 10;
@@ -17,6 +18,7 @@ export const MonitorProcesses: React.FC<{ processes: IMonitorProcess[] }> = ({ p
   const { t } = useTranslation('admin-monitor');
   const [sort, setSort] = useState<SortKey>('cpu');
   const [expanded, setExpanded] = useState(false);
+  const [selected, setSelected] = useState<IMonitorProcess | null>(null);
 
   const items = useMemo(
     () =>
@@ -39,6 +41,7 @@ export const MonitorProcesses: React.FC<{ processes: IMonitorProcess[] }> = ({ p
           ),
           value: p[sort],
           display: sort === 'cpu' ? `${p.cpu.toFixed(1)} %` : formatBytes(p.mem),
+          onClick: () => setSelected(p),
         })),
     [processes, sort, expanded, t]
   );
@@ -67,6 +70,7 @@ export const MonitorProcesses: React.FC<{ processes: IMonitorProcess[] }> = ({ p
             {t(expanded ? 'processes.less' : 'processes.more')}
           </Button>
         )}
+        <MonitorKillDrawer process={selected} onClose={() => setSelected(null)} />
       </CardContent>
     </Card>
   );

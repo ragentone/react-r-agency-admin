@@ -69,6 +69,17 @@ export interface IMutationAdminAddUserRoleArgs {
   userRole: string;
 }
 
+/** Arguments of `Mutation.adminMonitorKill` */
+export interface IMutationAdminMonitorKillArgs {
+  pid: number;
+  signal?: InputMaybe<string>;
+}
+
+/** Arguments of `Mutation.adminMonitorThresholdsSave` */
+export interface IMutationAdminMonitorThresholdsSaveArgs {
+  thresholds: ScalarJSON;
+}
+
 /** Arguments of `Mutation.adminPageCreate` */
 export interface IMutationAdminPageCreateArgs {
   values: ScalarJSON;
@@ -211,9 +222,15 @@ export interface IMutationAdminSeoSettingsSaveArgs {
   values: ScalarJSON;
 }
 
+/** Arguments of `Mutation.adminSystemBuildDeploy` */
+export interface IMutationAdminSystemBuildDeployArgs {
+  app?: InputMaybe<string>;
+}
+
 /** Arguments of `Mutation.adminSystemReleasePlan` */
 export interface IMutationAdminSystemReleasePlanArgs {
   app?: InputMaybe<string>;
+  buildPath?: InputMaybe<string>;
   bump?: InputMaybe<string>;
   notes?: InputMaybe<string>;
   required?: InputMaybe<boolean>;
@@ -784,6 +801,16 @@ export interface IQueryDbResourceReadArgs {
   pagination?: InputMaybe<IDbPagination>;
 }
 
+/** Arguments of `Query.adminMonitorHistory` */
+export interface IQueryAdminMonitorHistoryArgs {
+  hours?: InputMaybe<number>;
+}
+
+/** Arguments of `Query.adminMonitorSnapshot` */
+export interface IQueryAdminMonitorSnapshotArgs {
+  minutes?: InputMaybe<number>;
+}
+
 /** Arguments of `Query.adminPageGet` */
 export interface IQueryAdminPageGetArgs {
   id: ScalarID;
@@ -838,6 +865,13 @@ export interface IQueryAdminStatsOverviewArgs {
 /** Arguments of `Query.adminStatsSecurity` */
 export interface IQueryAdminStatsSecurityArgs {
   range?: InputMaybe<number>;
+}
+
+/** Arguments of `Query.adminSystemBuildLog` */
+export interface IQueryAdminSystemBuildLogArgs {
+  app?: InputMaybe<string>;
+  id?: InputMaybe<string>;
+  offset?: InputMaybe<number>;
 }
 
 /** Arguments of `Query.adminSystemDeploys` */

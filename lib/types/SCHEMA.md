@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |     98 |
-| [Mutation](#mutation) |    139 |
-| Object-Types          |    292 |
+| [Query](#query)       |    103 |
+| [Mutation](#mutation) |    143 |
+| Object-Types          |    301 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -50,6 +50,24 @@ Query  ‹IQuery›
 ├── adminDbUsageReport: adminDbUsageReportReturn  ‹IAdminDbUsageReportReturn›
 │   ├── error: String
 │   ├── report: JSON
+│   └── success: Boolean
+├── adminMonitorAlerts: adminMonitorAlertsReturn  ‹IAdminMonitorAlertsReturn›
+│   ├── alerts: JSON
+│   ├── error: String
+│   └── success: Boolean
+├── adminMonitorApp: adminMonitorAppReturn  ‹IAdminMonitorAppReturn›
+│   ├── app: JSON
+│   ├── error: String
+│   └── success: Boolean
+├── adminMonitorHistory: adminMonitorHistoryReturn  ‹IAdminMonitorHistoryReturn›
+│   ├── $hours: Int
+│   ├── error: String
+│   ├── history: JSON
+│   └── success: Boolean
+├── adminMonitorSnapshot: adminMonitorSnapshotReturn  ‹IAdminMonitorSnapshotReturn›
+│   ├── $minutes: Int
+│   ├── error: String
+│   ├── snapshot: JSON
 │   └── success: Boolean
 ├── adminPageGet: adminPageGetReturn  ‹IAdminPageGetReturn›
 │   ├── $id: ID!
@@ -145,6 +163,18 @@ Query  ‹IQuery›
 │   ├── field: String
 │   ├── security: JSON
 │   └── success: Boolean
+├── adminSystemBuildLog: adminSystemBuildLogReturn  ‹IAdminSystemBuildLogReturn›
+│   ├── $app: String
+│   ├── $id: String
+│   ├── $offset: Int
+│   ├── error: String
+│   ├── field: String
+│   ├── id: String
+│   ├── offset: Int
+│   ├── reset: Boolean
+│   ├── running: Boolean
+│   ├── success: Boolean
+│   └── text: String
 ├── adminSystemDeploys: adminSystemDeploysReturn  ‹IAdminSystemDeploysReturn›
 │   ├── $limit: Int
 │   ├── error: String
@@ -900,6 +930,16 @@ Mutation  ‹IMutation›
 │   ├── $userId: ID!
 │   ├── $userRole: String!
 │   └── success: Boolean
+├── adminMonitorKill: adminMonitorKillReturn  ‹IAdminMonitorKillReturn›
+│   ├── $pid: Int!
+│   ├── $signal: String
+│   ├── error: String
+│   └── success: Boolean
+├── adminMonitorThresholdsSave: adminMonitorThresholdsSaveReturn  ‹IAdminMonitorThresholdsSaveReturn›
+│   ├── $thresholds: JSON!
+│   ├── error: String
+│   ├── success: Boolean
+│   └── thresholds: JSON
 ├── adminPageCreate: adminPageCreateReturn  ‹IAdminPageCreateReturn›
 │   ├── $values: JSON!
 │   ├── page: JSON
@@ -1050,14 +1090,26 @@ Mutation  ‹IMutation›
 │   ├── field: String
 │   ├── sitemap: JSON
 │   └── success: Boolean
+├── adminSystemBuildDeploy: adminSystemBuildDeployReturn  ‹IAdminSystemBuildDeployReturn›
+│   ├── $app: String
+│   ├── error: String
+│   ├── field: String
+│   ├── started: Boolean
+│   └── success: Boolean
 ├── adminSystemReleasePlan: adminSystemReleasePlanReturn  ‹IAdminSystemReleasePlanReturn›
 │   ├── $app: String
+│   ├── $buildPath: String
 │   ├── $bump: String
 │   ├── $notes: String
 │   ├── $required: Boolean
 │   ├── error: String
 │   ├── field: String
 │   ├── release: JSON
+│   └── success: Boolean
+├── adminSystemRuntimeDeploy: adminSystemRuntimeDeployReturn  ‹IAdminSystemRuntimeDeployReturn›
+│   ├── error: String
+│   ├── field: String
+│   ├── started: Boolean
 │   └── success: Boolean
 ├── authAdminBan: authAdminBanReturn  ‹IAuthAdminBanReturn›
 │   ├── $reason: String
@@ -1966,6 +2018,12 @@ Inputs
 | `adminAddUserRoleReturn`                 | Object | `IAdminAddUserRoleReturn`                 | `objects.ts` |                                                                                  |
 | `adminDbUsageEntitiesReturn`             | Object | `IAdminDbUsageEntitiesReturn`             | `objects.ts` |                                                                                  |
 | `adminDbUsageReportReturn`               | Object | `IAdminDbUsageReportReturn`               | `objects.ts` |                                                                                  |
+| `adminMonitorAlertsReturn`               | Object | `IAdminMonitorAlertsReturn`               | `objects.ts` |                                                                                  |
+| `adminMonitorAppReturn`                  | Object | `IAdminMonitorAppReturn`                  | `objects.ts` |                                                                                  |
+| `adminMonitorHistoryReturn`              | Object | `IAdminMonitorHistoryReturn`              | `objects.ts` |                                                                                  |
+| `adminMonitorKillReturn`                 | Object | `IAdminMonitorKillReturn`                 | `objects.ts` |                                                                                  |
+| `adminMonitorSnapshotReturn`             | Object | `IAdminMonitorSnapshotReturn`             | `objects.ts` |                                                                                  |
+| `adminMonitorThresholdsSaveReturn`       | Object | `IAdminMonitorThresholdsSaveReturn`       | `objects.ts` |                                                                                  |
 | `adminPageCreateReturn`                  | Object | `IAdminPageCreateReturn`                  | `objects.ts` |                                                                                  |
 | `adminPageDeleteReturn`                  | Object | `IAdminPageDeleteReturn`                  | `objects.ts` |                                                                                  |
 | `adminPageGetReturn`                     | Object | `IAdminPageGetReturn`                     | `objects.ts` |                                                                                  |
@@ -2008,9 +2066,12 @@ Inputs
 | `adminStatsNewUsersReturn`               | Object | `IAdminStatsNewUsersReturn`               | `objects.ts` |                                                                                  |
 | `adminStatsOverviewReturn`               | Object | `IAdminStatsOverviewReturn`               | `objects.ts` |                                                                                  |
 | `adminStatsSecurityReturn`               | Object | `IAdminStatsSecurityReturn`               | `objects.ts` |                                                                                  |
+| `adminSystemBuildDeployReturn`           | Object | `IAdminSystemBuildDeployReturn`           | `objects.ts` |                                                                                  |
+| `adminSystemBuildLogReturn`              | Object | `IAdminSystemBuildLogReturn`              | `objects.ts` |                                                                                  |
 | `adminSystemDeploysReturn`               | Object | `IAdminSystemDeploysReturn`               | `objects.ts` |                                                                                  |
 | `adminSystemDocsListReturn`              | Object | `IAdminSystemDocsListReturn`              | `objects.ts` |                                                                                  |
 | `adminSystemReleasePlanReturn`           | Object | `IAdminSystemReleasePlanReturn`           | `objects.ts` |                                                                                  |
+| `adminSystemRuntimeDeployReturn`         | Object | `IAdminSystemRuntimeDeployReturn`         | `objects.ts` |                                                                                  |
 | `adminSystemStorageReturn`               | Object | `IAdminSystemStorageReturn`               | `objects.ts` |                                                                                  |
 | `adminUserGetReturn`                     | Object | `IAdminUserGetReturn`                     | `objects.ts` |                                                                                  |
 | `adminUserSearchReturn`                  | Object | `IAdminUserSearchReturn`                  | `objects.ts` |                                                                                  |

@@ -27,3 +27,19 @@ export const percent = (part: number, total: number): number =>
 /** Unix ms → `14:05:30`. */
 export const clock = (t: number): string =>
   new Date(t).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+/** Bytes per second → `1.2 MB/s`. */
+export const formatRate = (bytesPerSecond: number): string => `${formatBytes(bytesPerSecond)}/s`;
+
+/** Unix ms or ISO string → `14:05`. */
+export const clockShort = (value: number | string): string =>
+  new Date(value).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+/** History hour `2026-11-13T09` → `13.11. 09:00` in local time. */
+export const hourLabel = (hour: string): string => {
+  const date = new Date(`${hour}:00:00Z`);
+  return `${date.toLocaleDateString([], { day: '2-digit', month: '2-digit' })} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+};
+
+/** Number with thousands separator. */
+export const formatCount = (value: number): string => value.toLocaleString();

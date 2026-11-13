@@ -1,19 +1,19 @@
 import { StatTile } from '@ui/patterns/chart';
-import { Cpu, Gauge, MemoryStick, Timer } from 'lucide-react';
+import { ArrowDownUp, Cpu, Gauge, HardDrive, MemoryStick, Timer } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import type { IMonitorSnapshot } from '../types';
-import { formatBytes, percent } from '../utils';
+import type { IMonitorSnapshot } from '../../types';
+import { formatBytes, formatRate, percent } from '../../utils';
 
-/** Four key figures with a sparkline each. */
+/** Six key figures with a sparkline each. */
 export const MonitorTiles: React.FC<{ snapshot: IMonitorSnapshot }> = ({ snapshot }) => {
   const { t } = useTranslation('admin-monitor');
   const { current, history, host } = snapshot;
   if (!current) return <p className="text-body text-muted-foreground">{t('waiting')}</p>;
 
   return (
-    <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
       <StatTile
         icon={<Cpu />}
         label={t('tiles.cpu')}
@@ -27,6 +27,24 @@ export const MonitorTiles: React.FC<{ snapshot: IMonitorSnapshot }> = ({ snapsho
         value={`${percent(current.memUsed, current.memTotal)} %`}
         hint={`${formatBytes(current.memUsed)} / ${formatBytes(current.memTotal)}`}
         spark={history.map(s => percent(s.memUsed, s.memTotal))}
+      />
+      <StatTile
+        icon={<HardDrive />}
+        label={t('tiles.swap')}
+        value={current.swapTotal ? `${percent(current.swapUsed, current.swapTotal)} %` : '–'}
+        hint={
+          current.swapTotal
+            ? `${formatBytes(current.swapUsed)} / ${formatBytes(current.swapTotal)}`
+            : t('tiles.noSwap')
+        }
+        spark={history.map(s => percent(s.swapUsed, s.swapTotal))}
+      />
+      <StatTile
+        icon={<ArrowDownUp />}
+        label={t('tiles.network')}
+        value={`↓ ${formatRate(current.netRx)}`}
+        hint={`↑ ${formatRate(current.netTx)}`}
+        spark={history.map(s => s.netRx + s.netTx)}
       />
       <StatTile
         icon={<Gauge />}

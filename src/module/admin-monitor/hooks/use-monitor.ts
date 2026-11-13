@@ -10,3 +10,30 @@ export const useMonitor = (minutes: number) =>
     `monitor-${minutes}`,
     ADMIN_MONITOR_POLL_MS
   );
+
+/** Application metrics (WebSocket, GraphQL, cron, plugins, database, mesh). */
+export const useMonitorApp = () =>
+  useStatsQuery(
+    () => AdminMonitorApi.app(),
+    result => result.app,
+    'monitor-app',
+    10_000
+  );
+
+/** Open alerts, log and thresholds. */
+export const useMonitorAlerts = () =>
+  useStatsQuery(
+    () => AdminMonitorApi.alerts(),
+    result => result.alerts,
+    'monitor-alerts',
+    10_000
+  );
+
+/** Hourly long-term history of the last `hours`. */
+export const useMonitorHistory = (hours: number) =>
+  useStatsQuery(
+    () => AdminMonitorApi.history(hours),
+    result => result.history,
+    `monitor-history-${hours}`,
+    60_000
+  );

@@ -6,35 +6,42 @@ import {
   ChartBlock,
 } from '@ui/patterns/chart';
 import { ChartTooltip } from '@ui/shad-cn/components/chart.tsx';
-import React from 'react';
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from 'recharts';
 
-import type { IMonitorSample } from '../types';
-import { clock } from '../utils';
-
-export interface IMonitorSeries {
+export interface IMonitorSeries<T> {
   key: string;
   label: string;
-  value: (sample: IMonitorSample) => number;
+  value: (row: T) => number;
 }
 
 const tick = { fill: CHART_MUTED, fontSize: 11 };
 
-/** Black/white line chart of the sample history; series differ by dash pattern. */
-export const MonitorChart: React.FC<{
+/** Black/white line chart; series differ by dash pattern. `x` gives the label of a row. */
+export const MonitorChart = <T,>({
+  title,
+  text,
+  rows,
+  x,
+  series,
+  format,
+  max,
+  plain = true,
+}: {
   title: string;
   text: string;
-  history: IMonitorSample[];
-  series: IMonitorSeries[];
+  rows: T[];
+  x: (row: T) => string;
+  series: IMonitorSeries<T>[];
   format: (value: number) => string;
   max?: number;
-}> = ({ title, text, history, series, format, max }) => {
-  const data = history.map(sample => ({
-    time: clock(sample.t),
-    ...Object.fromEntries(series.map(s => [s.key, s.value(sample)])),
+  plain?: boolean;
+}) => {
+  const data = rows.map(row => ({
+    time: x(row),
+    ...Object.fromEntries(series.map(s => [s.key, s.value(row)])),
   }));
   return (
-    <ChartBlock title={title} text={text} label={`${title}: ${text}`} plain>
+    <ChartBlock title={title} text={text} label={`${title}: ${text}`} plain={plain}>
       <LineChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
         <CartesianGrid vertical={false} stroke={CHART_GRID} strokeOpacity={0.5} />
         <XAxis dataKey="time" tick={tick} tickLine={false} axisLine={false} minTickGap={48} />
@@ -42,7 +49,7 @@ export const MonitorChart: React.FC<{
           tick={tick}
           tickLine={false}
           axisLine={false}
-          width={56}
+          width={60}
           domain={[0, max ?? 'auto']}
           tickFormatter={format}
         />

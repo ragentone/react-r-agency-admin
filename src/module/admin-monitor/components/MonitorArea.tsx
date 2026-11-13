@@ -6,14 +6,10 @@ import { HomeError } from '../../admin/home/components/HomeSection';
 import { AdminPage } from '../../admin/ui/AdminPage';
 import { ADMIN_MONITOR_RANGES } from '../const';
 import { useMonitor } from '../hooks/use-monitor';
-import { MonitorCharts } from './MonitorCharts';
-import { MonitorDisks } from './MonitorDisks';
-import { MonitorHost } from './MonitorHost';
-import { MonitorProcesses } from './MonitorProcesses';
 import { MonitorRange } from './MonitorRange';
-import { MonitorTiles } from './MonitorTiles';
+import { MonitorSystem } from './system/MonitorSystem';
 
-/** Composes the monitor page: range switch, key figures, charts, disks, host. */
+/** Composes the monitor page: range switch, then the "System" tab's content. */
 export const MonitorArea: React.FC = () => {
   const { t } = useTranslation('admin-monitor');
   const [minutes, setMinutes] = useState<number>(ADMIN_MONITOR_RANGES[0]);
@@ -26,15 +22,7 @@ export const MonitorArea: React.FC = () => {
       {error && !data && (
         <HomeError text={t('error')} retry={t('retry')} onRetry={() => void reload()} />
       )}
-      {data && (
-        <>
-          <MonitorTiles snapshot={data} />
-          <MonitorCharts history={data.history} />
-          <MonitorProcesses processes={data.processes} />
-          <MonitorDisks disks={data.disks} />
-          <MonitorHost host={data.host} />
-        </>
-      )}
+      {data && <MonitorSystem snapshot={data} />}
     </AdminPage>
   );
 };

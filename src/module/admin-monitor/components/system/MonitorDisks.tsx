@@ -3,8 +3,8 @@ import { Progress } from '@ui/shad-cn/components/progress.tsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import type { IMonitorDisk } from '../types';
-import { formatBytes, percent } from '../utils';
+import type { IMonitorDisk } from '../../types';
+import { formatBytes, percent } from '../../utils';
 
 /** One bar per volume: used / total. */
 export const MonitorDisks: React.FC<{ disks: IMonitorDisk[] }> = ({ disks }) => {
