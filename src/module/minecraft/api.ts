@@ -46,6 +46,9 @@ const doc = {
   restoreBackup: parse(
     `mutation AdminMinecraftRestoreBackup($serverId: String!, $file: String!) { adminMinecraftRestoreBackup(serverId: $serverId, file: $file) { success error } }`
   ),
+  backupLink: parse(
+    `mutation AdminMinecraftBackupLink($serverId: String!, $file: String!) { adminMinecraftBackupLink(serverId: $serverId, file: $file) { success error token } }`
+  ),
   deleteBackup: parse(
     `mutation AdminMinecraftDeleteBackup($serverId: String!, $file: String!) { adminMinecraftDeleteBackup(serverId: $serverId, file: $file) { success error } }`
   ),
@@ -124,11 +127,20 @@ export const AdminMinecraftApi = {
   backups: (serverId: string) =>
     run<IMinecraftResult & { backups?: IMinecraftBackupInfo[] }>(
       () =>
-        client().query({ query: doc.backups as never, variables: { serverId }, fetchPolicy: 'no-cache' }),
+        client().query({
+          query: doc.backups as never,
+          variables: { serverId },
+          fetchPolicy: 'no-cache',
+        }),
       'adminMinecraftBackups'
     ),
   restoreBackup: (serverId: string, file: string) =>
     write<IMinecraftResult>(doc.restoreBackup, 'adminMinecraftRestoreBackup', { serverId, file }),
+  backupLink: (serverId: string, file: string) =>
+    write<IMinecraftResult & { token?: string }>(doc.backupLink, 'adminMinecraftBackupLink', {
+      serverId,
+      file,
+    }),
   deleteBackup: (serverId: string, file: string) =>
     write<IMinecraftResult>(doc.deleteBackup, 'adminMinecraftDeleteBackup', { serverId, file }),
   backup: (serverId: string) =>

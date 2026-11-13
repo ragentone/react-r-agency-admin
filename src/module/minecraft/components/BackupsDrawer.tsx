@@ -8,15 +8,17 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from '@ui/shad-cn/components/empty.tsx';
-import { Archive, ArchiveRestore, Plus, Trash2 } from 'lucide-react';
+import { Archive, Plus } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { AdminMinecraftApi } from '../api';
 import { formatSize } from '../format-size';
+import { useBackupDownload } from '../hooks/use-backup-download';
 import { useMinecraftBackups } from '../hooks/use-minecraft-backups';
 import { BackupConfirmDialog } from './BackupConfirmDialog';
+import { BackupRowMenu } from './BackupRowMenu';
 
 /** Backups eines Servers: erstellen, wiederherstellen (nur gestoppt), löschen. */
 export const BackupsDrawer: React.FC<{
@@ -28,6 +30,7 @@ export const BackupsDrawer: React.FC<{
 }> = ({ serverId, name, open, stopped, onOpenChange }) => {
   const { t } = useTranslation('minecraft');
   const { backups, reload } = useMinecraftBackups(serverId, open);
+  const { download, downloading } = useBackupDownload(serverId);
   const [creating, setCreating] = useState(false);
   const [confirm, setConfirm] = useState<{ mode: 'restore' | 'delete'; file: string } | null>(null);
 
@@ -96,27 +99,15 @@ export const BackupsDrawer: React.FC<{
           >
             <div className="min-w-0 flex-1">
               <p className="text-body font-medium">{new Date(item.createdAt).toLocaleString()}</p>
-              <p className="text-caption text-muted-foreground">
-                {formatSize(item.size)}
-              </p>
+              <p className="text-caption text-muted-foreground">{formatSize(item.size)}</p>
             </div>
-            <Button
-              variant="outline"
-              size="icon-md"
-              aria-label={t('backup.restoreConfirm')}
-              disabled={!stopped}
-              onClick={() => setConfirm({ mode: 'restore', file: item.file })}
-            >
-              <ArchiveRestore />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon-md"
-              aria-label={t('backup.deleteConfirm')}
-              onClick={() => setConfirm({ mode: 'delete', file: item.file })}
-            >
-              <Trash2 />
-            </Button>
+            <BackupRowMenu
+              stopped={stopped}
+              busy={downloading === item.file}
+              onDownload={() => void download(item.file)}
+              onRestore={() => setConfirm({ mode: 'restore', file: item.file })}
+              onDelete={() => setConfirm({ mode: 'delete', file: item.file })}
+            />
           </li>
         ))}
       </ul>

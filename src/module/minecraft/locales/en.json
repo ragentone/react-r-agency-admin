@@ -165,7 +165,15 @@
     "deleteText": "{{file}} will be deleted permanently.",
     "deleteConfirm": "Delete",
     "deleteDone": "Backup deleted.",
-    "emptyText": "Back up this server's world so you can restore it later."
+    "emptyText": "Back up this server's world so you can restore it later.",
+    "menu": "Actions",
+    "download": "Download",
+    "linkError": {
+      "unknown": "The download link could not be created.",
+      "busy": "Too many open download links. Please wait a moment.",
+      "not_found": "Backup not found.",
+      "invalid_input": "Invalid file name."
+    }
   },
   "pass": {
     "title": "Player pass",

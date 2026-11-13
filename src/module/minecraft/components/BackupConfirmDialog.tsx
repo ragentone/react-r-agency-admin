@@ -19,7 +19,8 @@ export const BackupConfirmDialog: React.FC<{
 
   const confirm = async () => {
     setBusy(true);
-    const call = mode === 'restore' ? AdminMinecraftApi.restoreBackup : AdminMinecraftApi.deleteBackup;
+    const call =
+      mode === 'restore' ? AdminMinecraftApi.restoreBackup : AdminMinecraftApi.deleteBackup;
     const result = await call(serverId, file);
     setBusy(false);
     if (!result.success) {

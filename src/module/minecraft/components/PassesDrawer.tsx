@@ -42,7 +42,11 @@ export const PassesDrawer: React.FC<{ open: boolean; onOpenChange: (open: boolea
       contentProps={{ className: 'max-w-5xl' }}
     >
       {deleting && (
-        <PassDeleteDialog pass={deleting} onDone={() => void reload()} onClose={() => setDeleting(null)} />
+        <PassDeleteDialog
+          pass={deleting}
+          onDone={() => void reload()}
+          onClose={() => setDeleting(null)}
+        />
       )}
       {passes && passes.length === 0 && (
         <Empty className="px-4 py-12">

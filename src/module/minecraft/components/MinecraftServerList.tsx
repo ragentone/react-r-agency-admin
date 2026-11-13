@@ -32,7 +32,11 @@ export const MinecraftServerList: React.FC = () => {
           >
             <Users />
           </Button>
-          <Button size="icon-lg" aria-label={t('form.createTitle')} onClick={() => setCreating(true)}>
+          <Button
+            size="icon-lg"
+            aria-label={t('form.createTitle')}
+            onClick={() => setCreating(true)}
+          >
             <Plus />
           </Button>
         </div>
@@ -56,7 +60,11 @@ export const MinecraftServerList: React.FC = () => {
         <ServerFormDialog server={editing} onSaved={reload} onClose={() => setEditing(null)} />
       )}
       {deleting && (
-        <DeleteServerDialog server={deleting} onDeleted={reload} onClose={() => setDeleting(null)} />
+        <DeleteServerDialog
+          server={deleting}
+          onDeleted={reload}
+          onClose={() => setDeleting(null)}
+        />
       )}
     </div>
   );

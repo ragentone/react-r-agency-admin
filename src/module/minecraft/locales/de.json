@@ -165,7 +165,15 @@
     "deleteText": "{{file}} wird endgültig gelöscht.",
     "deleteConfirm": "Löschen",
     "deleteDone": "Backup gelöscht.",
-    "emptyText": "Sichere die Welt dieses Servers, um sie später wiederherstellen zu können."
+    "emptyText": "Sichere die Welt dieses Servers, um sie später wiederherstellen zu können.",
+    "menu": "Aktionen",
+    "download": "Herunterladen",
+    "linkError": {
+      "unknown": "Der Download-Link konnte nicht erstellt werden.",
+      "busy": "Zu viele offene Download-Links. Bitte kurz warten.",
+      "not_found": "Backup nicht gefunden.",
+      "invalid_input": "Ungültiger Dateiname."
+    }
   },
   "pass": {
     "title": "Spielerpass",
