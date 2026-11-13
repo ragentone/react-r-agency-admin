@@ -97,18 +97,6 @@ export const SystemDeploysTab: React.FC = () => {
                 </div>
               </CardContent>
               <CardFooter className="flex-col gap-2 border-t border-border/50 p-3">
-                {deploy && (
-                  <Button
-                    size="md"
-                    className="w-full"
-                    disabled={deploy.running || deploy.blocked}
-                    onClick={() => setDeploying(app)}
-                  >
-                    {deploy.running
-                      ? t('system.deployments.deploy.running')
-                      : t(`system.deployments.deploy.${deploy.kind}.button`)}
-                  </Button>
-                )}
                 <Button
                   variant="outline"
                   size="md"
@@ -119,13 +107,26 @@ export const SystemDeploysTab: React.FC = () => {
                   {t('system.deployments.log.button')}
                 </Button>
                 <Button
-                  variant="default"
+                  variant="outline"
                   size="md"
                   className="w-full"
                   onClick={() => setEditing(app)}
                 >
                   {t('system.deployments.edit')}
                 </Button>
+                {deploy && (
+                  <Button
+                    size="md"
+                    className="w-full"
+                    variant={'destructive-outline'}
+                    disabled={deploy.running || deploy.blocked}
+                    onClick={() => setDeploying(app)}
+                  >
+                    {deploy.running
+                      ? t('system.deployments.deploy.running')
+                      : t(`system.deployments.deploy.${deploy.kind}.button`)}
+                  </Button>
+                )}
               </CardFooter>
             </Card>
           );
