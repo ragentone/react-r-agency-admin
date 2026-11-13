@@ -10,7 +10,10 @@
     "startedAt": "Started at",
     "lastError": "Last error",
     "restartAttempts": "Restart attempts",
-    "port": "Port {{port}}"
+    "port": "Port {{port}}",
+    "resources": "CPU · RAM",
+    "container": "Container",
+    "menu": "Menu"
   },
   "state": {
     "running": "running",
@@ -40,10 +43,13 @@
       "update_failed": "Could not save the changes.",
       "running": "Stop the server first.",
       "no_free_port": "No free port found (all checked UDP ports are in use).",
-      "conflict": "Name or port was just taken, please try again."
+      "conflict": "Name or port was just taken, please try again.",
+      "folder_delete_failed": "The folder could not be deleted. The server is removed, delete the folder manually."
     },
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "terminal": "Terminal",
+    "broadcast": "Send message"
   },
   "gamemode": {
     "survival": "Survival",
@@ -76,6 +82,60 @@
     "text": "The server is removed and can no longer be started.",
     "worldKept": "The world stays on disk under {{folder}} and is not deleted.",
     "confirm": "Delete",
-    "done": "Server deleted."
+    "done": "Server deleted.",
+    "deleteFiles": "Also delete folder and world",
+    "filesWarning": "The folder {{folder}} including the world will be deleted permanently."
+  },
+  "terminal": {
+    "title": "Terminal: {{name}}",
+    "description": "Server console with history and command input",
+    "placeholder": "Enter a command, e.g. list",
+    "offline": "Server is not running",
+    "send": "Send",
+    "empty": "No output yet.",
+    "error": {
+      "invalid_command": "Invalid command (empty, too long or multi-line).",
+      "not_running": "The server is not running."
+    },
+    "commands": {
+      "list": "Show online players",
+      "say": "Send a message to everyone",
+      "kick": "Kick a player from the server",
+      "allowlistAdd": "Add a gamertag to the allowlist",
+      "allowlistRemove": "Remove a gamertag from the allowlist",
+      "allowlistList": "Show the allowlist",
+      "allowlistReload": "Reload the allowlist",
+      "op": "Make a player operator",
+      "deop": "Remove operator rights",
+      "gamemode": "Set the game mode",
+      "timeSet": "Set the time of day",
+      "weather": "Set the weather",
+      "gamerule": "Read or set a game rule",
+      "saveHold": "Pause saving (backup)",
+      "saveQuery": "Query backup state",
+      "saveResume": "Resume saving",
+      "stop": "Shut the server down cleanly"
+    }
+  },
+  "players": {
+    "title": "Players online",
+    "empty": "Nobody online.",
+    "since": "since {{time}}"
+  },
+  "kick": {
+    "title": "Kick “{{name}}”?",
+    "text": "The player is removed from the server and can rejoin right away.",
+    "confirm": "Kick",
+    "reason": "Reason (optional)",
+    "done": "{{name}} was kicked.",
+    "action": "Kick {{name}}"
+  },
+  "broadcast": {
+    "title": "Message to everyone: {{name}}",
+    "text": "Shown to all players on the server.",
+    "send": "Send",
+    "placeholder": "Message",
+    "asTitle": "Show as title (better on PS5)",
+    "done": "Message sent."
   }
 }

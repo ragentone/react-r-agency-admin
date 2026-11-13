@@ -10,7 +10,10 @@
     "startedAt": "Gestartet am",
     "lastError": "Letzter Fehler",
     "restartAttempts": "Neustart-Versuche",
-    "port": "Port {{port}}"
+    "port": "Port {{port}}",
+    "resources": "CPU · RAM",
+    "container": "Container",
+    "menu": "Menü"
   },
   "state": {
     "running": "läuft",
@@ -40,10 +43,13 @@
       "update_failed": "Änderung konnte nicht gespeichert werden.",
       "running": "Der Server muss zuerst gestoppt werden.",
       "no_free_port": "Kein freier Port gefunden (alle geprüften UDP-Ports sind belegt).",
-      "conflict": "Name oder Port wurde gerade vergeben, bitte erneut versuchen."
+      "conflict": "Name oder Port wurde gerade vergeben, bitte erneut versuchen.",
+      "folder_delete_failed": "Der Ordner konnte nicht gelöscht werden. Der Server ist entfernt, Ordner von Hand löschen."
     },
     "edit": "Bearbeiten",
-    "delete": "Löschen"
+    "delete": "Löschen",
+    "terminal": "Terminal",
+    "broadcast": "Nachricht senden"
   },
   "gamemode": {
     "survival": "Survival",
@@ -76,6 +82,60 @@
     "text": "Der Server wird entfernt und kann nicht mehr gestartet werden.",
     "worldKept": "Die Welt bleibt unter {{folder}} auf der Platte erhalten und wird nicht gelöscht.",
     "confirm": "Löschen",
-    "done": "Server gelöscht."
+    "done": "Server gelöscht.",
+    "deleteFiles": "Ordner und Welt auch löschen",
+    "filesWarning": "Der Ordner {{folder}} mit der Welt wird unwiderruflich gelöscht."
+  },
+  "terminal": {
+    "title": "Terminal: {{name}}",
+    "description": "Server-Konsole mit Verlauf und Befehlseingabe",
+    "placeholder": "Befehl eingeben, z. B. list",
+    "offline": "Server läuft nicht",
+    "send": "Senden",
+    "empty": "Noch keine Ausgabe.",
+    "error": {
+      "invalid_command": "Ungültiger Befehl (leer, zu lang oder mehrzeilig).",
+      "not_running": "Der Server läuft nicht."
+    },
+    "commands": {
+      "list": "Spieler online anzeigen",
+      "say": "Nachricht an alle senden",
+      "kick": "Spieler vom Server werfen",
+      "allowlistAdd": "Gamertag zur Allowlist hinzufügen",
+      "allowlistRemove": "Gamertag aus der Allowlist entfernen",
+      "allowlistList": "Allowlist anzeigen",
+      "allowlistReload": "Allowlist neu einlesen",
+      "op": "Spieler zum Operator machen",
+      "deop": "Operator-Rechte entziehen",
+      "gamemode": "Spielmodus setzen",
+      "timeSet": "Tageszeit setzen",
+      "weather": "Wetter setzen",
+      "gamerule": "Spielregel lesen oder setzen",
+      "saveHold": "Speichern pausieren (Backup)",
+      "saveQuery": "Stand der Sicherung abfragen",
+      "saveResume": "Speichern fortsetzen",
+      "stop": "Server sauber beenden"
+    }
+  },
+  "players": {
+    "title": "Spieler online",
+    "empty": "Niemand online.",
+    "since": "seit {{time}}"
+  },
+  "kick": {
+    "title": "„{{name}}“ kicken?",
+    "text": "Der Spieler wird vom Server geworfen und kann sofort wieder beitreten.",
+    "confirm": "Rauswerfen",
+    "reason": "Grund (optional)",
+    "done": "{{name}} wurde gekickt.",
+    "action": "{{name}} kicken"
+  },
+  "broadcast": {
+    "title": "Nachricht an alle: {{name}}",
+    "text": "Wird allen Spielern auf dem Server angezeigt.",
+    "send": "Senden",
+    "placeholder": "Nachricht",
+    "asTitle": "Als Titel einblenden (besser auf der PS5)",
+    "done": "Nachricht gesendet."
   }
 }

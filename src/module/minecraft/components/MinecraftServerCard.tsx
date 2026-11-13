@@ -3,13 +3,18 @@ import { Badge } from '@ui/shad-cn/components/badge.tsx';
 import { Button } from '@ui/shad-cn/components/button.tsx';
 import { Card, CardContent } from '@ui/shad-cn/components/card.tsx';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@ui/shad-cn/components/tooltip.tsx';
-import { Pencil, Play, RotateCcw, Square, Trash2 } from 'lucide-react';
+import { Play, RotateCcw, Square } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { AdminMinecraftApi } from '../api';
 import type { IMinecraftRunState, IMinecraftServerEntry } from '../types';
+import { BroadcastDialog } from './BroadcastDialog';
+import { KickPlayerDialog } from './KickPlayerDialog';
+import { MinecraftCardMenu } from './MinecraftCardMenu';
+import { MinecraftServerInfo } from './MinecraftServerInfo';
+import { MinecraftTerminal } from './MinecraftTerminal';
 
 type Action = 'start' | 'stop' | 'restart';
 
@@ -34,6 +39,9 @@ export const MinecraftServerCard: React.FC<{
   const { t } = useTranslation('minecraft');
   const { server, status } = entry;
   const [busy, setBusy] = useState<Action | null>(null);
+  const [terminalOpen, setTerminalOpen] = useState(false);
+  const [kicking, setKicking] = useState<string | null>(null);
+  const [broadcasting, setBroadcasting] = useState(false);
 
   const run = async (
     action: Action,
@@ -57,62 +65,62 @@ export const MinecraftServerCard: React.FC<{
   const canStop = state === 'running' || state === 'starting';
 
   return (
-    <Card className="rounded-xl border-border/50 shadow-none">
-      <CardContent className="flex flex-col gap-4 p-4">
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <h3 className="text-title font-bold">{server.name}</h3>
-            <p className="text-caption text-muted-foreground">
-              {t(`gamemode.${server.gamemode}`)} · {t('card.port', { port: server.port })}
-            </p>
-          </div>
-          <div className="flex shrink-0 items-center gap-1">
-          {state && (
-            <Badge
-              className={cn({
-                'text-white': state === 'crashed',
-              })}
-              variant={BADGE_VARIANT[state]}
-            >
-              {t(`state.${state}`)}
-            </Badge>
+    <Card className="relative rounded-xl border-border/50 shadow-none">
+      {(state === 'running' || state === 'starting') && (
+        <span
+          aria-hidden
+          className={cn(
+            'pointer-events-none absolute -inset-px animate-pulse rounded-xl ring-2 motion-reduce:animate-none',
+            state === 'running' ? 'ring-green-500' : 'ring-yellow-500'
           )}
-            <Button variant="ghost" size="icon-md" aria-label={t('action.edit')} onClick={onEdit}>
-              <Pencil />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon-md"
-              aria-label={t('action.delete')}
-              disabled={!canStart}
-              onClick={onDelete}
-            >
-              <Trash2 />
-            </Button>
+        />
+      )}
+      {kicking && (
+        <KickPlayerDialog serverId={server.id} name={kicking} onClose={() => setKicking(null)} />
+      )}
+      {broadcasting && (
+        <BroadcastDialog
+          serverId={server.id}
+          name={server.name}
+          onClose={() => setBroadcasting(false)}
+        />
+      )}
+      <MinecraftTerminal
+        serverId={server.id}
+        name={server.name}
+        open={terminalOpen}
+        canSend={state === 'running' || state === 'starting'}
+        onOpenChange={setTerminalOpen}
+      />
+      <CardContent className="flex flex-col gap-4 p-4">
+        <div className="flex items-start justify-between gap-2">
+          <div className="min-w-0 flex-1">
+            <h3 className="text-title font-bold break-words">{server.name}</h3>
+            <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+              {state && (
+                <Badge
+                  className={cn({ 'text-white': state === 'crashed' })}
+                  variant={BADGE_VARIANT[state]}
+                >
+                  {t(`state.${state}`)}
+                </Badge>
+              )}
+              <span className="text-caption text-muted-foreground">
+                {t(`gamemode.${server.gamemode}`)} · {t('card.port', { port: server.port })}
+              </span>
+            </div>
           </div>
+          <MinecraftCardMenu
+            canBroadcast={state === 'running'}
+            canDelete={canStart}
+            onBroadcast={() => setBroadcasting(true)}
+            onTerminal={() => setTerminalOpen(true)}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
         </div>
 
-        <div className="flex flex-col">
-          <div className="flex justify-between gap-4 border-t border-border/50 py-2 text-caption">
-            <span className="text-muted-foreground">{t('card.pid')}</span>
-            <span className="tabular-nums">{status.pid ?? '–'}</span>
-          </div>
-          <div className="flex justify-between gap-4 border-t border-border/50 py-2 text-caption">
-            <span className="text-muted-foreground">{t('card.startedAt')}</span>
-            <span className="tabular-nums">
-              {status.startedAt ? new Date(status.startedAt).toLocaleString() : '–'}
-            </span>
-          </div>
-          <div className="flex justify-between gap-4 border-t border-border/50 py-2 text-caption">
-            <span className="text-muted-foreground">{t('card.restartAttempts')}</span>
-            <span className="tabular-nums">{status.restartAttempts}</span>
-          </div>
-          {status.lastError && state === 'crashed' && (
-            <p className="border-t border-border/50 py-2 text-caption break-words text-destructive">
-              {t('card.lastError')}: {status.lastError}
-            </p>
-          )}
-        </div>
+        <MinecraftServerInfo entry={entry} onKick={setKicking} />
 
         <div className="flex gap-2">
           <Tooltip>
@@ -122,7 +130,7 @@ export const MinecraftServerCard: React.FC<{
                 size="icon-lg"
                 aria-label={t('action.start')}
                 disabled={!canStart || busy !== null}
-                isLoading={busy === 'start'}
+                isLoading={busy === 'start' || state === 'starting' || state === 'stopping'}
                 onClick={() => void run('start', () => AdminMinecraftApi.start(server.id))}
               >
                 <Play />

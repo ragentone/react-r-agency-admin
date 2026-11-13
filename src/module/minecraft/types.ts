@@ -18,15 +18,30 @@ export interface IMinecraftStatus {
   serverId: string;
   state: IMinecraftRunState;
   pid: number | null;
+  container: string | null;
   startedAt: string | null;
   lastExitCode: number | null;
   lastError: string | null;
   restartAttempts: number;
 }
 
+export interface IMinecraftOnlinePlayer {
+  name: string;
+  xuid: string;
+  joinedAt: string;
+}
+
+export interface IMinecraftMetrics {
+  cpu: number;
+  memBytes: number;
+  at: string;
+}
+
 export interface IMinecraftServerEntry {
   server: IMinecraftServer;
   status: IMinecraftStatus;
+  players?: IMinecraftOnlinePlayer[];
+  metrics?: IMinecraftMetrics | null;
 }
 
 export interface IMinecraftServerInput {
@@ -34,4 +49,11 @@ export interface IMinecraftServerInput {
   gamemode: IMinecraftGamemode;
   maxPlayers: number;
   autostart: boolean;
+}
+
+export interface IMinecraftConsoleLine {
+  seq: number;
+  ts: string;
+  kind: 'out' | 'in' | 'err';
+  text: string;
 }
