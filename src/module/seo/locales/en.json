@@ -40,7 +40,8 @@
     "quickStart": "Quick add:",
     "noResults": "No path matches the search.",
     "listLabel": "SEO entries",
-    "order": "Order: the page's own data (e.g. custom pages) → exact path → path with /* → defaults."
+    "order": "Order: the page's own data (e.g. custom pages) → exact path → path with /* → defaults.",
+    "notFound": "This entry no longer exists."
   },
   "form": {
     "createTitle": "New entry",
@@ -77,7 +78,8 @@
     "errors": {
       "pathRequired": "Please enter a path.",
       "pathInvalid": "Starts with / and contains only letters, digits, - . _ ~ $ – optionally /* at the end."
-    }
+    },
+    "back": "Back to entries"
   },
   "changefreq": {
     "always": "Always",

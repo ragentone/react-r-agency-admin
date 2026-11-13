@@ -40,7 +40,8 @@
     "quickStart": "Schnell anlegen:",
     "noResults": "Kein Pfad passt zur Suche.",
     "listLabel": "SEO-Einträge",
-    "order": "Reihenfolge: Daten der Seite selbst (z. B. eigene Seiten) → genauer Pfad → Pfad mit /* → Standardwerte."
+    "order": "Reihenfolge: Daten der Seite selbst (z. B. eigene Seiten) → genauer Pfad → Pfad mit /* → Standardwerte.",
+    "notFound": "Dieser Eintrag existiert nicht mehr."
   },
   "form": {
     "createTitle": "Neuer Eintrag",
@@ -77,7 +78,8 @@
     "errors": {
       "pathRequired": "Bitte einen Pfad angeben.",
       "pathInvalid": "Pfad beginnt mit / und enthält nur Buchstaben, Zahlen, - . _ ~ $ – optional /* am Ende."
-    }
+    },
+    "back": "Zurück zu den Einträgen"
   },
   "changefreq": {
     "always": "Ständig",

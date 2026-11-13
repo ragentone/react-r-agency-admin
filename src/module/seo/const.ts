@@ -1,5 +1,11 @@
 /** SEO admin – only `admin:user` (route guard `_admin` + runtime `adminSeo*`). */
 export const ADMIN_SEO_ROUTE = '/admin/seo';
+/** Create a new entry (own page, no drawer). */
+export const ADMIN_SEO_NEW_ROUTE = '/admin/seo/new';
+/** Edit one entry. */
+export const ADMIN_SEO_ITEM_ROUTE = '/admin/seo/$routeId';
+export const seoRoutePath = (routeId: string) =>
+  ADMIN_SEO_ITEM_ROUTE.replace('$routeId', encodeURIComponent(routeId));
 export const SEO_ADMIN_ROLES = 'admin:user';
 
 /** Limits – same as the runtime (`shared/seo/types.ts`). */

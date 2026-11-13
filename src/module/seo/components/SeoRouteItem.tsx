@@ -1,26 +1,24 @@
+import { Link } from '@tanstack/react-router';
 import { Badge } from '@ui/shad-cn/components/badge.tsx';
 import { ChevronRight, EyeOff, FileSearch, FolderTree } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { seoRoutePath } from '../const';
 import type { ISeoRoute } from '../types';
 
-/** Row of the path list – tap opens the editor. */
-export const SeoRouteItem: React.FC<{ route: ISeoRoute; onOpen: (route: ISeoRoute) => void }> = ({
-  route,
-  onOpen,
-}) => {
+/** Row of the path list – the whole row links to the edit page. */
+export const SeoRouteItem: React.FC<{ route: ISeoRoute }> = ({ route }) => {
   const { t } = useTranslation('seo');
   const prefix = route.path.endsWith('/*');
   return (
     <li>
-      <button
-        type="button"
-        onClick={() => onOpen(route)}
+      <Link
+        to={seoRoutePath(route.id)}
         aria-label={t('routes.open', { path: route.path })}
-        className="flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-foreground/[0.03] focus-visible:bg-foreground/[0.05] focus-visible:outline-none active:bg-foreground/[0.06]"
+        className="flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50 focus-visible:bg-muted focus-visible:outline-none active:bg-muted"
       >
-        <span className="grid size-11 shrink-0 place-items-center rounded-full bg-foreground/[0.07]">
+        <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-muted">
           {prefix ? (
             <FolderTree className="size-5" aria-hidden="true" />
           ) : (
@@ -66,7 +64,7 @@ export const SeoRouteItem: React.FC<{ route: ISeoRoute; onOpen: (route: ISeoRout
           </span>
         </span>
         <ChevronRight className="mt-3 size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
-      </button>
+      </Link>
     </li>
   );
 };
