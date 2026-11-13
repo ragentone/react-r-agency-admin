@@ -46,7 +46,9 @@
       "conflict": "Name oder Port wurde gerade vergeben, bitte erneut versuchen.",
       "folder_delete_failed": "Der Ordner konnte nicht gelöscht werden. Der Server ist entfernt, Ordner von Hand löschen.",
       "low_memory": "Zu wenig freier Arbeitsspeicher, um den Server zu starten.",
-      "read_failed": "Einstellungen konnten nicht gelesen werden."
+      "read_failed": "Einstellungen konnten nicht gelesen werden.",
+      "bds_missing": "MINECRAFT_BDS_DIR: keine BDS-Installation (bedrock_server) gefunden.",
+      "layout_failed": "Server-Ordner konnte nicht vorbereitet werden (siehe Runtime-Log)."
     },
     "edit": "Bearbeiten",
     "delete": "Löschen",
