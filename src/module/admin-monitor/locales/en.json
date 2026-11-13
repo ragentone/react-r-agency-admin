@@ -45,5 +45,15 @@
   "menu": {
     "label": "Server monitor",
     "description": "CPU, memory and disk"
+  },
+  "processes": {
+    "title": "Running processes",
+    "text": "The busiest processes on the server",
+    "cpu": "CPU",
+    "mem": "RAM",
+    "more": "Show more",
+    "less": "Show less",
+    "empty": "Process list is not available on this system.",
+    "cores": "{{pid}} · {{cpu}} % CPU · {{mem}}"
   }
 }

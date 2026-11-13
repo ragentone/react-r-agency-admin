@@ -9,6 +9,7 @@ import { useMonitor } from '../hooks/use-monitor';
 import { MonitorCharts } from './MonitorCharts';
 import { MonitorDisks } from './MonitorDisks';
 import { MonitorHost } from './MonitorHost';
+import { MonitorProcesses } from './MonitorProcesses';
 import { MonitorRange } from './MonitorRange';
 import { MonitorTiles } from './MonitorTiles';
 
@@ -29,6 +30,7 @@ export const MonitorArea: React.FC = () => {
         <>
           <MonitorTiles snapshot={data} />
           <MonitorCharts history={data.history} />
+          <MonitorProcesses processes={data.processes} />
           <MonitorDisks disks={data.disks} />
           <MonitorHost host={data.host} />
         </>

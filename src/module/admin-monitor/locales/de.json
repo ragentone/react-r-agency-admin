@@ -45,5 +45,15 @@
   "menu": {
     "label": "Server-Monitor",
     "description": "CPU, Speicher und Festplatte"
+  },
+  "processes": {
+    "title": "Laufende Prozesse",
+    "text": "Die aktivsten Prozesse des Servers",
+    "cpu": "CPU",
+    "mem": "RAM",
+    "more": "Mehr anzeigen",
+    "less": "Weniger anzeigen",
+    "empty": "Prozessliste auf diesem System nicht verfügbar.",
+    "cores": "{{pid}} · {{cpu}} % CPU · {{mem}}"
   }
 }
