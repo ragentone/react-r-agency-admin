@@ -9,5 +9,6 @@ export * from './LayoutProvider';
 export * from './PageContent.tsx';
 export * from './PageHeader.tsx';
 export * from './PageScrollTopBlock.tsx';
+export * from './PageTopBar.tsx';
 export * from './types.ts';
 export * from './use.layout.ts';

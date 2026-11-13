@@ -5,7 +5,8 @@ const DELTA = 6;
 const MIN_OFFSET = 56;
 
 /**
- * `true` while the user scrolls down (used by floating UI like the menu button) (any scroll container of the page), `false` when scrolling up,
+ * `true` while the user scrolls down in any scroll container of the page (used by floating UI
+ * like the menu button), `false` when scrolling up,
  * near the top or after a route change. Scrolling inside dialogs is ignored.
  */
 const useHideOnScroll = (enabled = true) => {
@@ -48,4 +49,5 @@ const useHideOnScroll = (enabled = true) => {
 
   return enabled && hidden;
 };
-export default useHideOnScroll
+export { useHideOnScroll };
+export default useHideOnScroll;
