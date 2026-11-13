@@ -1,10 +1,11 @@
 import { Button } from '@ui/shad-cn/components/button.tsx';
-import { Plus, Users } from 'lucide-react';
+import { HardDriveDownload, Plus, Users } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useMinecraftServers } from '../hooks/use-minecraft-servers';
 import type { IMinecraftServer } from '../types';
+import { BdsDialog } from './BdsDialog';
 import { DeleteServerDialog } from './DeleteServerDialog';
 import { MinecraftServerCard } from './MinecraftServerCard';
 import { PassesDrawer } from './PassesDrawer';
@@ -18,12 +19,21 @@ export const MinecraftServerList: React.FC = () => {
   const [editing, setEditing] = useState<IMinecraftServer | null>(null);
   const [deleting, setDeleting] = useState<IMinecraftServer | null>(null);
   const [passes, setPasses] = useState(false);
+  const [bds, setBds] = useState(false);
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-3">
         <h3 className="text-title font-bold">{t('list.title')}</h3>
         <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="icon-lg"
+            aria-label={t('bds.title')}
+            onClick={() => setBds(true)}
+          >
+            <HardDriveDownload />
+          </Button>
           <Button
             variant="outline"
             size="icon-lg"
@@ -54,6 +64,7 @@ export const MinecraftServerList: React.FC = () => {
           onDelete={() => setDeleting(entry.server)}
         />
       ))}
+      {bds && <BdsDialog onClose={() => setBds(false)} />}
       <PassesDrawer open={passes} onOpenChange={setPasses} />
       {creating && <ServerFormDialog onSaved={reload} onClose={() => setCreating(false)} />}
       {editing && (

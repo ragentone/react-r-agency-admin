@@ -47,7 +47,7 @@
       "folder_delete_failed": "The folder could not be deleted. The server is removed, delete the folder manually.",
       "low_memory": "Not enough free memory to start the server.",
       "read_failed": "Settings could not be read.",
-      "bds_missing": "MINECRAFT_BDS_DIR: no BDS installation (bedrock_server) found.",
+      "bds_missing": "No BDS installation found. Install it with the download button above.",
       "layout_failed": "Server folder could not be prepared (see runtime log)."
     },
     "edit": "Edit",
@@ -235,5 +235,36 @@
     "tickHint": "4–12. Area around players where the world is simulated.",
     "cheats": "Allow cheats",
     "done": "World settings saved."
+  },
+  "bds": {
+    "title": "Bedrock server (BDS)",
+    "text": "Downloads the latest Linux version from minecraft.net and installs it for all servers.",
+    "close": "Close",
+    "install": "Install",
+    "update": "Update",
+    "current": "Up to date",
+    "loading": "Loading status",
+    "loadError": "Status could not be loaded.",
+    "docker": "In Docker mode the image brings the server, nothing to do here.",
+    "installed": "Installed",
+    "latest": "Latest version",
+    "none": "Not installed",
+    "unknownVersion": "Unknown version",
+    "latestUnknown": "unavailable",
+    "done": "Installed. Servers can be started now.",
+    "phase": {
+      "downloading": "Downloading …",
+      "installing": "Installing …"
+    },
+    "error": {
+      "not_configured": "MINECRAFT_BASE_DIR is not configured.",
+      "busy": "An installation is already running.",
+      "running": "Stop all servers first.",
+      "unavailable": "The latest version could not be determined (minecraft.net unreachable).",
+      "download_failed": "Download failed.",
+      "bad_archive": "The archive is invalid or too large.",
+      "wrong_platform": "The archive does not contain a Linux program.",
+      "install_failed": "Installation failed (see runtime log)."
+    }
   }
 }

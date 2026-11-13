@@ -47,7 +47,7 @@
       "folder_delete_failed": "Der Ordner konnte nicht gelöscht werden. Der Server ist entfernt, Ordner von Hand löschen.",
       "low_memory": "Zu wenig freier Arbeitsspeicher, um den Server zu starten.",
       "read_failed": "Einstellungen konnten nicht gelesen werden.",
-      "bds_missing": "MINECRAFT_BDS_DIR: keine BDS-Installation (bedrock_server) gefunden.",
+      "bds_missing": "Keine BDS-Installation gefunden. Über den Download-Button oben installieren.",
       "layout_failed": "Server-Ordner konnte nicht vorbereitet werden (siehe Runtime-Log)."
     },
     "edit": "Bearbeiten",
@@ -235,5 +235,36 @@
     "tickHint": "4–12. Bereich um Spieler, in dem die Welt berechnet wird.",
     "cheats": "Cheats erlauben",
     "done": "Welt-Einstellungen gespeichert."
+  },
+  "bds": {
+    "title": "Bedrock-Server (BDS)",
+    "text": "Lädt die neueste Linux-Version von minecraft.net und installiert sie für alle Server.",
+    "close": "Schließen",
+    "install": "Installieren",
+    "update": "Aktualisieren",
+    "current": "Aktuell",
+    "loading": "Stand wird geladen",
+    "loadError": "Stand konnte nicht geladen werden.",
+    "docker": "Im Docker-Modus bringt das Image den Server mit, hier ist nichts zu tun.",
+    "installed": "Installiert",
+    "latest": "Neueste Version",
+    "none": "Nicht installiert",
+    "unknownVersion": "Version unbekannt",
+    "latestUnknown": "nicht abrufbar",
+    "done": "Installiert. Server können jetzt gestartet werden.",
+    "phase": {
+      "downloading": "Wird heruntergeladen …",
+      "installing": "Wird installiert …"
+    },
+    "error": {
+      "not_configured": "MINECRAFT_BASE_DIR ist nicht konfiguriert.",
+      "busy": "Eine Installation läuft bereits.",
+      "running": "Zuerst alle Server stoppen.",
+      "unavailable": "Die neueste Version konnte nicht ermittelt werden (minecraft.net nicht erreichbar).",
+      "download_failed": "Download fehlgeschlagen.",
+      "bad_archive": "Das Archiv ist ungültig oder zu groß.",
+      "wrong_platform": "Das Archiv enthält kein Linux-Programm.",
+      "install_failed": "Installation fehlgeschlagen (siehe Runtime-Log)."
+    }
   }
 }

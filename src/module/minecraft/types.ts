@@ -97,3 +97,14 @@ export interface IMinecraftWorldSettings {
   permission: (typeof MINECRAFT_PERMISSIONS)[number];
   cheats: boolean;
 }
+
+/** BDS-Installation (nativer Modus), Stand der Installation. */
+export interface IMinecraftBdsStatus {
+  native: boolean;
+  installed: boolean;
+  version: string | null;
+  dir: string;
+  phase: 'idle' | 'downloading' | 'installing' | 'done' | 'error';
+  error: string | null;
+  latest: string | null;
+}

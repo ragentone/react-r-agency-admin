@@ -4,6 +4,7 @@ import { getMeshClient } from 'r-agency-mesh-client-v1/release';
 import type {
   IMinecraftBackupInfo,
   IMinecraftBackupSettings,
+  IMinecraftBdsStatus,
   IMinecraftConsoleLine,
   IMinecraftPass,
   IMinecraftServerEntry,
@@ -74,6 +75,12 @@ const doc = {
   ),
   worldSave: parse(
     `mutation AdminMinecraftWorldSave($serverId: String!, $settings: JSON!) { adminMinecraftWorldSave(serverId: $serverId, settings: $settings) { success error settings restartRequired } }`
+  ),
+  bdsStatus: parse(
+    `query AdminMinecraftBdsStatus { adminMinecraftBdsStatus { success error status } }`
+  ),
+  bdsInstall: parse(
+    `mutation AdminMinecraftBdsInstall { adminMinecraftBdsInstall { success error } }`
   ),
   restart: parse(
     `mutation AdminMinecraftRestart($serverId: String!) { adminMinecraftRestart(serverId: $serverId) { success error } }`
@@ -194,6 +201,12 @@ export const AdminMinecraftApi = {
       'adminMinecraftWorldSave',
       { serverId, settings }
     ),
+  bdsStatus: () =>
+    read<IMinecraftResult & { status?: IMinecraftBdsStatus }>(
+      doc.bdsStatus,
+      'adminMinecraftBdsStatus'
+    ),
+  bdsInstall: () => write<IMinecraftResult>(doc.bdsInstall, 'adminMinecraftBdsInstall'),
   passes: () =>
     read<IMinecraftResult & { passes?: IMinecraftPass[] }>(doc.passes, 'adminMinecraftPasses'),
   blockPass: (id: string, blocked: boolean) =>
