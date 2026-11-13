@@ -63,7 +63,7 @@ export const AccountPrivacyFields: React.FC<AccountPrivacyFieldsProps> = ({
 
   return (
     <FieldGroup className={className}>
-      <div className="divide-y divide-border/50 border-y border-border/50">
+      <div className="divide-y divide-border/50 border-b border-border/50">
         {items.map(item => {
           const Icon = item.icon;
           const isChecked = Boolean(formik?.values?.[item.field]);
@@ -74,7 +74,7 @@ export const AccountPrivacyFields: React.FC<AccountPrivacyFieldsProps> = ({
               asChild
               size={'sm'}
               className={cn(
-                'min-h-15 cursor-pointer gap-4 rounded-none border-0 px-4 py-3 select-none transition-colors hover:bg-foreground/[0.03] active:bg-foreground/[0.06]',
+                'min-h-15 cursor-pointer gap-4 rounded-none border-0 px-0 py-3 select-none transition-colors hover:bg-foreground/[0.03] active:bg-foreground/[0.06]',
                 isDisabled && 'cursor-not-allowed opacity-60'
               )}
             >

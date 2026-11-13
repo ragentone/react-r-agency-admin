@@ -128,8 +128,7 @@ export const AccountPrivacyForm: React.FC<AccountPrivacyFormProps> = ({
         {() => (
           <Form className="space-y-4" noValidate>
             <AccountAlert type="error" message={submitError} />
-            {/* Full-bleed rows inside the settings section (which has px-4). */}
-            <AccountPrivacyFields className="-mx-4" />
+            <AccountPrivacyFields />
             <div className="flex justify-end pt-2">
               <AccountSubmitButton className="w-full sm:w-auto" />
             </div>

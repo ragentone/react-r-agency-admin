@@ -1,7 +1,7 @@
 import { parse } from 'graphql';
 
 /*
- * Parsed here instead of `graphql()` from codegen (same as the other core modules): operations codegen
+ * Parsed here instead of `graphql()` from codegen (same as core/friends): operations codegen
  * hasn't seen yet would be empty objects. Backend: runtime actions/notify/runtime.conf.json.
  */
 

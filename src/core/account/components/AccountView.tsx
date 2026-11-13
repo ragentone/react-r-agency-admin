@@ -1,7 +1,7 @@
 import { useAccount } from '@core/account/hooks';
 import { CmsContainer } from '@core/cms';
-import { PluginSlot } from '@core/plugin/index.ts';
-import React, { useState } from 'react';
+import { PluginSlot } from '@core/plugin';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { AuthProgressBar } from '../../auth/components/AuthProgressBar.tsx';
@@ -25,7 +25,6 @@ export const AccountView: React.FC<IAccountViewProps> = ({ onBack, onScrollTop }
   const { t } = useTranslation('account');
   const { logout, isLoggingOut } = useAuth();
   const { account, loading, error, loadAccount } = useAccount(true);
-  const [openSections, setOpenSections] = useState<string[]>([]);
 
   return (
     <CmsContainer
@@ -35,7 +34,7 @@ export const AccountView: React.FC<IAccountViewProps> = ({ onBack, onScrollTop }
       name="page-account"
       payload={{ account }}
     >
-      <AccountPageHeader onBack={onBack} />
+      <AccountPageHeader onBack={onBack} onScrollTop={onScrollTop} />
 
       <div className="w-full grow">
         {isLoggingOut && (
@@ -59,15 +58,13 @@ export const AccountView: React.FC<IAccountViewProps> = ({ onBack, onScrollTop }
                 void loadAccount();
               }}
             />
-            <PluginSlot scope={'admin'} name={'account_before.widget'} />
+            <PluginSlot scope={'frontend'} name={'account_before.widget'} />
             <AccountSectionsAccordion
               account={account}
-              openSections={openSections}
-              onOpenSectionsChange={setOpenSections}
               onReload={() => loadAccount()}
               onLogout={() => logout()}
             />
-            <PluginSlot scope={'admin'} name={'account_after.widget'} />
+            <PluginSlot scope={'frontend'} name={'account_after.widget'} />
           </div>
         )}
       </div>

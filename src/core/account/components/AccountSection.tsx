@@ -1,14 +1,11 @@
 import { cn } from '@ui/lib/utils';
-import {
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@ui/shad-cn/components/accordion';
-import type { LucideIcon } from 'lucide-react';
-import React from 'react';
+import { AppDrawer } from '@ui/patterns/drawer';
+import { ChevronRight, type LucideIcon } from 'lucide-react';
+import React, { useState } from 'react';
 
 export interface AccountSectionProps {
-  value: string;
+  /** Stable id of the section (used for the row's DOM id). */
+  value?: string;
   icon: LucideIcon;
   title: string;
   description?: string;
@@ -19,8 +16,8 @@ export interface AccountSectionProps {
 }
 
 /**
- * X-style settings row: flat, full width, plain icon, title + description, chevron –
- * expands in place. Min. 60px high (comfortable touch target on phones).
+ * X-style settings row (icon | title + description | chevron). Min. 60px high
+ * (comfortable touch target on phones) – tapping it opens the content in an `AppDrawer`.
  */
 export const AccountSection: React.FC<AccountSectionProps> = ({
   value,
@@ -30,35 +27,58 @@ export const AccountSection: React.FC<AccountSectionProps> = ({
   destructive = false,
   className,
   children,
-}) => (
-  <AccordionItem value={value} className={cn('group/section border-b border-border/50', className)}>
-    <AccordionTrigger className="min-h-15 items-center gap-4 rounded-none px-4 py-3 transition-colors hover:bg-foreground/[0.03] focus-visible:bg-foreground/[0.05] focus-visible:ring-0 active:bg-foreground/[0.06] [&>svg]:translate-y-0 [&>svg]:text-muted-foreground">
-      <Icon
-        aria-hidden="true"
+}) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <button
+        type="button"
+        id={value ? `account-section-${value}` : undefined}
+        onClick={() => setOpen(true)}
         className={cn(
-          'size-5 shrink-0 transition-colors',
-          destructive
-            ? 'text-destructive'
-            : 'text-muted-foreground group-data-[open]/section:text-foreground'
+          'group flex min-h-15 w-full items-center gap-4 border-b border-border/50 px-4 py-3 text-left transition-colors hover:bg-foreground/[0.03] focus-visible:bg-foreground/[0.05] focus-visible:outline-none active:bg-foreground/[0.06]',
+          className
         )}
-        strokeWidth={1.75}
-      />
-      <span className="min-w-0 flex-1">
-        <span
+      >
+        <Icon
+          aria-hidden="true"
           className={cn(
-            'block truncate text-body leading-5 font-normal group-data-[open]/section:font-bold',
-            destructive ? 'text-destructive' : 'text-foreground'
+            'size-5 shrink-0',
+            destructive ? 'text-destructive' : 'text-muted-foreground'
           )}
-        >
-          {title}
-        </span>
-        {description && (
-          <span className="mt-0.5 block text-caption leading-4 font-normal text-muted-foreground">
-            {description}
+          strokeWidth={1.75}
+        />
+        <span className="min-w-0 flex-1">
+          <span
+            className={cn(
+              'block truncate text-body leading-5',
+              destructive ? 'text-destructive' : 'text-foreground'
+            )}
+          >
+            {title}
           </span>
-        )}
-      </span>
-    </AccordionTrigger>
-    <AccordionContent className="px-4 pt-1 pb-6 text-foreground">{children}</AccordionContent>
-  </AccordionItem>
-);
+          {description && (
+            <span className="mt-0.5 block truncate text-caption leading-4 text-muted-foreground">
+              {description}
+            </span>
+          )}
+        </span>
+        <ChevronRight
+          aria-hidden="true"
+          className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
+        />
+      </button>
+
+      <AppDrawer
+        open={open}
+        onOpenChange={setOpen}
+        title={title}
+        description={description}
+        autoHeight={true}
+      >
+        {children}
+      </AppDrawer>
+    </>
+  );
+};

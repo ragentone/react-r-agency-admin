@@ -101,7 +101,7 @@ export const AccountRolesAccordionItem: React.FC<AccountRolesAccordionItemProps>
                   {label}
                 </h4>
               )}
-              <ul className="divide-y divide-border/50 border-y border-border/50">
+              <ul>
                 {rows.map(row => (
                   <li key={row.role} className="flex items-start gap-3 py-3">
                     <BadgeCheck

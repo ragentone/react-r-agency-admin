@@ -74,7 +74,7 @@ const IdRow: React.FC<{ label: string; value: string | null; loading?: boolean }
         ) : (
           <div
             className={cn(
-              'mt-0.5 font-mono text-caption break-all select-all',
+              'mt-0.5 truncate font-mono text-caption select-all',
               value ? 'text-foreground' : 'text-muted-foreground'
             )}
           >

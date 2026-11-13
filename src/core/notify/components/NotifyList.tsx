@@ -15,7 +15,6 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useNotifyActivityStore } from '../activity';
-import { useLoadMoreSentinel } from '../hooks/use.load.more.sentinel';
 import { useNotifyStore } from '../store';
 import type { INotifyAction, INotifyItem, NotifyFilter } from '../types';
 import { NotifyItem } from './NotifyItem';
@@ -66,7 +65,6 @@ export const NotifyList: React.FC<INotifyListProps> = ({
 
   const items = useMemo(() => list.items.filter(item => !hidden[item.id]), [list.items, hidden]);
   const more = useCallback(() => loadMore(filter), [filter, loadMore]);
-  const sentinel = useLoadMoreSentinel(list.loaded && list.hasMore && !list.error, more);
   const onSeen = useCallback((item: INotifyItem) => void markSeen(item.id), [markSeen]);
 
   if (!list.loaded) return <NotifyListSkeleton />;
@@ -126,7 +124,6 @@ export const NotifyList: React.FC<INotifyListProps> = ({
           ))}
         </AnimatePresence>
       </ul>
-      <div ref={sentinel} aria-hidden className="h-px" />
       {list.loadingMore && (
         <div className="flex justify-center py-5 text-muted-foreground">
           <Spinner className="size-5" />

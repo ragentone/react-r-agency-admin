@@ -14,7 +14,7 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { INotifyAction, INotifyItem } from '../types';
-import { formatNotifyDateTime, formatNotifyTime, notifyText, notifyView } from '../utils';
+import { formatNotifyDateTime, formatNotifyTime, notifyText } from '../utils';
 import { type INotifyMenuItem, NotifyItemMenu } from './NotifyItemMenu';
 import { NotifyTypeIcon } from './NotifyTypeIcon';
 
@@ -70,7 +70,8 @@ export const NotifyItem: React.FC<INotifyItemProps> = ({
   const trashOpacity = useTransform(x, [-SWIPE_DELETE_PX, -24, 0], [1, 0.4, 0]);
   const trashScale = useTransform(x, [-SWIPE_DELETE_PX, -24], [1, 0.7]);
 
-  const { title, message, actions, answerInApp } = notifyView(t, i18n, item);
+  const title = notifyText(t, item.title, item);
+  const message = notifyText(t, item.message, item);
   const heading = title || message;
   const body = title ? message : '';
   const time = formatNotifyTime(item.date, i18n.language, t('time.now'));
@@ -217,9 +218,9 @@ export const NotifyItem: React.FC<INotifyItemProps> = ({
             <NotifyItemMenu title={heading} items={menu} className="-mt-1.5 -mr-2" />
           </div>
 
-          {actions.length > 0 && (
+          {item.actions.length > 0 && (
             <div className="mt-2.5 flex flex-wrap gap-2">
-              {actions.map(action => {
+              {item.actions.map(action => {
                 const running = busy === action.emit;
                 return (
                   <Button
@@ -235,9 +236,6 @@ export const NotifyItem: React.FC<INotifyItemProps> = ({
                 );
               })}
             </div>
-          )}
-          {answerInApp && (
-            <p className="mt-1.5 text-caption text-muted-foreground">{t('foreign.answerInApp')}</p>
           )}
         </div>
       </motion.div>

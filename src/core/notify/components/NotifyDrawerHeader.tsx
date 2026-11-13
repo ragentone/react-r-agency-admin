@@ -1,6 +1,6 @@
 import { cn } from '@ui/lib/utils';
 import { Button } from '@ui/shad-cn/components/button';
-import { DrawerDescription, DrawerTitle } from '@ui/shad-cn/components/drawer.tsx';
+import { DrawerTitle } from '@ui/shad-cn/components/drawer.tsx';
 import { CheckCheck, Trash2, X } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -36,15 +36,9 @@ export const NotifyDrawerHeader: React.FC<INotifyDrawerHeaderProps> = ({
 
   return (
     <>
-      <header className="flex min-h-13 items-center gap-1 pr-3 pb-2 pl-4">
+      <header className="flex min-h-13 items-center gap-1 pr-3 py-2 pl-4 border-b border-border/50">
         <div className="min-w-0 flex-1">
           <DrawerTitle className="truncate text-title font-bold">{t('title')}</DrawerTitle>
-          <DrawerDescription
-            className="truncate text-caption text-muted-foreground"
-            aria-live="polite"
-          >
-            {unread > 0 ? t('subtitle', { count: unread }) : t('subtitleNone')}
-          </DrawerDescription>
         </div>
         <Button
           variant="ghost"

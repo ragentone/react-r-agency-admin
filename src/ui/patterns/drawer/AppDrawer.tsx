@@ -80,6 +80,7 @@ export interface IAppDrawerProps {
   autoHeight?: boolean;
   /** Browser / Android back closes the drawer. Default `true`. */
   backClose?: boolean;
+  hideFooter?: boolean;
 }
 
 /**
@@ -111,6 +112,7 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
   direction,
   autoHeight = false,
   backClose = true,
+  hideFooter = false,
 }) => {
   const { t } = useTranslation('base');
   const close = closeLabel ?? t('drawer.close');
@@ -219,16 +221,18 @@ export const AppDrawer: React.FC<IAppDrawerProps> = ({
           {children}
         </div>
       )}
-      <div
-        className={cn(
-          'shrink-0 border-t border-border/50 bg-background px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]',
-          {
-            'bg-gray-50 dark:bg-transparent': true,
-          }
-        )}
-      >
-        {footer}
-      </div>
+      {!hideFooter && (
+        <div
+          className={cn(
+            'shrink-0 border-t border-border/50 bg-background px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]',
+            {
+              'bg-gray-50 dark:bg-transparent': true,
+            }
+          )}
+        >
+          {footer}
+        </div>
+      )}
     </>
   );
 

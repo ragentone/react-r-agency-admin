@@ -8,7 +8,6 @@ import {
 import type { IUserAccount } from '@core/account/types';
 import { CmsContainer } from '@core/cms';
 import { SecuritySection } from '@core/security/components/SecuritySection.tsx';
-import { Accordion } from '@ui/shad-cn/components/accordion';
 import { LogOut } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,8 +16,6 @@ import { useAuth } from '../../auth/components/use.auth.ts';
 
 export interface AccountSectionsAccordionProps {
   account: IUserAccount;
-  openSections: string[];
-  onOpenSectionsChange: (sections: string[]) => void;
   onReload: () => void;
   onLogout: () => void;
 }
@@ -33,8 +30,6 @@ const GroupLabel: React.FC<{ id: string; children: React.ReactNode }> = ({ id, c
 /** Settings: flat, full-width X-style lists (account · session · danger zone). */
 export const AccountSectionsAccordion: React.FC<AccountSectionsAccordionProps> = ({
   account,
-  openSections,
-  onOpenSectionsChange,
   onReload,
   onLogout,
 }) => {
@@ -42,11 +37,7 @@ export const AccountSectionsAccordion: React.FC<AccountSectionsAccordionProps> =
   const { preLogout, isLoggingOut } = useAuth();
 
   return (
-    <Accordion
-      value={openSections}
-      onValueChange={onOpenSectionsChange}
-      className="flex w-full flex-col border-t border-border/50 pt-1 pb-6"
-    >
+    <div className="flex w-full flex-col border-t border-border/50 pt-1 pb-6">
       <section aria-labelledby="account-group-settings">
         <GroupLabel id="account-group-settings">
           {t('settings', { defaultValue: 'Einstellungen' })}
@@ -94,6 +85,6 @@ export const AccountSectionsAccordion: React.FC<AccountSectionsAccordionProps> =
         </GroupLabel>
         <AccountDeleteAccordionItem onLogout={onLogout} />
       </section>
-    </Accordion>
+    </div>
   );
 };

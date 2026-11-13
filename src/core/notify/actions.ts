@@ -48,7 +48,7 @@ const handlers = new Map<string, IEntry>();
 
 /**
  * Registry of notification button handlers – modules register the `emit` names their
- * backend sends (see `core/notify/core.tsx` for the built-in buttons).
+ * backend sends (see `core/notify/core.tsx` for the friend request buttons).
  *
  * ```ts
  * NotifyActions.register('forum::open_post', ({ id }) => openPost(String(id)));
