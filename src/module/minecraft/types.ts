@@ -75,6 +75,25 @@ export interface IMinecraftPass {
   createdAt: string;
 }
 
+/** Server, auf dem ein Spieler gerade online ist. */
+export interface IMinecraftPlayerOnline {
+  serverId: string;
+  serverName: string;
+  joinedAt: string;
+}
+
+/** Spieler in der Übersicht; `unlisted` = online, aber ohne Spielerpass-Eintrag (`id` = `null`). */
+export interface IMinecraftPlayer {
+  id: string | null;
+  gamertag: string;
+  alias: string | null;
+  xuid: string | null;
+  status: 'active' | 'paused' | 'blocked' | 'unlisted';
+  createdAt: string | null;
+  lastSeenAt: string | null;
+  online: IMinecraftPlayerOnline[];
+}
+
 /** Auto-Backup-Zeitplan (gilt für alle Server, Serverzeit). */
 export interface IMinecraftBackupSettings {
   enabled: boolean;

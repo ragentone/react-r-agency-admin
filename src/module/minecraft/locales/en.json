@@ -311,5 +311,37 @@
       "fireDamage": "Fire damage",
       "tntExplodes": "TNT explodes"
     }
+  },
+  "monitor": {
+    "title": "Minecraft",
+    "summary": "{{running}} of {{total}} running · {{players}} players · RAM {{memory}} ({{share}} % of host)",
+    "players": "{{current}} / {{max}} players",
+    "empty": "No servers yet."
+  },
+  "playerList": {
+    "title": "Players",
+    "summary": "{{online}} online · {{total}} total",
+    "search": "Search gamertag or alias",
+    "noMatch": "No player found.",
+    "online": "online",
+    "offline": "Not online",
+    "onlineOn": "online on {{server}}",
+    "onlineTitle": "Online on",
+    "xuid": "XUID",
+    "unknown": "not known yet",
+    "created": "Added",
+    "unlistedHint": "This player has no player pass entry (e.g. added to the allowlist by hand). Kick works, blocking and deleting do not.",
+    "table": {
+      "where": "Online on / last seen"
+    },
+    "status": {
+      "active": "Active",
+      "paused": "Paused",
+      "blocked": "Blocked",
+      "unlisted": "No entry"
+    },
+    "serverTitle": "Players on {{name}}",
+    "serverSummary": "{{count}} online",
+    "serverButton": "Players on {{name}}"
   }
 }

@@ -2,7 +2,8 @@ import { cn } from '@ui/lib';
 import { Badge } from '@ui/shad-cn/components/badge.tsx';
 import { Button } from '@ui/shad-cn/components/button.tsx';
 import { TableCell, TableRow } from '@ui/shad-cn/components/table.tsx';
-import { ChevronDown } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@ui/shad-cn/components/tooltip.tsx';
+import { ChevronDown, Users } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -97,6 +98,19 @@ export const MinecraftServerRow: React.FC<{
         <TableCell>
           <div className="flex items-center justify-end gap-2">
             <MinecraftCardActions state={state} busy={busy} onRun={action => void run(action)} />
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon-lg"
+                  aria-label={t('playerList.serverButton', { name: server.name })}
+                  onClick={() => setDialog('players')}
+                >
+                  <Users />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>{t('playerList.title')}</TooltipContent>
+            </Tooltip>
             <MinecraftCardMenu
               canBroadcast={state === 'running'}
               canGamerules={state === 'running'}

@@ -2,14 +2,17 @@ import { CheckCircle2 } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import type { IMonitorAlert } from '../../types.alert';
-import { clockShort } from '../../utils';
+import type { IMonitorAlert, IMonitorMetricInfo } from '../../types.alert';
+import { clockShort, metricName, metricUnit } from '../../utils';
 import { MonitorAlertRow } from './MonitorAlertRow';
 import { MonitorAlertsSection } from './MonitorAlertsSection';
 
 /** Open alerts; a calm "all fine" state when nothing is violated. */
-export const MonitorAlertsActive: React.FC<{ active: IMonitorAlert[] }> = ({ active }) => {
-  const { t } = useTranslation('admin-monitor');
+export const MonitorAlertsActive: React.FC<{
+  active: IMonitorAlert[];
+  metrics: IMonitorMetricInfo[];
+}> = ({ active, metrics }) => {
+  const { t, i18n } = useTranslation('admin-monitor');
   return (
     <MonitorAlertsSection title={t('alerts.activeTitle')} text={t('alerts.activeText')}>
       {active.length === 0 ? (
@@ -22,7 +25,8 @@ export const MonitorAlertsActive: React.FC<{ active: IMonitorAlert[] }> = ({ act
           {active.map(alert => (
             <MonitorAlertRow
               key={alert.metric}
-              metric={alert.metric}
+              name={metricName(metrics, alert.metric, i18n.language)}
+              unit={metricUnit(metrics, alert.metric)}
               level={alert.level}
               value={alert.value}
               caption={t('alerts.since', { time: clockShort(alert.since) })}

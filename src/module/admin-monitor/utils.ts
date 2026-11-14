@@ -1,3 +1,4 @@
+import type { IMonitorMetricInfo } from './types.alert';
 const UNITS = ['B', 'KB', 'MB', 'GB', 'TB'] as const;
 
 /** `1536` → `1.5 KB`. */
@@ -43,3 +44,17 @@ export const hourLabel = (hour: string): string => {
 
 /** Number with thousands separator. */
 export const formatCount = (value: number): string => value.toLocaleString();
+
+/** Name of a metric in the UI language (`de-DE` → `de`); fallback English, then the id. */
+export const metricName = (
+  metrics: readonly IMonitorMetricInfo[],
+  id: string,
+  language: string
+): string => {
+  const labels = metrics.find(info => info.id === id)?.labels;
+  return labels?.[language.slice(0, 2)] ?? labels?.en ?? id;
+};
+
+/** Unit of a metric (`%` when unknown). */
+export const metricUnit = (metrics: readonly IMonitorMetricInfo[], id: string): string =>
+  metrics.find(info => info.id === id)?.unit ?? '%';

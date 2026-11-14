@@ -6,9 +6,16 @@ import { BroadcastDialog } from './BroadcastDialog';
 import { GamerulesDialog } from './GamerulesDialog';
 import { KickPlayerDialog } from './KickPlayerDialog';
 import { MinecraftTerminal } from './MinecraftTerminal';
+import { PlayersDrawer } from './PlayersDrawer';
 import { WorldSettingsDialog } from './WorldSettingsDialog';
 
-export type MinecraftDialog = 'backups' | 'world' | 'rules' | 'broadcast' | 'terminal';
+export type MinecraftDialog =
+  | 'backups'
+  | 'world'
+  | 'rules'
+  | 'broadcast'
+  | 'terminal'
+  | 'players';
 
 /** Alle Dialoge/Drawer eines Servers; `dialog` ist der gerade offene, `kicking` ein Spielername. */
 export const MinecraftServerDialogs: React.FC<{
@@ -32,6 +39,11 @@ export const MinecraftServerDialogs: React.FC<{
         name={name}
         open={dialog === 'backups'}
         stopped={stopped}
+        onOpenChange={open => !open && onClose()}
+      />
+      <PlayersDrawer
+        server={{ id, name }}
+        open={dialog === 'players'}
         onOpenChange={open => !open && onClose()}
       />
       <MinecraftTerminal

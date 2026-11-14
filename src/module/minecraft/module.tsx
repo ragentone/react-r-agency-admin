@@ -1,13 +1,25 @@
 import { Core } from '@core/core.api.ts';
 import { lazyPage } from '@core/page/lazy.page.ts';
 import { Gamepad2 } from 'lucide-react';
+import { lazy } from 'react';
 
+import { registerMonitorSection } from '../admin-monitor/registry';
 import { ADMIN_MINECRAFT_ROLES, ADMIN_MINECRAFT_ROUTE } from './const';
 
 // Own chunk. Backend: runtime apps/minecraft (`adminMinecraft*`, admin only).
 const PageAdminMinecraft = lazyPage(
   () => import('./pages/PageAdminMinecraft.tsx').then(m => m.PageAdminMinecraft),
   'PageAdminMinecraft'
+);
+
+// Section "Minecraft" in the admin monitor (runtime registers `minecraft` in `registerModule`).
+registerMonitorSection(
+  'minecraft',
+  lazy(() =>
+    import('./components/MonitorMinecraftSection.tsx').then(m => ({
+      default: m.MonitorMinecraftSection,
+    }))
+  )
 );
 
 Core.router.register({

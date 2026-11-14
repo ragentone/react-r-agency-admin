@@ -1,13 +1,13 @@
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { HomeError } from '../../../admin/home/components/HomeSection';
 import { useMonitorApp } from '../../hooks/use-monitor';
+import { getMonitorSection } from '../../registry';
 import { MonitorDb } from './MonitorDb';
 import { MonitorGraphql } from './MonitorGraphql';
 import { MonitorMesh } from './MonitorMesh';
-import { MonitorMinecraft } from './MonitorMinecraft';
 import { MonitorWs } from './MonitorWs';
 
 /** Tab "App": WebSocket, GraphQL, database, mesh. */
@@ -26,7 +26,14 @@ export const MonitorAppArea: React.FC = () => {
       <MonitorWs ws={data.ws} />
       <MonitorGraphql graphql={data.graphql} />
       <MonitorDb db={data.db} />
-      {data.modules?.minecraft && <MonitorMinecraft minecraft={data.modules.minecraft} />}
+      {Object.entries(data.modules ?? {}).map(([id, section]) => {
+        const Section = getMonitorSection(id);
+        return Section ? (
+          <Suspense key={id} fallback={<Skeleton className="h-40 rounded-xl" />}>
+            <Section data={section} />
+          </Suspense>
+        ) : null;
+      })}
       <MonitorMesh mesh={data.mesh} />
     </div>
   );

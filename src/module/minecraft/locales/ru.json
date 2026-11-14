@@ -311,5 +311,37 @@
       "fireDamage": "Урон от огня",
       "tntExplodes": "ТНТ взрывается"
     }
+  },
+  "monitor": {
+    "title": "Minecraft",
+    "summary": "Работает {{running}} из {{total}} · игроков: {{players}} · ОЗУ {{memory}} ({{share}} % хоста)",
+    "players": "{{current}} / {{max}} игроков",
+    "empty": "Серверов пока нет."
+  },
+  "playerList": {
+    "title": "Игроки",
+    "summary": "{{online}} онлайн · {{total}} всего",
+    "search": "Поиск по gamertag или псевдониму",
+    "noMatch": "Игрок не найден.",
+    "online": "онлайн",
+    "offline": "Не в сети",
+    "onlineOn": "онлайн на {{server}}",
+    "onlineTitle": "Онлайн на",
+    "xuid": "XUID",
+    "unknown": "пока неизвестен",
+    "created": "Добавлен",
+    "unlistedHint": "У этого игрока нет записи в пропуске (например, добавлен в allowlist вручную). Кик возможен, блокировка и удаление — нет.",
+    "table": {
+      "where": "Онлайн на / последний раз"
+    },
+    "status": {
+      "active": "Активен",
+      "paused": "На паузе",
+      "blocked": "Заблокирован",
+      "unlisted": "Без записи"
+    },
+    "serverTitle": "Игроки на {{name}}",
+    "serverSummary": "{{count}} онлайн",
+    "serverButton": "Игроки на {{name}}"
   }
 }

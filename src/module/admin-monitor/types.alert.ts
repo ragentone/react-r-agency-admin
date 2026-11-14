@@ -1,25 +1,12 @@
 import type { MonitorStatus } from './types';
 
 /** Mirror of runtime `shared/monitor/types.alert.ts`. */
-export type MonitorMetric = 'cpu' | 'mem' | 'swap' | 'disk' | 'loop' | 'db' | 'minecraft';
-export const MONITOR_METRICS: readonly MonitorMetric[] = [
-  'cpu',
-  'mem',
-  'swap',
-  'disk',
-  'loop',
-  'db',
-  'minecraft',
-];
-export const MONITOR_UNITS: Record<MonitorMetric, '%' | 'ms'> = {
-  cpu: '%',
-  mem: '%',
-  swap: '%',
-  disk: '%',
-  loop: 'ms',
-  db: 'ms',
-  minecraft: '%',
-};
+/** Id of a metric: built-in (`cpu` …) or registered by a module (`minecraft.mem`). */
+export type MonitorMetric = string;
+export type MonitorUnit = '%' | 'ms';
+
+/** Name per language (`de`, `en`, `ru`); fallback `en`, then the id. */
+export type MonitorLabels = Record<string, string>;
 
 export interface IMonitorRule {
   enabled: boolean;
@@ -28,6 +15,14 @@ export interface IMonitorRule {
   minutes: number;
 }
 export type IMonitorThresholds = Record<MonitorMetric, IMonitorRule>;
+
+/** Mirror of runtime `IMonitorMetricInfo`: all the admin needs to show and edit a metric. */
+export interface IMonitorMetricInfo {
+  id: MonitorMetric;
+  unit: MonitorUnit;
+  labels: MonitorLabels;
+  defaults: IMonitorRule;
+}
 
 export interface IMonitorAlert {
   metric: MonitorMetric;
@@ -48,6 +43,7 @@ export interface IMonitorAlerts {
   active: IMonitorAlert[];
   log: IMonitorAlertEvent[];
   thresholds: IMonitorThresholds;
+  metrics: IMonitorMetricInfo[];
   values: Record<MonitorMetric, number | null>;
 }
 

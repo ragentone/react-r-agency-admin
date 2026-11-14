@@ -104,15 +104,6 @@
     "72": "3 days",
     "168": "7 days"
   },
-  "metric": {
-    "cpu": "CPU",
-    "mem": "Memory",
-    "swap": "Swap",
-    "disk": "Disk",
-    "loop": "Event loop",
-    "db": "Database",
-    "minecraft": "Minecraft servers"
-  },
   "ws": {
     "connected": "Connected",
     "peak": "Peak {{peak}}",
@@ -171,19 +162,6 @@
       "table": "Table",
       "rows": "Rows",
       "size": "Size"
-    }
-  },
-  "minecraft": {
-    "title": "Minecraft",
-    "summary": "{{running}} of {{total}} running · {{players}} players · RAM {{memory}} ({{share}} % of host)",
-    "players": "{{current}} / {{max}} players",
-    "empty": "No servers yet.",
-    "state": {
-      "stopped": "stopped",
-      "starting": "starting",
-      "running": "running",
-      "stopping": "stopping",
-      "crashed": "crashed"
     }
   },
   "mesh": {

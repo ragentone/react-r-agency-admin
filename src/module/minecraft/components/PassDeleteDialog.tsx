@@ -9,7 +9,7 @@ import type { IMinecraftPass } from '../types';
 
 /** Bestätigung: Eintrag löschen, Gamertag überall aus der Allowlist nehmen und kicken. */
 export const PassDeleteDialog: React.FC<{
-  pass: IMinecraftPass;
+  pass: Pick<IMinecraftPass, 'id' | 'gamertag' | 'alias'>;
   onDone: () => void;
   onClose: () => void;
 }> = ({ pass, onDone, onClose }) => {

@@ -2,16 +2,19 @@ import { Button } from '@ui/shad-cn/components/button.tsx';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import type { IMonitorAlertEvent } from '../../types.alert';
-import { clockShort } from '../../utils';
+import type { IMonitorAlertEvent, IMonitorMetricInfo } from '../../types.alert';
+import { clockShort, metricName, metricUnit } from '../../utils';
 import { MonitorAlertRow } from './MonitorAlertRow';
 import { MonitorAlertsSection } from './MonitorAlertsSection';
 
 const SHORT = 8;
 
 /** Alert log, newest first; shows the latest few, the rest on demand. */
-export const MonitorAlertsLog: React.FC<{ log: IMonitorAlertEvent[] }> = ({ log }) => {
-  const { t } = useTranslation('admin-monitor');
+export const MonitorAlertsLog: React.FC<{
+  log: IMonitorAlertEvent[];
+  metrics: IMonitorMetricInfo[];
+}> = ({ log, metrics }) => {
+  const { t, i18n } = useTranslation('admin-monitor');
   const [expanded, setExpanded] = useState(false);
   const entries = [...log].reverse();
   const shown = expanded ? entries : entries.slice(0, SHORT);
@@ -25,7 +28,8 @@ export const MonitorAlertsLog: React.FC<{ log: IMonitorAlertEvent[] }> = ({ log 
             {shown.map((entry, index) => (
               <MonitorAlertRow
                 key={`${entry.t}-${entry.metric}-${index}`}
-                metric={entry.metric}
+                name={metricName(metrics, entry.metric, i18n.language)}
+                unit={metricUnit(metrics, entry.metric)}
                 level={entry.level}
                 value={entry.value}
                 caption={clockShort(entry.t)}

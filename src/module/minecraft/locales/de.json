@@ -311,5 +311,37 @@
       "fireDamage": "Feuerschaden",
       "tntExplodes": "TNT explodiert"
     }
+  },
+  "monitor": {
+    "title": "Minecraft",
+    "summary": "{{running}} von {{total}} laufen · {{players}} Spieler · RAM {{memory}} ({{share}} % des Hosts)",
+    "players": "{{current}} / {{max}} Spieler",
+    "empty": "Keine Server angelegt."
+  },
+  "playerList": {
+    "title": "Spieler",
+    "summary": "{{online}} online · {{total}} gesamt",
+    "search": "Gamertag oder Alias suchen",
+    "noMatch": "Kein Spieler gefunden.",
+    "online": "online",
+    "offline": "Nicht online",
+    "onlineOn": "online auf {{server}}",
+    "onlineTitle": "Online auf",
+    "xuid": "XUID",
+    "unknown": "noch nicht bekannt",
+    "created": "Eingetragen",
+    "unlistedHint": "Dieser Spieler hat keinen Spielerpass-Eintrag (z. B. von Hand in der Allowlist). Kicken geht, Sperren und Löschen nicht.",
+    "table": {
+      "where": "Online auf / zuletzt"
+    },
+    "status": {
+      "active": "Aktiv",
+      "paused": "Pausiert",
+      "blocked": "Gesperrt",
+      "unlisted": "Ohne Eintrag"
+    },
+    "serverTitle": "Spieler auf {{name}}",
+    "serverSummary": "{{count}} online",
+    "serverButton": "Spieler auf {{name}}"
   }
 }

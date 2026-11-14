@@ -8,6 +8,7 @@ import type {
   IMinecraftConsoleLine,
   IMinecraftGamerules,
   IMinecraftPass,
+  IMinecraftPlayer,
   IMinecraftServerEntry,
   IMinecraftServerInput,
   IMinecraftWorldSettings,
@@ -16,6 +17,7 @@ import type {
 /* Parsed here instead of codegen `graphql()` (Muster admin-monitor/api.ts). */
 const doc = {
   passes: parse(`query AdminMinecraftPasses { adminMinecraftPasses { success error passes } }`),
+  players: parse(`query AdminMinecraftPlayers { adminMinecraftPlayers { success error players } }`),
   blockPass: parse(
     `mutation AdminMinecraftBlockPass($id: String!, $blocked: Boolean) { adminMinecraftBlockPass(id: $id, blocked: $blocked) { success error } }`
   ),
@@ -235,6 +237,8 @@ export const AdminMinecraftApi = {
     }),
   passes: () =>
     read<IMinecraftResult & { passes?: IMinecraftPass[] }>(doc.passes, 'adminMinecraftPasses'),
+  players: () =>
+    read<IMinecraftResult & { players?: IMinecraftPlayer[] }>(doc.players, 'adminMinecraftPlayers'),
   blockPass: (id: string, blocked: boolean) =>
     write<IMinecraftResult>(doc.blockPass, 'adminMinecraftBlockPass', { id, blocked }),
   createPass: (gamertag: string) =>

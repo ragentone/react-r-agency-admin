@@ -7,8 +7,7 @@ import { Switch } from '@ui/shad-cn/components/switch.tsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import type { IMonitorRule, MonitorMetric } from '../../types.alert';
-import { MONITOR_UNITS } from '../../types.alert';
+import type { IMonitorRule, MonitorMetric, MonitorUnit } from '../../types.alert';
 import { MonitorThresholdField } from './MonitorThresholdField';
 
 /** Max of the warn/crit fields, by unit (`%` is capped at 100, `ms` left generous). */
@@ -17,17 +16,18 @@ const MAX_BY_UNIT: Record<'%' | 'ms', number> = { '%': 100, ms: 60_000 };
 /** One metric: summary in the header, switch + fields when opened. */
 export const MonitorThresholdItem: React.FC<{
   metric: MonitorMetric;
+  name: string;
+  unit: MonitorUnit;
   rule: IMonitorRule;
   onChange: (patch: Partial<IMonitorRule>) => void;
-}> = ({ metric, rule, onChange }) => {
+}> = ({ metric, name, unit, rule, onChange }) => {
   const { t } = useTranslation('admin-monitor');
-  const unit = MONITOR_UNITS[metric];
   const max = MAX_BY_UNIT[unit];
   return (
     <AccordionItem value={metric} className="border-border/50 px-4 last:border-b-0">
       <AccordionTrigger className="min-h-14 items-center py-3">
         <span className="flex min-w-0 flex-col">
-          <span className="truncate text-body font-bold">{t(`metric.${metric}`)}</span>
+          <span className="truncate text-body font-bold">{name}</span>
           <span className="truncate text-caption font-normal text-muted-foreground">
             {rule.enabled
               ? t('thresholds.summary', {

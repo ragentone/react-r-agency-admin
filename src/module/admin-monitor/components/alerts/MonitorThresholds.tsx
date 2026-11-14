@@ -5,17 +5,23 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { AdminMonitorApi } from '../../api';
-import type { IMonitorRule, IMonitorThresholds, MonitorMetric } from '../../types.alert';
-import { MONITOR_METRICS } from '../../types.alert';
+import type {
+  IMonitorMetricInfo,
+  IMonitorRule,
+  IMonitorThresholds,
+  MonitorMetric,
+} from '../../types.alert';
+import { metricName } from '../../utils';
 import { MonitorAlertsSection } from './MonitorAlertsSection';
 import { MonitorThresholdItem } from './MonitorThresholdItem';
 
 /** Editable thresholds per metric (accordion); save bar sticks to the bottom when dirty. */
 export const MonitorThresholds: React.FC<{
   thresholds: IMonitorThresholds;
+  metrics: IMonitorMetricInfo[];
   onSaved: (thresholds: IMonitorThresholds) => void;
-}> = ({ thresholds, onSaved }) => {
-  const { t } = useTranslation('admin-monitor');
+}> = ({ thresholds, metrics, onSaved }) => {
+  const { t, i18n } = useTranslation('admin-monitor');
   const [draft, setDraft] = useState(thresholds);
   const [saving, setSaving] = useState(false);
   const dirty = JSON.stringify(draft) !== JSON.stringify(thresholds);
@@ -38,12 +44,14 @@ export const MonitorThresholds: React.FC<{
   return (
     <MonitorAlertsSection title={t('thresholds.title')} text={t('thresholds.text')}>
       <Accordion>
-        {MONITOR_METRICS.map(metric => (
+        {metrics.map(info => (
           <MonitorThresholdItem
-            key={metric}
-            metric={metric}
-            rule={draft[metric]}
-            onChange={patch => set(metric, patch)}
+            key={info.id}
+            metric={info.id}
+            name={metricName(metrics, info.id, i18n.language)}
+            unit={info.unit}
+            rule={draft[info.id] ?? thresholds[info.id] ?? info.defaults}
+            onChange={patch => set(info.id, patch)}
           />
         ))}
       </Accordion>

@@ -15,7 +15,7 @@ import type { IMinecraftServer } from '../types';
 import { BdsDialog } from './BdsDialog';
 import { DeleteServerDialog } from './DeleteServerDialog';
 import { MinecraftServerRow } from './MinecraftServerRow';
-import { PassesDrawer } from './PassesDrawer';
+import { PlayersDrawer } from './PlayersDrawer';
 import { ServerFormDialog } from './ServerFormDialog';
 
 /** Liste aller Server (Tabelle, eine Zeile je Server) mit Plus-Button zum Anlegen. */
@@ -44,7 +44,7 @@ export const MinecraftServerList: React.FC = () => {
           <Button
             variant="outline"
             size="icon-lg"
-            aria-label={t('pass.title')}
+            aria-label={t('playerList.title')}
             onClick={() => setPasses(true)}
           >
             <Users />
@@ -89,7 +89,7 @@ export const MinecraftServerList: React.FC = () => {
         </div>
       )}
       {bds && <BdsDialog onClose={() => setBds(false)} />}
-      <PassesDrawer open={passes} onOpenChange={setPasses} />
+      <PlayersDrawer open={passes} onOpenChange={setPasses} />
       {creating && <ServerFormDialog onSaved={reload} onClose={() => setCreating(false)} />}
       {editing && (
         <ServerFormDialog server={editing} onSaved={reload} onClose={() => setEditing(null)} />

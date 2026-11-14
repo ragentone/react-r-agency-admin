@@ -21,9 +21,13 @@ export const MonitorAlertsArea: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <MonitorAlertsActive active={data.active} />
-      <MonitorAlertsLog log={data.log} />
-      <MonitorThresholds thresholds={data.thresholds} onSaved={() => reload()} />
+      <MonitorAlertsActive active={data.active} metrics={data.metrics} />
+      <MonitorAlertsLog log={data.log} metrics={data.metrics} />
+      <MonitorThresholds
+        thresholds={data.thresholds}
+        metrics={data.metrics}
+        onSaved={() => reload()}
+      />
     </div>
   );
 };

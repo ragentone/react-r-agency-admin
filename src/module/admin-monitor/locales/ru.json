@@ -104,15 +104,6 @@
     "72": "3 дня",
     "168": "7 дней"
   },
-  "metric": {
-    "cpu": "ЦП",
-    "mem": "Память",
-    "swap": "Swap",
-    "disk": "Диск",
-    "loop": "Event loop",
-    "db": "База данных",
-    "minecraft": "Серверы Minecraft"
-  },
   "ws": {
     "connected": "Подключено",
     "peak": "Пик {{peak}}",
@@ -171,19 +162,6 @@
       "table": "Таблица",
       "rows": "Строки",
       "size": "Размер"
-    }
-  },
-  "minecraft": {
-    "title": "Minecraft",
-    "summary": "Работает {{running}} из {{total}} · игроков: {{players}} · ОЗУ {{memory}} ({{share}} % хоста)",
-    "players": "{{current}} / {{max}} игроков",
-    "empty": "Серверов пока нет.",
-    "state": {
-      "stopped": "остановлен",
-      "starting": "запускается",
-      "running": "работает",
-      "stopping": "останавливается",
-      "crashed": "аварийно завершён"
     }
   },
   "mesh": {

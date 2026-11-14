@@ -1,5 +1,3 @@
-import type { IMonitorMinecraft } from './types.minecraft';
-
 /** Mirror of runtime `shared/monitor/types.app.ts`. */
 export interface IMonitorWs {
   connected: number;
@@ -54,6 +52,6 @@ export interface IMonitorApp {
   cron: IMonitorCron[];
   db: IMonitorDb;
   mesh: { version: string; node: string; env: string; startedAt: string };
-  /** Sections of modules (e.g. `minecraft`), see runtime `registerModule`. */
-  modules?: { minecraft?: IMonitorMinecraft };
+  /** Section data by module id (runtime `registerModule`); shown by `registerMonitorSection`. */
+  modules?: Record<string, unknown>;
 }
