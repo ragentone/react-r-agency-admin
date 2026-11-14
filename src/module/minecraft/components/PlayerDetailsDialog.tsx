@@ -1,6 +1,6 @@
 import { AppDialog } from '@ui/components';
 import { Button } from '@ui/shad-cn/components/button.tsx';
-import { Ban, CircleCheck, Trash2, UserX } from 'lucide-react';
+import { Ban, CircleCheck, MessageSquare, Trash2, UserX } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -22,9 +22,10 @@ export const PlayerDetailsDialog: React.FC<{
   player: IMinecraftPlayer;
   onChanged: () => void;
   onKick: (serverId: string, name: string) => void;
+  onMessage: (serverId: string, serverName: string, name: string) => void;
   onDelete: (player: IMinecraftPlayer) => void;
   onClose: () => void;
-}> = ({ player, onChanged, onKick, onDelete, onClose }) => {
+}> = ({ player, onChanged, onKick, onMessage, onDelete, onClose }) => {
   const { t } = useTranslation('minecraft');
   const [busy, setBusy] = useState(false);
   const blocked = player.status === 'blocked';
@@ -84,6 +85,14 @@ export const PlayerDetailsDialog: React.FC<{
                 <span className="shrink-0 text-muted-foreground">
                   {t('players.since', { time: time(item.joinedAt) })}
                 </span>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  aria-label={t('playerMessage.action', { name: player.gamertag })}
+                  onClick={() => onMessage(item.serverId, item.serverName, player.gamertag)}
+                >
+                  <MessageSquare />
+                </Button>
                 <Button
                   variant="ghost"
                   size="icon-sm"

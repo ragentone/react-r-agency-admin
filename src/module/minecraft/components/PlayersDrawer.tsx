@@ -16,6 +16,7 @@ import { useMinecraftPlayers } from '../hooks/use-minecraft-players';
 import { playerKey } from '../player-key';
 import type { IMinecraftPlayer } from '../types';
 import { KickPlayerDialog } from './KickPlayerDialog';
+import { MessagePlayerDialog } from './MessagePlayerDialog';
 import { PassAddDialog } from './PassAddDialog';
 import { PassDeleteDialog } from './PassDeleteDialog';
 import { PlayerDetailsDialog } from './PlayerDetailsDialog';
@@ -45,6 +46,11 @@ export const PlayersDrawer: React.FC<{
   const [selected, setSelected] = useState<string | null>(null);
   const [deleting, setDeleting] = useState<IMinecraftPlayer | null>(null);
   const [kicking, setKicking] = useState<{ serverId: string; name: string } | null>(null);
+  const [messaging, setMessaging] = useState<{
+    serverId: string;
+    serverName: string;
+    name: string;
+  } | null>(null);
   const [adding, setAdding] = useState(false);
 
   // Details aus der aktuellen Liste: bleiben nach Sperren/Polling frisch.
@@ -99,11 +105,20 @@ export const PlayersDrawer: React.FC<{
           }}
         />
       )}
-      {details && !deleting && !kicking && (
+      {messaging && (
+        <MessagePlayerDialog
+          serverId={messaging.serverId}
+          serverName={messaging.serverName}
+          name={messaging.name}
+          onClose={() => setMessaging(null)}
+        />
+      )}
+      {details && !deleting && !kicking && !messaging && (
         <PlayerDetailsDialog
           player={details}
           onChanged={() => void reload()}
           onKick={(serverId, name) => setKicking({ serverId, name })}
+          onMessage={(serverId, serverName, name) => setMessaging({ serverId, serverName, name })}
           onDelete={player => setDeleting(player)}
           onClose={() => setSelected(null)}
         />

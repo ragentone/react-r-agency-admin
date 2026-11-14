@@ -73,6 +73,9 @@ const doc = {
   kick: parse(
     `mutation AdminMinecraftKickPlayer($serverId: String!, $name: String!, $reason: String) { adminMinecraftKickPlayer(serverId: $serverId, name: $name, reason: $reason) { success error } }`
   ),
+  messagePlayer: parse(
+    `mutation AdminMinecraftMessagePlayer($serverId: String!, $name: String!, $message: String!, $mode: String) { adminMinecraftMessagePlayer(serverId: $serverId, name: $name, message: $message, mode: $mode) { success error } }`
+  ),
   broadcast: parse(
     `mutation AdminMinecraftBroadcast($serverId: String!, $message: String!, $mode: String) { adminMinecraftBroadcast(serverId: $serverId, message: $message, mode: $mode) { success error } }`
   ),
@@ -193,6 +196,13 @@ export const AdminMinecraftApi = {
     }),
   kickPlayer: (serverId: string, name: string, reason: string) =>
     write<IMinecraftResult>(doc.kick, 'adminMinecraftKickPlayer', { serverId, name, reason }),
+  messagePlayer: (serverId: string, name: string, message: string, mode: 'chat' | 'title') =>
+    write<IMinecraftResult>(doc.messagePlayer, 'adminMinecraftMessagePlayer', {
+      serverId,
+      name,
+      message,
+      mode,
+    }),
   broadcast: (serverId: string, message: string, mode: 'chat' | 'title') =>
     write<IMinecraftResult>(doc.broadcast, 'adminMinecraftBroadcast', { serverId, message, mode }),
   restart: (serverId: string) =>

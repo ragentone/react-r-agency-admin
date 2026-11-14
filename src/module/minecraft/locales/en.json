@@ -343,5 +343,11 @@
     "serverTitle": "Players on {{name}}",
     "serverSummary": "{{count}} online",
     "serverButton": "Players on {{name}}"
+  },
+  "playerMessage": {
+    "title": "Message to {{name}}",
+    "text": "Only this player on {{server}} sees it.",
+    "action": "Send a message to {{name}}",
+    "done": "Message sent to {{name}}."
   }
 }

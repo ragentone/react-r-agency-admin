@@ -343,5 +343,11 @@
     "serverTitle": "Игроки на {{name}}",
     "serverSummary": "{{count}} онлайн",
     "serverButton": "Игроки на {{name}}"
+  },
+  "playerMessage": {
+    "title": "Сообщение для {{name}}",
+    "text": "Увидит только этот игрок на {{server}}.",
+    "action": "Отправить сообщение игроку {{name}}",
+    "done": "Сообщение отправлено: {{name}}."
   }
 }
