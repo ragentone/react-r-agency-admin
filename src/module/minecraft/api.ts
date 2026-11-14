@@ -24,6 +24,9 @@ const doc = {
   setPassWindow: parse(
     `mutation AdminMinecraftSetPassWindow($id: String!, $from: Int, $to: Int) { adminMinecraftSetPassWindow(id: $id, from: $from, to: $to) { success error } }`
   ),
+  setServerPort: parse(
+    `mutation AdminMinecraftSetServerPort($serverId: String!, $port: Int!) { adminMinecraftSetServerPort(serverId: $serverId, port: $port) { success error } }`
+  ),
   createPass: parse(
     `mutation AdminMinecraftCreatePass($gamertag: String!) { adminMinecraftCreatePass(gamertag: $gamertag) { success error } }`
   ),
@@ -146,6 +149,8 @@ export const AdminMinecraftApi = {
       'adminMinecraftUpdateServer',
       { serverId, ...input }
     ),
+  setServerPort: (serverId: string, port: number) =>
+    write<IMinecraftResult>(doc.setServerPort, 'adminMinecraftSetServerPort', { serverId, port }),
   remove: (serverId: string, deleteFiles: boolean) =>
     write<IMinecraftResult>(doc.remove, 'adminMinecraftDeleteServer', { serverId, deleteFiles }),
   start: (serverId: string) =>

@@ -3,7 +3,7 @@ import { Badge } from '@ui/shad-cn/components/badge.tsx';
 import { Button } from '@ui/shad-cn/components/button.tsx';
 import { TableCell, TableRow } from '@ui/shad-cn/components/table.tsx';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@ui/shad-cn/components/tooltip.tsx';
-import { ChevronDown, Users } from 'lucide-react';
+import { ChevronDown, RotateCw, Users } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -80,14 +80,27 @@ export const MinecraftServerRow: React.FC<{
           </div>
         </TableCell>
         <TableCell>
-          {state && (
-            <Badge
-              className={cn({ 'text-white': state === 'crashed' })}
-              variant={BADGE_VARIANT[state]}
-            >
-              {t(`state.${state}`)}
-            </Badge>
-          )}
+          <div className="flex flex-wrap items-center gap-1">
+            {state && (
+              <Badge
+                className={cn({ 'text-white': state === 'crashed' })}
+                variant={BADGE_VARIANT[state]}
+              >
+                {t(`state.${state}`)}
+              </Badge>
+            )}
+            {status.restartPending && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Badge variant="outline" className="gap-1 border-border/50">
+                    <RotateCw className="size-3" aria-hidden="true" />
+                    {t('state.restartPending')}
+                  </Badge>
+                </TooltipTrigger>
+                <TooltipContent>{t('form.restartHint')}</TooltipContent>
+              </Tooltip>
+            )}
+          </div>
         </TableCell>
         <TableCell className="hidden tabular-nums sm:table-cell">
           {state === 'running' ? `${players.length} / ${server.maxPlayers}` : '–'}

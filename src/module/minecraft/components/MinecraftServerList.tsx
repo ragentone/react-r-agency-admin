@@ -92,7 +92,16 @@ export const MinecraftServerList: React.FC = () => {
       <PlayersDrawer open={passes} onOpenChange={setPasses} />
       {creating && <ServerFormDialog onSaved={reload} onClose={() => setCreating(false)} />}
       {editing && (
-        <ServerFormDialog server={editing} onSaved={reload} onClose={() => setEditing(null)} />
+        <ServerFormDialog
+          server={editing}
+          portLocked={
+            !['stopped', 'crashed'].includes(
+              entries?.find(entry => entry.server.id === editing.id)?.status.state ?? 'stopped'
+            )
+          }
+          onSaved={reload}
+          onClose={() => setEditing(null)}
+        />
       )}
       {deleting && (
         <DeleteServerDialog

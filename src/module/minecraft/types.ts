@@ -23,6 +23,8 @@ export interface IMinecraftStatus {
   lastExitCode: number | null;
   lastError: string | null;
   restartAttempts: number;
+  /** Konfiguration geändert, gilt erst nach Neustart. */
+  restartPending?: boolean;
 }
 
 export interface IMinecraftOnlinePlayer {

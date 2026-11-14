@@ -20,18 +20,31 @@ import { type IMinecraftGamemode, type IMinecraftServer, MINECRAFT_GAMEMODES } f
 /** Dialog zum Anlegen (ohne `server`) oder Bearbeiten eines Servers; Ports vergibt das Backend. */
 export const ServerFormDialog: React.FC<{
   server?: IMinecraftServer;
+  /** Port ist nur bei gestopptem Server änderbar. */
+  portLocked?: boolean;
   onSaved: () => void;
   onClose: () => void;
-}> = ({ server, onSaved, onClose }) => {
+}> = ({ server, portLocked = false, onSaved, onClose }) => {
   const { t } = useTranslation('minecraft');
   const [name, setName] = useState(server?.name ?? '');
   const [gamemode, setGamemode] = useState<IMinecraftGamemode>(server?.gamemode ?? 'survival');
   const [maxPlayers, setMaxPlayers] = useState(String(server?.maxPlayers ?? 10));
+  const [port, setPort] = useState(String(server?.port ?? ''));
   const [autostart, setAutostart] = useState(server?.autostart ?? false);
   const [busy, setBusy] = useState(false);
 
   const submit = async () => {
     setBusy(true);
+    if (server && !portLocked && Number(port) !== server.port) {
+      const moved = await AdminMinecraftApi.setServerPort(server.id, Number(port));
+      if (!moved.success) {
+        setBusy(false);
+        toast.error(
+          t(`action.error.${moved.error ?? 'unknown'}`, { defaultValue: t('action.error.unknown') })
+        );
+        return;
+      }
+    }
     const input = {
       name: name.trim(),
       gamemode,
@@ -104,6 +117,23 @@ export const ServerFormDialog: React.FC<{
             onChange={e => setMaxPlayers(e.target.value)}
           />
         </div>
+        {server && (
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="mc-port">{t('form.port')}</Label>
+            <Input
+              id="mc-port"
+              type="number"
+              min={1024}
+              max={65534}
+              disabled={portLocked}
+              value={port}
+              onChange={e => setPort(e.target.value)}
+            />
+            <p className="text-caption text-muted-foreground">
+              {t(portLocked ? 'form.portLocked' : 'form.portHint', { port: Number(port) + 1 })}
+            </p>
+          </div>
+        )}
         <div className="flex items-center justify-between gap-3">
           <Label htmlFor="mc-autostart">{t('form.autostart')}</Label>
           <Switch id="mc-autostart" checked={autostart} onCheckedChange={setAutostart} />

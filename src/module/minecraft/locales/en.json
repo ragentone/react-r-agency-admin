@@ -20,7 +20,8 @@
     "starting": "starting",
     "stopping": "stopping",
     "stopped": "stopped",
-    "crashed": "crashed"
+    "crashed": "crashed",
+    "restartPending": "Restart needed"
   },
   "action": {
     "start": "Start",
@@ -48,7 +49,8 @@
       "low_memory": "Not enough free memory to start the server.",
       "read_failed": "Settings could not be read.",
       "bds_missing": "No BDS installation found. Install it with the download button above.",
-      "layout_failed": "Server folder could not be prepared (see runtime log)."
+      "layout_failed": "Server folder could not be prepared (see runtime log).",
+      "port_in_use": "This port is in use on the host."
     },
     "edit": "Edit",
     "delete": "Delete",
@@ -89,7 +91,10 @@
     "save": "Save",
     "saved": "Saved.",
     "autostart": "Start with the runtime",
-    "restartHint": "Changes apply after the server restarts."
+    "restartHint": "Changes apply after the server restarts.",
+    "port": "Port (UDP)",
+    "portHint": "The IPv6 port is {{port}}. Applies from the next start; players must use the new port.",
+    "portLocked": "Port can only be changed while the server is stopped."
   },
   "delete": {
     "title": "Delete “{{name}}”?",

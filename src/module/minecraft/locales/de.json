@@ -20,7 +20,8 @@
     "starting": "startet",
     "stopping": "stoppt",
     "stopped": "gestoppt",
-    "crashed": "abgestürzt"
+    "crashed": "abgestürzt",
+    "restartPending": "Neustart nötig"
   },
   "action": {
     "start": "Starten",
@@ -48,7 +49,8 @@
       "low_memory": "Zu wenig freier Arbeitsspeicher, um den Server zu starten.",
       "read_failed": "Einstellungen konnten nicht gelesen werden.",
       "bds_missing": "Keine BDS-Installation gefunden. Über den Download-Button oben installieren.",
-      "layout_failed": "Server-Ordner konnte nicht vorbereitet werden (siehe Runtime-Log)."
+      "layout_failed": "Server-Ordner konnte nicht vorbereitet werden (siehe Runtime-Log).",
+      "port_in_use": "Dieser Port ist auf dem Host belegt."
     },
     "edit": "Bearbeiten",
     "delete": "Löschen",
@@ -89,7 +91,10 @@
     "save": "Speichern",
     "saved": "Gespeichert.",
     "autostart": "Mit der Runtime starten",
-    "restartHint": "Änderungen gelten nach einem Neustart des Servers."
+    "restartHint": "Änderungen gelten nach einem Neustart des Servers.",
+    "port": "Port (UDP)",
+    "portHint": "Der IPv6-Port ist {{port}}. Gilt ab dem nächsten Start; die Spieler müssen den neuen Port eintragen.",
+    "portLocked": "Port nur bei gestopptem Server änderbar."
   },
   "delete": {
     "title": "„{{name}}“ löschen?",
