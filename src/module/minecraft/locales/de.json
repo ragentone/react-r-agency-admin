@@ -352,5 +352,24 @@
     "text": "Wird nur diesem Spieler auf {{server}} angezeigt.",
     "action": "Nachricht an {{name}} senden",
     "done": "Nachricht an {{name}} gesendet."
+  },
+  "window": {
+    "menu": "Spielzeit",
+    "tile": "Spielzeit",
+    "anytime": "jederzeit",
+    "title": "Spielzeit: {{name}}",
+    "text": "Nur in diesem Zeitraum (deutsche Zeit) kann {{name}} spielen. Außerhalb wird der Gamertag gekickt und nicht eingelassen.",
+    "from": "Von",
+    "to": "Bis",
+    "hint": "10 Minuten vor Ende erscheint eine Warnung im Spiel. Bis zu 5 Minuten Verzögerung beim Rauswurf. Über Mitternacht ist möglich (z. B. 20:00 bis 06:00).",
+    "save": "Speichern",
+    "clear": "Zeitlimit entfernen",
+    "saved": "Spielzeit gespeichert.",
+    "cleared": "Spielzeit entfernt.",
+    "error": {
+      "invalid_input": "Beginn und Ende müssen verschieden sein.",
+      "not_found": "Eintrag nicht gefunden.",
+      "unknown": "Speichern fehlgeschlagen."
+    }
   }
 }

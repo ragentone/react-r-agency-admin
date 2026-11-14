@@ -91,6 +91,9 @@ export interface IMinecraftPlayer {
   status: 'active' | 'paused' | 'blocked' | 'unlisted';
   createdAt: string | null;
   lastSeenAt: string | null;
+  /** Spielzeit (Minute des Tages, deutsche Zeit), beide `null` = jederzeit. */
+  windowFrom: number | null;
+  windowTo: number | null;
   online: IMinecraftPlayerOnline[];
 }
 

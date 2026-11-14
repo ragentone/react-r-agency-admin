@@ -8,13 +8,15 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@ui/shad-cn/components/dropdown-menu.tsx';
-import { Ban, CircleCheck, Ellipsis, MessageSquare, Trash2, UserX } from 'lucide-react';
+import { Ban, CircleCheck, Clock, Ellipsis, MessageSquare, Trash2, UserX } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { AdminMinecraftApi } from '../api';
 import type { IMinecraftPlayer } from '../types';
+import { toTime } from '../window-time';
+import { PlayerWindowDialog } from './PlayerWindowDialog';
 
 const Tile: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
   <div className="flex min-w-0 flex-col gap-0.5 rounded-xl border border-border/50 p-3">
@@ -23,7 +25,8 @@ const Tile: React.FC<{ label: string; children: React.ReactNode }> = ({ label, c
   </div>
 );
 
-const time = (iso: string) => new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+const time = (iso: string) =>
+  new Date(iso).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
 /** Details eines Spielers: Stammdaten, wo er online ist, Rauswerfen, Sperren, Löschen. */
 export const PlayerDetailsDialog: React.FC<{
@@ -36,9 +39,11 @@ export const PlayerDetailsDialog: React.FC<{
 }> = ({ player, onChanged, onKick, onMessage, onDelete, onClose }) => {
   const { t } = useTranslation('minecraft');
   const [busy, setBusy] = useState(false);
+  const [editWindow, setEditWindow] = useState(false);
   const blocked = player.status === 'blocked';
   const never = t('pass.never');
-  const date = (iso: string | null, fallback = '–') => (iso ? new Date(iso).toLocaleString() : fallback);
+  const date = (iso: string | null, fallback = '–') =>
+    iso ? new Date(iso).toLocaleString() : fallback;
 
   const toggleBlock = async () => {
     if (!player.id) return;
@@ -80,6 +85,10 @@ export const PlayerDetailsDialog: React.FC<{
                 {blocked ? <CircleCheck /> : <Ban />}
                 {blocked ? t('pass.unblock') : t('pass.block')}
               </DropdownMenuItem>
+              <DropdownMenuItem onSelect={() => setEditWindow(true)}>
+                <Clock />
+                {t('window.menu')}
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem variant="destructive" onSelect={() => onDelete(player)}>
                 <Trash2 />
@@ -95,6 +104,13 @@ export const PlayerDetailsDialog: React.FC<{
         <Tile label={t('pass.table.lastSeen')}>{date(player.lastSeenAt, never)}</Tile>
         <Tile label={t('playerList.xuid')}>{player.xuid ?? t('playerList.unknown')}</Tile>
         <Tile label={t('playerList.created')}>{date(player.createdAt)}</Tile>
+        {player.id && (
+          <Tile label={t('window.tile')}>
+            {player.windowFrom === null || player.windowTo === null
+              ? t('window.anytime')
+              : `${toTime(player.windowFrom, '')}–${toTime(player.windowTo, '')}`}
+          </Tile>
+        )}
       </div>
       <section className="flex flex-col gap-2">
         <h4 className="text-body font-bold">{t('playerList.onlineTitle')}</h4>
@@ -105,10 +121,16 @@ export const PlayerDetailsDialog: React.FC<{
         ) : (
           <ul className="flex flex-col gap-2">
             {player.online.map(item => (
-              <li key={item.serverId} className="flex flex-col gap-3 rounded-xl border border-border/50 p-3">
+              <li
+                key={item.serverId}
+                className="flex flex-col gap-3 rounded-xl border border-border/50 p-3"
+              >
                 <div className="flex items-center justify-between gap-3">
                   <span className="flex min-w-0 items-center gap-2 font-medium">
-                    <span className="size-2 shrink-0 rounded-full bg-green-500" aria-hidden="true" />
+                    <span
+                      className="size-2 shrink-0 rounded-full bg-green-500"
+                      aria-hidden="true"
+                    />
                     <span className="truncate">{item.serverName}</span>
                   </span>
                   <span className="shrink-0 text-caption text-muted-foreground">
@@ -116,7 +138,10 @@ export const PlayerDetailsDialog: React.FC<{
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  <Button variant="outline" onClick={() => onMessage(item.serverId, item.serverName, player.gamertag)}>
+                  <Button
+                    variant="outline"
+                    onClick={() => onMessage(item.serverId, item.serverName, player.gamertag)}
+                  >
                     <MessageSquare />
                     {t('playerList.messageAction')}
                   </Button>
@@ -133,6 +158,13 @@ export const PlayerDetailsDialog: React.FC<{
           <p className="text-caption text-muted-foreground">{t('playerList.unlistedHint')}</p>
         )}
       </section>
+      {editWindow && (
+        <PlayerWindowDialog
+          player={player}
+          onChanged={onChanged}
+          onClose={() => setEditWindow(false)}
+        />
+      )}
     </AppDialog>
   );
 };

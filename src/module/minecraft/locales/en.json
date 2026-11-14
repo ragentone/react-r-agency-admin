@@ -352,5 +352,24 @@
     "text": "Only this player on {{server}} sees it.",
     "action": "Send a message to {{name}}",
     "done": "Message sent to {{name}}."
+  },
+  "window": {
+    "menu": "Play time",
+    "tile": "Play time",
+    "anytime": "any time",
+    "title": "Play time: {{name}}",
+    "text": "{{name}} can only play within this period (German time). Outside it the gamertag is kicked and not let in.",
+    "from": "From",
+    "to": "Until",
+    "hint": "A warning appears in game 10 minutes before the end. Kicks can be up to 5 minutes late. Past midnight works (e.g. 20:00 to 06:00).",
+    "save": "Save",
+    "clear": "Remove limit",
+    "saved": "Play time saved.",
+    "cleared": "Play time removed.",
+    "error": {
+      "invalid_input": "Start and end must differ.",
+      "not_found": "Entry not found.",
+      "unknown": "Saving failed."
+    }
   }
 }
