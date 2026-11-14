@@ -29,6 +29,9 @@ const SitePageLoader: React.FC<{ slug: string }> = ({ slug }) => {
   const { state, retry, replace } = useSitePage(slug);
   const mode = useSitePageDisplayMode(slug);
   const title = state.status === 'ready' ? state.page.title : '';
+  // Banner first: no hairline under the header, it would sit as a line on the banner image.
+  const heroFirst = state.status === 'ready' && state.page.blocks?.[0]?.type === 'hero';
+  const headerClassName = heroFirst ? 'border-b-0' : undefined;
   // Back: the previous page of the app, or the start page when this page was opened directly.
   const back = () =>
     window.history.length > 1 ? router.history.back() : void navigate({ to: '/' });
@@ -47,7 +50,12 @@ const SitePageLoader: React.FC<{ slug: string }> = ({ slug }) => {
     return (
       <FullscreenPage open title={title} layout="full" onClose={back}>
         <div className="flex min-h-0 flex-1 flex-col">
-          <PageHeader title={title} fullWidth={true} leading={backButton} />
+          <PageHeader
+            title={title}
+            fullWidth={true}
+            leading={backButton}
+            className={headerClassName}
+          />
           <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[max(2rem,env(safe-area-inset-bottom))]">
             {view}
           </div>
@@ -61,7 +69,7 @@ const SitePageLoader: React.FC<{ slug: string }> = ({ slug }) => {
       width="100%"
       scrollable={true}
       classes={{ scroll: 'p-0 sm:border-x-0' }}
-      header={{ title, leading: backButton }}
+      header={{ title, leading: backButton, className: headerClassName }}
     >
       {view}
     </RoutePage>

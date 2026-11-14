@@ -40,10 +40,10 @@ export const HeroBlock: React.FC<{ data: IHeroBlockData; first: boolean }> = ({ 
         'relative isolate flex w-full flex-col overflow-hidden',
         HERO_SIZE[data.size] ?? HERO_SIZE.md,
         data.rounded && 'rounded-3xl',
-        light
-          ? 'bg-foreground/[0.04] text-foreground'
-          : // Black in both themes – a hairline keeps it apart from a black page.
-            'bg-neutral-950 text-white dark:ring-1 dark:ring-border dark:ring-inset'
+        light ? 'bg-foreground/[0.04] text-foreground' : 'bg-neutral-950 text-white',
+        // Black card without image on a black page: a hairline keeps it apart. Edge to edge or
+        // with an image it would only draw a line along the top edge of the page.
+        !light && !image && data.rounded && 'dark:ring-1 dark:ring-border/50 dark:ring-inset'
       )}
     >
       {image && (
