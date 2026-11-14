@@ -51,5 +51,13 @@
     "not_found": "Job not found.",
     "running": "The job is already running.",
     "inactive": "The job is inactive."
-  }
+  },
+  "table": {
+    "name": "Name",
+    "expression": "Schedule",
+    "status": "Status",
+    "next": "Next run",
+    "last": "Last run"
+  },
+  "noNextShort": "–"
 }
