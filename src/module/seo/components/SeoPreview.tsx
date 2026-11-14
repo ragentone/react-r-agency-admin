@@ -60,7 +60,7 @@ export const SeoPreview: React.FC<ISeoPreviewProps> = ({
         </p>
         <div
           className={cn(
-            'rounded-2xl border border-border/60 p-4',
+            'rounded-2xl border border-border/50 p-4',
             noindex && 'opacity-50 [&_*]:line-through'
           )}
         >
@@ -72,7 +72,9 @@ export const SeoPreview: React.FC<ISeoPreviewProps> = ({
               <span className="block truncate text-caption font-medium text-foreground">
                 {siteName || host(url)}
               </span>
-              <span className="block truncate text-xs text-muted-foreground">{crumbs(url)}</span>
+              <span className="block truncate text-caption text-muted-foreground">
+                {crumbs(url)}
+              </span>
             </span>
           </div>
           <p className="mt-2 line-clamp-2 text-title leading-snug font-semibold text-foreground">
@@ -89,7 +91,7 @@ export const SeoPreview: React.FC<ISeoPreviewProps> = ({
 
       <div>
         <p className="mb-2 text-caption font-semibold text-muted-foreground">{t('preview.x')}</p>
-        <div className="overflow-hidden rounded-2xl border border-border/60">
+        <div className="overflow-hidden rounded-2xl border border-border/50">
           <div className="relative aspect-[1.91/1] bg-foreground/[0.06]">
             {showImage ? (
               <img
@@ -107,7 +109,7 @@ export const SeoPreview: React.FC<ISeoPreviewProps> = ({
                 </span>
               </div>
             )}
-            <span className="absolute bottom-2 left-2 max-w-[85%] truncate rounded-md bg-black/70 px-1.5 py-0.5 text-xs text-white">
+            <span className="absolute bottom-2 left-2 max-w-[85%] truncate rounded-md bg-black/70 px-1.5 py-0.5 text-caption text-white">
               {title || siteName || host(url)}
             </span>
           </div>

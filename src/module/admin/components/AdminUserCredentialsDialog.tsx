@@ -72,7 +72,7 @@ export const AdminUserCredentialsDialog: React.FC<IAdminUserCredentialsDialogPro
         {credentials && (
           <>
             <AlertDialogHeader className="space-y-2 text-left">
-              <AlertDialogTitle className="text-xl font-bold tracking-tight">
+              <AlertDialogTitle className="text-title font-bold">
                 {t('users.created.title', { alias: credentials.alias })}
               </AlertDialogTitle>
               <AlertDialogDescription className="text-body leading-5">

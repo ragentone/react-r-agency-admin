@@ -58,7 +58,7 @@ export const AdminUserDeletePanel: React.FC<IAdminUserDeletePanelProps> = ({ use
       <AlertDialog open={open} onOpenChange={next => !deleting && setOpen(next)}>
         <AlertDialogContent className="w-[calc(100%-2rem)] max-w-[340px] gap-6 rounded-2xl p-8">
           <AlertDialogHeader className="space-y-2 text-left">
-            <AlertDialogTitle className="text-xl font-bold tracking-tight">
+            <AlertDialogTitle className="text-title font-bold">
               {t('admins.delete.title')}
             </AlertDialogTitle>
             <AlertDialogDescription className="text-body leading-5">

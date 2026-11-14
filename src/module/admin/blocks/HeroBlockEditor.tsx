@@ -95,7 +95,7 @@ export const HeroEditor: React.FC<{
             className="mb-2.5 flex items-center justify-between gap-2 text-caption font-medium text-foreground"
           >
             <span>{t('blocks.hero.overlay')}</span>
-            <span className="text-xs font-normal text-muted-foreground tabular-nums">
+            <span className="text-caption font-normal text-muted-foreground tabular-nums">
               {data.overlay} %
             </span>
           </label>

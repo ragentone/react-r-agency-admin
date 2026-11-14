@@ -127,10 +127,7 @@ export const PlayerDetailsDialog: React.FC<{
               >
                 <div className="flex items-center justify-between gap-3">
                   <span className="flex min-w-0 items-center gap-2 font-medium">
-                    <span
-                      className="size-2 shrink-0 rounded-full bg-green-500"
-                      aria-hidden="true"
-                    />
+                    <span className="size-2 shrink-0 rounded-full bg-success" aria-hidden="true" />
                     <span className="truncate">{item.serverName}</span>
                   </span>
                   <span className="shrink-0 text-caption text-muted-foreground">

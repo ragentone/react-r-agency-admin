@@ -36,7 +36,7 @@ export const PluginRemoveDrawer: React.FC<IPluginRemoveDrawerProps> = ({
       locked={busy}
     >
       <div className="flex flex-col gap-2 px-4 py-4">
-        <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-border/60 p-4 select-none">
+        <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-border/50 p-4 select-none">
           <Checkbox
             checked={withData}
             disabled={busy}

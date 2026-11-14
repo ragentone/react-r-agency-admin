@@ -115,7 +115,7 @@ export const RolePickerSheet: React.FC<IRolePickerSheetProps> = ({
         className="z-[60] flex w-full flex-col gap-0 p-0 sm:max-w-md"
         onOpenAutoFocus={event => event.preventDefault()}
       >
-        <header className="flex items-start gap-2 border-b border-border/60 px-4 pt-[max(env(safe-area-inset-top),1rem)] pb-3">
+        <header className="flex items-start gap-2 border-b border-border/50 px-4 pt-[max(env(safe-area-inset-top),1rem)] pb-3">
           <div className="min-w-0 flex-1">
             <SheetTitle className="text-title font-extrabold">{title}</SheetTitle>
             <SheetDescription className={cn('mt-0.5 text-caption', !description && 'sr-only')}>
@@ -135,7 +135,7 @@ export const RolePickerSheet: React.FC<IRolePickerSheetProps> = ({
           </Button>
         </header>
 
-        <div className="border-b border-border/60 px-4 py-3">
+        <div className="border-b border-border/50 px-4 py-3">
           <div className="relative">
             <Search
               className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-muted-foreground"
@@ -233,7 +233,7 @@ export const RolePickerSheet: React.FC<IRolePickerSheetProps> = ({
           )}
         </div>
 
-        <footer className="flex items-center gap-2 border-t border-border/60 px-4 pt-3 pb-[max(env(safe-area-inset-bottom),0.75rem)]">
+        <footer className="flex items-center gap-2 border-t border-border/50 px-4 pt-3 pb-[max(env(safe-area-inset-bottom),0.75rem)]">
           {mode === 'multiple' && picked.length > 0 && (
             <Button
               variant="ghost"

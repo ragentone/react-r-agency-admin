@@ -88,9 +88,9 @@ export const SystemDeploysTab: React.FC = () => {
               <CardContent className="flex flex-col gap-1 p-4">
                 <div className="flex min-w-0 flex-col gap-1">
                   <p className="text-body font-bold">{scope}</p>
-                  <p className="font-mono text-sm tabular-nums">{current?.version ?? '–'}</p>
+                  <p className="font-mono text-caption tabular-nums">{current?.version ?? '–'}</p>
                   {current && (
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-caption text-muted-foreground">
                       {formatAgo(current.finishedAt, locale)}
                     </p>
                   )}

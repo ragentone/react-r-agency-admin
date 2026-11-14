@@ -1,4 +1,5 @@
 import { useAuthStore } from '@core/auth/auth.store.tsx';
+import { Button } from '@ui/shad-cn/components/button.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { ShieldCheck } from 'lucide-react';
 import React, { useEffect } from 'react';
@@ -29,13 +30,9 @@ export const AdminSelfView: React.FC<IAdminSelfViewProps> = ({ saving, onUpdate 
       return (
         <div role="alert" className="px-8 py-16 text-center">
           <p className="text-body text-muted-foreground">{t('error.load')}</p>
-          <button
-            type="button"
-            onClick={() => selfId && void load(selfId)}
-            className="mt-4 h-11 rounded-full bg-foreground px-5 text-sm font-bold text-background"
-          >
+          <Button onClick={() => selfId && void load(selfId)} size="lg" className="mt-4">
             {t('retry')}
-          </button>
+          </Button>
         </div>
       );
     }

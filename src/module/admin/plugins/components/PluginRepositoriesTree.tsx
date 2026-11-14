@@ -158,7 +158,7 @@ export const PluginRepositoriesTree: React.FC<IPluginRepositoriesTreeProps> = ({
     body = <Skeleton className="h-24 w-full" />;
   } else if (error) {
     body = (
-      <div className="flex items-center justify-between gap-2 rounded-md border border-border p-3">
+      <div className="flex items-center justify-between gap-2 rounded-md border border-border/50 p-3">
         <p className="text-caption text-destructive">{t('plugins.repositories.errors.load')}</p>
         <Button variant="outline" size="md" onClick={retry}>
           {t('plugins.error.retry')}

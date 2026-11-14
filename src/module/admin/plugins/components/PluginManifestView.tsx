@@ -122,7 +122,7 @@ export const PluginManifestView: React.FC<{ pluginId: string }> = ({ pluginId })
 
   if (error) {
     return (
-      <div className="flex items-center justify-between gap-2 rounded-md border border-border p-3">
+      <div className="flex items-center justify-between gap-2 rounded-md border border-border/50 p-3">
         <p className="text-caption text-destructive">{t('plugins.error.title')}</p>
         <Button variant="outline" size="md" onClick={retry}>
           {t('plugins.error.retry')}

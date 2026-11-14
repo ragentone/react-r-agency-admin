@@ -95,7 +95,7 @@ export const SystemReleasePlan: React.FC<{
         }
         aria-label={t('system.deploys.next.bumpLabel')}
         disabled={busy}
-        className="grid w-full grid-cols-3 gap-1 rounded-2xl border border-border/60 p-1"
+        className="grid w-full grid-cols-3 gap-1 rounded-2xl border border-border/50 p-1"
       >
         {BUMPS.map(bump => (
           <ToggleGroupItem
@@ -122,8 +122,8 @@ export const SystemReleasePlan: React.FC<{
           <span
             className={
               tooMany
-                ? 'text-xs text-destructive tabular-nums'
-                : 'text-xs text-muted-foreground tabular-nums'
+                ? 'text-caption text-destructive tabular-nums'
+                : 'text-caption text-muted-foreground tabular-nums'
             }
           >
             {lines.length} / {NOTES_MAX}

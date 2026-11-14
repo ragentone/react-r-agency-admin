@@ -111,8 +111,8 @@ export const DatabaseUsageReport: React.FC<Props> = ({ report, refreshing, onRef
 };
 
 const Tile: React.FC<{ label: string; value: number }> = ({ label, value }) => (
-  <div className="rounded-xl border border-border p-3">
+  <div className="rounded-xl border border-border/50 p-3">
     <dt className="text-caption text-muted-foreground">{label}</dt>
-    <dd className="text-2xl font-extrabold tabular-nums">{value}</dd>
+    <dd className="text-display font-bold tabular-nums">{value}</dd>
   </div>
 );

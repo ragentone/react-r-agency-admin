@@ -1,3 +1,4 @@
+import { Button } from '@ui/shad-cn/components/button.tsx';
 import { Input } from '@ui/shad-cn/components/input.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { useDebounce } from '@uidotdev/usehooks';
@@ -83,13 +84,9 @@ export const AdminUsersView: React.FC<IAdminUsersViewProps> = ({ saving, onUpdat
     body = (
       <div role="alert" className="px-8 py-16 text-center">
         <p className="text-body text-muted-foreground">{t('error.load')}</p>
-        <button
-          type="button"
-          onClick={() => void search(debounced)}
-          className="mt-4 h-10 rounded-lg bg-foreground px-4 text-sm font-semibold text-background"
-        >
+        <Button onClick={() => void search(debounced)} className="mt-4">
           {t('retry')}
-        </button>
+        </Button>
       </div>
     );
   } else if (users.length === 0) {
@@ -114,15 +111,17 @@ export const AdminUsersView: React.FC<IAdminUsersViewProps> = ({ saving, onUpdat
         <AdminUsersTable users={users} onOpen={open} />
         {hasMore && (
           <div className="border-t border-border/50 p-3">
-            <button
-              type="button"
+            <Button
               onClick={() => void loadMore()}
               disabled={loading}
-              className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-lg border border-border/50 text-sm font-semibold transition-colors hover:bg-muted disabled:opacity-50"
+              variant="outline"
+              size="lg"
+              fullWidth
+              className="border-border/50"
             >
               {loading && <Loader2 className="size-4 animate-spin" aria-hidden="true" />}
               {t('users.more', { count: total - users.length })}
-            </button>
+            </Button>
           </div>
         )}
       </>

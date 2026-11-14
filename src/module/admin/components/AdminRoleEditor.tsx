@@ -132,11 +132,11 @@ export const AdminRoleEditor: React.FC<IAdminRoleEditorProps> = ({
         </h3>
 
         {user.roles.length === 0 ? (
-          <p className="rounded-2xl border border-dashed border-border p-4 text-center text-caption text-muted-foreground">
+          <p className="rounded-2xl border border-dashed border-border/50 p-4 text-center text-caption text-muted-foreground">
             {t('role.empty')}
           </p>
         ) : (
-          <ul className="divide-y divide-border/50 overflow-hidden rounded-2xl border border-border/60">
+          <ul className="divide-y divide-border/50 overflow-hidden rounded-2xl border border-border/50">
             {user.roles.map(role => {
               const locked = isProtected(role);
               const canEdit = !readOnly && !locked && isManaged(role);
@@ -156,15 +156,15 @@ export const AdminRoleEditor: React.FC<IAdminRoleEditorProps> = ({
                     </span>
                     <RoleChip role={role} size="sm" />
                     {locked ? (
-                      <span className="text-[11px] text-muted-foreground">
+                      <span className="text-micro text-muted-foreground">
                         {user.self ? t('role.protectedSelf') : t('role.protected')}
                       </span>
                     ) : !name ? (
-                      <span className="text-[11px] text-amber-600 dark:text-amber-400">
+                      <span className="text-micro text-warning-foreground">
                         {t('role.unregistered')}
                       </span>
                     ) : !isManaged(role) ? (
-                      <span className="text-[11px] text-muted-foreground">{t('role.system')}</span>
+                      <span className="text-micro text-muted-foreground">{t('role.system')}</span>
                     ) : null}
                   </div>
                   {canEdit && (
@@ -210,12 +210,12 @@ export const AdminRoleEditor: React.FC<IAdminRoleEditorProps> = ({
             </p>
           )}
           {rolesLoading && available.length === 0 ? (
-            <div className="flex h-11 items-center justify-center rounded-full border border-border text-caption text-muted-foreground">
+            <div className="flex h-11 items-center justify-center rounded-full border border-border/50 text-caption text-muted-foreground">
               <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />
               {t('role.loading')}
             </div>
           ) : available.length === 0 ? (
-            <p className="rounded-2xl border border-dashed border-border p-4 text-center text-caption text-muted-foreground">
+            <p className="rounded-2xl border border-dashed border-border/50 p-4 text-center text-caption text-muted-foreground">
               {t('role.allAssigned')}
             </p>
           ) : (
@@ -272,7 +272,7 @@ export const AdminRoleEditor: React.FC<IAdminRoleEditorProps> = ({
       >
         <AlertDialogContent className="w-[calc(100%-2rem)] max-w-[340px] gap-6 rounded-2xl p-8">
           <AlertDialogHeader className="space-y-2 text-left">
-            <AlertDialogTitle className="text-xl font-bold tracking-tight">
+            <AlertDialogTitle className="text-title font-bold">
               {t('remove.title')}
             </AlertDialogTitle>
             <AlertDialogDescription className="text-body leading-5">

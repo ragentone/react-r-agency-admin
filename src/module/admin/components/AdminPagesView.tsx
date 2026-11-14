@@ -1,3 +1,4 @@
+import { Button } from '@ui/shad-cn/components/button.tsx';
 import { Input } from '@ui/shad-cn/components/input.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { FilePlus2, FileText, Plus, Search } from 'lucide-react';
@@ -115,13 +116,9 @@ export const AdminPagesView: React.FC = () => {
     body = (
       <div role="alert" className="px-8 py-16 text-center">
         <p className="text-body text-muted-foreground">{t('error.load')}</p>
-        <button
-          type="button"
-          onClick={() => void load()}
-          className="mt-4 h-10 rounded-lg bg-foreground px-4 text-sm font-semibold text-background"
-        >
+        <Button onClick={() => void load()} className="mt-4">
           {t('retry')}
-        </button>
+        </Button>
       </div>
     );
   } else if (pages.length === 0) {
@@ -132,14 +129,10 @@ export const AdminPagesView: React.FC = () => {
         </span>
         <h2 className="mt-4 text-title font-bold">{t('pages.emptyTitle')}</h2>
         <p className="mt-1 text-body text-muted-foreground">{t('pages.empty')}</p>
-        <button
-          type="button"
-          onClick={openCreate}
-          className="mt-5 inline-flex h-10 items-center gap-2 rounded-lg bg-foreground px-4 text-sm font-semibold text-background"
-        >
+        <Button onClick={openCreate} size="lg" className="mt-5">
           <Plus className="size-4" aria-hidden="true" />
           {t('pages.create')}
-        </button>
+        </Button>
       </div>
     );
   } else if (visible.length === 0) {
@@ -186,15 +179,10 @@ export const AdminPagesView: React.FC = () => {
               className="h-10 rounded-lg pr-4 pl-10 text-base sm:text-body"
             />
           </div>
-          <button
-            type="button"
-            onClick={openCreate}
-            aria-label={t('pages.create')}
-            className="inline-flex h-10 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-foreground px-4 text-sm font-semibold text-background transition-opacity hover:opacity-85"
-          >
+          <Button onClick={openCreate} aria-label={t('pages.create')} className="h-10">
             <Plus className="size-4" aria-hidden="true" />
             <span className="hidden min-[400px]:inline">{t('pages.new')}</span>
-          </button>
+          </Button>
         </div>
         {pages.length > 0 && (
           <div

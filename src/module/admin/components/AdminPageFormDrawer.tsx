@@ -300,7 +300,7 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
               <label htmlFor="admin-page-title" className={FIELD_LABEL}>
                 {t('pages.form.title')}
               </label>
-              <span className="text-xs text-muted-foreground tabular-nums">
+              <span className="text-caption text-muted-foreground tabular-nums">
                 {values.title.length} / {SITE_PAGE_TITLE_MAX}
               </span>
             </div>
@@ -362,7 +362,7 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
               <label htmlFor="admin-page-summary" className={FIELD_LABEL}>
                 {t('pages.form.summary')}
               </label>
-              <span className="text-xs text-muted-foreground tabular-nums">
+              <span className="text-caption text-muted-foreground tabular-nums">
                 {values.summary.length} / {SITE_PAGE_SUMMARY_MAX}
               </span>
             </div>
@@ -522,7 +522,7 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
                     const to = sitePagePath(page.slug);
                     requestClose(() => void navigate({ to }));
                   }}
-                  className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-border/70 text-body font-bold transition-colors hover:bg-foreground/[0.04]"
+                  className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-border/50 text-body font-bold transition-colors hover:bg-foreground/[0.04]"
                 >
                   <Eye className="size-4" aria-hidden="true" />
                   {page.published ? t('pages.view') : t('pages.preview')}
@@ -550,7 +550,7 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
       >
         <AlertDialogContent className="w-[calc(100%-2rem)] max-w-[340px] gap-6 rounded-2xl p-8">
           <AlertDialogHeader className="space-y-2 text-left">
-            <AlertDialogTitle className="text-xl font-bold tracking-tight">
+            <AlertDialogTitle className="text-title font-bold">
               {t('pages.discard.title')}
             </AlertDialogTitle>
             <AlertDialogDescription className="text-body leading-5">
@@ -596,7 +596,7 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
         <AlertDialog open={confirmDelete} onOpenChange={next => !saving && setConfirmDelete(next)}>
           <AlertDialogContent className="w-[calc(100%-2rem)] max-w-[340px] gap-6 rounded-2xl p-8">
             <AlertDialogHeader className="space-y-2 text-left">
-              <AlertDialogTitle className="text-xl font-bold tracking-tight">
+              <AlertDialogTitle className="text-title font-bold">
                 {t('pages.delete.title')}
               </AlertDialogTitle>
               <AlertDialogDescription className="text-body leading-5">

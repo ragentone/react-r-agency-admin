@@ -37,9 +37,9 @@ const ALIGN_ICON = { left: AlignLeft, center: AlignCenter, right: AlignRight } a
 const ICON_BUTTON =
   'grid size-8 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-foreground/10 hover:text-foreground disabled:pointer-events-none disabled:opacity-30';
 const PILL_BUTTON =
-  'inline-flex h-9 items-center gap-1.5 rounded-full border border-border/70 px-3.5 text-caption font-semibold text-muted-foreground transition-colors hover:text-foreground disabled:pointer-events-none disabled:opacity-40';
+  'inline-flex h-9 items-center gap-1.5 rounded-full border border-border/50 px-3.5 text-caption font-semibold text-muted-foreground transition-colors hover:text-foreground disabled:pointer-events-none disabled:opacity-40';
 const CELL_INPUT =
-  'h-10 w-full min-w-[8.5rem] rounded-lg border border-transparent bg-transparent px-2.5 text-base outline-none transition-colors placeholder:text-muted-foreground/50 hover:border-border/70 focus:border-foreground/40 focus:bg-background sm:text-body disabled:opacity-60';
+  'h-10 w-full min-w-[8.5rem] rounded-lg border border-transparent bg-transparent px-2.5 text-base outline-none transition-colors placeholder:text-muted-foreground/50 hover:border-border/50 focus:border-foreground/40 focus:bg-background sm:text-body disabled:opacity-60';
 
 /**
  * Delimited text (Excel / Google Sheets copy = tabs, CSV = `;` or `,`) → rows of cells.
@@ -208,10 +208,10 @@ const TableGrid: React.FC<{
                   <th
                     key={index}
                     scope="col"
-                    className="border-b border-border/70 bg-foreground/[0.04] p-1 align-bottom font-normal first:rounded-tl-xl last:rounded-tr-xl"
+                    className="border-b border-border/50 bg-foreground/[0.04] p-1 align-bottom font-normal first:rounded-tl-xl last:rounded-tr-xl"
                   >
                     <div className="flex items-center justify-between gap-1 px-1 pb-0.5">
-                      <span className="text-[11px] font-semibold text-muted-foreground tabular-nums">
+                      <span className="text-micro font-semibold text-muted-foreground tabular-nums">
                         {t('blocks.table.column', { index: index + 1 })}
                       </span>
                       <span className="flex">
@@ -263,7 +263,7 @@ const TableGrid: React.FC<{
               })}
               <th
                 aria-hidden="true"
-                className="border-b border-border/70 bg-foreground/[0.04] p-1 rounded-tr-xl"
+                className="border-b border-border/50 bg-foreground/[0.04] p-1 rounded-tr-xl"
               />
             </tr>
           </thead>
@@ -350,7 +350,7 @@ const TableGrid: React.FC<{
           <Columns2 className="size-4" aria-hidden="true" />
           {t('blocks.table.addColumn')}
         </button>
-        <span className="ml-auto text-xs text-muted-foreground tabular-nums">
+        <span className="ml-auto text-caption text-muted-foreground tabular-nums">
           {t('blocks.table.size', { columns: count, rows: rows.length })}
         </span>
       </div>
@@ -406,7 +406,7 @@ const TableImport: React.FC<{
   const tooWide = parsed.some(cells => cells.length > SITE_PAGE_TABLE_COLUMNS_MAX);
   const tooLong = parsed.length - (header ? 1 : 0) > SITE_PAGE_TABLE_ROWS_MAX;
   return (
-    <div className="space-y-3 rounded-xl border border-border/60 bg-background p-3">
+    <div className="space-y-3 rounded-xl border border-border/50 bg-background p-3">
       <div className="flex items-center justify-between gap-2">
         <label htmlFor={id} className="text-caption font-bold">
           {t('blocks.table.import')}
@@ -431,7 +431,7 @@ const TableImport: React.FC<{
       />
       <ToggleField label={t('blocks.table.importHeader')} value={header} onChange={setHeader} />
       {(tooWide || tooLong) && (
-        <p className="text-caption text-amber-600 dark:text-amber-400">
+        <p className="text-caption text-warning-foreground">
           {t('blocks.table.importLimit', {
             columns: SITE_PAGE_TABLE_COLUMNS_MAX,
             rows: SITE_PAGE_TABLE_ROWS_MAX,

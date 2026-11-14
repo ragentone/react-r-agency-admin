@@ -32,7 +32,7 @@ export const PluginConfigFieldsTable: React.FC<{ pluginId: string }> = ({ plugin
     );
   } else if (error) {
     body = (
-      <div className="flex items-center justify-between gap-2 rounded-md border border-border p-3">
+      <div className="flex items-center justify-between gap-2 rounded-md border border-border/50 p-3">
         <p className="text-caption text-destructive">{t('plugins.config.errors.load')}</p>
         <Button variant="outline" size="md" onClick={retry}>
           {t('plugins.error.retry')}
@@ -43,7 +43,7 @@ export const PluginConfigFieldsTable: React.FC<{ pluginId: string }> = ({ plugin
     body = <p className="text-caption text-muted-foreground">{t('plugins.configFields.empty')}</p>;
   } else {
     body = (
-      <div className="overflow-x-auto rounded-md border border-border">
+      <div className="overflow-x-auto rounded-md border border-border/50">
         <Table>
           <TableHeader>
             <TableRow>

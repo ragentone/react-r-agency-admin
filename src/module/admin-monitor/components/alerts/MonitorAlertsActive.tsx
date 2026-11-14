@@ -17,7 +17,7 @@ export const MonitorAlertsActive: React.FC<{
     <MonitorAlertsSection title={t('alerts.activeTitle')} text={t('alerts.activeText')}>
       {active.length === 0 ? (
         <div className="flex items-center gap-3 px-4 py-6">
-          <CheckCircle2 className="size-6 shrink-0 text-green-600" aria-hidden />
+          <CheckCircle2 className="size-6 shrink-0 text-success-foreground" aria-hidden />
           <p className="text-body font-bold">{t('alerts.activeEmpty')}</p>
         </div>
       ) : (

@@ -1,4 +1,5 @@
 import { useLoadMoreSentinel } from '@core/notify/hooks/use.load.more.sentinel.ts';
+import { Button } from '@ui/shad-cn/components/button.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { Loader2, RefreshCw, ShieldCheck } from 'lucide-react';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -69,13 +70,9 @@ export const AdminAdminsView: React.FC<IAdminAdminsViewProps> = ({ saving, onUpd
     body = (
       <div role="alert" className="px-8 py-16 text-center">
         <p className="text-body text-muted-foreground">{t('error.load')}</p>
-        <button
-          type="button"
-          onClick={() => void reload()}
-          className="mt-4 h-10 rounded-lg bg-foreground px-4 text-sm font-semibold text-background"
-        >
+        <Button onClick={() => void reload()} className="mt-4">
           {t('retry')}
-        </button>
+        </Button>
       </div>
     );
   } else {
@@ -95,13 +92,13 @@ export const AdminAdminsView: React.FC<IAdminAdminsViewProps> = ({ saving, onUpd
           {loading && <Loader2 className="size-4 animate-spin text-muted-foreground" />}
         </div>
         {error && (
-          <button
-            type="button"
+          <Button
             onClick={() => void loadMore()}
-            className="mx-auto mb-4 block h-10 rounded-lg border border-border/50 px-4 text-sm font-semibold hover:bg-muted"
+            variant="outline"
+            className="mx-auto mb-4 flex border-border/50"
           >
             {t('retry')}
-          </button>
+          </Button>
         )}
       </>
     );
@@ -115,16 +112,17 @@ export const AdminAdminsView: React.FC<IAdminAdminsViewProps> = ({ saving, onUpd
           <span aria-live="polite">{loaded ? t('admins.count', { count: total }) : '…'}</span>
         </p>
         <div className="flex shrink-0 items-center gap-2">
-          <button
-            type="button"
+          <Button
             onClick={() => void reload()}
             disabled={loading}
             aria-label={t('admins.reload')}
             title={t('admins.reload')}
-            className="inline-flex size-10 items-center justify-center rounded-lg border border-border/50 transition-colors hover:bg-muted disabled:opacity-50"
+            variant="outline"
+            size="icon-lg"
+            className="border-border/50"
           >
             <RefreshCw className={loading ? 'size-4 animate-spin' : 'size-4'} aria-hidden="true" />
-          </button>
+          </Button>
           <AdminUserCreateButton onCreated={() => void reload()} />
         </div>
       </div>

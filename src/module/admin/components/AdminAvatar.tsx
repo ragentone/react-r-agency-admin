@@ -11,7 +11,7 @@ export const AdminAvatar: React.FC<{ user: IAdminUser; className?: string }> = (
 }) => (
   <Avatar className={cn('size-11', className)}>
     {user.avatarUrl && <AvatarImage src={user.avatarUrl} alt="" className="object-cover" />}
-    <AvatarFallback className="bg-foreground/[0.08] text-sm font-bold">
+    <AvatarFallback className="bg-foreground/[0.08] text-caption font-bold">
       {initials(user.alias)}
     </AvatarFallback>
   </Avatar>

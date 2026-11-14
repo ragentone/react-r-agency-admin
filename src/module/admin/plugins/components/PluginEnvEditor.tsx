@@ -23,12 +23,12 @@ export const PluginEnvEditor: React.FC<IPluginEnvEditorProps> = ({ disabled }) =
       {helpers => (
         <div className="flex flex-col gap-3">
           {typeof errors.rows === 'string' && (
-            <p role="alert" className="text-sm text-destructive">
+            <p role="alert" className="text-caption text-destructive">
               {errors.rows}
             </p>
           )}
           {values.rows.length === 0 && (
-            <p className="text-sm text-muted-foreground">{t('plugins.code.env.empty')}</p>
+            <p className="text-caption text-muted-foreground">{t('plugins.code.env.empty')}</p>
           )}
           {values.rows.map((_, index) => {
             const rowError = rowErrors[index];
@@ -62,7 +62,7 @@ export const PluginEnvEditor: React.FC<IPluginEnvEditorProps> = ({ disabled }) =
                     <X />
                   </Button>
                 </div>
-                {keyError && <p className="text-xs text-destructive">{keyError}</p>}
+                {keyError && <p className="text-caption text-destructive">{keyError}</p>}
               </div>
             );
           })}

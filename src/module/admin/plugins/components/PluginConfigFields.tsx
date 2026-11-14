@@ -60,7 +60,7 @@ export const PluginConfigFields: React.FC<IPluginConfigFieldsProps> = ({ config 
             <div
               key={field.key}
               data-config-key={field.key}
-              className="border-border py-5 first:pt-0 last:pb-0 not-last:border-b"
+              className="border-border/50 py-5 first:pt-0 last:pb-0 not-last:border-b"
             >
               <PluginConfigField
                 field={field}

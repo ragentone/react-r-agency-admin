@@ -3,6 +3,7 @@ import { CoreVariables } from '@core/core.variables.ts';
 import { useSeo } from '@core/seo/use.seo.ts';
 import { Link, useNavigate, useRouter } from '@tanstack/react-router';
 import { cn } from '@ui/lib/utils';
+import { Button, buttonVariants } from '@ui/shad-cn/components/button.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { FileQuestion, Home, Lock, LogIn, Pencil } from 'lucide-react';
 import React, { useRef, useState } from 'react';
@@ -11,12 +12,15 @@ import { toast } from 'sonner';
 
 import { SITE_PAGE_COLUMN, SitePageBlocks } from '../blocks';
 import { sitePagePath } from '../const';
-import { type useSitePage, useAdminAccess, useAdminPages } from '../hooks';
+import { useAdminAccess, useAdminPages,type useSitePage } from '../hooks';
 import type { ISitePage, ISitePageValues } from '../types';
 import { formatDate } from '../utils';
 import { AdminPageFormDrawer } from './AdminPageFormDrawer';
 import { SitePageStatus } from './AdminPageItem';
 import { SitePageHtml } from './SitePageHtml';
+
+/** Router link in the look of the outline button. */
+const LINK_BUTTON = cn(buttonVariants({ variant: 'outline' }), 'h-10 border-border/50');
 
 /** First absolute image url of the blocks (banner, image …) – social preview of the page. */
 const firstBlockImage = (blocks: unknown[]): string | undefined => {
@@ -128,23 +132,19 @@ export const SitePageView: React.FC<
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           {login && (
-            <button
-              type="button"
+            <Button
               onClick={() => {
                 // Back to this page after the login.
                 useAuthStore.getState().setAfterLoginRoute(router.state.location);
                 void navigate({ to: CoreVariables.routePathAuth });
               }}
-              className="inline-flex h-10 items-center gap-1.5 rounded-full bg-foreground px-4 text-sm font-bold text-background"
+              className="h-10"
             >
               <LogIn className="size-4" aria-hidden="true" />
               {t('sitePage.loginAction')}
-            </button>
+            </Button>
           )}
-          <Link
-            to="/"
-            className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border/60 px-4 text-sm font-bold transition-colors hover:bg-foreground/[0.06]"
-          >
+          <Link to="/" className={LINK_BUTTON}>
             <Home className="size-4" aria-hidden="true" />
             {t('sitePage.home')}
           </Link>
@@ -166,18 +166,11 @@ export const SitePageView: React.FC<
         {missing && <p className="mt-1 text-body text-muted-foreground">{t('sitePage.missing')}</p>}
         <div className="mt-6 flex gap-2">
           {!missing && (
-            <button
-              type="button"
-              onClick={retry}
-              className="h-10 rounded-full bg-foreground px-4 text-sm font-bold text-background"
-            >
+            <Button onClick={retry} className="h-10">
               {t('retry')}
-            </button>
+            </Button>
           )}
-          <Link
-            to="/"
-            className="inline-flex h-10 items-center gap-1.5 rounded-full border border-border/60 px-4 text-sm font-bold transition-colors hover:bg-foreground/[0.06]"
-          >
+          <Link to="/" className={LINK_BUTTON}>
             <Home className="size-4" aria-hidden="true" />
             {t('sitePage.home')}
           </Link>
@@ -198,7 +191,7 @@ export const SitePageView: React.FC<
     <article className="pb-[max(3rem,env(safe-area-inset-bottom))]">
       {admin && (
         <div className={cn(SITE_PAGE_COLUMN, 'py-3')}>
-          <div className="flex items-center gap-2 rounded-xl border border-border/60 px-3 py-2">
+          <div className="flex items-center gap-2 rounded-xl border border-border/50 px-3 py-2">
             <SitePageStatus published={page.published} />
             {page.visibility === 'authenticated' && (
               <Lock
@@ -209,14 +202,15 @@ export const SitePageView: React.FC<
             <span className="min-w-0 flex-1 truncate text-caption text-muted-foreground">
               {page.published ? t('sitePage.adminHint') : t('sitePage.draftHint')}
             </span>
-            <button
-              type="button"
+            <Button
               onClick={() => void openEdit(page)}
-              className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full border border-border/70 px-3 text-caption font-bold hover:bg-foreground/[0.06]"
+              variant="outline"
+              size="sm"
+              className="border-border/50"
             >
               <Pencil className="size-3.5" aria-hidden="true" />
               {t('sitePage.edit')}
-            </button>
+            </Button>
           </div>
         </div>
       )}

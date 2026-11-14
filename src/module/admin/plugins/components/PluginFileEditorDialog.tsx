@@ -118,7 +118,7 @@ export const PluginFileEditorDialog: React.FC<IPluginFileEditorDialogProps> = ({
         <Item className={'p-0'} size={'sm'}>
           <ItemContent className={'gap-0'}>
             <ItemTitle className={'font-bold'}>{pluginName}</ItemTitle>
-            <ItemDescription className={'text-xs'}>{path}</ItemDescription>
+            <ItemDescription className={'text-caption'}>{path}</ItemDescription>
           </ItemContent>
           <ItemActions>
             <Button
@@ -169,7 +169,7 @@ export const PluginFileEditorDialog: React.FC<IPluginFileEditorDialogProps> = ({
           </Alert>
         )}
 
-        <div className="min-h-0 min-w-0 flex-1 overflow-hidden rounded-md border border-border">
+        <div className="min-h-0 min-w-0 flex-1 overflow-hidden rounded-md border border-border/50">
           {path !== null && !loading && !loadError && (
             <CodeMirror
               value={draft}

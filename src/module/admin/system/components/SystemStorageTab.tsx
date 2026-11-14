@@ -96,7 +96,7 @@ const Storage: React.FC<{
         </div>
 
         <p className="mt-4 flex items-baseline justify-between gap-3">
-          <span className="text-2xl font-extrabold tabular-nums">
+          <span className="text-display font-bold tabular-nums">
             {t('system.storage.used', { percent: disk.percent })}
           </span>
           <span className="text-caption text-muted-foreground tabular-nums">

@@ -24,9 +24,7 @@ export const SeoDeleteDialog: React.FC<{
     <AlertDialog open={open} onOpenChange={next => !busy && onOpenChange(next)}>
       <AlertDialogContent className="w-[calc(100%-2rem)] max-w-[340px] gap-6 rounded-2xl p-8">
         <AlertDialogHeader className="space-y-2 text-left">
-          <AlertDialogTitle className="text-xl font-bold tracking-tight">
-            {t('delete.title')}
-          </AlertDialogTitle>
+          <AlertDialogTitle className="text-title font-bold">{t('delete.title')}</AlertDialogTitle>
           <AlertDialogDescription className="text-body leading-5">
             {t('delete.description', { path })}
           </AlertDialogDescription>

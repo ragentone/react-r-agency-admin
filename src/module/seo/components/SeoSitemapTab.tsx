@@ -66,7 +66,7 @@ export const SeoSitemapTab: React.FC<{
             <MapIcon />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-2xl font-extrabold tabular-nums">
+            <p className="text-display font-bold tabular-nums">
               {t('sitemap.count', { count: sitemap.entries.length })}
             </p>
             <p className="text-caption text-muted-foreground">
@@ -92,7 +92,7 @@ export const SeoSitemapTab: React.FC<{
           </Alert>
         )}
 
-        <div className="flex h-12 items-center gap-1 rounded-xl border border-border/60 pr-1 pl-3">
+        <div className="flex h-12 items-center gap-1 rounded-xl border border-border/50 pr-1 pl-3">
           <span className="min-w-0 flex-1 truncate font-mono text-caption">{sitemap.url}</span>
           <Button
             type="button"
@@ -146,7 +146,7 @@ export const SeoSitemapTab: React.FC<{
                 <ToggleGroupItem
                   key={value}
                   value={value}
-                  className="h-8 shrink-0 rounded-full border border-border/70 px-3 text-caption font-semibold text-muted-foreground data-[state=on]:border-foreground data-[state=on]:bg-foreground data-[state=on]:text-background"
+                  className="h-8 shrink-0 rounded-full border border-border/50 px-3 text-caption font-semibold text-muted-foreground data-[state=on]:border-foreground data-[state=on]:bg-foreground data-[state=on]:text-background"
                 >
                   {value === 'all' ? t('sitemap.all') : sourceLabel(value)}
                   <span className="ml-1 tabular-nums opacity-70">{count}</span>

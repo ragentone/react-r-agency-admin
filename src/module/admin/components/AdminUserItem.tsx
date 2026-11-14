@@ -39,12 +39,12 @@ export const AdminUserItem: React.FC<{ user: IAdminUser; onOpen: (user: IAdminUs
               <RoleChip key={role} role={role} size="sm" />
             ))}
             {more > 0 && (
-              <span className="text-[11px] font-semibold text-muted-foreground tabular-nums">
+              <span className="text-micro font-semibold text-muted-foreground tabular-nums">
                 +{more}
               </span>
             )}
             {user.roles.length === 0 && (
-              <span className="text-[11px] text-muted-foreground">{t('role.empty')}</span>
+              <span className="text-micro text-muted-foreground">{t('role.empty')}</span>
             )}
           </span>
         </span>

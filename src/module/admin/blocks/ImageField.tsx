@@ -193,7 +193,7 @@ export const ImageField: React.FC<IImageFieldProps> = ({
       {value ? (
         <div
           className={cn(
-            'relative overflow-hidden rounded-xl border border-border/60 bg-muted',
+            'relative overflow-hidden rounded-xl border border-border/50 bg-muted',
             // Focus mode: the whole image (no crop), so a tap maps 1:1 to image coordinates.
             withFocus ? 'flex justify-center' : aspect
           )}
@@ -285,7 +285,7 @@ export const ImageField: React.FC<IImageFieldProps> = ({
           onClick={openPicker}
           disabled={disabled || busy}
           className={cn(
-            'flex w-full flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground disabled:opacity-50',
+            'flex w-full flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border/50 text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground disabled:opacity-50',
             aspect
           )}
         >

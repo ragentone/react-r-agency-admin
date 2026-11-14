@@ -54,7 +54,7 @@ export const PlayersTable: React.FC<{
                   <span
                     role="img"
                     aria-label={online ? t('playerList.online') : t('playerList.offline')}
-                    className={`size-2 shrink-0 rounded-full ${online ? 'bg-green-500' : 'bg-muted-foreground/30'}`}
+                    className={`size-2 shrink-0 rounded-full ${online ? 'bg-success' : 'bg-muted-foreground/30'}`}
                   />
                   <span className="truncate">{player.gamertag}</span>
                 </p>

@@ -33,7 +33,7 @@ export const TextField: React.FC<
       <label htmlFor={id} className={LABEL}>
         <span>{label}</span>
         {value.length > max * 0.8 && (
-          <span className="text-xs font-normal text-muted-foreground tabular-nums">
+          <span className="text-caption font-normal text-muted-foreground tabular-nums">
             {value.length} / {max}
           </span>
         )}
@@ -68,7 +68,7 @@ export const TextAreaField: React.FC<
       <label htmlFor={id} className={LABEL}>
         <span>{label}</span>
         {value.length > max * 0.8 && (
-          <span className="text-xs font-normal text-muted-foreground tabular-nums">
+          <span className="text-caption font-normal text-muted-foreground tabular-nums">
             {value.length} / {max}
           </span>
         )}
@@ -159,7 +159,7 @@ export const ChoiceField = <T extends string>({
             'h-9 rounded-full px-3.5 text-caption font-semibold transition-colors disabled:opacity-50',
             value === option
               ? 'bg-foreground text-background'
-              : 'border border-border/70 text-muted-foreground hover:text-foreground'
+              : 'border border-border/50 text-muted-foreground hover:text-foreground'
           )}
         >
           {text(option)}
@@ -217,13 +217,13 @@ export const ItemsField = <T,>({
     <div>
       <p className={LABEL}>
         <span>{label}</span>
-        <span className="text-xs font-normal text-muted-foreground tabular-nums">
+        <span className="text-caption font-normal text-muted-foreground tabular-nums">
           {items.length} / {max}
         </span>
       </p>
       <ol className="space-y-3">
         {items.map((item, index) => (
-          <li key={index} className="rounded-xl border border-border/60 bg-background">
+          <li key={index} className="rounded-xl border border-border/50 bg-background">
             <div className="flex items-center gap-1 border-b border-border/50 py-1 pr-1 pl-3">
               <span className="min-w-0 flex-1 truncate text-caption font-semibold text-muted-foreground">
                 {index + 1}. {title(item, index)}
@@ -265,7 +265,7 @@ export const ItemsField = <T,>({
           type="button"
           onClick={() => onChange([...items, create()])}
           disabled={disabled}
-          className="mt-3 inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-full border border-dashed border-border text-caption font-bold text-muted-foreground hover:text-foreground disabled:opacity-50"
+          className="mt-3 inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-full border border-dashed border-border/50 text-caption font-bold text-muted-foreground hover:text-foreground disabled:opacity-50"
         >
           <Plus className="size-4" aria-hidden="true" />
           {addLabel}

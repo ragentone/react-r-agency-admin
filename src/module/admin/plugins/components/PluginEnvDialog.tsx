@@ -123,7 +123,7 @@ export const PluginEnvDialog: React.FC<IPluginEnvDialogProps> = ({
                 </Alert>
               )}
               {content === null && !loadError && (
-                <p className="text-sm text-muted-foreground">{t('plugins.code.loading')}</p>
+                <p className="text-caption text-muted-foreground">{t('plugins.code.loading')}</p>
               )}
               {content !== null && <PluginEnvEditor disabled={isSubmitting} />}
             </Form>

@@ -188,7 +188,7 @@ const Card: React.FC<{ item: ICardItem; sizes: string }> = ({ item, sizes }) => 
     </>
   );
   const className =
-    'group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card';
+    'group flex h-full flex-col overflow-hidden rounded-2xl border border-border/50 bg-card';
   // Whole card is the link: big touch target on phones.
   return link ? (
     <BlockLink
@@ -211,7 +211,7 @@ export const CardsBlock: React.FC<{ data: ICardsBlockData }> = ({ data }) => {
   const columns = data.columns in CARD_GRID ? data.columns : '2';
   return (
     <section>
-      {data.title && <h2 className="mb-4 text-xl font-bold tracking-tight">{data.title}</h2>}
+      {data.title && <h2 className="mb-4 text-title font-bold">{data.title}</h2>}
       <ul className={cn('grid grid-cols-1 gap-3', CARD_GRID[columns])}>
         {items.map((item, index) => (
           <li key={index} className="min-w-0">

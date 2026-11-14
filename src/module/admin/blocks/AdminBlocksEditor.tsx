@@ -23,7 +23,7 @@ export interface IAdminBlocksEditorProps {
 }
 
 const PICK_BUTTON =
-  'flex min-h-20 flex-col items-start gap-1 rounded-xl border border-border/60 bg-background p-3 text-left transition-colors hover:border-foreground/30 active:bg-foreground/[0.04]';
+  'flex min-h-20 flex-col items-start gap-1 rounded-xl border border-border/50 bg-background p-3 text-left transition-colors hover:border-foreground/30 active:bg-foreground/[0.04]';
 
 /** Grid of block types – built-in ones, then the blocks registered by apps. */
 const BlockPicker: React.FC<{
@@ -33,7 +33,7 @@ const BlockPicker: React.FC<{
   const { t } = useTranslation('admin');
   const apps = usePageBlockRegistry().list();
   return (
-    <div className="rounded-2xl border border-border/60 bg-foreground/[0.02] p-3">
+    <div className="rounded-2xl border border-border/50 bg-foreground/[0.02] p-3">
       <div className="mb-2 flex items-center justify-between pl-1">
         <p className="text-caption font-bold">{t('blocks.pickTitle')}</p>
         <button
@@ -57,7 +57,7 @@ const BlockPicker: React.FC<{
             >
               <Icon className="size-5" aria-hidden="true" />
               <span className="text-body font-bold">{t(`blocks.type.${type}.label`)}</span>
-              <span className="text-[11px] leading-snug text-muted-foreground">
+              <span className="text-micro leading-snug text-muted-foreground">
                 {t(`blocks.type.${type}.description`)}
               </span>
             </button>
@@ -82,7 +82,7 @@ const BlockPicker: React.FC<{
                     {t(definition.label, { defaultValue: definition.label })}
                   </span>
                   {definition.description && (
-                    <span className="text-[11px] leading-snug text-muted-foreground">
+                    <span className="text-micro leading-snug text-muted-foreground">
                       {t(definition.description, { defaultValue: definition.description })}
                     </span>
                   )}
@@ -163,13 +163,13 @@ export const AdminBlocksEditor: React.FC<IAdminBlocksEditorProps> = ({
     <div>
       <div className="mb-2 flex items-center justify-between">
         <p className="text-caption font-medium text-foreground">{t('blocks.title')}</p>
-        <span className="text-xs text-muted-foreground tabular-nums">
+        <span className="text-caption text-muted-foreground tabular-nums">
           {value.length} / {SITE_PAGE_BLOCKS_MAX}
         </span>
       </div>
 
       {value.length === 0 && !picking && (
-        <div className="flex flex-col items-center rounded-2xl border-2 border-dashed border-border px-6 py-8 text-center">
+        <div className="flex flex-col items-center rounded-2xl border-2 border-dashed border-border/50 px-6 py-8 text-center">
           <LayoutGrid className="size-6 text-muted-foreground" aria-hidden="true" />
           <p className="mt-2 text-body font-semibold">{t('blocks.emptyTitle')}</p>
           <p className="mt-0.5 text-caption text-muted-foreground">{t('blocks.empty')}</p>
@@ -187,7 +187,7 @@ export const AdminBlocksEditor: React.FC<IAdminBlocksEditorProps> = ({
               id={`block-${block.id}`}
               className={cn(
                 'scroll-mt-4 rounded-2xl border transition-colors',
-                open ? 'border-foreground/25 bg-foreground/[0.015]' : 'border-border/60'
+                open ? 'border-foreground/25 bg-foreground/[0.015]' : 'border-border/50'
               )}
             >
               <button

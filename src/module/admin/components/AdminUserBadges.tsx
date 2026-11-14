@@ -10,8 +10,8 @@ const Badge: React.FC<{ tone?: 'default' | 'warn'; children: React.ReactNode }> 
   <span
     className={
       tone === 'warn'
-        ? 'inline-flex h-5 items-center rounded-full bg-destructive/10 px-2 text-[11px] font-semibold text-destructive'
-        : 'inline-flex h-5 items-center rounded-full bg-foreground/[0.07] px-2 text-[11px] font-semibold text-muted-foreground'
+        ? 'inline-flex h-5 items-center rounded-full bg-destructive/10 px-2 text-micro font-semibold text-destructive'
+        : 'inline-flex h-5 items-center rounded-full bg-foreground/[0.07] px-2 text-micro font-semibold text-muted-foreground'
     }
   >
     {children}

@@ -97,7 +97,7 @@ const DropSqlDrawer: React.FC<Props & { open: boolean; onOpenChange: (open: bool
         theme={theme === 'dark' ? 'dark' : 'light'}
         extensions={[sql()]}
         basicSetup={{ foldGutter: false, lineNumbers: false }}
-        className="overflow-hidden rounded-xl border border-border text-caption"
+        className="overflow-hidden rounded-xl border border-border/50 text-caption"
       />
     </AppDrawer>
   );

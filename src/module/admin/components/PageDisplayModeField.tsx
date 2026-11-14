@@ -47,12 +47,12 @@ export const PageDisplayModeField: React.FC<IPageDisplayModeFieldProps> = ({
                 'flex flex-col items-start gap-1 rounded-xl border p-3 text-left transition-colors disabled:opacity-50',
                 active
                   ? 'border-foreground bg-foreground/[0.04]'
-                  : 'border-border/60 hover:border-foreground/30'
+                  : 'border-border/50 hover:border-foreground/30'
               )}
             >
               <Icon className="size-4" aria-hidden="true" />
               <span className="text-body font-bold">{t(`pages.displayMode.${option}`)}</span>
-              <span className="text-[11px] leading-snug text-muted-foreground">
+              <span className="text-micro leading-snug text-muted-foreground">
                 {t(`pages.displayMode.${option}Hint`)}
               </span>
             </button>

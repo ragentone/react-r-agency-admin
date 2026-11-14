@@ -47,17 +47,15 @@ const BUTTON =
 const NOTICE = {
   info: {
     icon: Info,
-    className: 'border-sky-500/30 bg-sky-500/10 [&_svg]:text-sky-600 dark:[&_svg]:text-sky-400',
+    className: 'border-info/30 bg-info/10 [&_svg]:text-info-foreground',
   },
   success: {
     icon: CheckCircle2,
-    className:
-      'border-emerald-500/30 bg-emerald-500/10 [&_svg]:text-emerald-600 dark:[&_svg]:text-emerald-400',
+    className: 'border-success/30 bg-success/10 [&_svg]:text-success-foreground',
   },
   warning: {
     icon: AlertTriangle,
-    className:
-      'border-amber-500/40 bg-amber-500/10 [&_svg]:text-amber-600 dark:[&_svg]:text-amber-400',
+    className: 'border-warning/30 bg-warning/10 [&_svg]:text-warning-foreground',
   },
   danger: {
     icon: OctagonAlert,
@@ -120,7 +118,7 @@ const CtaBlock: React.FC<{ data: ICtaBlockData }> = ({ data }) => {
               className={cn(
                 BUTTON,
                 'border',
-                brand ? 'border-primary-foreground/40' : 'border-border'
+                brand ? 'border-primary-foreground/40' : 'border-border/50'
               )}
             >
               {data.secondaryLabel}
@@ -139,8 +137,8 @@ const FaqBlock: React.FC<{ data: IFaqBlockData }> = ({ data }) => {
   if (!items.length) return null;
   return (
     <section>
-      {data.title && <h2 className="mb-3 text-xl font-bold tracking-tight">{data.title}</h2>}
-      <div className="divide-y divide-border/60 rounded-2xl border border-border/60">
+      {data.title && <h2 className="mb-3 text-title font-bold">{data.title}</h2>}
+      <div className="divide-y divide-border/50 rounded-2xl border border-border/50">
         {items.map((item, index) => (
           <details key={index} className="group">
             <summary className="flex min-h-13 cursor-pointer list-none items-center gap-3 px-4 py-3 font-semibold [&::-webkit-details-marker]:hidden">
@@ -237,7 +235,7 @@ const StatsBlock: React.FC<{ data: IStatsBlockData }> = ({ data }) => {
   if (!items.length) return null;
   return (
     <section>
-      {data.title && <h2 className="mb-4 text-xl font-bold tracking-tight">{data.title}</h2>}
+      {data.title && <h2 className="mb-4 text-title font-bold">{data.title}</h2>}
       <dl
         className={cn(
           'grid grid-cols-2 gap-3',
@@ -266,7 +264,7 @@ const StepsBlock: React.FC<{ data: IStepsBlockData }> = ({ data }) => {
   if (!items.length) return null;
   return (
     <section>
-      {data.title && <h2 className="mb-5 text-xl font-bold tracking-tight">{data.title}</h2>}
+      {data.title && <h2 className="mb-5 text-title font-bold">{data.title}</h2>}
       <ol className="relative space-y-6 before:absolute before:top-2 before:bottom-2 before:left-4 before:w-px before:bg-border">
         {items.map((item, index) => (
           <li key={index} className="relative flex gap-4">
@@ -298,7 +296,7 @@ const TabsBlock: React.FC<{ data: ITabsBlockData }> = ({ data }) => {
   const current = Math.min(active, items.length - 1);
   return (
     <section>
-      {data.title && <h2 className="mb-4 text-xl font-bold tracking-tight">{data.title}</h2>}
+      {data.title && <h2 className="mb-4 text-title font-bold">{data.title}</h2>}
       <div
         role="tablist"
         aria-label={data.title || undefined}
@@ -317,7 +315,7 @@ const TabsBlock: React.FC<{ data: ITabsBlockData }> = ({ data }) => {
               'h-10 shrink-0 rounded-full px-4 text-body font-semibold transition-colors',
               index === current
                 ? 'bg-foreground text-background'
-                : 'border border-border/70 text-muted-foreground hover:text-foreground'
+                : 'border border-border/50 text-muted-foreground hover:text-foreground'
             )}
           >
             {item.label}
@@ -376,7 +374,7 @@ const CountdownBlock: React.FC<{ data: ICountdownBlockData }> = ({ data }) => {
 
   return (
     <section className="rounded-3xl bg-foreground/[0.04] p-6 text-center sm:p-8">
-      {data.title && <h2 className="text-xl font-bold tracking-tight sm:text-2xl">{data.title}</h2>}
+      {data.title && <h2 className="text-title font-bold sm:text-2xl">{data.title}</h2>}
       <p className="mt-1 text-caption text-muted-foreground">{date}</p>
       {left.done ? (
         <p className="mt-5 text-lg font-bold">{data.doneText || t('blocks.countdown.done')}</p>
@@ -387,7 +385,7 @@ const CountdownBlock: React.FC<{ data: ICountdownBlockData }> = ({ data }) => {
               <div className="text-2xl font-bold tabular-nums sm:text-4xl">
                 {String(value).padStart(unit === 'days' ? 1 : 2, '0')}
               </div>
-              <div className="text-[11px] text-muted-foreground sm:text-caption">
+              <div className="text-micro text-muted-foreground sm:text-caption">
                 {t(`blocks.countdown.${unit}`, { count: value })}
               </div>
             </div>
@@ -411,8 +409,8 @@ const TABLE_ALIGN = { left: 'text-left', center: 'text-center', right: 'text-rig
 
 const TABLE_ROW = {
   striped: 'even:bg-foreground/[0.035]',
-  lines: 'border-t border-border/60 first:border-t-0',
-  grid: 'border-t border-border/60 first:border-t-0',
+  lines: 'border-t border-border/50 first:border-t-0',
+  grid: 'border-t border-border/50 first:border-t-0',
 } as const;
 
 /** Rows with content, cells cut to the column count. */
@@ -436,7 +434,7 @@ const TableCards: React.FC<{ data: ITableBlockData }> = ({ data }) => {
           .map((value, index) => ({ value, column: columns[titled ? index + 1 : index] }))
           .filter(entry => entry.value);
         return (
-          <li key={rowIndex} className="rounded-2xl border border-border/60 bg-card p-4">
+          <li key={rowIndex} className="rounded-2xl border border-border/50 bg-card p-4">
             {titled && first && <p className="mb-1.5 font-bold text-foreground">{first}</p>}
             <dl className="space-y-1.5">
               {entries.map(({ value, column }, index) => (
@@ -475,12 +473,12 @@ const TableBlock: React.FC<{ data: ITableBlockData }> = ({ data }) => {
     cn(
       'px-4 py-3 align-top whitespace-pre-line',
       TABLE_ALIGN[columns[index]?.align] ?? TABLE_ALIGN.left,
-      grid && 'border-l border-border/60 first:border-l-0'
+      grid && 'border-l border-border/50 first:border-l-0'
     );
   return (
     <figure className="m-0">
       {data.title && (
-        <h2 id={titleId} className="mb-4 text-xl font-bold tracking-tight">
+        <h2 id={titleId} className="mb-4 text-title font-bold">
           {data.title}
         </h2>
       )}
@@ -492,7 +490,7 @@ const TableBlock: React.FC<{ data: ITableBlockData }> = ({ data }) => {
         aria-labelledby={data.title ? titleId : undefined}
         aria-label={data.title ? undefined : t('blocks.type.table.label')}
         className={cn(
-          'overflow-x-auto overscroll-x-contain rounded-2xl border border-border/60 bg-card focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
+          'overflow-x-auto overscroll-x-contain rounded-2xl border border-border/50 bg-card focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
           stack && 'hidden sm:block'
         )}
       >
@@ -506,7 +504,7 @@ const TableBlock: React.FC<{ data: ITableBlockData }> = ({ data }) => {
                     scope="col"
                     className={cn(
                       cell(index),
-                      'border-b border-border/70 py-2.5 text-caption font-bold text-muted-foreground'
+                      'border-b border-border/50 py-2.5 text-caption font-bold text-muted-foreground'
                     )}
                   >
                     {column.label}
@@ -553,7 +551,7 @@ const DividerBlock: React.FC<{ data: IDividerBlockData }> = ({ data }) => {
   const space = { sm: 'py-2', md: 'py-5', lg: 'py-10' }[data.size];
   return (
     <div className={space} aria-hidden={data.variant === 'space'}>
-      {data.variant === 'line' && <hr className="border-border/70" />}
+      {data.variant === 'line' && <hr className="border-border/50" />}
     </div>
   );
 };

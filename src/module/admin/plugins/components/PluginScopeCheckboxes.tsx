@@ -31,7 +31,7 @@ export const PluginScopeCheckboxes: React.FC<IPluginScopeCheckboxesProps> = ({ v
       {PLUGIN_SCOPE_OPTIONS.map(option => (
         <Label
           key={option}
-          className="flex min-h-12 cursor-pointer items-center gap-3 rounded-md border border-border px-3 py-2 text-base font-normal"
+          className="flex min-h-12 cursor-pointer items-center gap-3 rounded-md border border-border/50 px-3 py-2 text-base font-normal"
         >
           <Checkbox
             checked={value.includes(option)}

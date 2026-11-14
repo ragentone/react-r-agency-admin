@@ -12,7 +12,7 @@ export const SeoCounter: React.FC<{ length: number; ideal: number; max: number; 
     id={id}
     aria-live="polite"
     className={cn(
-      'text-xs tabular-nums',
+      'text-caption tabular-nums',
       length > max
         ? 'font-semibold text-destructive'
         : length > ideal

@@ -18,7 +18,7 @@ export const RoleChip: React.FC<IProps> = ({ role, locked = false, size = 'md', 
     <span
       className={cn(
         'inline-flex max-w-full min-w-0 items-center gap-1 rounded-full bg-foreground/[0.07] font-mono',
-        size === 'sm' ? 'h-6 px-2 text-[11px]' : 'h-7 px-2.5 text-xs',
+        size === 'sm' ? 'h-6 px-2 text-micro' : 'h-7 px-2.5 text-caption',
         className
       )}
     >

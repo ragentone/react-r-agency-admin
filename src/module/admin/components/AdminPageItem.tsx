@@ -16,16 +16,16 @@ export const SitePageStatus: React.FC<{ published: boolean; className?: string }
   return (
     <span
       className={cn(
-        'inline-flex h-5 items-center gap-1 rounded-full px-2 text-[11px] font-semibold',
+        'inline-flex h-5 items-center gap-1 rounded-full px-2 text-micro font-semibold',
         published
-          ? 'bg-emerald-500/12 text-emerald-700 dark:text-emerald-400'
+          ? 'bg-success/10 text-success-foreground'
           : 'bg-foreground/[0.07] text-muted-foreground',
         className
       )}
     >
       <span
         aria-hidden="true"
-        className={cn('size-1.5 rounded-full', published ? 'bg-emerald-500' : 'bg-current')}
+        className={cn('size-1.5 rounded-full', published ? 'bg-success' : 'bg-current')}
       />
       {published ? t('pages.status.published') : t('pages.status.draft')}
     </span>
@@ -57,7 +57,7 @@ export const AdminPageItem: React.FC<{ page: ISitePage; onOpen: (page: ISitePage
           <span className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
             <SitePageStatus published={page.published} />
             {page.visibility === 'authenticated' && (
-              <span className="inline-flex h-5 items-center gap-1 rounded-full bg-foreground/[0.07] px-2 text-[11px] font-semibold text-muted-foreground">
+              <span className="inline-flex h-5 items-center gap-1 rounded-full bg-foreground/[0.07] px-2 text-micro font-semibold text-muted-foreground">
                 <Lock className="size-3" aria-hidden="true" />
                 {page.roles?.length
                   ? t('pages.access.badgeRoles', { count: page.roles.length })
@@ -65,12 +65,12 @@ export const AdminPageItem: React.FC<{ page: ISitePage; onOpen: (page: ISitePage
               </span>
             )}
             {page.seoIndex === false && page.visibility !== 'authenticated' && (
-              <span className="inline-flex h-5 items-center gap-1 rounded-full bg-foreground/[0.07] px-2 text-[11px] font-semibold text-muted-foreground">
+              <span className="inline-flex h-5 items-center gap-1 rounded-full bg-foreground/[0.07] px-2 text-micro font-semibold text-muted-foreground">
                 <EyeOff className="size-3" aria-hidden="true" />
                 {t('pages.noindexBadge')}
               </span>
             )}
-            <span className="text-[11px] text-muted-foreground tabular-nums">
+            <span className="text-micro text-muted-foreground tabular-nums">
               {t('pages.updated', { date: formatDate(page.updatedAt, i18n.language) })}
             </span>
           </span>
