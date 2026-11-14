@@ -786,6 +786,12 @@
     "close": "Close"
   },
   "home": {
+    "welcome": {
+      "title": "Welcome",
+      "description": "Sign in to open the admin dashboard.",
+      "login": "Sign in",
+      "noAccess": "Your account has no access to the admin dashboard."
+    },
     "newUsers": {
       "title": "New sign-ups",
       "empty": "No new sign-ups in the last 7 days",

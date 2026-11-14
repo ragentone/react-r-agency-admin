@@ -1,4 +1,4 @@
-import { PageIndex } from '@core/pages/default/PageIndex.tsx';
+import { CmsContainer } from '@core/cms';
 import { PluginSlot } from '@core/plugin';
 import { RoutePage } from '@router/components';
 import React, { useState } from 'react';
@@ -10,6 +10,7 @@ import { HomeLive } from '../home/components/HomeLive';
 import { HomeNewUsers } from '../home/components/HomeNewUsers';
 import { HomeSystem } from '../home/components/HomeSystem';
 import { HomeUserSearch } from '../home/components/HomeUserSearch';
+import { HomeWelcome } from '../home/components/HomeWelcome';
 import { useAdminAccess } from '../hooks';
 import { StatsUserDrawer } from '../stats/components/StatsUserDrawer';
 import { useStatsQuery } from '../stats/hooks/use.stats.query';
@@ -19,11 +20,23 @@ import { ADMIN_SCROLL, ADMIN_WIDTH, AdminHeading, AdminPage } from '../ui/AdminP
 /**
  * Start page of the admin instance. Admins get a dashboard (mobile first: one column, from `lg`
  * a main column with the key figures and a side column with live + system); everybody else
- * sees the normal core start page.
+ * sees a welcome card (sign in / no access) above the regular CMS start content.
  */
 export const PageAdminHome: React.FC = () => {
   const admin = useAdminAccess();
-  if (!admin) return <PageIndex />;
+  if (!admin)
+    return (
+      <RoutePage width={'100%'} scrollable={true} classes={{ scroll: 'p-0 border-none' }}>
+        <HomeWelcome />
+        <CmsContainer name={'page-index'}>
+          <PluginSlot
+            name="home.widget"
+            scope="admin"
+            className="border-b border-border/50 px-4 py-3"
+          />
+        </CmsContainer>
+      </RoutePage>
+    );
   return (
     <RoutePage width={ADMIN_WIDTH.wide} scrollable={true} classes={{ scroll: ADMIN_SCROLL }}>
       <AdminHome />

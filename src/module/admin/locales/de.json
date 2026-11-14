@@ -786,6 +786,12 @@
     "close": "Schließen"
   },
   "home": {
+    "welcome": {
+      "title": "Willkommen",
+      "description": "Melde dich an, um das Admin-Dashboard zu öffnen.",
+      "login": "Anmelden",
+      "noAccess": "Dein Konto hat keinen Zugriff auf das Admin-Dashboard."
+    },
     "newUsers": {
       "title": "Neue Registrierungen",
       "empty": "Keine neuen Registrierungen in den letzten 7 Tagen",
