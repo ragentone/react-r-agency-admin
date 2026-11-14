@@ -21,6 +21,16 @@ const ERROR_KEYS: [needle: string, key: string][] = [
   ['user_update_role_not_allowed', 'error.superUser'],
   ['user_not_exists', 'error.userMissing'],
   ['not_authorized', 'error.notAuthorized'],
+  ['admin_delete_self', 'error.deleteSelf'],
+  ['admin_delete_super', 'error.deleteSuper'],
+  ['admin_delete_not_admin', 'error.deleteNotAdmin'],
+  // New admin account
+  ['alias_invalid', 'error.aliasInvalid'],
+  ['email_invalid', 'error.emailInvalid'],
+  ['alias_exists', 'error.aliasExists'],
+  ['email_exists', 'error.emailExists'],
+  ['pwned_password', 'error.passwordPwned'],
+  ['weak_password', 'error.passwordWeak'],
   // Dynamic pages (runtime apps/site-page)
   ['site_page_slug_exists', 'error.slugExists'],
   ['site_page_slug_invalid', 'error.slugInvalid'],

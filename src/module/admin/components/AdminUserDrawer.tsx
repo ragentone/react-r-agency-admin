@@ -1,3 +1,4 @@
+import { useRoles } from '@core/auth/roles/use.roles.ts';
 import { AdminBanPanel } from '@core/security/components/AdminBanPanel.tsx';
 import { AppDrawer } from '@ui/patterns';
 import React from 'react';
@@ -5,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import type { AdminRoleUpdate, IAdminRoleResult, IAdminUser } from '../types';
 import { AdminRoleEditor } from './AdminRoleEditor';
+import { AdminUserDeletePanel } from './AdminUserDeletePanel';
 import { AdminUserHeader } from './AdminUserHeader';
 
 export interface IAdminUserDrawerProps {
@@ -14,6 +16,8 @@ export interface IAdminUserDrawerProps {
   saving: boolean;
   onUpdate: (user: IAdminUser, change: AdminRoleUpdate) => Promise<IAdminRoleResult>;
   onChanged: (user: IAdminUser) => void;
+  /** Admin list only: shows "delete admin" (super administrator, not for super admins / yourself). */
+  onDeleted?: (user: IAdminUser) => void;
 }
 
 /** Bottom drawer: one user – roles and ban. */
@@ -24,8 +28,16 @@ export const AdminUserDrawer: React.FC<IAdminUserDrawerProps> = ({
   saving,
   onUpdate,
   onChanged,
+  onDeleted,
 }) => {
   const { t } = useTranslation('admin');
+  const { can } = useRoles();
+  const canDelete =
+    Boolean(onDeleted) &&
+    can('super:admin:user') &&
+    Boolean(user) &&
+    !user?.superUser &&
+    !user?.self;
   const close = (next: boolean) => {
     if (!saving) onOpenChange(next);
   };
@@ -45,6 +57,7 @@ export const AdminUserDrawer: React.FC<IAdminUserDrawerProps> = ({
         <>
           <AdminUserHeader user={user} />
           <AdminRoleEditor user={user} saving={saving} onUpdate={onUpdate} onChanged={onChanged} />
+          {canDelete && onDeleted && <AdminUserDeletePanel user={user} onDeleted={onDeleted} />}
           {!user.superUser && <AdminBanPanel key={user.id} userId={user.id} disabled={saving} />}
         </>
       )}

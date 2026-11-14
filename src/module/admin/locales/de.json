@@ -18,7 +18,8 @@
   },
   "tabs": {
     "users": "Benutzer",
-    "self": "Meine Rollen"
+    "self": "Meine Rollen",
+    "admins": "Admins"
   },
   "noAccess": {
     "title": "Kein Zugriff",
@@ -37,6 +38,21 @@
       "user": "Benutzer",
       "roles": "Rollen",
       "status": "Status"
+    },
+    "create": {
+      "open": "Neuer Admin",
+      "title": "Neues Admin-Konto",
+      "description": "Legt ein Konto mit Admin-Rechten an.",
+      "alias": "Benutzername",
+      "email": "E-Mail",
+      "password": "Passwort",
+      "aliasHint": "3–16 Zeichen: Buchstaben, Zahlen, Unterstrich.",
+      "passwordHint": "8–64 Zeichen, mindestens ein Buchstabe und eine Zahl.",
+      "note": "Das Konto ist sofort aktiv und hat die Rolle admin:user. Gib das Passwort sicher weiter.",
+      "submit": "Konto erstellen",
+      "toast": "Admin-Konto @{{alias}} erstellt",
+      "confirmed": "Bestätigt",
+      "confirmedHint": "Aus: Der neue Admin bekommt eine E-Mail mit Bestätigungslink. An: kein E-Mail-Versand, das Konto ist sofort bestätigt."
     }
   },
   "self": {
@@ -113,7 +129,17 @@
     "imageUpload": "Bild-Upload fehlgeschlagen.",
     "accessInvalid": "Ungültige Sichtbarkeit oder Rolle.",
     "roleUnknown": "Diese Rolle ist im System nicht registriert.",
-    "roleNotAssignable": "Diese Rolle wird vom System vergeben und kann nicht manuell zugewiesen werden."
+    "roleNotAssignable": "Diese Rolle wird vom System vergeben und kann nicht manuell zugewiesen werden.",
+    "create": "Konto konnte nicht erstellt werden.",
+    "aliasInvalid": "Ungültiger Benutzername.",
+    "emailInvalid": "Ungültige E-Mail-Adresse.",
+    "aliasExists": "Dieser Benutzername ist schon vergeben.",
+    "emailExists": "Diese E-Mail ist schon registriert.",
+    "passwordWeak": "Das Passwort ist zu schwach.",
+    "passwordPwned": "Dieses Passwort ist in Datenlecks aufgetaucht.",
+    "deleteSelf": "Du kannst dein eigenes Konto nicht löschen.",
+    "deleteSuper": "Ein Super-Admin kann nicht gelöscht werden.",
+    "deleteNotAdmin": "Dieses Konto ist kein Admin."
   },
   "pages": {
     "searchPlaceholder": "Titel oder Adresse",
@@ -1247,5 +1273,18 @@
       "current": "Aktuell"
     }
   },
-  "back": "Zurück"
+  "back": "Zurück",
+  "admins": {
+    "count": "{{count}} Admin-Konten",
+    "reload": "Liste neu laden",
+    "delete": {
+      "action": "Admin löschen",
+      "hint": "Der Admin wird sofort überall abgemeldet und kann sich nicht mehr anmelden.",
+      "title": "Admin löschen?",
+      "description": "@{{alias}} wird gelöscht und sofort abgemeldet, auch auf allen verbundenen Geräten.",
+      "confirm": "Löschen",
+      "cancel": "Abbrechen",
+      "toast": "Admin @{{alias}} gelöscht"
+    }
+  }
 }

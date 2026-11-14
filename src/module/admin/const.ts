@@ -21,6 +21,8 @@ export const ROLE_ADMIN = 'admin:user';
 export const ROLE_DEFAULT = 'default:user';
 
 export const ADMIN_SEARCH_LIMIT = 30;
+/** Admin list (super administrator): page size of the infinite scroll. */
+export const ADMIN_LIST_LIMIT = 25;
 /** Users are only loaded via the search – from this many characters on. */
 export const ADMIN_SEARCH_MIN = 2;
 export const ADMIN_SEARCH_DEBOUNCE = 300;

@@ -18,7 +18,8 @@
   },
   "tabs": {
     "users": "Users",
-    "self": "My roles"
+    "self": "My roles",
+    "admins": "Admins"
   },
   "noAccess": {
     "title": "No access",
@@ -37,6 +38,21 @@
       "user": "User",
       "roles": "Roles",
       "status": "Status"
+    },
+    "create": {
+      "open": "New admin",
+      "title": "New admin account",
+      "description": "Creates an account with admin rights.",
+      "alias": "Username",
+      "email": "E-mail",
+      "password": "Password",
+      "aliasHint": "3–16 characters: letters, numbers, underscore.",
+      "passwordHint": "8–64 characters, at least one letter and one number.",
+      "note": "The account is active right away and gets the admin:user role. Hand over the password securely.",
+      "submit": "Create account",
+      "toast": "Admin account @{{alias}} created",
+      "confirmed": "Confirmed",
+      "confirmedHint": "Off: the new admin gets an e-mail with a confirmation link. On: no e-mail, the account is confirmed right away."
     }
   },
   "self": {
@@ -113,7 +129,17 @@
     "imageUpload": "Image upload failed.",
     "accessInvalid": "Invalid visibility or role.",
     "roleUnknown": "This role is not registered in the system.",
-    "roleNotAssignable": "This role is set by the system and cannot be granted manually."
+    "roleNotAssignable": "This role is set by the system and cannot be granted manually.",
+    "create": "Could not create the account.",
+    "aliasInvalid": "Invalid username.",
+    "emailInvalid": "Invalid e-mail address.",
+    "aliasExists": "This username is already taken.",
+    "emailExists": "This e-mail is already registered.",
+    "passwordWeak": "The password is too weak.",
+    "passwordPwned": "This password appeared in a data breach.",
+    "deleteSelf": "You can't delete your own account.",
+    "deleteSuper": "A super admin can't be deleted.",
+    "deleteNotAdmin": "This account is not an admin."
   },
   "pages": {
     "searchPlaceholder": "Title or address",
@@ -1247,5 +1273,18 @@
       "current": "Current"
     }
   },
-  "back": "Back"
+  "back": "Back",
+  "admins": {
+    "count": "{{count}} admin accounts",
+    "reload": "Reload list",
+    "delete": {
+      "action": "Delete admin",
+      "hint": "The admin is signed out everywhere at once and can no longer sign in.",
+      "title": "Delete admin?",
+      "description": "@{{alias}} will be deleted and signed out immediately, on every connected device.",
+      "confirm": "Delete",
+      "cancel": "Cancel",
+      "toast": "Admin @{{alias}} deleted"
+    }
+  }
 }

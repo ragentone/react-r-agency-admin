@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { ADMIN_SEARCH_DEBOUNCE, ADMIN_SEARCH_MIN } from '../const';
 import { useAdminUsers } from '../hooks';
 import type { AdminRoleUpdate, IAdminRoleResult, IAdminUser } from '../types';
+import { AdminUserCreateButton } from './AdminUserCreateButton';
 import { AdminUserDrawer } from './AdminUserDrawer';
 import { AdminUserItem } from './AdminUserItem';
 import { AdminUsersTable } from './AdminUsersTable';
@@ -131,29 +132,32 @@ export const AdminUsersView: React.FC<IAdminUsersViewProps> = ({ saving, onUpdat
   return (
     <>
       <div className="space-y-1 border-b border-border/50 p-3">
-        <div className="relative">
-          <Search
-            className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-muted-foreground"
-            aria-hidden="true"
-          />
-          <Input
-            type="search"
-            value={query}
-            onChange={event => setQuery(event.target.value)}
-            placeholder={t('users.searchPlaceholder')}
-            aria-label={t('users.searchPlaceholder')}
-            autoCapitalize="none"
-            autoCorrect="off"
-            spellCheck={false}
-            enterKeyHint="search"
-            className="h-10 rounded-lg pr-10 pl-10 text-base sm:text-body"
-          />
-          {loading && loaded && (
-            <Loader2
-              className="absolute top-1/2 right-3.5 size-4 -translate-y-1/2 animate-spin text-muted-foreground"
+        <div className="flex items-center gap-2">
+          <div className="relative min-w-0 flex-1">
+            <Search
+              className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-muted-foreground"
               aria-hidden="true"
             />
-          )}
+            <Input
+              type="search"
+              value={query}
+              onChange={event => setQuery(event.target.value)}
+              placeholder={t('users.searchPlaceholder')}
+              aria-label={t('users.searchPlaceholder')}
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
+              enterKeyHint="search"
+              className="h-10 rounded-lg pr-10 pl-10 text-base sm:text-body"
+            />
+            {loading && loaded && (
+              <Loader2
+                className="absolute top-1/2 right-3.5 size-4 -translate-y-1/2 animate-spin text-muted-foreground"
+                aria-hidden="true"
+              />
+            )}
+          </div>
+          <AdminUserCreateButton onCreated={setQuery} />
         </div>
         {searching && loaded && (
           <p className="px-2 text-caption text-muted-foreground tabular-nums" aria-live="polite">

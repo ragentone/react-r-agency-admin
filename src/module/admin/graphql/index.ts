@@ -168,3 +168,33 @@ export const SitePageDisplayModeQuery = parse(`
     }
   }
 `);
+
+/** `admin:user` only – new admin account (alias, e-mail, password). */
+export const AdminUserCreateMutation = parse(`
+  mutation AdminUserCreate($alias: String!, $email: String!, $password: String!, $confirmed: Boolean) {
+    adminUserCreate(alias: $alias, email: $email, password: $password, confirmed: $confirmed) {
+      success
+      user
+    }
+  }
+`);
+
+/** `super:admin:user` only – every admin account, paged (infinite scroll). */
+export const AdminAdminListQuery = parse(`
+  query AdminAdminList($limit: Int, $offset: Int) {
+    adminAdminList(limit: $limit, offset: $offset) {
+      success
+      total
+      users
+    }
+  }
+`);
+
+/** `super:admin:user` only – delete an admin (signed out everywhere at once). */
+export const AdminAdminDeleteMutation = parse(`
+  mutation AdminAdminDelete($userId: ID!) {
+    adminAdminDelete(userId: $userId) {
+      success
+    }
+  }
+`);
