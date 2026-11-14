@@ -110,7 +110,8 @@
     "swap": "Swap",
     "disk": "Festplatte",
     "loop": "Event Loop",
-    "db": "Datenbank"
+    "db": "Datenbank",
+    "minecraft": "Minecraft-Server"
   },
   "ws": {
     "connected": "Verbunden",
@@ -170,6 +171,19 @@
       "table": "Tabelle",
       "rows": "Zeilen",
       "size": "Größe"
+    }
+  },
+  "minecraft": {
+    "title": "Minecraft",
+    "summary": "{{running}} von {{total}} laufen · {{players}} Spieler · RAM {{memory}} ({{share}} % des Hosts)",
+    "players": "{{current}} / {{max}} Spieler",
+    "empty": "Keine Server angelegt.",
+    "state": {
+      "stopped": "gestoppt",
+      "starting": "startet",
+      "running": "läuft",
+      "stopping": "stoppt",
+      "crashed": "abgestürzt"
     }
   },
   "mesh": {

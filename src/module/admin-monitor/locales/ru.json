@@ -110,7 +110,8 @@
     "swap": "Swap",
     "disk": "Диск",
     "loop": "Event loop",
-    "db": "База данных"
+    "db": "База данных",
+    "minecraft": "Серверы Minecraft"
   },
   "ws": {
     "connected": "Подключено",
@@ -170,6 +171,19 @@
       "table": "Таблица",
       "rows": "Строки",
       "size": "Размер"
+    }
+  },
+  "minecraft": {
+    "title": "Minecraft",
+    "summary": "Работает {{running}} из {{total}} · игроков: {{players}} · ОЗУ {{memory}} ({{share}} % хоста)",
+    "players": "{{current}} / {{max}} игроков",
+    "empty": "Серверов пока нет.",
+    "state": {
+      "stopped": "остановлен",
+      "starting": "запускается",
+      "running": "работает",
+      "stopping": "останавливается",
+      "crashed": "аварийно завершён"
     }
   },
   "mesh": {

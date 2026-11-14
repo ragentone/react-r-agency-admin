@@ -1,7 +1,7 @@
 import type { MonitorStatus } from './types';
 
 /** Mirror of runtime `shared/monitor/types.alert.ts`. */
-export type MonitorMetric = 'cpu' | 'mem' | 'swap' | 'disk' | 'loop' | 'db';
+export type MonitorMetric = 'cpu' | 'mem' | 'swap' | 'disk' | 'loop' | 'db' | 'minecraft';
 export const MONITOR_METRICS: readonly MonitorMetric[] = [
   'cpu',
   'mem',
@@ -9,6 +9,7 @@ export const MONITOR_METRICS: readonly MonitorMetric[] = [
   'disk',
   'loop',
   'db',
+  'minecraft',
 ];
 export const MONITOR_UNITS: Record<MonitorMetric, '%' | 'ms'> = {
   cpu: '%',
@@ -17,6 +18,7 @@ export const MONITOR_UNITS: Record<MonitorMetric, '%' | 'ms'> = {
   disk: '%',
   loop: 'ms',
   db: 'ms',
+  minecraft: '%',
 };
 
 export interface IMonitorRule {

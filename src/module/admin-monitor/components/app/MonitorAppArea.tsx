@@ -7,6 +7,7 @@ import { useMonitorApp } from '../../hooks/use-monitor';
 import { MonitorDb } from './MonitorDb';
 import { MonitorGraphql } from './MonitorGraphql';
 import { MonitorMesh } from './MonitorMesh';
+import { MonitorMinecraft } from './MonitorMinecraft';
 import { MonitorWs } from './MonitorWs';
 
 /** Tab "App": WebSocket, GraphQL, database, mesh. */
@@ -25,6 +26,7 @@ export const MonitorAppArea: React.FC = () => {
       <MonitorWs ws={data.ws} />
       <MonitorGraphql graphql={data.graphql} />
       <MonitorDb db={data.db} />
+      {data.modules?.minecraft && <MonitorMinecraft minecraft={data.modules.minecraft} />}
       <MonitorMesh mesh={data.mesh} />
     </div>
   );

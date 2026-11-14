@@ -2,8 +2,8 @@ import { Status, StatusIndicator } from '@ui/shad-cn/components/status.tsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { MONITOR_UNITS } from '../../types.alert';
 import type { MonitorMetric } from '../../types.alert';
+import { MONITOR_UNITS } from '../../types.alert';
 
 const VARIANT = { ok: 'success', warn: 'warning', crit: 'error' } as const;
 

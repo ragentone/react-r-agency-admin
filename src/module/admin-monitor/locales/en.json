@@ -110,7 +110,8 @@
     "swap": "Swap",
     "disk": "Disk",
     "loop": "Event loop",
-    "db": "Database"
+    "db": "Database",
+    "minecraft": "Minecraft servers"
   },
   "ws": {
     "connected": "Connected",
@@ -170,6 +171,19 @@
       "table": "Table",
       "rows": "Rows",
       "size": "Size"
+    }
+  },
+  "minecraft": {
+    "title": "Minecraft",
+    "summary": "{{running}} of {{total}} running · {{players}} players · RAM {{memory}} ({{share}} % of host)",
+    "players": "{{current}} / {{max}} players",
+    "empty": "No servers yet.",
+    "state": {
+      "stopped": "stopped",
+      "starting": "starting",
+      "running": "running",
+      "stopping": "stopping",
+      "crashed": "crashed"
     }
   },
   "mesh": {
