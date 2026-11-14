@@ -19,7 +19,6 @@ import { PageManager } from '@core/page/page.manager.tsx';
 import { Page404, PageIndex } from '@core/pages';
 import { ProfileProvider } from '@core/profile/components/ProfileDialogHost.tsx';
 import { getProfilePath, PROFILE_ROUTE } from '@core/profile/const.ts';
-import { openProfileDrawer } from '@core/profile/hooks/use.profile.drawer.ts';
 import {
   CircleUserRound,
   House,
@@ -282,20 +281,4 @@ Core.links.register({
   description: 'links:items.privacyDescription',
   content: { type: 'html', html: htmlFromUrl('/legal/privacy.{lang}.html') },
   sortOrder: 20,
-});
-
-// Search: people hits open the profile as drawer (no routing, back closes it).
-Core.search.registerGroup({
-  name: 'user',
-  label: 'search:groups.user',
-  icon: UserRound,
-  roundImage: true,
-  sortOrder: 0,
-});
-Core.search.registerHandler({
-  emit: 'user::show_profile',
-  handle: item => {
-    const id = item.payload?.id;
-    if (typeof id === 'string') openProfileDrawer(id);
-  },
 });

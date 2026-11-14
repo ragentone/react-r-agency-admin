@@ -8,7 +8,6 @@ import { LinkManager } from '@core/links/manager.ts';
 import { MenuManager } from '@core/menu/manager.ts';
 import { PageManager } from '@core/page/page.manager.tsx';
 import { ProviderManager } from '@core/provider/manager.ts';
-import { SearchManager } from '@core/search/manager.ts';
 import type { ICore } from '@core/types.ts';
 import { BaseRouter } from '@router/index.ts';
 
@@ -37,7 +36,6 @@ export const Core: ICore = {
   provider: ProviderManager,
   menu: MenuManager,
   dock: DockManager,
-  search: SearchManager,
   links: LinkManager,
   roles: UserRoleManager,
   blocks: PageBlockManager,

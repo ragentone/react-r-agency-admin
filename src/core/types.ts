@@ -8,7 +8,6 @@ import type { ILinkManager } from '@core/links/types.ts';
 import type { IMenuManager } from '@core/menu/types.ts';
 import type { IPageManager } from '@core/page';
 import type { IProviderManager } from '@core/provider';
-import type { ISearchManager } from '@core/search/types.ts';
 import type { IBaseRouter } from '@router/types.ts';
 import type { ReactNode } from 'react';
 
@@ -39,7 +38,6 @@ export interface ICore {
   provider: IProviderManager;
   menu: IMenuManager;
   dock: IDockManager;
-  search: ISearchManager;
   /** Link manager: imprint, terms, privacy + custom links (src/core/links). */
   links: ILinkManager;
   /** User role registry: apps register roles, the admin area offers them (src/core/auth/roles). */
