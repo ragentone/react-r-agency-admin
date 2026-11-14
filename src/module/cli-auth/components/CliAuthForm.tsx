@@ -31,7 +31,7 @@ export const CliAuthForm: React.FC<IProps> = ({ status, error, onSubmit }) => {
 
   return (
     <form
-      className="flex flex-col gap-4"
+      className="flex flex-col gap-5"
       onSubmit={e => {
         e.preventDefault();
         if (ready) onSubmit(identifier.trim(), password);
@@ -45,7 +45,7 @@ export const CliAuthForm: React.FC<IProps> = ({ status, error, onSubmit }) => {
           value={identifier}
           onChange={e => setIdentifier(e.target.value)}
           disabled={pending || done}
-          className={cn('h-11 border-border/50')}
+          className={cn('h-12 rounded-xl border-border/50')}
         />
       </div>
 
@@ -58,7 +58,7 @@ export const CliAuthForm: React.FC<IProps> = ({ status, error, onSubmit }) => {
           value={password}
           onChange={e => setPassword(e.target.value)}
           disabled={pending || done}
-          className={cn('h-11 border-border/50')}
+          className={cn('h-12 rounded-xl border-border/50')}
         />
       </div>
 
@@ -68,7 +68,7 @@ export const CliAuthForm: React.FC<IProps> = ({ status, error, onSubmit }) => {
         </Alert>
       )}
 
-      <Button type="submit" size="lg" className="h-11 w-full rounded-full" disabled={!ready}>
+      <Button type="submit" size="lg" className="h-12 w-full rounded-full text-body font-bold" disabled={!ready}>
         {pending && <Spinner data-icon="inline-start" />}
         {done ? 'Terminal freigegeben' : 'Anmelden und freigeben'}
       </Button>
