@@ -197,6 +197,23 @@
       "active": "Active",
       "paused": "Paused",
       "blocked": "Blocked"
+    },
+    "table": {
+      "gamertag": "Gamertag",
+      "alias": "Alias",
+      "lastSeen": "Last online",
+      "status": "Status"
+    },
+    "add": "Add",
+    "addTitle": "Add gamertag",
+    "addText": "Allowed on all servers right away.",
+    "addPlaceholder": "Gamertag",
+    "addDone": "Gamertag added.",
+    "error": {
+      "invalid_input": "Invalid gamertag (letters, digits, max. 15 characters).",
+      "exists": "This gamertag is already listed.",
+      "limit_reached": "Maximum number of entries reached.",
+      "rate_limited": "Too many attempts."
     }
   },
   "schedule": {

@@ -1,6 +1,4 @@
 import { AppDrawer } from '@ui/patterns';
-import { Badge } from '@ui/shad-cn/components/badge.tsx';
-import { Button } from '@ui/shad-cn/components/button.tsx';
 import {
   Empty,
   EmptyDescription,
@@ -8,7 +6,8 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from '@ui/shad-cn/components/empty.tsx';
-import { Ban, CircleCheck, Trash2, Users } from 'lucide-react';
+import { Button } from '@ui/shad-cn/components/button.tsx';
+import { Plus, Users } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -16,7 +15,9 @@ import { toast } from 'sonner';
 import { AdminMinecraftApi } from '../api';
 import { useMinecraftPasses } from '../hooks/use-minecraft-passes';
 import type { IMinecraftPass } from '../types';
+import { PassAddDialog } from './PassAddDialog';
 import { PassDeleteDialog } from './PassDeleteDialog';
+import { PassesTable } from './PassesTable';
 
 /** Spielerpass: alle eingetragenen Gamertags, auf allen Servern sperren/entsperren oder löschen. */
 export const PassesDrawer: React.FC<{ open: boolean; onOpenChange: (open: boolean) => void }> = ({
@@ -26,6 +27,7 @@ export const PassesDrawer: React.FC<{ open: boolean; onOpenChange: (open: boolea
   const { t } = useTranslation('minecraft');
   const { passes, reload } = useMinecraftPasses(open);
   const [deleting, setDeleting] = useState<IMinecraftPass | null>(null);
+  const [adding, setAdding] = useState(false);
 
   const toggleBlock = async (pass: IMinecraftPass) => {
     const result = await AdminMinecraftApi.blockPass(pass.id, pass.status !== 'blocked');
@@ -39,8 +41,19 @@ export const PassesDrawer: React.FC<{ open: boolean; onOpenChange: (open: boolea
       onOpenChange={onOpenChange}
       title={t('pass.title')}
       description={t('pass.description')}
+      action={
+        <Button
+          variant="ghost"
+          size="icon-md"
+          aria-label={t('pass.add')}
+          onClick={() => setAdding(true)}
+        >
+          <Plus />
+        </Button>
+      }
       contentProps={{ className: 'max-w-5xl' }}
     >
+      {adding && <PassAddDialog onDone={() => void reload()} onClose={() => setAdding(false)} />}
       {deleting && (
         <PassDeleteDialog
           pass={deleting}
@@ -59,41 +72,13 @@ export const PassesDrawer: React.FC<{ open: boolean; onOpenChange: (open: boolea
           </EmptyHeader>
         </Empty>
       )}
-      <ul className="flex flex-col">
-        {(passes ?? []).map(pass => (
-          <li
-            key={pass.id}
-            className="flex items-center gap-2 border-t border-border/50 py-2 first:border-t-0"
-          >
-            <div className="min-w-0 flex-1">
-              <p className="text-body font-medium">{pass.gamertag}</p>
-              <p className="text-caption text-muted-foreground">
-                {pass.alias} ·{' '}
-                {pass.lastSeenAt ? new Date(pass.lastSeenAt).toLocaleString() : t('pass.never')}
-              </p>
-            </div>
-            <Badge variant={pass.status === 'active' ? 'default' : 'secondary'}>
-              {t(`pass.status.${pass.status}`)}
-            </Badge>
-            <Button
-              variant="outline"
-              size="icon-md"
-              aria-label={pass.status === 'blocked' ? t('pass.unblock') : t('pass.block')}
-              onClick={() => void toggleBlock(pass)}
-            >
-              {pass.status === 'blocked' ? <CircleCheck /> : <Ban />}
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon-md"
-              aria-label={t('pass.delete')}
-              onClick={() => setDeleting(pass)}
-            >
-              <Trash2 />
-            </Button>
-          </li>
-        ))}
-      </ul>
+      {passes && passes.length > 0 && (
+        <PassesTable
+          passes={passes}
+          onToggleBlock={pass => void toggleBlock(pass)}
+          onDelete={setDeleting}
+        />
+      )}
     </AppDrawer>
   );
 };

@@ -7,11 +7,13 @@ import { AdminTabsBar } from '../../admin/ui/AdminTabsBar';
 import { MonitorAlertsArea } from './alerts/MonitorAlertsArea';
 import { MonitorAppArea } from './app/MonitorAppArea';
 import { MonitorHistoryArea } from './history/MonitorHistoryArea';
+import { MonitorJobsArea } from './jobs/MonitorJobsArea';
+import { MonitorProcessesArea } from './system/MonitorProcessesArea';
 import { MonitorSystemArea } from './system/MonitorSystemArea';
 
-const TABS = ['system', 'app', 'alerts', 'history'] as const;
+const TABS = ['system', 'app', 'jobs', 'processes', 'alerts', 'history'] as const;
 
-/** Composes the monitor page: tabs "System | App | Alerts | History". */
+/** Composes the monitor page: tabs "System | App | Jobs | Processes | Alerts | History". */
 export const MonitorArea: React.FC = () => {
   const { t } = useTranslation('admin-monitor');
   const [tab, setTab] = useState<string>(TABS[0]);
@@ -27,6 +29,8 @@ export const MonitorArea: React.FC = () => {
           <TabsContent key={value} value={value} className="mt-0">
             {value === 'system' && <MonitorSystemArea />}
             {value === 'app' && <MonitorAppArea />}
+            {value === 'jobs' && <MonitorJobsArea />}
+            {value === 'processes' && <MonitorProcessesArea />}
             {value === 'alerts' && <MonitorAlertsArea />}
             {value === 'history' && <MonitorHistoryArea />}
           </TabsContent>

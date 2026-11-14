@@ -8,7 +8,7 @@ import { MonitorAlertsActive } from './MonitorAlertsActive';
 import { MonitorAlertsLog } from './MonitorAlertsLog';
 import { MonitorThresholds } from './MonitorThresholds';
 
-/** Tab "Alerts": open alerts, alert log, editable thresholds. */
+/** Tab "Alerts": open alerts, alert log, editable thresholds (settings last). */
 export const MonitorAlertsArea: React.FC = () => {
   const { t } = useTranslation('admin-monitor');
   const { data, loading, error, reload } = useMonitorAlerts();
@@ -22,8 +22,8 @@ export const MonitorAlertsArea: React.FC = () => {
   return (
     <div className="flex flex-col gap-4">
       <MonitorAlertsActive active={data.active} />
-      <MonitorThresholds thresholds={data.thresholds} onSaved={() => reload()} />
       <MonitorAlertsLog log={data.log} />
+      <MonitorThresholds thresholds={data.thresholds} onSaved={() => reload()} />
     </div>
   );
 };

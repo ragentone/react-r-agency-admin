@@ -9,9 +9,13 @@ interface IState<D> {
   error: boolean;
 }
 
+/** Last result per `key`: a remounted tab shows it at once while the fresh one loads. */
+const cache = new Map<string, unknown>();
+
 /**
  * Loads one statistics result, reloads when `key` changes and – with `pollMs` – every
  * `pollMs` while the page is visible (live tab). Keeps the last data while reloading.
+ * Remembers the last result per `key` (stale-while-revalidate, no skeleton on re-entry).
  * `load` / `pick` are read when `key` or the reload counter changes (`key` must describe them).
  */
 export const useStatsQuery = <R extends IStatsResult, D>(
@@ -21,7 +25,10 @@ export const useStatsQuery = <R extends IStatsResult, D>(
   pollMs = 0
 ) => {
   const [tick, setTick] = useState(0);
-  const [state, setState] = useState<IState<D>>({ id: '', data: null, error: false });
+  const [state, setState] = useState<IState<D>>(() => {
+    const cached = cache.get(key) as D | undefined;
+    return { id: cached === undefined ? '' : `${key}|cached`, data: cached ?? null, error: false };
+  });
   const id = `${key}|${tick}`;
 
   useEffect(() => {
@@ -29,6 +36,7 @@ export const useStatsQuery = <R extends IStatsResult, D>(
     void load().then(result => {
       if (cancelled) return;
       const value = result.success ? pick(result) : undefined;
+      if (value !== undefined) cache.set(key, value);
       setState(previous =>
         value !== undefined
           ? { id, data: value, error: false }
@@ -60,7 +68,7 @@ export const useStatsQuery = <R extends IStatsResult, D>(
   }, [pollMs, reload]);
 
   const sameKey = state.id.startsWith(`${key}|`);
-  const data = sameKey || pollMs ? state.data : null;
+  const data = sameKey || pollMs ? state.data : ((cache.get(key) as D | undefined) ?? null);
   const pending = state.id !== id;
   return {
     data,

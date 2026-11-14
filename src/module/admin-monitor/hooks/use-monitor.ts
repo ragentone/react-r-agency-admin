@@ -11,7 +11,7 @@ export const useMonitor = (minutes: number) =>
     ADMIN_MONITOR_POLL_MS
   );
 
-/** Application metrics (WebSocket, GraphQL, cron, plugins, database, mesh). */
+/** Application metrics (WebSocket, GraphQL, cron jobs, database, mesh). */
 export const useMonitorApp = () =>
   useStatsQuery(
     () => AdminMonitorApi.app(),

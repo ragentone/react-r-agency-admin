@@ -32,13 +32,6 @@ export interface IMonitorCron {
   nextRun: string | null;
 }
 
-export interface IMonitorPlugin {
-  id: string;
-  name: string;
-  version: string;
-  status: string;
-}
-
 export interface IMonitorDb {
   connected: boolean;
   latencyMs: number;
@@ -57,7 +50,6 @@ export interface IMonitorApp {
   ws: IMonitorWs;
   graphql: IMonitorGraphql;
   cron: IMonitorCron[];
-  plugins: IMonitorPlugin[];
   db: IMonitorDb;
   mesh: { version: string; node: string; env: string; startedAt: string };
 }

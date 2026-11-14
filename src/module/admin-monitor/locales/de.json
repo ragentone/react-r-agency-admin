@@ -94,6 +94,8 @@
   "tabs": {
     "system": "System",
     "app": "App",
+    "jobs": "Cron-Jobs",
+    "processes": "Prozesse",
     "alerts": "Alerts",
     "history": "Historie"
   },
@@ -142,12 +144,13 @@
     "status": {
       "running": "Läuft",
       "pending": "Wartet"
+    },
+    "table": {
+      "name": "Name",
+      "expression": "Zeitplan",
+      "status": "Status",
+      "next": "Nächster Lauf"
     }
-  },
-  "plugins": {
-    "title": "Plugins",
-    "text": "Installierte Plugins",
-    "empty": "Keine Plugins installiert."
   },
   "db": {
     "latency": "Latenz",
@@ -179,7 +182,7 @@
   "alerts": {
     "activeTitle": "Offene Alerts",
     "activeText": "Aktuell verletzte Schwellwerte",
-    "activeEmpty": "Keine offenen Alerts.",
+    "activeEmpty": "Alles in Ordnung – keine offenen Alerts.",
     "level": {
       "ok": "OK",
       "warn": "Warnung",
@@ -187,7 +190,10 @@
     },
     "logTitle": "Alert-Verlauf",
     "logText": "Letzte Änderungen, neueste zuerst",
-    "logEmpty": "Noch keine Einträge."
+    "logEmpty": "Noch keine Einträge.",
+    "since": "Seit {{time}}",
+    "logMore": "{{count}} weitere anzeigen",
+    "logLess": "Weniger anzeigen"
   },
   "thresholds": {
     "title": "Schwellwerte",
@@ -197,7 +203,10 @@
     "error": "Speichern fehlgeschlagen.",
     "warn": "Warnung",
     "crit": "Kritisch",
-    "minutes": "Dauer (Min.)"
+    "minutes": "Dauer (Min.)",
+    "summary": "Warnung {{warn}} · Kritisch {{crit}} · {{minutes}} Min.",
+    "off": "Deaktiviert",
+    "enabled": "Überwachung aktiv"
   },
   "history": {
     "avg": "Ø",

@@ -4,14 +4,12 @@ import { useTranslation } from 'react-i18next';
 
 import { HomeError } from '../../../admin/home/components/HomeSection';
 import { useMonitorApp } from '../../hooks/use-monitor';
-import { MonitorCron } from './MonitorCron';
 import { MonitorDb } from './MonitorDb';
 import { MonitorGraphql } from './MonitorGraphql';
 import { MonitorMesh } from './MonitorMesh';
-import { MonitorPlugins } from './MonitorPlugins';
 import { MonitorWs } from './MonitorWs';
 
-/** Tab "App": WebSocket, GraphQL, cron, plugins, database, mesh. */
+/** Tab "App": WebSocket, GraphQL, database, mesh. */
 export const MonitorAppArea: React.FC = () => {
   const { t } = useTranslation('admin-monitor');
   const { data, loading, error, reload } = useMonitorApp();
@@ -26,10 +24,6 @@ export const MonitorAppArea: React.FC = () => {
     <div className="flex flex-col gap-4">
       <MonitorWs ws={data.ws} />
       <MonitorGraphql graphql={data.graphql} />
-      <div className="grid gap-4 md:grid-cols-2">
-        <MonitorCron cron={data.cron} />
-        <MonitorPlugins plugins={data.plugins} />
-      </div>
       <MonitorDb db={data.db} />
       <MonitorMesh mesh={data.mesh} />
     </div>

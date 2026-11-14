@@ -1,53 +1,48 @@
-import { Card, CardContent } from '@ui/shad-cn/components/card.tsx';
-import { Status, StatusIndicator } from '@ui/shad-cn/components/status.tsx';
-import React from 'react';
+import { Button } from '@ui/shad-cn/components/button.tsx';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { MONITOR_UNITS } from '../../types.alert';
 import type { IMonitorAlertEvent } from '../../types.alert';
 import { clockShort } from '../../utils';
+import { MonitorAlertRow } from './MonitorAlertRow';
+import { MonitorAlertsSection } from './MonitorAlertsSection';
 
-const VARIANT = { ok: 'success', warn: 'warning', crit: 'error' } as const;
+const SHORT = 8;
 
-/** Alert log: newest changes first (open / resolved), newest entries on top. */
+/** Alert log, newest first; shows the latest few, the rest on demand. */
 export const MonitorAlertsLog: React.FC<{ log: IMonitorAlertEvent[] }> = ({ log }) => {
   const { t } = useTranslation('admin-monitor');
+  const [expanded, setExpanded] = useState(false);
   const entries = [...log].reverse();
+  const shown = expanded ? entries : entries.slice(0, SHORT);
   return (
-    <Card className="rounded-xl border-border/50 shadow-none">
-      <CardContent className="flex flex-col gap-3 p-4">
-        <div>
-          <h3 className="text-title font-bold">{t('alerts.logTitle')}</h3>
-          <p className="text-caption text-muted-foreground">{t('alerts.logText')}</p>
-        </div>
-        {entries.length === 0 ? (
-          <p className="text-body text-muted-foreground">{t('alerts.logEmpty')}</p>
-        ) : (
-          <ul className="flex max-h-80 flex-col divide-y divide-border/50 overflow-y-auto">
-            {entries.map((entry, index) => (
-              <li
+    <MonitorAlertsSection title={t('alerts.logTitle')} text={t('alerts.logText')}>
+      {entries.length === 0 ? (
+        <p className="px-4 py-6 text-body text-muted-foreground">{t('alerts.logEmpty')}</p>
+      ) : (
+        <>
+          <ul>
+            {shown.map((entry, index) => (
+              <MonitorAlertRow
                 key={`${entry.t}-${entry.metric}-${index}`}
-                className="flex items-center justify-between gap-3 py-2 first:pt-0 last:pb-0"
-              >
-                <span className="flex min-w-0 flex-col">
-                  <span className="truncate font-semibold">{t(`metric.${entry.metric}`)}</span>
-                  <span className="text-micro text-muted-foreground">{clockShort(entry.t)}</span>
-                </span>
-                <span className="flex shrink-0 items-center gap-2">
-                  <span className="tabular-nums text-caption text-muted-foreground">
-                    {entry.value}
-                    {MONITOR_UNITS[entry.metric]}
-                  </span>
-                  <Status variant={VARIANT[entry.level]}>
-                    <StatusIndicator />
-                    {t(`alerts.level.${entry.level}`)}
-                  </Status>
-                </span>
-              </li>
+                metric={entry.metric}
+                level={entry.level}
+                value={entry.value}
+                caption={clockShort(entry.t)}
+              />
             ))}
           </ul>
-        )}
-      </CardContent>
-    </Card>
+          {entries.length > SHORT && (
+            <Button
+              variant="ghost"
+              className="h-12 w-full rounded-none border-t border-border/50"
+              onClick={() => setExpanded(open => !open)}
+            >
+              {t(expanded ? 'alerts.logLess' : 'alerts.logMore', { count: entries.length - SHORT })}
+            </Button>
+          )}
+        </>
+      )}
+    </MonitorAlertsSection>
   );
 };

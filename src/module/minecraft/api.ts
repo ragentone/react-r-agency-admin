@@ -19,6 +19,9 @@ const doc = {
   blockPass: parse(
     `mutation AdminMinecraftBlockPass($id: String!, $blocked: Boolean) { adminMinecraftBlockPass(id: $id, blocked: $blocked) { success error } }`
   ),
+  createPass: parse(
+    `mutation AdminMinecraftCreatePass($gamertag: String!) { adminMinecraftCreatePass(gamertag: $gamertag) { success error } }`
+  ),
   deletePass: parse(
     `mutation AdminMinecraftDeletePass($id: String!) { adminMinecraftDeletePass(id: $id) { success error } }`
   ),
@@ -234,6 +237,8 @@ export const AdminMinecraftApi = {
     read<IMinecraftResult & { passes?: IMinecraftPass[] }>(doc.passes, 'adminMinecraftPasses'),
   blockPass: (id: string, blocked: boolean) =>
     write<IMinecraftResult>(doc.blockPass, 'adminMinecraftBlockPass', { id, blocked }),
+  createPass: (gamertag: string) =>
+    write<IMinecraftResult>(doc.createPass, 'adminMinecraftCreatePass', { gamertag }),
   deletePass: (id: string) =>
     write<IMinecraftResult>(doc.deletePass, 'adminMinecraftDeletePass', { id }),
 };

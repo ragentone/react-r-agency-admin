@@ -197,6 +197,23 @@
       "active": "Активен",
       "paused": "Приостановлен",
       "blocked": "Заблокирован"
+    },
+    "table": {
+      "gamertag": "Gamertag",
+      "alias": "Алиас",
+      "lastSeen": "Последний вход",
+      "status": "Статус"
+    },
+    "add": "Добавить",
+    "addTitle": "Добавить gamertag",
+    "addText": "Сразу получит доступ на всех серверах.",
+    "addPlaceholder": "Gamertag",
+    "addDone": "Gamertag добавлен.",
+    "error": {
+      "invalid_input": "Недопустимый gamertag (буквы, цифры, до 15 символов).",
+      "exists": "Этот gamertag уже добавлен.",
+      "limit_reached": "Достигнут лимит записей.",
+      "rate_limited": "Слишком много попыток."
     }
   },
   "schedule": {

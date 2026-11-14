@@ -94,6 +94,8 @@
   "tabs": {
     "system": "System",
     "app": "App",
+    "jobs": "Cron jobs",
+    "processes": "Processes",
     "alerts": "Alerts",
     "history": "History"
   },
@@ -142,12 +144,13 @@
     "status": {
       "running": "Running",
       "pending": "Pending"
+    },
+    "table": {
+      "name": "Name",
+      "expression": "Schedule",
+      "status": "Status",
+      "next": "Next run"
     }
-  },
-  "plugins": {
-    "title": "Plugins",
-    "text": "Installed plugins",
-    "empty": "No plugins installed."
   },
   "db": {
     "latency": "Latency",
@@ -179,7 +182,7 @@
   "alerts": {
     "activeTitle": "Open alerts",
     "activeText": "Thresholds currently exceeded",
-    "activeEmpty": "No open alerts.",
+    "activeEmpty": "All good – no open alerts.",
     "level": {
       "ok": "OK",
       "warn": "Warning",
@@ -187,7 +190,10 @@
     },
     "logTitle": "Alert log",
     "logText": "Recent changes, newest first",
-    "logEmpty": "No entries yet."
+    "logEmpty": "No entries yet.",
+    "since": "Since {{time}}",
+    "logMore": "Show {{count}} more",
+    "logLess": "Show less"
   },
   "thresholds": {
     "title": "Thresholds",
@@ -197,7 +203,10 @@
     "error": "Could not save.",
     "warn": "Warn",
     "crit": "Critical",
-    "minutes": "Duration (min)"
+    "minutes": "Duration (min)",
+    "summary": "Warn {{warn}} · Crit {{crit}} · {{minutes}} min",
+    "off": "Disabled",
+    "enabled": "Monitoring enabled"
   },
   "history": {
     "avg": "Avg",

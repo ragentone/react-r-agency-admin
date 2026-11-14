@@ -197,6 +197,23 @@
       "active": "Aktiv",
       "paused": "Pausiert",
       "blocked": "Gesperrt"
+    },
+    "table": {
+      "gamertag": "Gamertag",
+      "alias": "Alias",
+      "lastSeen": "Zuletzt online",
+      "status": "Status"
+    },
+    "add": "Hinzufügen",
+    "addTitle": "Gamertag hinzufügen",
+    "addText": "Wird sofort auf allen Servern freigeschaltet.",
+    "addPlaceholder": "Gamertag",
+    "addDone": "Gamertag hinzugefügt.",
+    "error": {
+      "invalid_input": "Ungültiger Gamertag (Buchstaben, Ziffern, max. 15 Zeichen).",
+      "exists": "Dieser Gamertag ist bereits eingetragen.",
+      "limit_reached": "Maximale Anzahl Einträge erreicht.",
+      "rate_limited": "Zu viele Versuche."
     }
   },
   "schedule": {

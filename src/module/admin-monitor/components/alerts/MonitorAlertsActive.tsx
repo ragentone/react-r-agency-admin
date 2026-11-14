@@ -1,46 +1,35 @@
-import { Card, CardContent } from '@ui/shad-cn/components/card.tsx';
-import { Status, StatusIndicator } from '@ui/shad-cn/components/status.tsx';
+import { CheckCircle2 } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { MONITOR_UNITS } from '../../types.alert';
 import type { IMonitorAlert } from '../../types.alert';
+import { clockShort } from '../../utils';
+import { MonitorAlertRow } from './MonitorAlertRow';
+import { MonitorAlertsSection } from './MonitorAlertsSection';
 
-/** Open alerts: metric, level and the value that triggered it. */
+/** Open alerts; a calm "all fine" state when nothing is violated. */
 export const MonitorAlertsActive: React.FC<{ active: IMonitorAlert[] }> = ({ active }) => {
   const { t } = useTranslation('admin-monitor');
   return (
-    <Card className="rounded-xl border-border/50 shadow-none">
-      <CardContent className="flex flex-col gap-3 p-4">
-        <div>
-          <h3 className="text-title font-bold">{t('alerts.activeTitle')}</h3>
-          <p className="text-caption text-muted-foreground">{t('alerts.activeText')}</p>
+    <MonitorAlertsSection title={t('alerts.activeTitle')} text={t('alerts.activeText')}>
+      {active.length === 0 ? (
+        <div className="flex items-center gap-3 px-4 py-6">
+          <CheckCircle2 className="size-6 shrink-0 text-green-600" aria-hidden />
+          <p className="text-body font-bold">{t('alerts.activeEmpty')}</p>
         </div>
-        {active.length === 0 ? (
-          <p className="text-body text-muted-foreground">{t('alerts.activeEmpty')}</p>
-        ) : (
-          <ul className="flex flex-col divide-y divide-border/50">
-            {active.map(alert => (
-              <li
-                key={alert.metric}
-                className="flex items-center justify-between gap-3 py-2 first:pt-0 last:pb-0"
-              >
-                <span className="font-semibold">{t(`metric.${alert.metric}`)}</span>
-                <span className="flex items-center gap-2">
-                  <span className="tabular-nums text-caption text-muted-foreground">
-                    {alert.value}
-                    {MONITOR_UNITS[alert.metric]}
-                  </span>
-                  <Status variant={alert.level === 'crit' ? 'error' : 'warning'}>
-                    <StatusIndicator />
-                    {t(`alerts.level.${alert.level}`)}
-                  </Status>
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </CardContent>
-    </Card>
+      ) : (
+        <ul>
+          {active.map(alert => (
+            <MonitorAlertRow
+              key={alert.metric}
+              metric={alert.metric}
+              level={alert.level}
+              value={alert.value}
+              caption={t('alerts.since', { time: clockShort(alert.since) })}
+            />
+          ))}
+        </ul>
+      )}
+    </MonitorAlertsSection>
   );
 };
