@@ -50,9 +50,22 @@
       "passwordHint": "8–64 characters, at least one letter and one number.",
       "note": "The account is active right away and gets the admin:user role. Hand over the password securely.",
       "submit": "Create account",
-      "toast": "Admin account @{{alias}} created",
       "confirmed": "Confirmed",
-      "confirmedHint": "Off: the new admin gets an e-mail with a confirmation link. On: no e-mail, the account is confirmed right away."
+      "confirmedHint": "Off: the new admin gets an e-mail with a confirmation link. On: no e-mail, the account is confirmed right away.",
+      "passwordRepeat": "Confirm password",
+      "passwordMismatch": "The passwords don't match.",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password"
+    },
+    "created": {
+      "title": "Admin @{{alias}} created",
+      "description": "These credentials are shown only once, right now. Pass them on securely.",
+      "copy": "Copy {{label}}",
+      "copied": "{{label}} copied",
+      "copyFailed": "Copying failed.",
+      "confirmed": "The account is confirmed – it can sign in right away.",
+      "mailSent": "The account is not confirmed yet. A confirmation e-mail was sent.",
+      "done": "Done"
     }
   },
   "self": {

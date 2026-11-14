@@ -4,7 +4,8 @@ import { Switch } from '@ui/shad-cn/components/switch.tsx';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import type { IAdminUserCreateValues } from '../hooks';
+import { type IAdminUserCreateValues, useAdminTaken } from '../hooks';
+import { AdminPasswordFields } from './AdminPasswordFields';
 
 const EMPTY: IAdminUserCreateValues = { alias: '', email: '', password: '', confirmed: true };
 const ALIAS = /^[A-Za-z0-9_]{3,16}$/;
@@ -28,6 +29,8 @@ export const AdminUserCreateDrawer: React.FC<IAdminUserCreateDrawerProps> = ({
 }) => {
   const { t } = useTranslation('admin');
   const [values, setValues] = useState<IAdminUserCreateValues>(EMPTY);
+  const [repeat, setRepeat] = useState('');
+  const { taken, checking, check, clear, reset } = useAdminTaken();
   const [touched, setTouched] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
   const [wasOpen, setWasOpen] = useState(false);
@@ -37,6 +40,8 @@ export const AdminUserCreateDrawer: React.FC<IAdminUserCreateDrawerProps> = ({
     setWasOpen(open);
     if (open) {
       setValues(EMPTY);
+      setRepeat('');
+      reset();
       setTouched(false);
       setServerError(null);
     }
@@ -45,11 +50,20 @@ export const AdminUserCreateDrawer: React.FC<IAdminUserCreateDrawerProps> = ({
   const set = (key: 'alias' | 'email' | 'password', value: string) => {
     setValues(prev => ({ ...prev, [key]: value }));
     setServerError(null);
+    if (key !== 'password') clear(key);
   };
 
   const errors = {
-    alias: ALIAS.test(values.alias.trim()) ? null : t('users.create.aliasHint'),
-    email: EMAIL.test(values.email.trim()) ? null : t('error.emailInvalid'),
+    alias: !ALIAS.test(values.alias.trim())
+      ? t('users.create.aliasHint')
+      : taken.alias
+        ? t('error.aliasExists')
+        : null,
+    email: !EMAIL.test(values.email.trim())
+      ? t('error.emailInvalid')
+      : taken.email
+        ? t('error.emailExists')
+        : null,
     password:
       values.password.length >= 8 &&
       values.password.length <= 64 &&
@@ -58,12 +72,13 @@ export const AdminUserCreateDrawer: React.FC<IAdminUserCreateDrawerProps> = ({
         ? null
         : t('users.create.passwordHint'),
   };
-  const invalid = Boolean(errors.alias || errors.email || errors.password);
+  const repeatError = repeat === values.password ? null : t('users.create.passwordMismatch');
+  const invalid = Boolean(errors.alias || errors.email || errors.password || repeatError);
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
     setTouched(true);
-    if (invalid || saving) return;
+    if (invalid || saving || checking.alias || checking.email) return;
     const error = await onSubmit({
       alias: values.alias.trim(),
       email: values.email.trim(),
@@ -74,8 +89,15 @@ export const AdminUserCreateDrawer: React.FC<IAdminUserCreateDrawerProps> = ({
     else onOpenChange(false);
   };
 
+  /** Leaving the field: valid format → is it taken already? */
+  const blur = (key: 'alias' | 'email') => {
+    const value = values[key].trim();
+    if (!(key === 'alias' ? ALIAS : EMAIL).test(value)) return;
+    void check(key, key === 'email' ? value.toLowerCase() : value);
+  };
+
   const field = (
-    key: 'alias' | 'email' | 'password',
+    key: 'alias' | 'email',
     label: string,
     props: React.ComponentProps<typeof Input>
   ) => (
@@ -87,12 +109,13 @@ export const AdminUserCreateDrawer: React.FC<IAdminUserCreateDrawerProps> = ({
         id={`admin-create-${key}`}
         value={values[key]}
         onChange={event => set(key, event.target.value)}
-        aria-invalid={touched && Boolean(errors[key])}
+        onBlur={() => blur(key)}
+        aria-invalid={(touched || taken[key]) && Boolean(errors[key])}
         disabled={saving}
         className="h-11 rounded-lg text-base sm:text-body"
         {...props}
       />
-      {touched && errors[key] && (
+      {(touched || taken[key]) && errors[key] && (
         <p className="text-caption text-destructive" role="alert">
           {errors[key]}
         </p>
@@ -122,11 +145,19 @@ export const AdminUserCreateDrawer: React.FC<IAdminUserCreateDrawerProps> = ({
           autoCapitalize: 'none',
           inputMode: 'email',
         })}
-        {field('password', t('users.create.password'), {
-          type: 'password',
-          autoComplete: 'new-password',
-          maxLength: 64,
-        })}
+        <AdminPasswordFields
+          password={values.password}
+          repeat={repeat}
+          onPassword={value => set('password', value)}
+          onRepeat={value => {
+            setRepeat(value);
+            setServerError(null);
+          }}
+          touched={touched}
+          passwordError={errors.password}
+          repeatError={repeatError}
+          disabled={saving}
+        />
         <div className="flex items-center justify-between gap-4 rounded-lg border border-border/50 p-3">
           <label htmlFor="admin-create-confirmed" className="min-w-0 flex-1 space-y-0.5">
             <span className="block text-body font-medium">{t('users.create.confirmed')}</span>

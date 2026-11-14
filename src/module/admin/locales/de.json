@@ -50,9 +50,22 @@
       "passwordHint": "8–64 Zeichen, mindestens ein Buchstabe und eine Zahl.",
       "note": "Das Konto ist sofort aktiv und hat die Rolle admin:user. Gib das Passwort sicher weiter.",
       "submit": "Konto erstellen",
-      "toast": "Admin-Konto @{{alias}} erstellt",
       "confirmed": "Bestätigt",
-      "confirmedHint": "Aus: Der neue Admin bekommt eine E-Mail mit Bestätigungslink. An: kein E-Mail-Versand, das Konto ist sofort bestätigt."
+      "confirmedHint": "Aus: Der neue Admin bekommt eine E-Mail mit Bestätigungslink. An: kein E-Mail-Versand, das Konto ist sofort bestätigt.",
+      "passwordRepeat": "Passwort bestätigen",
+      "passwordMismatch": "Die Passwörter stimmen nicht überein.",
+      "showPassword": "Passwort anzeigen",
+      "hidePassword": "Passwort verbergen"
+    },
+    "created": {
+      "title": "Admin @{{alias}} erstellt",
+      "description": "Diese Zugangsdaten werden nur jetzt einmal angezeigt. Gib sie sicher weiter.",
+      "copy": "{{label}} kopieren",
+      "copied": "{{label}} kopiert",
+      "copyFailed": "Kopieren nicht möglich.",
+      "confirmed": "Das Konto ist bestätigt – die Anmeldung ist sofort möglich.",
+      "mailSent": "Das Konto ist noch nicht bestätigt. Eine Bestätigungs-E-Mail wurde gesendet.",
+      "done": "Fertig"
     }
   },
   "self": {

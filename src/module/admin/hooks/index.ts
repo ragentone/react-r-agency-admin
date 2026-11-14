@@ -4,6 +4,7 @@ export * from './use.admin.admins';
 export * from './use.admin.page.image';
 export * from './use.admin.pages';
 export * from './use.admin.roles';
+export * from './use.admin.taken';
 export * from './use.admin.user';
 export * from './use.admin.user.create';
 export * from './use.admin.users';
