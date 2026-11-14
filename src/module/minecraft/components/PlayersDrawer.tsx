@@ -113,7 +113,7 @@ export const PlayersDrawer: React.FC<{
           onClose={() => setMessaging(null)}
         />
       )}
-      {details && !deleting && !kicking && !messaging && (
+      {details && (
         <PlayerDetailsDialog
           player={details}
           onChanged={() => void reload()}

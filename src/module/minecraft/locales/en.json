@@ -342,7 +342,10 @@
     },
     "serverTitle": "Players on {{name}}",
     "serverSummary": "{{count}} online",
-    "serverButton": "Players on {{name}}"
+    "serverButton": "Players on {{name}}",
+    "messageAction": "Send message",
+    "kickAction": "Kick",
+    "more": "More actions"
   },
   "playerMessage": {
     "title": "Message to {{name}}",

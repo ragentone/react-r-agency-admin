@@ -342,7 +342,10 @@
     },
     "serverTitle": "Spieler auf {{name}}",
     "serverSummary": "{{count}} online",
-    "serverButton": "Spieler auf {{name}}"
+    "serverButton": "Spieler auf {{name}}",
+    "messageAction": "Nachricht senden",
+    "kickAction": "Rauswerfen",
+    "more": "Weitere Aktionen"
   },
   "playerMessage": {
     "title": "Nachricht an {{name}}",

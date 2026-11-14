@@ -342,7 +342,10 @@
     },
     "serverTitle": "Игроки на {{name}}",
     "serverSummary": "{{count}} онлайн",
-    "serverButton": "Игроки на {{name}}"
+    "serverButton": "Игроки на {{name}}",
+    "messageAction": "Отправить сообщение",
+    "kickAction": "Выгнать",
+    "more": "Другие действия"
   },
   "playerMessage": {
     "title": "Сообщение для {{name}}",
