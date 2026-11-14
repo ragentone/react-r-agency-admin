@@ -1,4 +1,11 @@
 import { Button } from '@ui/shad-cn/components/button.tsx';
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@ui/shad-cn/components/table.tsx';
 import { HardDriveDownload, Plus, Users } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,11 +14,11 @@ import { useMinecraftServers } from '../hooks/use-minecraft-servers';
 import type { IMinecraftServer } from '../types';
 import { BdsDialog } from './BdsDialog';
 import { DeleteServerDialog } from './DeleteServerDialog';
-import { MinecraftServerCard } from './MinecraftServerCard';
+import { MinecraftServerRow } from './MinecraftServerRow';
 import { PassesDrawer } from './PassesDrawer';
 import { ServerFormDialog } from './ServerFormDialog';
 
-/** Liste aller Server (eine Karte je Server) mit Plus-Button zum Anlegen. */
+/** Liste aller Server (Tabelle, eine Zeile je Server) mit Plus-Button zum Anlegen. */
 export const MinecraftServerList: React.FC = () => {
   const { t } = useTranslation('minecraft');
   const { data: entries, reload, error } = useMinecraftServers();
@@ -55,15 +62,32 @@ export const MinecraftServerList: React.FC = () => {
       {entries?.length === 0 && (
         <p className="text-caption text-muted-foreground">{t('list.empty')}</p>
       )}
-      {entries?.map(entry => (
-        <MinecraftServerCard
-          key={entry.server.id}
-          entry={entry}
-          onChanged={reload}
-          onEdit={() => setEditing(entry.server)}
-          onDelete={() => setDeleting(entry.server)}
-        />
-      ))}
+      {entries && entries.length > 0 && (
+        <div className="overflow-hidden rounded-xl border border-border/50">
+          <Table>
+            <TableHeader>
+              <TableRow className="border-border/50">
+                <TableHead>{t('list.col.server')}</TableHead>
+                <TableHead>{t('list.col.status')}</TableHead>
+                <TableHead className="hidden sm:table-cell">{t('players.title')}</TableHead>
+                <TableHead className="hidden md:table-cell">{t('card.resources')}</TableHead>
+                <TableHead className="w-0" />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {entries.map(entry => (
+                <MinecraftServerRow
+                  key={entry.server.id}
+                  entry={entry}
+                  onChanged={reload}
+                  onEdit={() => setEditing(entry.server)}
+                  onDelete={() => setDeleting(entry.server)}
+                />
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      )}
       {bds && <BdsDialog onClose={() => setBds(false)} />}
       <PassesDrawer open={passes} onOpenChange={setPasses} />
       {creating && <ServerFormDialog onSaved={reload} onClose={() => setCreating(false)} />}

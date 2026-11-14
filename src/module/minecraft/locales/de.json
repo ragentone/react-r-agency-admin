@@ -67,7 +67,13 @@
   "list": {
     "title": "Server",
     "empty": "Noch kein Server angelegt.",
-    "error": "Server konnten nicht geladen werden."
+    "error": "Server konnten nicht geladen werden.",
+    "col": {
+      "server": "Server",
+      "status": "Status"
+    },
+    "expand": "{{name}} aufklappen",
+    "collapse": "{{name}} zuklappen"
   },
   "form": {
     "createTitle": "Server anlegen",

@@ -67,7 +67,13 @@
   "list": {
     "title": "Servers",
     "empty": "No server created yet.",
-    "error": "Could not load servers."
+    "error": "Could not load servers.",
+    "col": {
+      "server": "Server",
+      "status": "Status"
+    },
+    "expand": "Expand {{name}}",
+    "collapse": "Collapse {{name}}"
   },
   "form": {
     "createTitle": "Create server",

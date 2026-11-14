@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import type { IMinecraftMetrics } from '../types';
 
-const formatMemory = (bytes: number): string =>
+export const formatMemory = (bytes: number): string =>
   bytes >= 1e9 ? `${(bytes / 1e9).toFixed(2)} GB` : `${Math.round(bytes / 1e6)} MB`;
 
 /** CPU und RAM des Servers (Messung alle 10 s); ohne Messwert nur "–". */
