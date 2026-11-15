@@ -11,9 +11,11 @@ import {
   EllipsisVertical,
   ListChecks,
   Megaphone,
+  Moon,
   Pencil,
   ScrollText,
   SlidersHorizontal,
+  Sun,
   Terminal,
   Trash2,
 } from 'lucide-react';
@@ -24,10 +26,13 @@ import { useTranslation } from 'react-i18next';
 export const MinecraftCardMenu: React.FC<{
   canBroadcast: boolean;
   canGamerules: boolean;
+  canTime: boolean;
   canDelete: boolean;
   onBackups: () => void;
   onWorld: () => void;
   onGamerules: () => void;
+  onDay: () => void;
+  onNight: () => void;
   onQuests: () => void;
   onBroadcast: () => void;
   onTerminal: () => void;
@@ -36,10 +41,13 @@ export const MinecraftCardMenu: React.FC<{
 }> = ({
   canBroadcast,
   canGamerules,
+  canTime,
   canDelete,
   onBackups,
   onWorld,
   onGamerules,
+  onDay,
+  onNight,
   onQuests,
   onBroadcast,
   onTerminal,
@@ -70,6 +78,14 @@ export const MinecraftCardMenu: React.FC<{
         <DropdownMenuItem disabled={!canGamerules} onSelect={onGamerules}>
           <ListChecks />
           {t('action.gamerules')}
+        </DropdownMenuItem>
+        <DropdownMenuItem disabled={!canTime} onSelect={onNight}>
+          <Moon />
+          {t('action.night')}
+        </DropdownMenuItem>
+        <DropdownMenuItem disabled={!canTime} onSelect={onDay}>
+          <Sun />
+          {t('action.day')}
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={onQuests}>
           <ScrollText />

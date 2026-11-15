@@ -100,6 +100,9 @@ const doc = {
   gameruleList: parse(
     `query AdminMinecraftGameruleList($serverId: String!) { adminMinecraftGameruleList(serverId: $serverId) { success error rules } }`
   ),
+  timeSet: parse(
+    `mutation AdminMinecraftTimeSet($serverId: String!, $phase: String!) { adminMinecraftTimeSet(serverId: $serverId, phase: $phase) { success error } }`
+  ),
   gameruleSet: parse(
     `mutation AdminMinecraftGameruleSet($serverId: String!, $name: String!, $value: Boolean!) { adminMinecraftGameruleSet(serverId: $serverId, name: $name, value: $value) { success error } }`
   ),
@@ -256,6 +259,8 @@ export const AdminMinecraftApi = {
       name,
       value,
     }),
+  setTime: (serverId: string, phase: 'day' | 'night') =>
+    write<IMinecraftResult>(doc.timeSet, 'adminMinecraftTimeSet', { serverId, phase }),
   passes: () =>
     read<IMinecraftResult & { passes?: IMinecraftPass[] }>(doc.passes, 'adminMinecraftPasses'),
   players: () =>

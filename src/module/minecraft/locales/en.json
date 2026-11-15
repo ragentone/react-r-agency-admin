@@ -60,7 +60,10 @@
     "backups": "Backups",
     "world": "World settings",
     "gamerules": "Game rules",
-    "quests": "Quests"
+    "quests": "Quests",
+    "day": "Day",
+    "night": "Night",
+    "timeDone": "Time of day set."
   },
   "gamemode": {
     "survival": "Survival",

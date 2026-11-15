@@ -43,6 +43,17 @@ export const MinecraftServerRow: React.FC<{
   const [kicking, setKicking] = useState<string | null>(null);
   const canStart = state === 'stopped' || state === 'crashed';
 
+  const setTime = async (phase: 'day' | 'night') => {
+    const result = await AdminMinecraftApi.setTime(server.id, phase);
+    if (result.success) {
+      toast.success(t('action.timeDone'));
+    } else {
+      toast.error(
+        t(`action.error.${result.error ?? 'unknown'}`, { defaultValue: t('action.error.unknown') })
+      );
+    }
+  };
+
   const run = async (action: CardAction) => {
     setBusy(action);
     const result = await AdminMinecraftApi[action](server.id);
@@ -127,10 +138,13 @@ export const MinecraftServerRow: React.FC<{
             <MinecraftCardMenu
               canBroadcast={state === 'running'}
               canGamerules={state === 'running'}
+              canTime={state === 'running'}
               canDelete={canStart}
               onBackups={() => setDialog('backups')}
               onWorld={() => setDialog('world')}
               onGamerules={() => setDialog('rules')}
+              onDay={() => void setTime('day')}
+              onNight={() => void setTime('night')}
               onQuests={() => setDialog('quests')}
               onBroadcast={() => setDialog('broadcast')}
               onTerminal={() => setDialog('terminal')}
