@@ -52,6 +52,7 @@ export const QuestsDrawer: React.FC<{
     <AppDrawer
       open={open}
       onOpenChange={onOpenChange}
+      locked={form !== null}
       title={t('quest.title', { name: server.name })}
       description={t('quest.text')}
       action={
