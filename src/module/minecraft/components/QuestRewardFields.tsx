@@ -34,7 +34,7 @@ export const QuestRewardFields: React.FC<{
           <SelectTrigger aria-label={t('quest.form.reward')}>
             <SelectValue />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="max-h-80">
             <SelectItem value={NONE}>{t('quest.form.rewardNone')}</SelectItem>
             {items.map(entry => (
               <SelectItem key={entry.item} value={entry.item}>

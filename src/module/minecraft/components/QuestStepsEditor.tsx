@@ -1,13 +1,23 @@
 import { Button } from '@ui/shad-cn/components/button.tsx';
 import { Input } from '@ui/shad-cn/components/input.tsx';
 import { Label } from '@ui/shad-cn/components/label.tsx';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@ui/shad-cn/components/select.tsx';
 import { Plus, Trash2 } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { QUEST_SIGNALS } from '../quest-signals';
 import { type IMinecraftQuestStep, QUEST_MAX_STEPS } from '../types.quest';
 
-/** Schritte einer Aufgabe: Text für den Spieler und optionales Signal des Behavior Packs. */
+const NONE = 'none';
+
+/** Schritte einer Aufgabe: Signal per Auswahl, Text kommt daraus. Nur bei „nur per Admin“ tippen. */
 export const QuestStepsEditor: React.FC<{
   steps: IMinecraftQuestStep[];
   onChange: (steps: IMinecraftQuestStep[]) => void;
@@ -16,14 +26,18 @@ export const QuestStepsEditor: React.FC<{
   const patch = (index: number, change: Partial<IMinecraftQuestStep>) =>
     onChange(steps.map((step, i) => (i === index ? { ...step, ...change } : step)));
 
+  const pick = (index: number, value: string) =>
+    patch(
+      index,
+      value === NONE ? { signal: '' } : { signal: value, text: t(`quest.signal.${value}`) }
+    );
+
   return (
     <div className="flex flex-col gap-3">
       {steps.map((step, index) => (
         <div key={index} className="flex flex-col gap-2 rounded-xl border border-border/50 p-3">
           <div className="flex items-center justify-between gap-2">
-            <Label htmlFor={`mc-quest-step-${index}`}>
-              {t('quest.form.step', { number: index + 1 })}
-            </Label>
+            <Label>{t('quest.form.step', { number: index + 1 })}</Label>
             <Button
               variant="ghost"
               size="icon-md"
@@ -34,23 +48,28 @@ export const QuestStepsEditor: React.FC<{
               <Trash2 />
             </Button>
           </div>
-          <Input
-            id={`mc-quest-step-${index}`}
-            value={step.text}
-            maxLength={80}
-            placeholder={t('quest.form.stepPlaceholder')}
-            onChange={event => patch(index, { text: event.target.value })}
-          />
-          <Input
-            value={step.signal}
-            maxLength={32}
-            autoCapitalize="none"
-            aria-label={t('quest.form.signal', { number: index + 1 })}
-            placeholder={t('quest.form.signalPlaceholder')}
-            onChange={event =>
-              patch(index, { signal: event.target.value.toLowerCase().replace(/[^a-z0-9_]/g, '') })
-            }
-          />
+          <Select value={step.signal || NONE} onValueChange={value => pick(index, value)}>
+            <SelectTrigger aria-label={t('quest.form.signal', { number: index + 1 })}>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className={'max-h-80'}>
+              {QUEST_SIGNALS.map(signal => (
+                <SelectItem key={signal} value={signal}>
+                  {t(`quest.signal.${signal}`)}
+                </SelectItem>
+              ))}
+              <SelectItem value={NONE}>{t('quest.signal.none')}</SelectItem>
+            </SelectContent>
+          </Select>
+          {!step.signal && (
+            <Input
+              value={step.text}
+              maxLength={80}
+              aria-label={t('quest.form.step', { number: index + 1 })}
+              placeholder={t('quest.form.stepPlaceholder')}
+              onChange={event => patch(index, { text: event.target.value })}
+            />
+          )}
         </div>
       ))}
       <p className="text-caption text-muted-foreground">{t('quest.form.signalHint')}</p>

@@ -3,7 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { AdminMinecraftQuestApi } from '../api.quest';
-import type { IMinecraftQuest, IMinecraftQuestReward, IMinecraftQuestStep } from '../types.quest';
+import type {
+  IMinecraftQuest,
+  IMinecraftQuestReward,
+  IMinecraftQuestStep,
+  MinecraftQuestLang,
+} from '../types.quest';
 
 const SIGNAL = /^[a-z0-9_]{0,32}$/;
 
@@ -12,6 +17,7 @@ export function useQuestForm(serverId: string, quest: IMinecraftQuest | null, on
   const { t } = useTranslation('minecraft');
   const [title, setTitle] = useState(quest?.title ?? '');
   const [intro, setIntro] = useState(quest?.intro ?? '');
+  const [lang, setLang] = useState<MinecraftQuestLang>(quest?.lang ?? 'de');
   const [steps, setSteps] = useState<IMinecraftQuestStep[]>(
     quest?.steps ?? [{ text: '', signal: '' }]
   );
@@ -28,6 +34,7 @@ export function useQuestForm(serverId: string, quest: IMinecraftQuest | null, on
     const result = await AdminMinecraftQuestApi.save(serverId, quest?.id ?? null, {
       title,
       intro,
+      lang,
       steps,
       reward,
     });
@@ -48,6 +55,8 @@ export function useQuestForm(serverId: string, quest: IMinecraftQuest | null, on
     setTitle,
     intro,
     setIntro,
+    lang,
+    setLang,
     steps,
     setSteps,
     reward,

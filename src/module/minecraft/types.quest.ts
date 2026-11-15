@@ -11,9 +11,13 @@ export interface IMinecraftQuestReward {
   amount: number;
 }
 
+/** Sprache der Meldungen an die Spieler. */
+export type MinecraftQuestLang = 'de' | 'en' | 'ru';
+
 export interface IMinecraftQuestInput {
   title: string;
   intro: string;
+  lang: MinecraftQuestLang;
   steps: IMinecraftQuestStep[];
   reward: IMinecraftQuestReward | null;
 }
