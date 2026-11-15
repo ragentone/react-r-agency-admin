@@ -7,15 +7,11 @@ import { GamerulesDialog } from './GamerulesDialog';
 import { KickPlayerDialog } from './KickPlayerDialog';
 import { MinecraftTerminal } from './MinecraftTerminal';
 import { PlayersDrawer } from './PlayersDrawer';
+import { QuestsDrawer } from './QuestsDrawer';
 import { WorldSettingsDialog } from './WorldSettingsDialog';
 
 export type MinecraftDialog =
-  | 'backups'
-  | 'world'
-  | 'rules'
-  | 'broadcast'
-  | 'terminal'
-  | 'players';
+  'backups' | 'world' | 'rules' | 'broadcast' | 'terminal' | 'players' | 'quests';
 
 /** Alle Dialoge/Drawer eines Servers; `dialog` ist der gerade offene, `kicking` ein Spielername. */
 export const MinecraftServerDialogs: React.FC<{
@@ -44,6 +40,11 @@ export const MinecraftServerDialogs: React.FC<{
       <PlayersDrawer
         server={{ id, name }}
         open={dialog === 'players'}
+        onOpenChange={open => !open && onClose()}
+      />
+      <QuestsDrawer
+        server={{ id, name }}
+        open={dialog === 'quests'}
         onOpenChange={open => !open && onClose()}
       />
       <MinecraftTerminal

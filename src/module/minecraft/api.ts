@@ -113,9 +113,9 @@ export interface IMinecraftResult {
   error?: string | null;
 }
 
-const client = () => getMeshClient().graphql();
+export const client = () => getMeshClient().graphql();
 
-const run = async <T extends IMinecraftResult>(
+export const run = async <T extends IMinecraftResult>(
   call: () => Promise<unknown>,
   field: string
 ): Promise<T> => {
@@ -131,8 +131,11 @@ const run = async <T extends IMinecraftResult>(
 const read = <T extends IMinecraftResult>(query: unknown, field: string) =>
   run<T>(() => client().query({ query: query as never, fetchPolicy: 'no-cache' }), field);
 
-const write = <T extends IMinecraftResult>(mutation: unknown, field: string, variables?: object) =>
-  run<T>(() => client().mutate({ mutation: mutation as never, variables }), field);
+export const write = <T extends IMinecraftResult>(
+  mutation: unknown,
+  field: string,
+  variables?: object
+) => run<T>(() => client().mutate({ mutation: mutation as never, variables }), field);
 
 /** Admin only (`admin:user`, checked in runtime `apps/minecraft`). */
 export const AdminMinecraftApi = {

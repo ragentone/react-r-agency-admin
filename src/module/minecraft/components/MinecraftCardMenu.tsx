@@ -12,6 +12,7 @@ import {
   ListChecks,
   Megaphone,
   Pencil,
+  ScrollText,
   SlidersHorizontal,
   Terminal,
   Trash2,
@@ -19,7 +20,7 @@ import {
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-/** Menü im Kartenkopf: Nachricht an alle, Terminal, Bearbeiten, Löschen. */
+/** Menü je Server: Terminal, Nachricht, Backups, Spielregeln, Aufgaben, Welt, Bearbeiten, Löschen. */
 export const MinecraftCardMenu: React.FC<{
   canBroadcast: boolean;
   canGamerules: boolean;
@@ -27,6 +28,7 @@ export const MinecraftCardMenu: React.FC<{
   onBackups: () => void;
   onWorld: () => void;
   onGamerules: () => void;
+  onQuests: () => void;
   onBroadcast: () => void;
   onTerminal: () => void;
   onEdit: () => void;
@@ -38,6 +40,7 @@ export const MinecraftCardMenu: React.FC<{
   onBackups,
   onWorld,
   onGamerules,
+  onQuests,
   onBroadcast,
   onTerminal,
   onEdit,
@@ -67,6 +70,10 @@ export const MinecraftCardMenu: React.FC<{
         <DropdownMenuItem disabled={!canGamerules} onSelect={onGamerules}>
           <ListChecks />
           {t('action.gamerules')}
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={onQuests}>
+          <ScrollText />
+          {t('action.quests')}
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={onWorld}>
           <SlidersHorizontal />

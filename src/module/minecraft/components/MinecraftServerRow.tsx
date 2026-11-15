@@ -131,6 +131,7 @@ export const MinecraftServerRow: React.FC<{
               onBackups={() => setDialog('backups')}
               onWorld={() => setDialog('world')}
               onGamerules={() => setDialog('rules')}
+              onQuests={() => setDialog('quests')}
               onBroadcast={() => setDialog('broadcast')}
               onTerminal={() => setDialog('terminal')}
               onEdit={onEdit}

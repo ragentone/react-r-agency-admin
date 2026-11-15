@@ -59,7 +59,8 @@
     "backup": "Create backup",
     "backups": "Backups",
     "world": "World settings",
-    "gamerules": "Game rules"
+    "gamerules": "Game rules",
+    "quests": "Quests"
   },
   "gamemode": {
     "survival": "Survival",
@@ -375,6 +376,72 @@
       "invalid_input": "Start and end must differ.",
       "not_found": "Entry not found.",
       "unknown": "Saving failed."
+    }
+  },
+  "quest": {
+    "title": "Quests: {{name}}",
+    "text": "Stories with steps and a reward. One quest is active per server.",
+    "menu": "Quest actions",
+    "loading": "Loading …",
+    "empty": "No quest yet",
+    "emptyText": "Create a story with a few steps and activate it.",
+    "summary": "{{steps}} steps · {{players}} joined · {{finished}} finished",
+    "status": {
+      "draft": "Draft",
+      "active": "Active",
+      "ended": "Ended"
+    },
+    "activate": "Activate",
+    "end": "End",
+    "activated": "Quest is active. Players on the server see it now.",
+    "ended": "Quest ended.",
+    "saved": "Quest saved.",
+    "deleteTitle": "Delete quest?",
+    "deleteText": "“{{title}}” will be deleted together with the progress of all players.",
+    "deleteDone": "Quest deleted.",
+    "form": {
+      "createTitle": "Create quest",
+      "editTitle": "Edit quest",
+      "text": "Short, simple sentences: players see them as a large title in the game.",
+      "title": "Title",
+      "titlePlaceholder": "The kidnapped bot",
+      "intro": "Story",
+      "introPlaceholder": "The bot is gone. Find three clues!",
+      "introHint": "Shown once when a player sees the quest for the first time. 80 characters at most.",
+      "step": "Step {{number}}",
+      "stepPlaceholder": "Look for the clue at the well",
+      "stepAdd": "Add step",
+      "stepRemove": "Remove step {{number}}",
+      "signal": "Signal for step {{number}}",
+      "signalPlaceholder": "Signal (optional), e.g. clue_1",
+      "signalHint": "The behavior pack will report the signal once the step is done in the game. Without a signal you tick off the step by hand in the progress view. Changing the steps restarts the progress.",
+      "reward": "Reward",
+      "rewardNone": "No reward",
+      "amount": "Amount",
+      "save": "Save"
+    },
+    "progress": {
+      "menu": "Progress",
+      "title": "Progress: {{title}}",
+      "text": "All players who have seen the quest. Refreshes every 10 seconds.",
+      "empty": "No player has seen the quest yet.",
+      "unknown": "Unknown player",
+      "step": "Step {{current}} of {{total}}",
+      "done": "Done",
+      "doneAt": "Finished on {{date}}",
+      "advance": "Step done",
+      "advanced": "Step ticked off for {{name}}."
+    },
+    "error": {
+      "invalid_input": "Please fill in the title and all steps.",
+      "not_found": "Quest or server not found.",
+      "active": "An active quest cannot be changed. End it first.",
+      "limit_reached": "20 quests per server at most.",
+      "not_active": "The quest is not active.",
+      "not_online": "The player is not on this server right now.",
+      "already_done": "The player has already finished the quest.",
+      "busy": "The step is being evaluated right now.",
+      "unknown": "That did not work."
     }
   }
 }

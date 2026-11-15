@@ -59,7 +59,8 @@
     "backup": "Backup erstellen",
     "backups": "Backups",
     "world": "Welt-Einstellungen",
-    "gamerules": "Spielregeln"
+    "gamerules": "Spielregeln",
+    "quests": "Aufgaben"
   },
   "gamemode": {
     "survival": "Survival",
@@ -375,6 +376,72 @@
       "invalid_input": "Beginn und Ende müssen verschieden sein.",
       "not_found": "Eintrag nicht gefunden.",
       "unknown": "Speichern fehlgeschlagen."
+    }
+  },
+  "quest": {
+    "title": "Aufgaben: {{name}}",
+    "text": "Geschichten mit Schritten und Belohnung. Pro Server ist eine Aufgabe aktiv.",
+    "menu": "Aktionen der Aufgabe",
+    "loading": "Wird geladen …",
+    "empty": "Noch keine Aufgabe",
+    "emptyText": "Lege eine Geschichte mit ein paar Schritten an und aktiviere sie.",
+    "summary": "{{steps}} Schritte · {{players}} dabei · {{finished}} fertig",
+    "status": {
+      "draft": "Entwurf",
+      "active": "Aktiv",
+      "ended": "Beendet"
+    },
+    "activate": "Aktivieren",
+    "end": "Beenden",
+    "activated": "Aufgabe ist aktiv. Spieler auf dem Server sehen sie jetzt.",
+    "ended": "Aufgabe beendet.",
+    "saved": "Aufgabe gespeichert.",
+    "deleteTitle": "Aufgabe löschen?",
+    "deleteText": "„{{title}}“ wird mit dem Fortschritt aller Spieler gelöscht.",
+    "deleteDone": "Aufgabe gelöscht.",
+    "form": {
+      "createTitle": "Aufgabe anlegen",
+      "editTitle": "Aufgabe bearbeiten",
+      "text": "Kurze, einfache Sätze: Die Spieler sehen sie als großen Titel im Spiel.",
+      "title": "Titel",
+      "titlePlaceholder": "Der entführte Bot",
+      "intro": "Geschichte",
+      "introPlaceholder": "Der Bot ist weg. Finde drei Hinweise!",
+      "introHint": "Erscheint einmal, wenn ein Spieler die Aufgabe zum ersten Mal sieht. Maximal 80 Zeichen.",
+      "step": "Schritt {{number}}",
+      "stepPlaceholder": "Suche den Hinweis am Brunnen",
+      "stepAdd": "Schritt hinzufügen",
+      "stepRemove": "Schritt {{number}} entfernen",
+      "signal": "Signal für Schritt {{number}}",
+      "signalPlaceholder": "Signal (optional), z. B. hinweis_1",
+      "signalHint": "Das Signal meldet später das Behavior Pack, wenn der Schritt im Spiel erledigt ist. Ohne Signal hakst du den Schritt im Fortschritt von Hand ab. Werden die Schritte geändert, beginnt der Fortschritt von vorn.",
+      "reward": "Belohnung",
+      "rewardNone": "Keine Belohnung",
+      "amount": "Anzahl",
+      "save": "Speichern"
+    },
+    "progress": {
+      "menu": "Fortschritt",
+      "title": "Fortschritt: {{title}}",
+      "text": "Alle Spieler, die die Aufgabe gesehen haben. Aktualisiert sich alle 10 Sekunden.",
+      "empty": "Noch hat kein Spieler die Aufgabe gesehen.",
+      "unknown": "Unbekannter Spieler",
+      "step": "Schritt {{current}} von {{total}}",
+      "done": "Fertig",
+      "doneAt": "Geschafft am {{date}}",
+      "advance": "Schritt erledigt",
+      "advanced": "Schritt für {{name}} abgehakt."
+    },
+    "error": {
+      "invalid_input": "Bitte Titel und alle Schritte ausfüllen.",
+      "not_found": "Aufgabe oder Server nicht gefunden.",
+      "active": "Eine aktive Aufgabe kann nicht geändert werden. Erst beenden.",
+      "limit_reached": "Maximal 20 Aufgaben je Server.",
+      "not_active": "Die Aufgabe ist nicht aktiv.",
+      "not_online": "Der Spieler ist gerade nicht auf diesem Server.",
+      "already_done": "Der Spieler hat die Aufgabe schon geschafft.",
+      "busy": "Der Schritt wird gerade gewertet.",
+      "unknown": "Das hat nicht geklappt."
     }
   }
 }
