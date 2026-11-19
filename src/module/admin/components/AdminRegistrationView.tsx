@@ -3,23 +3,27 @@ import { Checkbox } from '@ui/shad-cn/components/checkbox';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useRegistrationRoles } from '../hooks/use.registration.roles';
+import { type IRegistrationRoleGroup, useRegistrationRoles } from '../hooks/use.registration.roles';
+import { RegistrationRoleGroup } from './RegistrationRoleGroup';
 
-/** `Registrierung` tab: which roles every new account gets. */
+/** `Registrierung` tab: which app roles every new account gets, grouped by app. */
 export const AdminRegistrationView: React.FC = () => {
   const { t } = useTranslation('admin');
-  const { loading, saving, error, roles, options, save, retry } = useRegistrationRoles();
+  const { loading, saving, error, roles, groups, save, retry } = useRegistrationRoles();
   const [draft, setDraft] = useState<string[] | null>(null);
   const [failed, setFailed] = useState(false);
   const selected = draft ?? roles;
   const dirty = draft !== null;
 
-  const toggle = (role: string, checked: boolean) => {
+  const update = (change: (current: string[]) => string[]) => {
     setFailed(false);
-    setDraft(prev => {
-      const base = (prev ?? roles).filter(item => item !== role);
-      return checked ? [...base, role] : base;
-    });
+    setDraft(prev => change(prev ?? roles));
+  };
+  const toggle = (role: string, checked: boolean) =>
+    update(current => [...current.filter(item => item !== role), ...(checked ? [role] : [])]);
+  const toggleGroup = (group: IRegistrationRoleGroup, checked: boolean) => {
+    const ids = group.options.map(option => option.role);
+    update(current => [...current.filter(item => !ids.includes(item)), ...(checked ? ids : [])]);
   };
 
   const submit = async () => {
@@ -51,22 +55,18 @@ export const AdminRegistrationView: React.FC = () => {
         <code className="text-muted-foreground ml-auto text-xs">default:user</code>
       </div>
       {loading && <p className="text-muted-foreground px-4 py-3 text-sm">…</p>}
-      {!loading && options.length === 0 && (
+      {!loading && groups.length === 0 && (
         <p className="text-muted-foreground px-4 py-3 text-sm">{t('registration.empty')}</p>
       )}
-      {options.map(option => (
-        <label
-          key={option.role}
-          className="hover:bg-muted/50 flex min-h-11 cursor-pointer items-center gap-3 border-b border-border/50 px-4 py-3"
-        >
-          <Checkbox
-            checked={selected.includes(option.role)}
-            disabled={saving}
-            onCheckedChange={value => toggle(option.role, value === true)}
-          />
-          <span className="text-sm font-medium">{option.label}</span>
-          <code className="text-muted-foreground ml-auto truncate text-xs">{option.role}</code>
-        </label>
+      {groups.map(group => (
+        <RegistrationRoleGroup
+          key={group.id}
+          group={group}
+          selected={selected}
+          disabled={saving}
+          onToggle={toggle}
+          onToggleGroup={checked => toggleGroup(group, checked)}
+        />
       ))}
       <div className="flex flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-end">
         {failed && <p className="text-destructive text-sm">{t('registration.saveError')}</p>}

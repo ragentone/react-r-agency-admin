@@ -7,26 +7,67 @@ import type { MutationDocument, QueryDocument } from './graphql.client';
 
 /** Always given to new accounts, not editable here. */
 const BASE_ROLE = 'default:user';
+/** Admin scopes are never offered here (the backend refuses them too). */
+const ADMIN_SCOPES = ['admin', 'super'];
 
 export interface IRegistrationRoleOption {
   role: string;
   label: string;
 }
 
+export interface IRegistrationRoleGroup {
+  id: string;
+  label: string;
+  options: IRegistrationRoleOption[];
+}
+
+type RoleText = Partial<Record<string, string>> | null | undefined;
+
 interface IRoleDefinition {
   role: string;
-  label?: Partial<Record<string, string>> | null;
+  label?: RoleText;
+  group?: string;
   assignable?: boolean;
 }
 
-/** Roles a new account gets, plus every assignable role as a choice. */
+interface IRoleGroupDefinition {
+  id: string;
+  label?: RoleText;
+}
+
+const isAdminScope = (role: string) => ADMIN_SCOPES.includes(role.split(':')[0] ?? '');
+const textOf = (text: RoleText, lang: string, fallback: string) =>
+  text?.[lang] ?? text?.de ?? fallback;
+
+/** Assignable app roles, grouped by app in the order the runtime sends them. */
+export const buildRoleGroups = (
+  definitions: IRoleDefinition[],
+  groups: IRoleGroupDefinition[],
+  lang: string
+): IRegistrationRoleGroup[] => {
+  const result = new Map<string, IRegistrationRoleGroup>();
+  for (const item of definitions) {
+    if (item.assignable === false || item.role === BASE_ROLE || isAdminScope(item.role)) continue;
+    const id = item.group ?? item.role.split(':')[0] ?? 'other';
+    const group = result.get(id) ?? {
+      id,
+      label: textOf(groups.find(entry => entry.id === id)?.label, lang, id),
+      options: [],
+    };
+    group.options.push({ role: item.role, label: textOf(item.label, lang, item.role) });
+    result.set(id, group);
+  }
+  return [...result.values()];
+};
+
+/** Roles a new account gets, plus every assignable app role grouped by app. */
 export const useRegistrationRoles = () => {
   const getGraphql = useGraphQlGetter();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(false);
   const [roles, setRoles] = useState<string[]>([]);
-  const [options, setOptions] = useState<IRegistrationRoleOption[]>([]);
+  const [groups, setGroups] = useState<IRegistrationRoleGroup[]>([]);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -46,17 +87,18 @@ export const useRegistrationRoles = () => {
       ]);
       const stored = (current as { data?: { configRegistrationRoles?: { roles?: string[] } | null } })
         .data?.configRegistrationRoles;
-      const definitions = (list as {
-        data?: { adminRoleList?: { definitions?: IRoleDefinition[] | null } | null };
-      }).data?.adminRoleList?.definitions;
-      if (!stored || !Array.isArray(definitions)) throw new Error('registration roles');
+      const catalog = (list as {
+        data?: {
+          adminRoleList?: {
+            definitions?: IRoleDefinition[] | null;
+            groups?: IRoleGroupDefinition[] | null;
+          } | null;
+        };
+      }).data?.adminRoleList;
+      if (!stored || !Array.isArray(catalog?.definitions)) throw new Error('registration roles');
       const lang = i18n.language?.slice(0, 2) ?? 'de';
       setRoles((stored.roles ?? []).filter(role => role !== BASE_ROLE));
-      setOptions(
-        definitions
-          .filter(item => item.assignable !== false && item.role !== BASE_ROLE)
-          .map(item => ({ role: item.role, label: item.label?.[lang] ?? item.label?.de ?? item.role }))
-      );
+      setGroups(buildRoleGroups(catalog.definitions, catalog.groups ?? [], lang));
     } catch (err) {
       console.warn('[admin] registration roles', err);
       setError(true);
@@ -95,5 +137,5 @@ export const useRegistrationRoles = () => {
     [getGraphql]
   );
 
-  return { loading, saving, error, roles, options, save, retry: load };
+  return { loading, saving, error, roles, groups, save, retry: load };
 };
