@@ -7,10 +7,11 @@ import { useAdminRoleUpdate } from '../hooks';
 import { AdminPage } from '../ui/AdminPage';
 import { AdminPanel } from '../ui/AdminPanel';
 import { AdminAdminsView } from './AdminAdminsView';
+import { AdminRegistrationView } from './AdminRegistrationView';
 import { AdminSelfView } from './AdminSelfView';
 import { AdminUsersView } from './AdminUsersView';
 
-const TABS = ['users', 'self'] as const;
+const TABS = ['users', 'self', 'registration'] as const;
 const ADMINS_TAB = 'admins';
 
 /** `/admin` (user management): segmented tabs "Users | My roles" above one panel. Pages: `AdminPagesArea`. */
@@ -49,6 +50,11 @@ export const AdminArea: React.FC = () => {
         <TabsContent value="self" className="mt-0">
           <AdminPanel flush={true}>
             <AdminSelfView {...shared} />
+          </AdminPanel>
+        </TabsContent>
+        <TabsContent value="registration" className="mt-0">
+          <AdminPanel flush={true}>
+            <AdminRegistrationView />
           </AdminPanel>
         </TabsContent>
         {showAdmins && (

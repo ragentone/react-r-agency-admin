@@ -69,6 +69,11 @@ export interface IMutationAdminAddUserRoleArgs {
   userRole: string;
 }
 
+/** Arguments of `Mutation.adminAdminDelete` */
+export interface IMutationAdminAdminDeleteArgs {
+  userId: ScalarID;
+}
+
 /** Arguments of `Mutation.adminCronRun` */
 export interface IMutationAdminCronRunArgs {
   name: string;
@@ -77,6 +82,17 @@ export interface IMutationAdminCronRunArgs {
 /** Arguments of `Mutation.adminMinecraftBackup` */
 export interface IMutationAdminMinecraftBackupArgs {
   serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftBackupLink` */
+export interface IMutationAdminMinecraftBackupLinkArgs {
+  file: string;
+  serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftBackupSettingsSave` */
+export interface IMutationAdminMinecraftBackupSettingsSaveArgs {
+  settings: ScalarJSON;
 }
 
 /** Arguments of `Mutation.adminMinecraftBlockPass` */
@@ -90,6 +106,11 @@ export interface IMutationAdminMinecraftBroadcastArgs {
   message: string;
   mode?: InputMaybe<string>;
   serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftCreatePass` */
+export interface IMutationAdminMinecraftCreatePassArgs {
+  gamertag: string;
 }
 
 /** Arguments of `Mutation.adminMinecraftCreateServer` */
@@ -117,11 +138,50 @@ export interface IMutationAdminMinecraftDeleteServerArgs {
   serverId: string;
 }
 
+/** Arguments of `Mutation.adminMinecraftGameruleSet` */
+export interface IMutationAdminMinecraftGameruleSetArgs {
+  name: string;
+  serverId: string;
+  value: boolean;
+}
+
 /** Arguments of `Mutation.adminMinecraftKickPlayer` */
 export interface IMutationAdminMinecraftKickPlayerArgs {
   name: string;
   reason?: InputMaybe<string>;
   serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftMessagePlayer` */
+export interface IMutationAdminMinecraftMessagePlayerArgs {
+  message: string;
+  mode?: InputMaybe<string>;
+  name: string;
+  serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftQuestAdvance` */
+export interface IMutationAdminMinecraftQuestAdvanceArgs {
+  gamertag: string;
+  id: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftQuestDelete` */
+export interface IMutationAdminMinecraftQuestDeleteArgs {
+  id: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftQuestSave` */
+export interface IMutationAdminMinecraftQuestSaveArgs {
+  id?: InputMaybe<string>;
+  quest: ScalarJSON;
+  serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftQuestSetStatus` */
+export interface IMutationAdminMinecraftQuestSetStatusArgs {
+  id: string;
+  status: string;
 }
 
 /** Arguments of `Mutation.adminMinecraftRestart` */
@@ -141,6 +201,19 @@ export interface IMutationAdminMinecraftSendCommandArgs {
   serverId: string;
 }
 
+/** Arguments of `Mutation.adminMinecraftSetPassWindow` */
+export interface IMutationAdminMinecraftSetPassWindowArgs {
+  from?: InputMaybe<number>;
+  id: string;
+  to?: InputMaybe<number>;
+}
+
+/** Arguments of `Mutation.adminMinecraftSetServerPort` */
+export interface IMutationAdminMinecraftSetServerPortArgs {
+  port: number;
+  serverId: string;
+}
+
 /** Arguments of `Mutation.adminMinecraftStart` */
 export interface IMutationAdminMinecraftStartArgs {
   serverId: string;
@@ -151,6 +224,12 @@ export interface IMutationAdminMinecraftStopArgs {
   serverId: string;
 }
 
+/** Arguments of `Mutation.adminMinecraftTimeSet` */
+export interface IMutationAdminMinecraftTimeSetArgs {
+  phase: string;
+  serverId: string;
+}
+
 /** Arguments of `Mutation.adminMinecraftUpdateServer` */
 export interface IMutationAdminMinecraftUpdateServerArgs {
   autostart?: InputMaybe<boolean>;
@@ -158,6 +237,12 @@ export interface IMutationAdminMinecraftUpdateServerArgs {
   maxPlayers?: InputMaybe<number>;
   name: string;
   serverId: string;
+}
+
+/** Arguments of `Mutation.adminMinecraftWorldSave` */
+export interface IMutationAdminMinecraftWorldSaveArgs {
+  serverId: string;
+  settings: ScalarJSON;
 }
 
 /** Arguments of `Mutation.adminMonitorKill` */
@@ -327,6 +412,14 @@ export interface IMutationAdminSystemReleasePlanArgs {
   required?: InputMaybe<boolean>;
 }
 
+/** Arguments of `Mutation.adminUserCreate` */
+export interface IMutationAdminUserCreateArgs {
+  alias: string;
+  confirmed?: InputMaybe<boolean>;
+  email: string;
+  password: string;
+}
+
 /** Arguments of `Mutation.authAdminBan` */
 export interface IMutationAuthAdminBanArgs {
   reason?: InputMaybe<string>;
@@ -443,6 +536,11 @@ export interface IMutationAuthTotpEnableArgs {
   code: string;
 }
 
+/** Arguments of `Mutation.configRegistrationRolesSet` */
+export interface IMutationConfigRegistrationRolesSetArgs {
+  roles?: InputMaybe<ScalarJSON>;
+}
+
 /** Arguments of `Mutation.createAuthToken` */
 export interface IMutationCreateAuthTokenArgs {
   email: string;
@@ -490,6 +588,77 @@ export interface IMutationLinkCreateArgs {
 /** Arguments of `Mutation.linkParse` */
 export interface IMutationLinkParseArgs {
   token: string;
+}
+
+/** Arguments of `Mutation.musicArtistBanner` */
+export interface IMutationMusicArtistBannerArgs {
+  bannerFile?: InputMaybe<Array<InputMaybe<ScalarUpload>>>;
+  remove?: InputMaybe<boolean>;
+}
+
+/** Arguments of `Mutation.musicArtistUpdate` */
+export interface IMutationMusicArtistUpdateArgs {
+  bio?: InputMaybe<string>;
+  name?: InputMaybe<string>;
+}
+
+/** Arguments of `Mutation.musicTrackCreate` */
+export interface IMutationMusicTrackCreateArgs {
+  audioFile?: InputMaybe<Array<InputMaybe<ScalarUpload>>>;
+  coverFile?: InputMaybe<Array<InputMaybe<ScalarUpload>>>;
+  values: ScalarJSON;
+}
+
+/** Arguments of `Mutation.musicTrackDelete` */
+export interface IMutationMusicTrackDeleteArgs {
+  id: ScalarID;
+}
+
+/** Arguments of `Mutation.musicTrackDownload` */
+export interface IMutationMusicTrackDownloadArgs {
+  id: ScalarID;
+}
+
+/** Arguments of `Mutation.musicTrackLike` */
+export interface IMutationMusicTrackLikeArgs {
+  id: ScalarID;
+}
+
+/** Arguments of `Mutation.musicTrackListen` */
+export interface IMutationMusicTrackListenArgs {
+  id: ScalarID;
+  seconds: number;
+  session: string;
+  source?: InputMaybe<string>;
+}
+
+/** Arguments of `Mutation.musicTrackPlay` */
+export interface IMutationMusicTrackPlayArgs {
+  id: ScalarID;
+  source?: InputMaybe<string>;
+}
+
+/** Arguments of `Mutation.musicTrackReact` */
+export interface IMutationMusicTrackReactArgs {
+  id: ScalarID;
+  kind: string;
+  second: number;
+}
+
+/** Arguments of `Mutation.musicTrackUpdate` */
+export interface IMutationMusicTrackUpdateArgs {
+  coverFile?: InputMaybe<Array<InputMaybe<ScalarUpload>>>;
+  id: ScalarID;
+  values: ScalarJSON;
+}
+
+/** Arguments of `Mutation.musicTrackVideo` */
+export interface IMutationMusicTrackVideoArgs {
+  id: ScalarID;
+  length?: InputMaybe<number>;
+  locale?: InputMaybe<string>;
+  preset?: InputMaybe<string>;
+  start?: InputMaybe<number>;
 }
 
 /** Arguments of `Mutation.myEventsCalendarCreate` */
@@ -887,6 +1056,13 @@ export interface IQueryDbResourceReadArgs {
   pagination?: InputMaybe<IDbPagination>;
 }
 
+/** Arguments of `Query.adminAdminList` */
+export interface IQueryAdminAdminListArgs {
+  limit?: InputMaybe<number>;
+  offset?: InputMaybe<number>;
+  term?: InputMaybe<string>;
+}
+
 /** Arguments of `Query.adminCronRuns` */
 export interface IQueryAdminCronRunsArgs {
   name?: InputMaybe<string>;
@@ -903,8 +1079,28 @@ export interface IQueryAdminMinecraftConsoleHistoryArgs {
   serverId: string;
 }
 
+/** Arguments of `Query.adminMinecraftGameruleList` */
+export interface IQueryAdminMinecraftGameruleListArgs {
+  serverId: string;
+}
+
+/** Arguments of `Query.adminMinecraftQuestList` */
+export interface IQueryAdminMinecraftQuestListArgs {
+  serverId: string;
+}
+
+/** Arguments of `Query.adminMinecraftQuestProgress` */
+export interface IQueryAdminMinecraftQuestProgressArgs {
+  id: string;
+}
+
 /** Arguments of `Query.adminMinecraftStatus` */
 export interface IQueryAdminMinecraftStatusArgs {
+  serverId: string;
+}
+
+/** Arguments of `Query.adminMinecraftWorldGet` */
+export interface IQueryAdminMinecraftWorldGetArgs {
   serverId: string;
 }
 
@@ -1082,6 +1278,49 @@ export interface IQueryMailerSendArgs {
   subject?: InputMaybe<string>;
   template: string;
   to: string;
+}
+
+/** Arguments of `Query.musicArtist` */
+export interface IQueryMusicArtistArgs {
+  cursor?: InputMaybe<string>;
+  id: ScalarID;
+}
+
+/** Arguments of `Query.musicTrackClip` */
+export interface IQueryMusicTrackClipArgs {
+  id: ScalarID;
+  length?: InputMaybe<number>;
+}
+
+/** Arguments of `Query.musicTrackList` */
+export interface IQueryMusicTrackListArgs {
+  cursor?: InputMaybe<string>;
+  genre?: InputMaybe<string>;
+  scope?: InputMaybe<string>;
+  sort?: InputMaybe<string>;
+}
+
+/** Arguments of `Query.musicTrackLoad` */
+export interface IQueryMusicTrackLoadArgs {
+  id: ScalarID;
+}
+
+/** Arguments of `Query.musicTrackReactions` */
+export interface IQueryMusicTrackReactionsArgs {
+  id: ScalarID;
+}
+
+/** Arguments of `Query.musicTrackSearch` */
+export interface IQueryMusicTrackSearchArgs {
+  artistId?: InputMaybe<string>;
+  scope?: InputMaybe<string>;
+  term: string;
+}
+
+/** Arguments of `Query.musicTrackStats` */
+export interface IQueryMusicTrackStatsArgs {
+  days?: InputMaybe<number>;
+  id: ScalarID;
 }
 
 /** Arguments of `Query.myEventsCalendarLoad` */

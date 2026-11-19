@@ -198,3 +198,24 @@ export const AdminAdminDeleteMutation = parse(`
     }
   }
 `);
+
+/** `admin:user` only – roles a new account gets (`registrationRoles`). */
+export const RegistrationRolesQuery = parse(`
+  query RegistrationRoles {
+    configRegistrationRoles {
+      success
+      roles
+    }
+  }
+`);
+
+/** `admin:user` only – stores the roles a new account gets (`registrationRolesSet`). */
+export const RegistrationRolesSetMutation = parse(`
+  mutation RegistrationRolesSet($roles: JSON) {
+    configRegistrationRolesSet(roles: $roles) {
+      success
+      roles
+      invalid
+    }
+  }
+`);

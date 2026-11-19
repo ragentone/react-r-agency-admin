@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |    108 |
-| [Mutation](#mutation) |    157 |
-| Object-Types          |    320 |
+| [Query](#query)       |    124 |
+| [Mutation](#mutation) |    185 |
+| Object-Types          |    364 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -42,6 +42,13 @@ Query  ‹IQuery›
 │       │   └── showFullName: Boolean
 │       ├── superUser: Boolean
 │       └── userType: String!
+├── adminAdminList: adminAdminListReturn  ‹IAdminAdminListReturn›
+│   ├── $limit: Int
+│   ├── $offset: Int
+│   ├── $term: String
+│   ├── success: Boolean
+│   ├── total: Int
+│   └── users: JSON
 ├── adminCronList: adminCronListReturn  ‹IAdminCronListReturn›
 │   ├── error: String
 │   ├── list: JSON
@@ -65,6 +72,14 @@ Query  ‹IQuery›
 │   ├── backups: JSON
 │   ├── error: String
 │   └── success: Boolean
+├── adminMinecraftBackupSettings: adminMinecraftBackupSettingsReturn  ‹IAdminMinecraftBackupSettingsReturn›
+│   ├── error: String
+│   ├── settings: JSON
+│   └── success: Boolean
+├── adminMinecraftBdsStatus: adminMinecraftBdsStatusReturn  ‹IAdminMinecraftBdsStatusReturn›
+│   ├── error: String
+│   ├── status: JSON
+│   └── success: Boolean
 ├── adminMinecraftConsoleHistory: adminMinecraftConsoleHistoryReturn  ‹IAdminMinecraftConsoleHistoryReturn›
 │   ├── $after: Int
 │   ├── $serverId: String!
@@ -72,9 +87,29 @@ Query  ‹IQuery›
 │   ├── last: Int
 │   ├── lines: JSON
 │   └── success: Boolean
+├── adminMinecraftGameruleList: adminMinecraftGameruleListReturn  ‹IAdminMinecraftGameruleListReturn›
+│   ├── $serverId: String!
+│   ├── error: String
+│   ├── rules: JSON
+│   └── success: Boolean
 ├── adminMinecraftPasses: adminMinecraftPassesReturn  ‹IAdminMinecraftPassesReturn›
 │   ├── error: String
 │   ├── passes: JSON
+│   └── success: Boolean
+├── adminMinecraftPlayers: adminMinecraftPlayersReturn  ‹IAdminMinecraftPlayersReturn›
+│   ├── error: String
+│   ├── players: JSON
+│   └── success: Boolean
+├── adminMinecraftQuestList: adminMinecraftQuestListReturn  ‹IAdminMinecraftQuestListReturn›
+│   ├── $serverId: String!
+│   ├── error: String
+│   ├── items: JSON
+│   ├── quests: JSON
+│   └── success: Boolean
+├── adminMinecraftQuestProgress: adminMinecraftQuestProgressReturn  ‹IAdminMinecraftQuestProgressReturn›
+│   ├── $id: String!
+│   ├── error: String
+│   ├── progress: JSON
 │   └── success: Boolean
 ├── adminMinecraftServers: adminMinecraftServersReturn  ‹IAdminMinecraftServersReturn›
 │   ├── error: String
@@ -84,6 +119,11 @@ Query  ‹IQuery›
 │   ├── $serverId: String!
 │   ├── error: String
 │   ├── status: JSON
+│   └── success: Boolean
+├── adminMinecraftWorldGet: adminMinecraftWorldGetReturn  ‹IAdminMinecraftWorldGetReturn›
+│   ├── $serverId: String!
+│   ├── error: String
+│   ├── settings: JSON
 │   └── success: Boolean
 ├── adminMonitorAlerts: adminMonitorAlertsReturn  ‹IAdminMonitorAlertsReturn›
 │   ├── alerts: JSON
@@ -311,6 +351,9 @@ Query  ‹IQuery›
 │   ├── $data: JSON!
 │   ├── $dataKey: String!
 │   └── success: Boolean
+├── configRegistrationRoles: configRegistrationRolesReturn  ‹IConfigRegistrationRolesReturn›
+│   ├── roles: JSON
+│   └── success: Boolean
 ├── currencyGet: currencyGetReturn  ‹ICurrencyGetReturn›
 │   ├── $params: currencyParams!  ‹ICurrencyParams›
 │   │   ├── amount: Float
@@ -411,6 +454,66 @@ Query  ‹IQuery›
 │   └── success: Boolean
 ├── menuOpen: menuOpenReturn  ‹IMenuOpenReturn›
 │   └── entries: JSON
+├── musicArtist: musicArtistReturn  ‹IMusicArtistReturn›
+│   ├── $cursor: String
+│   ├── $id: ID!
+│   ├── artist: JSON
+│   ├── error: String
+│   ├── field: String
+│   ├── nextCursor: String
+│   ├── success: Boolean
+│   └── tracks: JSON
+├── musicTrackClip: musicTrackClipReturn  ‹IMusicTrackClipReturn›
+│   ├── $id: ID!
+│   ├── $length: Int
+│   ├── duration: Int
+│   ├── error: String
+│   ├── field: String
+│   ├── peaks: JSON
+│   ├── start: Int
+│   └── success: Boolean
+├── musicTrackList: musicTrackListReturn  ‹IMusicTrackListReturn›
+│   ├── $cursor: String
+│   ├── $genre: String
+│   ├── $scope: String
+│   ├── $sort: String
+│   ├── canCreate: Boolean
+│   ├── error: String
+│   ├── field: String
+│   ├── genres: JSON
+│   ├── nextCursor: String
+│   ├── success: Boolean
+│   └── tracks: JSON
+├── musicTrackLoad: musicTrackLoadReturn  ‹IMusicTrackLoadReturn›
+│   ├── $id: ID!
+│   ├── error: String
+│   ├── field: String
+│   ├── progress: Int
+│   ├── status: String
+│   ├── success: Boolean
+│   └── track: JSON
+├── musicTrackReactions: musicTrackReactionsReturn  ‹IMusicTrackReactionsReturn›
+│   ├── $id: ID!
+│   ├── error: String
+│   ├── field: String
+│   ├── reactions: JSON
+│   └── success: Boolean
+├── musicTrackSearch: musicTrackSearchReturn  ‹IMusicTrackSearchReturn›
+│   ├── $artistId: String
+│   ├── $scope: String
+│   ├── $term: String!
+│   ├── artists: JSON
+│   ├── error: String
+│   ├── field: String
+│   ├── success: Boolean
+│   └── tracks: JSON
+├── musicTrackStats: musicTrackStatsReturn  ‹IMusicTrackStatsReturn›
+│   ├── $days: Int
+│   ├── $id: ID!
+│   ├── error: String
+│   ├── field: String
+│   ├── stats: JSON
+│   └── success: Boolean
 ├── myEventsCalendarList: myEventsCalendarListReturn  ‹IMyEventsCalendarListReturn›
 │   ├── calendars: JSON
 │   ├── error: String
@@ -958,6 +1061,9 @@ Mutation  ‹IMutation›
 │   ├── $userId: ID!
 │   ├── $userRole: String!
 │   └── success: Boolean
+├── adminAdminDelete: adminAdminDeleteReturn  ‹IAdminAdminDeleteReturn›
+│   ├── $userId: ID!
+│   └── success: Boolean
 ├── adminCronRun: adminCronRunReturn  ‹IAdminCronRunReturn›
 │   ├── $name: String!
 │   ├── error: String
@@ -969,6 +1075,20 @@ Mutation  ‹IMutation›
 │   ├── file: String
 │   ├── size: Int
 │   └── success: Boolean
+├── adminMinecraftBackupLink: adminMinecraftBackupLinkReturn  ‹IAdminMinecraftBackupLinkReturn›
+│   ├── $file: String!
+│   ├── $serverId: String!
+│   ├── error: String
+│   ├── success: Boolean
+│   └── token: String
+├── adminMinecraftBackupSettingsSave: adminMinecraftBackupSettingsSaveReturn  ‹IAdminMinecraftBackupSettingsSaveReturn›
+│   ├── $settings: JSON!
+│   ├── error: String
+│   ├── settings: JSON
+│   └── success: Boolean
+├── adminMinecraftBdsInstall: adminMinecraftBdsInstallReturn  ‹IAdminMinecraftBdsInstallReturn›
+│   ├── error: String
+│   └── success: Boolean
 ├── adminMinecraftBlockPass: adminMinecraftBlockPassReturn  ‹IAdminMinecraftBlockPassReturn›
 │   ├── $blocked: Boolean
 │   ├── $id: String!
@@ -979,6 +1099,11 @@ Mutation  ‹IMutation›
 │   ├── $message: String!
 │   ├── $mode: String
 │   ├── $serverId: String!
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftCreatePass: adminMinecraftCreatePassReturn  ‹IAdminMinecraftCreatePassReturn›
+│   ├── $gamertag: String!
+│   ├── entry: JSON
 │   ├── error: String
 │   └── success: Boolean
 ├── adminMinecraftCreateServer: adminMinecraftCreateServerReturn  ‹IAdminMinecraftCreateServerReturn›
@@ -1003,11 +1128,46 @@ Mutation  ‹IMutation›
 │   ├── $serverId: String!
 │   ├── error: String
 │   └── success: Boolean
+├── adminMinecraftGameruleSet: adminMinecraftGameruleSetReturn  ‹IAdminMinecraftGameruleSetReturn›
+│   ├── $name: String!
+│   ├── $serverId: String!
+│   ├── $value: Boolean!
+│   ├── error: String
+│   └── success: Boolean
 ├── adminMinecraftKickPlayer: adminMinecraftKickPlayerReturn  ‹IAdminMinecraftKickPlayerReturn›
 │   ├── $name: String!
 │   ├── $reason: String
 │   ├── $serverId: String!
 │   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftMessagePlayer: adminMinecraftMessagePlayerReturn  ‹IAdminMinecraftMessagePlayerReturn›
+│   ├── $message: String!
+│   ├── $mode: String
+│   ├── $name: String!
+│   ├── $serverId: String!
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftQuestAdvance: adminMinecraftQuestAdvanceReturn  ‹IAdminMinecraftQuestAdvanceReturn›
+│   ├── $gamertag: String!
+│   ├── $id: String!
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftQuestDelete: adminMinecraftQuestDeleteReturn  ‹IAdminMinecraftQuestDeleteReturn›
+│   ├── $id: String!
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftQuestSave: adminMinecraftQuestSaveReturn  ‹IAdminMinecraftQuestSaveReturn›
+│   ├── $id: String
+│   ├── $quest: JSON!
+│   ├── $serverId: String!
+│   ├── error: String
+│   ├── quest: JSON
+│   └── success: Boolean
+├── adminMinecraftQuestSetStatus: adminMinecraftQuestSetStatusReturn  ‹IAdminMinecraftQuestSetStatusReturn›
+│   ├── $id: String!
+│   ├── $status: String!
+│   ├── error: String
+│   ├── quest: JSON
 │   └── success: Boolean
 ├── adminMinecraftRestart: adminMinecraftRestartReturn  ‹IAdminMinecraftRestartReturn›
 │   ├── $serverId: String!
@@ -1023,11 +1183,29 @@ Mutation  ‹IMutation›
 │   ├── $serverId: String!
 │   ├── error: String
 │   └── success: Boolean
+├── adminMinecraftSetPassWindow: adminMinecraftSetPassWindowReturn  ‹IAdminMinecraftSetPassWindowReturn›
+│   ├── $from: Int
+│   ├── $id: String!
+│   ├── $to: Int
+│   ├── entry: JSON
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftSetServerPort: adminMinecraftSetServerPortReturn  ‹IAdminMinecraftSetServerPortReturn›
+│   ├── $port: Int!
+│   ├── $serverId: String!
+│   ├── error: String
+│   ├── server: JSON
+│   └── success: Boolean
 ├── adminMinecraftStart: adminMinecraftStartReturn  ‹IAdminMinecraftStartReturn›
 │   ├── $serverId: String!
 │   ├── error: String
 │   └── success: Boolean
 ├── adminMinecraftStop: adminMinecraftStopReturn  ‹IAdminMinecraftStopReturn›
+│   ├── $serverId: String!
+│   ├── error: String
+│   └── success: Boolean
+├── adminMinecraftTimeSet: adminMinecraftTimeSetReturn  ‹IAdminMinecraftTimeSetReturn›
+│   ├── $phase: String!
 │   ├── $serverId: String!
 │   ├── error: String
 │   └── success: Boolean
@@ -1040,6 +1218,13 @@ Mutation  ‹IMutation›
 │   ├── error: String
 │   ├── restartRequired: Boolean
 │   ├── server: JSON
+│   └── success: Boolean
+├── adminMinecraftWorldSave: adminMinecraftWorldSaveReturn  ‹IAdminMinecraftWorldSaveReturn›
+│   ├── $serverId: String!
+│   ├── $settings: JSON!
+│   ├── error: String
+│   ├── restartRequired: Boolean
+│   ├── settings: JSON
 │   └── success: Boolean
 ├── adminMonitorKill: adminMonitorKillReturn  ‹IAdminMonitorKillReturn›
 │   ├── $pid: Int!
@@ -1222,6 +1407,13 @@ Mutation  ‹IMutation›
 │   ├── field: String
 │   ├── started: Boolean
 │   └── success: Boolean
+├── adminUserCreate: adminUserCreateReturn  ‹IAdminUserCreateReturn›
+│   ├── $alias: String!
+│   ├── $confirmed: Boolean
+│   ├── $email: String!
+│   ├── $password: String!
+│   ├── success: Boolean
+│   └── user: JSON
 ├── authAdminBan: authAdminBanReturn  ‹IAuthAdminBanReturn›
 │   ├── $reason: String
 │   ├── $until: String
@@ -1492,6 +1684,11 @@ Mutation  ‹IMutation›
 ├── configImport: configImportReturn  ‹IConfigImportReturn›
 │   ├── configs: JSON
 │   └── success: Boolean
+├── configRegistrationRolesSet: configRegistrationRolesSetReturn  ‹IConfigRegistrationRolesSetReturn›
+│   ├── $roles: JSON
+│   ├── invalid: JSON
+│   ├── roles: JSON
+│   └── success: Boolean
 ├── createAuthToken: createAuthTokenReturn  ‹ICreateAuthTokenReturn›
 │   ├── $email: String!
 │   ├── $password: String!
@@ -1554,6 +1751,91 @@ Mutation  ‹IMutation›
 │   ├── success: Boolean
 │   ├── target: String
 │   └── view: String
+├── musicArtistBanner: musicArtistBannerReturn  ‹IMusicArtistBannerReturn›
+│   ├── $bannerFile: [Upload]
+│   ├── $remove: Boolean
+│   ├── artist: JSON
+│   ├── error: String
+│   ├── field: String
+│   └── success: Boolean
+├── musicArtistUpdate: musicArtistUpdateReturn  ‹IMusicArtistUpdateReturn›
+│   ├── $bio: String
+│   ├── $name: String
+│   ├── error: String
+│   ├── field: String
+│   └── success: Boolean
+├── musicTrackCreate: musicTrackCreateReturn  ‹IMusicTrackCreateReturn›
+│   ├── $audioFile: [Upload]
+│   ├── $coverFile: [Upload]
+│   ├── $values: JSON!
+│   ├── error: String
+│   ├── field: String
+│   ├── progress: Int
+│   ├── status: String
+│   ├── success: Boolean
+│   └── track: JSON
+├── musicTrackDelete: musicTrackDeleteReturn  ‹IMusicTrackDeleteReturn›
+│   ├── $id: ID!
+│   ├── error: String
+│   ├── field: String
+│   └── success: Boolean
+├── musicTrackDownload: musicTrackDownloadReturn  ‹IMusicTrackDownloadReturn›
+│   ├── $id: ID!
+│   ├── error: String
+│   ├── field: String
+│   ├── success: Boolean
+│   └── url: String
+├── musicTrackLike: musicTrackLikeReturn  ‹IMusicTrackLikeReturn›
+│   ├── $id: ID!
+│   ├── error: String
+│   ├── field: String
+│   ├── liked: Boolean
+│   ├── likes: Int
+│   └── success: Boolean
+├── musicTrackListen: musicTrackListenReturn  ‹IMusicTrackListenReturn›
+│   ├── $id: ID!
+│   ├── $seconds: Int!
+│   ├── $session: String!
+│   ├── $source: String
+│   ├── error: String
+│   ├── field: String
+│   └── success: Boolean
+├── musicTrackPlay: musicTrackPlayReturn  ‹IMusicTrackPlayReturn›
+│   ├── $id: ID!
+│   ├── $source: String
+│   ├── error: String
+│   ├── field: String
+│   └── success: Boolean
+├── musicTrackReact: musicTrackReactReturn  ‹IMusicTrackReactReturn›
+│   ├── $id: ID!
+│   ├── $kind: String!
+│   ├── $second: Int!
+│   ├── error: String
+│   ├── field: String
+│   ├── success: Boolean
+│   └── total: Int
+├── musicTrackUpdate: musicTrackUpdateReturn  ‹IMusicTrackUpdateReturn›
+│   ├── $coverFile: [Upload]
+│   ├── $id: ID!
+│   ├── $values: JSON!
+│   ├── error: String
+│   ├── field: String
+│   ├── progress: Int
+│   ├── status: String
+│   ├── success: Boolean
+│   └── track: JSON
+├── musicTrackVideo: musicTrackVideoReturn  ‹IMusicTrackVideoReturn›
+│   ├── $id: ID!
+│   ├── $length: Int
+│   ├── $locale: String
+│   ├── $preset: String
+│   ├── $start: Int
+│   ├── error: String
+│   ├── field: String
+│   ├── progress: Int
+│   ├── status: String
+│   ├── success: Boolean
+│   └── track: JSON
 ├── myEventsCalendarCreate: myEventsCalendarCreateReturn  ‹IMyEventsCalendarCreateReturn›
 │   ├── $values: JSON!
 │   ├── calendar: JSON
@@ -2122,30 +2404,53 @@ Inputs
 | `accountUpdateData`                      | Input  | `IAccountUpdateData`                      | `inputs.ts`  |                                                                                  |
 | `adminAddRoleReturn`                     | Object | `IAdminAddRoleReturn`                     | `objects.ts` |                                                                                  |
 | `adminAddUserRoleReturn`                 | Object | `IAdminAddUserRoleReturn`                 | `objects.ts` |                                                                                  |
+| `adminAdminDeleteReturn`                 | Object | `IAdminAdminDeleteReturn`                 | `objects.ts` |                                                                                  |
+| `adminAdminListReturn`                   | Object | `IAdminAdminListReturn`                   | `objects.ts` |                                                                                  |
 | `adminCronListReturn`                    | Object | `IAdminCronListReturn`                    | `objects.ts` |                                                                                  |
 | `adminCronRunReturn`                     | Object | `IAdminCronRunReturn`                     | `objects.ts` |                                                                                  |
 | `adminCronRunsReturn`                    | Object | `IAdminCronRunsReturn`                    | `objects.ts` |                                                                                  |
 | `adminDbUsageEntitiesReturn`             | Object | `IAdminDbUsageEntitiesReturn`             | `objects.ts` |                                                                                  |
 | `adminDbUsageReportReturn`               | Object | `IAdminDbUsageReportReturn`               | `objects.ts` |                                                                                  |
+| `adminMinecraftBackupLinkReturn`         | Object | `IAdminMinecraftBackupLinkReturn`         | `objects.ts` |                                                                                  |
 | `adminMinecraftBackupReturn`             | Object | `IAdminMinecraftBackupReturn`             | `objects.ts` |                                                                                  |
+| `adminMinecraftBackupSettingsReturn`     | Object | `IAdminMinecraftBackupSettingsReturn`     | `objects.ts` |                                                                                  |
+| `adminMinecraftBackupSettingsSaveReturn` | Object | `IAdminMinecraftBackupSettingsSaveReturn` | `objects.ts` |                                                                                  |
 | `adminMinecraftBackupsReturn`            | Object | `IAdminMinecraftBackupsReturn`            | `objects.ts` |                                                                                  |
+| `adminMinecraftBdsInstallReturn`         | Object | `IAdminMinecraftBdsInstallReturn`         | `objects.ts` |                                                                                  |
+| `adminMinecraftBdsStatusReturn`          | Object | `IAdminMinecraftBdsStatusReturn`          | `objects.ts` |                                                                                  |
 | `adminMinecraftBlockPassReturn`          | Object | `IAdminMinecraftBlockPassReturn`          | `objects.ts` |                                                                                  |
 | `adminMinecraftBroadcastReturn`          | Object | `IAdminMinecraftBroadcastReturn`          | `objects.ts` |                                                                                  |
 | `adminMinecraftConsoleHistoryReturn`     | Object | `IAdminMinecraftConsoleHistoryReturn`     | `objects.ts` |                                                                                  |
+| `adminMinecraftCreatePassReturn`         | Object | `IAdminMinecraftCreatePassReturn`         | `objects.ts` |                                                                                  |
 | `adminMinecraftCreateServerReturn`       | Object | `IAdminMinecraftCreateServerReturn`       | `objects.ts` |                                                                                  |
 | `adminMinecraftDeleteBackupReturn`       | Object | `IAdminMinecraftDeleteBackupReturn`       | `objects.ts` |                                                                                  |
 | `adminMinecraftDeletePassReturn`         | Object | `IAdminMinecraftDeletePassReturn`         | `objects.ts` |                                                                                  |
 | `adminMinecraftDeleteServerReturn`       | Object | `IAdminMinecraftDeleteServerReturn`       | `objects.ts` |                                                                                  |
+| `adminMinecraftGameruleListReturn`       | Object | `IAdminMinecraftGameruleListReturn`       | `objects.ts` |                                                                                  |
+| `adminMinecraftGameruleSetReturn`        | Object | `IAdminMinecraftGameruleSetReturn`        | `objects.ts` |                                                                                  |
 | `adminMinecraftKickPlayerReturn`         | Object | `IAdminMinecraftKickPlayerReturn`         | `objects.ts` |                                                                                  |
+| `adminMinecraftMessagePlayerReturn`      | Object | `IAdminMinecraftMessagePlayerReturn`      | `objects.ts` |                                                                                  |
 | `adminMinecraftPassesReturn`             | Object | `IAdminMinecraftPassesReturn`             | `objects.ts` |                                                                                  |
+| `adminMinecraftPlayersReturn`            | Object | `IAdminMinecraftPlayersReturn`            | `objects.ts` |                                                                                  |
+| `adminMinecraftQuestAdvanceReturn`       | Object | `IAdminMinecraftQuestAdvanceReturn`       | `objects.ts` |                                                                                  |
+| `adminMinecraftQuestDeleteReturn`        | Object | `IAdminMinecraftQuestDeleteReturn`        | `objects.ts` |                                                                                  |
+| `adminMinecraftQuestListReturn`          | Object | `IAdminMinecraftQuestListReturn`          | `objects.ts` |                                                                                  |
+| `adminMinecraftQuestProgressReturn`      | Object | `IAdminMinecraftQuestProgressReturn`      | `objects.ts` |                                                                                  |
+| `adminMinecraftQuestSaveReturn`          | Object | `IAdminMinecraftQuestSaveReturn`          | `objects.ts` |                                                                                  |
+| `adminMinecraftQuestSetStatusReturn`     | Object | `IAdminMinecraftQuestSetStatusReturn`     | `objects.ts` |                                                                                  |
 | `adminMinecraftRestartReturn`            | Object | `IAdminMinecraftRestartReturn`            | `objects.ts` |                                                                                  |
 | `adminMinecraftRestoreBackupReturn`      | Object | `IAdminMinecraftRestoreBackupReturn`      | `objects.ts` |                                                                                  |
 | `adminMinecraftSendCommandReturn`        | Object | `IAdminMinecraftSendCommandReturn`        | `objects.ts` |                                                                                  |
 | `adminMinecraftServersReturn`            | Object | `IAdminMinecraftServersReturn`            | `objects.ts` |                                                                                  |
+| `adminMinecraftSetPassWindowReturn`      | Object | `IAdminMinecraftSetPassWindowReturn`      | `objects.ts` |                                                                                  |
+| `adminMinecraftSetServerPortReturn`      | Object | `IAdminMinecraftSetServerPortReturn`      | `objects.ts` |                                                                                  |
 | `adminMinecraftStartReturn`              | Object | `IAdminMinecraftStartReturn`              | `objects.ts` |                                                                                  |
 | `adminMinecraftStatusReturn`             | Object | `IAdminMinecraftStatusReturn`             | `objects.ts` |                                                                                  |
 | `adminMinecraftStopReturn`               | Object | `IAdminMinecraftStopReturn`               | `objects.ts` |                                                                                  |
+| `adminMinecraftTimeSetReturn`            | Object | `IAdminMinecraftTimeSetReturn`            | `objects.ts` |                                                                                  |
 | `adminMinecraftUpdateServerReturn`       | Object | `IAdminMinecraftUpdateServerReturn`       | `objects.ts` |                                                                                  |
+| `adminMinecraftWorldGetReturn`           | Object | `IAdminMinecraftWorldGetReturn`           | `objects.ts` |                                                                                  |
+| `adminMinecraftWorldSaveReturn`          | Object | `IAdminMinecraftWorldSaveReturn`          | `objects.ts` |                                                                                  |
 | `adminMonitorAlertsReturn`               | Object | `IAdminMonitorAlertsReturn`               | `objects.ts` |                                                                                  |
 | `adminMonitorAppReturn`                  | Object | `IAdminMonitorAppReturn`                  | `objects.ts` |                                                                                  |
 | `adminMonitorHistoryReturn`              | Object | `IAdminMonitorHistoryReturn`              | `objects.ts` |                                                                                  |
@@ -2201,6 +2506,7 @@ Inputs
 | `adminSystemReleasePlanReturn`           | Object | `IAdminSystemReleasePlanReturn`           | `objects.ts` |                                                                                  |
 | `adminSystemRuntimeDeployReturn`         | Object | `IAdminSystemRuntimeDeployReturn`         | `objects.ts` |                                                                                  |
 | `adminSystemStorageReturn`               | Object | `IAdminSystemStorageReturn`               | `objects.ts` |                                                                                  |
+| `adminUserCreateReturn`                  | Object | `IAdminUserCreateReturn`                  | `objects.ts` |                                                                                  |
 | `adminUserGetReturn`                     | Object | `IAdminUserGetReturn`                     | `objects.ts` |                                                                                  |
 | `adminUserSearchReturn`                  | Object | `IAdminUserSearchReturn`                  | `objects.ts` |                                                                                  |
 | `authAdminBanInfoReturn`                 | Object | `IAuthAdminBanInfoReturn`                 | `objects.ts` |                                                                                  |
@@ -2247,6 +2553,8 @@ Inputs
 | `clientUserMata`                         | Object | `IClientUserMata`                         | `objects.ts` |                                                                                  |
 | `clientWriteDataReturn`                  | Object | `IClientWriteDataReturn`                  | `objects.ts` |                                                                                  |
 | `configImportReturn`                     | Object | `IConfigImportReturn`                     | `objects.ts` |                                                                                  |
+| `configRegistrationRolesReturn`          | Object | `IConfigRegistrationRolesReturn`          | `objects.ts` |                                                                                  |
+| `configRegistrationRolesSetReturn`       | Object | `IConfigRegistrationRolesSetReturn`       | `objects.ts` |                                                                                  |
 | `createAuthTokenReturn`                  | Object | `ICreateAuthTokenReturn`                  | `objects.ts` |                                                                                  |
 | `createDummyUsersReturn`                 | Object | `ICreateDummyUsersReturn`                 | `objects.ts` |                                                                                  |
 | `currencyGetReturn`                      | Object | `ICurrencyGetReturn`                      | `objects.ts` |                                                                                  |
@@ -2291,6 +2599,24 @@ Inputs
 | `locationReverseReturn`                  | Object | `ILocationReverseReturn`                  | `objects.ts` |                                                                                  |
 | `mailerSendReturn`                       | Object | `IMailerSendReturn`                       | `objects.ts` |                                                                                  |
 | `menuOpenReturn`                         | Object | `IMenuOpenReturn`                         | `objects.ts` |                                                                                  |
+| `musicArtistBannerReturn`                | Object | `IMusicArtistBannerReturn`                | `objects.ts` |                                                                                  |
+| `musicArtistReturn`                      | Object | `IMusicArtistReturn`                      | `objects.ts` |                                                                                  |
+| `musicArtistUpdateReturn`                | Object | `IMusicArtistUpdateReturn`                | `objects.ts` |                                                                                  |
+| `musicTrackClipReturn`                   | Object | `IMusicTrackClipReturn`                   | `objects.ts` |                                                                                  |
+| `musicTrackCreateReturn`                 | Object | `IMusicTrackCreateReturn`                 | `objects.ts` |                                                                                  |
+| `musicTrackDeleteReturn`                 | Object | `IMusicTrackDeleteReturn`                 | `objects.ts` |                                                                                  |
+| `musicTrackDownloadReturn`               | Object | `IMusicTrackDownloadReturn`               | `objects.ts` |                                                                                  |
+| `musicTrackLikeReturn`                   | Object | `IMusicTrackLikeReturn`                   | `objects.ts` |                                                                                  |
+| `musicTrackListenReturn`                 | Object | `IMusicTrackListenReturn`                 | `objects.ts` |                                                                                  |
+| `musicTrackListReturn`                   | Object | `IMusicTrackListReturn`                   | `objects.ts` |                                                                                  |
+| `musicTrackLoadReturn`                   | Object | `IMusicTrackLoadReturn`                   | `objects.ts` |                                                                                  |
+| `musicTrackPlayReturn`                   | Object | `IMusicTrackPlayReturn`                   | `objects.ts` |                                                                                  |
+| `musicTrackReactionsReturn`              | Object | `IMusicTrackReactionsReturn`              | `objects.ts` |                                                                                  |
+| `musicTrackReactReturn`                  | Object | `IMusicTrackReactReturn`                  | `objects.ts` |                                                                                  |
+| `musicTrackSearchReturn`                 | Object | `IMusicTrackSearchReturn`                 | `objects.ts` |                                                                                  |
+| `musicTrackStatsReturn`                  | Object | `IMusicTrackStatsReturn`                  | `objects.ts` |                                                                                  |
+| `musicTrackUpdateReturn`                 | Object | `IMusicTrackUpdateReturn`                 | `objects.ts` |                                                                                  |
+| `musicTrackVideoReturn`                  | Object | `IMusicTrackVideoReturn`                  | `objects.ts` |                                                                                  |
 | `Mutation`                               | Object | `IMutation`                               | `objects.ts` |                                                                                  |
 | `myEventsCalendarCreateReturn`           | Object | `IMyEventsCalendarCreateReturn`           | `objects.ts` |                                                                                  |
 | `myEventsCalendarDeleteReturn`           | Object | `IMyEventsCalendarDeleteReturn`           | `objects.ts` |                                                                                  |

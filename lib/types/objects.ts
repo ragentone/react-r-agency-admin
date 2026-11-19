@@ -35,6 +35,18 @@ export interface IAdminAddUserRoleReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminAdminDeleteReturn` */
+export interface IAdminAdminDeleteReturn {
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminAdminListReturn` */
+export interface IAdminAdminListReturn {
+  success: Maybe<boolean>;
+  total: Maybe<number>;
+  users: Maybe<ScalarJSON>;
+}
+
 /** GraphQL: `adminCronListReturn` */
 export interface IAdminCronListReturn {
   error: Maybe<string>;
@@ -71,6 +83,13 @@ export interface IAdminDbUsageReportReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminMinecraftBackupLinkReturn` */
+export interface IAdminMinecraftBackupLinkReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+  token: Maybe<string>;
+}
+
 /** GraphQL: `adminMinecraftBackupReturn` */
 export interface IAdminMinecraftBackupReturn {
   error: Maybe<string>;
@@ -79,10 +98,37 @@ export interface IAdminMinecraftBackupReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminMinecraftBackupSettingsReturn` */
+export interface IAdminMinecraftBackupSettingsReturn {
+  error: Maybe<string>;
+  settings: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftBackupSettingsSaveReturn` */
+export interface IAdminMinecraftBackupSettingsSaveReturn {
+  error: Maybe<string>;
+  settings: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminMinecraftBackupsReturn` */
 export interface IAdminMinecraftBackupsReturn {
   backups: Maybe<ScalarJSON>;
   error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftBdsInstallReturn` */
+export interface IAdminMinecraftBdsInstallReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftBdsStatusReturn` */
+export interface IAdminMinecraftBdsStatusReturn {
+  error: Maybe<string>;
+  status: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
 }
 
@@ -104,6 +150,13 @@ export interface IAdminMinecraftConsoleHistoryReturn {
   error: Maybe<string>;
   last: Maybe<number>;
   lines: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftCreatePassReturn` */
+export interface IAdminMinecraftCreatePassReturn {
+  entry: Maybe<ScalarJSON>;
+  error: Maybe<string>;
   success: Maybe<boolean>;
 }
 
@@ -132,8 +185,27 @@ export interface IAdminMinecraftDeleteServerReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminMinecraftGameruleListReturn` */
+export interface IAdminMinecraftGameruleListReturn {
+  error: Maybe<string>;
+  rules: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftGameruleSetReturn` */
+export interface IAdminMinecraftGameruleSetReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminMinecraftKickPlayerReturn` */
 export interface IAdminMinecraftKickPlayerReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftMessagePlayerReturn` */
+export interface IAdminMinecraftMessagePlayerReturn {
   error: Maybe<string>;
   success: Maybe<boolean>;
 }
@@ -142,6 +214,54 @@ export interface IAdminMinecraftKickPlayerReturn {
 export interface IAdminMinecraftPassesReturn {
   error: Maybe<string>;
   passes: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftPlayersReturn` */
+export interface IAdminMinecraftPlayersReturn {
+  error: Maybe<string>;
+  players: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftQuestAdvanceReturn` */
+export interface IAdminMinecraftQuestAdvanceReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftQuestDeleteReturn` */
+export interface IAdminMinecraftQuestDeleteReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftQuestListReturn` */
+export interface IAdminMinecraftQuestListReturn {
+  error: Maybe<string>;
+  items: Maybe<ScalarJSON>;
+  quests: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftQuestProgressReturn` */
+export interface IAdminMinecraftQuestProgressReturn {
+  error: Maybe<string>;
+  progress: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftQuestSaveReturn` */
+export interface IAdminMinecraftQuestSaveReturn {
+  error: Maybe<string>;
+  quest: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftQuestSetStatusReturn` */
+export interface IAdminMinecraftQuestSetStatusReturn {
+  error: Maybe<string>;
+  quest: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
 }
 
@@ -170,6 +290,20 @@ export interface IAdminMinecraftServersReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminMinecraftSetPassWindowReturn` */
+export interface IAdminMinecraftSetPassWindowReturn {
+  entry: Maybe<ScalarJSON>;
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftSetServerPortReturn` */
+export interface IAdminMinecraftSetServerPortReturn {
+  error: Maybe<string>;
+  server: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminMinecraftStartReturn` */
 export interface IAdminMinecraftStartReturn {
   error: Maybe<string>;
@@ -189,11 +323,32 @@ export interface IAdminMinecraftStopReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminMinecraftTimeSetReturn` */
+export interface IAdminMinecraftTimeSetReturn {
+  error: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminMinecraftUpdateServerReturn` */
 export interface IAdminMinecraftUpdateServerReturn {
   error: Maybe<string>;
   restartRequired: Maybe<boolean>;
   server: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftWorldGetReturn` */
+export interface IAdminMinecraftWorldGetReturn {
+  error: Maybe<string>;
+  settings: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminMinecraftWorldSaveReturn` */
+export interface IAdminMinecraftWorldSaveReturn {
+  error: Maybe<string>;
+  restartRequired: Maybe<boolean>;
+  settings: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
 }
 
@@ -612,6 +767,12 @@ export interface IAdminSystemStorageReturn {
   field: Maybe<string>;
   storage: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminUserCreateReturn` */
+export interface IAdminUserCreateReturn {
+  success: Maybe<boolean>;
+  user: Maybe<ScalarJSON>;
 }
 
 /** GraphQL: `adminUserGetReturn` */
@@ -1053,6 +1214,19 @@ export interface IConfigImportReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `configRegistrationRolesReturn` */
+export interface IConfigRegistrationRolesReturn {
+  roles: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `configRegistrationRolesSetReturn` */
+export interface IConfigRegistrationRolesSetReturn {
+  invalid: Maybe<ScalarJSON>;
+  roles: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `createAuthTokenReturn` */
 export interface ICreateAuthTokenReturn {
   authToken: Maybe<string>;
@@ -1266,6 +1440,163 @@ export interface IMenuOpenReturn {
   entries: Maybe<ScalarJSON>;
 }
 
+/** GraphQL: `musicArtistBannerReturn` */
+export interface IMusicArtistBannerReturn {
+  artist: Maybe<ScalarJSON>;
+  error: Maybe<string>;
+  field: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicArtistReturn` */
+export interface IMusicArtistReturn {
+  artist: Maybe<ScalarJSON>;
+  error: Maybe<string>;
+  field: Maybe<string>;
+  nextCursor: Maybe<string>;
+  success: Maybe<boolean>;
+  tracks: Maybe<ScalarJSON>;
+}
+
+/** GraphQL: `musicArtistUpdateReturn` */
+export interface IMusicArtistUpdateReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicTrackClipReturn` */
+export interface IMusicTrackClipReturn {
+  duration: Maybe<number>;
+  error: Maybe<string>;
+  field: Maybe<string>;
+  peaks: Maybe<ScalarJSON>;
+  start: Maybe<number>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicTrackCreateReturn` */
+export interface IMusicTrackCreateReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  progress: Maybe<number>;
+  status: Maybe<string>;
+  success: Maybe<boolean>;
+  track: Maybe<ScalarJSON>;
+}
+
+/** GraphQL: `musicTrackDeleteReturn` */
+export interface IMusicTrackDeleteReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicTrackDownloadReturn` */
+export interface IMusicTrackDownloadReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  success: Maybe<boolean>;
+  url: Maybe<string>;
+}
+
+/** GraphQL: `musicTrackLikeReturn` */
+export interface IMusicTrackLikeReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  liked: Maybe<boolean>;
+  likes: Maybe<number>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicTrackListenReturn` */
+export interface IMusicTrackListenReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicTrackListReturn` */
+export interface IMusicTrackListReturn {
+  canCreate: Maybe<boolean>;
+  error: Maybe<string>;
+  field: Maybe<string>;
+  genres: Maybe<ScalarJSON>;
+  nextCursor: Maybe<string>;
+  success: Maybe<boolean>;
+  tracks: Maybe<ScalarJSON>;
+}
+
+/** GraphQL: `musicTrackLoadReturn` */
+export interface IMusicTrackLoadReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  progress: Maybe<number>;
+  status: Maybe<string>;
+  success: Maybe<boolean>;
+  track: Maybe<ScalarJSON>;
+}
+
+/** GraphQL: `musicTrackPlayReturn` */
+export interface IMusicTrackPlayReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicTrackReactionsReturn` */
+export interface IMusicTrackReactionsReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  reactions: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicTrackReactReturn` */
+export interface IMusicTrackReactReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  success: Maybe<boolean>;
+  total: Maybe<number>;
+}
+
+/** GraphQL: `musicTrackSearchReturn` */
+export interface IMusicTrackSearchReturn {
+  artists: Maybe<ScalarJSON>;
+  error: Maybe<string>;
+  field: Maybe<string>;
+  success: Maybe<boolean>;
+  tracks: Maybe<ScalarJSON>;
+}
+
+/** GraphQL: `musicTrackStatsReturn` */
+export interface IMusicTrackStatsReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  stats: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicTrackUpdateReturn` */
+export interface IMusicTrackUpdateReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  progress: Maybe<number>;
+  status: Maybe<string>;
+  success: Maybe<boolean>;
+  track: Maybe<ScalarJSON>;
+}
+
+/** GraphQL: `musicTrackVideoReturn` */
+export interface IMusicTrackVideoReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  progress: Maybe<number>;
+  status: Maybe<string>;
+  success: Maybe<boolean>;
+  track: Maybe<ScalarJSON>;
+}
+
 /** GraphQL: `Mutation` */
 export interface IMutation {
   DbResourceCreate: Maybe<IDbResourceCreateResult>;
@@ -1276,21 +1607,36 @@ export interface IMutation {
   accountSelfUpdateSettings: Maybe<IAccountSelfUpdateSettingsReturn>;
   adminAddRole: Maybe<IAdminAddRoleReturn>;
   adminAddUserRole: Maybe<IAdminAddUserRoleReturn>;
+  adminAdminDelete: Maybe<IAdminAdminDeleteReturn>;
   adminCronRun: Maybe<IAdminCronRunReturn>;
   adminMinecraftBackup: Maybe<IAdminMinecraftBackupReturn>;
+  adminMinecraftBackupLink: Maybe<IAdminMinecraftBackupLinkReturn>;
+  adminMinecraftBackupSettingsSave: Maybe<IAdminMinecraftBackupSettingsSaveReturn>;
+  adminMinecraftBdsInstall: Maybe<IAdminMinecraftBdsInstallReturn>;
   adminMinecraftBlockPass: Maybe<IAdminMinecraftBlockPassReturn>;
   adminMinecraftBroadcast: Maybe<IAdminMinecraftBroadcastReturn>;
+  adminMinecraftCreatePass: Maybe<IAdminMinecraftCreatePassReturn>;
   adminMinecraftCreateServer: Maybe<IAdminMinecraftCreateServerReturn>;
   adminMinecraftDeleteBackup: Maybe<IAdminMinecraftDeleteBackupReturn>;
   adminMinecraftDeletePass: Maybe<IAdminMinecraftDeletePassReturn>;
   adminMinecraftDeleteServer: Maybe<IAdminMinecraftDeleteServerReturn>;
+  adminMinecraftGameruleSet: Maybe<IAdminMinecraftGameruleSetReturn>;
   adminMinecraftKickPlayer: Maybe<IAdminMinecraftKickPlayerReturn>;
+  adminMinecraftMessagePlayer: Maybe<IAdminMinecraftMessagePlayerReturn>;
+  adminMinecraftQuestAdvance: Maybe<IAdminMinecraftQuestAdvanceReturn>;
+  adminMinecraftQuestDelete: Maybe<IAdminMinecraftQuestDeleteReturn>;
+  adminMinecraftQuestSave: Maybe<IAdminMinecraftQuestSaveReturn>;
+  adminMinecraftQuestSetStatus: Maybe<IAdminMinecraftQuestSetStatusReturn>;
   adminMinecraftRestart: Maybe<IAdminMinecraftRestartReturn>;
   adminMinecraftRestoreBackup: Maybe<IAdminMinecraftRestoreBackupReturn>;
   adminMinecraftSendCommand: Maybe<IAdminMinecraftSendCommandReturn>;
+  adminMinecraftSetPassWindow: Maybe<IAdminMinecraftSetPassWindowReturn>;
+  adminMinecraftSetServerPort: Maybe<IAdminMinecraftSetServerPortReturn>;
   adminMinecraftStart: Maybe<IAdminMinecraftStartReturn>;
   adminMinecraftStop: Maybe<IAdminMinecraftStopReturn>;
+  adminMinecraftTimeSet: Maybe<IAdminMinecraftTimeSetReturn>;
   adminMinecraftUpdateServer: Maybe<IAdminMinecraftUpdateServerReturn>;
+  adminMinecraftWorldSave: Maybe<IAdminMinecraftWorldSaveReturn>;
   adminMonitorKill: Maybe<IAdminMonitorKillReturn>;
   adminMonitorThresholdsSave: Maybe<IAdminMonitorThresholdsSaveReturn>;
   adminPageCreate: Maybe<IAdminPageCreateReturn>;
@@ -1322,6 +1668,7 @@ export interface IMutation {
   adminSystemBuildDeploy: Maybe<IAdminSystemBuildDeployReturn>;
   adminSystemReleasePlan: Maybe<IAdminSystemReleasePlanReturn>;
   adminSystemRuntimeDeploy: Maybe<IAdminSystemRuntimeDeployReturn>;
+  adminUserCreate: Maybe<IAdminUserCreateReturn>;
   authAdminBan: Maybe<IAuthAdminBanReturn>;
   authAdminUnban: Maybe<IAuthAdminUnbanReturn>;
   authCodeSend: Maybe<IAuthCodeSendReturn>;
@@ -1353,6 +1700,7 @@ export interface IMutation {
   authTotpEnable: Maybe<IAuthTotpEnableReturn>;
   authTotpSetup: Maybe<IAuthTotpSetupReturn>;
   configImport: Maybe<IConfigImportReturn>;
+  configRegistrationRolesSet: Maybe<IConfigRegistrationRolesSetReturn>;
   createAuthToken: Maybe<ICreateAuthTokenReturn>;
   createDummyUsers: Maybe<ICreateDummyUsersReturn>;
   debugClientReport: Maybe<IDebugClientReportReturn>;
@@ -1363,6 +1711,17 @@ export interface IMutation {
   googleAuthAfter: Maybe<IGoogleAuthAfterReturn>;
   linkCreate: Maybe<ILinkCreateReturn>;
   linkParse: Maybe<ILinkParseReturn>;
+  musicArtistBanner: Maybe<IMusicArtistBannerReturn>;
+  musicArtistUpdate: Maybe<IMusicArtistUpdateReturn>;
+  musicTrackCreate: Maybe<IMusicTrackCreateReturn>;
+  musicTrackDelete: Maybe<IMusicTrackDeleteReturn>;
+  musicTrackDownload: Maybe<IMusicTrackDownloadReturn>;
+  musicTrackLike: Maybe<IMusicTrackLikeReturn>;
+  musicTrackListen: Maybe<IMusicTrackListenReturn>;
+  musicTrackPlay: Maybe<IMusicTrackPlayReturn>;
+  musicTrackReact: Maybe<IMusicTrackReactReturn>;
+  musicTrackUpdate: Maybe<IMusicTrackUpdateReturn>;
+  musicTrackVideo: Maybe<IMusicTrackVideoReturn>;
   myEventsCalendarCreate: Maybe<IMyEventsCalendarCreateReturn>;
   myEventsCalendarDelete: Maybe<IMyEventsCalendarDeleteReturn>;
   myEventsCalendarUpdate: Maybe<IMyEventsCalendarUpdateReturn>;
@@ -1593,15 +1952,23 @@ export interface IMyEventsMemberSetRoleReturn {
 export interface IQuery {
   DbResourceRead: Maybe<IDbResourceReadResult>;
   accountSelfLoad: Maybe<IAccountSelfLoad>;
+  adminAdminList: Maybe<IAdminAdminListReturn>;
   adminCronList: Maybe<IAdminCronListReturn>;
   adminCronRuns: Maybe<IAdminCronRunsReturn>;
   adminDbUsageEntities: Maybe<IAdminDbUsageEntitiesReturn>;
   adminDbUsageReport: Maybe<IAdminDbUsageReportReturn>;
+  adminMinecraftBackupSettings: Maybe<IAdminMinecraftBackupSettingsReturn>;
   adminMinecraftBackups: Maybe<IAdminMinecraftBackupsReturn>;
+  adminMinecraftBdsStatus: Maybe<IAdminMinecraftBdsStatusReturn>;
   adminMinecraftConsoleHistory: Maybe<IAdminMinecraftConsoleHistoryReturn>;
+  adminMinecraftGameruleList: Maybe<IAdminMinecraftGameruleListReturn>;
   adminMinecraftPasses: Maybe<IAdminMinecraftPassesReturn>;
+  adminMinecraftPlayers: Maybe<IAdminMinecraftPlayersReturn>;
+  adminMinecraftQuestList: Maybe<IAdminMinecraftQuestListReturn>;
+  adminMinecraftQuestProgress: Maybe<IAdminMinecraftQuestProgressReturn>;
   adminMinecraftServers: Maybe<IAdminMinecraftServersReturn>;
   adminMinecraftStatus: Maybe<IAdminMinecraftStatusReturn>;
+  adminMinecraftWorldGet: Maybe<IAdminMinecraftWorldGetReturn>;
   adminMonitorAlerts: Maybe<IAdminMonitorAlertsReturn>;
   adminMonitorApp: Maybe<IAdminMonitorAppReturn>;
   adminMonitorHistory: Maybe<IAdminMonitorHistoryReturn>;
@@ -1639,6 +2006,7 @@ export interface IQuery {
   clientReadData: Maybe<IClientReadDataReturn>;
   clientStatus: Maybe<IClientStatusReturn>;
   clientWriteData: Maybe<IClientWriteDataReturn>;
+  configRegistrationRoles: Maybe<IConfigRegistrationRolesReturn>;
   currencyGet: Maybe<ICurrencyGetReturn>;
   debugReportList: Maybe<IDebugReportListReturn>;
   developerTestSource: Maybe<IDeveloperTestSourceReturn>;
@@ -1649,6 +2017,13 @@ export interface IQuery {
   locationReverse: Maybe<ILocationReverseReturn>;
   mailerSend: Maybe<IMailerSendReturn>;
   menuOpen: Maybe<IMenuOpenReturn>;
+  musicArtist: Maybe<IMusicArtistReturn>;
+  musicTrackClip: Maybe<IMusicTrackClipReturn>;
+  musicTrackList: Maybe<IMusicTrackListReturn>;
+  musicTrackLoad: Maybe<IMusicTrackLoadReturn>;
+  musicTrackReactions: Maybe<IMusicTrackReactionsReturn>;
+  musicTrackSearch: Maybe<IMusicTrackSearchReturn>;
+  musicTrackStats: Maybe<IMusicTrackStatsReturn>;
   myEventsCalendarList: Maybe<IMyEventsCalendarListReturn>;
   myEventsCalendarLoad: Maybe<IMyEventsCalendarLoadReturn>;
   myEventsEventHistory: Maybe<IMyEventsEventHistoryReturn>;

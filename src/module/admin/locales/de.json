@@ -19,7 +19,8 @@
   "tabs": {
     "users": "Benutzer",
     "self": "Meine Rollen",
-    "admins": "Admins"
+    "admins": "Admins",
+    "registration": "Registrierung"
   },
   "noAccess": {
     "title": "Kein Zugriff",
@@ -1299,5 +1300,14 @@
       "cancel": "Abbrechen",
       "toast": "Admin @{{alias}} gelöscht"
     }
+  },
+  "registration": {
+    "title": "Rollen bei Registrierung",
+    "description": "Diese Rollen bekommt jeder neue Benutzer. Die Basis-Rolle bleibt immer erhalten.",
+    "base": "Basis-Rolle (immer)",
+    "empty": "Keine weiteren Rollen verfügbar.",
+    "error": "Rollen konnten nicht geladen werden.",
+    "save": "Speichern",
+    "saveError": "Speichern fehlgeschlagen."
   }
 }

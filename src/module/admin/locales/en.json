@@ -19,7 +19,8 @@
   "tabs": {
     "users": "Users",
     "self": "My roles",
-    "admins": "Admins"
+    "admins": "Admins",
+    "registration": "Registration"
   },
   "noAccess": {
     "title": "No access",
@@ -1299,5 +1300,14 @@
       "cancel": "Cancel",
       "toast": "Admin @{{alias}} deleted"
     }
+  },
+  "registration": {
+    "title": "Roles on sign-up",
+    "description": "Every new user gets these roles. The base role always stays.",
+    "base": "Base role (always)",
+    "empty": "No other roles available.",
+    "error": "Roles could not be loaded.",
+    "save": "Save",
+    "saveError": "Saving failed."
   }
 }
