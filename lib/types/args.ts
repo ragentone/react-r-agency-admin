@@ -536,6 +536,35 @@ export interface IMutationAuthTotpEnableArgs {
   code: string;
 }
 
+/** Arguments of `Mutation.chatEnd` */
+export interface IMutationChatEndArgs {
+  peerId: ScalarID;
+}
+
+/** Arguments of `Mutation.chatRead` */
+export interface IMutationChatReadArgs {
+  peerId: ScalarID;
+}
+
+/** Arguments of `Mutation.chatSend` */
+export interface IMutationChatSendArgs {
+  clientKey?: InputMaybe<string>;
+  format?: InputMaybe<string>;
+  peerId: ScalarID;
+  text: string;
+}
+
+/** Arguments of `Mutation.chatTyping` */
+export interface IMutationChatTypingArgs {
+  peerId: ScalarID;
+}
+
+/** Arguments of `Mutation.configAppAuthSet` */
+export interface IMutationConfigAppAuthSetArgs {
+  allowLoginWithGoogle?: InputMaybe<boolean>;
+  allowRegister?: InputMaybe<boolean>;
+}
+
 /** Arguments of `Mutation.configRegistrationRolesSet` */
 export interface IMutationConfigRegistrationRolesSetArgs {
   roles?: InputMaybe<ScalarJSON>;
@@ -600,6 +629,41 @@ export interface IMutationMusicArtistBannerArgs {
 export interface IMutationMusicArtistUpdateArgs {
   bio?: InputMaybe<string>;
   name?: InputMaybe<string>;
+}
+
+/** Arguments of `Mutation.musicPlaylistAddTrack` */
+export interface IMutationMusicPlaylistAddTrackArgs {
+  id: ScalarID;
+  trackId: ScalarID;
+}
+
+/** Arguments of `Mutation.musicPlaylistCreate` */
+export interface IMutationMusicPlaylistCreateArgs {
+  values: ScalarJSON;
+}
+
+/** Arguments of `Mutation.musicPlaylistMoveTrack` */
+export interface IMutationMusicPlaylistMoveTrackArgs {
+  id: ScalarID;
+  to: number;
+  trackId: ScalarID;
+}
+
+/** Arguments of `Mutation.musicPlaylistRemove` */
+export interface IMutationMusicPlaylistRemoveArgs {
+  id: ScalarID;
+}
+
+/** Arguments of `Mutation.musicPlaylistRemoveTrack` */
+export interface IMutationMusicPlaylistRemoveTrackArgs {
+  id: ScalarID;
+  trackId: ScalarID;
+}
+
+/** Arguments of `Mutation.musicPlaylistUpdate` */
+export interface IMutationMusicPlaylistUpdateArgs {
+  id: ScalarID;
+  values: ScalarJSON;
 }
 
 /** Arguments of `Mutation.musicTrackCreate` */
@@ -1219,6 +1283,12 @@ export interface IQueryAuthInviteInfoArgs {
   token: string;
 }
 
+/** Arguments of `Query.chatMessages` */
+export interface IQueryChatMessagesArgs {
+  before?: InputMaybe<string>;
+  peerId: ScalarID;
+}
+
 /** Arguments of `Query.clientReadData` */
 export interface IQueryClientReadDataArgs {
   dataKey: string;
@@ -1283,6 +1353,11 @@ export interface IQueryMailerSendArgs {
 /** Arguments of `Query.musicArtist` */
 export interface IQueryMusicArtistArgs {
   cursor?: InputMaybe<string>;
+  id: ScalarID;
+}
+
+/** Arguments of `Query.musicPlaylistLoad` */
+export interface IQueryMusicPlaylistLoadArgs {
   id: ScalarID;
 }
 
@@ -1529,6 +1604,8 @@ export interface IQueryUserProfileLoadArgs {
 export interface IQueryUserRelationListArgs {
   limit: number;
   offset: number;
+  search?: InputMaybe<string>;
+  sort?: InputMaybe<string>;
   status?: InputMaybe<string>;
 }
 

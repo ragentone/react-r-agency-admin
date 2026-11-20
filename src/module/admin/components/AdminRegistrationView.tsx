@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { type IRegistrationRoleGroup, useRegistrationRoles } from '../hooks/use.registration.roles';
+import { AdminAuthFlagsSection } from './AdminAuthFlagsSection';
 import { RegistrationRoleGroup } from './RegistrationRoleGroup';
 
 /** `Registrierung` tab: which app roles every new account gets, grouped by app. */
@@ -46,6 +47,7 @@ export const AdminRegistrationView: React.FC = () => {
 
   return (
     <div className="flex flex-col">
+      <AdminAuthFlagsSection />
       <p className="text-muted-foreground border-b border-border/50 px-4 py-3 text-sm">
         {t('registration.description')}
       </p>

@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |    124 |
-| [Mutation](#mutation) |    185 |
-| Object-Types          |    364 |
+| [Query](#query)       |    130 |
+| [Mutation](#mutation) |    196 |
+| Object-Types          |    381 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -39,7 +39,9 @@ Query  ‹IQuery›
 │       │   ├── public: Boolean
 │       │   ├── searchable: Boolean
 │       │   ├── showEmail: Boolean
-│       │   └── showFullName: Boolean
+│       │   ├── showFullName: Boolean
+│       │   ├── showLastSeen: Boolean
+│       │   └── showReadReceipts: Boolean
 │       ├── superUser: Boolean
 │       └── userType: String!
 ├── adminAdminList: adminAdminListReturn  ‹IAdminAdminListReturn›
@@ -332,6 +334,18 @@ Query  ‹IQuery›
 │   ├── retryAfter: Int
 │   ├── sessions: JSON
 │   └── success: Boolean
+├── chatList: chatListReturn  ‹IChatListReturn›
+│   ├── list: JSON
+│   └── success: Boolean
+├── chatMessages: chatMessagesReturn  ‹IChatMessagesReturn›
+│   ├── $before: String
+│   ├── $peerId: ID!
+│   ├── expiresAt: String
+│   ├── hasMore: Boolean
+│   ├── messages: JSON
+│   ├── peer: JSON
+│   ├── peerReadAt: String
+│   └── success: Boolean
 ├── clientReadData: clientReadDataReturn  ‹IClientReadDataReturn›
 │   ├── $dataKey: String!
 │   ├── data: JSON
@@ -350,6 +364,10 @@ Query  ‹IQuery›
 ├── clientWriteData: clientWriteDataReturn  ‹IClientWriteDataReturn›
 │   ├── $data: JSON!
 │   ├── $dataKey: String!
+│   └── success: Boolean
+├── configAppAuth: configAppAuthReturn  ‹IConfigAppAuthReturn›
+│   ├── allowLoginWithGoogle: Boolean
+│   ├── allowRegister: Boolean
 │   └── success: Boolean
 ├── configRegistrationRoles: configRegistrationRolesReturn  ‹IConfigRegistrationRolesReturn›
 │   ├── roles: JSON
@@ -463,12 +481,25 @@ Query  ‹IQuery›
 │   ├── nextCursor: String
 │   ├── success: Boolean
 │   └── tracks: JSON
+├── musicPlaylistList: musicPlaylistListReturn  ‹IMusicPlaylistListReturn›
+│   ├── error: String
+│   ├── field: String
+│   ├── playlists: JSON
+│   └── success: Boolean
+├── musicPlaylistLoad: musicPlaylistLoadReturn  ‹IMusicPlaylistLoadReturn›
+│   ├── $id: ID!
+│   ├── error: String
+│   ├── field: String
+│   ├── playlist: JSON
+│   ├── success: Boolean
+│   └── tracks: JSON
 ├── musicTrackClip: musicTrackClipReturn  ‹IMusicTrackClipReturn›
 │   ├── $id: ID!
 │   ├── $length: Int
 │   ├── duration: Int
 │   ├── error: String
 │   ├── field: String
+│   ├── fine: JSON
 │   ├── peaks: JSON
 │   ├── start: Int
 │   └── success: Boolean
@@ -851,7 +882,9 @@ Query  ‹IQuery›
 │       │   ├── public: Boolean
 │       │   ├── searchable: Boolean
 │       │   ├── showEmail: Boolean
-│       │   └── showFullName: Boolean
+│       │   ├── showFullName: Boolean
+│       │   ├── showLastSeen: Boolean
+│       │   └── showReadReceipts: Boolean
 │       ├── superUser: Boolean
 │       ├── teaserUrl: String
 │       └── userType: String
@@ -897,7 +930,9 @@ Query  ‹IQuery›
 │   │   │   ├── public: Boolean
 │   │   │   ├── searchable: Boolean
 │   │   │   ├── showEmail: Boolean
-│   │   │   └── showFullName: Boolean
+│   │   │   ├── showFullName: Boolean
+│   │   │   ├── showLastSeen: Boolean
+│   │   │   └── showReadReceipts: Boolean
 │   │   ├── superUser: Boolean
 │   │   ├── teaserUrl: String
 │   │   └── userType: String
@@ -998,9 +1033,17 @@ Query  ‹IQuery›
 │   │   └── targetId: String
 │   ├── success: Boolean
 │   └── userId: String
+├── userRelationCounts: userRelationCountsReturn  ‹IUserRelationCountsReturn›
+│   ├── accepted: Int
+│   ├── blocked: Int
+│   ├── incoming: Int
+│   ├── outgoing: Int
+│   └── success: Boolean
 ├── userRelationList: userRelationListReturn  ‹IUserRelationListReturn›
 │   ├── $limit: Int!
 │   ├── $offset: Int!
+│   ├── $search: String
+│   ├── $sort: String
 │   ├── $status: String
 │   ├── list: JSON
 │   ├── success: Boolean
@@ -1041,14 +1084,18 @@ Mutation  ‹IMutation›
 │   │       ├── public: Boolean!
 │   │       ├── searchable: Boolean!
 │   │       ├── showEmail: Boolean!
-│   │       └── showFullName: Boolean!
+│   │       ├── showFullName: Boolean!
+│   │       ├── showLastSeen: Boolean
+│   │       └── showReadReceipts: Boolean
 │   └── success: Boolean
 ├── accountSelfUpdateSettings: accountSelfUpdateSettingsReturn  ‹IAccountSelfUpdateSettingsReturn›
 │   ├── $settings: userSettingsInput!  ‹IUserSettingsInput›
 │   │   ├── public: Boolean!
 │   │   ├── searchable: Boolean!
 │   │   ├── showEmail: Boolean!
-│   │   └── showFullName: Boolean!
+│   │   ├── showFullName: Boolean!
+│   │   ├── showLastSeen: Boolean
+│   │   └── showReadReceipts: Boolean
 │   ├── $userId: String!
 │   └── success: Boolean
 ├── adminAddRole: adminAddRoleReturn  ‹IAdminAddRoleReturn›
@@ -1681,6 +1728,29 @@ Mutation  ‹IMutation›
 │   ├── secret: String
 │   ├── success: Boolean
 │   └── uri: String
+├── chatEnd: chatEndReturn  ‹IChatEndReturn›
+│   ├── $peerId: ID!
+│   └── success: Boolean
+├── chatRead: chatReadReturn  ‹IChatReadReturn›
+│   ├── $peerId: ID!
+│   └── success: Boolean
+├── chatSend: chatSendReturn  ‹IChatSendReturn›
+│   ├── $clientKey: String
+│   ├── $format: String
+│   ├── $peerId: ID!
+│   ├── $text: String!
+│   ├── error: String
+│   ├── message: JSON
+│   └── success: Boolean
+├── chatTyping: chatTypingReturn  ‹IChatTypingReturn›
+│   ├── $peerId: ID!
+│   └── success: Boolean
+├── configAppAuthSet: configAppAuthSetReturn  ‹IConfigAppAuthSetReturn›
+│   ├── $allowLoginWithGoogle: Boolean
+│   ├── $allowRegister: Boolean
+│   ├── allowLoginWithGoogle: Boolean
+│   ├── allowRegister: Boolean
+│   └── success: Boolean
 ├── configImport: configImportReturn  ‹IConfigImportReturn›
 │   ├── configs: JSON
 │   └── success: Boolean
@@ -1764,6 +1834,45 @@ Mutation  ‹IMutation›
 │   ├── error: String
 │   ├── field: String
 │   └── success: Boolean
+├── musicPlaylistAddTrack: musicPlaylistAddTrackReturn  ‹IMusicPlaylistAddTrackReturn›
+│   ├── $id: ID!
+│   ├── $trackId: ID!
+│   ├── error: String
+│   ├── field: String
+│   └── success: Boolean
+├── musicPlaylistCreate: musicPlaylistCreateReturn  ‹IMusicPlaylistCreateReturn›
+│   ├── $values: JSON!
+│   ├── error: String
+│   ├── field: String
+│   ├── playlist: JSON
+│   ├── success: Boolean
+│   └── tracks: JSON
+├── musicPlaylistMoveTrack: musicPlaylistMoveTrackReturn  ‹IMusicPlaylistMoveTrackReturn›
+│   ├── $id: ID!
+│   ├── $to: Int!
+│   ├── $trackId: ID!
+│   ├── error: String
+│   ├── field: String
+│   └── success: Boolean
+├── musicPlaylistRemove: musicPlaylistRemoveReturn  ‹IMusicPlaylistRemoveReturn›
+│   ├── $id: ID!
+│   ├── error: String
+│   ├── field: String
+│   └── success: Boolean
+├── musicPlaylistRemoveTrack: musicPlaylistRemoveTrackReturn  ‹IMusicPlaylistRemoveTrackReturn›
+│   ├── $id: ID!
+│   ├── $trackId: ID!
+│   ├── error: String
+│   ├── field: String
+│   └── success: Boolean
+├── musicPlaylistUpdate: musicPlaylistUpdateReturn  ‹IMusicPlaylistUpdateReturn›
+│   ├── $id: ID!
+│   ├── $values: JSON!
+│   ├── error: String
+│   ├── field: String
+│   ├── playlist: JSON
+│   ├── success: Boolean
+│   └── tracks: JSON
 ├── musicTrackCreate: musicTrackCreateReturn  ‹IMusicTrackCreateReturn›
 │   ├── $audioFile: [Upload]
 │   ├── $coverFile: [Upload]
@@ -2152,7 +2261,9 @@ Mutation  ‹IMutation›
 │   │   │   ├── public: Boolean
 │   │   │   ├── searchable: Boolean
 │   │   │   ├── showEmail: Boolean
-│   │   │   └── showFullName: Boolean
+│   │   │   ├── showFullName: Boolean
+│   │   │   ├── showLastSeen: Boolean
+│   │   │   └── showReadReceipts: Boolean
 │   │   ├── superUser: Boolean
 │   │   ├── teaserUrl: String
 │   │   └── userType: String
@@ -2299,7 +2410,9 @@ Inputs
 │       ├── public: Boolean!
 │       ├── searchable: Boolean!
 │       ├── showEmail: Boolean!
-│       └── showFullName: Boolean!
+│       ├── showFullName: Boolean!
+│       ├── showLastSeen: Boolean
+│       └── showReadReceipts: Boolean
 ├── currencyParams  ‹ICurrencyParams›
 │   ├── amount: Float
 │   ├── base: String!
@@ -2390,7 +2503,9 @@ Inputs
     ├── public: Boolean!
     ├── searchable: Boolean!
     ├── showEmail: Boolean!
-    └── showFullName: Boolean!
+    ├── showFullName: Boolean!
+    ├── showLastSeen: Boolean
+    └── showReadReceipts: Boolean
 ```
 
 ## Typen-Index
@@ -2548,10 +2663,18 @@ Inputs
 | `authTotpReturn`                         | Object | `IAuthTotpReturn`                         | `objects.ts` |                                                                                  |
 | `authTotpSetupReturn`                    | Object | `IAuthTotpSetupReturn`                    | `objects.ts` |                                                                                  |
 | `Boolean`                                | Scalar | –                                         | built-in     | The `Boolean` scalar type represents `true` or `false`.                          |
+| `chatEndReturn`                          | Object | `IChatEndReturn`                          | `objects.ts` |                                                                                  |
+| `chatListReturn`                         | Object | `IChatListReturn`                         | `objects.ts` |                                                                                  |
+| `chatMessagesReturn`                     | Object | `IChatMessagesReturn`                     | `objects.ts` |                                                                                  |
+| `chatReadReturn`                         | Object | `IChatReadReturn`                         | `objects.ts` |                                                                                  |
+| `chatSendReturn`                         | Object | `IChatSendReturn`                         | `objects.ts` |                                                                                  |
+| `chatTypingReturn`                       | Object | `IChatTypingReturn`                       | `objects.ts` |                                                                                  |
 | `clientReadDataReturn`                   | Object | `IClientReadDataReturn`                   | `objects.ts` |                                                                                  |
 | `clientStatusReturn`                     | Object | `IClientStatusReturn`                     | `objects.ts` |                                                                                  |
 | `clientUserMata`                         | Object | `IClientUserMata`                         | `objects.ts` |                                                                                  |
 | `clientWriteDataReturn`                  | Object | `IClientWriteDataReturn`                  | `objects.ts` |                                                                                  |
+| `configAppAuthReturn`                    | Object | `IConfigAppAuthReturn`                    | `objects.ts` |                                                                                  |
+| `configAppAuthSetReturn`                 | Object | `IConfigAppAuthSetReturn`                 | `objects.ts` |                                                                                  |
 | `configImportReturn`                     | Object | `IConfigImportReturn`                     | `objects.ts` |                                                                                  |
 | `configRegistrationRolesReturn`          | Object | `IConfigRegistrationRolesReturn`          | `objects.ts` |                                                                                  |
 | `configRegistrationRolesSetReturn`       | Object | `IConfigRegistrationRolesSetReturn`       | `objects.ts` |                                                                                  |
@@ -2602,6 +2725,14 @@ Inputs
 | `musicArtistBannerReturn`                | Object | `IMusicArtistBannerReturn`                | `objects.ts` |                                                                                  |
 | `musicArtistReturn`                      | Object | `IMusicArtistReturn`                      | `objects.ts` |                                                                                  |
 | `musicArtistUpdateReturn`                | Object | `IMusicArtistUpdateReturn`                | `objects.ts` |                                                                                  |
+| `musicPlaylistAddTrackReturn`            | Object | `IMusicPlaylistAddTrackReturn`            | `objects.ts` |                                                                                  |
+| `musicPlaylistCreateReturn`              | Object | `IMusicPlaylistCreateReturn`              | `objects.ts` |                                                                                  |
+| `musicPlaylistListReturn`                | Object | `IMusicPlaylistListReturn`                | `objects.ts` |                                                                                  |
+| `musicPlaylistLoadReturn`                | Object | `IMusicPlaylistLoadReturn`                | `objects.ts` |                                                                                  |
+| `musicPlaylistMoveTrackReturn`           | Object | `IMusicPlaylistMoveTrackReturn`           | `objects.ts` |                                                                                  |
+| `musicPlaylistRemoveReturn`              | Object | `IMusicPlaylistRemoveReturn`              | `objects.ts` |                                                                                  |
+| `musicPlaylistRemoveTrackReturn`         | Object | `IMusicPlaylistRemoveTrackReturn`         | `objects.ts` |                                                                                  |
+| `musicPlaylistUpdateReturn`              | Object | `IMusicPlaylistUpdateReturn`              | `objects.ts` |                                                                                  |
 | `musicTrackClipReturn`                   | Object | `IMusicTrackClipReturn`                   | `objects.ts` |                                                                                  |
 | `musicTrackCreateReturn`                 | Object | `IMusicTrackCreateReturn`                 | `objects.ts` |                                                                                  |
 | `musicTrackDeleteReturn`                 | Object | `IMusicTrackDeleteReturn`                 | `objects.ts` |                                                                                  |
@@ -2787,6 +2918,7 @@ Inputs
 | `userRelationAcceptReturn`               | Object | `IUserRelationAcceptReturn`               | `objects.ts` |                                                                                  |
 | `userRelationBlockReturn`                | Object | `IUserRelationBlockReturn`                | `objects.ts` |                                                                                  |
 | `userRelationCancelReturn`               | Object | `IUserRelationCancelReturn`               | `objects.ts` |                                                                                  |
+| `userRelationCountsReturn`               | Object | `IUserRelationCountsReturn`               | `objects.ts` |                                                                                  |
 | `userRelationListReturn`                 | Object | `IUserRelationListReturn`                 | `objects.ts` |                                                                                  |
 | `userRelationRejectReturn`               | Object | `IUserRelationRejectReturn`               | `objects.ts` |                                                                                  |
 | `userRelationRequestReturn`              | Object | `IUserRelationRequestReturn`              | `objects.ts` |                                                                                  |

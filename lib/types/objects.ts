@@ -1180,6 +1180,44 @@ export interface IAuthTotpSetupReturn {
   uri: Maybe<string>;
 }
 
+/** GraphQL: `chatEndReturn` */
+export interface IChatEndReturn {
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `chatListReturn` */
+export interface IChatListReturn {
+  list: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `chatMessagesReturn` */
+export interface IChatMessagesReturn {
+  expiresAt: Maybe<string>;
+  hasMore: Maybe<boolean>;
+  messages: Maybe<ScalarJSON>;
+  peer: Maybe<ScalarJSON>;
+  peerReadAt: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `chatReadReturn` */
+export interface IChatReadReturn {
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `chatSendReturn` */
+export interface IChatSendReturn {
+  error: Maybe<string>;
+  message: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `chatTypingReturn` */
+export interface IChatTypingReturn {
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `clientReadDataReturn` */
 export interface IClientReadDataReturn {
   data: Maybe<ScalarJSON>;
@@ -1205,6 +1243,20 @@ export interface IClientUserMata {
 
 /** GraphQL: `clientWriteDataReturn` */
 export interface IClientWriteDataReturn {
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `configAppAuthReturn` */
+export interface IConfigAppAuthReturn {
+  allowLoginWithGoogle: Maybe<boolean>;
+  allowRegister: Maybe<boolean>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `configAppAuthSetReturn` */
+export interface IConfigAppAuthSetReturn {
+  allowLoginWithGoogle: Maybe<boolean>;
+  allowRegister: Maybe<boolean>;
   success: Maybe<boolean>;
 }
 
@@ -1465,11 +1517,75 @@ export interface IMusicArtistUpdateReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `musicPlaylistAddTrackReturn` */
+export interface IMusicPlaylistAddTrackReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicPlaylistCreateReturn` */
+export interface IMusicPlaylistCreateReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  playlist: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+  tracks: Maybe<ScalarJSON>;
+}
+
+/** GraphQL: `musicPlaylistListReturn` */
+export interface IMusicPlaylistListReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  playlists: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicPlaylistLoadReturn` */
+export interface IMusicPlaylistLoadReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  playlist: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+  tracks: Maybe<ScalarJSON>;
+}
+
+/** GraphQL: `musicPlaylistMoveTrackReturn` */
+export interface IMusicPlaylistMoveTrackReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicPlaylistRemoveReturn` */
+export interface IMusicPlaylistRemoveReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicPlaylistRemoveTrackReturn` */
+export interface IMusicPlaylistRemoveTrackReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicPlaylistUpdateReturn` */
+export interface IMusicPlaylistUpdateReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  playlist: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+  tracks: Maybe<ScalarJSON>;
+}
+
 /** GraphQL: `musicTrackClipReturn` */
 export interface IMusicTrackClipReturn {
   duration: Maybe<number>;
   error: Maybe<string>;
   field: Maybe<string>;
+  fine: Maybe<ScalarJSON>;
   peaks: Maybe<ScalarJSON>;
   start: Maybe<number>;
   success: Maybe<boolean>;
@@ -1699,6 +1815,11 @@ export interface IMutation {
   authTotpDisable: Maybe<IAuthTotpDisableReturn>;
   authTotpEnable: Maybe<IAuthTotpEnableReturn>;
   authTotpSetup: Maybe<IAuthTotpSetupReturn>;
+  chatEnd: Maybe<IChatEndReturn>;
+  chatRead: Maybe<IChatReadReturn>;
+  chatSend: Maybe<IChatSendReturn>;
+  chatTyping: Maybe<IChatTypingReturn>;
+  configAppAuthSet: Maybe<IConfigAppAuthSetReturn>;
   configImport: Maybe<IConfigImportReturn>;
   configRegistrationRolesSet: Maybe<IConfigRegistrationRolesSetReturn>;
   createAuthToken: Maybe<ICreateAuthTokenReturn>;
@@ -1713,6 +1834,12 @@ export interface IMutation {
   linkParse: Maybe<ILinkParseReturn>;
   musicArtistBanner: Maybe<IMusicArtistBannerReturn>;
   musicArtistUpdate: Maybe<IMusicArtistUpdateReturn>;
+  musicPlaylistAddTrack: Maybe<IMusicPlaylistAddTrackReturn>;
+  musicPlaylistCreate: Maybe<IMusicPlaylistCreateReturn>;
+  musicPlaylistMoveTrack: Maybe<IMusicPlaylistMoveTrackReturn>;
+  musicPlaylistRemove: Maybe<IMusicPlaylistRemoveReturn>;
+  musicPlaylistRemoveTrack: Maybe<IMusicPlaylistRemoveTrackReturn>;
+  musicPlaylistUpdate: Maybe<IMusicPlaylistUpdateReturn>;
   musicTrackCreate: Maybe<IMusicTrackCreateReturn>;
   musicTrackDelete: Maybe<IMusicTrackDeleteReturn>;
   musicTrackDownload: Maybe<IMusicTrackDownloadReturn>;
@@ -2003,9 +2130,12 @@ export interface IQuery {
   authInviteInfo: Maybe<IAuthInviteInfoReturn>;
   authSecurity: Maybe<IAuthSecurityReturn>;
   authSessions: Maybe<IAuthSessionsReturn>;
+  chatList: Maybe<IChatListReturn>;
+  chatMessages: Maybe<IChatMessagesReturn>;
   clientReadData: Maybe<IClientReadDataReturn>;
   clientStatus: Maybe<IClientStatusReturn>;
   clientWriteData: Maybe<IClientWriteDataReturn>;
+  configAppAuth: Maybe<IConfigAppAuthReturn>;
   configRegistrationRoles: Maybe<IConfigRegistrationRolesReturn>;
   currencyGet: Maybe<ICurrencyGetReturn>;
   debugReportList: Maybe<IDebugReportListReturn>;
@@ -2018,6 +2148,8 @@ export interface IQuery {
   mailerSend: Maybe<IMailerSendReturn>;
   menuOpen: Maybe<IMenuOpenReturn>;
   musicArtist: Maybe<IMusicArtistReturn>;
+  musicPlaylistList: Maybe<IMusicPlaylistListReturn>;
+  musicPlaylistLoad: Maybe<IMusicPlaylistLoadReturn>;
   musicTrackClip: Maybe<IMusicTrackClipReturn>;
   musicTrackList: Maybe<IMusicTrackListReturn>;
   musicTrackLoad: Maybe<IMusicTrackLoadReturn>;
@@ -2072,6 +2204,7 @@ export interface IQuery {
   userNotifyListing: Maybe<IUserNotifyListing>;
   userNotifyState: Maybe<IUserNotifyState>;
   userProfileLoad: Maybe<IUserProfileLoad>;
+  userRelationCounts: Maybe<IUserRelationCountsReturn>;
   userRelationList: Maybe<IUserRelationListReturn>;
   userRelationState: Maybe<IUserRelationStateReturn>;
 }
@@ -3084,6 +3217,15 @@ export interface IUserRelationCancelReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `userRelationCountsReturn` */
+export interface IUserRelationCountsReturn {
+  accepted: Maybe<number>;
+  blocked: Maybe<number>;
+  incoming: Maybe<number>;
+  outgoing: Maybe<number>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `userRelationListReturn` */
 export interface IUserRelationListReturn {
   list: Maybe<ScalarJSON>;
@@ -3126,6 +3268,8 @@ export interface IUserSettings {
   searchable: Maybe<boolean>;
   showEmail: Maybe<boolean>;
   showFullName: Maybe<boolean>;
+  showLastSeen: Maybe<boolean>;
+  showReadReceipts: Maybe<boolean>;
 }
 
 /** GraphQL: `userUpdateSettingsReturn` */

@@ -1308,6 +1308,9 @@
     "empty": "Keine weiteren Rollen verfügbar.",
     "error": "Rollen konnten nicht geladen werden.",
     "save": "Speichern",
-    "saveError": "Speichern fehlgeschlagen."
+    "saveError": "Speichern fehlgeschlagen.",
+    "signIn": "Anmeldung",
+    "allowRegister": "Registrierung erlauben",
+    "allowGoogle": "Neue Konten über Google erlauben"
   }
 }

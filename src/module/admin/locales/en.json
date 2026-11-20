@@ -1308,6 +1308,9 @@
     "empty": "No other roles available.",
     "error": "Roles could not be loaded.",
     "save": "Save",
-    "saveError": "Saving failed."
+    "saveError": "Saving failed.",
+    "signIn": "Sign-in",
+    "allowRegister": "Allow sign-up",
+    "allowGoogle": "Allow new accounts via Google"
   }
 }

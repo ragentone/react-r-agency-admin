@@ -157,4 +157,6 @@ export interface IUserSettingsInput {
   searchable: boolean;
   showEmail: boolean;
   showFullName: boolean;
+  showLastSeen?: InputMaybe<boolean>;
+  showReadReceipts?: InputMaybe<boolean>;
 }
