@@ -2,7 +2,12 @@ import { Core } from '@core/core.api.ts';
 import { lazyPage } from '@core/page/lazy.page.ts';
 import { Store } from 'lucide-react';
 
-import { ADMIN_SHOP_ROLES, ADMIN_SHOP_ROUTE } from './const';
+import {
+  ADMIN_SHOP_ITEM_NEW_ROUTE,
+  ADMIN_SHOP_ITEM_ROUTE,
+  ADMIN_SHOP_ROLES,
+  ADMIN_SHOP_ROUTE,
+} from './const';
 
 // Own chunk. Backend: runtime apps/shop (`shopGet`, `shopSave`, `shopItem*`, `shopRequest*`).
 const PageAdminShop = lazyPage(
@@ -16,6 +21,20 @@ Core.router.register({
   page: PageAdminShop,
   meta: { title: 'Admin' },
 });
+
+const PageAdminShopItem = lazyPage(
+  () => import('./pages/PageAdminShopItem.tsx').then(m => m.PageAdminShopItem),
+  'PageAdminShopItem'
+);
+
+for (const path of [ADMIN_SHOP_ITEM_NEW_ROUTE, ADMIN_SHOP_ITEM_ROUTE]) {
+  Core.router.register({
+    path,
+    target: 'admin',
+    page: PageAdminShopItem,
+    meta: { title: 'Admin' },
+  });
+}
 
 Core.menu.register({
   id: 'admin-shop',

@@ -1,8 +1,8 @@
 import { parse } from 'graphql';
 
 export const ShopItemListQuery = parse(`
-  query ShopItemList($shopId: ID, $kind: String, $search: String, $page: Int) {
-    shopItemList(shopId: $shopId, kind: $kind, search: $search, page: $page) {
+  query ShopItemList($shopId: ID, $kind: String, $categoryId: ID, $search: String, $page: Int) {
+    shopItemList(shopId: $shopId, kind: $kind, categoryId: $categoryId, search: $search, page: $page) {
       success
       items
       hasMore

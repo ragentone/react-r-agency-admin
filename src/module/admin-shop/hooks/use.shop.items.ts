@@ -18,9 +18,10 @@ export const useShopItems = (shopId: string | null, kind: ShopItemKind | null, s
   );
 
 /** One item with its shop (name, logo). */
-export const useShopItem = (id: string) =>
+export const useShopItem = (id: string | null) =>
   useShopQuery<IShopItem | null>(
     async client => {
+      if (!id) return null;
       const res = (await client.query({
         query: ShopItemLoadQuery as Doc,
         variables: { id },
@@ -28,6 +29,6 @@ export const useShopItem = (id: string) =>
       })) as { data?: { shopItemLoad?: { success?: boolean; items?: IShopItem[] } } };
       return res.data?.shopItemLoad?.items?.[0] ?? null;
     },
-    id,
+    id ?? 'new',
     null
   );

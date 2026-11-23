@@ -1,7 +1,6 @@
-import { AppDrawer } from '@ui/patterns/drawer/AppDrawer.tsx';
+import { LazyHtmlEditor as HtmlEditor } from '@core/editor/html/lazy.html-editor.tsx';
 import { Button } from '@ui/shad-cn/components/button.tsx';
 import { Input } from '@ui/shad-cn/components/input.tsx';
-import { Textarea } from '@ui/shad-cn/components/textarea.tsx';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,25 +14,26 @@ import {
 } from '../const';
 import { useShopItemMutate } from '../hooks';
 import type { IShopItem, IShopItemImage, ShopItemKind, ShopItemPriceType } from '../types';
+import { ShopCategoryPicker } from './ShopCategoryPicker';
 import { ShopFileField } from './ShopFileField';
 import { ShopKindFilter } from './ShopKindFilter';
 
 interface IProps {
-  open: boolean;
   shopId: string;
   /** `null` = new item. */
   item: IShopItem | null;
-  onOpenChange: (open: boolean) => void;
-  onSaved: () => void;
+  /** After a successful save. */
+  onDone: () => void;
 }
 
 const PRICE_TYPES: ShopItemPriceType[] = ['fixed', 'from', 'hourly', 'onRequest'];
 
 /** Create / edit a service or product, with up to 6 images. */
-export const ShopItemForm = ({ open, shopId, item, onOpenChange, onSaved }: IProps) => {
+export const ShopItemForm = ({ shopId, item, onDone }: IProps) => {
   const { t } = useTranslation('admin-shop');
   const { save, saving } = useShopItemMutate();
   const [kind, setKind] = useState<ShopItemKind>(item?.kind ?? 'service');
+  const [categoryId, setCategoryId] = useState<string | null>(item?.categoryId ?? null);
   const [title, setTitle] = useState(item?.title ?? '');
   const [description, setDescription] = useState(item?.description ?? '');
   const [priceType, setPriceType] = useState<ShopItemPriceType>(item?.priceType ?? 'fixed');
@@ -57,6 +57,9 @@ export const ShopItemForm = ({ open, shopId, item, onOpenChange, onSaved }: IPro
   const free = SHOP_ITEM_IMAGES_MAX - kept.length - files.length;
 
   const submit = async () => {
+    if (description.length > SHOP_ITEM_DESCRIPTION_MAX) {
+      return toast.error(t('item.descriptionTooLong'));
+    }
     if (!title.trim()) return toast.error(t('item.titleRequired'));
     const cents =
       priceType === 'onRequest' ? null : Math.round(Number(amount.replace(',', '.')) * 100);
@@ -66,34 +69,32 @@ export const ShopItemForm = ({ open, shopId, item, onOpenChange, onSaved }: IPro
     const result = await save(
       shopId,
       item,
-      { kind, title, description, priceType, amountCents: cents, duration, status: 'active' },
+      {
+        kind,
+        categoryId,
+        title,
+        description,
+        priceType,
+        amountCents: cents,
+        duration,
+        status: 'active',
+      },
       files,
       removed,
       kept.map(image => image.id)
     );
     if (result.ok) {
-      onSaved();
-      onOpenChange(false);
+      onDone();
     } else {
       toast.error(t(result.reason === 'shop_item_limit' ? 'item.limit' : 'item.error'));
     }
   };
 
   return (
-    <AppDrawer
-      open={open}
-      onOpenChange={onOpenChange}
-      direction="right"
-      size="full"
-      title={t(item ? 'item.editTitle' : 'item.newTitle')}
-      footer={
-        <Button className="w-full" size="lg" disabled={saving} onClick={() => void submit()}>
-          {t('form.save')}
-        </Button>
-      }
-    >
-      <div className="space-y-4">
+    <div>
+      <div className="space-y-4 p-3">
         {!item && <ShopKindFilter value={kind} onChange={v => v && setKind(v)} withAll={false} />}
+        <ShopCategoryPicker shopId={shopId} value={categoryId} onChange={setCategoryId} />
         <Input
           placeholder={t('item.title')}
           value={title}
@@ -101,13 +102,24 @@ export const ShopItemForm = ({ open, shopId, item, onOpenChange, onSaved }: IPro
           className="border-border/50"
           onChange={e => setTitle(e.target.value)}
         />
-        <Textarea
-          placeholder={t('item.description')}
+        <HtmlEditor
+          id="shop-item-description"
           value={description}
-          rows={5}
-          maxLength={SHOP_ITEM_DESCRIPTION_MAX}
-          className="border-border/50"
-          onChange={e => setDescription(e.target.value)}
+          onChange={setDescription}
+          placeholder={t('item.description')}
+          headingLevels={[2, 3, 4]}
+          features={{
+            preset: 'basic',
+            emoji: false,
+            highlight: true,
+            code: true,
+            codeBlock: true,
+            textAlign: true,
+            horizontalRule: true,
+          }}
+          minHeight={200}
+          stickyToolbar
+          className="rounded-xl"
         />
         <div className="flex flex-wrap gap-2">
           {PRICE_TYPES.map(type => (
@@ -166,7 +178,12 @@ export const ShopItemForm = ({ open, shopId, item, onOpenChange, onSaved }: IPro
           />
         ) : null}
       </div>
-    </AppDrawer>
+      <div className="sticky bottom-0 border-t border-border/50 bg-background p-3">
+        <Button className="w-full" size="lg" disabled={saving} onClick={() => void submit()}>
+          {t('form.save')}
+        </Button>
+      </div>
+    </div>
   );
 };
 

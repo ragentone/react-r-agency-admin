@@ -1,3 +1,4 @@
+export * from './category';
 export * from './item';
 export * from './request';
 export * from './request.note';

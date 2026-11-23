@@ -25,9 +25,17 @@ export interface IShopItemImage {
   url: string;
 }
 
+export interface IShopCategory {
+  id: string;
+  name: string;
+  position: number;
+  itemCount: number;
+}
+
 export interface IShopItem {
   id: string;
   shopId: string;
+  categoryId: string | null;
   kind: ShopItemKind;
   title: string;
   description: string;

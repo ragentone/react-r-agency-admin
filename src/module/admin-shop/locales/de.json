@@ -91,7 +91,8 @@
     "soldBy": "Verkauft von",
     "cover": "Titelbild",
     "back": "Zurück",
-    "notFound": "Artikel nicht gefunden."
+    "notFound": "Artikel nicht gefunden.",
+    "descriptionTooLong": "Die Beschreibung ist zu lang."
   },
   "manage": {
     "items": "Angebote",
@@ -102,7 +103,8 @@
     "tab": {
       "inbox": "Anfragen",
       "items": "Angebote",
-      "settings": "Einstellungen"
+      "settings": "Einstellungen",
+      "categories": "Kategorien"
     },
     "view": "Shop ansehen",
     "setup": "Richte zuerst den Shop ein (Name, Logo, Banner)."
@@ -113,7 +115,9 @@
     "itemTitle": "Angebot löschen?",
     "itemText": "„{{title}}“ wird mit allen Bildern gelöscht.",
     "shopTitle": "Shop löschen?",
-    "shopText": "„{{name}}“ wird mit allen Angeboten, Anfragen und Bildern gelöscht."
+    "shopText": "„{{name}}“ wird mit allen Angeboten, Anfragen und Bildern gelöscht.",
+    "categoryTitle": "Kategorie löschen?",
+    "categoryText": "„{{name}}“ wird gelöscht. Die Angebote bleiben ohne Kategorie."
   },
   "crm": {
     "empty": "Noch keine Anfragen.",
@@ -199,5 +203,12 @@
   "menu": {
     "label": "Shop",
     "description": "Shop einrichten, Angebote und Anfragen verwalten"
+  },
+  "category": {
+    "label": "Kategorie",
+    "none": "Keine",
+    "name": "Neue Kategorie",
+    "empty": "Noch keine Kategorien.",
+    "error": "Kategorie konnte nicht gespeichert werden."
   }
 }

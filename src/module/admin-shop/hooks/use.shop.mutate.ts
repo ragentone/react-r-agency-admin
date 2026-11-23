@@ -14,6 +14,7 @@ export interface IShopFormValues {
 
 export interface IShopItemFormValues {
   kind: ShopItemKind;
+  categoryId: string | null;
   title: string;
   description: string;
   priceType: ShopItemPriceType;

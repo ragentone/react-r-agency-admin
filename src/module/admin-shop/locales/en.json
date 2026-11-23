@@ -91,7 +91,8 @@
     "soldBy": "Sold by",
     "cover": "Cover",
     "back": "Back",
-    "notFound": "Item not found."
+    "notFound": "Item not found.",
+    "descriptionTooLong": "The description is too long."
   },
   "manage": {
     "items": "Offers",
@@ -102,7 +103,8 @@
     "tab": {
       "inbox": "Requests",
       "items": "Offers",
-      "settings": "Settings"
+      "settings": "Settings",
+      "categories": "Categories"
     },
     "view": "View shop",
     "setup": "Set up the shop first (name, logo, banner)."
@@ -113,7 +115,9 @@
     "itemTitle": "Delete offer?",
     "itemText": "“{{title}}” is deleted with all its images.",
     "shopTitle": "Delete shop?",
-    "shopText": "“{{name}}” is deleted with all offers, requests and images."
+    "shopText": "“{{name}}” is deleted with all offers, requests and images.",
+    "categoryTitle": "Delete category?",
+    "categoryText": "\"{{name}}\" will be deleted. Its offers stay without a category."
   },
   "crm": {
     "empty": "No requests yet.",
@@ -199,5 +203,12 @@
   "menu": {
     "label": "Shop",
     "description": "Set up the shop, manage offers and requests"
+  },
+  "category": {
+    "label": "Category",
+    "none": "None",
+    "name": "New category",
+    "empty": "No categories yet.",
+    "error": "Could not save the category."
   }
 }

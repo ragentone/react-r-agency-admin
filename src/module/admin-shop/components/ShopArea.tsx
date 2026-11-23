@@ -5,19 +5,23 @@ import { useTranslation } from 'react-i18next';
 
 import { AdminPage } from '../../admin/ui/AdminPage';
 import { useShop } from '../hooks';
+import { ShopCategories } from './ShopCategories';
 import { ShopEmpty } from './ShopEmpty';
 import { ShopForm } from './ShopForm';
 import { ShopInbox } from './ShopInbox';
 import { ShopManageItems } from './ShopManageItems';
 
-type Tab = 'inbox' | 'items' | 'settings';
-const TABS: Tab[] = ['inbox', 'items', 'settings'];
+type Tab = 'inbox' | 'items' | 'categories' | 'settings';
+const TABS: Tab[] = ['inbox', 'items', 'categories', 'settings'];
 
 /** Requests (CRM), offers and settings of the one shop. Before the first save only settings. */
+// Remembered so that coming back from the item route lands on the same tab.
+let lastTab: Tab = 'inbox';
+
 export const ShopArea: React.FC = () => {
   const { t } = useTranslation('admin-shop');
   const { data: shop, loading, error, reload } = useShop();
-  const [tab, setTab] = useState<Tab>('inbox');
+  const [tab, setTab] = useState<Tab>(lastTab);
 
   if (loading && !shop) {
     return (
@@ -47,7 +51,10 @@ export const ShopArea: React.FC = () => {
               pill
               disabled={!shop && value !== 'settings'}
               variant={active === value ? 'default' : 'outline'}
-              onClick={() => setTab(value)}
+              onClick={() => {
+                lastTab = value;
+                setTab(value);
+              }}
             >
               {t(`manage.tab.${value}`)}
             </Button>
@@ -60,6 +67,7 @@ export const ShopArea: React.FC = () => {
           </div>
         )}
         {shop && active === 'items' && <ShopManageItems shopId={shop.id} />}
+        {shop && active === 'categories' && <ShopCategories shopId={shop.id} />}
         {active === 'settings' && <ShopForm key={shop?.id ?? 'new'} shop={shop} onSaved={reload} />}
       </div>
     </AdminPage>
