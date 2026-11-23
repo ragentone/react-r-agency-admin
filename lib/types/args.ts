@@ -631,6 +631,11 @@ export interface IMutationMusicArtistUpdateArgs {
   name?: InputMaybe<string>;
 }
 
+/** Arguments of `Mutation.musicDebugLogCreate` */
+export interface IMutationMusicDebugLogCreateArgs {
+  lines: string;
+}
+
 /** Arguments of `Mutation.musicPlaylistAddTrack` */
 export interface IMutationMusicPlaylistAddTrackArgs {
   id: ScalarID;
@@ -718,6 +723,8 @@ export interface IMutationMusicTrackUpdateArgs {
 
 /** Arguments of `Mutation.musicTrackVideo` */
 export interface IMutationMusicTrackVideoArgs {
+  fadeIn?: InputMaybe<number>;
+  fadeOut?: InputMaybe<number>;
   id: ScalarID;
   length?: InputMaybe<number>;
   locale?: InputMaybe<string>;
@@ -1354,6 +1361,11 @@ export interface IQueryMailerSendArgs {
 export interface IQueryMusicArtistArgs {
   cursor?: InputMaybe<string>;
   id: ScalarID;
+}
+
+/** Arguments of `Query.musicArtistList` */
+export interface IQueryMusicArtistListArgs {
+  cursor?: InputMaybe<string>;
 }
 
 /** Arguments of `Query.musicPlaylistLoad` */

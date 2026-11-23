@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |    130 |
-| [Mutation](#mutation) |    196 |
-| Object-Types          |    381 |
+| [Query](#query)       |    131 |
+| [Mutation](#mutation) |    197 |
+| Object-Types          |    383 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -481,6 +481,13 @@ Query  ‹IQuery›
 │   ├── nextCursor: String
 │   ├── success: Boolean
 │   └── tracks: JSON
+├── musicArtistList: musicArtistListReturn  ‹IMusicArtistListReturn›
+│   ├── $cursor: String
+│   ├── artists: JSON
+│   ├── error: String
+│   ├── field: String
+│   ├── nextCursor: String
+│   └── success: Boolean
 ├── musicPlaylistList: musicPlaylistListReturn  ‹IMusicPlaylistListReturn›
 │   ├── error: String
 │   ├── field: String
@@ -1834,6 +1841,12 @@ Mutation  ‹IMutation›
 │   ├── error: String
 │   ├── field: String
 │   └── success: Boolean
+├── musicDebugLogCreate: musicDebugLogCreateReturn  ‹IMusicDebugLogCreateReturn›
+│   ├── $lines: String!
+│   ├── error: String
+│   ├── field: String
+│   ├── id: String
+│   └── success: Boolean
 ├── musicPlaylistAddTrack: musicPlaylistAddTrackReturn  ‹IMusicPlaylistAddTrackReturn›
 │   ├── $id: ID!
 │   ├── $trackId: ID!
@@ -1934,6 +1947,8 @@ Mutation  ‹IMutation›
 │   ├── success: Boolean
 │   └── track: JSON
 ├── musicTrackVideo: musicTrackVideoReturn  ‹IMusicTrackVideoReturn›
+│   ├── $fadeIn: Float
+│   ├── $fadeOut: Float
 │   ├── $id: ID!
 │   ├── $length: Int
 │   ├── $locale: String
@@ -2723,8 +2738,10 @@ Inputs
 | `mailerSendReturn`                       | Object | `IMailerSendReturn`                       | `objects.ts` |                                                                                  |
 | `menuOpenReturn`                         | Object | `IMenuOpenReturn`                         | `objects.ts` |                                                                                  |
 | `musicArtistBannerReturn`                | Object | `IMusicArtistBannerReturn`                | `objects.ts` |                                                                                  |
+| `musicArtistListReturn`                  | Object | `IMusicArtistListReturn`                  | `objects.ts` |                                                                                  |
 | `musicArtistReturn`                      | Object | `IMusicArtistReturn`                      | `objects.ts` |                                                                                  |
 | `musicArtistUpdateReturn`                | Object | `IMusicArtistUpdateReturn`                | `objects.ts` |                                                                                  |
+| `musicDebugLogCreateReturn`              | Object | `IMusicDebugLogCreateReturn`              | `objects.ts` |                                                                                  |
 | `musicPlaylistAddTrackReturn`            | Object | `IMusicPlaylistAddTrackReturn`            | `objects.ts` |                                                                                  |
 | `musicPlaylistCreateReturn`              | Object | `IMusicPlaylistCreateReturn`              | `objects.ts` |                                                                                  |
 | `musicPlaylistListReturn`                | Object | `IMusicPlaylistListReturn`                | `objects.ts` |                                                                                  |

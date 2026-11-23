@@ -1500,6 +1500,15 @@ export interface IMusicArtistBannerReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `musicArtistListReturn` */
+export interface IMusicArtistListReturn {
+  artists: Maybe<ScalarJSON>;
+  error: Maybe<string>;
+  field: Maybe<string>;
+  nextCursor: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `musicArtistReturn` */
 export interface IMusicArtistReturn {
   artist: Maybe<ScalarJSON>;
@@ -1514,6 +1523,14 @@ export interface IMusicArtistReturn {
 export interface IMusicArtistUpdateReturn {
   error: Maybe<string>;
   field: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `musicDebugLogCreateReturn` */
+export interface IMusicDebugLogCreateReturn {
+  error: Maybe<string>;
+  field: Maybe<string>;
+  id: Maybe<string>;
   success: Maybe<boolean>;
 }
 
@@ -1834,6 +1851,7 @@ export interface IMutation {
   linkParse: Maybe<ILinkParseReturn>;
   musicArtistBanner: Maybe<IMusicArtistBannerReturn>;
   musicArtistUpdate: Maybe<IMusicArtistUpdateReturn>;
+  musicDebugLogCreate: Maybe<IMusicDebugLogCreateReturn>;
   musicPlaylistAddTrack: Maybe<IMusicPlaylistAddTrackReturn>;
   musicPlaylistCreate: Maybe<IMusicPlaylistCreateReturn>;
   musicPlaylistMoveTrack: Maybe<IMusicPlaylistMoveTrackReturn>;
@@ -2148,6 +2166,7 @@ export interface IQuery {
   mailerSend: Maybe<IMailerSendReturn>;
   menuOpen: Maybe<IMenuOpenReturn>;
   musicArtist: Maybe<IMusicArtistReturn>;
+  musicArtistList: Maybe<IMusicArtistListReturn>;
   musicPlaylistList: Maybe<IMusicPlaylistListReturn>;
   musicPlaylistLoad: Maybe<IMusicPlaylistLoadReturn>;
   musicTrackClip: Maybe<IMusicTrackClipReturn>;
