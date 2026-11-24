@@ -851,81 +851,6 @@ export interface IMutationSendMailArgs {
   to: string;
 }
 
-/** Arguments of `Mutation.shopCategoryDelete` */
-export interface IMutationShopCategoryDeleteArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Mutation.shopCategorySave` */
-export interface IMutationShopCategorySaveArgs {
-  id?: InputMaybe<ScalarID>;
-  name: string;
-  shopId: ScalarID;
-}
-
-/** Arguments of `Mutation.shopItemDelete` */
-export interface IMutationShopItemDeleteArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Mutation.shopItemSave` */
-export interface IMutationShopItemSaveArgs {
-  id?: InputMaybe<ScalarID>;
-  imageFiles?: InputMaybe<Array<InputMaybe<ScalarUpload>>>;
-  imageOrder?: InputMaybe<Array<InputMaybe<string>>>;
-  removeImageIds?: InputMaybe<Array<InputMaybe<string>>>;
-  shopId: ScalarID;
-  values: ScalarJSON;
-}
-
-/** Arguments of `Mutation.shopRequestCreate` */
-export interface IMutationShopRequestCreateArgs {
-  captchaToken?: InputMaybe<string>;
-  id: ScalarID;
-  values: ScalarJSON;
-}
-
-/** Arguments of `Mutation.shopRequestDelete` */
-export interface IMutationShopRequestDeleteArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Mutation.shopRequestNoteCreate` */
-export interface IMutationShopRequestNoteCreateArgs {
-  id: ScalarID;
-  message: string;
-}
-
-/** Arguments of `Mutation.shopRequestNoteDelete` */
-export interface IMutationShopRequestNoteDeleteArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Mutation.shopRequestReplyCreate` */
-export interface IMutationShopRequestReplyCreateArgs {
-  id: ScalarID;
-  message: string;
-}
-
-/** Arguments of `Mutation.shopRequestStatus` */
-export interface IMutationShopRequestStatusArgs {
-  id: ScalarID;
-  status: string;
-}
-
-/** Arguments of `Mutation.shopRequestValue` */
-export interface IMutationShopRequestValueArgs {
-  id: ScalarID;
-  valueCents?: InputMaybe<number>;
-}
-
-/** Arguments of `Mutation.shopSave` */
-export interface IMutationShopSaveArgs {
-  bannerFile?: InputMaybe<Array<InputMaybe<ScalarUpload>>>;
-  logoFile?: InputMaybe<Array<InputMaybe<ScalarUpload>>>;
-  values: ScalarJSON;
-}
-
 /** Arguments of `Mutation.statsTrack` */
 export interface IMutationStatsTrackArgs {
   data: ScalarJSON;
@@ -1516,45 +1441,6 @@ export interface IQuerySearchArgs {
   active: ScalarJSON;
   options: ISearchOptions;
   searchTerm: string;
-}
-
-/** Arguments of `Query.shopCategoryList` */
-export interface IQueryShopCategoryListArgs {
-  shopId: ScalarID;
-}
-
-/** Arguments of `Query.shopItemList` */
-export interface IQueryShopItemListArgs {
-  categoryId?: InputMaybe<ScalarID>;
-  kind?: InputMaybe<string>;
-  page?: InputMaybe<number>;
-  search?: InputMaybe<string>;
-  shopId?: InputMaybe<ScalarID>;
-}
-
-/** Arguments of `Query.shopItemLoad` */
-export interface IQueryShopItemLoadArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Query.shopLoad` */
-export interface IQueryShopLoadArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Query.shopRequestList` */
-export interface IQueryShopRequestListArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Query.shopRequestNoteList` */
-export interface IQueryShopRequestNoteListArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Query.shopRequestReplyList` */
-export interface IQueryShopRequestReplyListArgs {
-  id: ScalarID;
 }
 
 /** Arguments of `Query.singleSearch` */

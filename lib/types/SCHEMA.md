@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |    140 |
-| [Mutation](#mutation) |    209 |
-| Object-Types          |    404 |
+| [Query](#query)       |    131 |
+| [Mutation](#mutation) |    197 |
+| Object-Types          |    383 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -633,46 +633,6 @@ Query  ‹IQuery›
 │   ├── error: String
 │   ├── routes: JSON
 │   ├── settings: JSON
-│   └── success: Boolean
-├── shopCategoryList: shopCategoryListReturn  ‹IShopCategoryListReturn›
-│   ├── $shopId: ID!
-│   ├── items: JSON
-│   └── success: Boolean
-├── shopGet: shopGetReturn  ‹IShopGetReturn›
-│   ├── shops: JSON
-│   └── success: Boolean
-├── shopItemList: shopItemListReturn  ‹IShopItemListReturn›
-│   ├── $categoryId: ID
-│   ├── $kind: String
-│   ├── $page: Int
-│   ├── $search: String
-│   ├── $shopId: ID
-│   ├── hasMore: Boolean
-│   ├── items: JSON
-│   └── success: Boolean
-├── shopItemLoad: shopItemLoadReturn  ‹IShopItemLoadReturn›
-│   ├── $id: ID!
-│   ├── hasMore: Boolean
-│   ├── items: JSON
-│   └── success: Boolean
-├── shopLoad: shopLoadReturn  ‹IShopLoadReturn›
-│   ├── $id: ID!
-│   ├── shops: JSON
-│   └── success: Boolean
-├── shopRequestList: shopRequestListReturn  ‹IShopRequestListReturn›
-│   ├── $id: ID!
-│   ├── requests: JSON
-│   └── success: Boolean
-├── shopRequestMine: shopRequestMineReturn  ‹IShopRequestMineReturn›
-│   ├── requests: JSON
-│   └── success: Boolean
-├── shopRequestNoteList: shopRequestNoteListReturn  ‹IShopRequestNoteListReturn›
-│   ├── $id: ID!
-│   ├── notes: JSON
-│   └── success: Boolean
-├── shopRequestReplyList: shopRequestReplyListReturn  ‹IShopRequestReplyListReturn›
-│   ├── $id: ID!
-│   ├── replies: JSON
 │   └── success: Boolean
 ├── singleSearch: singleSearch  ‹ISingleSearch›
 │   ├── $alias: String!
@@ -2125,70 +2085,6 @@ Mutation  ‹IMutation›
 │   ├── $template: String!
 │   ├── $to: String!
 │   └── sent: Boolean
-├── shopCategoryDelete: shopCategoryDeleteReturn  ‹IShopCategoryDeleteReturn›
-│   ├── $id: ID!
-│   ├── items: JSON
-│   └── success: Boolean
-├── shopCategorySave: shopCategorySaveReturn  ‹IShopCategorySaveReturn›
-│   ├── $id: ID
-│   ├── $name: String!
-│   ├── $shopId: ID!
-│   ├── items: JSON
-│   └── success: Boolean
-├── shopItemDelete: shopItemDeleteReturn  ‹IShopItemDeleteReturn›
-│   ├── $id: ID!
-│   ├── hasMore: Boolean
-│   ├── items: JSON
-│   └── success: Boolean
-├── shopItemSave: shopItemSaveReturn  ‹IShopItemSaveReturn›
-│   ├── $id: ID
-│   ├── $imageFiles: [Upload]
-│   ├── $imageOrder: [String]
-│   ├── $removeImageIds: [String]
-│   ├── $shopId: ID!
-│   ├── $values: JSON!
-│   ├── hasMore: Boolean
-│   ├── items: JSON
-│   └── success: Boolean
-├── shopRequestCreate: shopRequestCreateReturn  ‹IShopRequestCreateReturn›
-│   ├── $captchaToken: String
-│   ├── $id: ID!
-│   ├── $values: JSON!
-│   ├── requests: JSON
-│   └── success: Boolean
-├── shopRequestDelete: shopRequestDeleteReturn  ‹IShopRequestDeleteReturn›
-│   ├── $id: ID!
-│   └── success: Boolean
-├── shopRequestNoteCreate: shopRequestNoteCreateReturn  ‹IShopRequestNoteCreateReturn›
-│   ├── $id: ID!
-│   ├── $message: String!
-│   ├── notes: JSON
-│   └── success: Boolean
-├── shopRequestNoteDelete: shopRequestNoteDeleteReturn  ‹IShopRequestNoteDeleteReturn›
-│   ├── $id: ID!
-│   ├── notes: JSON
-│   └── success: Boolean
-├── shopRequestReplyCreate: shopRequestReplyCreateReturn  ‹IShopRequestReplyCreateReturn›
-│   ├── $id: ID!
-│   ├── $message: String!
-│   ├── replies: JSON
-│   └── success: Boolean
-├── shopRequestStatus: shopRequestStatusReturn  ‹IShopRequestStatusReturn›
-│   ├── $id: ID!
-│   ├── $status: String!
-│   ├── requests: JSON
-│   └── success: Boolean
-├── shopRequestValue: shopRequestValueReturn  ‹IShopRequestValueReturn›
-│   ├── $id: ID!
-│   ├── $valueCents: Int
-│   ├── requests: JSON
-│   └── success: Boolean
-├── shopSave: shopSaveReturn  ‹IShopSaveReturn›
-│   ├── $bannerFile: [Upload]
-│   ├── $logoFile: [Upload]
-│   ├── $values: JSON!
-│   ├── shops: JSON
-│   └── success: Boolean
 ├── statsTrack: statsTrackReturn  ‹IStatsTrackReturn›
 │   ├── $data: JSON!
 │   ├── error: String
@@ -2911,27 +2807,6 @@ Inputs
 | `sendMailContext`                        | Input  | `ISendMailContext`                        | `inputs.ts`  |                                                                                  |
 | `sendMailReturn`                         | Object | `ISendMailReturn`                         | `objects.ts` |                                                                                  |
 | `seoConfigReturn`                        | Object | `ISeoConfigReturn`                        | `objects.ts` |                                                                                  |
-| `shopCategoryDeleteReturn`               | Object | `IShopCategoryDeleteReturn`               | `objects.ts` |                                                                                  |
-| `shopCategoryListReturn`                 | Object | `IShopCategoryListReturn`                 | `objects.ts` |                                                                                  |
-| `shopCategorySaveReturn`                 | Object | `IShopCategorySaveReturn`                 | `objects.ts` |                                                                                  |
-| `shopGetReturn`                          | Object | `IShopGetReturn`                          | `objects.ts` |                                                                                  |
-| `shopItemDeleteReturn`                   | Object | `IShopItemDeleteReturn`                   | `objects.ts` |                                                                                  |
-| `shopItemListReturn`                     | Object | `IShopItemListReturn`                     | `objects.ts` |                                                                                  |
-| `shopItemLoadReturn`                     | Object | `IShopItemLoadReturn`                     | `objects.ts` |                                                                                  |
-| `shopItemSaveReturn`                     | Object | `IShopItemSaveReturn`                     | `objects.ts` |                                                                                  |
-| `shopLoadReturn`                         | Object | `IShopLoadReturn`                         | `objects.ts` |                                                                                  |
-| `shopRequestCreateReturn`                | Object | `IShopRequestCreateReturn`                | `objects.ts` |                                                                                  |
-| `shopRequestDeleteReturn`                | Object | `IShopRequestDeleteReturn`                | `objects.ts` |                                                                                  |
-| `shopRequestListReturn`                  | Object | `IShopRequestListReturn`                  | `objects.ts` |                                                                                  |
-| `shopRequestMineReturn`                  | Object | `IShopRequestMineReturn`                  | `objects.ts` |                                                                                  |
-| `shopRequestNoteCreateReturn`            | Object | `IShopRequestNoteCreateReturn`            | `objects.ts` |                                                                                  |
-| `shopRequestNoteDeleteReturn`            | Object | `IShopRequestNoteDeleteReturn`            | `objects.ts` |                                                                                  |
-| `shopRequestNoteListReturn`              | Object | `IShopRequestNoteListReturn`              | `objects.ts` |                                                                                  |
-| `shopRequestReplyCreateReturn`           | Object | `IShopRequestReplyCreateReturn`           | `objects.ts` |                                                                                  |
-| `shopRequestReplyListReturn`             | Object | `IShopRequestReplyListReturn`             | `objects.ts` |                                                                                  |
-| `shopRequestStatusReturn`                | Object | `IShopRequestStatusReturn`                | `objects.ts` |                                                                                  |
-| `shopRequestValueReturn`                 | Object | `IShopRequestValueReturn`                 | `objects.ts` |                                                                                  |
-| `shopSaveReturn`                         | Object | `IShopSaveReturn`                         | `objects.ts` |                                                                                  |
 | `singleSearch`                           | Object | `ISingleSearch`                           | `objects.ts` |                                                                                  |
 | `sitePageDisplayModeReturn`              | Object | `ISitePageDisplayModeReturn`              | `objects.ts` |                                                                                  |
 | `sitePageGetReturn`                      | Object | `ISitePageGetReturn`                      | `objects.ts` |                                                                                  |

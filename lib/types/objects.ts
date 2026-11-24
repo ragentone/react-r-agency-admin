@@ -1887,18 +1887,6 @@ export interface IMutation {
   resumeUpdate: Maybe<IResumeUpdateReturn>;
   resumeUpdateContent: Maybe<IResumeUpdateContentReturn>;
   sendMail: Maybe<ISendMailReturn>;
-  shopCategoryDelete: Maybe<IShopCategoryDeleteReturn>;
-  shopCategorySave: Maybe<IShopCategorySaveReturn>;
-  shopItemDelete: Maybe<IShopItemDeleteReturn>;
-  shopItemSave: Maybe<IShopItemSaveReturn>;
-  shopRequestCreate: Maybe<IShopRequestCreateReturn>;
-  shopRequestDelete: Maybe<IShopRequestDeleteReturn>;
-  shopRequestNoteCreate: Maybe<IShopRequestNoteCreateReturn>;
-  shopRequestNoteDelete: Maybe<IShopRequestNoteDeleteReturn>;
-  shopRequestReplyCreate: Maybe<IShopRequestReplyCreateReturn>;
-  shopRequestStatus: Maybe<IShopRequestStatusReturn>;
-  shopRequestValue: Maybe<IShopRequestValueReturn>;
-  shopSave: Maybe<IShopSaveReturn>;
   statsTrack: Maybe<IStatsTrackReturn>;
   storageWrite: Maybe<IStorageWriteReturn>;
   timelineCommentDelete: Maybe<ITimelineCommentDeleteReturn>;
@@ -2198,15 +2186,6 @@ export interface IQuery {
   search: Maybe<ISearch>;
   searchConfig: Maybe<ISearchConfig>;
   seoConfig: Maybe<ISeoConfigReturn>;
-  shopCategoryList: Maybe<IShopCategoryListReturn>;
-  shopGet: Maybe<IShopGetReturn>;
-  shopItemList: Maybe<IShopItemListReturn>;
-  shopItemLoad: Maybe<IShopItemLoadReturn>;
-  shopLoad: Maybe<IShopLoadReturn>;
-  shopRequestList: Maybe<IShopRequestListReturn>;
-  shopRequestMine: Maybe<IShopRequestMineReturn>;
-  shopRequestNoteList: Maybe<IShopRequestNoteListReturn>;
-  shopRequestReplyList: Maybe<IShopRequestReplyListReturn>;
   singleSearch: Maybe<ISingleSearch>;
   sitePageDisplayMode: Maybe<ISitePageDisplayModeReturn>;
   sitePageGet: Maybe<ISitePageGetReturn>;
@@ -2349,135 +2328,6 @@ export interface ISeoConfigReturn {
   error: Maybe<string>;
   routes: Maybe<ScalarJSON>;
   settings: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopCategoryDeleteReturn` */
-export interface IShopCategoryDeleteReturn {
-  items: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopCategoryListReturn` */
-export interface IShopCategoryListReturn {
-  items: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopCategorySaveReturn` */
-export interface IShopCategorySaveReturn {
-  items: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopGetReturn` */
-export interface IShopGetReturn {
-  shops: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopItemDeleteReturn` */
-export interface IShopItemDeleteReturn {
-  hasMore: Maybe<boolean>;
-  items: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopItemListReturn` */
-export interface IShopItemListReturn {
-  hasMore: Maybe<boolean>;
-  items: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopItemLoadReturn` */
-export interface IShopItemLoadReturn {
-  hasMore: Maybe<boolean>;
-  items: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopItemSaveReturn` */
-export interface IShopItemSaveReturn {
-  hasMore: Maybe<boolean>;
-  items: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopLoadReturn` */
-export interface IShopLoadReturn {
-  shops: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopRequestCreateReturn` */
-export interface IShopRequestCreateReturn {
-  requests: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopRequestDeleteReturn` */
-export interface IShopRequestDeleteReturn {
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopRequestListReturn` */
-export interface IShopRequestListReturn {
-  requests: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopRequestMineReturn` */
-export interface IShopRequestMineReturn {
-  requests: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopRequestNoteCreateReturn` */
-export interface IShopRequestNoteCreateReturn {
-  notes: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopRequestNoteDeleteReturn` */
-export interface IShopRequestNoteDeleteReturn {
-  notes: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopRequestNoteListReturn` */
-export interface IShopRequestNoteListReturn {
-  notes: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopRequestReplyCreateReturn` */
-export interface IShopRequestReplyCreateReturn {
-  replies: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopRequestReplyListReturn` */
-export interface IShopRequestReplyListReturn {
-  replies: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopRequestStatusReturn` */
-export interface IShopRequestStatusReturn {
-  requests: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopRequestValueReturn` */
-export interface IShopRequestValueReturn {
-  requests: Maybe<ScalarJSON>;
-  success: Maybe<boolean>;
-}
-
-/** GraphQL: `shopSaveReturn` */
-export interface IShopSaveReturn {
-  shops: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
 }
 
