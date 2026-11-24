@@ -1887,6 +1887,8 @@ export interface IMutation {
   resumeUpdate: Maybe<IResumeUpdateReturn>;
   resumeUpdateContent: Maybe<IResumeUpdateContentReturn>;
   sendMail: Maybe<ISendMailReturn>;
+  shopCategoryDelete: Maybe<IShopCategoryDeleteReturn>;
+  shopCategorySave: Maybe<IShopCategorySaveReturn>;
   shopItemDelete: Maybe<IShopItemDeleteReturn>;
   shopItemSave: Maybe<IShopItemSaveReturn>;
   shopRequestCreate: Maybe<IShopRequestCreateReturn>;
@@ -2196,6 +2198,7 @@ export interface IQuery {
   search: Maybe<ISearch>;
   searchConfig: Maybe<ISearchConfig>;
   seoConfig: Maybe<ISeoConfigReturn>;
+  shopCategoryList: Maybe<IShopCategoryListReturn>;
   shopGet: Maybe<IShopGetReturn>;
   shopItemList: Maybe<IShopItemListReturn>;
   shopItemLoad: Maybe<IShopItemLoadReturn>;
@@ -2346,6 +2349,24 @@ export interface ISeoConfigReturn {
   error: Maybe<string>;
   routes: Maybe<ScalarJSON>;
   settings: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `shopCategoryDeleteReturn` */
+export interface IShopCategoryDeleteReturn {
+  items: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `shopCategoryListReturn` */
+export interface IShopCategoryListReturn {
+  items: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `shopCategorySaveReturn` */
+export interface IShopCategorySaveReturn {
+  items: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
 }
 

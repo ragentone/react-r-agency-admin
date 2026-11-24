@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |    139 |
-| [Mutation](#mutation) |    207 |
-| Object-Types          |    401 |
+| [Query](#query)       |    140 |
+| [Mutation](#mutation) |    209 |
+| Object-Types          |    404 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -634,10 +634,15 @@ Query  ‹IQuery›
 │   ├── routes: JSON
 │   ├── settings: JSON
 │   └── success: Boolean
+├── shopCategoryList: shopCategoryListReturn  ‹IShopCategoryListReturn›
+│   ├── $shopId: ID!
+│   ├── items: JSON
+│   └── success: Boolean
 ├── shopGet: shopGetReturn  ‹IShopGetReturn›
 │   ├── shops: JSON
 │   └── success: Boolean
 ├── shopItemList: shopItemListReturn  ‹IShopItemListReturn›
+│   ├── $categoryId: ID
 │   ├── $kind: String
 │   ├── $page: Int
 │   ├── $search: String
@@ -2120,6 +2125,16 @@ Mutation  ‹IMutation›
 │   ├── $template: String!
 │   ├── $to: String!
 │   └── sent: Boolean
+├── shopCategoryDelete: shopCategoryDeleteReturn  ‹IShopCategoryDeleteReturn›
+│   ├── $id: ID!
+│   ├── items: JSON
+│   └── success: Boolean
+├── shopCategorySave: shopCategorySaveReturn  ‹IShopCategorySaveReturn›
+│   ├── $id: ID
+│   ├── $name: String!
+│   ├── $shopId: ID!
+│   ├── items: JSON
+│   └── success: Boolean
 ├── shopItemDelete: shopItemDeleteReturn  ‹IShopItemDeleteReturn›
 │   ├── $id: ID!
 │   ├── hasMore: Boolean
@@ -2896,6 +2911,9 @@ Inputs
 | `sendMailContext`                        | Input  | `ISendMailContext`                        | `inputs.ts`  |                                                                                  |
 | `sendMailReturn`                         | Object | `ISendMailReturn`                         | `objects.ts` |                                                                                  |
 | `seoConfigReturn`                        | Object | `ISeoConfigReturn`                        | `objects.ts` |                                                                                  |
+| `shopCategoryDeleteReturn`               | Object | `IShopCategoryDeleteReturn`               | `objects.ts` |                                                                                  |
+| `shopCategoryListReturn`                 | Object | `IShopCategoryListReturn`                 | `objects.ts` |                                                                                  |
+| `shopCategorySaveReturn`                 | Object | `IShopCategorySaveReturn`                 | `objects.ts` |                                                                                  |
 | `shopGetReturn`                          | Object | `IShopGetReturn`                          | `objects.ts` |                                                                                  |
 | `shopItemDeleteReturn`                   | Object | `IShopItemDeleteReturn`                   | `objects.ts` |                                                                                  |
 | `shopItemListReturn`                     | Object | `IShopItemListReturn`                     | `objects.ts` |                                                                                  |

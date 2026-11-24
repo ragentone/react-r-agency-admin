@@ -851,6 +851,18 @@ export interface IMutationSendMailArgs {
   to: string;
 }
 
+/** Arguments of `Mutation.shopCategoryDelete` */
+export interface IMutationShopCategoryDeleteArgs {
+  id: ScalarID;
+}
+
+/** Arguments of `Mutation.shopCategorySave` */
+export interface IMutationShopCategorySaveArgs {
+  id?: InputMaybe<ScalarID>;
+  name: string;
+  shopId: ScalarID;
+}
+
 /** Arguments of `Mutation.shopItemDelete` */
 export interface IMutationShopItemDeleteArgs {
   id: ScalarID;
@@ -1506,8 +1518,14 @@ export interface IQuerySearchArgs {
   searchTerm: string;
 }
 
+/** Arguments of `Query.shopCategoryList` */
+export interface IQueryShopCategoryListArgs {
+  shopId: ScalarID;
+}
+
 /** Arguments of `Query.shopItemList` */
 export interface IQueryShopItemListArgs {
+  categoryId?: InputMaybe<ScalarID>;
   kind?: InputMaybe<string>;
   page?: InputMaybe<number>;
   search?: InputMaybe<string>;
