@@ -388,6 +388,10 @@
       "toc": {
         "label": "Inhaltsverzeichnis",
         "description": "Sprunglinks zu allen Blöcken mit Anker"
+      },
+      "carousel": {
+        "label": "Karussell",
+        "description": "Bilder zum Wischen"
       }
     },
     "field": {
@@ -495,7 +499,11 @@
       "url": "Video-Link",
       "hint": "Link von YouTube oder Vimeo einfügen.",
       "invalid": "Kein gültiger YouTube- oder Vimeo-Link.",
-      "consent": "Antippen lädt das Video von {{provider}}. Dabei werden Daten an {{provider}} übertragen."
+      "consent": "Antippen lädt das Video von {{provider}}. Dabei werden Daten an {{provider}} übertragen.",
+      "poster": "Vorschaubild (optional)",
+      "posterHint": "Eigenes Bild statt dunkler Fläche. Es wird vor dem Antippen nichts vom Anbieter geladen.",
+      "ratio": "Format",
+      "play": "Video von {{provider}} abspielen"
     },
     "divider": {
       "variant": {
@@ -679,6 +687,15 @@
       "titlePlaceholder": "Inhalt",
       "numbered": "Nummeriert",
       "hint": "Zeigt jeden Block, der einen Anker hat – mit seiner Überschrift (oder der ersten Überschrift im Text). Blöcke ohne Anker erscheinen nicht. Besucher sehen nur Einträge zu Blöcken, die sie auch sehen dürfen."
+    },
+    "carousel": {
+      "items": "Bilder",
+      "item": "Bild",
+      "add": "Bild hinzufügen",
+      "addMany": "Mehrere Bilder wählen",
+      "hint": "Alle Bilder haben dasselbe Format und werden mittig zugeschnitten.",
+      "uploadFailed": "{{count}} Bild(er) konnten nicht hochgeladen werden.",
+      "slide": "Bild {{current}} von {{total}}"
     }
   },
   "stats": {

@@ -388,6 +388,10 @@
       "toc": {
         "label": "Table of contents",
         "description": "Jump links to every block with an anchor"
+      },
+      "carousel": {
+        "label": "Carousel",
+        "description": "Swipeable images"
       }
     },
     "field": {
@@ -495,7 +499,11 @@
       "url": "Video link",
       "hint": "Paste a YouTube or Vimeo link.",
       "invalid": "Not a valid YouTube or Vimeo link.",
-      "consent": "Tap to load the video from {{provider}}. Data will be sent to {{provider}}."
+      "consent": "Tap to load the video from {{provider}}. Data will be sent to {{provider}}.",
+      "poster": "Preview image (optional)",
+      "posterHint": "Own image instead of a dark area. Nothing is loaded from the provider before the tap.",
+      "ratio": "Format",
+      "play": "Play video from {{provider}}"
     },
     "divider": {
       "variant": {
@@ -679,6 +687,15 @@
       "titlePlaceholder": "Contents",
       "numbered": "Numbered",
       "hint": "Lists every block that has an anchor – with its heading (or the first heading in its text). Blocks without an anchor are left out. Visitors only see entries for blocks they may see."
+    },
+    "carousel": {
+      "items": "Images",
+      "item": "Image",
+      "add": "Add image",
+      "addMany": "Choose several images",
+      "hint": "All images share one format and are cropped around the centre.",
+      "uploadFailed": "{{count}} image(s) could not be uploaded.",
+      "slide": "Image {{current}} of {{total}}"
     }
   },
   "stats": {
