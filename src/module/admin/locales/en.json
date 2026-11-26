@@ -693,9 +693,35 @@
       "item": "Image",
       "add": "Add image",
       "addMany": "Choose several images",
-      "hint": "All images share one format and are cropped around the centre.",
+      "hint": "Select → compress → crop: only the cropped image is saved.",
       "uploadFailed": "{{count}} image(s) could not be uploaded.",
-      "slide": "Image {{current}} of {{total}}"
+      "slide": "Image {{current}} of {{total}}",
+      "ratioHint": "New images are cropped to this format. Already uploaded ones are centred – use “Crop” on the slide if needed.",
+      "perView": "Images side by side (from tablet)",
+      "fit": "Image fit",
+      "fitValue": {
+        "cover": "Fill",
+        "contain": "Show whole image"
+      },
+      "caption": "Caption",
+      "captionValue": {
+        "below": "Below",
+        "overlay": "On the image"
+      },
+      "arrows": "Arrows (from tablet)",
+      "dots": "Dots",
+      "loop": "Repeat endlessly",
+      "autoplay": "Advance automatically",
+      "autoplayHint": "Pauses on touch, on hover and with “reduce motion”.",
+      "interval": "Seconds per image",
+      "rounded": "Rounded corners",
+      "wide": "Full width on phones"
+    },
+    "crop": {
+      "title": "Crop image {{current}} of {{total}}",
+      "action": "Crop",
+      "description": "Format {{ratio}} – every image gets the same format. Only the cropped part is uploaded.",
+      "apply": "Crop & upload"
     }
   },
   "stats": {

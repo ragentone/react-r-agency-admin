@@ -12,6 +12,7 @@ import {
   ToggleField,
   UrlField,
 } from './BlockFields';
+import { CarouselBlockEditor } from './CarouselBlockEditor';
 import { CodeBlockEditor } from './CodeBlockEditor';
 import { ColumnsEditor } from './ColumnsBlockEditor';
 import { ContactEditor, DownloadsEditor } from './ContactBlockEditors';
@@ -29,8 +30,8 @@ import {
   type PageBlock,
   SITE_PAGE_FAQ_MAX,
   type SitePageBlockType,
-  videoEmbed,
 } from './types';
+import { VideoBlockEditor } from './VideoBlockEditor';
 
 type EditorProps<T extends SitePageBlockType> = {
   data: ISitePageBlockDataMap[T];
@@ -202,42 +203,6 @@ const QuoteEditor: React.FC<EditorProps<'quote'>> = ({ data, onChange, disabled 
         value={data.role}
         onChange={set('role')}
         max={120}
-        disabled={disabled}
-      />
-    </>
-  );
-};
-
-const VideoEditor: React.FC<EditorProps<'video'>> = ({ data, onChange, disabled }) => {
-  const { t } = useTranslation('admin');
-  const set = fieldSetter(data, onChange);
-  const invalid = Boolean(data.url.trim()) && !videoEmbed(data.url);
-  return (
-    <>
-      <div>
-        <TextField
-          label={t('blocks.video.url')}
-          value={data.url}
-          onChange={set('url')}
-          max={500}
-          placeholder="https://www.youtube.com/watch?v=…"
-          disabled={disabled}
-        />
-        <p
-          className={
-            invalid
-              ? 'mt-1 text-caption text-destructive'
-              : 'mt-1 text-caption text-muted-foreground'
-          }
-        >
-          {invalid ? t('blocks.video.invalid') : t('blocks.video.hint')}
-        </p>
-      </div>
-      <TextField
-        label={t('blocks.field.caption')}
-        value={data.caption}
-        onChange={set('caption')}
-        max={300}
         disabled={disabled}
       />
     </>
@@ -441,7 +406,19 @@ export const BlockEditor: React.FC<{
       );
     case 'video':
       return (
-        <VideoEditor {...props} data={block.data} onChange={data => onChange({ ...block, data })} />
+        <VideoBlockEditor
+          {...props}
+          data={block.data}
+          onChange={data => onChange({ ...block, data })}
+        />
+      );
+    case 'carousel':
+      return (
+        <CarouselBlockEditor
+          {...props}
+          data={block.data}
+          onChange={data => onChange({ ...block, data })}
+        />
       );
     case 'code':
       return (

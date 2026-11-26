@@ -101,7 +101,7 @@ const EditableImageField = <T extends IEditableImageData>({
 );
 
 /** Alt text with a gentle warning while it is missing. */
-const AltField: React.FC<{
+export const AltField: React.FC<{
   value: string;
   onChange: (value: string) => void;
   disabled?: boolean;

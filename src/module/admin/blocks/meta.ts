@@ -7,6 +7,7 @@ import {
   Contact,
   FileDown,
   Footprints,
+  GalleryHorizontal,
   Gauge,
   Image as ImageIcon,
   Info,
@@ -38,6 +39,7 @@ export const BLOCK_ICONS: Record<SitePageBlockType, typeof Type> = {
   faq: ListCollapse,
   quote: Quote,
   video: Youtube,
+  carousel: GalleryHorizontal,
   divider: SeparatorHorizontal,
   stats: Gauge,
   steps: Footprints,
@@ -99,6 +101,12 @@ export const blockSummary = (block: PageBlock): string => {
       return block.data.author || block.data.text;
     case 'video':
       return block.data.caption || block.data.url;
+    case 'carousel':
+      return (
+        block.data.title ||
+        block.data.items.find(item => item.caption)?.caption ||
+        `${block.data.items.filter(item => item.imageUrl).length}`
+      );
     case 'divider':
       return '';
     case 'code':

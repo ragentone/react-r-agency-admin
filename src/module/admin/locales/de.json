@@ -693,9 +693,35 @@
       "item": "Bild",
       "add": "Bild hinzufügen",
       "addMany": "Mehrere Bilder wählen",
-      "hint": "Alle Bilder haben dasselbe Format und werden mittig zugeschnitten.",
+      "hint": "Auswahl → verkleinern → zuschneiden: Nur der Ausschnitt wird gespeichert.",
       "uploadFailed": "{{count}} Bild(er) konnten nicht hochgeladen werden.",
-      "slide": "Bild {{current}} von {{total}}"
+      "slide": "Bild {{current}} von {{total}}",
+      "ratioHint": "Neue Bilder werden in diesem Format zugeschnitten. Schon hochgeladene passen sich mittig an – bei Bedarf „Zuschneiden“ an der Folie.",
+      "perView": "Bilder nebeneinander (ab Tablet)",
+      "fit": "Bildanpassung",
+      "fitValue": {
+        "cover": "Füllen",
+        "contain": "Ganz zeigen"
+      },
+      "caption": "Bildunterschrift",
+      "captionValue": {
+        "below": "Darunter",
+        "overlay": "Auf dem Bild"
+      },
+      "arrows": "Pfeile (ab Tablet)",
+      "dots": "Punkte",
+      "loop": "Endlos wiederholen",
+      "autoplay": "Automatisch weiterschalten",
+      "autoplayHint": "Pausiert beim Berühren, bei Mauszeiger und mit „Bewegung reduzieren“.",
+      "interval": "Sekunden pro Bild",
+      "rounded": "Abgerundete Ecken",
+      "wide": "Volle Breite auf dem Handy"
+    },
+    "crop": {
+      "title": "Bild {{current}} von {{total}} zuschneiden",
+      "action": "Zuschneiden",
+      "description": "Format {{ratio}} – alle Bilder bekommen dasselbe Format. Nur der Ausschnitt wird hochgeladen.",
+      "apply": "Zuschneiden & hochladen"
     }
   },
   "stats": {

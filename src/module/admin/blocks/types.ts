@@ -144,12 +144,31 @@ export interface ICarouselItem {
   caption: string;
 }
 
-export type CarouselRatio = Exclude<ImageRatio, 'auto'>;
-export const CAROUSEL_RATIOS: CarouselRatio[] = ['16/9', '4/3', '1/1', '3/4'];
+/** Slide format – every image is cropped to it in the editor before the upload. */
+export const CAROUSEL_RATIOS = ['16/9', '4/3', '1/1', '3/4'] as const;
+export type CarouselRatio = (typeof CAROUSEL_RATIOS)[number];
+/** Slides side by side from tablet width. */
+export const CAROUSEL_PER_VIEW = ['1', '2', '3'] as const;
+export type CarouselPerView = (typeof CAROUSEL_PER_VIEW)[number];
+export type CarouselFit = 'cover' | 'contain';
+export type CarouselCaption = 'below' | 'overlay';
 
 export interface ICarouselBlockData {
   title: string;
   ratio: CarouselRatio;
+  perView: CarouselPerView;
+  /** `cover` crops to the format, `contain` shows the whole image. */
+  fit: CarouselFit;
+  caption: CarouselCaption;
+  arrows: boolean;
+  dots: boolean;
+  loop: boolean;
+  autoplay: boolean;
+  /** Seconds per slide (autoplay). */
+  interval: number;
+  rounded: boolean;
+  /** Edge to edge on phones. */
+  wide: boolean;
   items: ICarouselItem[];
 }
 
@@ -454,7 +473,21 @@ const DEFAULTS: { [T in SitePageBlockType]: () => ISitePageBlockDataMap[T] } = {
   faq: () => ({ title: '', items: [emptyFaqItem()] }),
   quote: () => ({ text: '', author: '', role: '' }),
   video: () => ({ url: '', caption: '', posterUrl: '', ratio: '16/9' }),
-  carousel: () => ({ title: '', ratio: '4/3', items: [emptySlide(), emptySlide()] }),
+  carousel: () => ({
+    title: '',
+    ratio: '16/9',
+    perView: '1',
+    fit: 'cover',
+    caption: 'below',
+    arrows: true,
+    dots: true,
+    loop: false,
+    autoplay: false,
+    interval: 5,
+    rounded: true,
+    wide: false,
+    items: [emptySlide(), emptySlide()],
+  }),
   divider: () => ({ variant: 'line', size: 'md' }),
   code: () => ({ title: '', language: 'plain', code: '' }),
   contact: () => ({ title: '', phone: '', email: '', address: '', hours: '' }),

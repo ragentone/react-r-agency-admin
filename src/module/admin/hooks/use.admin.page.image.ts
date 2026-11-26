@@ -14,7 +14,7 @@ export const SITE_PAGE_IMAGE_MAX_SIZE = 8 * 1024 * 1024;
 export const SITE_PAGE_IMAGE_ACCEPT = 'image/jpeg,image/png,image/webp,image/gif,image/avif';
 
 /** Big photos (phone camera) → max 2400 px, JPEG / WebP re-encoded. GIFs stay untouched. */
-const shrink = (file: File): Promise<File> =>
+export const compressPageImage = (file: File): Promise<File> =>
   file.type === 'image/gif' || file.size < 600 * 1024
     ? Promise.resolve(file)
     : new Promise(resolve => {
@@ -47,7 +47,7 @@ export const useAdminPageImageUpload = () => {
       if (!SITE_PAGE_IMAGE_ACCEPT.split(',').includes(original.type)) {
         return { ok: false, error: 'error.imageType' };
       }
-      const file = await shrink(original);
+      const file = await compressPageImage(original);
       if (file.size > SITE_PAGE_IMAGE_MAX_SIZE) return { ok: false, error: 'error.imageTooLarge' };
       try {
         const response = (await getGraphql().mutate({

@@ -7,14 +7,13 @@ import { useTranslation } from 'react-i18next';
 import { SitePageHtml } from '../components/SitePageHtml';
 import { BlockLink } from './BlockLink';
 import { PageBlocksContext } from './blocks.context';
+import { CarouselBlock } from './CarouselBlock';
 import { CodeSnippetBlock } from './CodeBlockView';
 import { ColumnsBlock } from './ColumnsBlock';
 import { ContactBlock, DownloadsBlock } from './ContactBlocks';
 import { HeroBlock } from './HeroBlock';
 import { isFullWidthBlock, isInsetBlock, SITE_PAGE_COLUMN, SITE_PAGE_INSET } from './layout';
 import { CardsBlock, ImageBlock, SplitBlock } from './MediaBlocks';
-import { VideoBlock } from './VideoBlock';
-import { CarouselBlock } from './CarouselBlock';
 import { TocBlock } from './TocBlock';
 import {
   type IAppBlock,
@@ -32,6 +31,7 @@ import {
   type PageBlock,
   TABLE_CELL_KEYS,
 } from './types';
+import { VideoBlock } from './VideoBlock';
 
 export { BlockLink } from './BlockLink';
 
