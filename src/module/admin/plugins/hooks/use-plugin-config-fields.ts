@@ -12,7 +12,11 @@ interface IPluginConfigFieldsState {
 /** Loads the configuration fields a plugin declares (schema only, no values). `retry` loads again. */
 export const usePluginConfigFields = (pluginId: string) => {
   const [attempt, setAttempt] = useState(0);
-  const [state, setState] = useState<IPluginConfigFieldsState>({ loading: true, error: null, fields: [] });
+  const [state, setState] = useState<IPluginConfigFieldsState>({
+    loading: true,
+    error: null,
+    fields: [],
+  });
 
   useEffect(() => {
     let active = true;

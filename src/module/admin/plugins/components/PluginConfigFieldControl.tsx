@@ -40,7 +40,16 @@ export const PluginConfigFieldControl: React.FC<IPluginConfigFieldControlProps> 
 
   switch (field.type) {
     case 'code':
-      return <CodeField id={id} value={text} field={field} invalid={invalid} disabled={disabled} onChange={onChange} />;
+      return (
+        <CodeField
+          id={id}
+          value={text}
+          field={field}
+          invalid={invalid}
+          disabled={disabled}
+          onChange={onChange}
+        />
+      );
     case 'html':
       return (
         <LazyHtmlEditor
@@ -132,7 +141,14 @@ interface ICodeFieldProps {
 }
 
 /** CodeMirror for a `code` field. Empty text is stored as "not set". */
-const CodeField: React.FC<ICodeFieldProps> = ({ id, field, value, invalid, disabled, onChange }) => {
+const CodeField: React.FC<ICodeFieldProps> = ({
+  id,
+  field,
+  value,
+  invalid,
+  disabled,
+  onChange,
+}) => {
   const { theme } = useTheme();
   return (
     <div

@@ -26,15 +26,25 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
   const removal = usePluginRemove(() => undefined);
   const purgeData = usePluginPurge();
   const [deploying, setDeploying] = useState(false);
-  const busy = status.pending !== null || deploying || removal.busy || building.busy || installing.busy || purgeData.busy;
+  const busy =
+    status.pending !== null ||
+    deploying ||
+    removal.busy ||
+    building.busy ||
+    installing.busy ||
+    purgeData.busy;
 
   const toggle = async (value: boolean) => {
     const result = await status.setStatus(plugin.pluginId, value);
     if (result.success) {
-      toast.success(t(value ? 'plugins.toggle.activated' : 'plugins.toggle.deactivated', { name: plugin.name }));
+      toast.success(
+        t(value ? 'plugins.toggle.activated' : 'plugins.toggle.deactivated', { name: plugin.name })
+      );
     } else {
       toast.error(
-        result.error === 'app_version_too_old' ? t('plugins.toggle.appVersionTooOld') : t('plugins.toggle.error')
+        result.error === 'app_version_too_old'
+          ? t('plugins.toggle.appVersionTooOld')
+          : t('plugins.toggle.error')
       );
     }
   };
@@ -42,10 +52,14 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
   const build = async (reinstall = false) => {
     const result = await building.build(plugin.pluginId, reinstall);
     if (result.success) {
-      toast.success(t(result.synced ? 'plugins.build.synced' : 'plugins.build.success', { name: plugin.name }));
+      toast.success(
+        t(result.synced ? 'plugins.build.synced' : 'plugins.build.success', { name: plugin.name })
+      );
     } else {
       toast.error(
-        t(`plugins.build.errors.${result.error ?? 'unknown'}`, { defaultValue: t('plugins.build.errors.unknown') }),
+        t(`plugins.build.errors.${result.error ?? 'unknown'}`, {
+          defaultValue: t('plugins.build.errors.unknown'),
+        }),
         { description: result.errors?.join('\n') || undefined }
       );
     }
@@ -57,7 +71,9 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
       toast.success(t('plugins.install.started', { name: plugin.name }));
     } else {
       toast.error(
-        t(`plugins.install.errors.${result.error ?? 'unknown'}`, { defaultValue: t('plugins.install.errors.unknown') }),
+        t(`plugins.install.errors.${result.error ?? 'unknown'}`, {
+          defaultValue: t('plugins.install.errors.unknown'),
+        }),
         { description: result.errors?.join('\n') || undefined }
       );
     }
@@ -68,10 +84,17 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
     const result = await deployment.deploy(plugin.pluginId, bump);
     setDeploying(false);
     if (result.success) {
-      toast.success(t('plugins.deploy.success', { name: plugin.name, version: result.plugin?.version ?? plugin.version }));
+      toast.success(
+        t('plugins.deploy.success', {
+          name: plugin.name,
+          version: result.plugin?.version ?? plugin.version,
+        })
+      );
     } else {
       toast.error(
-        t(`plugins.deploy.errors.${result.error ?? 'unknown'}`, { defaultValue: t('plugins.deploy.errors.unknown') }),
+        t(`plugins.deploy.errors.${result.error ?? 'unknown'}`, {
+          defaultValue: t('plugins.deploy.errors.unknown'),
+        }),
         { description: result.errors?.join('\n') || undefined }
       );
     }
@@ -84,7 +107,11 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
       toast.success(t('plugins.purge.success', { name: plugin.name, count: result.deleted ?? 0 }));
       return true;
     }
-    toast.error(t(`plugins.purge.errors.${result.error ?? 'unknown'}`, { defaultValue: t('plugins.purge.errors.unknown') }));
+    toast.error(
+      t(`plugins.purge.errors.${result.error ?? 'unknown'}`, {
+        defaultValue: t('plugins.purge.errors.unknown'),
+      })
+    );
     return false;
   };
 
@@ -93,7 +120,11 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
     if (result.success && result.filename && result.data) {
       saveZip(result.filename, result.data);
     } else {
-      toast.error(t(`plugins.download.errors.${result.error ?? 'unknown'}`, { defaultValue: t('plugins.download.errors.unknown') }));
+      toast.error(
+        t(`plugins.download.errors.${result.error ?? 'unknown'}`, {
+          defaultValue: t('plugins.download.errors.unknown'),
+        })
+      );
     }
   };
 
@@ -104,13 +135,21 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
       if (withData) {
         const purged = await purgeData.purge(plugin.pluginId);
         if (!purged.success) {
-          toast.error(t(`plugins.purge.errors.${purged.error ?? 'unknown'}`, { defaultValue: t('plugins.purge.errors.unknown') }));
+          toast.error(
+            t(`plugins.purge.errors.${purged.error ?? 'unknown'}`, {
+              defaultValue: t('plugins.purge.errors.unknown'),
+            })
+          );
         }
       }
       toast.success(t('plugins.remove.success', { name: plugin.name }));
       void navigate({ to: ADMIN_PLUGINS_ROUTE });
     } else {
-      toast.error(t(`plugins.remove.errors.${result.error ?? 'unknown'}`, { defaultValue: t('plugins.remove.errors.unknown') }));
+      toast.error(
+        t(`plugins.remove.errors.${result.error ?? 'unknown'}`, {
+          defaultValue: t('plugins.remove.errors.unknown'),
+        })
+      );
     }
   };
 
@@ -122,7 +161,11 @@ export const usePluginDetail = (plugin: IPluginListItem, reload: () => void) => 
       void reload();
       return true;
     }
-    toast.error(t(`plugins.scope.errors.${result.error ?? 'unknown'}`, { defaultValue: t('plugins.scope.errors.unknown') }));
+    toast.error(
+      t(`plugins.scope.errors.${result.error ?? 'unknown'}`, {
+        defaultValue: t('plugins.scope.errors.unknown'),
+      })
+    );
     return false;
   };
 

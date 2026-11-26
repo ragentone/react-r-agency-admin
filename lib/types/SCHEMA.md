@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |    134 |
-| [Mutation](#mutation) |    198 |
-| Object-Types          |    387 |
+| [Query](#query)       |    136 |
+| [Mutation](#mutation) |    201 |
+| Object-Types          |    392 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -144,6 +144,13 @@ Query  ‹IQuery›
 │   ├── $minutes: Int
 │   ├── error: String
 │   ├── snapshot: JSON
+│   └── success: Boolean
+├── adminPageFormCounts: adminPageFormCountsReturn  ‹IAdminPageFormCountsReturn›
+│   ├── counts: JSON
+│   └── success: Boolean
+├── adminPageFormEntries: adminPageFormEntriesReturn  ‹IAdminPageFormEntriesReturn›
+│   ├── $pageId: ID!
+│   ├── entries: JSON
 │   └── success: Boolean
 ├── adminPageGet: adminPageGetReturn  ‹IAdminPageGetReturn›
 │   ├── $id: ID!
@@ -1319,6 +1326,13 @@ Mutation  ‹IMutation›
 │   ├── $file: [Upload]!
 │   ├── success: Boolean
 │   └── url: String
+├── adminPageFormDelete: adminPageFormDeleteReturn  ‹IAdminPageFormDeleteReturn›
+│   ├── $id: ID!
+│   └── success: Boolean
+├── adminPageFormRead: adminPageFormReadReturn  ‹IAdminPageFormReadReturn›
+│   ├── $id: ID!
+│   ├── $read: Boolean!
+│   └── success: Boolean
 ├── adminPageImageDiscard: adminPageImageDiscardReturn  ‹IAdminPageImageDiscardReturn›
 │   ├── $urls: [String]!
 │   ├── removed: Int
@@ -2107,6 +2121,13 @@ Mutation  ‹IMutation›
 │   ├── $template: String!
 │   ├── $to: String!
 │   └── sent: Boolean
+├── sitePageFormSubmit: sitePageFormSubmitReturn  ‹ISitePageFormSubmitReturn›
+│   ├── $blockId: String!
+│   ├── $elapsed: Int
+│   ├── $slug: String!
+│   ├── $values: JSON!
+│   ├── $website: String
+│   └── success: Boolean
 ├── statsTrack: statsTrackReturn  ‹IStatsTrackReturn›
 │   ├── $data: JSON!
 │   ├── error: String
@@ -2612,6 +2633,10 @@ Inputs
 | `adminPageCreateReturn`                  | Object | `IAdminPageCreateReturn`                  | `objects.ts` |                                                                                  |
 | `adminPageDeleteReturn`                  | Object | `IAdminPageDeleteReturn`                  | `objects.ts` |                                                                                  |
 | `adminPageFileUploadReturn`              | Object | `IAdminPageFileUploadReturn`              | `objects.ts` |                                                                                  |
+| `adminPageFormCountsReturn`              | Object | `IAdminPageFormCountsReturn`              | `objects.ts` |                                                                                  |
+| `adminPageFormDeleteReturn`              | Object | `IAdminPageFormDeleteReturn`              | `objects.ts` |                                                                                  |
+| `adminPageFormEntriesReturn`             | Object | `IAdminPageFormEntriesReturn`             | `objects.ts` |                                                                                  |
+| `adminPageFormReadReturn`                | Object | `IAdminPageFormReadReturn`                | `objects.ts` |                                                                                  |
 | `adminPageGetReturn`                     | Object | `IAdminPageGetReturn`                     | `objects.ts` |                                                                                  |
 | `adminPageImageDiscardReturn`            | Object | `IAdminPageImageDiscardReturn`            | `objects.ts` |                                                                                  |
 | `adminPageImageKeepReturn`               | Object | `IAdminPageImageKeepReturn`               | `objects.ts` |                                                                                  |
@@ -2832,6 +2857,7 @@ Inputs
 | `seoConfigReturn`                        | Object | `ISeoConfigReturn`                        | `objects.ts` |                                                                                  |
 | `singleSearch`                           | Object | `ISingleSearch`                           | `objects.ts` |                                                                                  |
 | `sitePageDisplayModeReturn`              | Object | `ISitePageDisplayModeReturn`              | `objects.ts` |                                                                                  |
+| `sitePageFormSubmitReturn`               | Object | `ISitePageFormSubmitReturn`               | `objects.ts` |                                                                                  |
 | `sitePageGetReturn`                      | Object | `ISitePageGetReturn`                      | `objects.ts` |                                                                                  |
 | `sitePageMenuReturn`                     | Object | `ISitePageMenuReturn`                     | `objects.ts` |                                                                                  |
 | `statsTrackReturn`                       | Object | `IStatsTrackReturn`                       | `objects.ts` |                                                                                  |

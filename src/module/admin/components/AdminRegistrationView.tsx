@@ -72,7 +72,11 @@ export const AdminRegistrationView: React.FC = () => {
       ))}
       <div className="flex flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-end">
         {failed && <p className="text-destructive text-sm">{t('registration.saveError')}</p>}
-        <Button className="min-h-11 sm:min-h-9" disabled={!dirty || saving} onClick={() => void submit()}>
+        <Button
+          className="min-h-11 sm:min-h-9"
+          disabled={!dirty || saving}
+          onClick={() => void submit()}
+        >
           {t('registration.save')}
         </Button>
       </div>

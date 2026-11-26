@@ -98,8 +98,12 @@ export const PluginCreateDrawer: React.FC<IPluginCreateDrawerProps> = ({
             className="mt-0.5"
           />
           <span className="flex flex-col gap-1">
-            <span className="text-body leading-5 font-medium">{t('plugins.create.scopeProtected.label')}</span>
-            <span className="text-caption text-muted-foreground">{t('plugins.create.scopeProtected.hint')}</span>
+            <span className="text-body leading-5 font-medium">
+              {t('plugins.create.scopeProtected.label')}
+            </span>
+            <span className="text-caption text-muted-foreground">
+              {t('plugins.create.scopeProtected.hint')}
+            </span>
           </span>
         </label>
         {result && !result.success && (

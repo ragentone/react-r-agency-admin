@@ -21,7 +21,8 @@ export const PluginConfigFieldsTable: React.FC<{ pluginId: string }> = ({ plugin
   const { t, i18n } = useTranslation('admin');
   const { loading, error, fields, retry } = usePluginConfigFields(pluginId);
 
-  const defaultOf = (field: IPluginConfigField) => (field.default === undefined ? '—' : String(field.default));
+  const defaultOf = (field: IPluginConfigField) =>
+    field.default === undefined ? '—' : String(field.default);
 
   let body: React.ReactNode;
   if (loading) {
@@ -60,8 +61,12 @@ export const PluginConfigFieldsTable: React.FC<{ pluginId: string }> = ({ plugin
                 <TableCell className="font-mono font-bold">{field.key}</TableCell>
                 <TableCell>{localizedText(field.label, i18n.language) ?? field.key}</TableCell>
                 <TableCell className="font-mono text-caption">{field.type}</TableCell>
-                <TableCell>{field.required ? t('plugins.configFields.yes') : t('plugins.configFields.no')}</TableCell>
-                <TableCell className="font-mono text-caption text-muted-foreground">{defaultOf(field)}</TableCell>
+                <TableCell>
+                  {field.required ? t('plugins.configFields.yes') : t('plugins.configFields.no')}
+                </TableCell>
+                <TableCell className="font-mono text-caption text-muted-foreground">
+                  {defaultOf(field)}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

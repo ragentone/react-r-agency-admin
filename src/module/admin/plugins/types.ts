@@ -152,7 +152,6 @@ export interface IPluginAdoptResult {
   plugin?: { pluginId: string; version: string; status: PluginStatus } | null;
 }
 
-
 /** Value of one configuration field. */
 export type PluginConfigPrimitive = string | number | boolean;
 
@@ -210,9 +209,9 @@ export interface IPluginConfigSetResult {
   errors?: IPluginConfigError[] | null;
 }
 
-
 /** Field types of a plugin table (`PLUGIN_TABLE_FIELD_TYPES` in runtime). */
-export type PluginTableFieldType = 'string' | 'text' | 'integer' | 'number' | 'boolean' | 'date' | 'json';
+export type PluginTableFieldType =
+  'string' | 'text' | 'integer' | 'number' | 'boolean' | 'date' | 'json';
 
 /** A field with options. A plain type name is the short form. */
 export interface IPluginFieldSpec {

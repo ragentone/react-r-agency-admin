@@ -240,6 +240,12 @@ export interface IColumnsBlockData {
   items: IColumnItem[];
 }
 
+/** Table of contents: links to every block with an anchor. */
+export interface ITocBlockData {
+  title: string;
+  numbered: boolean;
+}
+
 export interface ISitePageBlockDataMap {
   hero: IHeroBlockData;
   text: ITextBlockData;
@@ -261,6 +267,7 @@ export interface ISitePageBlockDataMap {
   contact: IContactBlockData;
   downloads: IDownloadsBlockData;
   columns: IColumnsBlockData;
+  toc: ITocBlockData;
 }
 
 export type SitePageBlockType = keyof ISitePageBlockDataMap;
@@ -307,6 +314,7 @@ export const isAppBlock = (block: PageBlock): block is IAppBlock => block.type.i
 /** Order of the block picker. */
 export const SITE_PAGE_BLOCK_TYPES: SitePageBlockType[] = [
   'hero',
+  'toc',
   'text',
   'image',
   'split',
@@ -424,6 +432,7 @@ const DEFAULTS: { [T in SitePageBlockType]: () => ISitePageBlockDataMap[T] } = {
   code: () => ({ title: '', language: 'plain', code: '' }),
   contact: () => ({ title: '', phone: '', email: '', address: '', hours: '' }),
   downloads: () => ({ title: '', items: [emptyDownload()] }),
+  toc: () => ({ title: '', numbered: false }),
   columns: () => ({ title: '', divider: false, items: [emptyColumn(), emptyColumn()] }),
   stats: () => ({ title: '', items: [emptyStat(), emptyStat(), emptyStat()] }),
   steps: () => ({ title: '', items: [emptyStep(), emptyStep(), emptyStep()] }),

@@ -13,7 +13,12 @@ interface IPluginScopeDrawerProps {
 }
 
 /** Changes where a plugin runs. Closes after a successful save. */
-export const PluginScopeDrawer: React.FC<IPluginScopeDrawerProps> = ({ open, onOpenChange, plugin, onSave }) => {
+export const PluginScopeDrawer: React.FC<IPluginScopeDrawerProps> = ({
+  open,
+  onOpenChange,
+  plugin,
+  onSave,
+}) => {
   const { t } = useTranslation('admin');
   const [scope, setScope] = useState<PluginScope[]>(plugin.scope);
   const [busy, setBusy] = useState(false);

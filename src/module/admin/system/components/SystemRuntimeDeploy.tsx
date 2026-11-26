@@ -57,7 +57,9 @@ export const SystemRuntimeDeploy: React.FC<{ running: boolean; onStarted: () => 
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>{t('system.deployments.deploy.confirmTitle')}</AlertDialogTitle>
-            <AlertDialogDescription>{t('system.deployments.deploy.confirmText')}</AlertDialogDescription>
+            <AlertDialogDescription>
+              {t('system.deployments.deploy.confirmText')}
+            </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>{t('system.deployments.deploy.cancel')}</AlertDialogCancel>

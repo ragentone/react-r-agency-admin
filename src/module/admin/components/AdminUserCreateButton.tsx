@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 import { type IAdminUserCreateValues, useAdminUserCreate } from '../hooks';
 import { AdminUserCreateDrawer } from './AdminUserCreateDrawer';
-import { AdminUserCredentialsDialog,type IAdminCredentials } from './AdminUserCredentialsDialog';
+import { AdminUserCredentialsDialog, type IAdminCredentials } from './AdminUserCredentialsDialog';
 
 export interface IAdminUserCreateButtonProps {
   /** The account was created – e.g. search for it. */

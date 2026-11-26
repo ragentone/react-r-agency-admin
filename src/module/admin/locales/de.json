@@ -384,6 +384,10 @@
       "columns": {
         "label": "Spalten",
         "description": "2 oder 3 Textspalten nebeneinander"
+      },
+      "toc": {
+        "label": "Inhaltsverzeichnis",
+        "description": "Sprunglinks zu allen Blöcken mit Anker"
       }
     },
     "field": {
@@ -670,6 +674,11 @@
       "linkHint": "Link: #{{anchor}} auf dieser Seite oder /site/<seite>#{{anchor}} von woanders.",
       "invalid": "Nur a–z, 0–9 und Bindestriche, mit einem Buchstaben am Anfang.",
       "taken": "Diesen Anker hat schon ein anderer Block dieser Seite."
+    },
+    "toc": {
+      "titlePlaceholder": "Inhalt",
+      "numbered": "Nummeriert",
+      "hint": "Zeigt jeden Block, der einen Anker hat – mit seiner Überschrift (oder der ersten Überschrift im Text). Blöcke ohne Anker erscheinen nicht. Besucher sehen nur Einträge zu Blöcken, die sie auch sehen dürfen."
     }
   },
   "stats": {

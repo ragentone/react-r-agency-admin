@@ -16,7 +16,13 @@ interface IPluginListProps {
 }
 
 /** Installed plugins: loading, error, empty (with the create action) or the list. */
-export const PluginList: React.FC<IPluginListProps> = ({ loading, error, plugins, onRetry, onCreate }) => {
+export const PluginList: React.FC<IPluginListProps> = ({
+  loading,
+  error,
+  plugins,
+  onRetry,
+  onCreate,
+}) => {
   const { t } = useTranslation('admin');
 
   if (loading) return <PluginListLoading />;

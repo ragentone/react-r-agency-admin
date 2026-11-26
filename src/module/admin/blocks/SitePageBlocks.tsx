@@ -9,17 +9,19 @@ import {
   Play,
   Quote,
 } from 'lucide-react';
-import React, { Suspense, useEffect, useId, useState } from 'react';
+import React, { Suspense, useEffect, useId, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { SitePageHtml } from '../components/SitePageHtml';
 import { BlockLink } from './BlockLink';
+import { PageBlocksContext } from './blocks.context';
 import { CodeSnippetBlock } from './CodeBlockView';
 import { ColumnsBlock } from './ColumnsBlock';
 import { ContactBlock, DownloadsBlock } from './ContactBlocks';
 import { HeroBlock } from './HeroBlock';
 import { isFullWidthBlock, isInsetBlock, SITE_PAGE_COLUMN, SITE_PAGE_INSET } from './layout';
 import { CardsBlock, ImageBlock, SplitBlock } from './MediaBlocks';
+import { TocBlock } from './TocBlock';
 import {
   type IAppBlock,
   type ICountdownBlockData,
@@ -619,6 +621,8 @@ export const SitePageBlockView: React.FC<{ block: PageBlock; first?: boolean }> 
       return <ContactBlock data={block.data} />;
     case 'downloads':
       return <DownloadsBlock data={block.data} />;
+    case 'toc':
+      return <TocBlock data={block.data} headingClass="text-title font-bold" />;
     case 'columns':
       return <ColumnsBlock data={block.data} headingClass="mb-4 text-title font-bold" />;
     default:
@@ -633,22 +637,25 @@ export const SitePageBlocks: React.FC<{ blocks: PageBlock[]; className?: string 
 }) => {
   // Re-render when an app registers its block later (lazy app chunks).
   usePageBlockRegistry();
+  const context = useMemo(() => ({ blocks, slug: '' }), [blocks]);
   return (
-    <div data-slot="site-page-blocks" className={cn('flex flex-col gap-8', className)}>
-      {blocks.map((block, index) => (
-        <div
-          key={block.id}
-          data-block={block.type}
-          className={cn(
-            'min-w-0',
-            isFullWidthBlock(block) ? 'w-full' : SITE_PAGE_COLUMN,
-            isInsetBlock(block) && SITE_PAGE_INSET,
-            isInsetBlock(block) && index === 0 && 'pt-3 sm:pt-6'
-          )}
-        >
-          <SitePageBlockView block={block} first={index === 0} />
-        </div>
-      ))}
-    </div>
+    <PageBlocksContext.Provider value={context}>
+      <div data-slot="site-page-blocks" className={cn('flex flex-col gap-8', className)}>
+        {blocks.map((block, index) => (
+          <div
+            key={block.id}
+            data-block={block.type}
+            className={cn(
+              'min-w-0',
+              isFullWidthBlock(block) ? 'w-full' : SITE_PAGE_COLUMN,
+              isInsetBlock(block) && SITE_PAGE_INSET,
+              isInsetBlock(block) && index === 0 && 'pt-3 sm:pt-6'
+            )}
+          >
+            <SitePageBlockView block={block} first={index === 0} />
+          </div>
+        ))}
+      </div>
+    </PageBlocksContext.Provider>
   );
 };

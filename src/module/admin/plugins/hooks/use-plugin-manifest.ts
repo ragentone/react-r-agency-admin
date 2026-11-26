@@ -24,7 +24,12 @@ const parseManifest = (raw: string): IPluginManifestParsed => {
 /** Loads `plugin.json` of the development project, parsed and raw. `retry` loads again. */
 export const usePluginManifest = (pluginId: string) => {
   const [attempt, setAttempt] = useState(0);
-  const [state, setState] = useState<IPluginManifestState>({ loading: true, error: null, raw: '', parsed: null });
+  const [state, setState] = useState<IPluginManifestState>({
+    loading: true,
+    error: null,
+    raw: '',
+    parsed: null,
+  });
 
   useEffect(() => {
     let active = true;

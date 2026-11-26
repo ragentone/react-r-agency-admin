@@ -90,7 +90,9 @@ const JsonLeaf: React.FC<IJsonLeafProps> = ({ name, value, depth }) => (
   >
     <File className="size-4 shrink-0 self-center text-muted-foreground" aria-hidden="true" />
     <span className="font-mono font-bold">{name}</span>
-    <span className="min-w-0 break-all font-mono text-muted-foreground">{JSON.stringify(value)}</span>
+    <span className="min-w-0 break-all font-mono text-muted-foreground">
+      {JSON.stringify(value)}
+    </span>
   </li>
 );
 

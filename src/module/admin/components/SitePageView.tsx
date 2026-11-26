@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 
 import { SITE_PAGE_COLUMN, SitePageBlocks } from '../blocks';
 import { sitePagePath } from '../const';
-import { useAdminAccess, useAdminPages,type useSitePage } from '../hooks';
+import { useAdminAccess, useAdminPages, type useSitePage } from '../hooks';
 import type { ISitePage, ISitePageValues } from '../types';
 import { formatDate } from '../utils';
 import { AdminPageFormDrawer } from './AdminPageFormDrawer';

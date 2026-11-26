@@ -384,6 +384,10 @@
       "columns": {
         "label": "Columns",
         "description": "2 or 3 text columns side by side"
+      },
+      "toc": {
+        "label": "Table of contents",
+        "description": "Jump links to every block with an anchor"
       }
     },
     "field": {
@@ -670,6 +674,11 @@
       "linkHint": "Link: #{{anchor}} on this page or /site/<page>#{{anchor}} from elsewhere.",
       "invalid": "Only a–z, 0–9 and dashes, starting with a letter.",
       "taken": "Another block on this page already uses this anchor."
+    },
+    "toc": {
+      "titlePlaceholder": "Contents",
+      "numbered": "Numbered",
+      "hint": "Lists every block that has an anchor – with its heading (or the first heading in its text). Blocks without an anchor are left out. Visitors only see entries for blocks they may see."
     }
   },
   "stats": {

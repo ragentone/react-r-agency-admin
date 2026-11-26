@@ -13,6 +13,7 @@ import {
   LayoutGrid,
   LayoutTemplate,
   ListCollapse,
+  ListTree,
   Megaphone,
   PanelsTopLeft,
   Quote,
@@ -47,6 +48,7 @@ export const BLOCK_ICONS: Record<SitePageBlockType, typeof Type> = {
   contact: Contact,
   downloads: FileDown,
   columns: Columns3,
+  toc: ListTree,
 };
 
 /** Icon of a block – app blocks from their registration (puzzle = app not loaded). */
@@ -141,6 +143,8 @@ export const blockSummary = (block: PageBlock): string => {
     }
     case 'contact':
       return block.data.title || block.data.phone || block.data.email || block.data.address;
+    case 'toc':
+      return block.data.title;
     case 'columns':
       return (
         block.data.title ||

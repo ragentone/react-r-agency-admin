@@ -62,7 +62,9 @@ export const SystemDeployButton: React.FC<{
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>{t(`system.deployments.deploy.${kind}.confirmTitle`)}</AlertDialogTitle>
+            <AlertDialogTitle>
+              {t(`system.deployments.deploy.${kind}.confirmTitle`)}
+            </AlertDialogTitle>
             <AlertDialogDescription>
               {t(`system.deployments.deploy.${kind}.confirmText`)}
             </AlertDialogDescription>

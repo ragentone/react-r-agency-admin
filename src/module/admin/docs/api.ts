@@ -18,10 +18,12 @@ interface IDocsResponse {
 export const AdminDocsApi = {
   list: async (): Promise<{ success: boolean; docs: IAdminDoc[] }> => {
     try {
-      const response = (await getMeshClient().graphql().query({
-        query: DocsQuery as never,
-        fetchPolicy: 'no-cache',
-      })) as IDocsResponse;
+      const response = (await getMeshClient()
+        .graphql()
+        .query({
+          query: DocsQuery as never,
+          fetchPolicy: 'no-cache',
+        })) as IDocsResponse;
       const result = response.data?.adminSystemDocsList;
       return { success: result?.success === true, docs: result?.docs ?? [] };
     } catch (error) {

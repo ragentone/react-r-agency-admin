@@ -27,7 +27,9 @@ export const PluginConfigFields: React.FC<IPluginConfigFieldsProps> = ({ config 
   // Keys of the fields with a problem, in form order. Used to bring the first one into view after a rejected save.
   const invalidKeys = useMemo(
     () =>
-      visible.filter(field => config.errors.some(error => error.key === field.key)).map(field => field.key),
+      visible
+        .filter(field => config.errors.some(error => error.key === field.key))
+        .map(field => field.key),
     [visible, config.errors]
   );
   const invalidSignature = invalidKeys.join('|');
@@ -42,11 +44,15 @@ export const PluginConfigFields: React.FC<IPluginConfigFieldsProps> = ({ config 
       `[data-config-key="${CSS.escape(invalidKeys[0])}"]`
     );
     target?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    target?.querySelector<HTMLElement>('input, textarea, button, [role="switch"], [role="combobox"]')?.focus();
+    target
+      ?.querySelector<HTMLElement>('input, textarea, button, [role="switch"], [role="combobox"]')
+      ?.focus();
   }, [invalidSignature, invalidKeys]);
 
   if (visible.length === 0) {
-    return <p className="text-caption text-muted-foreground">{t('plugins.config.noVisibleFields')}</p>;
+    return (
+      <p className="text-caption text-muted-foreground">{t('plugins.config.noVisibleFields')}</p>
+    );
   }
 
   return (

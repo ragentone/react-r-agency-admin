@@ -1,6 +1,12 @@
 import { AppDrawer } from '@ui/patterns';
 import { Button } from '@ui/shad-cn/components/button.tsx';
-import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from '@ui/shad-cn/components/item.tsx';
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
+} from '@ui/shad-cn/components/item.tsx';
 import { Status } from '@ui/shad-cn/components/status.tsx';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -14,7 +20,9 @@ interface IPluginDetailReleasesProps {
 }
 
 const formatSize = (bytes: number): string =>
-  bytes < 1024 * 1024 ? `${Math.max(1, Math.round(bytes / 1024))} KB` : `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  bytes < 1024 * 1024
+    ? `${Math.max(1, Math.round(bytes / 1024))} KB`
+    : `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 
 /** Every release ZIP in the `dist/` folder of a development project. The current version cannot be deleted. */
 export const PluginDetailReleases: React.FC<IPluginDetailReleasesProps> = ({ pluginId }) => {
@@ -33,14 +41,19 @@ export const PluginDetailReleases: React.FC<IPluginDetailReleasesProps> = ({ plu
       setPending(null);
     } else {
       toast.error(
-        t(`plugins.releases.errors.${result.error ?? 'unknown'}`, { defaultValue: t('plugins.releases.errors.unknown') })
+        t(`plugins.releases.errors.${result.error ?? 'unknown'}`, {
+          defaultValue: t('plugins.releases.errors.unknown'),
+        })
       );
     }
   };
 
-  if (state.loading) return <p className="text-caption text-muted-foreground">{t('plugins.releases.loading')}</p>;
-  if (state.error) return <p className="text-caption text-destructive">{t('plugins.releases.loadError')}</p>;
-  if (state.releases.length === 0) return <p className="text-caption text-muted-foreground">{t('plugins.releases.empty')}</p>;
+  if (state.loading)
+    return <p className="text-caption text-muted-foreground">{t('plugins.releases.loading')}</p>;
+  if (state.error)
+    return <p className="text-caption text-destructive">{t('plugins.releases.loadError')}</p>;
+  if (state.releases.length === 0)
+    return <p className="text-caption text-muted-foreground">{t('plugins.releases.empty')}</p>;
 
   return (
     <section className="flex flex-col gap-2">
@@ -51,7 +64,9 @@ export const PluginDetailReleases: React.FC<IPluginDetailReleasesProps> = ({ plu
           <ItemContent>
             <ItemTitle className="flex flex-wrap items-center gap-2">
               <Status variant={'info'}>{release.version}</Status>
-              {release.current && <Status variant={'success'}>{t('plugins.releases.current')}</Status>}
+              {release.current && (
+                <Status variant={'success'}>{t('plugins.releases.current')}</Status>
+              )}
             </ItemTitle>
             <ItemDescription>
               {`${release.filename} · ${formatSize(release.size)} · ${new Date(release.modifiedAt).toLocaleString()}`}
@@ -82,7 +97,12 @@ export const PluginDetailReleases: React.FC<IPluginDetailReleasesProps> = ({ plu
         locked={busy}
       >
         <div className="flex flex-col gap-2 px-4 py-4">
-          <Button variant="destructive" size="lg" disabled={busy || !pending} onClick={() => void confirmRemove()}>
+          <Button
+            variant="destructive"
+            size="lg"
+            disabled={busy || !pending}
+            onClick={() => void confirmRemove()}
+          >
             {busy ? t('plugins.releases.busy') : t('plugins.releases.confirm')}
           </Button>
           <Button variant="ghost" size="lg" disabled={busy} onClick={() => setPending(null)}>

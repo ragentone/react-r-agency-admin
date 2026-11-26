@@ -20,7 +20,8 @@ const specOf = (value: PluginTableFieldType | IPluginFieldSpec): IPluginFieldSpe
   typeof value === 'string' ? { type: value } : value;
 
 /** Shows a default or other value as text; objects as JSON. */
-const show = (value: unknown): string => (typeof value === 'object' && value !== null ? JSON.stringify(value) : String(value));
+const show = (value: unknown): string =>
+  typeof value === 'object' && value !== null ? JSON.stringify(value) : String(value);
 
 interface ITreeFolderProps {
   label: string;
@@ -54,7 +55,9 @@ const TreeFolder: React.FC<ITreeFolderProps> = ({ label, count, depth, children 
           <Folder className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
         )}
         <span className="min-w-0 flex-1 truncate text-left">{label}</span>
-        <span className="shrink-0 font-mono text-caption font-normal text-muted-foreground">{count}</span>
+        <span className="shrink-0 font-mono text-caption font-normal text-muted-foreground">
+          {count}
+        </span>
       </CollapsibleTrigger>
       <CollapsibleContent>{children}</CollapsibleContent>
     </Collapsible>
@@ -75,7 +78,9 @@ const ConfigRow: React.FC<IConfigRowProps> = ({ label, value, depth }) => (
   >
     <File className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
     <span className="text-muted-foreground">{label}</span>
-    <Badge variant="outline" className="font-mono">{value}</Badge>
+    <Badge variant="outline" className="font-mono">
+      {value}
+    </Badge>
   </li>
 );
 
@@ -109,7 +114,12 @@ const FieldNode: React.FC<IFieldNodeProps> = ({ name, spec, depth }) => {
       <TreeFolder label={name} count={configs.length} depth={depth}>
         <ul className="flex flex-col">
           {configs.map(config => (
-            <ConfigRow key={config.label} label={config.label} value={config.value} depth={depth + 1} />
+            <ConfigRow
+              key={config.label}
+              label={config.label}
+              value={config.value}
+              depth={depth + 1}
+            />
           ))}
         </ul>
       </TreeFolder>

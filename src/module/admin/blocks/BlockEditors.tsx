@@ -20,6 +20,7 @@ import { ImageField } from './ImageField';
 import { CountdownEditor, StatsEditor, StepsEditor, TabsEditor } from './LayoutBlockEditors';
 import { CardsBlockEditor, ImageBlockEditor, SplitBlockEditor } from './MediaBlockEditors';
 import { TableEditor } from './TableBlockEditor';
+import { TocEditor } from './TocBlockEditor';
 import {
   emptyFaqItem,
   type IAppBlock,
@@ -505,6 +506,10 @@ export const BlockEditor: React.FC<{
           data={block.data}
           onChange={data => onChange({ ...block, data })}
         />
+      );
+    case 'toc':
+      return (
+        <TocEditor {...props} data={block.data} onChange={data => onChange({ ...block, data })} />
       );
     default:
       return null;

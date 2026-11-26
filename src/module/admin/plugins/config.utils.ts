@@ -37,7 +37,10 @@ export const defaultsOf = (fields: IPluginConfigField[]): PluginConfigValues => 
  * Text for the current language. Plain text is used as it is; otherwise the language, then English,
  * then any text that exists. Undefined when there is no text at all.
  */
-export const localizedText = (text: PluginConfigText | undefined, language: string): string | undefined => {
+export const localizedText = (
+  text: PluginConfigText | undefined,
+  language: string
+): string | undefined => {
   if (text === undefined || typeof text === 'string') return text;
   const short = language.slice(0, 2) as keyof typeof text;
   return text[short] ?? text.en ?? Object.values(text).find(value => value !== undefined);

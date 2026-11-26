@@ -4,7 +4,11 @@ import { type RefObject, useEffect, useState } from 'react';
  * The section the reader is on: the first heading (document order) inside the top quarter of
  * the viewport. Re-observes when `key` changes (new HTML after a search step or a new doc).
  */
-export const useActiveSection = (root: RefObject<HTMLElement | null>, key: unknown, enabled: boolean) => {
+export const useActiveSection = (
+  root: RefObject<HTMLElement | null>,
+  key: unknown,
+  enabled: boolean
+) => {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {

@@ -1,4 +1,10 @@
-import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from '@ui/shad-cn/components/item.tsx';
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
+} from '@ui/shad-cn/components/item.tsx';
 import { Switch } from '@ui/shad-cn/components/switch.tsx';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +18,10 @@ interface IPluginDetailActivationProps {
 }
 
 /** Activation switch of a plugin, as a list item above the tabs. */
-export const PluginDetailActivation: React.FC<IPluginDetailActivationProps> = ({ plugin, detail }) => {
+export const PluginDetailActivation: React.FC<IPluginDetailActivationProps> = ({
+  plugin,
+  detail,
+}) => {
   const { t } = useTranslation('admin');
 
   return (

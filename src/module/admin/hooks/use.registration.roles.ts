@@ -2,7 +2,11 @@ import { useGraphQlGetter } from '@core/mesh';
 import i18n from 'i18next';
 import { useCallback, useEffect, useState } from 'react';
 
-import { AdminRoleListQuery, RegistrationRolesQuery, RegistrationRolesSetMutation } from '../graphql';
+import {
+  AdminRoleListQuery,
+  RegistrationRolesQuery,
+  RegistrationRolesSetMutation,
+} from '../graphql';
 import type { MutationDocument, QueryDocument } from './graphql.client';
 
 /** Always given to new accounts, not editable here. */
@@ -85,16 +89,19 @@ export const useRegistrationRoles = () => {
           errorPolicy: 'all',
         }),
       ]);
-      const stored = (current as { data?: { configRegistrationRoles?: { roles?: string[] } | null } })
-        .data?.configRegistrationRoles;
-      const catalog = (list as {
-        data?: {
-          adminRoleList?: {
-            definitions?: IRoleDefinition[] | null;
-            groups?: IRoleGroupDefinition[] | null;
-          } | null;
-        };
-      }).data?.adminRoleList;
+      const stored = (
+        current as { data?: { configRegistrationRoles?: { roles?: string[] } | null } }
+      ).data?.configRegistrationRoles;
+      const catalog = (
+        list as {
+          data?: {
+            adminRoleList?: {
+              definitions?: IRoleDefinition[] | null;
+              groups?: IRoleGroupDefinition[] | null;
+            } | null;
+          };
+        }
+      ).data?.adminRoleList;
       if (!stored || !Array.isArray(catalog?.definitions)) throw new Error('registration roles');
       const lang = i18n.language?.slice(0, 2) ?? 'de';
       setRoles((stored.roles ?? []).filter(role => role !== BASE_ROLE));

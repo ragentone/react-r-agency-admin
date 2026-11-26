@@ -151,7 +151,6 @@ const ConfigSetMutation = parse(`
   }
 `);
 
-
 const client = () => getMeshClient().graphql();
 
 /** Admin only (`admin:user`, checked in the runtime `shared/plugin`). */
@@ -315,7 +314,11 @@ export const PluginApi = {
     }
   },
 
-  writeFile: async (pluginId: string, path: string, content: string): Promise<IPluginFileWriteResult> => {
+  writeFile: async (
+    pluginId: string,
+    path: string,
+    content: string
+  ): Promise<IPluginFileWriteResult> => {
     try {
       const response = (await client().mutate({
         mutation: FileWriteMutation as never,

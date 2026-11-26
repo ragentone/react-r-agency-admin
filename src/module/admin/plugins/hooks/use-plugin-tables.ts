@@ -12,7 +12,11 @@ interface IPluginTablesState {
 /** Loads the table definitions a plugin declares in its backend. `retry` loads again. */
 export const usePluginTables = (pluginId: string) => {
   const [attempt, setAttempt] = useState(0);
-  const [state, setState] = useState<IPluginTablesState>({ loading: true, error: null, tables: [] });
+  const [state, setState] = useState<IPluginTablesState>({
+    loading: true,
+    error: null,
+    tables: [],
+  });
 
   useEffect(() => {
     let active = true;

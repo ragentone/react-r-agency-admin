@@ -12,7 +12,12 @@ interface IPluginReleasesState {
 
 const stateOf = (result: IPluginReleasesResult): IPluginReleasesState =>
   result.success
-    ? { loading: false, error: false, current: result.current ?? null, releases: result.releases ?? [] }
+    ? {
+        loading: false,
+        error: false,
+        current: result.current ?? null,
+        releases: result.releases ?? [],
+      }
     : { loading: false, error: true, current: null, releases: [] };
 
 /** Release ZIPs of a development plugin. Loads on mount and again after every delete. */

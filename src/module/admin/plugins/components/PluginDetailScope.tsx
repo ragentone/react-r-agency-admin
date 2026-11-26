@@ -1,5 +1,11 @@
 import { Button } from '@ui/shad-cn/components/button.tsx';
-import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from '@ui/shad-cn/components/item.tsx';
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
+} from '@ui/shad-cn/components/item.tsx';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -28,12 +34,22 @@ export const PluginDetailScope: React.FC<IPluginDetailScopeProps> = ({ plugin, d
           {locked && <ItemDescription>{t('plugins.scope.locked')}</ItemDescription>}
         </ItemContent>
         <ItemActions>
-          <Button variant="outline" size="sm" disabled={detail.busy || locked} onClick={() => setOpen(true)}>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={detail.busy || locked}
+            onClick={() => setOpen(true)}
+          >
             {t('plugins.scope.change')}
           </Button>
         </ItemActions>
       </Item>
-      <PluginScopeDrawer open={open} onOpenChange={setOpen} plugin={plugin} onSave={detail.changeScope} />
+      <PluginScopeDrawer
+        open={open}
+        onOpenChange={setOpen}
+        plugin={plugin}
+        onSave={detail.changeScope}
+      />
     </>
   );
 };

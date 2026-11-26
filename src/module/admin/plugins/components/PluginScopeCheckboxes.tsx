@@ -14,7 +14,11 @@ interface IPluginScopeCheckboxesProps {
 }
 
 /** One checkbox per scope. The last checked scope cannot be unchecked, so one always stays selected. */
-export const PluginScopeCheckboxes: React.FC<IPluginScopeCheckboxesProps> = ({ value, onChange, disabled }) => {
+export const PluginScopeCheckboxes: React.FC<IPluginScopeCheckboxesProps> = ({
+  value,
+  onChange,
+  disabled,
+}) => {
   const { t } = useTranslation('admin');
 
   const toggle = (option: PluginScope, checked: boolean) => {

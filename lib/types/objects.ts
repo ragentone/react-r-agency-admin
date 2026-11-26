@@ -410,6 +410,28 @@ export interface IAdminPageFileUploadReturn {
   url: Maybe<string>;
 }
 
+/** GraphQL: `adminPageFormCountsReturn` */
+export interface IAdminPageFormCountsReturn {
+  counts: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminPageFormDeleteReturn` */
+export interface IAdminPageFormDeleteReturn {
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminPageFormEntriesReturn` */
+export interface IAdminPageFormEntriesReturn {
+  entries: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `adminPageFormReadReturn` */
+export interface IAdminPageFormReadReturn {
+  success: Maybe<boolean>;
+}
+
 /** GraphQL: `adminPageGetReturn` */
 export interface IAdminPageGetReturn {
   page: Maybe<ScalarJSON>;
@@ -1781,6 +1803,8 @@ export interface IMutation {
   adminPageCreate: Maybe<IAdminPageCreateReturn>;
   adminPageDelete: Maybe<IAdminPageDeleteReturn>;
   adminPageFileUpload: Maybe<IAdminPageFileUploadReturn>;
+  adminPageFormDelete: Maybe<IAdminPageFormDeleteReturn>;
+  adminPageFormRead: Maybe<IAdminPageFormReadReturn>;
   adminPageImageDiscard: Maybe<IAdminPageImageDiscardReturn>;
   adminPageImageKeep: Maybe<IAdminPageImageKeepReturn>;
   adminPageImageUpload: Maybe<IAdminPageImageUploadReturn>;
@@ -1894,6 +1918,7 @@ export interface IMutation {
   resumeUpdate: Maybe<IResumeUpdateReturn>;
   resumeUpdateContent: Maybe<IResumeUpdateContentReturn>;
   sendMail: Maybe<ISendMailReturn>;
+  sitePageFormSubmit: Maybe<ISitePageFormSubmitReturn>;
   statsTrack: Maybe<IStatsTrackReturn>;
   storageWrite: Maybe<IStorageWriteReturn>;
   timelineCommentDelete: Maybe<ITimelineCommentDeleteReturn>;
@@ -2125,6 +2150,8 @@ export interface IQuery {
   adminMonitorApp: Maybe<IAdminMonitorAppReturn>;
   adminMonitorHistory: Maybe<IAdminMonitorHistoryReturn>;
   adminMonitorSnapshot: Maybe<IAdminMonitorSnapshotReturn>;
+  adminPageFormCounts: Maybe<IAdminPageFormCountsReturn>;
+  adminPageFormEntries: Maybe<IAdminPageFormEntriesReturn>;
   adminPageGet: Maybe<IAdminPageGetReturn>;
   adminPageList: Maybe<IAdminPageListReturn>;
   adminPluginConfigGet: Maybe<IAdminPluginConfigGetReturn>;
@@ -2354,6 +2381,11 @@ export interface ISingleSearch {
 /** GraphQL: `sitePageDisplayModeReturn` */
 export interface ISitePageDisplayModeReturn {
   displayMode: Maybe<string>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `sitePageFormSubmitReturn` */
+export interface ISitePageFormSubmitReturn {
   success: Maybe<boolean>;
 }
 
