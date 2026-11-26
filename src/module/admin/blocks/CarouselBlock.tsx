@@ -22,7 +22,7 @@ const BASIS: Record<CarouselPerView, string> = {
   '3': 'basis-[85%] sm:basis-1/2 md:basis-1/3',
 };
 const SIZES: Record<CarouselPerView, string> = {
-  '1': '(min-width: 768px) 720px, 100vw',
+  '1': '(min-width: 768px) 800px, 100vw',
   '2': '(min-width: 768px) 360px, 90vw',
   '3': '(min-width: 768px) 240px, 90vw',
 };

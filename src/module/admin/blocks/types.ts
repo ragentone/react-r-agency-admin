@@ -398,6 +398,10 @@ export interface IBlockAccess {
   roles: string[];
 }
 
+/** Block width (same as the backend) – missing = default of the type (column; banner: full). */
+export const SITE_PAGE_BLOCK_WIDTHS = ['column', 'wide', 'full'] as const;
+export type SitePageBlockWidth = (typeof SITE_PAGE_BLOCK_WIDTHS)[number];
+
 export type SitePageBlockOf<T extends SitePageBlockType> = {
   id: string;
   type: T;
@@ -406,6 +410,8 @@ export type SitePageBlockOf<T extends SitePageBlockType> = {
   access?: IBlockAccess;
   /** Jump target `/site/<slug>#<anchor>` – unique per page. */
   anchor?: string;
+  /** Missing = default of the block type. */
+  width?: SitePageBlockWidth;
 };
 
 export type SitePageBlock = { [T in SitePageBlockType]: SitePageBlockOf<T> }[SitePageBlockType];
@@ -417,6 +423,8 @@ export interface IAppBlock {
   data: PageBlockData;
   access?: IBlockAccess;
   anchor?: string;
+  /** Missing = default of the block type. */
+  width?: SitePageBlockWidth;
 }
 
 /** Same rule as the backend: lower case letter first, then letters, digits, dashes. */

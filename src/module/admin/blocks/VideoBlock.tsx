@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { pageImageSrcSet, VIDEO_RATIO_CLASS } from './image.utils';
 import { type IVideoBlockData, videoEmbed } from './types';
 
-const SIZES = '(min-width: 768px) 720px, 100vw';
+const SIZES = '(min-width: 768px) 800px, 100vw';
 
 /**
  * Two-click embed: nothing is loaded from YouTube / Vimeo before the visitor taps play.

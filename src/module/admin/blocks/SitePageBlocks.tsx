@@ -14,7 +14,7 @@ import { CompareBlock } from './CompareBlock';
 import { ContactBlock, DownloadsBlock } from './ContactBlocks';
 import { EventBlock } from './EventBlock';
 import { HeroBlock } from './HeroBlock';
-import { isFullWidthBlock, isInsetBlock, SITE_PAGE_COLUMN, SITE_PAGE_INSET } from './layout';
+import { blockWidthClass, isInsetBlock, SITE_PAGE_INSET } from './layout';
 import { CardsBlock, ImageBlock, SplitBlock } from './MediaBlocks';
 import { PricingBlock } from './PricingBlock';
 import { TimelineBlock } from './TimelineBlock';
@@ -610,7 +610,7 @@ export const SitePageBlocks: React.FC<{ blocks: PageBlock[]; className?: string 
             data-block={block.type}
             className={cn(
               'min-w-0',
-              isFullWidthBlock(block) ? 'w-full' : SITE_PAGE_COLUMN,
+              blockWidthClass(block),
               isInsetBlock(block) && SITE_PAGE_INSET,
               isInsetBlock(block) && index === 0 && 'pt-3 sm:pt-6'
             )}

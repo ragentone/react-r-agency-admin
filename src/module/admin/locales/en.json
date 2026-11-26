@@ -795,6 +795,15 @@
       "add": "Add entry",
       "date": "Date",
       "dateHint": "Free text, e.g. “2024”, “March 2025” or “Q3”."
+    },
+    "width": {
+      "label": "Width",
+      "auto": "Default",
+      "column": "800 px",
+      "wide": "1200 px",
+      "full": "100 %",
+      "hint": "Default: reading column of 800 px. Phones always use the full width.",
+      "hintFull": "Default: full width (banner edge to edge). Phones always use the full width."
     }
   },
   "stats": {

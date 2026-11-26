@@ -795,6 +795,15 @@
       "add": "Eintrag hinzufügen",
       "date": "Datum",
       "dateHint": "Freier Text, z. B. „2024“, „März 2025“ oder „Q3“."
+    },
+    "width": {
+      "label": "Breite",
+      "auto": "Standard",
+      "column": "800 px",
+      "wide": "1200 px",
+      "full": "100 %",
+      "hint": "Standard: Lesespalte mit 800 px. Auf dem Handy immer volle Breite.",
+      "hintFull": "Standard: volle Breite (bei Banner randlos). Auf dem Handy immer volle Breite."
     }
   },
   "stats": {

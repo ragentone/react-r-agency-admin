@@ -69,7 +69,7 @@ export const HeroBlock: React.FC<{ data: IHeroBlockData; first: boolean }> = ({ 
       )}
       <div
         className={cn(
-          'mx-auto flex w-full max-w-[720px] flex-1 flex-col gap-3 px-5 py-8 sm:px-8 sm:py-12',
+          'mx-auto flex w-full max-w-[800px] flex-1 flex-col gap-3 px-5 py-8 sm:px-8 sm:py-12',
           HERO_JUSTIFY[data.valign] ?? HERO_JUSTIFY.bottom,
           HERO_ALIGN[data.align] ?? HERO_ALIGN.left
         )}

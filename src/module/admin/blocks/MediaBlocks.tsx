@@ -13,8 +13,8 @@ import {
   isSafeUrl,
 } from './types';
 
-/** Reading column: full phone width, at most 720 px. */
-const COLUMN_SIZES = '(min-width: 768px) 720px, 100vw';
+/** Reading column: full phone width, at most 800 px. */
+const COLUMN_SIZES = '(min-width: 768px) 800px, 100vw';
 /** Half of the column (split, two cards). */
 const HALF_SIZES = '(min-width: 640px) 360px, 100vw';
 const THIRD_SIZES = '(min-width: 640px) 240px, 100vw';

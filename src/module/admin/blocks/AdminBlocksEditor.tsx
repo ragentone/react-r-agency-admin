@@ -9,6 +9,7 @@ import { BlockAccessBadge } from './BlockAccessBadge';
 import { BlockAccessField } from './BlockAccessField';
 import { BlockAnchorField } from './BlockAnchorField';
 import { BlockEditor } from './BlockEditors';
+import { BlockWidthField } from './BlockWidthField';
 import { BLOCK_ICONS, blockIcon, blockLabel, blockSummary } from './meta';
 import {
   createAppBlock,
@@ -270,6 +271,7 @@ export const AdminBlocksEditor: React.FC<IAdminBlocksEditorProps> = ({
                   <div className="space-y-4 px-3 pt-1 pb-4">
                     <BlockEditor block={block} onChange={update} disabled={disabled} />
                     <BlockAccessField block={block} onChange={update} disabled={disabled} />
+                    <BlockWidthField block={block} onChange={update} disabled={disabled} />
                     <BlockAnchorField
                       block={block}
                       taken={value
