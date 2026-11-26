@@ -43,6 +43,7 @@ export const sitePagePath = (slug: string) =>
 export const SITE_PAGE_TITLE_MAX = 150;
 export const SITE_PAGE_SLUG_MAX = 80;
 export const SITE_PAGE_SUMMARY_MAX = 300;
+export const SITE_PAGE_SEO_CANONICAL_MAX = 300;
 /** Visible characters of the content (the backend limits raw HTML to 200 000). */
 export const SITE_PAGE_CONTENT_MAX = 50000;
 export const SITE_PAGE_MENU_ORDER_MIN = -9999;

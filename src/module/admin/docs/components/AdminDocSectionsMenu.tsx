@@ -1,3 +1,4 @@
+import { cn } from '@ui/lib/utils';
 import { Button } from '@ui/shad-cn/components/button.tsx';
 import {
   DropdownMenu,
@@ -7,7 +8,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@ui/shad-cn/components/dropdown-menu.tsx';
-import { cn } from '@ui/lib/utils';
 import { ListTree } from 'lucide-react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';

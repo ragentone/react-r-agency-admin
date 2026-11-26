@@ -56,6 +56,10 @@ export interface ISitePage {
   showInMenu: boolean;
   /** Search engines may index it (`index` meta + sitemap). */
   seoIndex: boolean;
+  /** Preview image for search results / social media ('' = first image of the blocks). */
+  seoImage: string;
+  /** Canonical address ('' = own url). */
+  seoCanonical: string;
   /** Position in the menu group – lower first. */
   menuOrder: number;
   /** `all` = everybody, `authenticated` = signed-in users only. */
@@ -79,6 +83,10 @@ export interface ISitePageValues {
   published: boolean;
   showInMenu: boolean;
   seoIndex: boolean;
+  /** Preview image for search results / social media ('' = first image of the blocks). */
+  seoImage: string;
+  /** Canonical address ('' = own url). */
+  seoCanonical: string;
   menuOrder: number;
   visibility: SitePageVisibility;
   roles: string[];

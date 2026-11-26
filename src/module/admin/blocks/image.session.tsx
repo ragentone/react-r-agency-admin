@@ -7,7 +7,6 @@ import {
   useAdminPageImageDiscard,
   useAdminPageImageKeep,
 } from '../hooks/use.admin.page.image';
-import type { PageBlock } from './types';
 
 /** Heartbeat interval – well below the server's cron limit of 1 h. */
 const KEEP_INTERVAL_MS = 10 * 60 * 1000;
@@ -38,9 +37,9 @@ const RELEASE_DELAY_MS = 8000;
 export interface IPageImageSession {
   /** Remember a fresh upload. */
   track: (url: string) => void;
-  /** Blocks changed – uploads of this session they don't use any more go (delayed). */
-  sync: (blocks: PageBlock[]) => void;
-  commit: (blocks: PageBlock[]) => void;
+  /** Page content changed (`{ blocks, seoImage }`) – uploads of this session it doesn't use any more go (delayed). */
+  sync: (used: unknown) => void;
+  commit: (used: unknown) => void;
   cancel: () => void;
 }
 
@@ -65,12 +64,12 @@ export const usePageImageSession = (): IPageImageSession => {
   }, []);
 
   const sync = useCallback(
-    (blocks: PageBlock[]) => {
+    (used: unknown) => {
       window.clearTimeout(release.current);
       if (!uploads.current.size) return;
       release.current = window.setTimeout(() => {
-        const used = JSON.stringify(blocks);
-        const gone = [...uploads.current].filter(url => !used.includes(pageImageUuid(url) ?? url));
+        const text = JSON.stringify(used);
+        const gone = [...uploads.current].filter(url => !text.includes(pageImageUuid(url) ?? url));
         gone.forEach(url => uploads.current.delete(url));
         discard(gone);
       }, RELEASE_DELAY_MS);
@@ -79,8 +78,8 @@ export const usePageImageSession = (): IPageImageSession => {
   );
 
   const commit = useCallback(
-    (blocks: PageBlock[]) => {
-      const saved = JSON.stringify(blocks);
+    (used: unknown) => {
+      const saved = JSON.stringify(used);
       discard(take().filter(url => !saved.includes(pageImageUuid(url) ?? url)));
     },
     [discard]

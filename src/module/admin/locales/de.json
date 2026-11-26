@@ -156,7 +156,8 @@
     "deleteNotAdmin": "Dieses Konto ist kein Admin.",
     "fileType": "Nur PDF, Word, Excel, PowerPoint, TXT, CSV oder ZIP.",
     "fileTooLarge": "Die Datei ist größer als 20 MB.",
-    "fileUpload": "Datei-Upload fehlgeschlagen."
+    "fileUpload": "Datei-Upload fehlgeschlagen.",
+    "canonicalInvalid": "Die kanonische Adresse ist ungültig."
   },
   "pages": {
     "searchPlaceholder": "Titel oder Adresse",
@@ -212,9 +213,16 @@
       "seoIndexPrivate": "Seiten nur für Angemeldete stehen nie in Suchmaschinen.",
       "tabs": {
         "label": "Bereiche",
-        "config": "Einstellungen",
-        "blocks": "Blöcke"
-      }
+        "blocks": "Blöcke",
+        "general": "Allgemein",
+        "visibility": "Sichtbarkeit",
+        "seo": "SEO"
+      },
+      "seoImage": "Vorschau-Bild",
+      "seoImageHint": "Erscheint in Suchergebnissen und beim Teilen. Leer = erstes Bild der Seite. Format 1200 × 630.",
+      "seoCanonical": "Kanonische Adresse",
+      "seoCanonicalHint": "Nur nötig, wenn die Seite auch unter einer anderen Adresse erreichbar ist. Leer = eigene Adresse.",
+      "seoCanonicalInvalid": "Bitte eine vollständige Adresse mit https:// angeben."
     },
     "delete": {
       "action": "Seite löschen",

@@ -1,9 +1,5 @@
+import { Delayed } from '@ui/patterns';
 import { Button } from '@ui/shad-cn/components/button.tsx';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@ui/shad-cn/components/collapsible.tsx';
 import {
   CodeBlock,
   CodeBlockActions,
@@ -12,8 +8,12 @@ import {
   CodeBlockHeader,
   CodeBlockTitle,
 } from '@ui/shad-cn/components/code-block.tsx';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@ui/shad-cn/components/collapsible.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
-import { Delayed } from '@ui/patterns';
 import { ChevronRight, File, Folder, FolderOpen } from 'lucide-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';

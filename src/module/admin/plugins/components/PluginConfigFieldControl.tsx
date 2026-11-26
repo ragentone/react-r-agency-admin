@@ -1,7 +1,5 @@
 import { LazyHtmlEditor } from '@core/editor/html/lazy.html-editor.tsx';
-import CodeMirror from '@uiw/react-codemirror';
 import { useTheme } from '@core/theme';
-import { languageByName } from '../code.language';
 import { Input } from '@ui/shad-cn/components/input.tsx';
 import {
   Select,
@@ -12,9 +10,11 @@ import {
 } from '@ui/shad-cn/components/select.tsx';
 import { Switch } from '@ui/shad-cn/components/switch.tsx';
 import { Textarea } from '@ui/shad-cn/components/textarea.tsx';
+import CodeMirror from '@uiw/react-codemirror';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { languageByName } from '../code.language';
 import type { IPluginConfigField, PluginConfigPrimitive } from '../types';
 
 interface IPluginConfigFieldControlProps {

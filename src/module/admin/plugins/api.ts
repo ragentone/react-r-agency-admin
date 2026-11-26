@@ -6,9 +6,6 @@ import type {
   IPluginConfigGetResult,
   IPluginConfigSetResult,
   IPluginCreateResult,
-  IPluginScopeResult,
-  IPluginTablesResult,
-  PluginScope,
   IPluginDeployResult,
   IPluginDownloadResult,
   IPluginFileReadResult,
@@ -19,9 +16,12 @@ import type {
   IPluginReleaseDeleteResult,
   IPluginReleasesResult,
   IPluginRemoveResult,
+  IPluginScopeResult,
   IPluginStatusResult,
+  IPluginTablesResult,
   IPluginUnknownResult,
   IPluginUploadResult,
+  PluginScope,
 } from './types';
 import type { PluginBump } from './version';
 

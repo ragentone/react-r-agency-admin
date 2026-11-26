@@ -11,6 +11,8 @@ export interface IAppFormDrawerProps extends Omit<IAppDrawerProps, 'wrapper'> {
   /** Saving: spinner on the button, drawer is locked. */
   busy?: boolean;
   submitDisabled?: boolean;
+  /** `header` placement only: icon instead of the label (the label stays as `aria-label` / tooltip). */
+  submitIcon?: React.ReactNode;
   /**
    * `header` = small pill top right like „Posten“ on X (compose: posts, comments).
    * `footer` = big black button in the thumb zone (forms with several fields).
@@ -29,6 +31,7 @@ export const AppFormDrawer: React.FC<IAppFormDrawerProps> = ({
   submitLabel,
   busy = false,
   submitDisabled = false,
+  submitIcon,
   submitPlacement = 'footer',
   secondaryAction,
   locked,
@@ -38,16 +41,19 @@ export const AppFormDrawer: React.FC<IAppFormDrawerProps> = ({
 }) => {
   const blocked = submitDisabled || busy;
 
+  const iconOnly = submitPlacement === 'header' && Boolean(submitIcon);
   const submit = submitLabel ? (
     <Button
       type="submit"
-      size={submitPlacement === 'header' ? 'md' : 'xl'}
+      size={submitPlacement === 'header' ? (iconOnly ? 'icon-md' : 'md') : 'xl'}
+      aria-label={iconOnly ? submitLabel : undefined}
+      title={iconOnly ? submitLabel : undefined}
       fullWidth={submitPlacement === 'footer' && !secondaryAction}
       className={submitPlacement === 'footer' && secondaryAction ? 'flex-1' : undefined}
       disabled={submitDisabled && !busy}
       isLoading={busy}
     >
-      {submitLabel}
+      {iconOnly ? submitIcon : submitLabel}
     </Button>
   ) : null;
 

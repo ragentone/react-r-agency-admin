@@ -9,10 +9,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@ui/shad-cn/components/alert-dialog.tsx';
-import { Button } from '@ui/shad-cn/components/button.tsx';
+import { Button, buttonVariants } from '@ui/shad-cn/components/button.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
 import { Tabs, TabsContent } from '@ui/shad-cn/components/tabs.tsx';
-import { Eye, Trash2 } from 'lucide-react';
+import { Eye, Save, Trash2 } from 'lucide-react';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -30,7 +30,9 @@ import {
 import type { ISitePage, ISitePageValues } from '../types';
 import { AdminTabsBar } from '../ui/AdminTabsBar';
 import { cleanSlugInput, slugify } from '../utils';
-import { PageConfigFields } from './PageConfigFields';
+import { PageGeneralFields } from './PageGeneralFields';
+import { PageSeoFields } from './PageSeoFields';
+import { PageVisibilityFields } from './PageVisibilityFields';
 
 const EMPTY: ISitePageValues = {
   title: '',
@@ -41,6 +43,8 @@ const EMPTY: ISitePageValues = {
   published: false,
   showInMenu: true,
   seoIndex: true,
+  seoImage: '',
+  seoCanonical: '',
   menuOrder: 0,
   visibility: 'all',
   displayMode: 'route',
@@ -83,7 +87,7 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
   const [confirmDiscard, setConfirmDiscard] = useState<{ then?: () => void } | null>(null);
   const navigate = useNavigate();
   const [touched, setTouched] = useState(false);
-  const [tab, setTab] = useState('config');
+  const [tab, setTab] = useState('general');
   /** New page: the slug follows the title until it is edited by hand. */
   const [slugManual, setSlugManual] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
@@ -110,6 +114,8 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
           published: page.published,
           showInMenu: page.showInMenu ?? true,
           seoIndex: page.seoIndex ?? true,
+          seoImage: page.seoImage ?? '',
+          seoCanonical: page.seoCanonical ?? '',
           menuOrder: page.menuOrder ?? 0,
           visibility: page.visibility ?? 'all',
           displayMode: page.displayMode ?? 'route',
@@ -141,6 +147,10 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
     : !SITE_PAGE_SLUG_PATTERN.test(slug)
       ? t('error.slugInvalid')
       : null;
+  const canonicalError =
+    values.seoCanonical.trim() && !/^https?:\/\/\S+$/i.test(values.seoCanonical.trim())
+      ? t('pages.form.seoCanonicalInvalid')
+      : null;
   const summaryError =
     values.summary.trim().length > SITE_PAGE_SUMMARY_MAX
       ? t('pages.form.tooLong', { max: SITE_PAGE_SUMMARY_MAX })
@@ -156,7 +166,7 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
       ? t('error.menuOrderInvalid')
       : null;
   const invalid = Boolean(
-    titleError || slugError || summaryError || contentError || menuOrderError
+    titleError || slugError || summaryError || contentError || menuOrderError || canonicalError
   );
 
   const set = <K extends keyof ISitePageValues>(key: K, value: ISitePageValues[K]) => {
@@ -212,6 +222,8 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
       published: values.published,
       showInMenu: values.showInMenu,
       seoIndex: values.seoIndex,
+      seoImage: values.seoImage,
+      seoCanonical: values.seoCanonical.trim(),
       menuOrder: values.menuOrder,
       visibility: values.visibility,
       displayMode: values.displayMode,
@@ -222,7 +234,7 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
       return false;
     }
     // Saved: uploads the saved blocks don't use (replaced / removed) go.
-    images.commit(values.blocks);
+    images.commit({ blocks: values.blocks, seoImage: values.seoImage });
     onOpenChange(false);
     return true;
   };
@@ -265,7 +277,43 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
       submitLabel={mode === 'edit' ? t('pages.form.save') : t('pages.form.create')}
       submitDisabled={!ready || (touched && invalid)}
       busy={saving}
-      submitPlacement="header"
+      // Edit: save icon in the header. New page: only "General" and a big button in the footer.
+      submitPlacement={mode === 'edit' ? 'header' : 'footer'}
+      submitIcon={mode === 'edit' ? <Save aria-hidden="true" /> : undefined}
+      action={
+        page && (
+          <>
+            {showViewLink && (
+              <Link
+                to={sitePagePath(page.slug)}
+                aria-label={page.published ? t('pages.view') : t('pages.preview')}
+                title={page.published ? t('pages.view') : t('pages.preview')}
+                className={buttonVariants({ variant: 'ghost', size: 'icon-md' })}
+                onClick={event => {
+                  // Unsaved changes → ask first, navigate after discarding.
+                  event.preventDefault();
+                  const to = sitePagePath(page.slug);
+                  requestClose(() => void navigate({ to }));
+                }}
+              >
+                <Eye aria-hidden="true" />
+              </Link>
+            )}
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon-md"
+              onClick={() => setConfirmDelete(true)}
+              disabled={saving}
+              aria-label={t('pages.delete.action')}
+              title={t('pages.delete.action')}
+              className="text-destructive hover:text-destructive"
+            >
+              <Trash2 aria-hidden="true" />
+            </Button>
+          </>
+        )
+      }
       onSubmit={submit}
       bodyClassName="px-0 pt-0"
       contentProps={{ className: 'max-w-180' }}
@@ -282,90 +330,93 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
           <Skeleton className="h-64 w-full rounded-xl" />
         </div>
       ) : (
-        <Tabs value={tab} onValueChange={setTab} className="px-4 py-5 sm:px-6">
-          <AdminTabsBar
-            label={t('pages.form.tabs.label')}
-            tabs={[
-              { value: 'config', label: t('pages.form.tabs.config') },
-              { value: 'blocks', label: t('pages.form.tabs.blocks'), count: values.blocks.length },
-            ]}
-          />
-          {serverError && (
-            <p
-              role="alert"
-              className="mt-5 rounded-xl border border-destructive/30 bg-destructive/10 px-3 py-2.5 text-caption text-destructive"
-            >
-              {t(serverError)}
-            </p>
-          )}
-
-          <TabsContent value="config" className="mt-5 space-y-5">
-            <PageConfigFields
-              mode={mode}
-              page={page}
-              values={values}
-              slug={slug}
-              saving={saving}
-              touched={touched}
-              titleError={titleError}
-              slugError={slugError}
-              summaryError={summaryError}
-              menuOrderError={menuOrderError}
-              set={set}
-              setTitle={setTitle}
-              setSlug={setSlug}
-              patch={patch => {
-                setValues(prev => ({ ...prev, ...patch }));
-                setTouched(true);
-                setServerError(null);
-              }}
-            />
-
-            {page && (
-              <div className={showViewLink ? 'grid grid-cols-1 gap-3 pt-1 sm:grid-cols-2' : 'pt-1'}>
-                {showViewLink && (
-                  <Link
-                    to={sitePagePath(page.slug)}
-                    onClick={event => {
-                      // Unsaved changes → ask first, navigate after discarding.
-                      event.preventDefault();
-                      const to = sitePagePath(page.slug);
-                      requestClose(() => void navigate({ to }));
-                    }}
-                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-border/50 text-body font-bold transition-colors hover:bg-foreground/[0.04]"
-                  >
-                    <Eye className="size-4" aria-hidden="true" />
-                    {page.published ? t('pages.view') : t('pages.preview')}
-                  </Link>
-                )}
-                <Button
-                  type="button"
-                  onClick={() => setConfirmDelete(true)}
-                  disabled={saving}
-                  variant="destructive-outline"
-                  size="lg"
-                  fullWidth
-                >
-                  <Trash2 className="size-4" aria-hidden="true" />
-                  {t('pages.delete.action')}
-                </Button>
-              </div>
-            )}
-          </TabsContent>
-
-          <TabsContent value="blocks" className="mt-5">
-            <PageImageSessionProvider session={images}>
-              <AdminBlocksEditor
-                value={values.blocks}
-                onChange={blocks => {
-                  set('blocks', blocks);
-                  images.sync(blocks);
-                }}
-                disabled={saving}
+        <PageImageSessionProvider session={images}>
+          <Tabs value={tab} onValueChange={setTab} className="px-4 py-5 sm:px-6">
+            {mode === 'edit' && (
+              <AdminTabsBar
+                fill
+                label={t('pages.form.tabs.label')}
+                tabs={[
+                  { value: 'general', label: t('pages.form.tabs.general') },
+                  {
+                    value: 'blocks',
+                    label: t('pages.form.tabs.blocks'),
+                    count: values.blocks.length,
+                  },
+                  { value: 'visibility', label: t('pages.form.tabs.visibility') },
+                  { value: 'seo', label: t('pages.form.tabs.seo') },
+                ]}
               />
-            </PageImageSessionProvider>
-          </TabsContent>
-        </Tabs>
+            )}
+            {serverError && (
+              <p
+                role="alert"
+                className="mt-5 rounded-xl border border-destructive/30 bg-destructive/10 px-3 py-2.5 text-caption text-destructive"
+              >
+                {t(serverError)}
+              </p>
+            )}
+
+            <TabsContent value="general" className="mt-5 space-y-5">
+              <PageGeneralFields
+                mode={mode}
+                page={page}
+                values={values}
+                slug={slug}
+                saving={saving}
+                touched={touched}
+                titleError={titleError}
+                slugError={slugError}
+                summaryError={summaryError}
+                set={set}
+                setTitle={setTitle}
+                setSlug={setSlug}
+              />
+            </TabsContent>
+
+            {mode === 'edit' && (
+              <>
+                <TabsContent value="blocks" className="mt-5">
+                  <AdminBlocksEditor
+                    value={values.blocks}
+                    onChange={blocks => {
+                      set('blocks', blocks);
+                      images.sync({ blocks, seoImage: values.seoImage });
+                    }}
+                    disabled={saving}
+                  />
+                </TabsContent>
+
+                <TabsContent value="visibility" className="mt-5 space-y-5">
+                  <PageVisibilityFields
+                    values={values}
+                    saving={saving}
+                    menuOrderError={menuOrderError}
+                    set={set}
+                    patch={patch => {
+                      setValues(prev => ({ ...prev, ...patch }));
+                      setTouched(true);
+                      setServerError(null);
+                    }}
+                  />
+                </TabsContent>
+
+                <TabsContent value="seo" className="mt-5 space-y-5">
+                  <PageSeoFields
+                    values={values}
+                    saving={saving}
+                    error={canonicalError}
+                    onImage={seoImage => {
+                      set('seoImage', seoImage);
+                      images.sync({ blocks: values.blocks, seoImage });
+                    }}
+                    set={set}
+                  />
+                </TabsContent>
+              </>
+            )}
+          </Tabs>
+        </PageImageSessionProvider>
       )}
 
       <AlertDialog

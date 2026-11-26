@@ -42,6 +42,7 @@ const ERROR_KEYS: [needle: string, key: string][] = [
   ['site_page_menu_order_invalid', 'error.menuOrderInvalid'],
   ['site_page_visibility_invalid', 'error.accessInvalid'],
   ['site_page_roles_invalid', 'error.accessInvalid'],
+  ['site_page_canonical_invalid', 'error.canonicalInvalid'],
   ['site_page_blocks_too_many', 'error.blocksTooMany'],
   ['site_page_block_items_too_many', 'error.blockItemsTooMany'],
   ['site_page_block_type_invalid', 'error.blocksInvalid'],

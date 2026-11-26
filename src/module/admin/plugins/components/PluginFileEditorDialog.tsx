@@ -1,3 +1,4 @@
+import { useTheme } from '@core/theme';
 import { AppDrawer } from '@ui/patterns';
 import { Alert, AlertDescription, AlertTitle } from '@ui/shad-cn/components/alert.tsx';
 import { Button } from '@ui/shad-cn/components/button.tsx';
@@ -16,7 +17,6 @@ import { toast } from 'sonner';
 
 import { PluginApi } from '../api';
 import { languageOfPath } from '../code.language';
-import { useTheme } from '@core/theme';
 
 interface IPluginFileEditorDialogProps {
   pluginId: string;

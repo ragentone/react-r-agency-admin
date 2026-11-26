@@ -156,7 +156,8 @@
     "deleteNotAdmin": "This account is not an admin.",
     "fileType": "Only PDF, Word, Excel, PowerPoint, TXT, CSV or ZIP.",
     "fileTooLarge": "The file is larger than 20 MB.",
-    "fileUpload": "File upload failed."
+    "fileUpload": "File upload failed.",
+    "canonicalInvalid": "The canonical address is invalid."
   },
   "pages": {
     "searchPlaceholder": "Title or address",
@@ -212,9 +213,16 @@
       "seoIndexPrivate": "Pages for signed-in users never appear in search engines.",
       "tabs": {
         "label": "Sections",
-        "config": "Settings",
-        "blocks": "Blocks"
-      }
+        "blocks": "Blocks",
+        "general": "General",
+        "visibility": "Visibility",
+        "seo": "SEO"
+      },
+      "seoImage": "Preview image",
+      "seoImageHint": "Shown in search results and when shared. Empty = first image of the page. Format 1200 × 630.",
+      "seoCanonical": "Canonical address",
+      "seoCanonicalHint": "Only needed when the page is also reachable under another address. Empty = own address.",
+      "seoCanonicalInvalid": "Please enter a full address starting with https://."
     },
     "delete": {
       "action": "Delete page",
