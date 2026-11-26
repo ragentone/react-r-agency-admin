@@ -5,6 +5,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
+import { BlockAccessBadge } from './BlockAccessBadge';
+import { BlockAccessField } from './BlockAccessField';
+import { BlockAnchorField } from './BlockAnchorField';
 import { BlockEditor } from './BlockEditors';
 import { BLOCK_ICONS, blockIcon, blockLabel, blockSummary } from './meta';
 import {
@@ -204,8 +207,14 @@ export const AdminBlocksEditor: React.FC<IAdminBlocksEditorProps> = ({
                   <span className="block text-body font-semibold">
                     {t(blockLabel(block), { defaultValue: block.type })}
                   </span>
-                  <span className="block truncate text-caption text-muted-foreground">
-                    {summary || t('blocks.noContent')}
+                  <span className="flex items-center gap-1.5 text-caption text-muted-foreground">
+                    <BlockAccessBadge block={block} />
+                    {block.anchor && (
+                      <span className="shrink-0 font-semibold text-foreground">
+                        #{block.anchor}
+                      </span>
+                    )}
+                    <span className="min-w-0 truncate">{summary || t('blocks.noContent')}</span>
                   </span>
                 </span>
                 <ChevronDown
@@ -260,6 +269,15 @@ export const AdminBlocksEditor: React.FC<IAdminBlocksEditorProps> = ({
                   </div>
                   <div className="space-y-4 px-3 pt-1 pb-4">
                     <BlockEditor block={block} onChange={update} disabled={disabled} />
+                    <BlockAccessField block={block} onChange={update} disabled={disabled} />
+                    <BlockAnchorField
+                      block={block}
+                      taken={value
+                        .filter(item => item.id !== block.id && item.anchor)
+                        .map(item => item.anchor as string)}
+                      onChange={update}
+                      disabled={disabled}
+                    />
                   </div>
                 </div>
               )}

@@ -15,6 +15,8 @@ import { useTranslation } from 'react-i18next';
 import { SitePageHtml } from '../components/SitePageHtml';
 import { BlockLink } from './BlockLink';
 import { CodeSnippetBlock } from './CodeBlockView';
+import { ColumnsBlock } from './ColumnsBlock';
+import { ContactBlock, DownloadsBlock } from './ContactBlocks';
 import { HeroBlock } from './HeroBlock';
 import { isFullWidthBlock, isInsetBlock, SITE_PAGE_COLUMN, SITE_PAGE_INSET } from './layout';
 import { CardsBlock, ImageBlock, SplitBlock } from './MediaBlocks';
@@ -613,6 +615,12 @@ export const SitePageBlockView: React.FC<{ block: PageBlock; first?: boolean }> 
       return <TableBlock data={block.data} />;
     case 'code':
       return <CodeSnippetBlock data={block.data} />;
+    case 'contact':
+      return <ContactBlock data={block.data} />;
+    case 'downloads':
+      return <DownloadsBlock data={block.data} />;
+    case 'columns':
+      return <ColumnsBlock data={block.data} headingClass="mb-4 text-title font-bold" />;
     default:
       return null;
   }

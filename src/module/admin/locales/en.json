@@ -153,7 +153,10 @@
     "passwordPwned": "This password appeared in a data breach.",
     "deleteSelf": "You can't delete your own account.",
     "deleteSuper": "A super admin can't be deleted.",
-    "deleteNotAdmin": "This account is not an admin."
+    "deleteNotAdmin": "This account is not an admin.",
+    "fileType": "Only PDF, Word, Excel, PowerPoint, TXT, CSV or ZIP.",
+    "fileTooLarge": "The file is larger than 20 MB.",
+    "fileUpload": "File upload failed."
   },
   "pages": {
     "searchPlaceholder": "Title or address",
@@ -369,6 +372,18 @@
       "code": {
         "label": "Code",
         "description": "Code snippet with copy button"
+      },
+      "contact": {
+        "label": "Contact",
+        "description": "Phone, email, address and opening hours"
+      },
+      "downloads": {
+        "label": "Downloads",
+        "description": "Files to download, e.g. PDF or Excel"
+      },
+      "columns": {
+        "label": "Columns",
+        "description": "2 or 3 text columns side by side"
       }
     },
     "field": {
@@ -607,6 +622,54 @@
       "title": "Title",
       "language": "Language",
       "code": "Code"
+    },
+    "contact": {
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "addressHint": "Several lines allowed. Tapping opens the map (OpenStreetMap).",
+      "hours": "Opening hours",
+      "hoursHint": "Free text, e.g. \"Mon–Fri 9am–6pm\"."
+    },
+    "downloads": {
+      "items": "Files",
+      "item": "File",
+      "add": "Add file",
+      "file": "File or link",
+      "upload": "Upload file",
+      "formats": "PDF, Word, Excel, PowerPoint, TXT, CSV, ZIP · max. 20 MB",
+      "label": "Name",
+      "size": "Size",
+      "note": "Note (optional)",
+      "open": "Open file"
+    },
+    "columns": {
+      "items": "Columns",
+      "item": "Column {{n}}",
+      "add": "Add column",
+      "divider": "Divider",
+      "dividerHint": "Thin line between the columns.",
+      "hint": "On phones the columns are stacked. 3 columns only from tablet width."
+    },
+    "access": {
+      "title": "Who sees this block?",
+      "all": "Everybody",
+      "allHint": "Every visitor sees the block.",
+      "guests": "Guests only",
+      "guestsHint": "Only without sign-in, e.g. \"Register now\". Signed-in users don't see it.",
+      "authenticated": "Signed in",
+      "authenticatedHint": "Guests don't see the block – the server doesn't even send it.",
+      "rolesEmpty": "No role picked – every signed-in user sees the block.",
+      "rolesHint": "One of the picked roles is enough. Admins always see the block, except for \"Guests only\".",
+      "badgeRoles_one": "{{count}} role",
+      "badgeRoles_other": "{{count}} roles"
+    },
+    "anchor": {
+      "label": "Anchor (optional)",
+      "hint": "Name for jump links to this block, e.g. \"pricing\".",
+      "linkHint": "Link: #{{anchor}} on this page or /site/<page>#{{anchor}} from elsewhere.",
+      "invalid": "Only a–z, 0–9 and dashes, starting with a letter.",
+      "taken": "Another block on this page already uses this anchor."
     }
   },
   "stats": {

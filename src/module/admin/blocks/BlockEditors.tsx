@@ -12,6 +12,9 @@ import {
   ToggleField,
   UrlField,
 } from './BlockFields';
+import { CodeBlockEditor } from './CodeBlockEditor';
+import { ColumnsEditor } from './ColumnsBlockEditor';
+import { ContactEditor, DownloadsEditor } from './ContactBlockEditors';
 import { HeroEditor } from './HeroBlockEditor';
 import { ImageField } from './ImageField';
 import { CountdownEditor, StatsEditor, StepsEditor, TabsEditor } from './LayoutBlockEditors';
@@ -27,8 +30,6 @@ import {
   type SitePageBlockType,
   videoEmbed,
 } from './types';
-
-import { CodeBlockEditor } from './CodeBlockEditor';
 
 type EditorProps<T extends SitePageBlockType> = {
   data: ISitePageBlockDataMap[T];
@@ -476,6 +477,30 @@ export const BlockEditor: React.FC<{
     case 'countdown':
       return (
         <CountdownEditor
+          {...props}
+          data={block.data}
+          onChange={data => onChange({ ...block, data })}
+        />
+      );
+    case 'contact':
+      return (
+        <ContactEditor
+          {...props}
+          data={block.data}
+          onChange={data => onChange({ ...block, data })}
+        />
+      );
+    case 'downloads':
+      return (
+        <DownloadsEditor
+          {...props}
+          data={block.data}
+          onChange={data => onChange({ ...block, data })}
+        />
+      );
+    case 'columns':
+      return (
+        <ColumnsEditor
           {...props}
           data={block.data}
           onChange={data => onChange({ ...block, data })}

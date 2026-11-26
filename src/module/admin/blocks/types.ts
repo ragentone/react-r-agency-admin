@@ -203,6 +203,43 @@ export interface IDividerBlockData {
   size: 'md' | 'sm' | 'lg';
 }
 
+/** Contact details: phone and mail tappable, address opens a map. */
+export interface IContactBlockData {
+  title: string;
+  phone: string;
+  email: string;
+  /** Multi-line postal address. */
+  address: string;
+  /** Free text, e.g. "Mo–Fr 9–18 Uhr". */
+  hours: string;
+}
+
+export interface IDownloadItem {
+  label: string;
+  /** Own upload or external link. */
+  url: string;
+  /** Free text, e.g. "1,2 MB" (the file type comes from the url). */
+  size: string;
+  note: string;
+}
+
+export interface IDownloadsBlockData {
+  title: string;
+  items: IDownloadItem[];
+}
+
+export interface IColumnItem {
+  html: string;
+}
+
+/** 2–3 text columns side by side (stacked on phones). */
+export interface IColumnsBlockData {
+  title: string;
+  /** Thin line between the columns. */
+  divider: boolean;
+  items: IColumnItem[];
+}
+
 export interface ISitePageBlockDataMap {
   hero: IHeroBlockData;
   text: ITextBlockData;
@@ -221,14 +258,31 @@ export interface ISitePageBlockDataMap {
   tabs: ITabsBlockData;
   countdown: ICountdownBlockData;
   table: ITableBlockData;
+  contact: IContactBlockData;
+  downloads: IDownloadsBlockData;
+  columns: IColumnsBlockData;
 }
 
 export type SitePageBlockType = keyof ISitePageBlockDataMap;
+
+/** Who sees a block (same as the backend) – missing `access` = everybody. */
+export const SITE_PAGE_BLOCK_VISIBILITIES = ['all', 'guests', 'authenticated'] as const;
+export type SitePageBlockVisibility = (typeof SITE_PAGE_BLOCK_VISIBILITIES)[number];
+
+export interface IBlockAccess {
+  visibility: SitePageBlockVisibility;
+  /** `authenticated` only: one of these roles (empty = every signed-in user). */
+  roles: string[];
+}
 
 export type SitePageBlockOf<T extends SitePageBlockType> = {
   id: string;
   type: T;
   data: ISitePageBlockDataMap[T];
+  /** The server only sends the blocks the visitor may see. */
+  access?: IBlockAccess;
+  /** Jump target `/site/<slug>#<anchor>` – unique per page. */
+  anchor?: string;
 };
 
 export type SitePageBlock = { [T in SitePageBlockType]: SitePageBlockOf<T> }[SitePageBlockType];
@@ -238,7 +292,12 @@ export interface IAppBlock {
   id: string;
   type: `${string}:${string}`;
   data: PageBlockData;
+  access?: IBlockAccess;
+  anchor?: string;
 }
+
+/** Same rule as the backend: lower case letter first, then letters, digits, dashes. */
+export const SITE_PAGE_BLOCK_ANCHOR = /^[a-z][a-z0-9-]{0,39}$/;
 
 /** Any block of a page: built-in or from an app. */
 export type PageBlock = SitePageBlock | IAppBlock;
@@ -251,6 +310,7 @@ export const SITE_PAGE_BLOCK_TYPES: SitePageBlockType[] = [
   'text',
   'image',
   'split',
+  'columns',
   'cards',
   'stats',
   'steps',
@@ -259,6 +319,8 @@ export const SITE_PAGE_BLOCK_TYPES: SitePageBlockType[] = [
   'faq',
   'tabs',
   'table',
+  'contact',
+  'downloads',
   'quote',
   'video',
   'countdown',
@@ -275,6 +337,8 @@ export const SITE_PAGE_STEPS_MAX = 10;
 export const SITE_PAGE_TABS_MAX = 8;
 export const SITE_PAGE_TABLE_COLUMNS_MAX = 6;
 export const SITE_PAGE_TABLE_ROWS_MAX = 50;
+export const SITE_PAGE_DOWNLOADS_MAX = 20;
+export const SITE_PAGE_COLUMNS_MAX = 3;
 
 export const TABLE_CELL_KEYS = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'] as const;
 export type TableCellKey = (typeof TABLE_CELL_KEYS)[number];
@@ -283,6 +347,8 @@ export const emptyStat = (): IStatItem => ({ value: '', label: '' });
 export const emptyStep = (): IStepItem => ({ title: '', text: '' });
 export const emptyTab = (): ITabItem => ({ label: '', html: '' });
 export const emptyTableRow = (): ITableRow => ({ c1: '', c2: '', c3: '', c4: '', c5: '', c6: '' });
+export const emptyColumn = (): IColumnItem => ({ html: '' });
+export const emptyDownload = (): IDownloadItem => ({ label: '', url: '', size: '', note: '' });
 export const emptyTableColumn = (): ITableColumn => ({ label: '', align: 'left' });
 
 /** Countdown default: in 7 days, 18:00 local time. */
@@ -356,6 +422,9 @@ const DEFAULTS: { [T in SitePageBlockType]: () => ISitePageBlockDataMap[T] } = {
   video: () => ({ url: '', caption: '' }),
   divider: () => ({ variant: 'line', size: 'md' }),
   code: () => ({ title: '', language: 'plain', code: '' }),
+  contact: () => ({ title: '', phone: '', email: '', address: '', hours: '' }),
+  downloads: () => ({ title: '', items: [emptyDownload()] }),
+  columns: () => ({ title: '', divider: false, items: [emptyColumn(), emptyColumn()] }),
   stats: () => ({ title: '', items: [emptyStat(), emptyStat(), emptyStat()] }),
   steps: () => ({ title: '', items: [emptyStep(), emptyStep(), emptyStep()] }),
   tabs: () => ({ title: '', items: [emptyTab(), emptyTab()] }),
@@ -410,11 +479,12 @@ export const normalizeBlock = (block: PageBlock): PageBlock => {
   return { ...block, data } as SitePageBlock;
 };
 
-/** Deep copy with a new id. */
-export const duplicateBlock = (block: PageBlock): PageBlock => ({
-  ...structuredClone(block),
-  id: newBlockId(),
-});
+/** Deep copy with a new id – without the anchor (must stay unique). */
+export const duplicateBlock = (block: PageBlock): PageBlock => {
+  const copy = { ...structuredClone(block), id: newBlockId() };
+  delete copy.anchor;
+  return copy;
+};
 
 /** Pages from before the blocks: the HTML content becomes one text block. */
 export const blocksFromPage = (page: { blocks?: PageBlock[]; content?: string }): PageBlock[] => {

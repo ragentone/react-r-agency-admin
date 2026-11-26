@@ -1,14 +1,10 @@
-import { useUserRoleRegistry } from '@core/auth/roles/role.manager.ts';
 import { cn } from '@ui/lib/utils';
-import { Button } from '@ui/shad-cn/components/button.tsx';
-import { Globe, Lock, Plus, X } from 'lucide-react';
-import React, { useMemo, useState } from 'react';
+import { Globe, Lock } from 'lucide-react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { useBackendRoles } from '../hooks/use.backend.roles';
 import type { SitePageVisibility } from '../types';
-import { RoleChip } from './RoleChip';
-import { RolePickerSheet } from './RolePickerSheet';
+import { RoleListField } from './RoleListField';
 
 const OPTIONS: { value: SitePageVisibility; icon: typeof Globe }[] = [
   { value: 'all', icon: Globe },
@@ -33,13 +29,6 @@ export const PageAccessField: React.FC<IPageAccessFieldProps> = ({
   disabled,
 }) => {
   const { t } = useTranslation('admin');
-  const { roles: registered } = useUserRoleRegistry();
-  useBackendRoles();
-  const [picking, setPicking] = useState(false);
-  const options = useMemo(
-    () => registered.filter(definition => !roles.includes(definition.role)),
-    [registered, roles]
-  );
 
   return (
     <fieldset className="rounded-xl border border-border/50 p-3">
@@ -80,69 +69,13 @@ export const PageAccessField: React.FC<IPageAccessFieldProps> = ({
 
       {visibility === 'authenticated' && (
         <div className="mt-4">
-          <p className="mb-1.5 text-caption font-medium text-foreground">
-            {t('pages.access.roles')}
-          </p>
-          {roles.length > 0 ? (
-            <ul className="mb-2 flex flex-wrap gap-1.5">
-              {roles.map(role => (
-                <li key={role} className="flex items-center">
-                  <RoleChip role={role} className="pr-1" />
-                  <button
-                    type="button"
-                    onClick={() =>
-                      onChange(
-                        visibility,
-                        roles.filter(item => item !== role)
-                      )
-                    }
-                    disabled={disabled}
-                    aria-label={t('pages.access.removeRole', { role })}
-                    className="-ml-1 grid size-7 place-items-center rounded-full text-muted-foreground hover:bg-foreground/10 hover:text-foreground disabled:opacity-50"
-                  >
-                    <X className="size-3.5" />
-                  </button>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="mb-2 text-caption text-muted-foreground">
-              {t('pages.access.rolesEmpty')}
-            </p>
-          )}
-          {options.length > 0 && (
-            <>
-              <Button
-                type="button"
-                variant="outline"
-                pill
-                size="lg"
-                fullWidth
-                onClick={() => setPicking(true)}
-                disabled={disabled}
-                aria-haspopup="dialog"
-              >
-                <Plus />
-                {t('pages.access.addRole')}
-              </Button>
-              <RolePickerSheet
-                open={picking}
-                onOpenChange={setPicking}
-                title={t('pages.access.addRole')}
-                description={t('pages.access.rolesHint')}
-                options={options}
-                mode="multiple"
-                confirmLabel={count =>
-                  count ? t('rolePicker.addConfirm', { count }) : t('rolePicker.addNone')
-                }
-                onConfirm={picked => {
-                  onChange(visibility, [...roles, ...picked.filter(role => !roles.includes(role))]);
-                  return true;
-                }}
-              />
-            </>
-          )}
-          <p className="mt-1.5 text-caption text-muted-foreground">{t('pages.access.rolesHint')}</p>
+          <RoleListField
+            roles={roles}
+            onChange={next => onChange(visibility, next)}
+            emptyText={t('pages.access.rolesEmpty')}
+            hint={t('pages.access.rolesHint')}
+            disabled={disabled}
+          />
         </div>
       )}
     </fieldset>

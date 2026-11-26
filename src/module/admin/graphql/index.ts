@@ -159,6 +159,16 @@ export const AdminPageImageUploadMutation = parse(`
   }
 `);
 
+/** `admin:user` only – one file for the downloads block, returns its url. */
+export const AdminPageFileUploadMutation = parse(`
+  mutation AdminPageFileUpload($file: [Upload]!) {
+    adminPageFileUpload(file: $file) {
+      success
+      url
+    }
+  }
+`);
+
 /** Display mode only (`route` / `fullscreen`) – read before the page is rendered. */
 export const SitePageDisplayModeQuery = parse(`
   query SitePageDisplayMode($slug: String!) {

@@ -404,6 +404,12 @@ export interface IAdminPageDeleteReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `adminPageFileUploadReturn` */
+export interface IAdminPageFileUploadReturn {
+  success: Maybe<boolean>;
+  url: Maybe<string>;
+}
+
 /** GraphQL: `adminPageGetReturn` */
 export interface IAdminPageGetReturn {
   page: Maybe<ScalarJSON>;
@@ -1774,6 +1780,7 @@ export interface IMutation {
   adminMonitorThresholdsSave: Maybe<IAdminMonitorThresholdsSaveReturn>;
   adminPageCreate: Maybe<IAdminPageCreateReturn>;
   adminPageDelete: Maybe<IAdminPageDeleteReturn>;
+  adminPageFileUpload: Maybe<IAdminPageFileUploadReturn>;
   adminPageImageDiscard: Maybe<IAdminPageImageDiscardReturn>;
   adminPageImageKeep: Maybe<IAdminPageImageKeepReturn>;
   adminPageImageUpload: Maybe<IAdminPageImageUploadReturn>;
@@ -2202,9 +2209,11 @@ export interface IQuery {
   timelineLoadConfig: Maybe<ITimelineLoadConfigReturn>;
   timelineLoadEntry: Maybe<ITimelineLoadEntry>;
   timelineLoadPost: Maybe<ITimelineLoadPostReturn>;
+  timelinePageDirectory: Maybe<ITimelinePageDirectoryReturn>;
   timelinePageList: Maybe<ITimelinePageListReturn>;
   timelinePageLoad: Maybe<ITimelinePageLoadReturn>;
   timelinePageMembers: Maybe<ITimelinePageMembersReturn>;
+  timelineTrendsTags: Maybe<ITimelineTrendsTagsReturn>;
   tokenValidate: Maybe<ITokenValidateReturn>;
   userAliasExists: Maybe<IUserAliasExists>;
   userCheckAuth: Maybe<IUserCheckAuth>;
@@ -2226,6 +2235,7 @@ export interface IQuery {
   userRelationCounts: Maybe<IUserRelationCountsReturn>;
   userRelationList: Maybe<IUserRelationListReturn>;
   userRelationState: Maybe<IUserRelationStateReturn>;
+  userRelationSuggestions: Maybe<IUserRelationSuggestionsReturn>;
 }
 
 /** GraphQL: `resumeCreateReturn` */
@@ -2723,6 +2733,15 @@ export interface ITimelinePageDeleteReturn {
   success: Maybe<boolean>;
 }
 
+/** GraphQL: `timelinePageDirectoryReturn` */
+export interface ITimelinePageDirectoryReturn {
+  hasNextPage: Maybe<boolean>;
+  nextCursor: Maybe<string>;
+  pages: Maybe<ScalarJSON>;
+  success: Maybe<boolean>;
+  total: Maybe<number>;
+}
+
 /** GraphQL: `timelinePageListReturn` */
 export interface ITimelinePageListReturn {
   max: Maybe<number>;
@@ -2776,6 +2795,12 @@ export interface ITimelineReactReturn {
   likes: Maybe<number>;
   mine: Maybe<number>;
   success: Maybe<boolean>;
+}
+
+/** GraphQL: `timelineTrendsTagsReturn` */
+export interface ITimelineTrendsTagsReturn {
+  success: Maybe<boolean>;
+  tags: Maybe<ScalarJSON>;
 }
 
 /** GraphQL: `timelineUpdateEntryImagesReturn` */
@@ -3267,6 +3292,12 @@ export interface IUserRelationRequestReturn {
 /** GraphQL: `userRelationStateReturn` */
 export interface IUserRelationStateReturn {
   relation: Maybe<IUserRelation>;
+  success: Maybe<boolean>;
+}
+
+/** GraphQL: `userRelationSuggestionsReturn` */
+export interface IUserRelationSuggestionsReturn {
+  list: Maybe<ScalarJSON>;
   success: Maybe<boolean>;
 }
 

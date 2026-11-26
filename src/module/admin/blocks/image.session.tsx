@@ -11,6 +11,8 @@ import type { PageBlock } from './types';
 
 /** Heartbeat interval – well below the server's cron limit of 1 h. */
 const KEEP_INTERVAL_MS = 10 * 60 * 1000;
+/** Removed uploads go after this delay – longer than the undo toast (sonner: 4 s). */
+const RELEASE_DELAY_MS = 8000;
 
 /**
  * Images uploaded while a page is edited. Nothing may stay on the server that no page uses:
@@ -22,6 +24,9 @@ const KEEP_INTERVAL_MS = 10 * 60 * 1000;
  * - **Tab closed / reloaded** (`pagehide`) → same as cancel, sent as keepalive request so it
  *   survives the page. Not when the page only goes into the back/forward cache (it may come
  *   back with the editor still open).
+ * - **Removed while editing** → `sync(blocks)` after every change: uploads of this session the
+ *   blocks no longer reference (block / file / image removed) are discarded after a short delay,
+ *   so "undo" still works. Saved uploads stay until the next save (the drawer may be cancelled).
  * - **Still editing** → heartbeat every 10 minutes and when the tab becomes visible again: the
  *   server refreshes the unsaved uploads, so its cron (removes unused uploads after 1 h) keeps
  *   them. Uploads that are gone already (device slept for hours) are reported with a toast.
@@ -33,6 +38,8 @@ const KEEP_INTERVAL_MS = 10 * 60 * 1000;
 export interface IPageImageSession {
   /** Remember a fresh upload. */
   track: (url: string) => void;
+  /** Blocks changed – uploads of this session they don't use any more go (delayed). */
+  sync: (blocks: PageBlock[]) => void;
   commit: (blocks: PageBlock[]) => void;
   cancel: () => void;
 }
@@ -44,8 +51,10 @@ export const usePageImageSession = (): IPageImageSession => {
   const discard = useAdminPageImageDiscard();
   const keep = useAdminPageImageKeep();
   const uploads = useRef(new Set<string>());
+  const release = useRef<number | undefined>(undefined);
 
   const take = () => {
+    window.clearTimeout(release.current);
     const list = [...uploads.current];
     uploads.current.clear();
     return list;
@@ -54,6 +63,20 @@ export const usePageImageSession = (): IPageImageSession => {
   const track = useCallback((url: string) => {
     if (pageImageUuid(url)) uploads.current.add(url);
   }, []);
+
+  const sync = useCallback(
+    (blocks: PageBlock[]) => {
+      window.clearTimeout(release.current);
+      if (!uploads.current.size) return;
+      release.current = window.setTimeout(() => {
+        const used = JSON.stringify(blocks);
+        const gone = [...uploads.current].filter(url => !used.includes(pageImageUuid(url) ?? url));
+        gone.forEach(url => uploads.current.delete(url));
+        discard(gone);
+      }, RELEASE_DELAY_MS);
+    },
+    [discard]
+  );
 
   const commit = useCallback(
     (blocks: PageBlock[]) => {
@@ -98,7 +121,7 @@ export const usePageImageSession = (): IPageImageSession => {
     };
   }, [keep, t]);
 
-  return useMemo(() => ({ track, commit, cancel }), [track, commit, cancel]);
+  return useMemo(() => ({ track, sync, commit, cancel }), [track, sync, commit, cancel]);
 };
 
 export const PageImageSessionProvider: React.FC<{

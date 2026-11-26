@@ -386,7 +386,10 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
           <PageImageSessionProvider session={images}>
             <AdminBlocksEditor
               value={values.blocks}
-              onChange={blocks => set('blocks', blocks)}
+              onChange={blocks => {
+                set('blocks', blocks);
+                images.sync(blocks);
+              }}
               disabled={saving}
             />
           </PageImageSessionProvider>

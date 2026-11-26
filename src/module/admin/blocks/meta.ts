@@ -3,6 +3,9 @@ import {
   CalendarClock,
   Code2,
   Columns2,
+  Columns3,
+  Contact,
+  FileDown,
   Footprints,
   Gauge,
   Image as ImageIcon,
@@ -41,6 +44,9 @@ export const BLOCK_ICONS: Record<SitePageBlockType, typeof Type> = {
   countdown: CalendarClock,
   table: Table2,
   code: Code2,
+  contact: Contact,
+  downloads: FileDown,
+  columns: Columns3,
 };
 
 /** Icon of a block – app blocks from their registration (puzzle = app not loaded). */
@@ -133,6 +139,24 @@ export const blockSummary = (block: PageBlock): string => {
         (rows ? `${columns} × ${rows}` : '')
       );
     }
+    case 'contact':
+      return block.data.title || block.data.phone || block.data.email || block.data.address;
+    case 'columns':
+      return (
+        block.data.title ||
+        block.data.items
+          .map(item => htmlToText(item.html).slice(0, 40))
+          .filter(Boolean)
+          .join(' | ')
+      );
+    case 'downloads':
+      return (
+        block.data.title ||
+        block.data.items
+          .map(item => item.label)
+          .filter(Boolean)
+          .join(' · ')
+      );
     default:
       return '';
   }

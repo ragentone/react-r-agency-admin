@@ -153,7 +153,10 @@
     "passwordPwned": "Dieses Passwort ist in Datenlecks aufgetaucht.",
     "deleteSelf": "Du kannst dein eigenes Konto nicht löschen.",
     "deleteSuper": "Ein Super-Admin kann nicht gelöscht werden.",
-    "deleteNotAdmin": "Dieses Konto ist kein Admin."
+    "deleteNotAdmin": "Dieses Konto ist kein Admin.",
+    "fileType": "Nur PDF, Word, Excel, PowerPoint, TXT, CSV oder ZIP.",
+    "fileTooLarge": "Die Datei ist größer als 20 MB.",
+    "fileUpload": "Datei-Upload fehlgeschlagen."
   },
   "pages": {
     "searchPlaceholder": "Titel oder Adresse",
@@ -369,6 +372,18 @@
       "code": {
         "label": "Code",
         "description": "Code-Ausschnitt mit Kopieren-Knopf"
+      },
+      "contact": {
+        "label": "Kontakt",
+        "description": "Telefon, E-Mail, Adresse und Öffnungszeiten"
+      },
+      "downloads": {
+        "label": "Downloads",
+        "description": "Dateien zum Herunterladen, z. B. PDF oder Excel"
+      },
+      "columns": {
+        "label": "Spalten",
+        "description": "2 oder 3 Textspalten nebeneinander"
       }
     },
     "field": {
@@ -607,6 +622,54 @@
       "title": "Titel",
       "language": "Sprache",
       "code": "Code"
+    },
+    "contact": {
+      "phone": "Telefon",
+      "email": "E-Mail",
+      "address": "Adresse",
+      "addressHint": "Mehrzeilig möglich. Antippen öffnet die Karte (OpenStreetMap).",
+      "hours": "Öffnungszeiten",
+      "hoursHint": "Freier Text, z. B. „Mo–Fr 9–18 Uhr“."
+    },
+    "downloads": {
+      "items": "Dateien",
+      "item": "Datei",
+      "add": "Datei hinzufügen",
+      "file": "Datei oder Link",
+      "upload": "Datei hochladen",
+      "formats": "PDF, Word, Excel, PowerPoint, TXT, CSV, ZIP · max. 20 MB",
+      "label": "Name",
+      "size": "Größe",
+      "note": "Hinweis (optional)",
+      "open": "Datei öffnen"
+    },
+    "columns": {
+      "items": "Spalten",
+      "item": "Spalte {{n}}",
+      "add": "Spalte hinzufügen",
+      "divider": "Trennlinie",
+      "dividerHint": "Dünne Linie zwischen den Spalten.",
+      "hint": "Auf dem Handy stehen die Spalten untereinander. 3 Spalten erst ab Tablet-Breite."
+    },
+    "access": {
+      "title": "Wer sieht diesen Block?",
+      "all": "Alle",
+      "allHint": "Jeder Besucher sieht den Block.",
+      "guests": "Nur Gäste",
+      "guestsHint": "Nur ohne Anmeldung, z. B. „Jetzt registrieren“. Angemeldete sehen ihn nicht.",
+      "authenticated": "Nur angemeldete",
+      "authenticatedHint": "Gäste sehen den Block nicht – der Server schickt ihn gar nicht erst mit.",
+      "rolesEmpty": "Keine Rolle gewählt – jeder angemeldete Nutzer sieht den Block.",
+      "rolesHint": "Eine der gewählten Rollen reicht. Admins sehen den Block immer, außer bei „Nur Gäste“.",
+      "badgeRoles_one": "{{count}} Rolle",
+      "badgeRoles_other": "{{count}} Rollen"
+    },
+    "anchor": {
+      "label": "Anker (optional)",
+      "hint": "Name für Sprunglinks auf diesen Block, z. B. „preise“.",
+      "linkHint": "Link: #{{anchor}} auf dieser Seite oder /site/<seite>#{{anchor}} von woanders.",
+      "invalid": "Nur a–z, 0–9 und Bindestriche, mit einem Buchstaben am Anfang.",
+      "taken": "Diesen Anker hat schon ein anderer Block dieser Seite."
     }
   },
   "stats": {

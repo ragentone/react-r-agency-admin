@@ -266,6 +266,11 @@ export interface IMutationAdminPageDeleteArgs {
   id: ScalarID;
 }
 
+/** Arguments of `Mutation.adminPageFileUpload` */
+export interface IMutationAdminPageFileUploadArgs {
+  file: Array<InputMaybe<ScalarUpload>>;
+}
+
 /** Arguments of `Mutation.adminPageImageDiscard` */
 export interface IMutationAdminPageImageDiscardArgs {
   urls: Array<InputMaybe<string>>;
@@ -1515,6 +1520,13 @@ export interface IQueryTimelineLoadPostArgs {
   entryId: ScalarID;
 }
 
+/** Arguments of `Query.timelinePageDirectory` */
+export interface IQueryTimelinePageDirectoryArgs {
+  cursor?: InputMaybe<string>;
+  limit?: InputMaybe<number>;
+  search?: InputMaybe<string>;
+}
+
 /** Arguments of `Query.timelinePageLoad` */
 export interface IQueryTimelinePageLoadArgs {
   id: ScalarID;
@@ -1525,6 +1537,12 @@ export interface IQueryTimelinePageLoadArgs {
 export interface IQueryTimelinePageMembersArgs {
   id: ScalarID;
   shareToken?: InputMaybe<string>;
+}
+
+/** Arguments of `Query.timelineTrendsTags` */
+export interface IQueryTimelineTrendsTagsArgs {
+  limit?: InputMaybe<number>;
+  period?: InputMaybe<string>;
 }
 
 /** Arguments of `Query.tokenValidate` */
@@ -1625,4 +1643,9 @@ export interface IQueryUserRelationListArgs {
 export interface IQueryUserRelationStateArgs {
   sourceId?: InputMaybe<ScalarID>;
   targetId?: InputMaybe<ScalarID>;
+}
+
+/** Arguments of `Query.userRelationSuggestions` */
+export interface IQueryUserRelationSuggestionsArgs {
+  limit?: InputMaybe<number>;
 }

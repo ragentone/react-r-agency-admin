@@ -7,9 +7,9 @@
 
 | Bereich               | Anzahl |
 | --------------------- | -----: |
-| [Query](#query)       |    131 |
-| [Mutation](#mutation) |    197 |
-| Object-Types          |    383 |
+| [Query](#query)       |    134 |
+| [Mutation](#mutation) |    198 |
+| Object-Types          |    387 |
 | Interfaces            |      0 |
 | Unions                |      0 |
 | [Inputs](#inputs)     |     21 |
@@ -826,6 +826,15 @@ Query  ‹IQuery›
 ├── timelineLoadPost: timelineLoadPostReturn  ‹ITimelineLoadPostReturn›
 │   ├── $entryId: ID!
 │   └── post: JSON
+├── timelinePageDirectory: timelinePageDirectoryReturn  ‹ITimelinePageDirectoryReturn›
+│   ├── $cursor: String
+│   ├── $limit: Int
+│   ├── $search: String
+│   ├── hasNextPage: Boolean
+│   ├── nextCursor: String
+│   ├── pages: JSON
+│   ├── success: Boolean
+│   └── total: Int
 ├── timelinePageList: timelinePageListReturn  ‹ITimelinePageListReturn›
 │   ├── max: Int
 │   ├── pages: JSON
@@ -843,6 +852,11 @@ Query  ‹IQuery›
 │   ├── pending: JSON
 │   ├── success: Boolean
 │   └── total: Int
+├── timelineTrendsTags: timelineTrendsTagsReturn  ‹ITimelineTrendsTagsReturn›
+│   ├── $limit: Int
+│   ├── $period: String
+│   ├── success: Boolean
+│   └── tags: JSON
 ├── tokenValidate: tokenValidateReturn  ‹ITokenValidateReturn›
 │   ├── $token: String!
 │   ├── expired: Boolean
@@ -1055,17 +1069,21 @@ Query  ‹IQuery›
 │   ├── list: JSON
 │   ├── success: Boolean
 │   └── total: Int
-└── userRelationState: userRelationStateReturn  ‹IUserRelationStateReturn›
-    ├── $sourceId: ID
-    ├── $targetId: ID
-    ├── relation: userRelation  ‹IUserRelation›
-    │   ├── blockedBy: String
-    │   ├── id: String
-    │   ├── relationId: String
-    │   ├── requestBy: String
-    │   ├── sourceId: String
-    │   ├── status: String
-    │   └── targetId: String
+├── userRelationState: userRelationStateReturn  ‹IUserRelationStateReturn›
+│   ├── $sourceId: ID
+│   ├── $targetId: ID
+│   ├── relation: userRelation  ‹IUserRelation›
+│   │   ├── blockedBy: String
+│   │   ├── id: String
+│   │   ├── relationId: String
+│   │   ├── requestBy: String
+│   │   ├── sourceId: String
+│   │   ├── status: String
+│   │   └── targetId: String
+│   └── success: Boolean
+└── userRelationSuggestions: userRelationSuggestionsReturn  ‹IUserRelationSuggestionsReturn›
+    ├── $limit: Int
+    ├── list: JSON
     └── success: Boolean
 ```
 
@@ -1297,6 +1315,10 @@ Mutation  ‹IMutation›
 ├── adminPageDelete: adminPageDeleteReturn  ‹IAdminPageDeleteReturn›
 │   ├── $id: ID!
 │   └── success: Boolean
+├── adminPageFileUpload: adminPageFileUploadReturn  ‹IAdminPageFileUploadReturn›
+│   ├── $file: [Upload]!
+│   ├── success: Boolean
+│   └── url: String
 ├── adminPageImageDiscard: adminPageImageDiscardReturn  ‹IAdminPageImageDiscardReturn›
 │   ├── $urls: [String]!
 │   ├── removed: Int
@@ -2589,6 +2611,7 @@ Inputs
 | `adminMonitorThresholdsSaveReturn`       | Object | `IAdminMonitorThresholdsSaveReturn`       | `objects.ts` |                                                                                  |
 | `adminPageCreateReturn`                  | Object | `IAdminPageCreateReturn`                  | `objects.ts` |                                                                                  |
 | `adminPageDeleteReturn`                  | Object | `IAdminPageDeleteReturn`                  | `objects.ts` |                                                                                  |
+| `adminPageFileUploadReturn`              | Object | `IAdminPageFileUploadReturn`              | `objects.ts` |                                                                                  |
 | `adminPageGetReturn`                     | Object | `IAdminPageGetReturn`                     | `objects.ts` |                                                                                  |
 | `adminPageImageDiscardReturn`            | Object | `IAdminPageImageDiscardReturn`            | `objects.ts` |                                                                                  |
 | `adminPageImageKeepReturn`               | Object | `IAdminPageImageKeepReturn`               | `objects.ts` |                                                                                  |
@@ -2860,6 +2883,7 @@ Inputs
 | `timelineLocationInput`                  | Input  | `ITimelineLocationInput`                  | `inputs.ts`  |                                                                                  |
 | `timelinePageCreateReturn`               | Object | `ITimelinePageCreateReturn`               | `objects.ts` |                                                                                  |
 | `timelinePageDeleteReturn`               | Object | `ITimelinePageDeleteReturn`               | `objects.ts` |                                                                                  |
+| `timelinePageDirectoryReturn`            | Object | `ITimelinePageDirectoryReturn`            | `objects.ts` |                                                                                  |
 | `timelinePageListReturn`                 | Object | `ITimelinePageListReturn`                 | `objects.ts` |                                                                                  |
 | `timelinePageLoadReturn`                 | Object | `ITimelinePageLoadReturn`                 | `objects.ts` |                                                                                  |
 | `timelinePageMemberReturn`               | Object | `ITimelinePageMemberReturn`               | `objects.ts` |                                                                                  |
@@ -2869,6 +2893,7 @@ Inputs
 | `timelinePollVoteReturn`                 | Object | `ITimelinePollVoteReturn`                 | `objects.ts` |                                                                                  |
 | `timelineReactReturn`                    | Object | `ITimelineReactReturn`                    | `objects.ts` |                                                                                  |
 | `timelineSearchInput`                    | Input  | `ITimelineSearchInput`                    | `inputs.ts`  |                                                                                  |
+| `timelineTrendsTagsReturn`               | Object | `ITimelineTrendsTagsReturn`               | `objects.ts` |                                                                                  |
 | `timelineUpdateEntryImagesReturn`        | Object | `ITimelineUpdateEntryImagesReturn`        | `objects.ts` |                                                                                  |
 | `timelineUpdateEntryReturn`              | Object | `ITimelineUpdateEntryReturn`              | `objects.ts` |                                                                                  |
 | `timelineUpdateEntryVideoReturn`         | Object | `ITimelineUpdateEntryVideoReturn`         | `objects.ts` |                                                                                  |
@@ -2940,6 +2965,7 @@ Inputs
 | `userRelationRejectReturn`               | Object | `IUserRelationRejectReturn`               | `objects.ts` |                                                                                  |
 | `userRelationRequestReturn`              | Object | `IUserRelationRequestReturn`              | `objects.ts` |                                                                                  |
 | `userRelationStateReturn`                | Object | `IUserRelationStateReturn`                | `objects.ts` |                                                                                  |
+| `userRelationSuggestionsReturn`          | Object | `IUserRelationSuggestionsReturn`          | `objects.ts` |                                                                                  |
 | `userRelationUnblockReturn`              | Object | `IUserRelationUnblockReturn`              | `objects.ts` |                                                                                  |
 | `userResetTeaserReturn`                  | Object | `IUserResetTeaserReturn`                  | `objects.ts` |                                                                                  |
 | `userSettings`                           | Object | `IUserSettings`                           | `objects.ts` |                                                                                  |
