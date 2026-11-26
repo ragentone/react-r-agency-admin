@@ -271,17 +271,6 @@ export interface IMutationAdminPageFileUploadArgs {
   file: Array<InputMaybe<ScalarUpload>>;
 }
 
-/** Arguments of `Mutation.adminPageFormDelete` */
-export interface IMutationAdminPageFormDeleteArgs {
-  id: ScalarID;
-}
-
-/** Arguments of `Mutation.adminPageFormRead` */
-export interface IMutationAdminPageFormReadArgs {
-  id: ScalarID;
-  read: boolean;
-}
-
 /** Arguments of `Mutation.adminPageImageDiscard` */
 export interface IMutationAdminPageImageDiscardArgs {
   urls: Array<InputMaybe<string>>;
@@ -867,15 +856,6 @@ export interface IMutationSendMailArgs {
   to: string;
 }
 
-/** Arguments of `Mutation.sitePageFormSubmit` */
-export interface IMutationSitePageFormSubmitArgs {
-  blockId: string;
-  elapsed?: InputMaybe<number>;
-  slug: string;
-  values: ScalarJSON;
-  website?: InputMaybe<string>;
-}
-
 /** Arguments of `Mutation.statsTrack` */
 export interface IMutationStatsTrackArgs {
   data: ScalarJSON;
@@ -1208,11 +1188,6 @@ export interface IQueryAdminMonitorHistoryArgs {
 /** Arguments of `Query.adminMonitorSnapshot` */
 export interface IQueryAdminMonitorSnapshotArgs {
   minutes?: InputMaybe<number>;
-}
-
-/** Arguments of `Query.adminPageFormEntries` */
-export interface IQueryAdminPageFormEntriesArgs {
-  pageId: ScalarID;
 }
 
 /** Arguments of `Query.adminPageGet` */
