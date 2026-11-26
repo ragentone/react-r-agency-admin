@@ -91,7 +91,7 @@ export const MapBlockEditor: React.FC<IProps> = ({ data, onChange, disabled }) =
         disabled={disabled}
       />
       <ChoiceField
-        label={t('blocks.field.ratio')}
+        label={t('blocks.field.format')}
         value={data.ratio}
         options={MAP_RATIOS}
         onChange={ratio => patch({ ratio })}

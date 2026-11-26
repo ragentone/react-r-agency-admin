@@ -582,7 +582,8 @@
       "noPosition": "No place chosen yet – pick a suggestion.",
       "clearPosition": "Remove position",
       "zoom": "Zoom",
-      "zoomHint": "1 = world, 14 = district, 19 = building."
+      "zoomHint": "1 = world, 14 = district, 19 = building.",
+      "open": "Open in Google Maps"
     },
     "tabs": {
       "items": "Tabs",

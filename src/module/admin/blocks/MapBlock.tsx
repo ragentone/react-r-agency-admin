@@ -35,7 +35,7 @@ export const MapBlock: React.FC<{ data: IMapBlockData }> = ({ data }) => {
   const { t } = useTranslation('admin');
   const [ref, seen] = useInView();
   if (!hasMapPosition(data) && !data.address && !data.title) return null;
-  const link = `https://www.openstreetmap.org/?mlat=${data.lat}&mlon=${data.lon}#map=${data.zoom}/${data.lat}/${data.lon}`;
+  const link = `https://www.google.com/maps/search/?api=1&query=${data.lat},${data.lon}`;
   return (
     <figure>
       {data.title && <h2 className="mb-4 text-xl font-bold tracking-tight">{data.title}</h2>}

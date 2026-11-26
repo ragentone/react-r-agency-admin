@@ -27,9 +27,12 @@ const SERIES = 'var(--color-value)';
 
 type Domain = [number, number];
 /** Bars start at zero (negative values stay visible), headroom for the value labels. */
-const barDomain = ([min, max]: Domain): Domain => [Math.min(0, min * 1.2), Math.max(0, max * 1.2)];
+const barDomain = ([min, max]: readonly number[]): Domain => [
+  Math.min(0, min * 1.2),
+  Math.max(0, max * 1.2),
+];
 /** Line: fit the data (no empty half), with room above and below. */
-const lineDomain = ([min, max]: Domain): Domain => {
+const lineDomain = ([min, max]: readonly number[]): Domain => {
   const pad = (max - min || Math.abs(max) || 1) * 0.3;
   return [min - pad, max + pad];
 };

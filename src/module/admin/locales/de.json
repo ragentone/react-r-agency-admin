@@ -582,7 +582,8 @@
       "noPosition": "Noch kein Ort gewählt – bitte einen Vorschlag auswählen.",
       "clearPosition": "Position entfernen",
       "zoom": "Zoom",
-      "zoomHint": "1 = Welt, 14 = Stadtteil, 19 = Haus."
+      "zoomHint": "1 = Welt, 14 = Stadtteil, 19 = Haus.",
+      "open": "In Google Maps öffnen"
     },
     "tabs": {
       "items": "Tabs",
