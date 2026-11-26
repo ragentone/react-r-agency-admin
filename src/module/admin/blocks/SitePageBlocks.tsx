@@ -1,14 +1,6 @@
 import { usePageBlockRegistry } from '@core/blocks/use.page.blocks.ts';
 import { cn } from '@ui/lib/utils';
-import {
-  AlertTriangle,
-  CheckCircle2,
-  ChevronDown,
-  Info,
-  OctagonAlert,
-  Play,
-  Quote,
-} from 'lucide-react';
+import { AlertTriangle, CheckCircle2, ChevronDown, Info, OctagonAlert, Quote } from 'lucide-react';
 import React, { Suspense, useEffect, useId, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -21,6 +13,8 @@ import { ContactBlock, DownloadsBlock } from './ContactBlocks';
 import { HeroBlock } from './HeroBlock';
 import { isFullWidthBlock, isInsetBlock, SITE_PAGE_COLUMN, SITE_PAGE_INSET } from './layout';
 import { CardsBlock, ImageBlock, SplitBlock } from './MediaBlocks';
+import { VideoBlock } from './VideoBlock';
+import { CarouselBlock } from './CarouselBlock';
 import { TocBlock } from './TocBlock';
 import {
   type IAppBlock,
@@ -35,10 +29,8 @@ import {
   type IStepsBlockData,
   type ITableBlockData,
   type ITabsBlockData,
-  type IVideoBlockData,
   type PageBlock,
   TABLE_CELL_KEYS,
-  videoEmbed,
 } from './types';
 
 export { BlockLink } from './BlockLink';
@@ -184,49 +176,6 @@ const QuoteBlock: React.FC<{ data: IQuoteBlockData }> = ({ data }) => {
             </span>
           )}
         </figcaption>
-      )}
-    </figure>
-  );
-};
-
-/* ---------------------------------------------------------------- video */
-
-/** Two-click embed: nothing is loaded from YouTube / Vimeo before the visitor taps play. */
-const VideoBlock: React.FC<{ data: IVideoBlockData }> = ({ data }) => {
-  const { t } = useTranslation('admin');
-  const [active, setActive] = useState(false);
-  const embed = videoEmbed(data.url);
-  if (!embed) return null;
-  const provider = embed.provider === 'youtube' ? 'YouTube' : 'Vimeo';
-  return (
-    <figure>
-      <div className="relative aspect-video overflow-hidden rounded-2xl bg-neutral-900">
-        {active ? (
-          <iframe
-            src={embed.src}
-            title={data.caption || provider}
-            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-            allowFullScreen
-            referrerPolicy="strict-origin-when-cross-origin"
-            className="absolute inset-0 size-full"
-          />
-        ) : (
-          <button
-            type="button"
-            onClick={() => setActive(true)}
-            className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center text-white"
-          >
-            <span className="grid size-16 place-items-center rounded-full bg-white/15 backdrop-blur transition-transform hover:scale-105">
-              <Play className="size-7 translate-x-0.5 fill-current" aria-hidden="true" />
-            </span>
-            <span className="max-w-xs text-caption text-white/75">
-              {t('blocks.video.consent', { provider })}
-            </span>
-          </button>
-        )}
-      </div>
-      {data.caption && (
-        <figcaption className="mt-2 text-caption text-muted-foreground">{data.caption}</figcaption>
       )}
     </figure>
   );
@@ -589,6 +538,8 @@ export const SitePageBlockView: React.FC<{ block: PageBlock; first?: boolean }> 
       return <SitePageHtml html={block.data.html} />;
     case 'image':
       return <ImageBlock data={block.data} first={first} />;
+    case 'carousel':
+      return <CarouselBlock data={block.data} first={first} />;
     case 'split':
       return <SplitBlock data={block.data} first={first} />;
     case 'cards':

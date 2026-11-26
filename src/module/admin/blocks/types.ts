@@ -126,9 +126,31 @@ export interface IQuoteBlockData {
   role: string;
 }
 
+/** Video formats – `9/16` for shorts / vertical clips. */
+export type VideoRatio = '16/9' | '4/3' | '1/1' | '9/16';
+export const VIDEO_RATIOS: VideoRatio[] = ['16/9', '4/3', '1/1', '9/16'];
+
 export interface IVideoBlockData {
   url: string;
   caption: string;
+  /** Own preview image ('' = dark area) – nothing is loaded from the provider before the tap. */
+  posterUrl: string;
+  ratio: VideoRatio;
+}
+
+export interface ICarouselItem {
+  imageUrl: string;
+  alt: string;
+  caption: string;
+}
+
+export type CarouselRatio = Exclude<ImageRatio, 'auto'>;
+export const CAROUSEL_RATIOS: CarouselRatio[] = ['16/9', '4/3', '1/1', '3/4'];
+
+export interface ICarouselBlockData {
+  title: string;
+  ratio: CarouselRatio;
+  items: ICarouselItem[];
 }
 
 export interface IStatItem {
@@ -258,6 +280,7 @@ export interface ISitePageBlockDataMap {
   quote: IQuoteBlockData;
   code: ICodeBlockData;
   video: IVideoBlockData;
+  carousel: ICarouselBlockData;
   divider: IDividerBlockData;
   stats: IStatsBlockData;
   steps: IStepsBlockData;
@@ -317,6 +340,7 @@ export const SITE_PAGE_BLOCK_TYPES: SitePageBlockType[] = [
   'toc',
   'text',
   'image',
+  'carousel',
   'split',
   'columns',
   'cards',
@@ -347,6 +371,7 @@ export const SITE_PAGE_TABLE_COLUMNS_MAX = 6;
 export const SITE_PAGE_TABLE_ROWS_MAX = 50;
 export const SITE_PAGE_DOWNLOADS_MAX = 20;
 export const SITE_PAGE_COLUMNS_MAX = 3;
+export const SITE_PAGE_CAROUSEL_MAX = 12;
 
 export const TABLE_CELL_KEYS = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'] as const;
 export type TableCellKey = (typeof TABLE_CELL_KEYS)[number];
@@ -355,6 +380,7 @@ export const emptyStat = (): IStatItem => ({ value: '', label: '' });
 export const emptyStep = (): IStepItem => ({ title: '', text: '' });
 export const emptyTab = (): ITabItem => ({ label: '', html: '' });
 export const emptyTableRow = (): ITableRow => ({ c1: '', c2: '', c3: '', c4: '', c5: '', c6: '' });
+export const emptySlide = (): ICarouselItem => ({ imageUrl: '', alt: '', caption: '' });
 export const emptyColumn = (): IColumnItem => ({ html: '' });
 export const emptyDownload = (): IDownloadItem => ({ label: '', url: '', size: '', note: '' });
 export const emptyTableColumn = (): ITableColumn => ({ label: '', align: 'left' });
@@ -427,7 +453,8 @@ const DEFAULTS: { [T in SitePageBlockType]: () => ISitePageBlockDataMap[T] } = {
   }),
   faq: () => ({ title: '', items: [emptyFaqItem()] }),
   quote: () => ({ text: '', author: '', role: '' }),
-  video: () => ({ url: '', caption: '' }),
+  video: () => ({ url: '', caption: '', posterUrl: '', ratio: '16/9' }),
+  carousel: () => ({ title: '', ratio: '4/3', items: [emptySlide(), emptySlide()] }),
   divider: () => ({ variant: 'line', size: 'md' }),
   code: () => ({ title: '', language: 'plain', code: '' }),
   contact: () => ({ title: '', phone: '', email: '', address: '', hours: '' }),
@@ -482,6 +509,13 @@ export const normalizeBlock = (block: PageBlock): PageBlock => {
     const cards = data as ICardsBlockData;
     cards.items = (Array.isArray(cards.items) ? cards.items : []).map(item => ({
       ...emptyCard(),
+      ...item,
+    }));
+  }
+  if (block.type === 'carousel') {
+    const carousel = data as ICarouselBlockData;
+    carousel.items = (Array.isArray(carousel.items) ? carousel.items : []).map(item => ({
+      ...emptySlide(),
       ...item,
     }));
   }

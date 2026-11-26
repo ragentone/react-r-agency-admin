@@ -1,5 +1,5 @@
 import { pageImageUuid } from '../hooks/use.admin.page.image';
-import type { ImageRatio } from './types';
+import type { ImageRatio, VideoRatio } from './types';
 
 /** Widths the static server renders for `srcset` (fixed list → few cache variants). */
 const SRCSET_WIDTHS = [640, 960, 1280, 1920, 2400];
@@ -20,4 +20,12 @@ export const RATIO_CLASS: Record<Exclude<ImageRatio, 'auto'>, string> = {
   '4/3': 'aspect-[4/3]',
   '1/1': 'aspect-square',
   '3/4': 'aspect-[3/4]',
+};
+
+/** Video frame formats (Tailwind needs the literal classes). */
+export const VIDEO_RATIO_CLASS: Record<VideoRatio, string> = {
+  '16/9': 'aspect-video',
+  '4/3': 'aspect-[4/3]',
+  '1/1': 'aspect-square',
+  '9/16': 'mx-auto aspect-[9/16] max-w-sm',
 };
