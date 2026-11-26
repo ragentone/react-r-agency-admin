@@ -209,7 +209,12 @@
       "seoIndexHint": "Listed in the sitemap, Google may find the page.",
       "seoIndexDraftHint": "Goes into the sitemap once the page is published.",
       "seoIndexOffHint": "Not in the sitemap, search engines get noindex.",
-      "seoIndexPrivate": "Pages for signed-in users never appear in search engines."
+      "seoIndexPrivate": "Pages for signed-in users never appear in search engines.",
+      "tabs": {
+        "label": "Sections",
+        "config": "Settings",
+        "blocks": "Blocks"
+      }
     },
     "delete": {
       "action": "Delete page",
@@ -355,7 +360,7 @@
       },
       "map": {
         "label": "Map",
-        "description": "Location with marker, loads on tap"
+        "description": "One place on OpenStreetMap"
       },
       "tabs": {
         "label": "Tabs",
@@ -408,6 +413,10 @@
       "timeline": {
         "label": "Timeline",
         "description": "Events with date, text and image"
+      },
+      "chart": {
+        "label": "Chart",
+        "description": "Bars, line or pie from your own values"
       }
     },
     "field": {
@@ -569,22 +578,11 @@
       "add": "Add step"
     },
     "map": {
-      "search": "Search address",
-      "searchPlaceholder": "Street, city or company",
-      "label": "Marker name",
-      "address": "Address (display)",
-      "lat": "Latitude",
-      "lng": "Longitude",
+      "address": "Place or address",
+      "noPosition": "No place chosen yet – pick a suggestion.",
+      "clearPosition": "Remove position",
       "zoom": "Zoom",
-      "zoomValue": {
-        "11": "City",
-        "13": "District",
-        "15": "Street",
-        "17": "Building"
-      },
-      "load": "Load map",
-      "consent": "Loading fetches map data from OpenStreetMap/CARTO.",
-      "open": "Open in map"
+      "zoomHint": "1 = world, 14 = district, 19 = building."
     },
     "tabs": {
       "items": "Tabs",
@@ -794,7 +792,10 @@
       "item": "Entry",
       "add": "Add entry",
       "date": "Date",
-      "dateHint": "Free text, e.g. “2024”, “March 2025” or “Q3”."
+      "dateHint": "Pick a date. It is shown written out (e.g. “March 12, 2025”).",
+      "datePlaceholder": "Pick a date",
+      "dateClear": "Clear date",
+      "dateLegacy": "Previous text: “{{value}}” – stays visible until a date is picked."
     },
     "width": {
       "label": "Width",
@@ -804,6 +805,22 @@
       "full": "100 %",
       "hint": "Default: reading column of 800 px. Phones always use the full width.",
       "hintFull": "Default: full width (banner edge to edge). Phones always use the full width."
+    },
+    "chart": {
+      "kind": "Chart type",
+      "kinds": {
+        "bar": "Bars",
+        "line": "Line",
+        "pie": "Pie"
+      },
+      "unit": "Unit (optional)",
+      "unitHint": "Appended to the values, e.g. “%” or “€”.",
+      "showValues": "Show values",
+      "items": "Data points",
+      "item": "Data point",
+      "add": "Add data point",
+      "label": "Label",
+      "value": "Value"
     }
   },
   "stats": {

@@ -330,6 +330,43 @@ export interface ITimelineBlockData {
   items: ITimelineItem[];
 }
 
+export const CHART_KINDS = ['bar', 'line', 'pie'] as const;
+export type ChartKind = (typeof CHART_KINDS)[number];
+export const SITE_PAGE_CHART_MAX = 12;
+
+export interface IChartPoint {
+  label: string;
+  value: number;
+}
+
+export interface IChartBlockData {
+  title: string;
+  kind: ChartKind;
+  /** Appended to the values, e.g. "%" or "€". */
+  unit: string;
+  showValues: boolean;
+  caption: string;
+  items: IChartPoint[];
+}
+
+export const MAP_RATIOS = ['16/9', '4/3', '1/1'] as const;
+export type MapRatio = (typeof MAP_RATIOS)[number];
+
+export interface IMapBlockData {
+  title: string;
+  address: string;
+  /** 0 / 0 = no position chosen yet. */
+  lat: number;
+  lon: number;
+  zoom: number;
+  ratio: MapRatio;
+  caption: string;
+}
+
+export const emptyChartPoint = (): IChartPoint => ({ label: '', value: 0 });
+export const hasMapPosition = (data: Pick<IMapBlockData, 'lat' | 'lon'>) =>
+  data.lat !== 0 || data.lon !== 0;
+
 export interface ICompareBlockData {
   title: string;
   beforeUrl: string;
@@ -371,6 +408,8 @@ export interface ISitePageBlockDataMap {
   video: IVideoBlockData;
   carousel: ICarouselBlockData;
   compare: ICompareBlockData;
+  chart: IChartBlockData;
+  map: IMapBlockData;
   pricing: IPricingBlockData;
   timeline: ITimelineBlockData;
   event: IEventBlockData;
@@ -443,6 +482,8 @@ export const SITE_PAGE_BLOCK_TYPES: SitePageBlockType[] = [
   'image',
   'carousel',
   'compare',
+  'chart',
+  'map',
   'split',
   'columns',
   'cards',
@@ -597,6 +638,19 @@ const DEFAULTS: { [T in SitePageBlockType]: () => ISitePageBlockDataMap[T] } = {
     wide: false,
     items: [emptySlide(), emptySlide()],
   }),
+  chart: () => ({
+    title: '',
+    kind: 'bar',
+    unit: '',
+    showValues: true,
+    caption: '',
+    items: [
+      { label: '', value: 10 },
+      { label: '', value: 20 },
+      { label: '', value: 15 },
+    ],
+  }),
+  map: () => ({ title: '', address: '', lat: 0, lon: 0, zoom: 14, ratio: '16/9', caption: '' }),
   compare: () => ({
     title: '',
     beforeUrl: '',
@@ -684,6 +738,13 @@ export const normalizeBlock = (block: PageBlock): PageBlock => {
       ...empty(),
       ...item,
     })) as typeof list.items;
+  }
+  if (block.type === 'chart') {
+    const chart = data as IChartBlockData;
+    chart.items = (Array.isArray(chart.items) ? chart.items : []).map(item => ({
+      ...emptyChartPoint(),
+      ...item,
+    }));
   }
   if (block.type === 'carousel') {
     const carousel = data as ICarouselBlockData;

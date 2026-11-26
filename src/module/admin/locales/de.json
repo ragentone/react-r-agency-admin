@@ -209,7 +209,12 @@
       "seoIndexHint": "Steht in der Sitemap, Google darf die Seite finden.",
       "seoIndexDraftHint": "Kommt in die Sitemap, sobald die Seite veröffentlicht ist.",
       "seoIndexOffHint": "Nicht in der Sitemap, Suchmaschinen bekommen noindex.",
-      "seoIndexPrivate": "Seiten nur für Angemeldete stehen nie in Suchmaschinen."
+      "seoIndexPrivate": "Seiten nur für Angemeldete stehen nie in Suchmaschinen.",
+      "tabs": {
+        "label": "Bereiche",
+        "config": "Einstellungen",
+        "blocks": "Blöcke"
+      }
     },
     "delete": {
       "action": "Seite löschen",
@@ -355,7 +360,7 @@
       },
       "map": {
         "label": "Karte",
-        "description": "Standort mit Marker, lädt erst auf Klick"
+        "description": "Ein Ort auf OpenStreetMap"
       },
       "tabs": {
         "label": "Tabs",
@@ -408,6 +413,10 @@
       "timeline": {
         "label": "Zeitstrahl",
         "description": "Ereignisse mit Datum, Text und Bild"
+      },
+      "chart": {
+        "label": "Diagramm",
+        "description": "Balken, Linie oder Kreis aus eigenen Werten"
       }
     },
     "field": {
@@ -569,22 +578,11 @@
       "add": "Schritt hinzufügen"
     },
     "map": {
-      "search": "Adresse suchen",
-      "searchPlaceholder": "Straße, Ort oder Firma",
-      "label": "Name am Marker",
-      "address": "Adresse (Anzeige)",
-      "lat": "Breitengrad",
-      "lng": "Längengrad",
+      "address": "Ort oder Adresse",
+      "noPosition": "Noch kein Ort gewählt – bitte einen Vorschlag auswählen.",
+      "clearPosition": "Position entfernen",
       "zoom": "Zoom",
-      "zoomValue": {
-        "11": "Stadt",
-        "13": "Viertel",
-        "15": "Straße",
-        "17": "Gebäude"
-      },
-      "load": "Karte laden",
-      "consent": "Beim Laden werden Kartendaten von OpenStreetMap/CARTO abgerufen.",
-      "open": "In Karte öffnen"
+      "zoomHint": "1 = Welt, 14 = Stadtteil, 19 = Haus."
     },
     "tabs": {
       "items": "Tabs",
@@ -794,7 +792,10 @@
       "item": "Eintrag",
       "add": "Eintrag hinzufügen",
       "date": "Datum",
-      "dateHint": "Freier Text, z. B. „2024“, „März 2025“ oder „Q3“."
+      "dateHint": "Datum wählen. Das Datum erscheint ausgeschrieben (z. B. „12. März 2025“).",
+      "datePlaceholder": "Datum wählen",
+      "dateClear": "Datum entfernen",
+      "dateLegacy": "Bisheriger Text: „{{value}}“ – wird weiter angezeigt, bis ein Datum gewählt wird."
     },
     "width": {
       "label": "Breite",
@@ -804,6 +805,22 @@
       "full": "100 %",
       "hint": "Standard: Lesespalte mit 800 px. Auf dem Handy immer volle Breite.",
       "hintFull": "Standard: volle Breite (bei Banner randlos). Auf dem Handy immer volle Breite."
+    },
+    "chart": {
+      "kind": "Diagrammart",
+      "kinds": {
+        "bar": "Balken",
+        "line": "Linie",
+        "pie": "Kreis"
+      },
+      "unit": "Einheit (optional)",
+      "unitHint": "Wird an die Werte angehängt, z. B. „%“ oder „€“.",
+      "showValues": "Werte anzeigen",
+      "items": "Datenpunkte",
+      "item": "Datenpunkt",
+      "add": "Datenpunkt hinzufügen",
+      "label": "Beschriftung",
+      "value": "Wert"
     }
   },
   "stats": {

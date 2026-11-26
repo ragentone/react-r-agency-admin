@@ -3,6 +3,7 @@ import {
   ArrowLeftRight,
   CalendarClock,
   CalendarDays,
+  ChartColumn,
   CircleDollarSign,
   Code2,
   Columns2,
@@ -18,6 +19,7 @@ import {
   LayoutTemplate,
   ListCollapse,
   ListTree,
+  Map as MapIcon,
   Megaphone,
   Milestone,
   PanelsTopLeft,
@@ -45,6 +47,8 @@ export const BLOCK_ICONS: Record<SitePageBlockType, typeof Type> = {
   video: Youtube,
   carousel: GalleryHorizontal,
   compare: ArrowLeftRight,
+  chart: ChartColumn,
+  map: MapIcon,
   pricing: CircleDollarSign,
   timeline: Milestone,
   event: CalendarDays,
@@ -127,6 +131,16 @@ export const blockSummary = (block: PageBlock): string => {
       );
     case 'compare':
       return block.data.title || block.data.caption;
+    case 'chart':
+      return (
+        block.data.title ||
+        block.data.items
+          .map(item => item.label)
+          .filter(Boolean)
+          .join(' · ')
+      );
+    case 'map':
+      return block.data.title || block.data.address;
     case 'event':
       return block.data.title || block.data.location;
     case 'carousel':

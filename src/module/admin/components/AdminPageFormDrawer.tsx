@@ -10,10 +10,8 @@ import {
   AlertDialogTitle,
 } from '@ui/shad-cn/components/alert-dialog.tsx';
 import { Button } from '@ui/shad-cn/components/button.tsx';
-import { Input } from '@ui/shad-cn/components/input.tsx';
 import { Skeleton } from '@ui/shad-cn/components/skeleton.tsx';
-import { Switch } from '@ui/shad-cn/components/switch.tsx';
-import { Textarea } from '@ui/shad-cn/components/textarea.tsx';
+import { Tabs, TabsContent } from '@ui/shad-cn/components/tabs.tsx';
 import { Eye, Trash2 } from 'lucide-react';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -30,9 +28,9 @@ import {
   sitePagePath,
 } from '../const';
 import type { ISitePage, ISitePageValues } from '../types';
+import { AdminTabsBar } from '../ui/AdminTabsBar';
 import { cleanSlugInput, slugify } from '../utils';
-import { PageAccessField } from './PageAccessField';
-import { PageDisplayModeField } from './PageDisplayModeField';
+import { PageConfigFields } from './PageConfigFields';
 
 const EMPTY: ISitePageValues = {
   title: '',
@@ -48,8 +46,6 @@ const EMPTY: ISitePageValues = {
   displayMode: 'route',
   roles: [],
 };
-
-const FIELD_LABEL = 'text-caption font-medium text-foreground';
 
 export interface IAdminPageFormDrawerProps {
   open: boolean;
@@ -87,6 +83,7 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
   const [confirmDiscard, setConfirmDiscard] = useState<{ then?: () => void } | null>(null);
   const navigate = useNavigate();
   const [touched, setTouched] = useState(false);
+  const [tab, setTab] = useState('config');
   /** New page: the slug follows the title until it is edited by hand. */
   const [slugManual, setSlugManual] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
@@ -285,266 +282,90 @@ export const AdminPageFormDrawer: React.FC<IAdminPageFormDrawerProps> = ({
           <Skeleton className="h-64 w-full rounded-xl" />
         </div>
       ) : (
-        <div className="space-y-5 px-4 py-5 sm:px-6">
+        <Tabs value={tab} onValueChange={setTab} className="px-4 py-5 sm:px-6">
+          <AdminTabsBar
+            label={t('pages.form.tabs.label')}
+            tabs={[
+              { value: 'config', label: t('pages.form.tabs.config') },
+              { value: 'blocks', label: t('pages.form.tabs.blocks'), count: values.blocks.length },
+            ]}
+          />
           {serverError && (
             <p
               role="alert"
-              className="rounded-xl border border-destructive/30 bg-destructive/10 px-3 py-2.5 text-caption text-destructive"
+              className="mt-5 rounded-xl border border-destructive/30 bg-destructive/10 px-3 py-2.5 text-caption text-destructive"
             >
               {t(serverError)}
             </p>
           )}
 
-          <div>
-            <div className="mb-1.5 flex items-center justify-between">
-              <label htmlFor="admin-page-title" className={FIELD_LABEL}>
-                {t('pages.form.title')}
-              </label>
-              <span className="text-caption text-muted-foreground tabular-nums">
-                {values.title.length} / {SITE_PAGE_TITLE_MAX}
-              </span>
-            </div>
-            <Input
-              id="admin-page-title"
-              value={values.title}
-              onChange={e => setTitle(e.target.value)}
-              placeholder={t('pages.form.titlePlaceholder')}
-              disabled={saving}
-              aria-invalid={Boolean(touched && titleError)}
-              className="h-12 rounded-xl text-base font-semibold sm:text-body"
-            />
-            {touched && titleError && (
-              <p role="alert" className="mt-1.5 text-caption text-destructive">
-                {titleError}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="admin-page-slug" className={`mb-1.5 block ${FIELD_LABEL}`}>
-              {t('pages.form.slug')}
-            </label>
-            <div className="flex h-12 items-center overflow-hidden rounded-xl border border-input focus-within:ring-1 focus-within:ring-ring">
-              <span className="shrink-0 pl-3 text-base text-muted-foreground select-none sm:text-body">
-                /site/
-              </span>
-              <input
-                id="admin-page-slug"
-                value={values.slug}
-                onChange={e => setSlug(e.target.value)}
-                onBlur={() => set('slug', values.slug.replace(/-+$/g, ''))}
-                placeholder={t('pages.form.slugPlaceholder')}
-                disabled={saving}
-                autoCapitalize="none"
-                autoCorrect="off"
-                spellCheck={false}
-                inputMode="url"
-                aria-invalid={Boolean(touched && slugError)}
-                aria-describedby="admin-page-slug-hint"
-                className="h-full min-w-0 flex-1 bg-transparent pr-3 text-base outline-none disabled:opacity-50 sm:text-body"
-              />
-            </div>
-            {touched && slugError ? (
-              <p role="alert" className="mt-1.5 text-caption text-destructive">
-                {slugError}
-              </p>
-            ) : (
-              <p id="admin-page-slug-hint" className="mt-1.5 text-caption text-muted-foreground">
-                {mode === 'edit' && page && slug !== page.slug
-                  ? t('pages.form.slugChanged')
-                  : t('pages.form.slugHint')}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <div className="mb-1.5 flex items-center justify-between">
-              <label htmlFor="admin-page-summary" className={FIELD_LABEL}>
-                {t('pages.form.summary')}
-              </label>
-              <span className="text-caption text-muted-foreground tabular-nums">
-                {values.summary.length} / {SITE_PAGE_SUMMARY_MAX}
-              </span>
-            </div>
-            <Textarea
-              id="admin-page-summary"
-              value={values.summary}
-              onChange={e => set('summary', e.target.value)}
-              placeholder={t('pages.form.summaryPlaceholder')}
-              disabled={saving}
-              rows={2}
-              aria-invalid={Boolean(summaryError)}
-              className="min-h-20 resize-none rounded-xl text-base sm:text-body"
-            />
-            {summaryError && (
-              <p role="alert" className="mt-1.5 text-caption text-destructive">
-                {summaryError}
-              </p>
-            )}
-          </div>
-
-          <PageImageSessionProvider session={images}>
-            <AdminBlocksEditor
-              value={values.blocks}
-              onChange={blocks => {
-                set('blocks', blocks);
-                images.sync(blocks);
+          <TabsContent value="config" className="mt-5 space-y-5">
+            <PageConfigFields
+              mode={mode}
+              page={page}
+              values={values}
+              slug={slug}
+              saving={saving}
+              touched={touched}
+              titleError={titleError}
+              slugError={slugError}
+              summaryError={summaryError}
+              menuOrderError={menuOrderError}
+              set={set}
+              setTitle={setTitle}
+              setSlug={setSlug}
+              patch={patch => {
+                setValues(prev => ({ ...prev, ...patch }));
+                setTouched(true);
+                setServerError(null);
               }}
-              disabled={saving}
             />
-          </PageImageSessionProvider>
 
-          <PageAccessField
-            visibility={values.visibility}
-            roles={values.roles}
-            onChange={(visibility, roles) => {
-              setValues(prev => ({ ...prev, visibility, roles }));
-              setTouched(true);
-              setServerError(null);
-            }}
-            disabled={saving}
-          />
-
-          <PageDisplayModeField
-            value={values.displayMode}
-            onChange={displayMode => {
-              setValues(prev => ({ ...prev, displayMode }));
-              setTouched(true);
-            }}
-            disabled={saving}
-          />
-
-          <label
-            htmlFor="admin-page-published"
-            className="flex cursor-pointer items-center gap-4 rounded-xl border border-border/50 px-3 py-3"
-          >
-            <span className="min-w-0 flex-1">
-              <span className="block text-body font-semibold text-foreground">
-                {t('pages.form.published')}
-              </span>
-              <span className="mt-0.5 block text-caption text-muted-foreground">
-                {t('pages.form.publishedHint')}
-              </span>
-            </span>
-            <Switch
-              id="admin-page-published"
-              checked={values.published}
-              onCheckedChange={checked => set('published', checked)}
-              disabled={saving}
-            />
-          </label>
-
-          <label
-            htmlFor="admin-page-seo-index"
-            className="flex cursor-pointer items-center gap-4 rounded-xl border border-border/50 px-3 py-3 has-[:disabled]:cursor-not-allowed"
-          >
-            <span className="min-w-0 flex-1">
-              <span className="block text-body font-semibold text-foreground">
-                {t('pages.form.seoIndex')}
-              </span>
-              <span className="mt-0.5 block text-caption text-muted-foreground">
-                {values.visibility === 'authenticated'
-                  ? t('pages.form.seoIndexPrivate')
-                  : values.seoIndex
-                    ? values.published
-                      ? t('pages.form.seoIndexHint')
-                      : t('pages.form.seoIndexDraftHint')
-                    : t('pages.form.seoIndexOffHint')}
-              </span>
-            </span>
-            <Switch
-              id="admin-page-seo-index"
-              checked={values.seoIndex && values.visibility !== 'authenticated'}
-              onCheckedChange={checked => set('seoIndex', checked)}
-              disabled={saving || values.visibility === 'authenticated'}
-            />
-          </label>
-
-          <div className="rounded-xl border border-border/50">
-            <label
-              htmlFor="admin-page-menu"
-              className="flex cursor-pointer items-center gap-4 px-3 py-3"
-            >
-              <span className="min-w-0 flex-1">
-                <span className="block text-body font-semibold text-foreground">
-                  {t('pages.form.showInMenu')}
-                </span>
-                <span className="mt-0.5 block text-caption text-muted-foreground">
-                  {values.published
-                    ? t('pages.form.showInMenuHint')
-                    : t('pages.form.showInMenuDraftHint')}
-                </span>
-              </span>
-              <Switch
-                id="admin-page-menu"
-                checked={values.showInMenu}
-                onCheckedChange={checked => set('showInMenu', checked)}
-                disabled={saving}
-              />
-            </label>
-            {values.showInMenu && (
-              <div className="flex items-center gap-4 border-t border-border/50 px-3 py-2.5">
-                <label
-                  htmlFor="admin-page-menu-order"
-                  className="min-w-0 flex-1 text-caption text-muted-foreground"
-                >
-                  {t('pages.form.menuOrder')}
-                </label>
-                <Input
-                  id="admin-page-menu-order"
-                  type="number"
-                  inputMode="numeric"
-                  step={1}
-                  min={SITE_PAGE_MENU_ORDER_MIN}
-                  max={SITE_PAGE_MENU_ORDER_MAX}
-                  value={Number.isNaN(values.menuOrder) ? '' : values.menuOrder}
-                  onChange={e =>
-                    set('menuOrder', e.target.value === '' ? 0 : Number(e.target.value))
-                  }
+            {page && (
+              <div className={showViewLink ? 'grid grid-cols-1 gap-3 pt-1 sm:grid-cols-2' : 'pt-1'}>
+                {showViewLink && (
+                  <Link
+                    to={sitePagePath(page.slug)}
+                    onClick={event => {
+                      // Unsaved changes → ask first, navigate after discarding.
+                      event.preventDefault();
+                      const to = sitePagePath(page.slug);
+                      requestClose(() => void navigate({ to }));
+                    }}
+                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-border/50 text-body font-bold transition-colors hover:bg-foreground/[0.04]"
+                  >
+                    <Eye className="size-4" aria-hidden="true" />
+                    {page.published ? t('pages.view') : t('pages.preview')}
+                  </Link>
+                )}
+                <Button
+                  type="button"
+                  onClick={() => setConfirmDelete(true)}
                   disabled={saving}
-                  aria-invalid={Boolean(menuOrderError)}
-                  className="h-10 w-24 rounded-lg text-right text-base tabular-nums sm:text-body"
-                />
+                  variant="destructive-outline"
+                  size="lg"
+                  fullWidth
+                >
+                  <Trash2 className="size-4" aria-hidden="true" />
+                  {t('pages.delete.action')}
+                </Button>
               </div>
             )}
-            {menuOrderError && (
-              <p role="alert" className="px-3 pb-2.5 text-caption text-destructive">
-                {menuOrderError}
-              </p>
-            )}
-          </div>
+          </TabsContent>
 
-          {page && (
-            <div className={showViewLink ? 'grid grid-cols-1 gap-3 pt-1 sm:grid-cols-2' : 'pt-1'}>
-              {showViewLink && (
-                <Link
-                  to={sitePagePath(page.slug)}
-                  onClick={event => {
-                    // Unsaved changes → ask first, navigate after discarding.
-                    event.preventDefault();
-                    const to = sitePagePath(page.slug);
-                    requestClose(() => void navigate({ to }));
-                  }}
-                  className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-border/50 text-body font-bold transition-colors hover:bg-foreground/[0.04]"
-                >
-                  <Eye className="size-4" aria-hidden="true" />
-                  {page.published ? t('pages.view') : t('pages.preview')}
-                </Link>
-              )}
-              <Button
-                type="button"
-                onClick={() => setConfirmDelete(true)}
+          <TabsContent value="blocks" className="mt-5">
+            <PageImageSessionProvider session={images}>
+              <AdminBlocksEditor
+                value={values.blocks}
+                onChange={blocks => {
+                  set('blocks', blocks);
+                  images.sync(blocks);
+                }}
                 disabled={saving}
-                variant="destructive-outline"
-                size="lg"
-                fullWidth
-              >
-                <Trash2 className="size-4" aria-hidden="true" />
-                {t('pages.delete.action')}
-              </Button>
-            </div>
-          )}
-        </div>
+              />
+            </PageImageSessionProvider>
+          </TabsContent>
+        </Tabs>
       )}
 
       <AlertDialog

@@ -8,6 +8,7 @@ import { SitePageHtml } from '../components/SitePageHtml';
 import { BlockLink } from './BlockLink';
 import { PageBlocksContext } from './blocks.context';
 import { CarouselBlock } from './CarouselBlock';
+import { ChartBlock } from './ChartBlock';
 import { CodeSnippetBlock } from './CodeBlockView';
 import { ColumnsBlock } from './ColumnsBlock';
 import { CompareBlock } from './CompareBlock';
@@ -15,6 +16,7 @@ import { ContactBlock, DownloadsBlock } from './ContactBlocks';
 import { EventBlock } from './EventBlock';
 import { HeroBlock } from './HeroBlock';
 import { blockWidthClass, isInsetBlock, SITE_PAGE_INSET } from './layout';
+import { MapBlock } from './MapBlock';
 import { CardsBlock, ImageBlock, SplitBlock } from './MediaBlocks';
 import { PricingBlock } from './PricingBlock';
 import { TimelineBlock } from './TimelineBlock';
@@ -550,6 +552,10 @@ export const SitePageBlockView: React.FC<{ block: PageBlock; first?: boolean }> 
       return <TimelineBlock data={block.data} />;
     case 'compare':
       return <CompareBlock data={block.data} />;
+    case 'chart':
+      return <ChartBlock data={block.data} />;
+    case 'map':
+      return <MapBlock data={block.data} />;
     case 'event':
       return <EventBlock data={block.data} />;
     case 'split':

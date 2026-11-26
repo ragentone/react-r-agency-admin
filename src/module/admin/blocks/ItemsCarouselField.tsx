@@ -15,7 +15,9 @@ const ROUND =
 
 /** Typing / buttons must not start a swipe (text selection, taps). */
 const noSwipeOnFields = (_api: CarouselApi, event: MouseEvent | TouchEvent) =>
-  !(event.target as HTMLElement | null)?.closest('input,textarea,button,label,[role=radio]');
+  !(event.target as HTMLElement | null)?.closest(
+    'input,textarea,button,label,[role=radio],[contenteditable=true]'
+  );
 
 interface IProps<T> {
   label: string;

@@ -1,12 +1,25 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { pageImageSrcSet } from './image.utils';
 import type { ITimelineBlockData } from './types';
 
 const SIZES = '(min-width: 768px) 640px, calc(100vw - 3rem)';
 
+const ISO_DAY = /^(\d{4})-(\d{2})-(\d{2})$/;
+
+/** `YYYY-MM-DD` → written out in the reader's language; older free text stays as it is. */
+const formatTimelineDate = (value: string, locale: string): string => {
+  const match = ISO_DAY.exec(value);
+  if (!match) return value;
+  const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat(locale, { dateStyle: 'long' }).format(date);
+};
+
 /** Vertical time line: a line with a dot per entry, date above the title, optional image. */
 export const TimelineBlock: React.FC<{ data: ITimelineBlockData }> = ({ data }) => {
+  const { i18n } = useTranslation('admin');
   const items = data.items.filter(item => item.date || item.title || item.text || item.imageUrl);
   if (!items.length) return null;
   return (
@@ -23,7 +36,7 @@ export const TimelineBlock: React.FC<{ data: ITimelineBlockData }> = ({ data }) 
               />
               {item.date && (
                 <p className="text-caption font-semibold text-muted-foreground tabular-nums">
-                  {item.date}
+                  {formatTimelineDate(item.date, i18n.language)}
                 </p>
               )}
               {item.title && <h3 className="text-lg font-bold tracking-tight">{item.title}</h3>}

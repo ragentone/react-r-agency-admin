@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { TextEditor } from './BlockEditors.shared';
 import { DateTimeField, ItemsField, TextAreaField, TextField, UrlField } from './BlockFields';
+import { ItemsCarouselField } from './ItemsCarouselField';
 import {
   emptyStat,
   emptyStep,
@@ -126,7 +127,7 @@ export const TabsEditor: React.FC<EditorProps<'tabs'>> = ({ data, onChange, disa
         max={150}
         disabled={disabled}
       />
-      <ItemsField
+      <ItemsCarouselField
         label={t('blocks.tabs.items')}
         items={data.items}
         onChange={set('items')}

@@ -13,6 +13,7 @@ import {
   UrlField,
 } from './BlockFields';
 import { CarouselBlockEditor } from './CarouselBlockEditor';
+import { ChartBlockEditor } from './ChartBlockEditor';
 import { CodeBlockEditor } from './CodeBlockEditor';
 import { ColumnsEditor } from './ColumnsBlockEditor';
 import { CompareBlockEditor } from './CompareBlockEditor';
@@ -21,6 +22,7 @@ import { EventBlockEditor } from './EventBlockEditor';
 import { HeroEditor } from './HeroBlockEditor';
 import { ImageField } from './ImageField';
 import { CountdownEditor, StatsEditor, StepsEditor, TabsEditor } from './LayoutBlockEditors';
+import { MapBlockEditor } from './MapBlockEditor';
 import { CardsBlockEditor, ImageBlockEditor, SplitBlockEditor } from './MediaBlockEditors';
 import { PricingBlockEditor } from './PricingBlockEditor';
 import { TableEditor } from './TableBlockEditor';
@@ -467,6 +469,22 @@ export const BlockEditor: React.FC<{
     case 'timeline':
       return (
         <TimelineBlockEditor
+          {...props}
+          data={block.data}
+          onChange={data => onChange({ ...block, data })}
+        />
+      );
+    case 'chart':
+      return (
+        <ChartBlockEditor
+          {...props}
+          data={block.data}
+          onChange={data => onChange({ ...block, data })}
+        />
+      );
+    case 'map':
+      return (
+        <MapBlockEditor
           {...props}
           data={block.data}
           onChange={data => onChange({ ...block, data })}

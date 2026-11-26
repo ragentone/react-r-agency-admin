@@ -1,8 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ItemsField, TextAreaField, TextField } from './BlockFields';
+import { TextAreaField, TextField } from './BlockFields';
 import { CropImageField } from './CropImageField';
+import { DayField } from './DayField';
+import { ItemsCarouselField } from './ItemsCarouselField';
 import { AltField } from './MediaBlockEditors';
 import { emptyMilestone, type ITimelineBlockData, SITE_PAGE_TIMELINE_MAX } from './types';
 
@@ -24,7 +26,7 @@ export const TimelineBlockEditor: React.FC<IProps> = ({ data, onChange, disabled
         max={150}
         disabled={disabled}
       />
-      <ItemsField
+      <ItemsCarouselField
         label={t('blocks.timeline.items')}
         items={data.items}
         onChange={items => onChange({ ...data, items })}
@@ -37,13 +39,11 @@ export const TimelineBlockEditor: React.FC<IProps> = ({ data, onChange, disabled
         disabled={disabled}
         render={(item, update) => (
           <>
-            <TextField
+            <DayField
               label={t('blocks.timeline.date')}
               hint={t('blocks.timeline.dateHint')}
               value={item.date}
               onChange={date => update({ ...item, date })}
-              max={40}
-              placeholder="März 2025"
               disabled={disabled}
             />
             <TextField
