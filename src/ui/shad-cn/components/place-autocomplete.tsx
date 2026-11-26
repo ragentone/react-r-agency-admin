@@ -69,7 +69,7 @@ interface PlaceSearchOptions {
 interface PlaceAutocompleteProps
   extends
     Omit<PlaceSearchOptions, 'query'>,
-    Omit<React.ComponentProps<'input'>, 'value' | 'onChange'> {
+    Omit<React.ComponentProps<'input'>, 'value' | 'onChange' | 'size'> {
   debounceMs?: number;
   value?: string;
   defaultValue?: string;
@@ -281,15 +281,14 @@ function PlaceAutocomplete({
     <Command className={cn('h-fit overflow-visible', className)} shouldFilter={false} loop>
       <div className="relative">
         <InputGroup
-          className={cn(
-            'shadow-none border-input! bg-popover! ring-0!',
-            showCommandList && 'rounded-b-none'
-          )}
+          // Same look as the other inputs: 44 px touch height, rounded-xl, input border + focus ring.
+          className={cn('h-11 rounded-xl bg-transparent', showCommandList && 'rounded-b-none')}
         >
           <InputGroupAddon>
             <SearchIcon />
           </InputGroupAddon>
           <InputGroupInput
+            className="h-full text-base sm:text-body"
             placeholder="Search"
             value={displayValue}
             onChange={event => {
@@ -312,7 +311,7 @@ function PlaceAutocomplete({
           <CommandList
             data-state={showCommandList ? 'open' : 'closed'}
             className={cn(
-              'bg-popover border-input absolute top-full right-0 left-0 rounded-b-md border border-t-0 shadow-md',
+              'absolute top-full right-0 left-0 z-50 rounded-b-xl border border-t-0 border-border/50 bg-popover p-1 shadow-md',
               'data-[state=open]:animate-in data-[state=closed]:animate-out',
               'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
               'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
@@ -327,6 +326,7 @@ function PlaceAutocomplete({
                   const formattedAddress = formatAddress(feature.properties);
                   return (
                     <CommandItem
+                      className="min-h-11 rounded-lg px-2.5"
                       key={feature.properties.osm_id}
                       value={String(feature.properties.osm_id)}
                       onSelect={() => {
@@ -343,10 +343,12 @@ function PlaceAutocomplete({
                     >
                       <MapPinIcon />
                       <div className="flex flex-col items-start text-start">
-                        <span className="font-medium">
+                        <span className="text-body font-semibold">
                           {feature.properties.name || feature.properties.street || 'Unknown'}
                         </span>
-                        <span className="text-muted-foreground text-xs">{formattedAddress}</span>
+                        <span className="text-caption text-muted-foreground">
+                          {formattedAddress}
+                        </span>
                       </div>
                     </CommandItem>
                   );

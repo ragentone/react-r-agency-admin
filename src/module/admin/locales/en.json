@@ -392,6 +392,22 @@
       "carousel": {
         "label": "Carousel",
         "description": "Swipeable images"
+      },
+      "compare": {
+        "label": "Before / after",
+        "description": "Two images with a slider"
+      },
+      "event": {
+        "label": "Event",
+        "description": "Date, place and calendar download"
+      },
+      "pricing": {
+        "label": "Pricing",
+        "description": "Plans with price, points and button"
+      },
+      "timeline": {
+        "label": "Timeline",
+        "description": "Events with date, text and image"
       }
     },
     "field": {
@@ -639,7 +655,7 @@
       "phone": "Phone",
       "email": "Email",
       "address": "Address",
-      "addressHint": "Several lines allowed. Tapping opens the map (OpenStreetMap).",
+      "addressHint": "Suggestions while typing (OpenStreetMap). Tapping the block opens the map.",
       "hours": "Opening hours",
       "hoursHint": "Free text, e.g. \"Mon–Fri 9am–6pm\"."
     },
@@ -726,6 +742,59 @@
       "action": "Crop",
       "description": "Format {{ratio}} – every image gets the same format. Only the cropped part is uploaded.",
       "apply": "Crop & upload"
+    },
+    "compare": {
+      "before": "Before",
+      "after": "After",
+      "slider": "Compare {{before}} / {{after}}: move the divider",
+      "beforeImage": "“Before” image",
+      "afterImage": "“After” image",
+      "beforeLabel": "“Before” label",
+      "afterLabel": "“After” label",
+      "labelHint": "Empty = “Before” / “After”.",
+      "start": "Start position of the divider"
+    },
+    "event": {
+      "addToCalendar": "Add to calendar",
+      "over": "Past",
+      "start": "Start",
+      "allDay": "All day",
+      "allDayHint": "Shows the day only, without a time.",
+      "hasEnd": "With end",
+      "end": "End",
+      "endInvalid": "The end must be after the start.",
+      "location": "Place",
+      "locationHint": "Suggestions while typing (OpenStreetMap). Tapping the block opens the map."
+    },
+    "place": {
+      "placeholder": "Search place or address …"
+    },
+    "pricing": {
+      "items": "Plans",
+      "item": "Plan",
+      "add": "Add plan",
+      "name": "Name",
+      "price": "Price",
+      "priceHint": "Amount, e.g. 9.90. 0 reads “Free”.",
+      "period": "Period (optional)",
+      "features": "Features",
+      "featuresHint": "Best as a bullet list (list button in the toolbar).",
+      "highlight": "Recommended (highlight)",
+      "badge": "Label",
+      "badgePlaceholder": "Popular",
+      "free": "Free",
+      "from": "from",
+      "showPrice": "Show price",
+      "currency": "Currency",
+      "fromHint": "Shows “from €9.90”.",
+      "description": "Description"
+    },
+    "timeline": {
+      "items": "Entries",
+      "item": "Entry",
+      "add": "Add entry",
+      "date": "Date",
+      "dateHint": "Free text, e.g. “2024”, “March 2025” or “Q3”."
     }
   },
   "stats": {

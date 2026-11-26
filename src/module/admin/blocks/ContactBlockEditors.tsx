@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { formatFileSize } from '../hooks/use.admin.page.file';
 import { ItemsField, TextAreaField, TextField } from './BlockFields';
 import { FileField } from './FileField';
+import { PlaceField } from './PlaceField';
 import {
   emptyDownload,
   type ISitePageBlockDataMap,
@@ -48,7 +49,7 @@ export const ContactEditor: React.FC<EditorProps<'contact'>> = ({ data, onChange
         placeholder="info@example.de"
         disabled={disabled}
       />
-      <TextAreaField
+      <PlaceField
         label={t('blocks.contact.address')}
         value={data.address}
         onChange={set('address')}

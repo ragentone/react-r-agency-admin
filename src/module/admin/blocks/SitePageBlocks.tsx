@@ -10,10 +10,14 @@ import { PageBlocksContext } from './blocks.context';
 import { CarouselBlock } from './CarouselBlock';
 import { CodeSnippetBlock } from './CodeBlockView';
 import { ColumnsBlock } from './ColumnsBlock';
+import { CompareBlock } from './CompareBlock';
 import { ContactBlock, DownloadsBlock } from './ContactBlocks';
+import { EventBlock } from './EventBlock';
 import { HeroBlock } from './HeroBlock';
 import { isFullWidthBlock, isInsetBlock, SITE_PAGE_COLUMN, SITE_PAGE_INSET } from './layout';
 import { CardsBlock, ImageBlock, SplitBlock } from './MediaBlocks';
+import { PricingBlock } from './PricingBlock';
+import { TimelineBlock } from './TimelineBlock';
 import { TocBlock } from './TocBlock';
 import {
   type IAppBlock,
@@ -540,6 +544,14 @@ export const SitePageBlockView: React.FC<{ block: PageBlock; first?: boolean }> 
       return <ImageBlock data={block.data} first={first} />;
     case 'carousel':
       return <CarouselBlock data={block.data} first={first} />;
+    case 'pricing':
+      return <PricingBlock data={block.data} />;
+    case 'timeline':
+      return <TimelineBlock data={block.data} />;
+    case 'compare':
+      return <CompareBlock data={block.data} />;
+    case 'event':
+      return <EventBlock data={block.data} />;
     case 'split':
       return <SplitBlock data={block.data} first={first} />;
     case 'cards':

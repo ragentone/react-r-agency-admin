@@ -392,6 +392,22 @@
       "carousel": {
         "label": "Karussell",
         "description": "Bilder zum Wischen"
+      },
+      "compare": {
+        "label": "Vorher / Nachher",
+        "description": "Zwei Bilder mit Schieberegler"
+      },
+      "event": {
+        "label": "Termin",
+        "description": "Datum, Ort und Kalender-Download"
+      },
+      "pricing": {
+        "label": "Preise",
+        "description": "Pläne mit Preis, Punkten und Button"
+      },
+      "timeline": {
+        "label": "Zeitstrahl",
+        "description": "Ereignisse mit Datum, Text und Bild"
       }
     },
     "field": {
@@ -639,7 +655,7 @@
       "phone": "Telefon",
       "email": "E-Mail",
       "address": "Adresse",
-      "addressHint": "Mehrzeilig möglich. Antippen öffnet die Karte (OpenStreetMap).",
+      "addressHint": "Vorschläge beim Tippen (OpenStreetMap). Antippen im Block öffnet die Karte.",
       "hours": "Öffnungszeiten",
       "hoursHint": "Freier Text, z. B. „Mo–Fr 9–18 Uhr“."
     },
@@ -726,6 +742,59 @@
       "action": "Zuschneiden",
       "description": "Format {{ratio}} – alle Bilder bekommen dasselbe Format. Nur der Ausschnitt wird hochgeladen.",
       "apply": "Zuschneiden & hochladen"
+    },
+    "compare": {
+      "before": "Vorher",
+      "after": "Nachher",
+      "slider": "Vergleich {{before}} / {{after}}: Trennlinie verschieben",
+      "beforeImage": "Bild „Vorher“",
+      "afterImage": "Bild „Nachher“",
+      "beforeLabel": "Beschriftung „Vorher“",
+      "afterLabel": "Beschriftung „Nachher“",
+      "labelHint": "Leer = „Vorher“ bzw. „Nachher“.",
+      "start": "Startposition der Trennlinie"
+    },
+    "event": {
+      "addToCalendar": "Zum Kalender hinzufügen",
+      "over": "Vorbei",
+      "start": "Beginn",
+      "allDay": "Ganztägig",
+      "allDayHint": "Zeigt nur den Tag, ohne Uhrzeit.",
+      "hasEnd": "Mit Ende",
+      "end": "Ende",
+      "endInvalid": "Das Ende muss nach dem Beginn liegen.",
+      "location": "Ort",
+      "locationHint": "Vorschläge beim Tippen (OpenStreetMap). Antippen im Block öffnet die Karte."
+    },
+    "place": {
+      "placeholder": "Ort oder Adresse suchen …"
+    },
+    "pricing": {
+      "items": "Pläne",
+      "item": "Plan",
+      "add": "Plan hinzufügen",
+      "name": "Name",
+      "price": "Preis",
+      "priceHint": "Betrag, z. B. 9,90. Bei 0 steht „Kostenlos“.",
+      "period": "Zeitraum (optional)",
+      "features": "Leistungen",
+      "featuresHint": "Am besten als Aufzählung (Listen-Button in der Leiste).",
+      "highlight": "Empfohlen (hervorheben)",
+      "badge": "Beschriftung",
+      "badgePlaceholder": "Beliebt",
+      "free": "Kostenlos",
+      "from": "ab",
+      "showPrice": "Preis anzeigen",
+      "currency": "Währung",
+      "fromHint": "Zeigt „ab 9,90 €“.",
+      "description": "Beschreibung"
+    },
+    "timeline": {
+      "items": "Einträge",
+      "item": "Eintrag",
+      "add": "Eintrag hinzufügen",
+      "date": "Datum",
+      "dateHint": "Freier Text, z. B. „2024“, „März 2025“ oder „Q3“."
     }
   },
   "stats": {

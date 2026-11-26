@@ -1,6 +1,9 @@
 import { PageBlockManager } from '@core/blocks/manager.ts';
 import {
+  ArrowLeftRight,
   CalendarClock,
+  CalendarDays,
+  CircleDollarSign,
   Code2,
   Columns2,
   Columns3,
@@ -16,6 +19,7 @@ import {
   ListCollapse,
   ListTree,
   Megaphone,
+  Milestone,
   PanelsTopLeft,
   Quote,
   SeparatorHorizontal,
@@ -40,6 +44,10 @@ export const BLOCK_ICONS: Record<SitePageBlockType, typeof Type> = {
   quote: Quote,
   video: Youtube,
   carousel: GalleryHorizontal,
+  compare: ArrowLeftRight,
+  pricing: CircleDollarSign,
+  timeline: Milestone,
+  event: CalendarDays,
   divider: SeparatorHorizontal,
   stats: Gauge,
   steps: Footprints,
@@ -101,6 +109,26 @@ export const blockSummary = (block: PageBlock): string => {
       return block.data.author || block.data.text;
     case 'video':
       return block.data.caption || block.data.url;
+    case 'pricing':
+      return (
+        block.data.title ||
+        block.data.items
+          .map(plan => plan.name)
+          .filter(Boolean)
+          .join(' · ')
+      );
+    case 'timeline':
+      return (
+        block.data.title ||
+        block.data.items
+          .map(item => item.date || item.title)
+          .filter(Boolean)
+          .join(' → ')
+      );
+    case 'compare':
+      return block.data.title || block.data.caption;
+    case 'event':
+      return block.data.title || block.data.location;
     case 'carousel':
       return (
         block.data.title ||

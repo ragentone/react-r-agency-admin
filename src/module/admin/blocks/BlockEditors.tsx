@@ -15,12 +15,16 @@ import {
 import { CarouselBlockEditor } from './CarouselBlockEditor';
 import { CodeBlockEditor } from './CodeBlockEditor';
 import { ColumnsEditor } from './ColumnsBlockEditor';
+import { CompareBlockEditor } from './CompareBlockEditor';
 import { ContactEditor, DownloadsEditor } from './ContactBlockEditors';
+import { EventBlockEditor } from './EventBlockEditor';
 import { HeroEditor } from './HeroBlockEditor';
 import { ImageField } from './ImageField';
 import { CountdownEditor, StatsEditor, StepsEditor, TabsEditor } from './LayoutBlockEditors';
 import { CardsBlockEditor, ImageBlockEditor, SplitBlockEditor } from './MediaBlockEditors';
+import { PricingBlockEditor } from './PricingBlockEditor';
 import { TableEditor } from './TableBlockEditor';
+import { TimelineBlockEditor } from './TimelineBlockEditor';
 import { TocEditor } from './TocBlockEditor';
 import {
   emptyFaqItem,
@@ -451,6 +455,38 @@ export const BlockEditor: React.FC<{
     case 'table':
       return (
         <TableEditor {...props} data={block.data} onChange={data => onChange({ ...block, data })} />
+      );
+    case 'pricing':
+      return (
+        <PricingBlockEditor
+          {...props}
+          data={block.data}
+          onChange={data => onChange({ ...block, data })}
+        />
+      );
+    case 'timeline':
+      return (
+        <TimelineBlockEditor
+          {...props}
+          data={block.data}
+          onChange={data => onChange({ ...block, data })}
+        />
+      );
+    case 'compare':
+      return (
+        <CompareBlockEditor
+          {...props}
+          data={block.data}
+          onChange={data => onChange({ ...block, data })}
+        />
+      );
+    case 'event':
+      return (
+        <EventBlockEditor
+          {...props}
+          data={block.data}
+          onChange={data => onChange({ ...block, data })}
+        />
       );
     case 'countdown':
       return (

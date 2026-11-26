@@ -9,13 +9,17 @@ export const TextEditor: React.FC<{
   data: ITextBlockData;
   onChange: (data: ITextBlockData) => void;
   disabled?: boolean;
-}> = ({ data, onChange, disabled }) => {
+  /** Default: "Text". */
+  label?: string;
+  hint?: string;
+  minHeight?: number;
+}> = ({ data, onChange, disabled, label, hint, minHeight = 180 }) => {
   const { t } = useTranslation('admin');
   const id = useId();
   return (
     <div>
       <label htmlFor={id} className="mb-1.5 block text-caption font-medium text-foreground">
-        {t('blocks.field.text')}
+        {label ?? t('blocks.field.text')}
       </label>
       <HtmlEditor
         id={id}
@@ -33,10 +37,11 @@ export const TextEditor: React.FC<{
           horizontalRule: true,
         }}
         editable={!disabled}
-        minHeight={180}
+        minHeight={minHeight}
         stickyToolbar
         className="rounded-xl"
       />
+      {hint && <p className="mt-1 text-caption text-muted-foreground">{hint}</p>}
     </div>
   );
 };

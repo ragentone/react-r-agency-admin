@@ -287,6 +287,76 @@ export interface ITocBlockData {
   numbered: boolean;
 }
 
+export const PLAN_CURRENCIES = ['EUR', 'USD', 'GBP', 'CHF'] as const;
+export type PlanCurrency = (typeof PLAN_CURRENCIES)[number];
+
+export interface IPlanItem {
+  name: string;
+  /** Off = no price shown (e.g. "on request"). */
+  showPrice: boolean;
+  /** Amount in `currency` – 0 reads "Free". */
+  price: number;
+  currency: PlanCurrency;
+  /** Adds "from" before the price. */
+  from: boolean;
+  /** "/ Monat" – '' = none. */
+  period: string;
+  description: string;
+  /** One point per line. */
+  features: string;
+  /** Recommended plan – emphasised, with `badge`. */
+  highlight: boolean;
+  badge: string;
+  buttonLabel: string;
+  buttonUrl: string;
+}
+
+export interface IPricingBlockData {
+  title: string;
+  items: IPlanItem[];
+}
+
+export interface ITimelineItem {
+  /** Free text ("2024", "März 2025", "Q3"). */
+  date: string;
+  title: string;
+  text: string;
+  imageUrl: string;
+  alt: string;
+}
+
+export interface ITimelineBlockData {
+  title: string;
+  items: ITimelineItem[];
+}
+
+export interface ICompareBlockData {
+  title: string;
+  beforeUrl: string;
+  afterUrl: string;
+  /** '' = default text ("Before" / "After"). */
+  beforeLabel: string;
+  afterLabel: string;
+  alt: string;
+  caption: string;
+  ratio: CarouselRatio;
+  /** Start position of the divider in percent. */
+  start: number;
+}
+
+export interface IEventBlockData {
+  title: string;
+  /** ISO date with time zone. */
+  start: string;
+  /** ISO date, '' = no end. */
+  end: string;
+  allDay: boolean;
+  location: string;
+  text: string;
+  buttonLabel: string;
+  buttonUrl: string;
+}
+
 export interface ISitePageBlockDataMap {
   hero: IHeroBlockData;
   text: ITextBlockData;
@@ -300,6 +370,10 @@ export interface ISitePageBlockDataMap {
   code: ICodeBlockData;
   video: IVideoBlockData;
   carousel: ICarouselBlockData;
+  compare: ICompareBlockData;
+  pricing: IPricingBlockData;
+  timeline: ITimelineBlockData;
+  event: IEventBlockData;
   divider: IDividerBlockData;
   stats: IStatsBlockData;
   steps: IStepsBlockData;
@@ -360,11 +434,14 @@ export const SITE_PAGE_BLOCK_TYPES: SitePageBlockType[] = [
   'text',
   'image',
   'carousel',
+  'compare',
   'split',
   'columns',
   'cards',
+  'pricing',
   'stats',
   'steps',
+  'timeline',
   'cta',
   'notice',
   'faq',
@@ -375,6 +452,7 @@ export const SITE_PAGE_BLOCK_TYPES: SitePageBlockType[] = [
   'quote',
   'video',
   'countdown',
+  'event',
   'divider',
   'code',
 ];
@@ -390,6 +468,8 @@ export const SITE_PAGE_TABLE_COLUMNS_MAX = 6;
 export const SITE_PAGE_TABLE_ROWS_MAX = 50;
 export const SITE_PAGE_DOWNLOADS_MAX = 20;
 export const SITE_PAGE_COLUMNS_MAX = 3;
+export const SITE_PAGE_PLANS_MAX = 3;
+export const SITE_PAGE_TIMELINE_MAX = 20;
 export const SITE_PAGE_CAROUSEL_MAX = 12;
 
 export const TABLE_CELL_KEYS = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6'] as const;
@@ -400,6 +480,27 @@ export const emptyStep = (): IStepItem => ({ title: '', text: '' });
 export const emptyTab = (): ITabItem => ({ label: '', html: '' });
 export const emptyTableRow = (): ITableRow => ({ c1: '', c2: '', c3: '', c4: '', c5: '', c6: '' });
 export const emptySlide = (): ICarouselItem => ({ imageUrl: '', alt: '', caption: '' });
+export const emptyPlan = (): IPlanItem => ({
+  name: '',
+  showPrice: true,
+  price: 0,
+  currency: 'EUR',
+  from: false,
+  period: '',
+  description: '',
+  features: '',
+  highlight: false,
+  badge: '',
+  buttonLabel: '',
+  buttonUrl: '',
+});
+export const emptyMilestone = (): ITimelineItem => ({
+  date: '',
+  title: '',
+  text: '',
+  imageUrl: '',
+  alt: '',
+});
 export const emptyColumn = (): IColumnItem => ({ html: '' });
 export const emptyDownload = (): IDownloadItem => ({ label: '', url: '', size: '', note: '' });
 export const emptyTableColumn = (): ITableColumn => ({ label: '', align: 'left' });
@@ -488,6 +589,29 @@ const DEFAULTS: { [T in SitePageBlockType]: () => ISitePageBlockDataMap[T] } = {
     wide: false,
     items: [emptySlide(), emptySlide()],
   }),
+  compare: () => ({
+    title: '',
+    beforeUrl: '',
+    afterUrl: '',
+    beforeLabel: '',
+    afterLabel: '',
+    alt: '',
+    caption: '',
+    ratio: '16/9',
+    start: 50,
+  }),
+  event: () => ({
+    title: '',
+    start: inOneWeek(),
+    end: '',
+    allDay: false,
+    location: '',
+    text: '',
+    buttonLabel: '',
+    buttonUrl: '',
+  }),
+  pricing: () => ({ title: '', items: [emptyPlan(), emptyPlan()] }),
+  timeline: () => ({ title: '', items: [emptyMilestone(), emptyMilestone()] }),
   divider: () => ({ variant: 'line', size: 'md' }),
   code: () => ({ title: '', language: 'plain', code: '' }),
   contact: () => ({ title: '', phone: '', email: '', address: '', hours: '' }),
@@ -544,6 +668,14 @@ export const normalizeBlock = (block: PageBlock): PageBlock => {
       ...emptyCard(),
       ...item,
     }));
+  }
+  if (block.type === 'pricing' || block.type === 'timeline') {
+    const list = data as IPricingBlockData | ITimelineBlockData;
+    const empty = block.type === 'pricing' ? emptyPlan : emptyMilestone;
+    list.items = (Array.isArray(list.items) ? list.items : []).map(item => ({
+      ...empty(),
+      ...item,
+    })) as typeof list.items;
   }
   if (block.type === 'carousel') {
     const carousel = data as ICarouselBlockData;
