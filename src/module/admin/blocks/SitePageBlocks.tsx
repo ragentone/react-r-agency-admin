@@ -15,7 +15,7 @@ import { CompareBlock } from './CompareBlock';
 import { ContactBlock, DownloadsBlock } from './ContactBlocks';
 import { EventBlock } from './EventBlock';
 import { HeroBlock } from './HeroBlock';
-import { blockWidthClass, isInsetBlock, SITE_PAGE_INSET } from './layout';
+import { blockBandClass, blockWidthClass, isInsetBlock, SITE_PAGE_INSET } from './layout';
 import { MapBlock } from './MapBlock';
 import { CardsBlock, ImageBlock, SplitBlock } from './MediaBlocks';
 import { PricingBlock } from './PricingBlock';
@@ -611,17 +611,18 @@ export const SitePageBlocks: React.FC<{ blocks: PageBlock[]; className?: string 
     <PageBlocksContext.Provider value={context}>
       <div data-slot="site-page-blocks" className={cn('flex flex-col gap-8', className)}>
         {blocks.map((block, index) => (
-          <div
-            key={block.id}
-            data-block={block.type}
-            className={cn(
-              'min-w-0',
-              blockWidthClass(block),
-              isInsetBlock(block) && SITE_PAGE_INSET,
-              isInsetBlock(block) && index === 0 && 'pt-3 sm:pt-6'
-            )}
-          >
-            <SitePageBlockView block={block} first={index === 0} />
+          <div key={block.id} className={blockBandClass(block) || undefined}>
+            <div
+              data-block={block.type}
+              className={cn(
+                'min-w-0',
+                blockWidthClass(block),
+                isInsetBlock(block) && SITE_PAGE_INSET,
+                isInsetBlock(block) && index === 0 && 'pt-3 sm:pt-6'
+              )}
+            >
+              <SitePageBlockView block={block} first={index === 0} />
+            </div>
           </div>
         ))}
       </div>

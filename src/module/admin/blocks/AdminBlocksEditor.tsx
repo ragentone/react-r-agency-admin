@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { BlockAccessBadge } from './BlockAccessBadge';
 import { BlockAccessField } from './BlockAccessField';
 import { BlockAnchorField } from './BlockAnchorField';
+import { BlockBackgroundField } from './BlockBackgroundField';
 import { BlockEditor } from './BlockEditors';
 import { BlockWidthField } from './BlockWidthField';
 import { BLOCK_ICONS, blockIcon, blockLabel, blockSummary } from './meta';
@@ -272,6 +273,7 @@ export const AdminBlocksEditor: React.FC<IAdminBlocksEditorProps> = ({
                     <BlockEditor block={block} onChange={update} disabled={disabled} />
                     <BlockAccessField block={block} onChange={update} disabled={disabled} />
                     <BlockWidthField block={block} onChange={update} disabled={disabled} />
+                    <BlockBackgroundField block={block} onChange={update} disabled={disabled} />
                     <BlockAnchorField
                       block={block}
                       taken={value

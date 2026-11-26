@@ -822,6 +822,13 @@
       "add": "Datenpunkt hinzufügen",
       "label": "Beschriftung",
       "value": "Wert"
+    },
+    "background": {
+      "label": "Hintergrund",
+      "default": "Standard",
+      "muted": "Gedämpft (Muted)",
+      "inverted": "Invertiert",
+      "hint": "Randloses Band hinter dem Block. Invertiert: dunkel auf hellen Seiten, hell auf dunklen."
     }
   },
   "stats": {

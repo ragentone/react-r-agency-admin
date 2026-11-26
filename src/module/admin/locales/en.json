@@ -822,6 +822,13 @@
       "add": "Add data point",
       "label": "Label",
       "value": "Value"
+    },
+    "background": {
+      "label": "Background",
+      "default": "Default",
+      "muted": "Muted",
+      "inverted": "Inverted",
+      "hint": "Edge-to-edge band behind the block. Inverted: dark on light pages, light on dark pages."
     }
   },
   "stats": {

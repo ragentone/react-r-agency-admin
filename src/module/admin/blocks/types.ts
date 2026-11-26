@@ -441,6 +441,10 @@ export interface IBlockAccess {
 export const SITE_PAGE_BLOCK_WIDTHS = ['column', 'wide', 'full'] as const;
 export type SitePageBlockWidth = (typeof SITE_PAGE_BLOCK_WIDTHS)[number];
 
+/** Background band of a block (same as the backend) – missing = page background. */
+export const SITE_PAGE_BLOCK_BACKGROUNDS = ['muted', 'inverted'] as const;
+export type SitePageBlockBackground = (typeof SITE_PAGE_BLOCK_BACKGROUNDS)[number];
+
 export type SitePageBlockOf<T extends SitePageBlockType> = {
   id: string;
   type: T;
@@ -451,6 +455,7 @@ export type SitePageBlockOf<T extends SitePageBlockType> = {
   anchor?: string;
   /** Missing = default of the block type. */
   width?: SitePageBlockWidth;
+  background?: SitePageBlockBackground;
 };
 
 export type SitePageBlock = { [T in SitePageBlockType]: SitePageBlockOf<T> }[SitePageBlockType];
@@ -464,6 +469,7 @@ export interface IAppBlock {
   anchor?: string;
   /** Missing = default of the block type. */
   width?: SitePageBlockWidth;
+  background?: SitePageBlockBackground;
 }
 
 /** Same rule as the backend: lower case letter first, then letters, digits, dashes. */

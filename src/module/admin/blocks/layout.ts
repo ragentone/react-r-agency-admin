@@ -30,3 +30,13 @@ export const blockWidthClass = (block: PageBlock): string => {
   if (width === 'column') return SITE_PAGE_COLUMN;
   return isFullWidthBlock(block) ? 'w-full' : 'w-full px-4 sm:px-6';
 };
+
+/**
+ * Background band of a block (edge to edge, the content keeps its column). `-my-4` takes back
+ * half of the gap between blocks so that neighbouring bands touch. The banner never gets one.
+ */
+export const blockBandClass = (block: PageBlock): string => {
+  if (!block.background || (!isAppBlock(block) && block.type === 'hero')) return '';
+  const band = '-my-4 w-full py-12 sm:py-14 bg-background text-foreground';
+  return block.background === 'inverted' ? `${band} site-band-inverted` : `${band} bg-muted/60`;
+};
