@@ -715,7 +715,11 @@
       "autoplayHint": "Pausiert beim Berühren, bei Mauszeiger und mit „Bewegung reduzieren“.",
       "interval": "Sekunden pro Bild",
       "rounded": "Abgerundete Ecken",
-      "wide": "Volle Breite auf dem Handy"
+      "wide": "Volle Breite auf dem Handy",
+      "prev": "Zurück",
+      "next": "Weiter",
+      "moveLeft": "Nach links",
+      "moveRight": "Nach rechts"
     },
     "crop": {
       "title": "Bild {{current}} von {{total}} zuschneiden",

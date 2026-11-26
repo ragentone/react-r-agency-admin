@@ -715,7 +715,11 @@
       "autoplayHint": "Pauses on touch, on hover and with “reduce motion”.",
       "interval": "Seconds per image",
       "rounded": "Rounded corners",
-      "wide": "Full width on phones"
+      "wide": "Full width on phones",
+      "prev": "Previous",
+      "next": "Next",
+      "moveLeft": "Move left",
+      "moveRight": "Move right"
     },
     "crop": {
       "title": "Crop image {{current}} of {{total}}",

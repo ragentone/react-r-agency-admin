@@ -4,11 +4,9 @@ import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { SITE_PAGE_IMAGE_ACCEPT } from '../hooks/use.admin.page.image';
-import { ItemsField, TextField } from './BlockFields';
+import { TextField } from './BlockFields';
 import { CarouselSettings } from './CarouselSettings';
-import { CropImageField } from './CropImageField';
-import { RATIO_CLASS } from './image.utils';
-import { AltField } from './MediaBlockEditors';
+import { CarouselSlidesField } from './CarouselSlidesField';
 import { emptySlide, type ICarouselBlockData, SITE_PAGE_CAROUSEL_MAX } from './types';
 import { useCropImage } from './useCropImage';
 
@@ -75,43 +73,8 @@ export const CarouselBlockEditor: React.FC<IProps> = ({ data, onChange, disabled
         <p className="mt-1 text-caption text-muted-foreground">{t('blocks.carousel.hint')}</p>
       </div>
       {dialog}
+      <CarouselSlidesField data={data} onChange={onChange} disabled={locked} />
       <CarouselSettings data={data} onChange={onChange} disabled={locked} />
-      <ItemsField
-        label={t('blocks.carousel.items')}
-        items={data.items}
-        onChange={items => onChange({ ...data, items })}
-        create={emptySlide}
-        max={SITE_PAGE_CAROUSEL_MAX}
-        title={(item, index) => item.caption || `${t('blocks.carousel.item')} ${index + 1}`}
-        addLabel={t('blocks.carousel.add')}
-        disabled={locked}
-        render={(item, update) => (
-          <>
-            <CropImageField
-              label={t('blocks.field.image')}
-              value={item.imageUrl}
-              onChange={imageUrl => update({ ...item, imageUrl })}
-              ratio={data.ratio}
-              aspect={RATIO_CLASS[data.ratio]}
-              disabled={locked}
-            />
-            {item.imageUrl && (
-              <AltField
-                value={item.alt}
-                onChange={alt => update({ ...item, alt })}
-                disabled={locked}
-              />
-            )}
-            <TextField
-              label={t('blocks.field.caption')}
-              value={item.caption}
-              onChange={caption => update({ ...item, caption })}
-              max={200}
-              disabled={locked}
-            />
-          </>
-        )}
-      />
     </>
   );
 };

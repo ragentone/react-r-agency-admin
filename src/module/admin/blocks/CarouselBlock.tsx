@@ -7,12 +7,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@ui/shad-cn/components/carousel';
-import React, { useCallback, useState, useSyncExternalStore } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { pageImageSrcSet, RATIO_CLASS } from './image.utils';
 import type { CarouselPerView, ICarouselBlockData } from './types';
 import { useCarouselAutoplay } from './useCarouselAutoplay';
+import { useCarouselSlides } from './useCarouselSlides';
 
 /** Phones: one slide with a peek of the next; from tablet width `perView` side by side. */
 const BASIS: Record<CarouselPerView, string> = {
@@ -28,22 +29,6 @@ const SIZES: Record<CarouselPerView, string> = {
 const ARROW =
   'top-[calc(50%-1.25rem)] hidden size-10 border-border/50 bg-background/90 shadow-sm backdrop-blur sm:inline-flex';
 
-/** Selected slide + slide count of an embla api (re-render only when they change). */
-const useSlides = (api: CarouselApi | undefined) => {
-  const subscribe = useCallback(
-    (notify: () => void) => {
-      api?.on('select', notify).on('reInit', notify);
-      return () => {
-        api?.off('select', notify).off('reInit', notify);
-      };
-    },
-    [api]
-  );
-  const index = useSyncExternalStore(subscribe, () => api?.selectedScrollSnap() ?? 0);
-  const count = useSyncExternalStore(subscribe, () => api?.scrollSnapList().length ?? 0);
-  return { index, count };
-};
-
 /** Swipeable images: touch drag on phones, arrows + dots from tablet width (switchable). */
 export const CarouselBlock: React.FC<{ data: ICarouselBlockData; first?: boolean }> = ({
   data,
@@ -51,7 +36,7 @@ export const CarouselBlock: React.FC<{ data: ICarouselBlockData; first?: boolean
 }) => {
   const { t } = useTranslation('admin');
   const [api, setApi] = useState<CarouselApi>();
-  const { index, count } = useSlides(api);
+  const { index, count } = useCarouselSlides(api);
   useCarouselAutoplay(api, data.autoplay, data.interval);
   const items = data.items.filter(item => item.imageUrl);
   if (!items.length) return null;
